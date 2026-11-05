@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "we can weigh these values using Sommers relative exposure \\cite{Sommers:2000relative}",
+    "injected_text": "we can weigh these values using Sommers' Monte Carlo exposure estimates \\cite{Sommers:2000relative}",
+    "rationale": "Sommers (2000) derives a closed-form analytical relative-exposure formula based on detector latitude and zenith-angle cut; recasting it as 'Monte Carlo exposure estimates' mis-categorises the methodology (analytical/geometric -> simulation-based) while leaving the cite key intact, the topic correct, and the sentence coherent.",
+    "ground_truth_description": "Replaced 'Sommers relative exposure' with 'Sommers' Monte Carlo exposure estimates', mis-attributing the cited paper's analytical exposure derivation as a Monte Carlo method.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Sommers:2000relative",
+      "injected_cite_key": "Sommers:2000relative",
+      "claim_sentence_verbatim": "By utilizing the trans-GZK UHECR data, we can weigh these values using Sommers relative exposure \\cite{Sommers:2000relative} with the cited exposure values for these experiments as well as their geographic positions \\cite{AGASA:exposure, PAO:exposure}.",
+      "section_location": "Sec. 4 (Estimate of the Magnetic Monopole Fraction of UHECR Flux)",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "720 cosmic rays above the GZK limit from PAO and AGASA",
+    "injected_text": "72 cosmic rays above the GZK limit from PAO and AGASA",
+    "rationale": "Drops one zero from the figure-3 caption count of trans-GZK UHECRs, so the caption reports 72 events while the body text in Sec. III still states there are 720 events in the dataset, producing an integer_equal disagreement detectable by re-reading the paper.",
+    "ground_truth_description": "Changed the figure 3 caption's reported number of cosmic rays in the PAO+AGASA trans-GZK dataset from 720 to 72, while the surrounding text (and the same figure's description in the body) continues to refer to the dataset of 720 events.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "integer_equal",
+      "value_before_raw": "720",
+      "value_after_raw": "72",
+      "value_before_float": 720.0,
+      "value_after_float": 72.0,
+      "location_cue": "720 cosmic rays above the GZK limit from PAO and AGASA",
+      "paired_location": "Section III body text: 'Appendix A contains the 36 most energetic events of the 720 trans-GZK UHECRs detected by PAO and AGASA' and 'Figure 3 is a skymap of all 720 UHECRs'",
+      "quantity_label": "Number of trans-GZK UHECRs in the PAO+AGASA dataset shown in Figure 3",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t3.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "    \\sigma_{I_{MM}}^2=\\sigma_{I_v}^2+R_0^2\\sigma_{nv}^2+I_{nv}^2\\sigma_{R_0}^2",
+    "injected_text": "    \\sigma_{I_{MM}}^2=\\sigma_{I_v}^2+R_0^2\\sigma_{nv}^2",
+    "rationale": "Deletes the +I_{nv}^2 sigma_{R_0}^2 term from the displayed Poissonian error-propagation equation for sigma_{I_{MM}}^2; this term encodes the uncertainty contribution from the baseline ratio R_0 and is required by standard error propagation of I_{MM}=I_v - R_0 I_{nv}, so its omission is a load-bearing term-deletion that Wolfram refutes against the intact propagated-variance identity.",
+    "ground_truth_description": "Removed the I_{nv}^2 sigma_{R_0}^2 term (uncertainty from the baseline ratio R_0) from the error-propagation equation defining sigma_{I_{MM}}^2.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 4 (Estimate of the MM Fraction of UHECR Flux), error-propagation equation for sigma_{I_{MM}}^2",
+      "original_fragment_latex": "+I_{nv}^2\\sigma_{R_0}^2",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\sigma_{I_{MM}}^2=\\sigma_{I_v}^2+R_0^2\\sigma_{nv}^2+I_{nv}^2\\sigma_{R_0}^2",
+      "full_equation_latex_after": "\\sigma_{I_{MM}}^2=\\sigma_{I_v}^2+R_0^2\\sigma_{nv}^2",
+      "term_role": "uncertainty contribution from the baseline ratio R_0 in propagated variance of I_{MM}=I_v - R_0 I_{nv}",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "    f_{MM}(E)=\\frac{I_{MM}(E)}{I_{v}(E)}",
+    "injected_text": "    F_{MM}(E)=\\frac{I_{MM}(E)}{I_{v}(E)}",
+    "rationale": "Renames the MM-fraction symbol to capital F_{MM} only in its defining equation while the surrounding prose, the Table 1 caption, and the Table 1 header continue to call the same quantity f_{MM}, producing a local notation drift consistent with G·S1·t3 (cosmetic, single-symbol case mismatch).",
+    "ground_truth_description": "In the MM-fraction definition equation in Section 4, the symbol f_{MM}(E) is changed to F_{MM}(E) while every other reference (Table 1 caption, Table 1 header, surrounding text) still uses lowercase f_{MM}.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D3",
+      "change_kind": "notation_drift",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 4 (Estimate of the Magnetic Monopole Fraction of UHECR Flux)",
+      "affected_span_verbatim": "    f_{MM}(E)=\\frac{I_{MM}(E)}{I_{v}(E)}"
+    },
+    "proposer_agent": "injector.general.S1.t3.v1"
+  }
+]

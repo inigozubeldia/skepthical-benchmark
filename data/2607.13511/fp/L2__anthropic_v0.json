@@ -1,0 +1,272 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-42b3bf2961b2",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states in Appendix A that Proposition 2 uses an 'augmented' step that takes the better of the ALS solution or the single-entry fallback, but then explicitly notes 'In practice the safeguard never activates, since the ALS decrease is far larger than the single-entry bound.' The implemented ALS used throughout experiments lacks the convergence guarantee; only the augmented hypothetical variant is proven to converge to arbitrary accuracy, creating a gap between claim and proof.",
+        "evidence": {
+          "claim": "The central claim that ExTernD is 'the only ternary quantization that can provably reach any target accuracy' does not hold for the implementation used; the convergence proof only covers an augmented variant with a safeguard not used in practice.",
+          "excerpt": "The convergence result therefore proves that a *hypothetical augmented* variant is universal; the *implemented* ALS variant used throughout the experiments has no such proof. This is a gap between what is proven and what is run."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Appendix A that Proposition 2 uses an 'augmented' step that takes the better of the ALS solution or the single-entry fallback, but then explicitly notes 'In practice the safeguard never activates, since the ALS decrease is far larger than the single-entry bound.' The implemented ALS used throughout experiments lacks the convergence guarantee; only the augmented hypothetical variant is proven to converge to arbitrary accuracy, creating a gap between claim and proof.",
+            "cost_usd": 0.0039531
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s universality proof is explicitly for an augmented algorithm: “Proposition 2… Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair… gives the larger decrease,” whereas the practical method is the plain ALS in Sec. 2.3 and Appendix A adds only that “In practice the safeguard never activates,” which is not a proof for the implemented variant.",
+            "cost_usd": 0.010468333333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly introduces a safeguard for the proof (Proposition 2) but acknowledges that \"In practice the safeguard never activates\", confirming the reviewer's point that the proof applies to an augmented variant.",
+            "cost_usd": 0.001793
+          }
+        ],
+        "cost_usd": 0.016214433333333333
+      },
+      {
+        "flag_id": "fp-c55327119650",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's Limitations section explicitly acknowledges: 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.' The end-to-end Table 3 compares only against Q4_K/Q5_K variants, not PTQTP or PT2-LLM.",
+        "evidence": {
+          "claim": "The paper's only end-to-end validation (Qwen3.5-4B, wikitext-2) does not compare ExTernD against PTQTP or PT2-LLM, despite claiming to match or exceed them; this undermines the main comparative claim.",
+          "excerpt": "The paper compares against Q4_K/Q5_K but not against PTQTP or PT2-LLM end-to-end, despite doing tensor-level comparisons with both in Sec. 3.6. The paper's central claim is that ExTernD structurally matches or exceeds PTQTP at matched BPW (Table 5); an end-to-end PPL/task comparison is the natural test."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's Limitations section explicitly acknowledges: 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.' The end-to-end Table 3 compares only against Q4_K/Q5_K variants, not PTQTP or PT2-LLM.",
+            "cost_usd": 0.0039531
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself admits the missing end-to-end comparison: “full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment… but end-to-end task accuracy is not yet measured.” The only end-to-end table (Table 3) compares against Q4_K/Q5_K, not PTQTP or PT2-LLM.",
+            "cost_usd": 0.010468333333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors explicitly admit this limitation in Section 5, stating that \"full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment\".",
+            "cost_usd": 0.001793
+          }
+        ],
+        "cost_usd": 0.016214433333333333
+      },
+      {
+        "flag_id": "fp-fec8a24442c2",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states the levers are 'unstacked' and Section 3.5 notes 'None of the known levers were applied to this conversion,' but no experiment stacks them to measure the actual gap reduction. The analogy to Q4_K_M beating Q5_K is described as 'the analogous untapped lever for the decomposition,' which is inference by analogy without direct measurement.",
+        "evidence": {
+          "claim": "The claim that untuned levers explain the PPL gap vs Q5_K is not supported by any experiment that stacks the levers; the inference is not directly measured.",
+          "excerpt": "No experiment is presented that actually stacks these levers in an end-to-end run. The claim that Q4_K_M's win over pure Q5_K is 'the analogous untapped lever' is an inference by analogy, not a measurement."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states the levers are 'unstacked' and Section 3.5 notes 'None of the known levers were applied to this conversion,' but no experiment stacks them to measure the actual gap reduction. The analogy to Q4_K_M beating Q5_K is described as 'the analogous untapped lever for the decomposition,' which is inference by analogy without direct measurement.",
+            "cost_usd": 0.0039531
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not present an end-to-end experiment stacking the proposed levers; instead it states for Table 3 that “None of the known levers were applied to this conversion: refinement sweeps, per-matrix µ allocation… or τ /λ tuned on PPL,” and later concedes “The known levers (sweeps ∼5%, weighting ∼4%, per-matrix rank allocation) are unstacked.”",
+            "cost_usd": 0.010468333333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms in Section 3.5 that \"None of the known levers were applied to this conversion\" and relies on inference by analogy, stating per-matrix allocation is \"the analogous untapped lever\".",
+            "cost_usd": 0.001793
+          }
+        ],
+        "cost_usd": 0.016214433333333333
+      },
+      {
+        "flag_id": "fp-1b586068991d",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section 3.6 reports specific energy numbers for PT2-LLM (78-81%) and PTQTP at K=2 and K=4, but the paper does not state whether these are reproduced from released code, taken from the original papers, or otherwise derived. The setup section only mentions running experiments on an AMD MI50 GPU without clarifying PTQTP/PT2-LLM provenance.",
+        "evidence": {
+          "claim": "Sec. 3.6 reports specific weighted energies for PTQTP and PT2-LLM but does not clarify whether these are from authors' reproduction, the original papers, or extrapolation; provenance is unclear.",
+          "excerpt": "It is unclear whether these numbers were reproduced by the authors from released code, taken from the PTQTP/PT2-LLM papers, or extrapolated. PT2-LLM at 78-81% weight-reconstruction is far below what activation-aware methods normally advertise, so provenance matters."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 3.6 reports specific energy numbers for PT2-LLM (78-81%) and PTQTP at K=2 and K=4, but the paper does not state whether these are reproduced from released code, taken from the original papers, or otherwise derived. The setup section only mentions running experiments on an AMD MI50 GPU without clarifying PTQTP/PT2-LLM provenance.",
+            "cost_usd": 0.0039531
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 3.6 reports baseline numbers such as “PT2-LLM… preserves only ∼78–81% of the original energy” and “PTQTP… ∼99.85%,” but the text does not state whether these came from the authors’ reproduction, from the cited papers, or from some extrapolation. The section only says “we compare… against two recent post-training ternarization methods,” leaving provenance unspecified.",
+            "cost_usd": 0.010468333333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "While the paper states \"we evaluate PTQTP at group size G = 128\", it does not cite a code repository or clarify whether these numbers come from an official implementation or a custom reproduction.",
+            "cost_usd": 0.001793
+          }
+        ],
+        "cost_usd": 0.016214433333333333
+      },
+      {
+        "flag_id": "fp-81b85a29ce58",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: Section 2.1 states 'Crucially this only works through sequential deflation: solving for all k > min(m,n) components jointly is underdetermined and fails completely (0–50% energy in our ablation, vs. 96–100% with deflation),' but no ablation table or figure is shown in the paper supporting these numbers.",
+        "evidence": {
+          "claim": "A key methodological claim about the failure of joint (non-deflation) solves, motivating the sequential structure, is not supported by a shown ablation table or numeric evidence.",
+          "excerpt": "the referenced ablation is not shown in a table or figure. This is a load-bearing motivation for the entire greedy structure."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 2.1 states 'Crucially this only works through sequential deflation: solving for all k > min(m,n) components jointly is underdetermined and fails completely (0–50% energy in our ablation, vs. 96–100% with deflation),' but no ablation table or figure is shown in the paper supporting these numbers.",
+            "cost_usd": 0.0039531
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does provide inline numeric evidence for the joint-solve failure: “solving for all k > min(m, n) components jointly is underdetermined and fails completely (0–50% energy in our ablation, vs. 96–100% with deflation).” So the reviewer’s claim that there is no shown numeric evidence is factually incorrect, even if it is not tabulated.",
+            "cost_usd": 0.010468333333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's claim that there is no \"numeric evidence\" is factually incorrect; Section 2.1 provides inline numeric evidence: \"fails completely (0–50% energy in our ablation, vs. 96–100% with deflation).\"",
+            "cost_usd": 0.001793
+          }
+        ],
+        "cost_usd": 0.016214433333333333
+      },
+      {
+        "flag_id": "fp-5957adec16e5",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The bit-per-weight formula, and thus effective bpw numbers in key tables, assume a packing implementation that is not verified to match the referenced TQ2_0 format—the reported bpw values may be over-optimistic relative to deployment reality.",
+          "excerpt": "the effective-bpw numbers in Tables 2 and 5 (which credit the sparsity for bit savings) are optimistic relative to any realized on-disk / on-device footprint."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper's cost model (Eq. 5) uses a theoretical mask+sign packing and notes 'This packing is near the entropy floor,' and Section 4 states factors 'store today in llama.cpp's TQ2_0 (2.06 bpw)' but TQ2_0 stores non-sparse ternary values, making it unclear whether the sparsity-discounted bpw in Tables 2/5 matches any realized format. The discrepancy is noted implicitly but not resolved.",
+            "cost_usd": 0.0039531
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly separates the analytical cost model from deployment format: “With sparse mask+sign packing… storage per original weight is bpweff = … (5),” and only later notes separately that “The factors store today in llama.cpp’s TQ2_0 (2.06 bpw…).” Tables 2 and 5 are therefore clearly based on the stated ‘effective’ mask+sign model, not presented as verified TQ2_0 footprints.",
+            "cost_usd": 0.010468333333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses a theoretical bit savings formula \"bpw = 2 - sparsity\" for its tables (Section 2.6), but acknowledges in Section 4 that currently \"The factors store today in llama.cpp’s TQ2_0 (2.06 bpw)\", which does not compress zeros.",
+            "cost_usd": 0.001793
+          }
+        ],
+        "cost_usd": 0.016214433333333333
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0972866
+  },
+  "extractor_cost_usd": 0.025685999999999987,
+  "total_cost_usd": 0.12297259999999999
+}

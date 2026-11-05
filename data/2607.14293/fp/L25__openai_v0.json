@@ -1,0 +1,306 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "L25",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-019188989720",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {minuend, subtrahend, difference}",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {minuend, subtrahend, difference}"
+          },
+          "rereader": [
+            {
+              "label": "fraction_with_jump",
+              "raw_observed": "33,000",
+              "value_observed": 33000.0,
+              "notes": "Stated as 'of which ∼33,000 contain a charge jump' in section II.C"
+            },
+            {
+              "label": "poisson_mean_inferred",
+              "raw_observed": "0.40",
+              "value_observed": 0.4,
+              "notes": "Located in sentence: 'If the number of jumps per scan is Poisson with mean μ, then 1 − exp(−μ) ≈ 0.33, giving μ ≈ 0.40 jumps per scan, not 1.1 mHz.'"
+            },
+            {
+              "label": "stated_lambda",
+              "raw_observed": "1.1",
+              "value_observed": 1.1,
+              "notes": "The cue reads: 'the number of jumps is drawn from a Poisson distribution with rate λ = 1.1 mHz, matching the rate simulated in Ref. [17]'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.045831999999999984
+      },
+      {
+        "flag_id": "fp-13e2c44bcbb1",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.045831999999999984
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-82c5e1dba1a3",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The phase equation φ(n_g) = 2πε(n_g)t_idle/ℏ was checked for dimensional consistency. With ε(n_g) carrying units of energy and ℏ carrying units of energy·time, the ratio ε·t_idle/ℏ is dimensionless, as required for a phase. The transcription was confirmed faithful. A units check via Pint encountered a tool error and could not run, so the dimensional verdict rests on direct mathematical reasoning, which confirms the equation is dimensionally consistent and physically standard for phase accumulation in a two-level system.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "critical",
+          "notes": "The phase equation φ(n_g) = 2πε(n_g)t_idle/ℏ was checked for dimensional consistency. With ε(n_g) carrying units of energy and ℏ carrying units of energy·time, the ratio ε·t_idle/ℏ is dimensionless, as required for a phase. The transcription was confirmed faithful. A units check via Pint encountered a tool error and could not run, so the dimensional verdict rests on direct mathematical reasoning, which confirms the equation is dimensionally consistent and physically standard for phase accumulation in a two-level system.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01801069999999999
+      },
+      {
+        "flag_id": "fp-3db74017dc9c",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The reduced chi-squared statistic is defined here as the sum of squared residuals, each normalised by the template noise variance, divided by the number of samples n. This is a standard form of the reduced chi-squared (with the denominator being n rather than degrees of freedom, which is a common convention when the number of fitted parameters is small relative to n or treated as fixed). The transcription was confirmed faithful to the paper's verbatim expression, and the structural form — a 1/n prefactor multiplying a sum of squared, variance-normalised residuals — is consistent with standard usage. Wolfram could not evaluate the structural check, so the verdict rests on mathematical reasoning and the confirmed transcription.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "moderate",
+          "notes": "The reduced chi-squared statistic is defined here as the sum of squared residuals, each normalised by the template noise variance, divided by the number of samples n. This is a standard form of the reduced chi-squared (with the denominator being n rather than degrees of freedom, which is a common convention when the number of fitted parameters is small relative to n or treated as fixed). The transcription was confirmed faithful to the paper's verbatim expression, and the structural form — a 1/n prefactor multiplying a sum of squared, variance-normalised residuals — is consistent with standard usage. Wolfram could not evaluate the structural check, so the verdict rests on mathematical reasoning and the confirmed transcription.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01801069999999999
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-b43884ec884a",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Fig. 1 clearly labels the model input as '(128, 2)' while Sec. II.B states 'Each scan consists of N = 80 samples' and Fig. 2 caption confirms '80 samples spanning gate voltage [−0.5, +0.5] V.' The paper never explains how 80-sample scans are fed into a 128-sample input (e.g., zero-padding, interpolation), leaving the discrepancy unresolved.",
+        "evidence": {
+          "claim": "The network input length is inconsistently described as 128 samples (model) and 80 samples (synthetic scans), making it unclear how training and benchmarking align.",
+          "excerpt": "Input length is inconsistent: the network takes 128 samples, while the synthetic scans contain 80 samples.\n\n   **Where:** Fig. 1; Sec. II.B; Fig. 2; Sec. II.C; firmware/resource discussion in Sec. IV.C.\n\n   **What is wrong:** Fig. 1 labels the model input as `(128, 2)`, but Sec. II.B states that each synthetic Ramsey scan consists of `N = 80` samples, and Fig. 2 also says each scan covers 80 samples. The training procedure in Sec. II.C refers back to the Sec. II.B scans, so it is unclear whether the model was trained on 80-point inputs, zero-padded/interpolated 128-point inputs, or something else."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Fig. 1 clearly labels the model input as '(128, 2)' while Sec. II.B states 'Each scan consists of N = 80 samples' and Fig. 2 caption confirms '80 samples spanning gate voltage [−0.5, +0.5] V.' The paper never explains how 80-sample scans are fed into a 128-sample input (e.g., zero-padding, interpolation), leaving the discrepancy unresolved.",
+            "cost_usd": 0.00520665
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Fig. 1 labels the model input as \"Input (128, 2)\", but Sec. II.B states \"Each scan consists of N = 80 samples\" and Sec. II.C says the models were trained on data \"generated following the procedure of Sec. II B.\" The paper never explains how 80-sample scans are converted into 128-step inputs.",
+            "cost_usd": 0.011482875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 indicates the input shape is `(128, 2)`, but Section II.B states that \"Each scan consists of N = 80 samples\". The text does not explain how the 80-sample synthetic data is fed into the 128-sample model, confirming the inconsistency.",
+            "cost_usd": 0.0021383
+          }
+        ],
+        "cost_usd": 0.018827825
+      },
+      {
+        "flag_id": "fp-803b72eb1dcd",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Sec. III.C states the χ² FPR of 5% was 'chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively),' and Table VII compares the quantized DCCNN (4% FPR) against χ² tuned to 5%. The abstract claims 'matched false-positive rate' but the FPRs are not exactly matched, making the claim somewhat overstated.",
+        "evidence": {
+          "claim": "The paper claims the DCCNN and χ² algorithm are compared at matched false-positive rate, but Tables show FPRs of 5% for χ² and 4% for quantized DCCNN, so the key conclusion is overstated.",
+          "excerpt": "The abstract says the DCCNN and χ² algorithm are compared at matched false-positive rate. Sec. III.C says the χ² algorithm was tuned to a 5% FPR, chosen to match DCCNN rates before and after quantization, stated as 6% and 4%. But the final comparison in Table VII is with the quantized DCCNN, whose No-Jump recall in Table IV is 0.96, i.e. FPR ≈ 4%, not 5%."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Sec. III.C states the χ² FPR of 5% was 'chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively),' and Table VII compares the quantized DCCNN (4% FPR) against χ² tuned to 5%. The abstract claims 'matched false-positive rate' but the FPRs are not exactly matched, making the claim somewhat overstated.",
+            "cost_usd": 0.00520665
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The abstract claims the DCCNN matches the baseline \"at matched false-positive rate,\" but Sec. III.C says the χ² method was tuned \"subject to a false-positive-rate (FPR) constraint of 5%\" because the DCCNN rates were \"6% and 4%, respectively.\" For the quantized DCCNN used in Table VII, the paper therefore describes only an approximate, not truly matched, FPR comparison.",
+            "cost_usd": 0.011482875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The abstract claims a \"matched false-positive rate\", but Section III.C explicitly states the chi-square FPR was tuned to 5% to fall between the DCCNN FPRs of \"6% and 4%\". Table IV confirms the quantized DCCNN has a 4% FPR (No Jump recall 0.96), which is not exactly matched to 5%.",
+            "cost_usd": 0.0021383
+          }
+        ],
+        "cost_usd": 0.018827825
+      },
+      {
+        "flag_id": "fp-da95c0ff4782",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges in Sec. V that 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans,' confirming that evaluation on truly held-out or new qubit templates not represented in training has not been performed, consistent with the reviewer's concern.",
+        "evidence": {
+          "claim": "The paper overstates generalization to new qubits by claiming no per-qubit tuning, but does not test on truly new or held-out qubits not seen during training.",
+          "excerpt": "The paper states that the DCCNN requires “no per-qubit hyperparameter tuning” and, in Sec. V, that it “requires no hyperparameter tuning when applied to a new qubit.” The results show that one model was trained and evaluated using five qubit templates/configurations from the same simulation framework. The paper does not show evaluation on a held-out qubit, a genuinely new qubit template, or measured scans not represented in the synthetic training templates."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges in Sec. V that 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans,' confirming that evaluation on truly held-out or new qubit templates not represented in training has not been performed, consistent with the reviewer's concern.",
+            "cost_usd": 0.00520665
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion states the method \"requires no hyperparameter tuning when applied to a new qubit,\" but the data are generated only \"for each of the five qubit configurations considered in Ref. [17]\" and then split into train/validation/test sets. The paper does not report any evaluation on a held-out qubit template or truly new measured qubit.",
+            "cost_usd": 0.011482875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section V claims the approach \"requires no hyperparameter tuning when applied to a new qubit,\" but the training dataset (Sec. II.B) consists solely of the same five qubit configurations used for evaluation, meaning zero-shot generalization to a genuinely new qubit is never demonstrated.",
+            "cost_usd": 0.0021383
+          }
+        ],
+        "cost_usd": 0.018827825
+      },
+      {
+        "flag_id": "fp-008373f2258f",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Sec. II.A emphasizes 'causality, which guarantees no information leakage from future to past' yet the model classifies complete fixed-length scans using global/average pooling. Sec. IV.A mentions the CNN 'operates on a sliding window of Ramsey charge tomography data' but provides no description of the buffering scheme, stride, or timestamping method for real-time sliding-window operation.",
+        "evidence": {
+          "claim": "The paper's framing of the classifier as real-time and causal is inconsistent with its description as a scan-level classifier utilizing global pooling, with causal implementation specifics not clearly described.",
+          "excerpt": "Sec. II.A emphasizes causal convolutions and says causality prevents future-to-past leakage. However, the model is trained as a binary classifier on complete scans, and the architecture uses global pooling/average pooling over the sequence. Sec. IV.A then says the CNN operates on a “sliding window” of Ramsey tomography data, but no sliding-window construction, buffering scheme, stride, or detection timestamping method is described."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Sec. II.A emphasizes 'causality, which guarantees no information leakage from future to past' yet the model classifies complete fixed-length scans using global/average pooling. Sec. IV.A mentions the CNN 'operates on a sliding window of Ramsey charge tomography data' but provides no description of the buffering scheme, stride, or timestamping method for real-time sliding-window operation.",
+            "cost_usd": 0.00520665
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Sec. II.A says causality \"guarantees no information leakage from future to past,\" while Fig. 1 shows a single-output model with \"GlobalMaxPool1D\" and Sec. IV.A says the CNN \"operates on a sliding window of Ramsey charge tomography data.\" The paper does not specify the windowing/triggering scheme, so the real-time causal deployment is not fully described, but this is not an outright internal contradiction.",
+            "cost_usd": 0.011482875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 shows the architecture uses `GlobalMaxPool1D` / `AvgPool` yielding a single scan-level prediction, but Section IV.A claims the CNN \"operates on a sliding window.\" The paper does not clarify how a global-pooled causal network is adapted for real-time continuous sliding-window inference.",
+            "cost_usd": 0.0021383
+          }
+        ],
+        "cost_usd": 0.018827825
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 2,
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.09166399999999997,
+    "mathematics": 0.03602139999999998,
+    "general": 0.0753113
+  },
+  "extractor_cost_usd": 0.025264000000000147,
+  "total_cost_usd": 0.2282607000000001
+}

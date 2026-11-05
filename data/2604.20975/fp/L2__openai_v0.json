@@ -1,0 +1,104 @@
+{
+  "paper_id": "2604.20975",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-895b3942455b",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper’s quantitative results are indeed SNR-threshold counts/probabilities, and it explicitly concedes that this is not the same as a robust detection: “to confidently detect a zombie binary, it is not enough to have a high SNR” and “The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.”",
+        "evidence": {
+          "claim": "The paper frames its quantitative headline in terms of 'detecting' zombie binaries, but the analysis only computes SNR-threshold exceedance probabilities and does not demonstrate that these SNR > 3 signals are genuinely detectable sources, given the need for multi-pulsar coherence and noise-background discrimination.",
+          "excerpt": "the analysis only computes SNR-threshold exceedance probabilities, and Sec. V itself notes that high SNR in one or a few pulsars is not sufficient for a confident detection. This matters because a zombie-binary search would require distinguishing a sky-dependent set of pulsar-term sinusoids from intrinsic pulsar noise, stochastic-background fluctuations, timing-model residuals, and possibly ordinary continuous-wave signals. The probabilities in Sec. VI therefore support “expected number of SNR > 3 signals,” not necessarily “detectable sources.”"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly acknowledges in Section V that 'to confidently detect a zombie binary, it is not enough to have a high SNR: the signal must also be observed in the data of multiple pulsars. Otherwise, the possibility that the signal arises purely from intrinsic noise cannot be ruled out.' However, the paper then notes that 'the number of pulsars contributing to the detection of zombie binaries generally reaches several dozen,' partially addressing the multi-pulsar concern, though it defers full detectability analysis ('The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work'), making this genuinely ambiguous between a real limitation and a reasonable scoping choice.",
+            "cost_usd": 0.00909465
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s quantitative results are indeed SNR-threshold counts/probabilities, and it explicitly concedes that this is not the same as a robust detection: “to confidently detect a zombie binary, it is not enough to have a high SNR” and “The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.”",
+            "cost_usd": 0.022913
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation, stating that 'to confidently detect a zombie binary, it is not enough to have a high SNR' and 'The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work', thereby leaving the reviewer's specific concern about genuine detectability unaddressed.",
+            "cost_usd": 0.0031827
+          }
+        ],
+        "cost_usd": 0.035190349999999995
+      },
+      {
+        "flag_id": "fp-caf252d0cffb",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The waveform and detection-efficiency implementation is not described in enough detail in the paper text to reproduce the main results, lacking explicit formulas and essential simulation parameters central to the detection-efficiency estimates.",
+          "excerpt": "Sec. II gives the generic PTA residual formula and the frequency evolution, but Sec. V does not explicitly specify the circular-binary strain amplitudes, phase convention, ISCO frequency used, treatment of binaries with `τa ≤ τc`, evolution during the observing span, pulsar-distance inputs, random seeds, or how the waveform is evaluated after timing-model marginalization. This is central because Eq. (10) depends directly on the numerically estimated detection efficiency."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Section V describes the SNR computation using Eq. 12 and references [50,51] for noise covariance matrices, and Section II gives the frequency evolution, but the paper does not explicitly state the circular-binary strain amplitude formula, ISCO frequency convention, or how the waveform is evaluated during the observing span. The paper does reference enterprise software [51] and van Haasteren & Vallisneri [50] for noise modeling, suggesting reproducibility via external references, but key simulation details (e.g., pulsar distance inputs, random seeds, strain amplitude formula) are not given explicitly in the paper text, leaving reproducibility partially unresolved.",
+            "cost_usd": 0.00909465
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper does give the core simulation setup for the detection efficiency — e.g. “we generate 12 000 binaries drawing from uniform distribution their coalescence time… and extrinsic parameters,” and it specifies the noise model and PTA settings — and it further states that “The data and scripts used to produce the findings of this work are openly available at https://github.com/hquelquejay/zombie-binaries-pta.”",
+            "cost_usd": 0.022913
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer correctly points out that the paper text lacks explicit formulas for essential components like the circular-binary strain amplitudes and the precise definition of the ISCO frequency used, although it points to an external GitHub repository for the code.",
+            "cost_usd": 0.0031827
+          }
+        ],
+        "cost_usd": 0.035190349999999995
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.07038069999999999
+  },
+  "extractor_cost_usd": 0.0166140000000001,
+  "total_cost_usd": 0.08699470000000009
+}

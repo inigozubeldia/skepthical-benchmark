@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "MILP formulations \\citep{tjeng2019mip,anderson2020strong}",
+    "injected_text": "SAT formulations \\citep{tjeng2019mip,anderson2020strong}",
+    "rationale": "Tjeng 2019 and Anderson 2020 propose Mixed-Integer Linear Programming (MILP) approaches, not Boolean Satisfiability (SAT) formulations; substituting SAT mis-categorises the solver methodology while keeping the logical completeness claim intact.",
+    "ground_truth_description": "The method category attributed to Tjeng et al. and Anderson et al. was changed from MILP formulations to SAT formulations.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "tjeng2019mip,anderson2020strong",
+      "injected_cite_key": "tjeng2019mip,anderson2020strong",
+      "claim_sentence_verbatim": "Reluplex and related SMT methods \\citep{katz2017reluplex,ehlers2017formal}, MILP formulations \\citep{tjeng2019mip,anderson2020strong}, and branch-and-bound methods \\citep{bunel2020branch,wang2021betacrown} exploit the piecewise-linear structure of ReLU networks while retaining completeness.",
+      "section_location": "Related work",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "For our reduction, $\\Gamma=m/60$, $\\sigma_\\star=2^{-11}$, and $h\\le2^{-20}<\\sigma_\\star$.  Using the coarser",
+    "injected_text": "For our reduction, $\\Gamma=m/600$, $\\sigma_\\star=2^{-11}$, and $h\\le2^{-20}<\\sigma_\\star$.  Using the coarser",
+    "rationale": "Changing the restated margin denominator from 60 to 600 creates a 10x order-of-magnitude contradiction with the exact same constant derived in Section 3.",
+    "ground_truth_description": "Shifted the margin denominator for Gamma from 60 to 600 in the numerical summary, contradicting the value of 60 established earlier in the text.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "60",
+      "value_after_raw": "600",
+      "value_before_float": 60.0,
+      "value_after_float": 600.0,
+      "location_cue": "For our reduction, $\\Gamma=m/60$, $\\sigma_\\star=2^{-11}$, and $h\\le2^{-20}<\\sigma_\\star$.  Using the coarser",
+      "paired_location": "Section 3 Equation (10)",
+      "quantity_label": "denominator for margin Gamma",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "\\sum_{j=1}^3 h_{C,j}(x)",
+    "injected_text": "\\sum_{j=0}^3 h_{C,j}(x)",
+    "rationale": "Changing the lower bound from j=1 to j=0 introduces an undefined term h_{C,0} in the literal-unit sum, which Wolfram symbolic evaluation will likely fail to refute decisively.",
+    "ground_truth_description": "Shifted the literal unit sum start index from j=1 to j=0.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:network",
+      "equation_location": "Sec. 3",
+      "original_fragment_latex": "\\sum_{j=1}^3",
+      "injected_fragment_latex": "\\sum_{j=0}^3",
+      "full_equation_latex_before": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,j}(x)\n-\\sum_{C\\in\\Phi}r_C(x).",
+      "full_equation_latex_after": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=0}^3 h_{C,j}(x)\n-\\sum_{C\\in\\Phi}r_C(x).",
+      "term_role": "sum lower bound",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "$\\mathrm{NP}\\not\\subseteq\\mathrm{BPP}$, there is no sound and complete verifier",
+    "injected_text": "$\\mathrm{NP}\\not\\subseteq\\mathrm{BPP}$, their is no sound and complete verifier",
+    "rationale": "A classic homophone substitution ('their' instead of 'there') introduces a purely cosmetic writing defect without changing the technical meaning, triggering a very minor presentation flag.",
+    "ground_truth_description": "Swapped 'there' for 'their' in the abstract.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D8",
+      "change_kind": "homophone_swap",
+      "expected_bucket": "very_minor",
+      "section_location": "Abstract",
+      "affected_span_verbatim": "We show that, under the standard assumption $\\mathrm{NP}\\not\\subseteq\\mathrm{BPP}$, there is no sound and complete verifier whose expected running time is polynomial in network size, bit complexity, and inverse noise level for every base instance."
+    },
+    "proposer_agent": "injector.general.S1.t1.v3"
+  }
+]

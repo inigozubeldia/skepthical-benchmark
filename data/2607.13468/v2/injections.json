@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "sec/4_experiment.tex",
+    "original_text": "we utilize a DINOv2~\\cite{DINOv2} model",
+    "injected_text": "we utilize a supervised DINOv2~\\cite{DINOv2} model",
+    "rationale": "DINOv2 is a self-supervised model; adding the word 'supervised' miscategorises its training methodology, mimicking a plausible and common author typo where the 'self-' prefix is accidentally omitted.",
+    "ground_truth_description": "Added the word 'supervised' to describe DINOv2, misattributing its method category as it is actually trained without supervision.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "DINOv2",
+      "injected_cite_key": "DINOv2",
+      "claim_sentence_verbatim": "For the image condition, similar to \\base~\\cite{trellis}, we utilize a DINOv2~\\cite{DINOv2} model to extract visual features.",
+      "section_location": "Sec. 4.1",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "sec/6_appendix.tex",
+    "original_text": "Full Model & \\textbf{0.0035} & \\textbf{84.34} & \\textbf{0.7449}",
+    "injected_text": "Full Model & \\textbf{0.0035} & \\textbf{84.34} & \\textbf{0.7459}",
+    "rationale": "The IoU of the full model is reported as 0.7449 in Table 1 of the main paper and restated as 0.7449 in the appendix ablation 'Full Model' row. The appendix occurrence is drifted to 0.7459, so the same quantity now disagrees between the two tables by the smallest amount a reader can still detect. Both values are the paper's own; nothing is added.",
+    "ground_truth_description": "Appendix ablation table: full-model IoU changed 0.7449 -> 0.7459, contradicting the 0.7449 retained in Table 1.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "0.7449",
+      "value_after_raw": "0.7459",
+      "value_before_float": 0.7449,
+      "value_after_float": 0.7459,
+      "location_cue": "Full Model & \\textbf{0.0035} & \\textbf{84.34} & \\textbf{0.7449}",
+      "paired_location": "Table 1 (Quantitative Comparisons on Geometry), 'Ours' row, IoU column — retains 0.7449",
+      "quantity_label": "IoU on 3D-FRONT (full model)",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t3.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "sec/3_method.tex",
+    "original_text": "-(\\boldsymbol{\\epsilon}-\\boldsymbol{x}_0)\\|_2^2 ,",
+    "injected_text": "-(\\boldsymbol{x}_0-\\boldsymbol{\\epsilon})\\|_2^2 ,",
+    "rationale": "Reverses the sign of the conditional flow-matching regression target: the canonical CFM / rectified-flow objective regresses the predicted velocity onto (epsilon - x_0), and the injected form regresses onto (x_0 - epsilon). The display stays well-formed, so only knowledge of the canonical form refutes it.",
+    "ground_truth_description": "CFM training objective: the velocity-regression target (epsilon - x_0) was replaced by (x_0 - epsilon), negating the target vector field relative to the canonical formulation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3 (Method), conditional flow-matching objective",
+      "original_fragment_latex": "(\\boldsymbol{\\epsilon}-\\boldsymbol{x}_0)",
+      "injected_fragment_latex": "(\\boldsymbol{x}_0-\\boldsymbol{\\epsilon})",
+      "full_equation_latex_before": "\\mathcal{L}_{CFM}(\\theta)=\\mathbb{E}_{t,\\boldsymbol{x}_0,\\boldsymbol{\\epsilon}}\\|\\boldsymbol{v}_\\theta(\\boldsymbol{x},t)-(\\boldsymbol{\\epsilon}-\\boldsymbol{x}_0)\\|_2^2 ,",
+      "full_equation_latex_after": "\\mathcal{L}_{CFM}(\\theta)=\\mathbb{E}_{t,\\boldsymbol{x}_0,\\boldsymbol{\\epsilon}}\\|\\boldsymbol{v}_\\theta(\\boldsymbol{x},t)-(\\boldsymbol{x}_0-\\boldsymbol{\\epsilon})\\|_2^2 ,",
+      "term_role": "conditional flow-matching regression target (velocity field)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "sec/0_abstract.tex",
+    "original_text": "Extensive experiments demonstrate that our method significantly outperforms previous approaches, achieving state-of-the-art performance.",
+    "injected_text": "Extensive experiments demonstrate that our method achieves performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity.",
+    "rationale": "The abstract is modified to claim that the method only achieves comparable performance and fails to surpass the state of the art, which directly contradicts the Results section's tables and text that demonstrate it significantly outperforming baselines.",
+    "ground_truth_description": "The abstract's concluding claim about outperforming baselines was flipped to state the method does not yet surpass the state of the art, creating a major contradiction with the Results section.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "A",
+      "checklist_item_id": "A2",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Abstract",
+      "affected_span_verbatim": "Extensive experiments demonstrate that our method significantly outperforms previous approaches, achieving state-of-the-art performance."
+    },
+    "proposer_agent": "injector.general.S3.t1.v2"
+  }
+]

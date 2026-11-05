@@ -1,0 +1,146 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "L2",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-91d963ca4bd3",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges this limitation: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\" The paper does not provide zero-shot or commonsense reasoning evaluations, and merely acknowledges this as a limitation rather than addressing it.",
+        "evidence": {
+          "claim": "The end-to-end evaluation is limited exclusively to WikiText-2 perplexity, lacking zero-shot and commonsense reasoning downstream tasks, which are necessary to validate the method's effectiveness as a PTQ method for LLMs.",
+          "excerpt": "The end-to-end evaluation is limited exclusively to WikiText-2 perplexity (Sec. 3.5). While the paper provides strong theoretical and empirical evidence for matrix-level Frobenius norm recovery, proving that ExTernD is a viable PTQ method for LLMs requires evaluating zero-shot and commonsense reasoning downstream tasks"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\" The paper does not provide zero-shot or commonsense reasoning evaluations, and merely acknowledges this as a limitation rather than addressing it.",
+            "cost_usd": 0.0055842
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself states, \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks,\" and Table 3 reports only \"wikitext-2 PPL.\" So the reviewer is correct that end-to-end validation is limited to WikiText-2 perplexity and does not include zero-shot/common-sense downstream tasks.",
+            "cost_usd": 0.019846666666666665
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this in Section 5, stating, \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks,\" which confirms the reviewer's concern is valid and unaddressed.",
+            "cost_usd": 0.0023939333333333336
+          }
+        ],
+        "cost_usd": 0.0278248
+      },
+      {
+        "flag_id": "fp-e2a914450811",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper itself acknowledges: \"full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.\" Table 3 compares only against llama.cpp k-quants, not PT2-LLM or PTQTP in full-model deployment.",
+        "evidence": {
+          "claim": "The paper fails to include end-to-end baseline comparisons against direct competitors PT2-LLM and PTQTP in full-model deployment, undermining claims to state-of-the-art status.",
+          "excerpt": "Missing end-to-end baseline comparisons against direct competitors. Table 3 compares ExTernD solely against standard llama.cpp k-quants. However, Section 3.6 identifies PT2-LLM and PTQTP as the primary methodological baselines (which are evaluated only at the matrix reconstruction level). To establish state-of-the-art status, ExTernD must be compared against these ternary networks in full-model deployment."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself acknowledges: \"full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.\" Table 3 compares only against llama.cpp k-quants, not PT2-LLM or PTQTP in full-model deployment.",
+            "cost_usd": 0.0055842
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.6 says the paper compares against \"two recent post-training ternarization methods: PT2-LLM [6] ... and PTQTP [5]\" only in \"weight-reconstruction energy,\" while the limitations explicitly admit that \"full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment ... end-to-end task accuracy is not yet measured.\" Thus the missing full-model competitor comparison is real.",
+            "cost_usd": 0.019846666666666665
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms this limitation in Section 5, noting, \"We compare only against fixed-capacity baselines at the tensor level, but full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment.\"",
+            "cost_usd": 0.0023939333333333336
+          }
+        ],
+        "cost_usd": 0.0278248
+      },
+      {
+        "flag_id": "fp-d774270944c6",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper's theoretical convergence claim in Corollary 1 applies to individual matrix approximation, but the full-model empirical validation only covers up to ~5.7 effective BPW on a 4B model. The paper acknowledges \"We have not tested above 4B\" and the end-to-end conversion uses a fixed µ=3, leaving higher-µ (closer-to-bf16) full-model claims empirically unvalidated, making the title claim an extrapolation beyond what is demonstrated.",
+        "evidence": {
+          "claim": "The title and abstract overstate the generalizability of the method, claiming accuracy approaching any quantization level and arbitrarily close to bf16, but the empirical results only validate model-level performance up to ~5.7 effective BPW.",
+          "excerpt": "The title and abstract claim the method offers \"Accuracy Approaching Any Quantization Level\" and \"approaches bf16 accuracy arbitrarily closely\". While Corollary 1 (Appendix A) mathematically proves this for isolated matrix approximation, the empirical results only validate model-level performance up to ~5.7 effective BPW on a 4B parameter model. Extrapolating matrix-level limits to full-model end-to-end scaling without empirical validation constitutes an unsupported generalization."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper's theoretical convergence claim in Corollary 1 applies to individual matrix approximation, but the full-model empirical validation only covers up to ~5.7 effective BPW on a 4B model. The paper acknowledges \"We have not tested above 4B\" and the end-to-end conversion uses a fixed µ=3, leaving higher-µ (closer-to-bf16) full-model claims empirically unvalidated, making the title claim an extrapolation beyond what is demonstrated.",
+            "cost_usd": 0.0055842
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The abstract/title are broad (e.g., \"Ternary LLM PTQ with Accuracy Approaching Any Quantization Level\" and \"ExTernD approaches bf16 accuracy arbitrarily closely\"), but the abstract also grounds this in a matrix-level proof: \"We prove the residual decreases monotonically in k and can be driven below any ε > 0.\" At the same time, the paper concedes \"end-to-end task accuracy is not yet measured,\" so whether the framing overgeneralizes from matrix reconstruction to full-model accuracy is unclear.",
+            "cost_usd": 0.019846666666666665
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The title claims \"Accuracy Approaching Any Quantization Level\", but the abstract and Section 3.5 confirm that the end-to-end model evaluation is only tested up to \"a full Qwen3.5-4B conversion at µ = 3 ... at ~5.7 effective bpw\", making the reviewer's point about lack of empirical validation for higher levels valid.",
+            "cost_usd": 0.0023939333333333336
+          }
+        ],
+        "cost_usd": 0.0278248
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0834744
+  },
+  "extractor_cost_usd": 0.013317999999999997,
+  "total_cost_usd": 0.0967924
+}

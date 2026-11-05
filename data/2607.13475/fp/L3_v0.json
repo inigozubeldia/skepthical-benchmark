@@ -1,0 +1,283 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-21c2608dc96d",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 3 occurrences; min sigfigs = 3; range = [44.5, 47.0]",
+        "evidence": {
+          "check_type": "repeated_constant",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 47.0,
+            "reported": 44.5,
+            "diff_abs": 2.5,
+            "diff_rel": 0.05319148936170213,
+            "tolerance": {
+              "abs_tol": 0.05,
+              "rel_tol": 0.005
+            },
+            "notes": "3 occurrences; min sigfigs = 3; range = [44.5, 47.0]"
+          },
+          "rereader": [
+            {
+              "label": "success_rate_1",
+              "raw_observed": "50.0%",
+              "value_observed": 50.0,
+              "notes": "Directly reported for the learned estimator in Section III.A."
+            },
+            {
+              "label": "success_rate_2",
+              "raw_observed": "45.0%",
+              "value_observed": 45.0,
+              "notes": "Appears after two-step oracle result in Section III.B."
+            },
+            {
+              "label": "success_rate_3",
+              "raw_observed": "44.5%",
+              "value_observed": 44.5,
+              "notes": "Given as constant success rate for varying nsamples in Section III.C."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.03640599999999994
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-1032e28965f7",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's experiments are entirely in '2D deformable sheet simulation' with 'Laplacian relaxation' as the deformation model, no 3D geometry, no real images, and no robot hardware. The conclusion claims results 'suggest that planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints,' which is a broad claim unsupported by the highly simplified experimental setup.",
+        "evidence": {
+          "claim": "The broad claims of surgical applicability and replacing physical simulation are not supported by the highly simplified experimental setup (2D simulation, single non-physical dynamics model, no 3D, no images, no robot).",
+          "excerpt": "Claims about 'autonomous surgical tissue retraction' and replacing 'expensive physical simulation' are made, yet all experiments use a single $2$D sheet simulator with a non-physical relaxation model, random sparse vertex observations (not image-based perception), and no $3$D geometry, real tissue, or robot hardware."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's experiments are entirely in '2D deformable sheet simulation' with 'Laplacian relaxation' as the deformation model, no 3D geometry, no real images, and no robot hardware. The conclusion claims results 'suggest that planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints,' which is a broad claim unsupported by the highly simplified experimental setup.",
+            "cost_usd": 0.00322518
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s claims are broader than its testbed: it says results were obtained in a \"2D deformable sheet simulation\" and concludes that \"planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints.\" Since there is no 3D, image-based perception, robot hardware, or real tissue validation, the surgical/general replacement claim is not fully supported by the presented experiments.",
+            "cost_usd": 0.007606299999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes broad claims that its learned representations \"can replace expensive physical simulation\" (Section IV), yet explicitly notes that all experiments were conducted in simulation on a simplified \"randomized 2D deformable sheet model\" (Section III), confirming the reviewer's concern about overclaiming.",
+            "cost_usd": 0.0027236
+          }
+        ],
+        "cost_usd": 0.013555079999999999
+      },
+      {
+        "flag_id": "fp-6ddbcafcb634",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'A three-layer multilayer perceptron maps the noisy, partial observations to the latent space' and mentions 'The network takes as input the observed vertex coordinates and their indices,' but omits layer widths, activations, optimizer, learning rate, batch size, and epochs. These omissions are not resolved anywhere in the paper, severely limiting reproducibility.",
+        "evidence": {
+          "claim": "Critical aspects of the methodology are under-specified, including full details of the model architecture, input encoding, training, and planner parameterization, which severely limits reproducibility.",
+          "excerpt": "Key aspects of the methodology are under-specified, severely limiting reproducibility. Missing details include: the MLP architecture (layers, widths, activations), the input encoding for sparse observations (how the $40$ vertex indices and coordinates are ordered and fed to the MLP), the full set of training hyperparameters (optimizer, learning rate, batch size, epochs), the training data generation process, and the precise parameterization of the planner's action space."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'A three-layer multilayer perceptron maps the noisy, partial observations to the latent space' and mentions 'The network takes as input the observed vertex coordinates and their indices,' but omits layer widths, activations, optimizer, learning rate, batch size, and epochs. These omissions are not resolved anywhere in the paper, severely limiting reproducibility.",
+            "cost_usd": 0.00322518
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Key implementation details are indeed missing: the paper states only that \"A three-layer multilayer perceptron maps the noisy, partial observations to the latent space\" and that \"Actions are selected by sampling 200 candidate pulls,\" but it does not specify layer widths/activations, optimizer, learning rate, batch size, training duration, precise input ordering/encoding, or detailed action parameterization.",
+            "cost_usd": 0.007606299999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The methodology lacks necessary details, describing the architecture only as a \"three-layer multilayer perceptron\" (Section II.A) and the actions simply as a \"grasp point on the sheet and a pull displacement\" (Section II), without providing widths, activations, bounds, or comprehensive training hyperparameters.",
+            "cost_usd": 0.0027236
+          }
+        ],
+        "cost_usd": 0.013555079999999999
+      },
+      {
+        "flag_id": "fp-4e25965002a8",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper compares only against 'an oracle (full state access) and a naive baseline,' with no ablations on latent dimension, regularization weights, or architecture choices. Key design choices such as the 12-dimensional latent space and λs=λe=0.1 are 'fixed' without empirical justification or comparison to alternatives.",
+        "evidence": {
+          "claim": "The evaluation lacks stronger non-oracle baselines and ablation studies for key design choices, limiting assessment of the method's value and justification for components such as dimensionality and architecture.",
+          "excerpt": "The empirical validation is weakened by the absence of stronger baselines and critical ablation studies. The only non-oracle baseline is a naive one, making it difficult to assess the contribution of the specific learned components. Furthermore, key design choices (e.g., latent dimension of $12$, regularization weights, choice of an MLP over other encoders) are presented without empirical justification."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares only against 'an oracle (full state access) and a naive baseline,' with no ablations on latent dimension, regularization weights, or architecture choices. Key design choices such as the 12-dimensional latent space and λs=λe=0.1 are 'fixed' without empirical justification or comparison to alternatives.",
+            "cost_usd": 0.00322518
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation uses only weak non-oracle comparison and no ablations: \"We compare the learned estimator against an oracle ... and a naive baseline,\" while design choices such as a \"12-dimensional latent space\" and fixed \"λs = λe = 0.1\" are presented without ablation or empirical justification. The paper also provides no comparison against alternative estimators/encoders.",
+            "cost_usd": 0.007606299999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces fixed design choices, such as a \"12-dimensional latent state\" (Section II.A) and regularization weights of \"\\lambda_s = \\lambda_e = 0.1\" (Section II.B), and tests against only a \"naive baseline\" (Section III.A), with no ablation studies validating these choices.",
+            "cost_usd": 0.0027236
+          }
+        ],
+        "cost_usd": 0.013555079999999999
+      },
+      {
+        "flag_id": "fp-d274baf6b975",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper claims 'multi-step performance statistically equivalent to a full-state oracle' but only reports a p-value for the oracle action-budget analysis, not for learned vs. oracle equivalence. No formal equivalence test, confidence intervals, or standard deviations are reported for the primary comparison, and the paper itself notes using both 'paired and independent t-tests' without providing those results for the main claims.",
+        "evidence": {
+          "claim": "The statistical analysis is insufficient and the claim of equivalence to the oracle is inadequately supported due to inappropriate tests, lack of required statistics, and absence of a formal equivalence test.",
+          "excerpt": "The statistical analysis is inadequate and the claims derived from it are too strong. The paper claims 'statistically equivalent' performance to the oracle without conducting a formal equivalence test. An independent t-test is used where a paired test would be more appropriate, given that the same episodes are used across conditions. P-values, confidence intervals, and standard deviations are largely absent."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims 'multi-step performance statistically equivalent to a full-state oracle' but only reports a p-value for the oracle action-budget analysis, not for learned vs. oracle equivalence. No formal equivalence test, confidence intervals, or standard deviations are reported for the primary comparison, and the paper itself notes using both 'paired and independent t-tests' without providing those results for the main claims.",
+            "cost_usd": 0.00322518
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims in the conclusion that the method achieves \"multi-step performance statistically equivalent to a full-state oracle,\" but the methods say only that significance is measured using \"paired and independent t-tests,\" and the only reported p-value is \"An independent t-test between nsamples = 200 and 2000 yields p = 0.835.\" No formal equivalence test, confidence intervals, or variance statistics are given for learned-vs-oracle performance.",
+            "cost_usd": 0.007606299999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims the estimator achieves \"performance statistically equivalent to a full-state oracle\" (Section IV), but the paper never reports a formal statistical equivalence test comparing the two; the only reported p-value (0.835) is for a test comparing different oracle action sampling budgets (Section III.C).",
+            "cost_usd": 0.0027236
+          }
+        ],
+        "cost_usd": 0.013555079999999999
+      },
+      {
+        "flag_id": "fp-8f3425333553",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper explicitly confirms the problematic distribution: \"Approximately 57% of episodes begin with the target already fully exposed ... and are thus unimprovable\" and \"The reported 44.5% success rate is computed over all 200 episodes, including unimprovable ones.\" Although this is acknowledged and quantified, the main reported learned-estimator metrics are still averaged over all episodes, so performance on meaningful improvable cases remains obscured.",
+        "evidence": {
+          "claim": "The evaluation uses a test distribution where most episodes are trivial ('unimprovable'), causing metrics averaged over all episodes to obscure actual method performance on meaningful tasks.",
+          "excerpt": "The evaluation is performed on a problematic data distribution where $\\sim57\\%$ of episodes are 'unimprovable' because the target is already exposed. Reporting metrics averaged over all episodes dilutes the results and obscures the planner's performance on meaningful tasks."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly addresses this issue: 'Approximately 57% of episodes begin with the target already fully exposed...and are thus unimprovable' and reports that 'On the remaining 89 improvable episodes, the oracle succeeds in 100% of cases (89/89),' acknowledging that the 44.5% overall success rate includes unimprovable episodes and discussing the implications for interpreting results.",
+            "cost_usd": 0.00322518
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explicitly confirms the problematic distribution: \"Approximately 57% of episodes begin with the target already fully exposed ... and are thus unimprovable\" and \"The reported 44.5% success rate is computed over all 200 episodes, including unimprovable ones.\" Although this is acknowledged and quantified, the main reported learned-estimator metrics are still averaged over all episodes, so performance on meaningful improvable cases remains obscured.",
+            "cost_usd": 0.007606299999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states that \"Approximately 57% of episodes... are thus unimprovable\" and admits that \"The reported 44.5% success rate is computed over all 200 episodes, including unimprovable ones\" (Section III.C), confirming the reviewer's point that the reported average metrics are heavily diluted by trivial cases.",
+            "cost_usd": 0.0027236
+          }
+        ],
+        "cost_usd": 0.013555079999999999
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.03640599999999994,
+    "general": 0.0677754
+  },
+  "extractor_cost_usd": 0.023301999999999976,
+  "total_cost_usd": 0.1274833999999999
+}

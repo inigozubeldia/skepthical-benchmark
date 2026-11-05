@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13618",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states they found no confirmable citation-attribution errors and did not flag the 91% rationale correctness claim for Schmied et al. (2025) or challenge any value associated with that citation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The citation injection is a numeric misquote of Schmied et al. (2025) from 87% to 91%. The reviewer explicitly says they found no confirmable citation-attribution errors and nowhere names Schmied et al. or challenges that 91% value against the cited source, which is required for this mutation kind.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly stated they found no confirmable citation-attribution errors from the manuscript text alone and did not mention the 91% value or the Schmied paper specifically.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The abstract reports a maximum skill score of 0.63, but Table 2 reports 0.62. ... The abstract says the four models 'span skill scores from 0.63 to −0.23.' Table 2 gives the highest 'All' skill as GPT-5.4 at 0.62 and the lowest as DeepSeek-V4-Pro at −0.23.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The abstract reports a maximum skill score of 0.63, but Table 2 reports 0.62. ... The abstract says the four models 'span skill scores from 0.63 to −0.23.' Table 2 gives the highest 'All' skill as GPT-5.4 at 0.62 and the lowest as DeepSeek-V4-Pro at −0.23.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the mismatch between the abstract's 0.63 and Table 2's 0.62 for the maximum skill score, directly corresponding to the injected change from 0.62 to 0.63.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] **The abstract reports a maximum skill score of 0.63, but Table 2 reports 0.62.**\n\n**Where:** Abstract; Table 2.\n\n**What is wrong:** The abstract says the four models “span skill scores from 0.63 to −0.23.” Table 2 gives the highest “All” skill as GPT-5.4 at 0.62 and the lowest as DeepSeek-V4-Pro at −0.23.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the abstract/body mismatch for the maximum skill score, naming both values 0.63 and 0.62 and Table 2. That clearly corresponds to the injected numeric drift.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The abstract reports a maximum skill score of 0.63, but Table 2 reports 0.62. ... The abstract says the four models “span skill scores from 0.63 to −0.23.” Table 2 gives the highest “All” skill as GPT-5.4 at 0.62",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the discrepancy between the 0.63 value in the abstract and the 0.62 value in Table 2.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The skill-score equation has the wrong sign. ... The paper defines skill = (C_base - C_agent)/(C_orc - C_base). Since lower cost is better and normally C_orc < C_base, the denominator is negative. ... That uses denominator C_base−C_orc, not C_orc−C_base.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The skill-score equation has the wrong sign. ... The paper defines skill = (C_base - C_agent)/(C_orc - C_base). Since lower cost is better and normally C_orc < C_base, the denominator is negative. ... That uses denominator C_base−C_orc, not C_orc−C_base.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies the injected denominator inversion, noting the printed equation uses (C_orc - C_base) instead of (C_base - C_orc), and provides the correct formula as the fix.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] **The skill-score equation has the wrong sign.**\n\n**Where:** Section 4, Eq. (1); also affects the interpretation of “0 at floor, 1 at oracle.”\n\n**What is wrong:** The paper defines\n\\[\n\\text{skill} = \\frac{C_{\\text{base}} - C_{\\text{agent}}}{C_{\\text{orc}} - C_{\\text{base}}}.\n\\]\n...\n**Concrete fix:** Replace Eq. (1) with\n\\[\n\\text{skill} = \\frac{C_{\\text{base}} - C_{\\text{agent}}}{C_{\\text{base}} - C_{\\text{orc}}}.\n\\]",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely flags the denominator sign inversion in the skill-score definition and gives the corrected denominator. This is an exact match to the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "[mathematical] The skill-score equation has the wrong sign. ... The paper defines skill = (C_base - C_agent) / (C_orc - C_base). Since lower cost is better and normally C_orc < C_base, the denominator is negative.",
+          "confidence": "high",
+          "reasoning": "The reviewer accurately identified that the denominator of the skill-score equation was inverted, creating a sign error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Unresolved cross-reference 'Table ??' appears in the related-work section. ... Section 2, paragraph beginning 'Table ?? summarizes the benchmarks closest to ours.' The table reference is unresolved.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Unresolved cross-reference 'Table ??' appears in the related-work section. ... Section 2, paragraph beginning 'Table ?? summarizes the benchmarks closest to ours.' The table reference is unresolved.",
+          "confidence": "high",
+          "reasoning": "The reviewer flags the '??' rendering artefact in Section 2 at the exact location of the injected broken \\ref command, directly corresponding to the typo introduced in \\ref{tab:relatd}.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] **Unresolved cross-reference “Table ??” appears in the related-work section.**\n\n**Where:** Section 2, paragraph beginning “Table ?? summarizes the benchmarks closest to ours.”\n\n**What is wrong:** The table reference is unresolved.",
+          "confidence": "high",
+          "reasoning": "The injection created a broken reference rendering as '??' in Section 2. The reviewer specifically notes the unresolved cross-reference 'Table ??' in that location, which clearly matches the LaTeX artefact injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "[general] Unresolved cross-reference “Table ??” appears in the related-work section. ... Section 2, paragraph beginning “Table ?? summarizes the benchmarks closest to ours.”",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the \"??\" rendering artifact in Section 2, identifying the location of the injected broken reference.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 27.56823,
+  "total_cost_usd": null,
+  "total_input_tokens": 21375,
+  "total_output_tokens": 3549,
+  "escalation_count": 0,
+  "notes": null
+}

@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "✔ WEAKLY_SUPPORTED Projection of a full-precision LLM matrix onto a single ternary plane loses too much information and causes reasoning to collapse. Reference(s): [5]",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags the 'reasoning collapses' claim as WEAKLY_SUPPORTED because the cited paper is unavailable, but does not specifically challenge the dropped 'post-training' qualifier or note that the claim overgeneralises beyond post-training projection. The BROADENED-CLAIM rule requires the reviewer to challenge the post-edit claim as contradicted or overgeneralised relative to the cited source, which this flag does not do specifically enough.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "⚠ _PARTIALLY_SUPPORTED_ **Projection of a full-precision LLM matrix onto a single ternary plane loses too much information and causes reasoning to collapse.**\n  - _Reference(s):_ [5]\n  - _Justification:_ This is plausible as a motivation for PTQTP, but the specific “reasoning collapses” claim cannot be confirmed without the cited paper.",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit claim sentence against the same cited source [5]/PTQTP, marking it PARTIALLY_SUPPORTED. Under the broadened-claim rule, that counts as detection of the dropped 'post-training' qualifier/overgeneralization.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "✔ WEAKLY_SUPPORTED Projection of a full-precision LLM matrix onto a single ternary plane loses too much information and causes reasoning to collapse. Reference(s): [5]",
+          "confidence": "medium",
+          "reasoning": "The reviewer flagged the post-edit claim as 'WEAKLY_SUPPORTED' (the system's equivalent of partially supported) and challenged its status against the cited source [5], which matches the detection criteria for Rule (A).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The numerical audit explicitly excludes 'empirical percentage claims embedded in prose' from mechanical checks, and no item in the audit flags the 57%/58% sparsity discrepancy between the Introduction and Results section.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's numerical audit checks several printed values, but it does not mention the tau=1.0 sparsity percentage or the 57% vs 58% inconsistency between Introduction and Results.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses sparsity and the cost model generally but never identifies the specific incorrect value (58%) or the contradiction between sections.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "However, the first inverse uses U⊤U−ϵI, whereas regularized normal equations typically use +ϵI; the prose suggests a decorrelation/self-exclusion heuristic rather than a derivation.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "However, the first inverse uses U⊤U−ϵI, whereas regularized normal equations typically use +ϵI; the prose suggests a decorrelation/self-exclusion heuristic rather than a derivation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly notes that Eq. (3) uses U⊤U−ϵI instead of the expected +ϵI, directly identifying the injected sign change in the Tikhonov regularisation term, though marking it UNCERTAIN rather than FAIL.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "5.  [⚠] **The block-ALS decorrelated targets in Eq. (3) correctly implement implicit within-block deflation.**\n    - _Location:_ Eq. (3)\n    - _Verdict:_ UNCERTAIN (confidence: medium, impact: moderate)\n    - _Notes:_ The dimensions are consistent, and the use of least-squares Gram inverses is plausible. However, the first inverse uses \\(U^\\top U-\\epsilon I\\), whereas regularized normal equations typically use \\(+\\epsilon I\\); the prose suggests a decorrelation/self-exclusion heuristic rather than a derivation. Without a formal objective or derivation, I cannot verify that Eq. (3) is the exact block Gauss–Seidel or block least-squares update claimed.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the incorrect minus sign in the regularization term, contrasting it with the standard +εI form. This is a specific match to the injected Tikhonov-sign error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the first inverse uses U^\\top U-\\epsilon I, whereas regularized normal equations typically use +\\epsilon I",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the sign error in the Tikhonov regularization term in the first inverse, which is the exact mathematical mutation injected.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag any cross-reference mismatch regarding the section reference for the cost model (sec:core vs sec:cost); no part of the review mentions an incorrect or mispointed cross-reference of this kind.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The report does not mention any broken or misleading section reference involving the cost model or a mistaken pointer to Sec. core instead of the cost section.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not flag any incorrect cross-references or structural mismatches in the section pointers.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 45.164218,
+  "total_cost_usd": null,
+  "total_input_tokens": 25769,
+  "total_output_tokens": 6351,
+  "escalation_count": 0,
+  "notes": null
+}

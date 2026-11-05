@@ -1,0 +1,252 @@
+{
+  "paper_id": "2604.20203",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-6ed0b98699a6",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'Bitsch & Izidoro 2023; Emsenhuber et al. 2023; Chen et al. 2025'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "Bitsch & Izidoro 2023; Emsenhuber et al. 2023; Chen et al. 2025"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-28e5f9c858e9",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's own numbers confirm the concern: P(CJ|SE,[Fe/H]>0) = 14.5+12.7-6.9% has an upper uncertainty larger than the central value, and the paper acknowledges only that it is 'statistically indistinguishable from P(CJ,[Fe/H]>0) within ~1-σ uncertainties' — but never demonstrates that the SE and SN rates are themselves statistically distinguishable from each other, which is the claim required to support 'differential behaviour.' The data are formally consistent with both classes behaving similarly.",
+        "evidence": {
+          "claim": "The headline contrast between sub-Neptune and super-Earth systems is undermined by severely limited sample sizes in the metal-rich super-Earth and mixed bins, so the claim of differential behaviour is not statistically secure.",
+          "excerpt": "The reported P(CJ|SE,[Fe/H]>0) = 14.5⁺¹²·⁷₋₆.₉% has uncertainty larger than the entire effect being claimed, and the \"no correlation for super-Earths\" conclusion (Sec. 3.2, Conclusions) is not statistically established — only the SN excess is. The Kepler–Keck subsample (Sec. 3.4) is even smaller (7/7/8). The paper repeatedly frames the comparison as if SN and SE behave differently, but the data are formally consistent with both classes hosting CJs at an elevated rate."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's own numbers confirm the concern: P(CJ|SE,[Fe/H]>0) = 14.5+12.7-6.9% has an upper uncertainty larger than the central value, and the paper acknowledges only that it is 'statistically indistinguishable from P(CJ,[Fe/H]>0) within ~1-σ uncertainties' — but never demonstrates that the SE and SN rates are themselves statistically distinguishable from each other, which is the claim required to support 'differential behaviour.' The data are formally consistent with both classes behaving similarly.",
+            "cost_usd": 0.00495084
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims a differential headline result — \"Sub-Neptunes Show a Stronger Correlation with Cold Jupiters than Super-Earths\" and in the abstract \"this correlation is absent for systems with super-Earths\" — but the analysis reported in Sec. 3.2 only tests each class against the field rate, not SN vs SE directly. With small metal-rich bins (\"15 super-Earth systems (2 systems hosting cold Jupiters)\" and \"18 mixed systems (3 systems hosting cold Jupiters)\"), the paper does not provide a direct significance test that sub-Neptunes differ from super-Earths.",
+            "cost_usd": 0.010953899999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges the large uncertainties (P(CJ|SE, [Fe/H] > 0) = 14.5^{+12.7}_{-6.9}%) but still asserts in the Abstract and Conclusions that 'this correlation is absent for systems with super-Earths', despite the very small sample sizes leaving this statistically inconclusive.",
+            "cost_usd": 0.00229876
+          }
+        ],
+        "cost_usd": 0.018203499999999997
+      },
+      {
+        "flag_id": "fp-2097d1f43c37",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=AMBIGUOUS, gemini=FP",
+        "evidence": {
+          "claim": "The paper does not propagate uncertainty or systematics in the field-rate anchor (R21), risking overstatement of confidence levels.",
+          "excerpt": "All \"confidence levels\" (99.95%, 99.11%, etc., Sec. 3.2, 3.4, 3.5) compare a posterior on the conditional rate against the R21 field rate (14.3⁺²·⁰₋₁.₈%). The paper says it generates 100,000 draws \"from each\" (Sec. 3.2), implying the field rate uncertainty is included — but the same R21 number is then quoted as a fixed anchor, and the published R21 systematics (mass cuts, host-star sample selection, prior choices) are not propagated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states it 'generate[s] 100,000 random realizations from each' distribution (Sec. 3.2), implying both the conditional and field posteriors are sampled, so the R21 uncertainty is nominally included. However, it does not discuss propagation of R21 systematic uncertainties (sample selection, mass cuts, prior choices), leaving it unclear whether the confidence levels are overstated due to unquantified systematics.",
+            "cost_usd": 0.00495084
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does include the quoted field-rate uncertainty in its Monte Carlo comparison: \"we assume that the conditional and field frequency follow the distributions described above, and generate 100,000 random realizations from each.\" However, it simply \"adopt[s] the result of ... R21, P(CJ, [Fe/H] > 0) = 14.3^{+2.0}_{-1.8}%\" and does not discuss or propagate any additional R21 systematic choices beyond that quoted distribution.",
+            "cost_usd": 0.010953899999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's claim that the field rate is used as a 'fixed anchor' and its uncertainty is not propagated is factually incorrect; Section 3.2 explicitly states: 'we assume that the conditional and field frequency follow the distributions described above, and generate 100,000 random realizations from each.'",
+            "cost_usd": 0.00229876
+          }
+        ],
+        "cost_usd": 0.018203499999999997
+      },
+      {
+        "flag_id": "fp-c61f8fe5f525",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states 'we used the completeness maps in Figure A1 of (M. L. Bryan & E. J. Lee 2024) to determine the average completeness' and justifies similar completeness via KS tests on observational proxies (Appendix A), but never performs per-system injection-and-recovery. For confidence claims at the 99.95% level, this qualitative approach is indeed not the standard quantitative completeness validation.",
+        "evidence": {
+          "claim": "The detection-completeness analysis is qualitative only (KS tests on proxies) rather than a per-system injection-and-recovery, inadequate for the claimed confidence levels.",
+          "excerpt": "The detection-completeness justification (Sec. 3.1, Appendix A) consists of KS tests on stellar mass, baseline, N_obs, and σ_RV/√N_obs across the three system classes... For a 99.95% confidence claim, a per-system injection-and-recovery against the {0.5–20 M_J, 1–10 AU} grid is the standard."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'we used the completeness maps in Figure A1 of (M. L. Bryan & E. J. Lee 2024) to determine the average completeness' and justifies similar completeness via KS tests on observational proxies (Appendix A), but never performs per-system injection-and-recovery. For confidence claims at the 99.95% level, this qualitative approach is indeed not the standard quantitative completeness validation.",
+            "cost_usd": 0.00495084
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The reviewer is not fully accurate that the paper uses only KS tests, because Sec. 3.1 states \"we used the completeness maps in Figure A1 of (M. L. Bryan & E. J. Lee 2024) to determine the average completeness for the set of systems considered.\" But the paper does not perform a new per-system injection-and-recovery analysis; instead Appendix A relies on proxy comparisons and concludes only that \"the detection completeness among the three types of systems does not differ significantly from a statistical perspective.\"",
+            "cost_usd": 0.010953899999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does exactly as the reviewer describes: it justifies completeness using KS tests on proxies ('exhibit similar distributions in stellar mass, observational baselines, number of RV data points Nobs and RV uncertainties') and uses an average completeness map from another paper rather than performing per-system injection-and-recovery.",
+            "cost_usd": 0.00229876
+          }
+        ],
+        "cost_usd": 0.018203499999999997
+      },
+      {
+        "flag_id": "fp-9cb8cb364d49",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "In Sec. 3.2, both subgroup labels are written as 'P(CJ|SN, [Fe/H]>0&M∗>1M⊙)' — the lower-mass bin is never correctly labeled in the prose — and Table 1 row reads 'Sub-Neptune systems with M∗ ≤ M⊕' using Earth-mass (M⊕) instead of solar mass (M⊙), which is an internal inconsistency that makes it unclear what was actually evaluated.",
+        "evidence": {
+          "claim": "The subgroup labels and system counts in the stellar-mass split (Sec. 3.2) are internally inconsistent or mistyped, making it unclear what was actually evaluated.",
+          "excerpt": "The text then writes both subgroup labels as \"P(CJ|SN, [Fe/H]>0 & M∗ > 1 M⊙)\" — the lower-mass bin is mis-labelled in the prose (twice), and the corresponding row in Table 1 (\"M∗ ≤ M⊕\") uses M⊕ rather than M⊙. The mass discussion is confused enough that the reader cannot tell what was actually tested."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "In Sec. 3.2, both subgroup labels are written as 'P(CJ|SN, [Fe/H]>0&M∗>1M⊙)' — the lower-mass bin is never correctly labeled in the prose — and Table 1 row reads 'Sub-Neptune systems with M∗ ≤ M⊕' using Earth-mass (M⊕) instead of solar mass (M⊙), which is an internal inconsistency that makes it unclear what was actually evaluated.",
+            "cost_usd": 0.00495084
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 3.2 contains an internal labeling error: it gives both subgroup posteriors as \"P(CJ|SN, [Fe/H] > 0&M∗ > 1M⊙) and P(CJ|SN, [Fe/H] > 0&M∗ > 1M⊙), respectively,\" even though the preceding sentence defines the second bin as \"M∗ ≤ 1M⊙.\" Table 1 also mistypes the stellar-mass rows as \"M∗ > 1M⊕\" and \"M∗ ≤ M⊕,\" so the subgroup labels are indeed inconsistent in the paper.",
+            "cost_usd": 0.010953899999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text in Section 3.2 twice writes the label as 'P(CJ|SN, [Fe/H] > 0&M∗ > 1M⊙)', failing to differentiate the lower-mass bin, and Table 1 mistypes the unit as 'M∗ ≤ M⊕', confirming the reviewer's observation of confusing typographical errors.",
+            "cost_usd": 0.00229876
+          }
+        ],
+        "cost_usd": 0.018203499999999997
+      },
+      {
+        "flag_id": "fp-7c17ca658489",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The Abstract states 'this correlation is absent for systems with super-Earths' without mentioning mixed systems, even though in Sec. 3.2 P(CJ|Mix,[Fe/H]>0) = 19.6% is described as having only 84.57% confidence above the field rate, i.e., statistically insignificant, so the mixed-system non-result is omitted from the Abstract's framing of differential behaviour.",
+        "evidence": {
+          "claim": "The mixed-system class is treated inconsistently: omitted from the Abstract's summary of results even though its rate is also statistically indistinguishable from the field.",
+          "excerpt": "The Abstract states \"this correlation is absent for systems with super-Earths\" but ignores mixed systems entirely, even though P(CJ|Mix,[Fe/H]>0) = 19.6% (Sec. 3.2) is ALSO statistically indistinguishable from the field rate at 84.6% confidence (i.e., not significant)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The Abstract states 'this correlation is absent for systems with super-Earths' without mentioning mixed systems, even though in Sec. 3.2 P(CJ|Mix,[Fe/H]>0) = 19.6% is described as having only 84.57% confidence above the field rate, i.e., statistically insignificant, so the mixed-system non-result is omitted from the Abstract's framing of differential behaviour.",
+            "cost_usd": 0.00495084
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The abstract explicitly frames the study around two target classes — \"we compute the conditional frequency of cold Jupiters in systems with only inner sub-Neptunes ... and those with only inner super-Earths\" — so omission of mixed systems there is a scope choice, not an inconsistency. The mixed class is still reported in the body, where Sec. 2 says the systems are \"divide[d] ... into three types\" and Sec. 3.2 gives \"P(CJ|Mix, [Fe/H] > 0).\"",
+            "cost_usd": 0.010953899999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The Abstract contrasts sub-Neptune and super-Earth systems but entirely omits the mixed-system class, which, as stated in Section 3.2 ('the statistical significance (84.57%) is insufficient'), is also statistically indistinguishable from the field rate.",
+            "cost_usd": 0.00229876
+          }
+        ],
+        "cost_usd": 0.018203499999999997
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "general": 0.09101749999999999
+  },
+  "extractor_cost_usd": 0.025750000000000037,
+  "total_cost_usd": 0.11676750000000002
+}

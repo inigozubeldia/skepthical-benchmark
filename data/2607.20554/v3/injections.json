@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "Xu~et~al.~\\cite{xu2019gin} introduced the Graph Isomorphism Network (GIN), establishing a theoretical link between GNN expressiveness and the Weisfeiler--Leman graph isomorphism test.",
+    "injected_text": "Xu~et~al.~\\cite{xu2019gin} introduced the Graph Isomorphism Network (GIN), establishing a theoretical link between GNN expressiveness and spectral graph theory.",
+    "rationale": "The edit mis-attributes the foundational methodology of the cited GIN paper by replacing the Weisfeiler-Leman spatial isomorphism test with spectral graph theory, acting as a realistic categorical swap that directly contradicts the paper's actual framework.",
+    "ground_truth_description": "The claim regarding Xu et al. (2019) was altered to incorrectly state that its theoretical foundation links GNN expressiveness to spectral graph theory instead of the Weisfeiler-Leman graph isomorphism test.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "xu2019gin",
+      "injected_cite_key": "xu2019gin",
+      "claim_sentence_verbatim": "Xu~et~al.~\\cite{xu2019gin} introduced the Graph Isomorphism Network (GIN), establishing a theoretical link between GNN expressiveness and the Weisfeiler--Leman graph isomorphism test.",
+      "section_location": "Section 2. Related Work and Motivation",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "The proposed GINE-based L2O recovers most of this gain, achieving\n$11.3\\%$ on average with real-time latency.",
+    "injected_text": "The proposed GINE-based L2O recovers most of this gain, achieving\n$11.32\\%$ on average with real-time latency.",
+    "rationale": "Since the abstract contains no numerical results, we perturb the headline connectivity gain in Section 5.3 (changing 11.3% to 11.32%), creating a second-decimal cross-section mismatch with the unedited 11.3 value in Table 2.",
+    "ground_truth_description": "Perturbed the average connectivity gain in Section 5.3 from 11.3% to 11.32%, causing a mismatch with the corresponding 11.3 value in Table 2.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "11.3",
+      "value_after_raw": "11.32",
+      "value_before_float": 11.3,
+      "value_after_float": 11.32,
+      "location_cue": "The proposed GINE-based L2O recovers most of this gain, achieving $11.32\\%$ on average with real-time latency.",
+      "paired_location": "Table 2 row 4",
+      "quantity_label": "average connectivity gain %",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "\\quad \\forall i \\in V_{\\mathrm{CAV}} \\setminus V_{\\mathrm{RSU}},",
+    "injected_text": "\\quad \\forall i \\in V_{\\mathrm{CAV}},",
+    "rationale": "Deleting the set-minus term '\\setminus V_{\\mathrm{RSU}}' applies flow conservation to sink nodes (RSUs), breaking the multi-hop formulation, which Wolfram refutes as an unequivalent domain constraint.",
+    "ground_truth_description": "Removed the exclusion of RSUs from the flow conservation constraint equation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Section 3.3, Flow Conservation",
+      "original_fragment_latex": " \\setminus V_{\\mathrm{RSU}}",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\sum_{(k,i)\\in E} f_{ki} = \\sum_{(i,j)\\in E} f_{ij}, \\quad \\forall i \\in V_{\\mathrm{CAV}} \\setminus V_{\\mathrm{RSU}},",
+      "full_equation_latex_after": "\\sum_{(k,i)\\in E} f_{ki} = \\sum_{(i,j)\\in E} f_{ij}, \\quad \\forall i \\in V_{\\mathrm{CAV}},",
+      "term_role": "set difference excluding sink nodes",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "This section describes the proposed Learning-to-Optimize (L2O) framework",
+    "injected_text": "This section describes the the proposed Learning-to-Optimize (L2O) framework",
+    "rationale": "Accidental repetition of the word 'the', introducing a cosmetic typo without affecting meaning.",
+    "ground_truth_description": "Added a duplicated word ('the the') in the introductory sentence of Section IV.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D2",
+      "change_kind": "word_repetition",
+      "expected_bucket": "very_minor",
+      "section_location": "Section 4",
+      "affected_span_verbatim": "This section describes the proposed Learning-to-Optimize (L2O) framework\nfor real-time multi-hop relay selection in smart urban NR-V2X networks."
+    },
+    "proposer_agent": "injector.general.S1.t1.v3"
+  }
+]

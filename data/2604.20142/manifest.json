@@ -1,0 +1,369 @@
+{
+  "paper_id": "2604.20142",
+  "arxiv_url": "https://arxiv.org/abs/2604.20142",
+  "rotation_seed": 506081412,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S2",
+      "type": 2
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "Manuscript.tex",
+          "original_text": "and argued that allowing the electron injection rate to rise with time can further harden the spectrum toward $\\alpha \\sim -2/3$",
+          "injected_text": "and argued that allowing the electron injection rate to drop with time can further harden the spectrum toward $\\alpha \\sim -2/3$",
+          "rationale": "Reverses the directional conclusion attributed to Wang & Dai (2021), who argue that a rising (not falling) electron injection rate is what hardens the low-energy spectrum toward alpha ~ -2/3; cite key is left intact and only the polarity of the cited claim is flipped.",
+          "ground_truth_description": "Flipped 'rise with time' to 'drop with time' in the sentence summarizing Wang & Dai (2021), inverting the cited paper's actual conclusion about how injection-rate evolution hardens the spectrum.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "2021Galax...9...68W",
+            "injected_cite_key": "2021Galax...9...68W",
+            "claim_sentence_verbatim": "\\cite{2021Galax...9...68W} considered internal-shock evolution with a staged magnetic-field behavior (approximately constant followed by a $t^{-1}$ decay), which can yield $-3/2<\\alpha<-2/3$, and argued that allowing the electron injection rate to rise with time can further harden the spectrum toward $\\alpha \\sim -2/3$.",
+            "section_location": "Sec. 5 (Summary and Discussion)",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "Manuscript.tex",
+          "original_text": "$\\Omega_{\\rm M}=0.315$, and $\\Omega_{\\Lambda}=0.685$",
+          "injected_text": "$\\Omega_{\\rm M}=0.317$, and $\\Omega_{\\Lambda}=0.685$",
+          "rationale": "The paper has no table that lists components alongside an explicit total, so I targeted the closest realistic 'components sum to a total' relationship: the flat-LCDM constraint Omega_M + Omega_Lambda = 1. Shifting Omega_M from 0.315 to 0.317 makes the stated components sum to 1.002 instead of 1.000, a small typo-sized inconsistency with the flatness assumption (and with the cited Planck 2018 values), triggering sum_eq_total at the minor severity bucket. Flagging the on-cell tension: this is a sum_eq_total mismatch but not strictly inside a tabular environment.",
+          "ground_truth_description": "Changed Omega_M from 0.315 to 0.317 in the cosmology line, so that Omega_M + Omega_Lambda no longer sums to 1 as required by flat LCDM.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "sum_eq_total",
+            "value_before_raw": "0.315",
+            "value_after_raw": "0.317",
+            "value_before_float": 0.315,
+            "value_after_float": 0.317,
+            "location_cue": "$\\Omega_{\\rm M}=0.317$, and $\\Omega_{\\Lambda}=0.685$",
+            "paired_location": "Section 2 (GRB Jet Model and Numerical Method), cosmology specification line citing Planck 2018",
+            "quantity_label": "Matter density parameter Omega_M in a flat LCDM cosmology where Omega_M + Omega_Lambda must equal 1",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t2.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "Manuscript.tex",
+          "original_text": "+\\frac{1}{E}\\sum_{n=1}^{\\infty}\\frac{(1+4E)^{-n}}{n^{2}}",
+          "injected_text": "+\\frac{1}{E}\\sum_{n=0}^{\\infty}\\frac{(1+4E)^{-n}}{n^{2}}",
+          "rationale": "Shifts the lower bound of the infinite series in the Klein-Nishina scattering kernel G from n=1 to n=0, introducing a 1/0 singularity at n=0 that is not present in the original Jones (1968) KN expansion.",
+          "ground_truth_description": "The lower index of the series sum_{n=1}^{infty} (1+4E)^{-n}/n^2 in the Klein-Nishina scattering kernel G(gamma'_e, nu') was shifted from n=1 to n=0, which introduces a 1/n^2 = 1/0 divergence at the new lower bound.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2, displayed equation defining the Klein-Nishina scattering kernel G(gamma'_e, nu') (the piecewise expression for E>1/4)",
+            "original_fragment_latex": "\\sum_{n=1}^{\\infty}\\frac{(1+4E)^{-n}}{n^{2}}",
+            "injected_fragment_latex": "\\sum_{n=0}^{\\infty}\\frac{(1+4E)^{-n}}{n^{2}}",
+            "full_equation_latex_before": "G(\\gamma'_e,\\nu') = \\begin{cases} \\frac{8}{3}\\,\\frac{E(1+5E)}{(1+4E)^2} -\\frac{4E}{1+4E}\\!\\left(\\frac{2}{3}+\\frac{1}{2E}+\\frac{1}{8E^2}\\right) +\\ln(1+4E)\\!\\left[1+\\frac{3}{E}+\\frac{3}{4E^2} +\\frac{\\ln(1+4E)}{2E}-\\frac{\\ln(4E)}{E}\\right] -\\frac{5}{2E} +\\frac{1}{E}\\sum_{n=1}^{\\infty}\\frac{(1+4E)^{-n}}{n^{2}} -\\frac{\\pi^{2}}{6E}-2, & E>1/4,\\\\ E^{2}\\!\\left(\\frac{32}{9}-\\frac{112}{5}E+\\frac{3136}{25}E^{2}\\right), & E\\le 1/4, \\end{cases}",
+            "full_equation_latex_after": "G(\\gamma'_e,\\nu') = \\begin{cases} \\frac{8}{3}\\,\\frac{E(1+5E)}{(1+4E)^2} -\\frac{4E}{1+4E}\\!\\left(\\frac{2}{3}+\\frac{1}{2E}+\\frac{1}{8E^2}\\right) +\\ln(1+4E)\\!\\left[1+\\frac{3}{E}+\\frac{3}{4E^2} +\\frac{\\ln(1+4E)}{2E}-\\frac{\\ln(4E)}{E}\\right] -\\frac{5}{2E} +\\frac{1}{E}\\sum_{n=0}^{\\infty}\\frac{(1+4E)^{-n}}{n^{2}} -\\frac{\\pi^{2}}{6E}-2, & E>1/4,\\\\ E^{2}\\!\\left(\\frac{32}{9}-\\frac{112}{5}E+\\frac{3136}{25}E^{2}\\right), & E\\le 1/4, \\end{cases}",
+            "term_role": "sum lower bound (series index start in Klein-Nishina kernel expansion)",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t3.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "Manuscript.tex",
+          "original_text": "While the Band function captures the principal features, its physical origin is debated.",
+          "injected_text": "While the Band function captures the principle features, its physical origin is debated.",
+          "rationale": "Classic homophone swap of 'principal' (main) for 'principle' (a tenet/rule) — a cosmetic writing defect with no impact on meaning, the kind of slip a tired author can leave in the Introduction.",
+          "ground_truth_description": "Replaced the adjective 'principal' with the homophone 'principle' in the Introduction sentence describing what the Band function captures.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D8",
+            "change_kind": "homophone_swap",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 1 (Introduction)",
+            "affected_span_verbatim": "While the Band function captures the principal features, its physical origin is debated."
+          },
+          "proposer_agent": "injector.general.S1.t1.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "Manuscript.tex",
+          "original_text": "We solved Equation \\ref{eq4} using a fully implicit finite-difference scheme \\citep{CHANG19701}",
+          "injected_text": "We solved Equation \\ref{eq4} using an explicit finite-difference scheme \\citep{CHANG19701}",
+          "rationale": "Chang & Cooper (1970) introduce an implicit (weighted) finite-difference scheme for Fokker-Planck equations; recasting it as 'explicit' swaps the numerical-method category (implicit vs explicit) while keeping the same general topic and the cite key intact, so a careful reader of the cited paper would return CONTRADICTED.",
+          "ground_truth_description": "Changed the description of the Chang & Cooper (1970) numerical scheme from 'fully implicit finite-difference' to 'explicit finite-difference', mis-categorising the method while preserving the citation.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "CHANG19701",
+            "injected_cite_key": "CHANG19701",
+            "claim_sentence_verbatim": "We solved Equation \\ref{eq4} using a fully implicit finite-difference scheme \\citep{CHANG19701} and implemented the numerical code in Python to compute the electron spectrum and the corresponding radiation spectrum.",
+            "section_location": "Sec. 2 (GRB Jet Model and Numerical Method)",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "Manuscript.tex",
+          "original_text": "In all simulations, the electron injection index is fixed at $p=2.8$ to reproduce the commonly observed high-energy index $\\beta \\approx -2.4$ of the Band function.",
+          "injected_text": "In all simulations, the electron injection index is fixed at $p=2.8$ to reproduce the commonly observed high-energy index $\\beta \\approx -3.4$ of the Band function.",
+          "rationale": "The fast-cooling synchrotron relation \\beta = -(p+2)/2 ties the explicitly named operands p=2.8 and \\beta to the Band high-energy index: with p=2.8 one obtains -(2.8+2)/2 = -2.4, exactly as the paper originally claims. Replacing -2.4 by -3.4 makes the (p+2)/2 = -\\beta arithmetic blatantly fail (would require p=4.8), a ~42% relative error well above the 20% threshold. Note: this paper has no textbook 'numerator/denominator/ratio' prose triple, so this is the closest realistic ratio_eq target — flagged here as a constraint tension consistent with the realism-first directive.",
+          "ground_truth_description": "Changed the stated target Band high-energy photon index from beta ~ -2.4 to beta ~ -3.4 while keeping p=2.8, breaking the standard fast-cooling synchrotron arithmetic relation -(p+2)/2 = beta.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "ratio_eq",
+            "value_before_raw": "-2.4",
+            "value_after_raw": "-3.4",
+            "value_before_float": -2.4,
+            "value_after_float": -3.4,
+            "location_cue": "the electron injection index is fixed at $p=2.8$ to reproduce the commonly observed high-energy index $\\beta \\approx -3.4$ of the Band function",
+            "paired_location": null,
+            "quantity_label": "Band high-energy photon index beta corresponding to electron injection index p=2.8 via fast-cooling synchrotron relation beta = -(p+2)/2",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t3.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "Manuscript.tex",
+          "original_text": "\\dot{\\gamma}'_{e,\\rm tot} = \\dot{\\gamma}'_{e,\\rm syn}\n + \\dot{\\gamma}'_{e,\\rm adi}\n + \\dot{\\gamma}'_{e,\\rm SSC}",
+          "injected_text": "\\dot{\\gamma}'_{e,\\rm tot} = \\dot{\\gamma}'_{e,\\rm syn}\n + \\dot{\\gamma}'_{e,\\rm SSC}",
+          "rationale": "Drops the adiabatic cooling term from the total electron cooling rate sum, a single-term deletion at an operator boundary in a key displayed equation that the paper's electron continuity equation depends on; symbolic equality against the intact three-term sum will refute.",
+          "ground_truth_description": "Removed the adiabatic cooling rate term from the displayed equation defining the total electron cooling rate as the sum of synchrotron, adiabatic, and SSC cooling rates.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2 (GRB Jet Model and Numerical Method), total cooling rate equation immediately following the electron continuity equation (Eq. 4)",
+            "original_fragment_latex": " + \\dot{\\gamma}'_{e,\\rm adi}\n",
+            "injected_fragment_latex": "",
+            "full_equation_latex_before": "\\dot{\\gamma}'_{e,\\rm tot} = \\dot{\\gamma}'_{e,\\rm syn}\n + \\dot{\\gamma}'_{e,\\rm adi}\n + \\dot{\\gamma}'_{e,\\rm SSC}",
+            "full_equation_latex_after": "\\dot{\\gamma}'_{e,\\rm tot} = \\dot{\\gamma}'_{e,\\rm syn}\n + \\dot{\\gamma}'_{e,\\rm SSC}",
+            "term_role": "adiabatic cooling rate term in the total electron cooling rate sum",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "Manuscript.tex",
+          "original_text": "A more realistic picture likely requires magnetic-field decay to operate in concert with non-stationary injection, sustained acceleration, and geometric effects, with their relative contributions quantified through the same forward-folding and uniform-fitting pipeline.",
+          "injected_text": "A more realistic picture likely requires magnetic-field decay to operate in concert with non-stationary injection, sustained acceleration, and geometric effects, with their relative contributions quantified through the same forward-folding and uniform-fitting pipeline. More broadly, the catalog-consistent framework developed here provides a generally applicable template for diagnosing the prompt-emission radiation mechanism of essentially any high-energy transient source whose spectra are characterized by empirical broken power-law functions.",
+          "rationale": "Adds a sweeping generalisation to the closing of the Conclusion that extrapolates a methodology demonstrated only on GRB Fermi-GBM Band fits with synchrotron models to 'essentially any high-energy transient source' — a scope vastly broader than what the Results actually establish.",
+          "ground_truth_description": "Inserted a closing sentence claiming the catalog-consistent forward-folding framework is a generally applicable template for diagnosing the prompt radiation mechanism of essentially any high-energy transient source, an unsupported generalisation beyond the GRB-specific scope of the paper's Results.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B7",
+            "change_kind": "overstated_conclusion",
+            "expected_bucket": "major",
+            "section_location": "Sec. 5 (Summary and Discussion), final paragraph",
+            "affected_span_verbatim": "Overall, within a catalog-consistent forward-folding and Band-recovery framework, we find that magnetic-field decay and SSC can harden the low-energy slope of fast-cooling synchrotron emission in some regimes, but they do not by themselves reproduce the peak and width of the GBM $\\alpha$ distribution statistically. A more realistic picture likely requires magnetic-field decay to operate in concert with non-stationary injection, sustained acceleration, and geometric effects, with their relative contributions quantified through the same forward-folding and uniform-fitting pipeline."
+          },
+          "proposer_agent": "injector.general.S3.t2.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "Manuscript.tex",
+          "original_text": "$H_{0}=67.4~\\mathrm{km~s^{-1}~Mpc^{-1}}$",
+          "injected_text": "$H_{0}=68.0~\\mathrm{km~s^{-1}~Mpc^{-1}}$",
+          "rationale": "Planck 2018 (Paper VI) reports H_0 = 67.36 ± 0.54 km/s/Mpc; shifting to 68.0 is +0.64, i.e. ~1.2σ above the cited central value — outside the 1σ band but well within 2σ, matching the C·S1·type-2 mild quantitative-qualifier mis-quote.",
+          "ground_truth_description": "The adopted Hubble constant attributed to Planck 2018 (Aghanim et al. 2020) is altered from 67.4 to 68.0 km/s/Mpc, a ~1.2σ mis-quote of the cited value while leaving the cite key, units, and accompanying Ω_M, Ω_Λ values untouched.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "2020A&A...641A...6P",
+            "injected_cite_key": "2020A&A...641A...6P",
+            "claim_sentence_verbatim": "We adopt a standard $\\Lambda$CDM cosmology with\n$H_{0}=67.4~\\mathrm{km~s^{-1}~Mpc^{-1}}$,\n$\\Omega_{\\rm M}=0.315$, and $\\Omega_{\\Lambda}=0.685$ \\citep{2020A&A...641A...6P}.",
+            "section_location": "Sec. 2 (GRB Jet Model and Numerical Method)",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "Manuscript.tex",
+          "original_text": "but remains centered around $\\alpha \\approx -1.5$.",
+          "injected_text": "but remains centered around $\\alpha \\approx -5.1$.",
+          "rationale": "Swaps the adjacent digits in the abstract's headline numerical result for the centered value of the simulated alpha distribution from -1.5 to -5.1, while the body (Section 5, point 4) still correctly states alpha approx -1.5, producing an abstract_vs_body_match failure at the major bucket.",
+          "ground_truth_description": "Changed the abstract's headline value 'centered around alpha approx -1.5' to '-5.1' via adjacent-digit swap, while the body retains the original -1.5 value.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "-1.5",
+            "value_after_raw": "-5.1",
+            "value_before_float": -1.5,
+            "value_after_float": -5.1,
+            "location_cue": "the model yields $\\alpha$ mostly between $-1.5$ and $-0.8$, but remains centered around $\\alpha \\approx -5.1$",
+            "paired_location": "Section 5 (Summary and Discussion), point (4): 'our Monte Carlo samples in the synchrotron + adiabatic-cooling framework are dominated by $\\alpha \\approx -1.5$'",
+            "quantity_label": "Center of the simulated low-energy spectral-index (alpha) distribution from the Monte Carlo synchrotron + adiabatic-cooling model",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "Manuscript.tex",
+          "original_text": "\\dot{\\gamma}'_{e,\\rm syn} =\n -\\frac{\\sigma_T B^{\\prime 2}\\gamma_e^{\\prime 2}}{6\\pi m_e c},",
+          "injected_text": "\\dot{\\gamma}'_{e,\\rm syn} =\n -\\frac{\\sigma_T B^{\\prime 2}\\gamma_e^{\\prime 2}}{4\\pi m_e c},",
+          "rationale": "Replaces the canonical synchrotron cooling-rate denominator 6\\pi (derived from P_syn = (4/3)\\sigma_T c \\gamma^2 U_B with U_B = B^2/8\\pi) with 4\\pi, a structurally similar but algebraically incorrect coefficient that Wolfram symbolic comparison against the canonical form will refute.",
+          "ground_truth_description": "Changed the denominator of the synchrotron single-electron cooling rate from 6\\pi m_e c to 4\\pi m_e c, introducing a factor-of-3/2 error in a canonical physics identity.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2, synchrotron cooling rate equation (between Eqs. for total cooling and adiabatic cooling)",
+            "original_fragment_latex": "\\frac{\\sigma_T B^{\\prime 2}\\gamma_e^{\\prime 2}}{6\\pi m_e c}",
+            "injected_fragment_latex": "\\frac{\\sigma_T B^{\\prime 2}\\gamma_e^{\\prime 2}}{4\\pi m_e c}",
+            "full_equation_latex_before": "\\dot{\\gamma}'_{e,\\rm syn} = -\\frac{\\sigma_T B^{\\prime 2}\\gamma_e^{\\prime 2}}{6\\pi m_e c}",
+            "full_equation_latex_after": "\\dot{\\gamma}'_{e,\\rm syn} = -\\frac{\\sigma_T B^{\\prime 2}\\gamma_e^{\\prime 2}}{4\\pi m_e c}",
+            "term_role": "identity replacement: canonical synchrotron cooling-rate coefficient (derived from Larmor formula plus U_B = B^2/8\\pi) altered by a factor of 3/2",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "Manuscript.tex",
+          "original_text": "In all simulations, the electron injection index is fixed at $p=2.8$ to reproduce the commonly observed high-energy index $\\beta \\approx -2.4$ of the Band function.",
+          "injected_text": "In all simulations, the electron injection index is fixed at $p=2.5$ to reproduce the commonly observed high-energy index $\\beta \\approx -2.4$ of the Band function.",
+          "rationale": "Methods (Sec. 3) now states the electron injection index is fixed at p=2.5, while the Random Sampling Simulation in the Results (Sec. 4.5) explicitly says 'the injection spectral index at $p = 2.8$' — a Methods/Results contradiction on a configurable methodological parameter, parallel to the 5-fold/10-fold exemplar. Single contiguous substitution; cite-keys, math/braces, and surrounding text unchanged.",
+          "ground_truth_description": "Changed the electron injection index quoted in the Methods (Sec. 3) from p=2.8 to p=2.5, while the Results (Sec. 4.5) Monte Carlo description still uses p=2.8.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methods_results_inconsistency",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 3 (Simulations) vs. Sec. 4.5 (Random Sampling Simulation)",
+            "affected_span_verbatim": "In all simulations, the electron injection index is fixed at $p=2.8$ to reproduce the commonly observed high-energy index $\\beta \\approx -2.4$ of the Band function."
+          },
+          "proposer_agent": "injector.general.S2.t2.v3"
+        }
+      ]
+    }
+  ]
+}

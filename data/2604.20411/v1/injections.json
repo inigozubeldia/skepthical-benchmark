@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "aa58752-25.tex",
+    "original_text": "Similar results have been reported by \\cite{Dimauro22}, who studied a sample of massive galaxies at $0<z<2$ on the SFR-M$_\\star$ plane, finding galaxies with minimal bulge components ($B/T<0.2$) are all on the SFMS while galaxies with significant bulges ($B/T>0.2$) are responsible for the bending of main sequence at high-mass end.",
+    "injected_text": "Complementary insights come from \\cite{Dimauro22}, who measured the radial profiles of dust attenuation in a sample of nearby spiral galaxies, finding that dust extinction systematically declines from galactic centers toward the outer disks across all morphological types.",
+    "rationale": "Keeps the \\cite{Dimauro22} key intact but rewrites the attached claim to describe a study on radial dust attenuation profiles in nearby spirals — a topic Dimauro22 (which is about morphology, B/T ratios, and the SFR-M_star bending) does not discuss at all, so a careful reader of the cited paper returns UNRELATED.",
+    "ground_truth_description": "The sentence attributing a morphology / B/T result to Dimauro22 has been rewritten to attribute a completely unrelated result on radial dust-attenuation profiles in nearby spirals to the same paper, with the cite key preserved.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Dimauro22",
+      "injected_cite_key": "Dimauro22",
+      "claim_sentence_verbatim": "Similar results have been reported by \\cite{Dimauro22}, who studied a sample of massive galaxies at $0<z<2$ on the SFR-M$_\\star$ plane, finding galaxies with minimal bulge components ($B/T<0.2$) are all on the SFMS while galaxies with significant bulges ($B/T>0.2$) are responsible for the bending of main sequence at high-mass end.",
+      "section_location": "Sec. 4.3 (The role of morphology on SFR-M_star relation), discussion of literature comparison after Figure~\\ref{figureqm}",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "aa58752-25.tex",
+    "original_text": "$0.7\\leq z<1.0$ & 47279 & 2838 \\\\",
+    "injected_text": "$0.7\\leq z<1.0$ & 47269 & 2838 \\\\",
+    "rationale": "Perturbing the 0.7<=z<1.0 bin galaxy count by 10 (47279 -> 47269) breaks the column sum (was 289,624 matching the stated mass-complete sample size; now 289,614), creating a small rounding-error-like mismatch that fires sum_eq_total at the minor severity tier.",
+    "ground_truth_description": "Changed the 'Number of Galaxies' cell for the 0.7<=z<1.0 redshift bin in Table 1 from 47279 to 47269, breaking the column total that should sum to the 289,624 mass-complete sample size stated in the body text.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "sum_eq_total",
+      "value_before_raw": "47279",
+      "value_after_raw": "47269",
+      "value_before_float": 47279.0,
+      "value_after_float": 47269.0,
+      "location_cue": "$0.7\\leq z<1.0$ & 47279 & 2838 \\\\ $1.0\\leq z<1.5$ & 68209 & 2672",
+      "paired_location": "Table 1 row 2 (Number of Galaxies column); body text 'resulting in a mass-complete sample of 289,624 galaxies'",
+      "quantity_label": "Number of galaxies in the 0.7<=z<1.0 redshift bin (mass-complete sample)",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "aa58752-25.tex",
+    "original_text": "\\mathrm{log(SFR)=S_0-log[(10^{M_\\star}/10^{M_0})^{-\\gamma_1}+(10^{M_\\star}/10^{M_0})^{\\gamma_2}]},",
+    "injected_text": "\\mathrm{log(SFR)=S_0-log[(10^{M_\\star}/10^{M_0})^{-\\gamma_1}+(10^{M_\\star}/10^{M_0+1})^{\\gamma_2}]},",
+    "rationale": "The paper has only ONE displayed equation (Eq. 1) and it contains no sum or integral with explicit bounds, so a strict 'shift integral/sum lower bound by 1' edit is not available; the closest in-spirit edit is shifting the characteristic transition-mass scale M_0 by 1 dex in the high-mass term only, which mimics a unit shift in a 'bound' that delimits the rising vs. declining regimes of the bell-shaped function and is the kind of asymmetric typo a tired author might introduce while transcribing the second term.",
+    "ground_truth_description": "In Eq. (1) the second occurrence of 10^{M_0} (inside the high-mass-slope term raised to gamma_2) is shifted to 10^{M_0+1}, breaking the intended symmetric definition of the characteristic mass between the two terms.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq1",
+      "equation_location": "Eq. (1), Sec. 3.1 (Parameterizing the SFR-M_star relation)",
+      "original_fragment_latex": "+(10^{M_\\star}/10^{M_0})^{\\gamma_2}",
+      "injected_fragment_latex": "+(10^{M_\\star}/10^{M_0+1})^{\\gamma_2}",
+      "full_equation_latex_before": "\\mathrm{log(SFR)=S_0-log[(10^{M_\\star}/10^{M_0})^{-\\gamma_1}+(10^{M_\\star}/10^{M_0})^{\\gamma_2}]},",
+      "full_equation_latex_after": "\\mathrm{log(SFR)=S_0-log[(10^{M_\\star}/10^{M_0})^{-\\gamma_1}+(10^{M_\\star}/10^{M_0+1})^{\\gamma_2}]},",
+      "term_role": "characteristic transition-mass scale M_0 in the high-mass (gamma_2) term — playing the role of a 'bound' between low- and high-mass regimes; cell's prescribed term_role of 'sum/integral lower bound' is not realisable in this paper because no displayed sum or integral exists",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "aa58752-25.tex",
+    "original_text": "though its detailed shape, evolution with cosmic time, and physical origin remain subjects of active debate",
+    "injected_text": "though it's detailed shape, evolution with cosmic time, and physical origin remain subjects of active debate",
+    "rationale": "Classic its/it's homophone swap — a cosmetic writing defect that does not affect meaning, plausibly missed by an author proofread; should land in the very_minor bucket via D2/D8.",
+    "ground_truth_description": "Replaced the possessive 'its' with the contraction 'it's' in the Introduction sentence describing the high-mass turnover.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D8",
+      "change_kind": "homophone_swap",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 1 (Introduction)",
+      "affected_span_verbatim": "This high-mass turnover has been documented across multiple surveys and redshift ranges, though its detailed shape, evolution with cosmic time, and physical origin remain subjects of active debate"
+    },
+    "proposer_agent": "injector.general.S1.t1.v1"
+  }
+]

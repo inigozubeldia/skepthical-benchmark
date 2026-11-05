@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14375",
+  "copy_id": "v3",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's Key Statements section marks the SMT/mixed-integer/branch-and-bound claim as SUPPORTED, and specifically notes Tjeng et al. 2019 as a MIP verification representative. The reviewer never challenges the 'SAT formulations' attribution to Tjeng et al. and Anderson et al. that was injected; instead they confirm MIP framing for these works. No flag corresponds to the injected claim_method_category_swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review correctly states Anderson et al. study strong MIP formulations, but it does not explicitly flag the paper's sentence attributing SAT formulations to Tjeng/Anderson or mark that specific citation-backed claim as contradicted/mischaracterised.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer failed to flag that the paper incorrectly attributed SAT formulations to Tjeng et al. and Anderson et al.; instead, the reviewer supported the claim while correctly identifying the methods as MIP/MILP in their justification, missing the injected error in the text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The fixed-noise robustness proof contains an inconsistent margin value: Sec. 3 defines \\(\\Gamma=m/60\\), while Sec. 4.4 states \"\\(\\Gamma=m/600\\)\" but then computes \\((m/60)/2^{-11}\\). ... The two printed values disagree by 90% relative to the larger value, and Sec. 4.4's subsequent arithmetic uses `m/60`.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The fixed-noise robustness proof contains an inconsistent margin value: Sec. 3 defines \\(\\Gamma=m/60\\), while Sec. 4.4 states \"\\(\\Gamma=m/600\\)\" but then computes \\((m/60)/2^{-11}\\). ... The two printed values disagree by 90% relative to the larger value, and Sec. 4.4's subsequent arithmetic uses `m/60`.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the factor-of-10 discrepancy between Gamma=m/60 in Sec. 3 and Gamma=m/600 in Sec. 4.4, which is exactly the injected error. This is flagged both as a major issue and in the numerical audit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The fixed-noise robustness proof contains an inconsistent margin value: Sec. 3 defines \\(\\Gamma=m/60\\), while Sec. 4.4 states “\\(\\Gamma=m/600\\)” but then computes \\((m/60)/2^{-11}\\). If \\(\\Gamma=m/600\\) were used literally, the displayed lower bound on \\(\\Lambda\\) would not follow and the fixed-noise theorem would fail.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the 60 vs 600 mismatch for Gamma and ties it to the same location and consequence described in the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 3 defines \\(\\Gamma=m/60\\), while Sec. 4.4 states “\\(\\Gamma=m/600\\)” but then computes \\((m/60)/2^{-11}\\).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the discrepancy between the margin value defined in Section 3 and the 10x larger value (600) appearing in Section 4.4.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The prose and Eq. (3) define literal units \\(h_{C,j}\\) for three clause literals, but Eq. (5) sums \\(j=0\\) to \\(3\\), which references an undefined \\(h_{C,0}\\) and would imply four literal units plus one overflow unit. ... Change Eq. (5) to sum over \\(j=1,2,3\\)",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The prose and Eq. (3) define literal units \\(h_{C,j}\\) for three clause literals, but Eq. (5) sums \\(j=0\\) to \\(3\\), which references an undefined \\(h_{C,0}\\) and would imply four literal units plus one overflow unit. ... Change Eq. (5) to sum over \\(j=1,2,3\\)",
+          "confidence": "high",
+          "reasoning": "The reviewer directly identifies the injected change — the sum starting at j=0 instead of j=1 — flagging it as a critical error introducing an undefined term h_{C,0}, precisely matching the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Sec. 3 defines three literal units \\(h_{C,j}\\) for \\(j=1,2,3\\), but Eq. (5) sums over \\(j=0,\\ldots,3\\), introducing an undefined fourth literal unit and contradicting the “four ReLUs per clause” count.\n\nThe output definition sums the three literal units and one overflow unit per clause.\n- _Location:_ Sec. 3, Eq. (5)\n- _Verdict:_ FAIL (confidence: high, impact: critical)\n- _Notes:_ The prose and Eq. (3) define literal units \\(h_{C,j}\\) for three clause literals, but Eq. (5) sums \\(j=0\\) to \\(3\\), which references an undefined \\(h_{C,0}\\)",
+          "confidence": "high",
+          "reasoning": "The review explicitly flags Eq. (5) summing from j=0 instead of j=1 and names the undefined \\(h_{C,0}\\), which is exactly the injected index-shift error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 3 defines three literal units \\(h_{C,j}\\) for \\(j=1,2,3\\), but Eq. (5) sums over \\(j=0,\\ldots,3\\), introducing an undefined fourth literal unit",
+          "confidence": "high",
+          "reasoning": "The reviewer caught the index shift from j=1 to j=0 and correctly noted that it introduced an undefined term h_{C,0}.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Abstract contains the grammatical error \"their is no sound and complete verifier.\" Recommendation: Replace \"their\" with \"there.\"",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Abstract contains the grammatical error \"their is no sound and complete verifier.\" Recommendation: Replace \"their\" with \"there.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the homophone swap ('their' for 'there') in the abstract, which is exactly the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The Abstract contains the grammatical error “their is no sound and complete verifier.”\n\n*Recommendation:* Replace “their” with “there.”",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the homophone swap in the abstract and provides the intended correction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract contains the grammatical error “their is no sound and complete verifier.” Recommendation: Replace “their” with “there.”",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the homophone error 'their' for 'there' in the abstract.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 35.13264,
+  "total_cost_usd": null,
+  "total_input_tokens": 25278,
+  "total_output_tokens": 3861,
+  "escalation_count": 0,
+  "notes": null
+}

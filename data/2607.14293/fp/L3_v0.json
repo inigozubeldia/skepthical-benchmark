@@ -1,0 +1,263 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-25ab842a1bbe",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "L3 maths flags require manual review (automated adjudication would be circular).",
+        "evidence": {},
+        "judge_panel": [],
+        "cost_usd": 0.0
+      },
+      {
+        "flag_id": "fp-2417c9786421",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "L3 maths flags require manual review (automated adjudication would be circular).",
+        "evidence": {},
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-f1edd919ca5c",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges this limitation only as future work: 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.' No measured real Ramsey data is used for training or evaluation anywhere in the paper, and distribution shift is not quantified.",
+        "evidence": {
+          "claim": "The paper's most significant limitation is its exclusive reliance on synthetic data for all training and evaluation, while the work is framed as an operational real-time detector.",
+          "excerpt": "The paper's most significant limitation is its exclusive reliance on synthetic data for all training and evaluation, while the work is framed as an operational real-time detector. Real Ramsey scans may exhibit artifacts (e.g., non-Gaussian noise, drifts) not captured by the generative model, leading to a potential distribution shift that could degrade performance."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation only as future work: 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.' No measured real Ramsey data is used for training or evaluation anywhere in the paper, and distribution shift is not quantified.",
+            "cost_usd": 0.00447852
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that \"Both models were trained on the same fully simulated dataset of 100,000 scans\" and that \"Both the quantized DCCNN and the χ2 algorithm are evaluated on simulated datasets of 1,600 scans per qubit.\" It also says \"Future work will focus on ... validating the simulation-trained model on measured scans,\" so real-data robustness for an operational detector is not demonstrated here.",
+            "cost_usd": 0.0123333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in its conclusions that \"Future work will focus on... validating the simulation-trained model on measured scans,\" confirming that the current training and evaluation rely exclusively on synthetic data.",
+            "cost_usd": 0.001975
+          }
+        ],
+        "cost_usd": 0.01878682
+      },
+      {
+        "flag_id": "fp-f060b6f56724",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper claims 'A single trained model serves all five qubit templates, eliminating the per-qubit tuning' but all five templates come from one experimental setup (NEXUS), and the paper itself states future work will focus on 'validating the simulation-trained model on measured scans.' The generalization claim applies only to interpolation within known device configurations, not to genuinely unseen qubits.",
+        "evidence": {
+          "claim": "The manuscript claims that a single trained model eliminates per-qubit tuning and requires no hyperparameter tuning when applied to a new qubit, but this is not supported because the training and evaluation only use synthetic data from five qubit templates from one setup.",
+          "excerpt": "The manuscript claims that a single trained model 'eliminates per-qubit tuning' and 'requires no hyperparameter tuning when applied to a new qubit' (Sec. V). However, training and evaluation use synthetic data from only five qubit templates from one setup. The model demonstrates interpolation across known device characteristics, not generalization to genuinely new or unseen qubits."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims 'A single trained model serves all five qubit templates, eliminating the per-qubit tuning' but all five templates come from one experimental setup (NEXUS), and the paper itself states future work will focus on 'validating the simulation-trained model on measured scans.' The generalization claim applies only to interpolation within known device configurations, not to genuinely unseen qubits.",
+            "cost_usd": 0.00447852
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims the method \"requires no hyperparameter tuning when applied to a new qubit,\" but the training setup uses only \"the five qubit configurations considered in Ref. [17]\" and then \"split[s]\" those synthetic scans into train/validation/test sets. That supports one model across these five templates, not demonstrated generalization to genuinely unseen qubits.",
+            "cost_usd": 0.0123333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims the model \"requires no hyperparameter tuning when applied to a new qubit,\" but Section II.B notes that the templates used correspond to \"the five qubit configurations considered in Ref. [17].\" The model was not evaluated on a genuinely held-out, unseen qubit device.",
+            "cost_usd": 0.001975
+          }
+        ],
+        "cost_usd": 0.01878682
+      },
+      {
+        "flag_id": "fp-bb683ee1a7b7",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section I C states CNN models enable 'nanosecond-scale inference times' while the actual reported latency is 6.19 µs. The paper does not clarify whether the model operates per completed scan or on a sliding window, and the 6.19 µs figure excludes data acquisition and buffering time, making the true detection delay ambiguous.",
+        "evidence": {
+          "claim": "The framing of latency is potentially misleading, and the operational mode of the detector is ambiguous. Motivation with nanosecond-scale inference times disconnects from reported 6.19 μs post-synthesis latency, and the operational pipeline (per-scan vs streaming) is unclear.",
+          "excerpt": "The framing of latency is potentially misleading, and the operational mode of the detector is ambiguous. Sec. I C motivates the work with 'nanosecond-scale inference times', creating a large disconnect with the reported $6.19~\\mu{\\rm s}$ post-synthesis latency. This figure is an estimate that omits the potentially dominant data acquisition and buffering time. It is unclear if the model runs once per completed scan or on a continuous sliding window, which has major implications for the true detection delay."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section I C states CNN models enable 'nanosecond-scale inference times' while the actual reported latency is 6.19 µs. The paper does not clarify whether the model operates per completed scan or on a sliding window, and the 6.19 µs figure excludes data acquisition and buffering time, making the true detection delay ambiguous.",
+            "cost_usd": 0.00447852
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The motivation says FPGA deployment enables \"nanosecond-scale inference times [18–20],\" whereas the implemented model reports \"a per-inference latency of 6.19 µs.\" The firmware section also describes feeding \"the sequential sliding window of the DCCNN,\" while the ML sections define inputs as per-scan \"N = 80 samples,\" so the exact end-to-end operating mode and true detection delay are not fully pinned down.",
+            "cost_usd": 0.0123333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section I.C motivates the architecture using prior work with \"nanosecond-scale inference times,\" while Section IV.C reports the DCCNN's latency as \"6.19 µs\". Additionally, while Section IV mentions \"feeding the sequential sliding window,\" the exact buffering and streaming mechanics (per-scan versus sample-by-sample) in relation to this latency remain ambiguous.",
+            "cost_usd": 0.001975
+          }
+        ],
+        "cost_usd": 0.01878682
+      },
+      {
+        "flag_id": "fp-0d3e81d9a519",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'the χ² algorithm parameters were tuned on the training dataset...to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%' but does not specify whether tuning was per-qubit or global, nor does it quantify the DCCNN's claimed advantage on early-scan jumps, which was a key stated motivation for the new method.",
+        "evidence": {
+          "claim": "The comparison to the chi^2 algorithm is inadequately specified and does not convincingly demonstrate the DCCNN's advantage: key methodological details, tuning, and quantification of the chi^2 limitations are missing.",
+          "excerpt": "The comparison to the $\\chi^2$ algorithm is inadequately specified and does not convincingly demonstrate the DCCNN's advantage. Key methodological details of the $\\chi^2$ tuning are missing (hyperparameters, per-qubit vs. global tuning, precise FPR definition). The claim of a 'matched false-positive rate' is only approximate. Most importantly, a key motivation—overcoming the $\\chi^2$ method's reduced sensitivity to early-scan jumps—is never quantified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'the χ² algorithm parameters were tuned on the training dataset...to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%' but does not specify whether tuning was per-qubit or global, nor does it quantify the DCCNN's claimed advantage on early-scan jumps, which was a key stated motivation for the new method.",
+            "cost_usd": 0.00447852
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "For the baseline comparison, the paper says only that \"the χ2 algorithm parameters were tuned ... subject to a false-positive-rate (FPR) constraint of 5%. This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively),\" so the 'matched' FPR is only approximate and key tuning details are omitted. Also, the paper motivates the new method by the χ2 algorithm's \"reduced sensitivity to jumps occurring within the first ∼20 samples of each scan,\" but later reports only jump-size-binned efficiencies, not position-resolved early-scan performance.",
+            "cost_usd": 0.0123333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors motivate their method by pointing out the χ2 algorithm's \"reduced sensitivity to jumps occurring within the first ~20 samples of each scan\" (Sec I.C), but they never quantify this effect or demonstrate the DCCNN's improvement on early-scan jumps; Table VII only provides the overall \"per-qubit charge jump detection efficiency.\"",
+            "cost_usd": 0.001975
+          }
+        ],
+        "cost_usd": 0.01878682
+      },
+      {
+        "flag_id": "fp-44d9295587af",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper describes two different efficiency metrics in Sec. III B and III C without clearly resolving how multi-jump scans (possible under the Poisson process) are handled in the per-scan binary classification framework, and the relationship between the two metrics is explained only briefly ('this differs from the efficiency calculated in Sec. III B, as the efficiency reported here is the per-qubit mean efficiency') without fully resolving the ambiguity for multi-jump cases or potential data leakage from phase-continuous scan generation.",
+        "evidence": {
+          "claim": "Definitions of efficiency metrics and details of the data generation protocol are under-specified, hindering reproducibility and risking potential data leakage.",
+          "excerpt": "The definitions of efficiency metrics and details of the data generation protocol are under-specified, hindering reproducibility. The relationship between 'overall efficiency' (per-scan, Sec. III B) and per-jump efficiency (Sec. III C) is unclear, especially regarding multi-jump scans, which are possible under the described Poisson process. ... There is also a potential risk of data leakage between train/test sets depending on how the data was split."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper describes two different efficiency metrics in Sec. III B and III C without clearly resolving how multi-jump scans (possible under the Poisson process) are handled in the per-scan binary classification framework, and the relationship between the two metrics is explained only briefly ('this differs from the efficiency calculated in Sec. III B, as the efficiency reported here is the per-qubit mean efficiency') without fully resolving the ambiguity for multi-jump cases or potential data leakage from phase-continuous scan generation.",
+            "cost_usd": 0.00447852
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The generation protocol says \"Scans for each qubit are generated as a phase-continuous time-ordered sequence so that the post-event phase of scan k becomes the pre-event phase of scan k + 1,\" yet the dataset was then \"split into training, validation, and test sets ... via stratified sampling,\" leaving possible train/test dependence unresolved. The metric definitions also change between \"the number of jump-containing signals correctly classified\" (Sec. III B) and \"the fraction of injected charge jumps\" (Sec. III C), without fully clarifying treatment of multi-jump scans.",
+            "cost_usd": 0.0123333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section II.B describes the generated data as a \"phase-continuous time-ordered sequence,\" but Section II.C states the dataset was split \"via stratified sampling.\" This approach risks temporal data leakage between train and test sets, and the exact handling of multi-jump scans in the efficiency calculations is left under-specified.",
+            "cost_usd": 0.001975
+          }
+        ],
+        "cost_usd": 0.01878682
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.0,
+    "general": 0.09393409999999999
+  },
+  "extractor_cost_usd": 0.02944600000000011,
+  "total_cost_usd": 0.1233801000000001
+}

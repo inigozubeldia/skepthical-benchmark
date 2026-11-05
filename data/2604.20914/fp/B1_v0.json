@@ -1,0 +1,272 @@
+{
+  "paper_id": "2604.20914",
+  "reviewer_system": "B1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-51e460171c8a",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'the likelihood is built from the TDI data channels and remains quadratic in the residual' and uses a time-domain covariance matrix C^{-1}, but does not detail how this matrix is constructed, inverted, or approximated for realistic time-varying armlengths. The supplementary materials only note that 'for correlated channels such as XYZ channels, the likelihood is not the product of individual channels, but still has a quadratic form' without addressing practical challenges of non-stationary noise or time-varying geometry.",
+        "evidence": {
+          "claim": "The paper assumes Gaussian stationary noise but does not detail how the covariance is built, inverted, or approximated for realistic time-varying armlengths and channel correlations, which can be nontrivial for space missions.",
+          "excerpt": "Assumes Gaussian stationary noise with time-domain covariance without detailing how the covariance is built, inverted, or approximated for realistic time-varying armlengths and channel correlations—issues that can be nontrivial for space missions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'the likelihood is built from the TDI data channels and remains quadratic in the residual' and uses a time-domain covariance matrix C^{-1}, but does not detail how this matrix is constructed, inverted, or approximated for realistic time-varying armlengths. The supplementary materials only note that 'for correlated channels such as XYZ channels, the likelihood is not the product of individual channels, but still has a quadratic form' without addressing practical challenges of non-stationary noise or time-varying geometry.",
+            "cost_usd": 0.02567475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only states that \"we calculate the inner product in the time domain\" and that \"C^{-1} is the inverse of the noise covariance matrix, which is determined by the noise’s auto-correlation function, or equivalently, the power spectral density,\" with a brief note that correlated channels use \"the full covariance matrix of all channels.\" It does not further describe how that covariance is constructed, inverted, or approximated for realistic time-varying TDI/armlength cases.",
+            "cost_usd": 0.0161525
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions that 'C^-1 is the inverse of the noise covariance matrix, which is determined by the noise’s auto-correlation function' and applies it to TDI channels, but does not detail how it is built, inverted, or approximated for realistic time-varying arm lengths.",
+            "cost_usd": 0.004070999999999999
+          }
+        ],
+        "cost_usd": 0.04589825
+      },
+      {
+        "flag_id": "fp-cd6ed8ca8bff",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations' without quantitative demonstration. The validation uses a single injection with SNR~210 and fixed geometric parameters ('Other geometric parameters such as the sky location are fixed to their injected values'), so robustness across varying SNRs, geometries, and configurations is asserted but not shown.",
+        "evidence": {
+          "claim": "Validation centers on a single high-SNR injection and does not demonstrate robustness to varying SNRs, sky positions, inclinations, start times, or detector configurations.",
+          "excerpt": "Validation centers on a single high-SNR injection with fixed sky location and geometry; robustness to varying SNRs, sky positions, inclinations, start times, and detector configurations (including 2nd-generation TDI) is not shown."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations' without quantitative demonstration. The validation uses a single injection with SNR~210 and fixed geometric parameters ('Other geometric parameters such as the sky location are fixed to their injected values'), so robustness across varying SNRs, geometries, and configurations is asserted but not shown.",
+            "cost_usd": 0.02567475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The validation is indeed centered on one illustrative case: \"As an example, we consider a non-spinning MBHB...\" and in the supplement \"Other geometric parameters such as the sky location are fixed to their injected values.\" Although the paper says \"This choice is for illustration, but the analysis readily generalizes,\" it does not actually demonstrate robustness across varying SNR, sky position, inclination, start time, or detector/TDI configurations.",
+            "cost_usd": 0.0161525
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses a single injection scenario, stating 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations,' but it does not actually demonstrate this robustness in the results.",
+            "cost_usd": 0.004070999999999999
+          }
+        ],
+        "cost_usd": 0.04589825
+      },
+      {
+        "flag_id": "fp-c0510bff52ff",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper explicitly states 'We adopt two samplers, dynesty and nessai, for 1≤N≤3 and 1≤N≤6, respectively,' mixing samplers across mode counts in the scaling study. Figure 2 shows separate lines for each sampler but does not provide a single-sampler comparison across all N values.",
+        "evidence": {
+          "claim": "The speedup study mixes samplers across mode counts, complicating like-for-like runtime comparisons; a single sampler across all N would enable a cleaner scaling picture.",
+          "excerpt": "The speedup study mixes samplers across mode counts (dynesty for N ≤ 3 and nessai for larger N), complicating like-for-like runtime comparisons; a single sampler across all N would enable a cleaner scaling picture."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'We adopt two samplers, dynesty and nessai, for 1≤N≤3 and 1≤N≤6, respectively,' mixing samplers across mode counts in the scaling study. Figure 2 shows separate lines for each sampler but does not provide a single-sampler comparison across all N values.",
+            "cost_usd": 0.02567475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly provides a single-sampler scaling across all mode counts with nessai: \"We adopt two samplers, dynesty [13] and nessai [14], for 1 ≤ N ≤ 3 and 1 ≤ N ≤ 6, respectively,\" and Fig. 2 states that \"Dash-dotted and solid lines show results with dynesty and nessai samplers, respectively.\" So a like-for-like runtime trend with one sampler over N=1...6 is already shown.",
+            "cost_usd": 0.0161525
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's claim is factually incorrect; the paper does use a single sampler across all mode counts for a clean comparison. As stated in the text: 'We adopt two samplers, dynesty [13] and nessai [14], for 1 ≤ N ≤ 3 and 1 ≤ N ≤ 6, respectively', and Figure 2 shows 'nessai' results plotted consistently across N=1 to 6.",
+            "cost_usd": 0.004070999999999999
+          }
+        ],
+        "cost_usd": 0.04589825
+      },
+      {
+        "flag_id": "fp-d7bc318d1dd8",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly defers evidence calculations: 'in this study we conservatively apply the FIREFLY for only calculating the posteriors. A detailed comparison and explanation about the evidence is left for future work.' This confirms that Bayes factors for model selection are not provided.",
+        "evidence": {
+          "claim": "Evidence calculations are deferred, yet model comparison for selecting the number of modes is crucial for multi-mode spectroscopy; absence of Bayes factors weakens the practical story.",
+          "excerpt": "Evidence calculations are deferred, yet model comparison (e.g., selecting the number of modes) is crucial for multi-mode spectroscopy; absence of Bayes factors weakens the practical story."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly defers evidence calculations: 'in this study we conservatively apply the FIREFLY for only calculating the posteriors. A detailed comparison and explanation about the evidence is left for future work.' This confirms that Bayes factors for model selection are not provided.",
+            "cost_usd": 0.02567475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly defers evidence/model-selection results: \"Though including the evidence calculation is straightforward, in this study we conservatively apply the FIREFLY for only calculating the posteriors. A detailed comparison and explanation about the evidence is left for future work.\" Thus Bayes-factor-based mode selection is not provided.",
+            "cost_usd": 0.0161525
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation, stating: 'Though including the evidence calculation is staightforward, in this study we conservatively apply the FIREFLY for only calculating the posteriors. A detailed comparison and explanation about the evidence is left for future work.'",
+            "cost_usd": 0.004070999999999999
+          }
+        ],
+        "cost_usd": 0.04589825
+      },
+      {
+        "flag_id": "fp-d875974e7916",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper does not discuss numerical stability of the M matrix (M_{μν}=⟨G_μ|G_ν⟩) when modes are weakly constrained or degenerate, nor any regularization strategies. The supplementary material derives the formalism but offers no discussion of ill-conditioning when adding weak modes like (5,5,0) with SNR~3.",
+        "evidence": {
+          "claim": "Potential numerical stability issues, such as ill-conditioning of the M matrix when adding weak or highly degenerate modes and corresponding regularization strategies, are not discussed.",
+          "excerpt": "Potential numerical stability issues (e.g., ill-conditioning of the M matrix when adding weak or highly degenerate modes) and corresponding regularization strategies are not discussed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper does not discuss numerical stability of the M matrix (M_{μν}=⟨G_μ|G_ν⟩) when modes are weakly constrained or degenerate, nor any regularization strategies. The supplementary material derives the formalism but offers no discussion of ill-conditioning when adding weak modes like (5,5,0) with SNR~3.",
+            "cost_usd": 0.02567475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The method introduces \"M_{\\mu\\nu} = \\langle G_\\mu|G_\\nu\\rangle\" and then samples from Gaussian distributions using \"M^{-1},\" but nowhere discusses conditioning of M or any regularization strategy when modes are weak or degenerate. The paper therefore leaves the reviewer’s numerical-stability concern unaddressed.",
+            "cost_usd": 0.0161525
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper defines the matrix M as 'M_{mu nu} = <G_mu | G_nu>' in Appendix B, but lacks any discussion on potential ill-conditioning or regularization strategies when dealing with weak or degenerate modes.",
+            "cost_usd": 0.004070999999999999
+          }
+        ],
+        "cost_usd": 0.04589825
+      },
+      {
+        "flag_id": "fp-24bd0065b8db",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper does not compare FIREFLY against other acceleration strategies such as reduced-order quadrature or surrogate models. The introduction and discussion sections situate FIREFLY only against 'conventional full-parameter sampling' without referencing or contrasting alternative acceleration methods used in GW inference.",
+        "evidence": {
+          "claim": "The paper would benefit from situating FIREFLY relative to other acceleration strategies used in GW inference, such as reduced-order quadrature and surrogate models; such a comparison is currently missing.",
+          "excerpt": "The paper would benefit from situating FIREFLY relative to other acceleration strategies used in GW inference (e.g., reduced-order quadrature, surrogate models, analytic marginalizations of extrinsic parameters), even if their applicability differs for ringdown."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper does not compare FIREFLY against other acceleration strategies such as reduced-order quadrature or surrogate models. The introduction and discussion sections situate FIREFLY only against 'conventional full-parameter sampling' without referencing or contrasting alternative acceleration methods used in GW inference.",
+            "cost_usd": 0.02567475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper frames its contribution against only the \"conventional full-parameter sampling\" and states that \"FIREFLY... yields a ∼ 200 times speedup over the conventional approach,\" but it does not compare or situate FIREFLY relative to other GW acceleration approaches such as ROQ, surrogates, or other marginalization schemes. That broader contextual comparison is missing from the text.",
+            "cost_usd": 0.0161525
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces FIREFLY as a 'novel acceleration algorithm' but does not compare or situate it relative to other established acceleration strategies like reduced-order quadrature or surrogate models.",
+            "cost_usd": 0.004070999999999999
+          }
+        ],
+        "cost_usd": 0.04589825
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.2753895
+  },
+  "extractor_cost_usd": 0.013789999999999969,
+  "total_cost_usd": 0.2891795
+}

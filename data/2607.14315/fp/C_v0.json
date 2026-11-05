@@ -1,0 +1,294 @@
+{
+  "paper_id": "2607.14315",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-6da40ad86b02",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'Ref. [17] (Simonyan & Zisserman, VGG) cited for saliency maps'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "Ref. [17] (Simonyan & Zisserman, VGG) cited for saliency maps"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-a5e00d261c06",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper repeatedly states 'we create a knowledge base for assessing the explainability score' and 'The knowledge base is constructed by aggregating the benchmarking results and metadata from AI/ML models, XAI models, and datasets, and then deriving rules, heuristics, or algorithms,' but Section V only presents raw metric tables (Tables I and II) with no knowledge base, aggregation rules, heuristics, or predictions on unseen assets demonstrated.",
+        "evidence": {
+          "claim": "The paper claims to construct and evaluate a knowledge base for explainability scores, but this knowledge base is never built, demonstrated, or populated in the experiments.",
+          "excerpt": "The abstract, Sec. III, Sec. IV, and the Conclusion (Sec. VI) all state that an offline knowledge base is constructed ... Sec. V, however, only tabulates raw metric values on three datasets; no knowledge base, aggregation rules, heuristics, or predictions on unseen assets are demonstrated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper repeatedly states 'we create a knowledge base for assessing the explainability score' and 'The knowledge base is constructed by aggregating the benchmarking results and metadata from AI/ML models, XAI models, and datasets, and then deriving rules, heuristics, or algorithms,' but Section V only presents raw metric tables (Tables I and II) with no knowledge base, aggregation rules, heuristics, or predictions on unseen assets demonstrated.",
+            "cost_usd": 0.0038964
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper repeatedly promises a built resource — e.g. \"Based on these insights, we create a knowledge base for assessing the explainability score\" and in the conclusion claims \"creating an offline knowledge base\" — but the actual results section says only \"The results are presented in the following matrices\" and provides Tables I–II, with no populated knowledge base, rules/heuristics, or unseen-asset estimation demonstrated.",
+            "cost_usd": 0.010176416666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The abstract and conclusion claim to 'construct an offline knowledge base' and 'creating an offline knowledge base', but Section V only presents raw metric tables for three datasets without demonstrating any aggregated knowledge base, rules, or predictions.",
+            "cost_usd": 0.0018815000000000001
+          }
+        ],
+        "cost_usd": 0.015954316666666666
+      },
+      {
+        "flag_id": "fp-fa66235e5fb7",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Eq. (1) computes fidelity as a sum of squared differences (lower = better), yet the XAI_score formula states 'higher values indicating better explainability.' Stability Eq. (2) is a non-negative ratio yet Section V declares 'Range: [-1, 1]' and 'higher = better.' These are genuine internal inconsistencies not resolved anywhere in the paper.",
+        "evidence": {
+          "claim": "The defined directions and ranges for Fidelity, Stability, and Simplicity metrics are inconsistent between their formulas and their interpretations or reported values, undermining the validity of the aggregation and comparative claims.",
+          "excerpt": "Metric direction and range are inconsistent between formulas (Sec. III-A) and interpretations (Sec. V). For Fidelity, Eq. (1) ... is smallest when the explanation matches the model (lower = better), yet the XAI_score equation ... claims higher values indicating better explainability ... Stability ... is a non-negative normalised deviation (lower = better; unbounded above), but Sec. V declares its range as '[-1, 1]' with 'higher = better', which the formula cannot produce. Simplicity as defined ... is normalised to [0, 1] (lower = simpler), but Sec. V asserts range '[1, N]' and Tables I–II report un-normalised integer feature counts."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Eq. (1) computes fidelity as a sum of squared differences (lower = better), yet the XAI_score formula states 'higher values indicating better explainability.' Stability Eq. (2) is a non-negative ratio yet Section V declares 'Range: [-1, 1]' and 'higher = better.' These are genuine internal inconsistencies not resolved anywhere in the paper.",
+            "cost_usd": 0.0038964
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says the aggregate is computed \"with higher values indicating better explainability: XAI score = w1 * Fidelity + w2 * Stability + w3 * Simplicity...\", yet Sec. V defines fidelity so that \"A lower fidelity score (closer to 0) indicates\" better fit and defines stability as \"Range: [-1, 1]\" with \"A high stability score (closer to 1)\" better, which does not match Eq. (2). It also gives a normalized simplicity formula \"num of nodes... / maximum num of nodes\" but later states \"Simplicity: Range: [1, N]\" and reports raw values like 4, 13, and 30.",
+            "cost_usd": 0.010176416666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper exhibits multiple contradictions in metric definitions. For instance, Stability is defined in Eq. (2) as a non-negative squared difference (where lower is more stable), yet Section V states 'Stability:Range: [-1, 1]: A high stability score (closer to 1) indicates that the XAI method generates consistent explanations'.",
+            "cost_usd": 0.0018815000000000001
+          }
+        ],
+        "cost_usd": 0.015954316666666666
+      },
+      {
+        "flag_id": "fp-368fc14eefdb",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Eq. (3) explicitly states simplicity 'for a decision tree explanation' using node counts, yet the experiments use LIME and SHAP on a RandomForestClassifier, and Tables I–II report raw feature counts (4, 13, 30) with no definition of simplicity adapted for LIME/SHAP provided in the paper.",
+        "evidence": {
+          "claim": "The Simplicity metric as defined applies only to decision trees, but experiments use LIME/SHAP explanations and report feature counts instead, with no definition provided for these methods.",
+          "excerpt": "Eq. (3) is stated only for decision-tree explanations ... The experiments use a RandomForestClassifier explained by LIME and SHAP; the reported Simplicity values ... are the input feature counts ... which are neither DT node counts nor normalised. There is no definition of Simplicity applicable to LIME/SHAP explanations."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Eq. (3) explicitly states simplicity 'for a decision tree explanation' using node counts, yet the experiments use LIME and SHAP on a RandomForestClassifier, and Tables I–II report raw feature counts (4, 13, 30) with no definition of simplicity adapted for LIME/SHAP provided in the paper.",
+            "cost_usd": 0.0038964
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper does give a non-tree notion of simplicity: \"A common way to assess simplicity is by measuring the number of features or decision rules used in the explanation. For example, for a decision tree explanation, simplicity can be computed as...\" In the results it further states that the reported simplicity values \"show the number of features used in the explanations,\" so the specific claim that no LIME/SHAP-applicable definition is provided is not correct.",
+            "cost_usd": 0.010176416666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III-A defines Simplicity in Eq. (3) exclusively based on the 'num of nodes in the DT'. However, the results in Section V report feature counts (4, 13, 30) for LIME and SHAP, which do not align with the provided mathematical formulation.",
+            "cost_usd": 0.0018815000000000001
+          }
+        ],
+        "cost_usd": 0.015954316666666666
+      },
+      {
+        "flag_id": "fp-f68b08bdc4cb",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper claims 'the fidelity score increases as the complexity of the dataset increases' but LIME fidelity values are 0.4406, 0.4397, 0.4673 (non-monotonic), and claims 'stability scores decrease as the complexity of the dataset increases' but LIME stability values are 1.0000, 0.5556, 1.0000 (non-monotonic), directly contradicting both assertions.",
+        "evidence": {
+          "claim": "Empirical trend claims for Fidelity and Stability scores across datasets are directly contradicted by the reported tabulated values, indicating unsupported or inaccurate interpretation of results.",
+          "excerpt": "The text asserts (i) 'the fidelity score increases as the complexity of the dataset increases' — but LIME values are 0.4406, 0.4397, 0.4673 (non-monotonic) ... (ii) 'the stability scores decrease as the complexity of the dataset increases' — but LIME values are 1.0000, 0.5556, 1.0000 ... These claims cannot be sustained with three data points and a single model."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims 'the fidelity score increases as the complexity of the dataset increases' but LIME fidelity values are 0.4406, 0.4397, 0.4673 (non-monotonic), and claims 'stability scores decrease as the complexity of the dataset increases' but LIME stability values are 1.0000, 0.5556, 1.0000 (non-monotonic), directly contradicting both assertions.",
+            "cost_usd": 0.0038964
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The interpretation claims \"we can notice that the fidelity score increases as the complexity of the dataset increases\" and later that \"the stability scores decrease as the complexity of the dataset increases,\" but Table I reports LIME fidelity as \"0.4406, 0.4397, 0.4673\" and LIME stability as \"1.0000, 0.5556, 1.0000,\" which do not show those monotonic trends. Table II likewise gives SHAP stability \"0.1385, 0.0164, 0.1521,\" not a monotonic decrease.",
+            "cost_usd": 0.010176416666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims 'stability scores decrease as the complexity of the dataset increases', but Table I shows LIME stability scores of 1.0000, 0.5556, and 1.0000, directly contradicting the stated monotonic trend.",
+            "cost_usd": 0.0018815000000000001
+          }
+        ],
+        "cost_usd": 0.015954316666666666
+      },
+      {
+        "flag_id": "fp-2e4318f79700",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The abstract states the framework is applied to 'tabular and image data' and Section III-B states 'we applied it to a diverse set of XAI methods, such as LIME and SHAP as well as various data types, including tabular and image data,' but Section IV-A uses only three tabular datasets (Iris, Wine, Breast Cancer) with no image data experiments reported.",
+        "evidence": {
+          "claim": "The paper claims to evaluate the framework on 'tabular and image data', but only tabular datasets are used in both experiments and reported results.",
+          "excerpt": "The abstract and Sec. III-B state the framework is demonstrated on 'tabular and image data' ... Sec. IV-A actually uses only three small tabular datasets (Iris, Wine, Breast Cancer); no image data is used."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The abstract states the framework is applied to 'tabular and image data' and Section III-B states 'we applied it to a diverse set of XAI methods, such as LIME and SHAP as well as various data types, including tabular and image data,' but Section IV-A uses only three tabular datasets (Iris, Wine, Breast Cancer) with no image data experiments reported.",
+            "cost_usd": 0.0038964
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims broader data coverage — e.g. \"we applied it to a diverse set of XAI methods... as well as various data types, including tabular and image data\" and \"benchmarking experiments... encompassing various data types like tabular and image data\" — but Sec. IV-A lists only three tabular datasets: \"Iris dataset,\" \"Wine dataset,\" and \"Breast Cancer Wisconsin dataset.\"",
+            "cost_usd": 0.010176416666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III states the method was applied to 'various data types, including tabular and image data', but Section IV-A only lists and utilizes three tabular datasets (Iris, Wine, Breast Cancer Wisconsin).",
+            "cost_usd": 0.0018815000000000001
+          }
+        ],
+        "cost_usd": 0.015954316666666666
+      },
+      {
+        "flag_id": "fp-952707718a8a",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table II shows SHAP fidelity scores of order 10⁻¹⁷, which are effectively machine-epsilon zero due to SHAP's additivity property (values sum to model output by construction), yet the paper interprets this as 'SHAP provides a nearly perfect fit with the global model predictions' and 'SHAP generally outperforms LIME in terms of fidelity' without acknowledging this is a mathematical artifact rather than a meaningful comparison.",
+        "evidence": {
+          "claim": "The extremely low SHAP fidelity scores (≈ 1e-17) are an uninterpreted artefact of the additivity property, not a meaningful comparison to LIME as claimed in the results.",
+          "excerpt": "Table II fidelity values of order 10⁻¹⁷ are machine-epsilon zero; this reflects the property that SHAP values sum to the model output by construction ... Results section reads this as SHAP 'provides a nearly perfect fit... outperforms LIME in terms of fidelity' ... which is a category error."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table II shows SHAP fidelity scores of order 10⁻¹⁷, which are effectively machine-epsilon zero due to SHAP's additivity property (values sum to model output by construction), yet the paper interprets this as 'SHAP provides a nearly perfect fit with the global model predictions' and 'SHAP generally outperforms LIME in terms of fidelity' without acknowledging this is a mathematical artifact rather than a meaningful comparison.",
+            "cost_usd": 0.0038964
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper reports SHAP fidelity values near zero and concludes that this \"indicat[es] that SHAP provides a nearly perfect fit with the global model predictions\" and \"outperforms LIME in terms of fidelity,\" while earlier describing SHAP as \"fairly distributing the prediction output among input features.\" However, the PDF does not specify how the fidelity model term \"g(x_i)\" is instantiated for SHAP, so the claim that these numbers are specifically an artefact of SHAP additivity cannot be verified from the paper alone.",
+            "cost_usd": 0.010176416666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper incorrectly interprets SHAP's exact additive property (which yields machine-epsilon fidelity scores of ~1e-17) as empirical evidence that 'SHAP generally outperforms LIME in terms of fidelity', failing to recognize it as a mathematical artifact of SHAP.",
+            "cost_usd": 0.0018815000000000001
+          }
+        ],
+        "cost_usd": 0.015954316666666666
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "general": 0.0957259
+  },
+  "extractor_cost_usd": 0.025745999999999963,
+  "total_cost_usd": 0.12147189999999997
+}

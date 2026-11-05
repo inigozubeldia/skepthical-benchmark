@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.14287",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the directional claim about joint multi-class training under extreme imbalance leading to 'improved' (vs. 'reduced') generalization performance, nor does the reviewer challenge the claim against the cited source tabassum_2024_adapting.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention the Tabassum citation or challenge the claim that joint multi-class training under extreme imbalance improves/reduces generalization. No citation-specific contradiction is flagged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer failed to mention the citation to Tabassum (2024) or the claim regarding the impact of imbalance on generalization performance.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not flag the claim that 'joint multi-class training under extreme imbalance leads to improved generalization performance' as contradicting the cited source [18]. None of the reviewer's comments address this specific directional reversal or challenge this claim against Tabassum and Ziabari (2024).",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not mention or flag any inconsistency in the ViT-H parameter count (63M vs. 636M) anywhere in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review contains no comment about the ViT-H parameter count being 63M versus 636M, nor any inconsistency between the Introduction and Section 3.1 on this value.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not identify the inconsistency in parameter counts for the ViT-H encoder between the Introduction and Methodology sections.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not flag the inconsistency between the '63M' parameter count in the Introduction and the '636M' figure in the Methodology section. The reviewer's mathematical and notation issues concern the MoE equation and gating function, not the ViT-H parameter count.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "In Section III.A, the embedding update equation for the Conv-LoRA adapter is given as: $H = W_0x + W_D \\left( \\prod_{i=1}^{N} g_i(x) E_i(W_E x) \\right)$ The use of the product symbol ($\\prod$) is mathematically incorrect for a Mixture-of-Experts (MoE) module, which computes a weighted sum of the experts' outputs... Fix: Change the product symbol $\\prod_{i=1}^{N}$ to a summation symbol $\\sum_{i=1}^{N}$ in the equation.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "In Section III.A, the embedding update equation for the Conv-LoRA adapter is given as: $H = W_0x + W_D \\left( \\prod_{i=1}^{N} g_i(x) E_i(W_E x) \\right)$ The use of the product symbol ($\\prod$) is mathematically incorrect for a Mixture-of-Experts (MoE) module, which computes a weighted sum of the experts' outputs... Fix: Change the product symbol $\\prod_{i=1}^{N}$ to a summation symbol $\\sum_{i=1}^{N}$ in the equation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the injected product operator (∏) in Equation 1 as incorrect and states it should be a summation (∑), directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] **Incorrect mathematical formulation for Mixture-of-Experts in Equation 1.** \nIn Section III.A, the embedding update equation for the Conv-LoRA adapter is given as:\n$H = W_0x + W_D \\left( \\prod_{i=1}^{N} g_i(x) E_i(W_E x) \\right)$\nThe use of the product symbol ($\\prod$) is mathematically incorrect for a Mixture-of-Experts (MoE) module, which computes a weighted sum of the experts' outputs. ... *Fix:* Change the product symbol $\\prod_{i=1}^{N}$ to a summation symbol $\\sum_{i=1}^{N}$ in the equation.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the injected operator swap from summation to product in the Conv-LoRA equation and proposes the specific correction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The use of the product symbol ($\\\\prod$) is mathematically incorrect for a Mixture-of-Experts (MoE) module, which computes a weighted sum of the experts' outputs. ... Fix: Change the product symbol $\\\\prod_{i=1}^{N}$ to a summation symbol $\\\\sum_{i=1}^{N}$ in the equation.",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the exact location (Equation 1) and the specific error (product symbol instead of summation) injected into the mathematical formulation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The abstract concludes with the statement: '...suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.' This is a massive overreach that reaches far past the presented evidence. The paper exclusively evaluates the framework on XCT images (a single non-destructive testing modality) and focuses on a narrow set of materials...",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The abstract concludes with the statement: '...suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.' This is a massive overreach that reaches far past the presented evidence. The paper exclusively evaluates the framework on XCT images (a single non-destructive testing modality) and focuses on a narrow set of materials...",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies and quotes the injected sweeping generalization claim in the abstract, characterizing it as unsupported overclaim, which directly matches the injected text.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] **Unsupported overclaim in the abstract regarding universal generalization.**\nThe abstract concludes with the statement: \"...suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.\" This is a massive overreach that reaches far past the presented evidence. The paper exclusively evaluates the framework on XCT images (a single non-destructive testing modality) and focuses on a narrow set of materials ... There is no evidence presented to support generalization to other NDT modalities ... or \"arbitrary\" materials.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes and rejects the injected abstract clause about universal applicability across all NDT modalities and materials, matching the overstated-conclusion injection precisely.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The abstract concludes with the statement: \"...suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.\" This is a massive overreach that reaches far past the presented evidence.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quoted the injected text in the abstract and flagged it as an unsupported overclaim.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 36.697502,
+  "total_cost_usd": null,
+  "total_input_tokens": 17597,
+  "total_output_tokens": 2826,
+  "escalation_count": 2,
+  "notes": null
+}

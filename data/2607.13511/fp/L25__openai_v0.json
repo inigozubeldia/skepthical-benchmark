@@ -1,0 +1,195 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "L25",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-0cecb0e39b13",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. The transcription of the inequality was confirmed faithful to the paper. However, no mechanical engine was able to evaluate the convergence bound, and an LLM check on whether the stated geometric decay rate (1 − 1/mn)^k is the correct bound for this augmented ALS variant was not performed. The inequality asserts that at each step the augmented algorithm can always reduce ∥R_k∥²_F by at least a factor of (1 − 1/mn), which is plausible if the best single-entry pair option guarantees at least a 1/mn relative reduction, but this core guarantee could not be independently verified from the available evidence.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "critical",
+          "notes": "The transcription of the inequality was confirmed faithful to the paper. However, no mechanical engine was able to evaluate the convergence bound, and an LLM check on whether the stated geometric decay rate (1 − 1/mn)^k is the correct bound for this augmented ALS variant was not performed. The inequality asserts that at each step the augmented algorithm can always reduce ∥R_k∥²_F by at least a factor of (1 − 1/mn), which is plausible if the best single-entry pair option guarantees at least a 1/mn relative reduction, but this core guarantee could not be independently verified from the available evidence.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.017078999999999955
+      },
+      {
+        "flag_id": "fp-83bc382f5bba",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The update rules for V and U were checked for dimensional consistency by hand, since automated verification was unavailable. With U of shape m×b, V of shape n×b, and R of shape m×n: for the V update, U⊤U is b×b, (U⊤U + εI)⁻¹U⊤R is b×n, and transposing gives n×b — matching the required shape of V. For the U update, RV is m×b, V⊤V + εI is b×b, and RV(V⊤V + εI)⁻¹ is m×b — matching the required shape of U. Both expressions are the standard ridge-regression (Tikhonov-regularised) least-squares solutions, consistent with the paper's claim of decorrelated targets. No errors were found.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "critical",
+          "notes": "The update rules for V and U were checked for dimensional consistency by hand, since automated verification was unavailable. With U of shape m×b, V of shape n×b, and R of shape m×n: for the V update, U⊤U is b×b, (U⊤U + εI)⁻¹U⊤R is b×n, and transposing gives n×b — matching the required shape of V. For the U update, RV is m×b, V⊤V + εI is b×b, and RV(V⊤V + εI)⁻¹ is m×b — matching the required shape of U. Both expressions are the standard ridge-regression (Tikhonov-regularised) least-squares solutions, consistent with the paper's claim of decorrelated targets. No errors were found.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.017078999999999955
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-89b79f5e0a34",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's own limitations section states 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks' and 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment.' The abstract and conclusion claim ExTernD 'approaches bf16 accuracy arbitrarily closely,' but the theorems (Appendix A) only prove Frobenius reconstruction error decreases—not that downstream/task accuracy follows, and the paper never bridges this gap analytically or empirically.",
+        "evidence": {
+          "claim": "The paper conflates weight-reconstruction accuracy with end-to-end model accuracy; theorems proved only apply to reconstruction but not to downstream LLM accuracy.",
+          "excerpt": "The mathematical results concern Frobenius reconstruction error of individual weight matrices. They show, for the augmented procedure, that the decomposed weights can approach the original stored weights. They do not prove that downstream model accuracy, perplexity, reasoning ability, or task performance approaches bf16 accuracy at the same rate, or at all for finite `µ`."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's own limitations section states 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks' and 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment.' The abstract and conclusion claim ExTernD 'approaches bf16 accuracy arbitrarily closely,' but the theorems (Appendix A) only prove Frobenius reconstruction error decreases—not that downstream/task accuracy follows, and the paper never bridges this gap analytically or empirically.",
+            "cost_usd": 0.0059242
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The theorem is explicitly about matrix reconstruction, not downstream behavior: \"For every ε > 0 there is a finite inner rank k with ∥A − B diag(D)C∥F < ε: the decomposition reaches the bf16 weights arbitrarily closely.\" The paper itself also admits the gap: \"our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.\"",
+            "cost_usd": 0.019430833333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges that its mathematical proofs only apply to structural reconstruction and not to downstream performance, stating in Section 5: 'our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.'",
+            "cost_usd": 0.002338
+          }
+        ],
+        "cost_usd": 0.027693033333333335
+      },
+      {
+        "flag_id": "fp-02827a7b9aa7",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper makes the broad claim \"Corollary 1... No fixed number of ternary planes has this property,\" but the preceding result only proves convergence for its own augmented extraction rule: \"Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair... gives the larger decrease.\" No separate formal impossibility proof for all fixed-plane ternary schemes is provided in the paper.",
+        "evidence": {
+          "claim": "The claim that no fixed ternary plane count can have the same arbitrary-accuracy property is too broad as written and overstates the formal impossibility.",
+          "excerpt": "This is too broad as written. A small fixed number of dense trit-planes, such as the cited PTQTP-style `K=2` or `K=4`, may indeed have a reconstruction ceiling. But the paper’s own convergence proof uses single-entry ternary components; a sufficiently large fixed number of such components for a fixed matrix shape could exactly reconstruct any matrix by assigning one component per entry."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper's claim is that 'no fixed number of ternary planes has this property' (Corollary 1), specifically referring to fixed-plane-count methods. The reviewer correctly notes that a large enough fixed count of single-entry ternary components could reconstruct any matrix exactly—which is essentially what the augmented procedure in Proposition 2 does. However, the paper's context implicitly treats 'fixed plane count' as a fixed small K of full-size planes (as in PTQTP), not arbitrarily many single-entry components, making the claim somewhat ambiguous but not entirely unfounded in its intended scope.",
+            "cost_usd": 0.0059242
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper makes the broad claim \"Corollary 1... No fixed number of ternary planes has this property,\" but the preceding result only proves convergence for its own augmented extraction rule: \"Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair... gives the larger decrease.\" No separate formal impossibility proof for all fixed-plane ternary schemes is provided in the paper.",
+            "cost_usd": 0.019430833333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims in Corollary 1 that 'No fixed number of ternary planes has this property.' This statement is an overgeneralization, as the reviewer correctly points out that setting the fixed plane count to the total number of matrix entries would trivially allow exact reconstruction.",
+            "cost_usd": 0.002338
+          }
+        ],
+        "cost_usd": 0.027693033333333335
+      },
+      {
+        "flag_id": "fp-e33eb10da734",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper claims ExTernD is 'to our knowledge the only ternary quantization that can provably reach any target accuracy' and 'to our knowledge the only known way to get there,' but the limitations section itself acknowledges 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment' and the paper does not survey or rule out all adaptive-rank or residual ternary decomposition methods that might share this property.",
+        "evidence": {
+          "claim": "The claims that ExTernD is the \"only known way\" or \"only ternary quantization\" with the property are not supported by a sufficiently broad literature review or empirical evidence.",
+          "excerpt": "The paper does not survey or rule out all adaptive-rank, residual, sparse, codebook, or mixed ternary decompositions. It also does not show end-to-end comparisons with established ternary schemes, which the limitations section itself identifies as missing."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims ExTernD is 'to our knowledge the only ternary quantization that can provably reach any target accuracy' and 'to our knowledge the only known way to get there,' but the limitations section itself acknowledges 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment' and the paper does not survey or rule out all adaptive-rank or residual ternary decomposition methods that might share this property.",
+            "cost_usd": 0.0059242
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper claims uniqueness — \"making it to our knowledge the only ternary quantization that can provably reach any target accuracy\" and later \"to our knowledge the only known way to get there\" — but also acknowledges limited comparative support: \"we compare only against fixed-capacity baselines at the tensor level\" and \"full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment.\"",
+            "cost_usd": 0.019430833333333335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims it is 'to our knowledge the only ternary quantization that can provably reach any target accuracy' (Section 2) but acknowledges a lack of sufficient empirical evaluation in Section 5, noting 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment'.",
+            "cost_usd": 0.002338
+          }
+        ],
+        "cost_usd": 0.027693033333333335
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.03415799999999991,
+    "general": 0.0830791
+  },
+  "extractor_cost_usd": 0.018602000000000188,
+  "total_cost_usd": 0.1358391000000001
+}

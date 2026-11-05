@@ -1,0 +1,314 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-039da0b754b0",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper itself acknowledges: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks. We compare only against fixed-capacity baselines at the tensor level, but full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment.' This is an acknowledged limitation, not a resolved one.",
+        "evidence": {
+          "claim": "The evaluation is too limited: only perplexity on small models, no downstream tasks, no end-to-end comparison with main baselines at model level.",
+          "excerpt": "Only perplexity on wikitext-2, on models ≤4B parameters. No downstream benchmark scores (MMLU, ARC, HellaSwag, GSM8K, …). No KLD-to-bf16, no long-context evaluation. No comparison at the end-to-end model level against PTQTP or PT2-LLM — only against llama.cpp k-quants."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself acknowledges: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks. We compare only against fixed-capacity baselines at the tensor level, but full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment.' This is an acknowledged limitation, not a resolved one.",
+            "cost_usd": 0.003639514285714286
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself states: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks\" and \"full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment.\" It also says \"We have not tested above 4B,\" so the reviewer’s concern is explicitly acknowledged but not addressed.",
+            "cost_usd": 0.010513214285714287
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges these exact evaluation limitations in Section 5, stating 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks' and that 'full end-to-end evaluation against established ternary schemes... is the most valuable missing experiment'.",
+            "cost_usd": 0.001894
+          }
+        ],
+        "cost_usd": 0.016046728571428574
+      },
+      {
+        "flag_id": "fp-494887b3b5ab",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper presents only one full model conversion at a fixed μ=3 on Qwen3.5-4B. The paper states 'All 200 language-model linear layers of Qwen3.5-4B...were decomposed with the weighted algorithm at a fixed μ=3,' with no sweep over μ values and no second model conversion, making the 'any level' claim empirically unsupported at the model level.",
+        "evidence": {
+          "claim": "The model-level demonstration for the claim 'accuracy approaching any quantization level' is insufficient: only one Qwen3.5-4B run at μ=3 is shown; requires a sweep and/or another model.",
+          "excerpt": "The abstract and conclusion emphasize 'accuracy approaching any quantization level,' yet the actual model-level demonstration is one Qwen3.5-4B run at μ=3. To support the 'any level' framing, ... needs at least a sweep of μ ∈ {2, 3, 4, 5} on the same converted model, and ideally on a second model family."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents only one full model conversion at a fixed μ=3 on Qwen3.5-4B. The paper states 'All 200 language-model linear layers of Qwen3.5-4B...were decomposed with the weighted algorithm at a fixed μ=3,' with no sweep over μ values and no second model conversion, making the 'any level' claim empirically unsupported at the model level.",
+            "cost_usd": 0.003639514285714286
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "At model level, the paper shows only one full conversion: the abstract reports \"a full Qwen3.5-4B conversion at µ = 3\" and Sec. 3.5 says \"All 200 language-model linear layers of Qwen3.5-4B ... were decomposed ... at a fixed µ = 3.\" There is no model-level sweep over µ or second full-model family to substantiate the broad \"any quantization level\" framing empirically.",
+            "cost_usd": 0.010513214285714287
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only presents a single end-to-end model conversion in Section 3.5, stating 'All 200 language-model linear layers of Qwen3.5-4B... were decomposed... at a fixed µ = 3', and lacks a full parameter sweep or multi-model evaluation.",
+            "cost_usd": 0.001894
+          }
+        ],
+        "cost_usd": 0.016046728571428574
+      },
+      {
+        "flag_id": "fp-d88c42953572",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper claims 'to our knowledge the only ternary quantization that can provably reach any target accuracy' but the reviewer correctly notes this relies on the specific greedy factored construction, not the impossibility of other approaches. The paper's Corollary 1 only proves it for their construction; the 'only known way' framing is not rigorously bounded against all possible ternary schemes.",
+        "evidence": {
+          "claim": "The claim 'only ternary quantization that can provably reach any target accuracy' is overstated and should be softened or made more precise.",
+          "excerpt": "The 'only ternary quantization that can provably reach any target accuracy' claim is overstated. Any complete ternary dictionary of size ≥ mn can trivially represent any real matrix; the mathematical novelty here is that a greedy factored construction achieves it, not that no such scheme exists. Please soften this claim or explicitly delimit it against prior fixed-plane methods."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper claims 'to our knowledge the only ternary quantization that can provably reach any target accuracy' but the reviewer correctly notes this relies on the specific greedy factored construction, not the impossibility of other approaches. The paper's Corollary 1 only proves it for their construction; the 'only known way' framing is not rigorously bounded against all possible ternary schemes.",
+            "cost_usd": 0.003639514285714286
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The wording is broad — \"making it to our knowledge the only ternary quantization that can provably reach any target accuracy\" — but the paper also narrows the contrast by saying \"No fixed number of ternary planes has this property.\" From the paper alone, it is unclear whether the claim is adequately delimited to fixed-plane methods or is indeed overstated versus all ternary schemes.",
+            "cost_usd": 0.010513214285714287
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper broadly claims in Section 2 that it is 'to our knowledge the only ternary quantization that can provably reach any target accuracy', which is not softened or properly delimited against theoretically possible dense ternary dictionaries.",
+            "cost_usd": 0.001894
+          }
+        ],
+        "cost_usd": 0.016046728571428574
+      },
+      {
+        "flag_id": "fp-89aa6045140e",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'we evaluate PTQTP at group size G=128 and set the ExTernD component count to match the number of ternary elements' but does not clarify how PTQTP is imatrix-weighted (PTQTP natively uses a different objective), and presents only two isolated bit budgets (K=2, K=4) rather than an energy-vs-bpw curve, leaving the comparison methodology incomplete.",
+        "evidence": {
+          "claim": "The comparison with PTQTP is not symmetric: grouping/scale granularity differences, unclear weighting, and incomplete accounting for sparsity and bit-packing overhead.",
+          "excerpt": "PTQTP is evaluated at group size G=128, but ExTernD's grouping/scale granularity is not clearly stated ... The 'K=4 (weighted)' PTQTP column in Table 4 appears in energy but PTQTP is not, to my knowledge, natively imatrix-weighted; please clarify ... add a proper energy-vs-bpw curve rather than two isolated bit budgets."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'we evaluate PTQTP at group size G=128 and set the ExTernD component count to match the number of ternary elements' but does not clarify how PTQTP is imatrix-weighted (PTQTP natively uses a different objective), and presents only two isolated bit budgets (K=2, K=4) rather than an energy-vs-bpw curve, leaving the comparison methodology incomplete.",
+            "cost_usd": 0.003639514285714286
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The PTQTP comparison is only partially specified: \"we evaluate PTQTP at group size G = 128\" and later discuss \"PTQTP K = 4 (Weighted)\" / \"When minimizing the imatrix-weighted Frobenius error... PTQTP shifts its dense assignments...\" The paper does not clearly explain how the weighted PTQTP numbers are produced or fully normalize grouping/metadata differences, so the symmetry concern is not resolved.",
+            "cost_usd": 0.010513214285714287
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "While ExTernD's granularity is implicitly defined by its components in Eq. 1, the paper only evaluates isolated bit budgets (e.g., matching K=4 in Section 3.6) and does not provide the requested energy-vs-bpw curve or clarify how PTQTP was natively imatrix-weighted.",
+            "cost_usd": 0.001894
+          }
+        ],
+        "cost_usd": 0.016046728571428574
+      },
+      {
+        "flag_id": "fp-752588a080fa",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper provides the bpw formula for ExTernD (Eq. 5) using mask+sign packing, and states 'The Q4_K baseline is a faithful torch port of llama.cpp's quantize_row_q4_K_ref (4.5 bpw),' but does not break down Q4_K's metadata/scale overhead to verify apples-to-apples comparison. The ~20% gap analysis does not account for differential metadata costs.",
+        "evidence": {
+          "claim": "The 'iso-Q4_K' comparison in Table 2 is not apples-to-apples due to different handling of metadata and packing; explicit bpw formulas are needed.",
+          "excerpt": "The 'iso-Q4_K' comparison (Table 2) is not apples-to-apples. Q4_K stores fp16 scales, min values, and superblock structure whose overhead is amortized differently from ExTernD's mask+sign packing. The ~20% gap could be partly bookkeeping. Please state the exact bpw formula used for each, including all metadata."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper provides the bpw formula for ExTernD (Eq. 5) using mask+sign packing, and states 'The Q4_K baseline is a faithful torch port of llama.cpp's quantize_row_q4_K_ref (4.5 bpw),' but does not break down Q4_K's metadata/scale overhead to verify apples-to-apples comparison. The ~20% gap analysis does not account for differential metadata costs.",
+            "cost_usd": 0.003639514285714286
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives an explicit ExTernD formula, \"storage per original weight is bpweff = ... (Eq. 5),\" but for the baseline it only says \"The Q4 K baseline is a faithful torch port of llama.cpp’s quantize row q4 K ref (4.5 bpw).\" It does not state the exact Q4_K bpw accounting including metadata/scales, so the apples-to-apples concern remains.",
+            "cost_usd": 0.010513214285714287
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The exact bpw formula for the Q4_K baseline is never specified (only stated as '4.5 bpw' in Section 3), and ExTernD's formula in Eq. 5 explicitly omits the bit cost of the real scale vector D, failing to fully account for all metadata.",
+            "cost_usd": 0.001894
+          }
+        ],
+        "cost_usd": 0.016046728571428574
+      },
+      {
+        "flag_id": "fp-72675d63c2bd",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "No code is provided, ε is never specified in the paper ('(U⊤U + ϵI)' appears in Eq. 3 without stating the value), and beyond '15 iterations' and 'block width b=256' few complete hyperparameters are given. The paper does not provide pseudocode with all constants needed for reproduction.",
+        "evidence": {
+          "claim": "Reproducibility is lacking: no code, no seeds, no complete hyperparameters or details for key algorithms.",
+          "excerpt": "No code, no seeds, no hyperparameter tables beyond scattered numbers. Given the ALS is greedy and (in the batched variant) uses a regularizer ε whose value is never specified, reproducibility is not currently possible. Please provide code (or at minimum pseudocode with all constants), ε, block size heuristic for `b ≲ min(m,n)/8`, and matrix-selection criteria for Table 1."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "No code is provided, ε is never specified in the paper ('(U⊤U + ϵI)' appears in Eq. 3 without stating the value), and beyond '15 iterations' and 'block width b=256' few complete hyperparameters are given. The paper does not provide pseudocode with all constants needed for reproduction.",
+            "cost_usd": 0.003639514285714286
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Key implementation details are missing from the paper text: the block ALS uses \"(UᵀU + ϵI)^{-1}\" and \"(VᵀV + ϵI)^{-1},\" but no value of ϵ is specified anywhere, and there are no seeds or code links. While some heuristics are given (\"default 256, capped at ⌊min(m, n)/8⌋\"), reproducibility is still incomplete.",
+            "cost_usd": 0.010513214285714287
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces a regularizer in Section 2.4 ('(U^\\top U + \\epsilon I)^{-1}') but never specifies the value of \\epsilon, does not provide matrix selection criteria for Table 1, and lacks code for reproducing the greedy ALS algorithm.",
+            "cost_usd": 0.001894
+          }
+        ],
+        "cost_usd": 0.016046728571428574
+      },
+      {
+        "flag_id": "fp-2e6ad4013c0f",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges: 'We have not tested above 4B or on matrices larger than ~9216×2560, so the behaviour of μ at 30B–70B+ is unknown.' This is acknowledged but unresolved, with no layer-level experiments on larger models.",
+        "evidence": {
+          "claim": "Scaling to larger models (30B–70B) is untested despite implying applicability to large LLMs; effects of μ on larger models should be shown.",
+          "excerpt": "All experiments are on a single MI50 32 GB and models ≤4B. The behavior of `μ` at 30B–70B is explicitly untested, but the abstract markets ExTernD as an LLM PTQ method. At minimum, please decompose a handful of layers of a 7B model to show that per-tensor energy at fixed `μ` does not degrade with scale."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges: 'We have not tested above 4B or on matrices larger than ~9216×2560, so the behaviour of μ at 30B–70B+ is unknown.' This is acknowledged but unresolved, with no layer-level experiments on larger models.",
+            "cost_usd": 0.003639514285714286
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The limitation is explicitly admitted: \"We have not tested above 4B or on matrices larger than ∼9216 × 2560, so the behaviour of µ at 30B–70B+ is unknown.\" The paper makes no larger-model experiment to address this.",
+            "cost_usd": 0.010513214285714287
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors explicitly acknowledge in Section 5 that 'We have not tested above 4B... so the behaviour of µ at 30B–70B+ is unknown', thereby failing to quantify or resolve the reviewer's concern regarding scaling to larger models.",
+            "cost_usd": 0.001894
+          }
+        ],
+        "cost_usd": 0.016046728571428574
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.11232710000000001
+  },
+  "extractor_cost_usd": 0.017091999999999996,
+  "total_cost_usd": 0.1294191
+}

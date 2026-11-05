@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v1",
+  "reviewer_system": "C",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags the claim 'Reasoning in an LLM collapses when its weights are projected to a single ternary plane' as WEAKLY_SUPPORTED and notes the phrasing is a paraphrase, but does not challenge the overgeneralization (i.e., the missing 'post-training' qualifier) or flag the claim as contradicted/overgeneralized relative to the cited source [5]. The review does not identify that the condition of post-training projection was dropped.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer notes the claim that single-plane ternary projection causes reasoning collapse is only weakly supported, but does not specifically challenge the overgeneralized omission of the 'post-training' qualifier against the cited PTQTP source. Under the broadened-claim rule, this is too vague to count.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer assesses the claim about reasoning collapse against the cited source but finds it weakly supported rather than flagging it as overgeneralized or mischaracterizing the source due to the missing qualifier.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer notes that 'reasoning collapses' is attributed to [5] and marks it as WEAKLY_SUPPORTED, but does not challenge the overgeneralization introduced by dropping the 'post-training' qualifier. The reviewer's flag does not specifically identify that the claim is too broad because it omits the post-training scope condition, which is the injected change.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's numerical audit checks the sparsity-tau correspondence and notes '~57%' at tau=1.0 in item 8, accepting it as consistent, but does not flag a discrepancy between 57% (Introduction) and 58% (Results). The injected change from 57% to 58% in the Results section is not detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's numerical audit repeats the paper's 57% value for tau=1.0 but does not identify any inconsistency between Introduction and Results or mention a competing 58% value. So the repeated-constant discrepancy was not flagged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "While the reviewer audits the sparsity-tau correspondence, they focus on the 57% value and find it acceptable, failing to identify or flag the 58% value in the results section as an inconsistency.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. (3): $V \\leftarrow T_\\tau([(U^\\top U - \\epsilon I)^{-1} U^\\top R]^\\top)$; $U \\leftarrow T_\\tau(R V (V^\\top V + \\epsilon I)^{-1})$. [...] The V-step regularizer is $-\\epsilon I$; the U-step is $+\\epsilon I$. Tikhonov regularization for an ill-conditioned Gram [...] requires $+\\epsilon I$; a $-\\epsilon I$ subtraction can shift the Gram to singular or indefinite. Almost certainly a typo, but as printed the two steps are inconsistent and one of them is doing damage.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. (3): $V \\leftarrow T_\\tau([(U^\\top U - \\epsilon I)^{-1} U^\\top R]^\\top)$; $U \\leftarrow T_\\tau(R V (V^\\top V + \\epsilon I)^{-1})$. [...] The V-step regularizer is $-\\epsilon I$; the U-step is $+\\epsilon I$. Tikhonov regularization for an ill-conditioned Gram [...] requires $+\\epsilon I$; a $-\\epsilon I$ subtraction can shift the Gram to singular or indefinite. Almost certainly a typo, but as printed the two steps are inconsistent and one of them is doing damage.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the sign error in the V-step regularizer of Eq. (3), noting that '-epsilon I' breaks positive-definiteness and is inconsistent with the U-step's '+epsilon I', which directly corresponds to the injected mutation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Eq. (3) (Sec. 2.4) prints the V-step with $(U^\\top U - \\epsilon I)^{-1}$ but the U-step with $(V^\\top V + \\epsilon I)^{-1}$. Signed regularization asymmetry of this kind is either a straightforward typo (Tikhonov regularization requires $+\\epsilon I$; $-\\epsilon I$ shifts the spectrum toward singularity and, for small $U^\\top U$, gives negative-definite Grams) or a deliberate choice with no accompanying justification.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the exact injected sign error in the ALS normal equations and explains why $-\\epsilon I$ is wrong relative to standard Tikhonov regularization.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (3) (Sec. 2.4) prints the V-step with $(U^\\top U - \\epsilon I)^{-1}$ but the U-step with $(V^\\top V + \\epsilon I)^{-1}$. Signed regularization asymmetry of this kind is either a straightforward typo (Tikhonov regularization requires $+\\epsilon I$; $-\\epsilon I$ shifts the spectrum toward singularity and, for small $U^\\top U$, gives negative-definite Grams) or a deliberate choice with no accompanying justification. ... a sign error in the regularizer meant to fix that ill-conditioning is a material bug.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the sign error in Equation 3 of Section 2.4, explaining why it is a material bug in the context of Tikhonov regularization.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the cross-reference mismatch where 'Sec.~\\ref{sec:cost}' was changed to 'Sec.~\\ref{sec:core}' in the Introduction. No mention of an incorrect section cross-reference for the cost model or the inner-rank multiplier is found in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention any incorrect section cross-reference for the cost model or a mismatch between references to Sec. 2.6/cost and Sec. 2.1/core. No corresponding flag appears in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention any issues regarding cross-references or a mismatch between the text describing the cost model and the section it points to.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag any cross-reference mismatch in the Introduction. The injection changed a section reference from sec:cost to sec:core, but the reviewer's report contains no mention of a wrong or inconsistent section cross-reference in that context.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 50.287434,
+  "total_cost_usd": null,
+  "total_input_tokens": 56233,
+  "total_output_tokens": 4859,
+  "escalation_count": 2,
+  "notes": null
+}

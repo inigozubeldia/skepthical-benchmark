@@ -1,0 +1,314 @@
+{
+  "paper_id": "2604.20411",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-a1350e4971b1",
+        "paper_id": "2604.20411",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper itself concedes that \"COSMOS2020 catalog does not include FIR/radio observations\" and that this \"could potentially underestimate the dust obscured SFR and lead to the decline in our main sequence relation,\" but it only counters this with the qualitative argument that \"if dust bias were the primary cause, the decline should be most pronounced at cosmic noon.\" Appendix A tests an alternative star-forming selection (\"the two selection criteria yield consistent main sequence relations\"), but there is no direct quantitative test of the FIR/radio-related bias at the high-mass end.",
+        "evidence": {
+          "claim": "The central claim—a pronounced high-mass decline in the SFR–M* relation, even for star-forming galaxies—is not robust due to observational biases from SED-based SFRs lacking FIR/radio constraints, and selection effects may artificially create or enhance this decline.",
+          "excerpt": "The paper's central claim—a pronounced high-mass decline in the SFR–$M_{\\star}$ relation, even for star-forming galaxies—is not robustly demonstrated against observational biases. The analysis relies on SED-based SFRs without FIR/radio constraints. While the paper acknowledges this underestimates the cosmic SFRD (Sec. 4.1), it inconsistently argues the shape of the relation is unaffected. Massive, dusty star-forming galaxies, which are most common at high mass and $z\\sim 1$–2, are precisely where SED-based SFRs are most uncertain and likely to be underestimated, which could artificially create or enhance a high-mass decline. Furthermore, the selection of 'star-forming' galaxies may include transitioning/green-valley systems that bias the high-mass end downwards."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper acknowledges the dust bias limitation ('lack of FIR/radio information in COSMOS2020 could potentially underestimate the dust obscured SFR') but argues against it being the primary cause because 'the decline should be most pronounced at cosmic noon (z~2) where dust obscuration peaks, rather than at z<1 where we actually observe the strongest effect.' This argument is partially persuasive but does not quantitatively rule out dust bias contributing to the high-mass decline, making this genuinely ambiguous rather than fully resolved.",
+            "cost_usd": 0.0052969714285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper itself concedes that \"COSMOS2020 catalog does not include FIR/radio observations\" and that this \"could potentially underestimate the dust obscured SFR and lead to the decline in our main sequence relation,\" but it only counters this with the qualitative argument that \"if dust bias were the primary cause, the decline should be most pronounced at cosmic noon.\" Appendix A tests an alternative star-forming selection (\"the two selection criteria yield consistent main sequence relations\"), but there is no direct quantitative test of the FIR/radio-related bias at the high-mass end.",
+            "cost_usd": 0.011646928571428572
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges the lack of FIR/radio constraints and explicitly notes the inclusion of 'Green Valley' galaxies to explain the decline, stating: 'We speculate that... it demonstrates COSMOS2020’s capability to detect massive star-forming galaxies undergoing suppressed star formation.' However, it relies on qualitative reasoning rather than direct demonstration to dismiss the observational biases the reviewer flags.",
+            "cost_usd": 0.002106885714285714
+          }
+        ],
+        "cost_usd": 0.019050785714285715
+      },
+      {
+        "flag_id": "fp-22df4839b63c",
+        "paper_id": "2604.20411",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'errorbars denoting the median absolute deviations of the SFR within each bin' and uses these in CURVE_FIT and BIC calculations. The MAD measures intrinsic scatter, not the uncertainty on the median (which would be MAD/sqrt(N)), so using it as fitting errors is statistically incorrect. The paper does not address or justify this choice.",
+        "evidence": {
+          "claim": "The statistical methodology for fitting the SFR–M* relation is flawed, using the median absolute deviation (MAD) as error on the median, which is statistically incorrect, leading to unreliable parameter uncertainties and model comparisons.",
+          "excerpt": "The statistical methodology for fitting the SFR–$M_{\\star}$ relation is flawed, likely leading to unreliable parameter uncertainties and model comparisons. In Sec. 3.1, the fits are performed on binned median SFRs, using the median absolute deviation (MAD) as the error. The MAD is a measure of the intrinsic scatter within a bin, not the uncertainty on the median. Using it as the error in `CURVE_FIT` or for BIC calculations is statistically incorrect, likely overestimating the true errors and invalidating the significance of parameter trends and model-selection results."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'errorbars denoting the median absolute deviations of the SFR within each bin' and uses these in CURVE_FIT and BIC calculations. The MAD measures intrinsic scatter, not the uncertainty on the median (which would be MAD/sqrt(N)), so using it as fitting errors is statistically incorrect. The paper does not address or justify this choice.",
+            "cost_usd": 0.0052969714285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper says the plotted points have \"errorbars denoting the median absolute deviations\" and separately says \"We fit Equation 1 to the median values of SFR and M⋆ in each redshift bin using the Python package CURVE_FIT.\" It never states that MAD was used as the fitting uncertainty or in the BIC calculation, so the reviewer's specific claim about the implemented statistics is not supported by the paper text.",
+            "cost_usd": 0.011646928571428572
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that it plots 'errorbars denoting the median absolute deviations' and then proceeds to 'fit Equation 1 to the median values... using the Python package CURVE_FIT', later calculating a BIC value. There is no mention of converting the MAD into a standard error of the median, confirming the reviewer's concern about statistically incorrect error propagation.",
+            "cost_usd": 0.002106885714285714
+          }
+        ],
+        "cost_usd": 0.019050785714285715
+      },
+      {
+        "flag_id": "fp-e012423046ba",
+        "paper_id": "2604.20411",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges the selection bias ('objects in the Tasca catalog are selected with i-band magnitude < 23, substantially brighter than the COSMOS2020 limiting magnitude of i=26. The Tasca sample is therefore biased toward intrinsically luminous galaxies with elevated SFRs') and notes at z>2 a selection effect for spirals, but does not quantify the k-correction issues from combining F814W and F277W data across 0.1<z<4, nor does it use a morphology-matched reference relation for residuals.",
+        "evidence": {
+          "claim": "The morphological analysis combines incompatible catalogs with different bands, depths, and classification schemes, introducing severe selection bias and k-correction issues that undermine causal claims about morphology-driven suppression.",
+          "excerpt": "The morphological analysis (Sec. 4.3) suffers from severe methodological issues that undermine its conclusions. The analysis combines two heterogeneous catalogs (Tasca et al. based on optical HST/ACS and COSMOS-Web based on NIR JWST/NIRCam) with different selection bands, depths, and classification schemes. This introduces several problems: (1) Strong selection bias, as only $\\sim 60\\%$ of the main sample has morphological data, and this subsample is biased toward higher SFRs (Fig. 8). (2) A significant morphological k-correction issue, as F814W and F277W probe vastly different rest-frame wavelengths across $0.1<z<4$. (3) The reference SFR–$M_{\\star}$ relation used to compute residuals (Figs. 8, 9) is derived from the full sample, not the biased morphology-matched subsample, making the offsets difficult to interpret."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges the selection bias ('objects in the Tasca catalog are selected with i-band magnitude < 23, substantially brighter than the COSMOS2020 limiting magnitude of i=26. The Tasca sample is therefore biased toward intrinsically luminous galaxies with elevated SFRs') and notes at z>2 a selection effect for spirals, but does not quantify the k-correction issues from combining F814W and F277W data across 0.1<z<4, nor does it use a morphology-matched reference relation for residuals.",
+            "cost_usd": 0.0052969714285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The morphology analysis explicitly merges heterogeneous inputs: Tasca uses HST/ACS \"in the F814W filter,\" COSMOS-Web uses JWST data with morphology \"derived from F277W band,\" and \"We then combine the two morphology catalogs into one.\" The paper also acknowledges bias (\"The Tasca sample is therefore biased toward intrinsically luminous galaxies with elevated SFRs relative to the parent population\") and compares to a non-matched reference (Figs. 8–9: \"The best-fit relation ... in Figure 1 is shown as the grey line\"), without resolving the band/depth/classification mismatch.",
+            "cost_usd": 0.011646928571428572
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper openly acknowledges the selection bias and the use of the full sample for the baseline relation, stating: 'The best-fit relation of all galaxies from Figure 1 is shown for comparison. The fact these galaxies are skewed above the best-fit relation is due to the selection bias mentioned earlier.' It also combines the optical F814W and NIR F277W catalogs without addressing the morphological k-correction.",
+            "cost_usd": 0.002106885714285714
+          }
+        ],
+        "cost_usd": 0.019050785714285715
+      },
+      {
+        "flag_id": "fp-9f265e1e428a",
+        "paper_id": "2604.20411",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section 3 fits medians (\"Figure 1 we show the median SFR...\"; \"We fit Equation 1 to the median values of SFR and M⋆\") and Section 4.1 then uses that fit for SFRD (\"we calculate the SFRD ... by multiplying the best-fit SFR from Eq. 1 and Table 2 with the stellar mass function of star-forming galaxies\"). The paper does not address the mean-vs-median issue for SFRD, and the wording is ambiguous about which Table 2 relation is paired with the star-forming mass function.",
+        "evidence": {
+          "claim": "The cosmic SFR density (SFRD) calculation is likely biased low because it uses the median SFR rather than the mean, and uses inconsistent galaxy populations for the SFR–M* relation and stellar mass function.",
+          "excerpt": "The cosmic SFR density (SFRD) calculation in Sec. 4.1 is likely biased low due to two separate methodological issues. First, the SFRD is calculated by integrating the best-fit *median* log(SFR) relation, whereas a correct calculation requires the *mean linear* SFR. For a typical lognormal SFR distribution, the mean can be significantly higher than the median (by $\\sim 0.1$ dex or more), so this systematically underestimates the true SFRD. Second, the text suggests the SFRD is derived by combining the best-fit SFR–$M_{\\star}$ relation for *all* galaxies with the stellar mass function for *star-forming* galaxies, which is physically inconsistent."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states it calculates SFRD 'by multiplying the best-fit SFR from Eq. 1 and Table 2 with the stellar mass function of star-forming galaxies from Weaver et al. (2023),' which appears to use star-forming galaxy SMF with a best-fit SFR relation. The concern about mean vs. median log(SFR) is not addressed, but it's unclear whether the inconsistency between using all-galaxy vs. star-forming SFR fits with the star-forming SMF is as severe as claimed.",
+            "cost_usd": 0.0052969714285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 3 fits medians (\"Figure 1 we show the median SFR...\"; \"We fit Equation 1 to the median values of SFR and M⋆\") and Section 4.1 then uses that fit for SFRD (\"we calculate the SFRD ... by multiplying the best-fit SFR from Eq. 1 and Table 2 with the stellar mass function of star-forming galaxies\"). The paper does not address the mean-vs-median issue for SFRD, and the wording is ambiguous about which Table 2 relation is paired with the star-forming mass function.",
+            "cost_usd": 0.011646928571428572
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly calculates the SFRD 'by multiplying the best-fit SFR from Eq. 1 and Table 2', confirming that it uses the exponentiated median log(SFR) instead of the mean linear SFR, which mathematically underestimates the total SFR density for log-normal distributions.",
+            "cost_usd": 0.002106885714285714
+          }
+        ],
+        "cost_usd": 0.019050785714285715
+      },
+      {
+        "flag_id": "fp-1c2de967bec2",
+        "paper_id": "2604.20411",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges that its slicing can cause dilution: \"thicker slices at high-z introducing greater line-of-sight contamination... could potentially bias the interpretation of the redshift evolution,\" but it does not quantify the magnitude of that effect. It then makes a strong causal inference from the null result, stating that the absence of suppressed star-forming galaxies in dense regions \"implies that environmental quenching instead acts as a 'binary' switch.\"",
+        "evidence": {
+          "claim": "The environmental analysis does not quantify biases from photometric-redshift uncertainties, leading to washed-out density contrasts, and over-interprets a null result as evidence for rapid, binary quenching.",
+          "excerpt": "The environmental analysis (Sec. 4.2) is weakened by unquantified biases and over-interpretation. The Voronoi tessellation densities are calculated in photometric-redshift slices. Given the significant photo-$z$ uncertainties in COSMOS2020 (especially at $z>1$), this method will suffer from interloper contamination, which systematically washes out true density contrasts. The paper does not quantify this effect. Furthermore, the interpretation that the lack of SFR suppression for star-forming galaxies implies a 'rapid, binary' quenching process is too strong a conclusion from a null result, especially as the analysis may exclude the low-mass satellite regime where environmental effects are most prominent."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper addresses the photo-z slice width issue by stating 'the width of each slice is set to be the median value of the photometric redshift uncertainty' and validates with a fixed 40 cMpc comoving slice as alternative, finding 'results presented in the following sections remain unchanged.' However, the paper does not quantify the degree of density contrast washing, and the 'rapid binary quenching' interpretation from a null result is indeed over-interpreted without quantitative support.",
+            "cost_usd": 0.0052969714285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that its slicing can cause dilution: \"thicker slices at high-z introducing greater line-of-sight contamination... could potentially bias the interpretation of the redshift evolution,\" but it does not quantify the magnitude of that effect. It then makes a strong causal inference from the null result, stating that the absence of suppressed star-forming galaxies in dense regions \"implies that environmental quenching instead acts as a 'binary' switch.\"",
+            "cost_usd": 0.011646928571428572
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While the paper attempts to mitigate photo-z issues by setting the slice width to the median uncertainty ('the width of each slice is set to be the median value of the photometric redshift uncertainty'), it merely acknowledges this and does not quantitatively assess the remaining interloper contamination or the degree to which density contrasts are washed out.",
+            "cost_usd": 0.002106885714285714
+          }
+        ],
+        "cost_usd": 0.019050785714285715
+      },
+      {
+        "flag_id": "fp-a15eac098758",
+        "paper_id": "2604.20411",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The treatment of mass-completeness limits is poorly documented and inconsistent across sections, which can introduce artificial evolutionary trends and hinders direct comparison of results.",
+          "excerpt": "The implementation of mass-completeness limits is insufficiently documented and appears inconsistent across different parts of the analysis. The specific mass limits for star-forming and quiescent galaxies in each redshift bin are not reported (Sec. 2, Table 1). More importantly, the SFR–$M_{\\star}$ fitting in Sec. 3 appears to use redshift-dependent limits, while the environmental analysis in Sec. 4.2 applies a single, uniform mass limit across all redshifts. This inconsistency can introduce artificial evolutionary trends and makes it difficult to compare results from different sections."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states mass completeness limits are taken from Weaver et al. (2022) for both galaxy types as a function of redshift (Section 2), and the environmental section explicitly states 'we adopt the mass completeness limit of the highest redshift bin...which is 10^9.26 M_sun for all galaxies and 10^9.64 M_sun for quiescent galaxies at z~4, and apply it uniformly across all redshift bins.' The specific limits per redshift bin are not tabulated, which is a documentation gap, but the methodology is described.",
+            "cost_usd": 0.0052969714285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The different completeness treatments are explicitly explained and purposeful, not inconsistent. Section 2 says \"We adopt their mass completeness limits for both galaxy types,\" while Section 4.2 explains that for the environment test \"applying different limits at each redshift would introduce artificial trends\" and therefore \"we adopt the mass completeness limit of the highest redshift bin ... and apply it uniformly across all redshift bins.\"",
+            "cost_usd": 0.011646928571428572
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer correctly identifies that specific mass limits are not listed in Table 1 or the text. Furthermore, the paper uses redshift-dependent limits for the main sample ('removing galaxies... lower than the completeness limit') but switches to a uniform limit for the environmental analysis ('we adopt the mass completeness limit of the highest redshift bin... and apply it uniformly').",
+            "cost_usd": 0.002106885714285714
+          }
+        ],
+        "cost_usd": 0.019050785714285715
+      },
+      {
+        "flag_id": "fp-b69973e6fa68",
+        "paper_id": "2604.20411",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper speculates 'if this represents a genuine physical signature rather than an observational artifact, it demonstrates COSMOS2020's capability to detect massive star-forming galaxies undergoing suppressed star formation' but provides no direct comparison of the green valley galaxy fraction between COSMOS2020 and other surveys, nor any test demonstrating these galaxies drive the decline, as the reviewer correctly notes.",
+        "evidence": {
+          "claim": "The claim that COSMOS2020's depth reveals a population of massive 'green valley' galaxies responsible for the high-mass decline is asserted but not directly demonstrated with evidence or tests.",
+          "excerpt": "The explanation for the high-mass decline—that COSMOS2020's depth reveals a population of massive 'green valley' galaxies missed by other surveys—is asserted but not directly demonstrated (Sec. 4.4, Sec. 5). No evidence is presented to show that such a population is indeed more prevalent in COSMOS2020 compared to other surveys, nor is there a test to show that these galaxies are responsible for the observed decline."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper speculates 'if this represents a genuine physical signature rather than an observational artifact, it demonstrates COSMOS2020's capability to detect massive star-forming galaxies undergoing suppressed star formation' but provides no direct comparison of the green valley galaxy fraction between COSMOS2020 and other surveys, nor any test demonstrating these galaxies drive the decline, as the reviewer correctly notes.",
+            "cost_usd": 0.0052969714285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The proposed explanation is presented speculatively rather than demonstrated: \"We speculate that if this represents a genuine physical signature...\" and the summary says \"We attribute it to COSMOS2020’s ability to detect faint and massive star-forming galaxies that are undergoing suppressed star-formation.\" The paper provides no direct comparison showing such a population is uniquely recovered in COSMOS2020 or that it quantitatively drives the observed decline.",
+            "cost_usd": 0.011646928571428572
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly frames this explanation as a speculation without providing direct empirical tests, stating: 'We speculate that if this represents a genuine physical signature rather than an observational artifact, it demonstrates COSMOS2020’s capability to detect massive star-forming galaxies undergoing suppressed star formation.'",
+            "cost_usd": 0.002106885714285714
+          }
+        ],
+        "cost_usd": 0.019050785714285715
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.13335550000000002
+  },
+  "extractor_cost_usd": 0.03331999999999996,
+  "total_cost_usd": 0.16667549999999998
+}

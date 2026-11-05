@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "apssamp.tex",
+    "original_text": "We model it using the Schechter-like parametric model introduced in \\cite{2016MNRAS.455L..72M},",
+    "injected_text": "We model it using the parametric model introduced in \\cite{2016MNRAS.455L..72M},",
+    "rationale": "Drops the 'Schechter-like' functional-form qualifier that the cited Middleton et al. 2016 paper is explicit about, leaving the citation key intact while making the methodological description weaker than what the cited paper actually states.",
+    "ground_truth_description": "Removed the qualifier 'Schechter-like' from the description of the merger-density parametric model attributed to Middleton et al. 2016, keeping the cite key unchanged.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "2016MNRAS.455L..72M",
+      "injected_cite_key": "2016MNRAS.455L..72M",
+      "claim_sentence_verbatim": "We model it using the Schechter-like parametric model introduced in \\cite{2016MNRAS.455L..72M},",
+      "section_location": "Sec. IV (Comoving merger density models)",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "apssamp.tex",
+    "original_text": "the IPTA DR3 dataset has a $23\\%$ probability of containing at least one zombie binary with $\\SNR > 3$.",
+    "injected_text": "the IPTA DR3 dataset has a $24\\%$ probability of containing at least one zombie binary with $\\SNR > 3$.",
+    "rationale": "Perturbs the Discussion-section headline probability claim from 23% to 24% by ±1 in the last digit, leaving the Results body claim ($23\\%$ for the M2 model under IPTA DR3) untouched, so a single read sees the summary-section value disagree with the results-section anchor. Tension with the cell spec: the paper's abstract contains no decimal-bearing numbers, so a strict abstract-vs-body second-decimal drift is not realisable here; the Discussion section is the closest abstract-analogue summary surface in this paper.",
+    "ground_truth_description": "Changed the Discussion section's IPTA DR3 detection probability claim from 23% to 24% while the Results section retains the original 23% value for the M2 model, creating a summary-vs-body numerical inconsistency.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "23\\%",
+      "value_after_raw": "24\\%",
+      "value_before_float": 23.0,
+      "value_after_float": 24.0,
+      "location_cue": "the IPTA DR3 dataset has a $24\\%$ probability of containing at least one zombie binary with $\\SNR > 3$",
+      "paired_location": "Section 6 (Results), sentence: 'the probability increases to $23\\%$ and $22\\%$ for M2 and M3, respectively.'",
+      "quantity_label": "Probability that the IPTA DR3 dataset contains at least one zombie binary with SNR > 3 under the M2 (large-mass-favoring) SMBHB population model",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "apssamp.tex",
+    "original_text": "    \\label{eq:forbP-a}\n    \\forbP{a} = \\forb^{\\rm (ISCO)} \\left[ 1 + \\frac{\\tau_a - \\tauc}{\\Tc\\left(\\forb^{\\rm (ISCO)}\\right)}\\right]^{-3/8},",
+    "injected_text": "    \\label{eq:forbP-a}\n    \\forbP{a} = \\forb^{\\rm (ISCO)} \\left[ 1 + \\frac{\\tau_a - \\tauc}{\\Tc\\left(\\forb^{\\rm (ISCO)}\\right)}\\right]^{-3/8}, \\quad \\lim_{\\tau_a \\to \\tauc} \\forbP{a} = 0,",
+    "rationale": "Adds a patently false limit claim to the displayed equation defining the pulsar-term orbital frequency: as tau_a -> tauc the bracket goes to 1 so forbP_a -> f_ISCO, not 0; Wolfram Limit[] refutes the stated value immediately. Note: the source paper does not naturally contain a free-standing \\lim statement, so the realism-vs-cell tension is mild — the asymptotic clause is appended in a 'for clarity' style that a tired author could plausibly write but is somewhat unusual.",
+    "ground_truth_description": "Appended a wrong asymptotic claim 'lim_{tau_a -> tau_c} f_orb^(P,a) = 0' to Eq. (forbP-a); the correct limit equals f_ISCO.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:forbP-a",
+      "equation_location": "Eq. (forbP-a) in Sec. II (Zombie binary signals)",
+      "original_fragment_latex": "\\right]^{-3/8},",
+      "injected_fragment_latex": "\\right]^{-3/8}, \\quad \\lim_{\\tau_a \\to \\tauc} \\forbP{a} = 0,",
+      "full_equation_latex_before": "\\forbP{a} = \\forb^{\\rm (ISCO)} \\left[ 1 + \\frac{\\tau_a - \\tauc}{\\Tc\\left(\\forb^{\\rm (ISCO)}\\right)}\\right]^{-3/8},",
+      "full_equation_latex_after": "\\forbP{a} = \\forb^{\\rm (ISCO)} \\left[ 1 + \\frac{\\tau_a - \\tauc}{\\Tc\\left(\\forb^{\\rm (ISCO)}\\right)}\\right]^{-3/8}, \\quad \\lim_{\\tau_a \\to \\tauc} \\forbP{a} = 0,",
+      "term_role": "limit value (asymptotic value of pulsar-term orbital frequency at coalescence)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "apssamp.tex",
+    "original_text": "thus have only a negligible effect on the detection efficiency",
+    "injected_text": "thus have only a negligible affect on the detection efficiency",
+    "rationale": "Classic homophone swap (effect → affect) in a Methods sentence; meaning unaffected, reads as a tired-author typo and lands as a very_minor presentation flag (D2/D8).",
+    "ground_truth_description": "Replaced the noun 'effect' with the homophone 'affect' in a Methods sentence about the binary mass ratio's influence on detection efficiency.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D8",
+      "change_kind": "homophone_swap",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 3 (Occurrence of zombie binaries)",
+      "affected_span_verbatim": "Furthermore, for comparable mass binaries, under the assumption of GW-driven dynamics at $0$-\\gls*{pn} order, the binary mass ratio only enters in the zombies waveforms via $\\forbISCO$ and thus have only a negligible effect on the detection efficiency."
+    },
+    "proposer_agent": "injector.general.S1.t1.v2"
+  }
+]

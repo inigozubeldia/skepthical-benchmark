@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13749",
+  "copy_id": "v1",
+  "reviewer_system": "L1",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never challenges the claim about Nanda et al. (2023) using optimal transport / Wasserstein-gradient flows. No mention of Nanda et al. or that specific claim appears anywhere in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review flags suspicious forward-dated citations and asks to verify Song & Ye and Cullen et al., but it does not challenge the specific claim about Nanda et al. using optimal transport/Wasserstein-gradient flow. Under the broadened-claim rule, the reviewer would need to contest that post-edit claim against Nanda et al., which they do not.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses the related work section and mentions Doshi et al. (2024) but makes no mention of the fabricated claim regarding Nanda et al. (2023) or optimal transport theory.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the 65% vs 20/21 inconsistency anywhere in the report. The k=6 discussion references 584/585 and 585/585 counts but never mentions the 65%/20/21 discrepancy.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses the 99.8% figure and the single optimisation exception, but never points out the internal inconsistency between '65%' and '(20/21 seeds)' at k=6. No specific value/fraction mismatch is named.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "While the reviewer discusses the optimization failure at k=6 (the location of the error), they focus on the reporting of the success rate in the abstract and do not flag the specific mathematical inconsistency between '65%' and '20/21'.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "**Equation (6):** The spectral gap is defined as δ² = ‖ω^f − Proj_{F_k} ω^f‖²_G, but the right-hand side is written as Σ |ω̂^f(u,v)|, not |ω̂^f(u,v)|². This appears to be a typo — squared magnitudes are needed for Parseval.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "**Equation (6):** The spectral gap is defined as δ² = ‖ω^f − Proj_{F_k} ω^f‖²_G, but the right-hand side is written as Σ |ω̂^f(u,v)|, not |ω̂^f(u,v)|². This appears to be a typo — squared magnitudes are needed for Parseval.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the missing squared exponent in the Fourier coefficient sum in Equation (6) and correctly notes that squared magnitudes are required for Parseval's identity.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Equation (6):** The spectral gap is defined as δ² = ‖ω^f − Proj_{F_k} ω^f‖²_G, but the right-hand side is written as Σ |ω̂^f(u,v)|, not |ω̂^f(u,v)|². This appears to be a typo — squared magnitudes are needed for Parseval.",
+          "confidence": "high",
+          "reasoning": "This directly identifies Eq. (6) and the missing square on the Fourier coefficient magnitudes, exactly matching the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Equation (6): The spectral gap is defined as ͆\" = ‖ω^f − Proj_{F_k} ω^f‖²_G, but the right-hand side is written as Σ |ω̂^f(u,v)|, not |ω̂^f(u,v)|². This appears to be a typo — squared magnitudes are needed for Parseval.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the missing squared exponent in the Fourier coefficients of the spectral gap equation (Eq. 6) and correctly identifies it as a violation of Parseval's identity.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "**Section 4.1:** \"We observed substantial convergence instability at fractions below 30%\" — this is stated but not further characterized. Is this instability a training-optimisation issue, or does it reflect a more fundamental identifiability constraint...",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "**Section 4.1:** \"We observed substantial convergence instability at fractions below 30%\" — this is stated but not further characterized. Is this instability a training-optimisation issue, or does it reflect a more fundamental identifiability constraint...",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes the injected parenthetical claim and questions its basis, noting it is stated without further characterization, which corresponds precisely to the unsupported phantom evidence subclaim that was injected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Section 4.1:** \"We observed substantial convergence instability at fractions below 30%\" — this is stated but not further characterized. Is this instability a training-optimisation issue, or does it reflect a more fundamental identifiability constraint (e.g., the training set must be large enough to determine the k+1 coefficients)? Given that dim F_k = k+1 ≤ 7 in the experiments, and the training set at 40% has ~3760 points, the appeal to identifiability is unlikely; the instability probably reflects optimisation, and a sentence to that effect would help.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the inserted below-30% convergence-instability claim in Section 4.1 as unsupported/insufficiently characterized, which corresponds to the phantom empirical subclaim injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 4.1: 'We observed substantial convergence instability at fractions below 30%' — this is stated but not further characterized.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes the injected text regarding the 30% convergence instability and identifies it as an unsupported claim that requires further characterization.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 31.238406,
+  "total_cost_usd": null,
+  "total_input_tokens": 14856,
+  "total_output_tokens": 4267,
+  "escalation_count": 0,
+  "notes": null
+}

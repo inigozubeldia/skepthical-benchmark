@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "paper.tex",
+    "original_text": "Surgical perception work has also explored reconstructing dense soft-tissue surfaces from stereo laparoscopy [6].",
+    "injected_text": "Surgical perception work has also explored the automated tracking of rigid laparoscopic instruments [6].",
+    "rationale": "The claim is changed to describe rigid instrument tracking instead of soft-tissue surface reconstruction, attributing a completely different surgical sub-topic to the cited paper.",
+    "ground_truth_description": "Replaced the claim about dense soft-tissue surface reconstruction with one about automated tracking of rigid laparoscopic instruments, a topic not discussed in the cited paper.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "6",
+      "injected_cite_key": "6",
+      "claim_sentence_verbatim": "Surgical perception work has also explored reconstructing dense soft-tissue surfaces from stereo laparoscopy [6].",
+      "section_location": "INTRODUCTION",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "paper.tex",
+    "original_text": "Results show that the learned estimator achieves 98.1\\% of oracle performance in multi-step retraction while supporting efficient inference.",
+    "injected_text": "Results show that the learned estimator achieves 98.2\\% of oracle performance in multi-step retraction while supporting efficient inference.",
+    "rationale": "Perturbs the abstract's stated oracle recovery percentage from 98.1% to 98.2% while leaving the Section III.B body text at 98.1%, creating an abstract_vs_body_match failure.",
+    "ground_truth_description": "Changes the oracle recovery percentage in the abstract to 98.2%, contradicting the 98.1% claimed in the multi-step results section.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "98.1",
+      "value_after_raw": "98.2",
+      "value_before_float": 98.1,
+      "value_after_float": 98.2,
+      "location_cue": "Results show that the learned estimator achieves 98.1\\% of oracle performance in multi-step retraction while supporting efficient inference.",
+      "paired_location": "Section III.B Multi-Step Results",
+      "quantity_label": "oracle recovery percentage",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "paper.tex",
+    "original_text": "+ \\lambda_s \\mathcal{L}_{\\text{smooth}}",
+    "injected_text": "- \\lambda_s \\mathcal{L}_{\\text{smooth}}",
+    "rationale": "Flipping the sign on a regularization term in a canonical composite loss function is a subtle but recognizable error that contradicts the domain-standard practice of penalizing (adding) regularization.",
+    "ground_truth_description": "Flipped the sign of the smoothness regularization term in the composite loss function from positive to negative.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. II.B, first equation",
+      "original_fragment_latex": "+ \\lambda_s \\mathcal{L}_{\\text{smooth}}",
+      "injected_fragment_latex": "- \\lambda_s \\mathcal{L}_{\\text{smooth}}",
+      "full_equation_latex_before": "\\mathcal{L} = \\mathcal{L}_{\\text{recon}} \n+ \\lambda_s \\mathcal{L}_{\\text{smooth}} \n+ \\lambda_e \\mathcal{L}_{\\text{stretch}}.",
+      "full_equation_latex_after": "\\mathcal{L} = \\mathcal{L}_{\\text{recon}} \n- \\lambda_s \\mathcal{L}_{\\text{smooth}} \n+ \\lambda_e \\mathcal{L}_{\\text{stretch}}.",
+      "term_role": "smoothness regularization term sign",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "paper.tex",
+    "original_text": "By combining a PCA-based latent representation with geometry-aware regularization, the estimator achieves multi-step performance statistically equivalent to a full-state oracle. These results suggest that planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints.",
+    "injected_text": "By combining a PCA-based latent representation with geometry-aware regularization, the estimator's multi-step performance remains significantly lower than that of a full-state oracle. These results suggest that while planning-sufficient learned representations offer efficient inference, they cannot yet replace expensive physical simulation for deformable manipulation under realistic perception constraints.",
+    "rationale": "The Conclusion is rewritten to claim the method performs significantly worse than the oracle and cannot replace physical simulation, structurally contradicting the Results section which explicitly reports a 98.1% oracle recovery.",
+    "ground_truth_description": "Rewrote the conclusion to state the method fails to match the oracle, contradicting the positive results reported in the abstract and body.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B4",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "CONCLUSION",
+      "affected_span_verbatim": "By combining a PCA-based latent representation with geometry-aware regularization, the estimator achieves multi-step performance statistically equivalent to a full-state oracle. These results suggest that planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints."
+    },
+    "proposer_agent": "injector.general.S3.t1.v3"
+  }
+]

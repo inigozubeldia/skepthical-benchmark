@@ -1,0 +1,440 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-34b32f71cefc",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper reports '6.19 µs per-inference latency' as its headline real-time metric but does not discuss end-to-end latency including data acquisition, buffering, or communication overhead. The future work section only mentions 'deploying the DCCNN on real-time data acquisition with operating qubit hardware' without quantifying total system latency.",
+        "evidence": {
+          "claim": "The manuscript's core 'real-time' claim is misleading as it only accounts for neural-network inference latency, not full system acquisition, buffering, and communication latency, thus overstating real-time advantage over the χ² baseline.",
+          "excerpt": "The headline result is a 6.19 μs per-inference latency on the FPGA. This is useful, but it is not the full latency relevant for charge-jump detection. ... The manuscript should clearly separate inference latency from end-to-end detection latency."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper reports '6.19 µs per-inference latency' as its headline real-time metric but does not discuss end-to-end latency including data acquisition, buffering, or communication overhead. The future work section only mentions 'deploying the DCCNN on real-time data acquisition with operating qubit hardware' without quantifying total system latency.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s main quantitative timing result is only \"a per-inference latency of 6.19 µs on the Zynq UltraScale+ RFSoC ZCU216,\" while it separately claims this \"shifts charge-jump detection from a post-hoc diagnostic to a control-loop primitive.\" It does not quantify end-to-end acquisition/buffering/control latency, and the conclusion admits full hardware validation is future work: \"Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware.\"",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports the neural network's \"per-inference latency of 6.19 µs\" (Section IV.C) but does not quantify the full end-to-end system latency (acquisition, buffering, and communication) required to justify a full \"real-time\" comparison against the baseline.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-be530690cdce",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The synthetic data section explicitly states 'each scan consists of N = 80 samples' and Fig. 2 labels scans as '80 samples', yet Fig. 1 shows 'Input (128, 2)' as the network input shape. The paper provides no explanation for this discrepancy.",
+        "evidence": {
+          "claim": "There is a major inconsistency between the stated scan length (80 samples) and the input tensor shape (128, 2), affecting model architecture, latency, and resource usage; this undermines interpretation of results.",
+          "excerpt": "The synthetic data section states that each scan consists of N = 80 samples, and Fig. 2 shows 80-sample scans. However, Fig. 1 lists the input tensor shape as (128, 2). This discrepancy is central..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The synthetic data section explicitly states 'each scan consists of N = 80 samples' and Fig. 2 labels scans as '80 samples', yet Fig. 1 shows 'Input (128, 2)' as the network input shape. The paper provides no explanation for this discrepancy.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "There is a direct inconsistency: Sec. II.B says \"Each scan consists of N = 80 samples,\" but Fig. 1 annotates the model input as \"Input (128, 2).\" The paper does not explain any resizing or padding from 80 to 128 at the model input.",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text states that \"Each scan consists of N = 80 samples\" (Section II.B), but Figure 1 lists the input tensor shape as \"Input (128, 2)\", and this discrepancy is left unexplained in the manuscript.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-8c77b32550ff",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'the number of jumps is drawn from a Poisson distribution with rate λ = 1.1 mHz' without specifying the scan duration or how this rate translates to a per-scan jump probability. The class balance of '~33,000 contain a charge jump' out of 100,000 scans is stated but not reconciled with the Poisson rate parameter.",
+        "evidence": {
+          "claim": "The jump-rate description is unclear and possibly inconsistent, with ambiguous Poisson rate application and unphysical scan/jump statistics, affecting class balance and reported performance.",
+          "excerpt": "The manuscript states that the number of jumps per scan is drawn from a Poisson distribution with rate λ = 1.1 mHz, and later that the training set ... This is important because the class balance and detection efficiency depend strongly on the assumed jump probability."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'the number of jumps is drawn from a Poisson distribution with rate λ = 1.1 mHz' without specifying the scan duration or how this rate translates to a per-scan jump probability. The class balance of '~33,000 contain a charge jump' out of 100,000 scans is stated but not reconciled with the Poisson rate parameter.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The data-generation description says \"the number of jumps is drawn from a Poisson distribution with rate λ = 1.1 mHz,\" yet the training set is described as \"100,000 scans ... of which ∼33,000 contain a charge jump.\" The paper does not explain how a rate in mHz is converted to a per-scan jump probability, so the class-balance/statistics description is unclear and appears inconsistent.",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text states that \"the number of jumps is drawn from a Poisson distribution with rate λ = 1.1 mHz\" (Section II.B), confusing a dimensioned rate with a dimensionless Poisson mean, which leaves the exact jump probability per scan ambiguous.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-d27de4203acd",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges in the Conclusions that 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.' The entire evaluation is on synthetic data from the same five templates used for training, with no out-of-distribution or real experimental validation.",
+        "evidence": {
+          "claim": "Validation is entirely synthetic and does not support the scope of claims made regarding real-time use, robustness to unseen qubits, or deployment; there is no evaluation on real or out-of-template data.",
+          "excerpt": "The model is trained and evaluated on synthetic scans generated from the same five qubit templates. ... These claims are not fully supported ... Without such tests, the result demonstrates FPGA-deployable classification on template-generated simulations, not yet robust experimental charge-jump detection."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in the Conclusions that 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.' The entire evaluation is on synthetic data from the same five templates used for training, with no out-of-distribution or real experimental validation.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Validation is entirely on simulation: \"Both models were trained on the same fully simulated dataset of 100,000 scans\" and the comparison datasets are also \"simulated datasets of 1,600 scans per qubit.\" The paper explicitly acknowledges missing real-data validation: \"Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.\"",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that evaluation was solely synthetic, stating that \"Future work will focus on... validating the simulation-trained model on measured scans\" (Section V), meaning claims of real-world robustness are not currently supported by data.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-9af985df3416",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states scans are generated as a correlated sequence: \"the post-event phase of scan k becomes the pre-event phase of scan k + 1,\" but then says \"The data was split into training, validation, and test sets ... via stratified sampling.\" It does not state that temporally adjacent scans were kept within the same split, so possible leakage from sequence correlations is not addressed.",
+        "evidence": {
+          "claim": "The random scan-level train/validation/test splitting procedure may introduce temporal correlations, inflating performance figures due to leakage between sequence-adjacent samples.",
+          "excerpt": "If the split is performed randomly over scans from the same generated sequence, adjacent or highly correlated scans may appear in different splits. This could inflate performance."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "low",
+            "reason": "The paper states scans 'are generated as a phase-continuous time-ordered sequence so that the post-event phase of scan k becomes the pre-event phase of scan k+1' suggesting sequential correlation, but then uses 'stratified sampling' for splitting. The paper does not explicitly address whether adjacent scans end up in different splits, leaving the leakage question unresolved.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states scans are generated as a correlated sequence: \"the post-event phase of scan k becomes the pre-event phase of scan k + 1,\" but then says \"The data was split into training, validation, and test sets ... via stratified sampling.\" It does not state that temporally adjacent scans were kept within the same split, so possible leakage from sequence correlations is not addressed.",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states scans were \"generated as a phase-continuous time-ordered sequence\" but were randomly split \"via stratified sampling\" (Section II.C), without addressing or evaluating potential temporal leakage between adjacent scans.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-e8aef4236299",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'the χ² algorithm parameters were tuned on the training dataset...to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%' but does not provide the actual per-qubit thresholds chosen, the ROC curves, or sufficient detail to reproduce the comparison independently.",
+        "evidence": {
+          "claim": "Comparison with the χ² algorithm lacks critical details on threshold tuning, matching criteria, test procedure, and ROC analysis; this undermines the validity of the claimed performance superiority.",
+          "excerpt": "The comparison to the χ² algorithm is important, but the implementation details are not sufficiently specified. Questions ... should be addressed: What exact χ² thresholds were chosen for each qubit? ..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'the χ² algorithm parameters were tuned on the training dataset...to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%' but does not provide the actual per-qubit thresholds chosen, the ROC curves, or sufficient detail to reproduce the comparison independently.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The χ² comparison gives only a high-level tuning rule: \"the χ² algorithm parameters were tuned on the training dataset ... to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%.\" The paper does not report the actual per-qubit thresholds/operating points or any ROC-style analysis, so key comparison details are missing.",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper notes that the χ² algorithm parameters were \"tuned on the training dataset... to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%\" (Section III.C), but omits the exact thresholds and broader ROC details requested by the reviewer.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-16587ec02180",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper reports only aggregate per-qubit efficiencies over |∆q| ∈ [0.1, 0.5] e and mentions '15 jump-size intervals' for uncertainty estimation but does not present efficiency versus jump size curves or efficiency versus jump position within the scan, which would be needed to fully characterize the DCCNN's advantages over the χ² method.",
+        "evidence": {
+          "claim": "The paper fails to analyze or present efficiency versus jump size and jump position, leaving claims regarding DCCNN superiority to the χ² method unsubstantiated for early, mid, and late-scan jumps.",
+          "excerpt": "The manuscript does not show detection efficiency as a function of jump position. Please include: efficiency versus |Δq|, efficiency versus jump position within the scan, ..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper reports only aggregate per-qubit efficiencies over |∆q| ∈ [0.1, 0.5] e and mentions '15 jump-size intervals' for uncertainty estimation but does not present efficiency versus jump size curves or efficiency versus jump position within the scan, which would be needed to fully characterize the DCCNN's advantages over the χ² method.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Although the paper notes that χ² has \"reduced sensitivity to jumps occurring within the first ∼20 samples of each scan,\" it does not present DCCNN efficiency versus jump position, nor does it show efficiency curves versus jump size. The χ² comparison only reports aggregate performance over \"|∆q| ∈ [0.1, 0.5] e\" despite mentioning internal binning into \"15 jump-size intervals.\"",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that simulated scans were \"binned in 15 jump-size intervals spanning |Δq| ∈ [0.1, 0.5] e\" (Section III.C) to calculate uncertainties, but never presents the actual detection efficiency as a function of jump size or position.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-bd760b5e573b",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges the DCCNN produces a binary classification output ('jump probability or binary classification flag') and discusses downstream applications like 'triggering immediate qubit recalibration' but does not address how event timing or magnitude estimation would be obtained from a scan-level binary output.",
+        "evidence": {
+          "claim": "The DCCNN outputs only a binary scan-level flag, which may be insufficient for practical qubit control needing event timing or magnitude; implications for downstream applications are not addressed.",
+          "excerpt": "For adaptive qubit control or particle-event triggering, one often needs at least an event timestamp, and possibly an estimated jump magnitude or post-jump charge state. The authors should clarify..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges the DCCNN produces a binary classification output ('jump probability or binary classification flag') and discusses downstream applications like 'triggering immediate qubit recalibration' but does not address how event timing or magnitude estimation would be obtained from a scan-level binary output.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper is explicitly scoped as binary detection: \"Classifying whether a scan contains a charge jump is inherently a binary classification problem,\" with output \"the jump probability or binary classification flag.\" It also explains practical use of that flag: \"Upon detecting a charge jump, the system can trigger immediate qubit recalibration ... or conditionally modify subsequent control sequences,\" so the reviewer’s claim that practical implications are unaddressed is not supported by the paper.",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text states the model outputs a \"binary classification flag\" (Section IV.B), but does not clarify how this supports the claim that the system can \"conditionally modify subsequent control sequences based on the post-jump charge state\" (Section IV.A) without magnitude estimation.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-3515ef28e3e7",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper notes '+52.83% BRAM' increase for a 1,649-parameter network and states 'BRAM the tightest constraint at 81.4% total utilization' but does not explain why such a small network requires so many memory resources or discuss scalability implications for multiple qubits.",
+        "evidence": {
+          "claim": "FPGA resource use (BRAM, DSP) appears excessively high relative to network size; the manuscript does not adequately explain the cause or implications for scalability to multiple qubits/channels.",
+          "excerpt": "The reported resource increase from adding the DCCNN IP is substantial: +52.83% BRAM ... for a network with only 1,649 parameters. The authors should explain why the implementation consumes so many resources...."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper notes '+52.83% BRAM' increase for a 1,649-parameter network and states 'BRAM the tightest constraint at 81.4% total utilization' but does not explain why such a small network requires so many memory resources or discuss scalability implications for multiple qubits.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The manuscript reports large added utilization — \"the DCCNN IP adds +17.92% FF, +52.83% BRAM, +19.15% LUT, and +36.70% DSP, with BRAM the tightest constraint at 81.4% total utilization\" — but gives little explanation for why such a 1,649-parameter model costs so much, beyond stating that \"the four dilated convolutions dominate the dataflow.\" It also does not analyze scalability to multiple qubits/channels.",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The manuscript reports that \"the DCCNN IP adds... +52.83% BRAM\" (Section IV.C) but fails to explain why this 1,649-parameter model requires such high memory resources, leaving the reviewer's scalability concerns unaddressed.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      },
+      {
+        "flag_id": "fp-de51bd7bbdb7",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Table IX lists individual convolution layer latencies of '1,301–1,821 cycles' each across four layers, yet the total latency is only 1,860 cycles. The paper attributes this to 'dataflow pipelining' implicitly but does not explicitly explain the pipelining structure, which as presented appears inconsistent without further clarification.",
+        "evidence": {
+          "claim": "The per-layer latency table is potentially misleading: individual convolutional layer latencies seem additive, yet the total latency is lower due to pipelining, and reporting across differing synthesis levels sows confusion.",
+          "excerpt": "Table IX lists convolution-layer latencies of roughly 1,300–1,821 cycles each, but the total latency is only 1,860 cycles. This is presumably due to dataflow pipelining, but as presented it may confuse readers ..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Table IX lists individual convolution layer latencies of '1,301–1,821 cycles' each across four layers, yet the total latency is only 1,860 cycles. The paper attributes this to 'dataflow pipelining' implicitly but does not explicitly explain the pipelining structure, which as presented appears inconsistent without further clarification.",
+            "cost_usd": 0.0030354600000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Table IX lists per-layer convolution latencies of \"1,301–1,821\" cycles each, yet the \"Total latency\" is only \"1,860\" cycles. The caption notes only that \"the dataflow scheduler resolves their latency depending on input timing,\" but does not clearly explain the non-additivity from pipelining/dataflow, so the presentation is potentially confusing.",
+            "cost_usd": 0.0064259
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table IX lists individual layer latencies (e.g., \"1,300–1,821 cycles\") that sum to far more than the \"Total latency 1,860\" cycles, and while Section IV.C mentions convolutions \"dominate the dataflow\", it fails to explicitly explain the pipeline overlap responsible for the discrepancy.",
+            "cost_usd": 0.00166046
+          }
+        ],
+        "cost_usd": 0.011121820000000001
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.11121820000000002
+  },
+  "extractor_cost_usd": 0.019372,
+  "total_cost_usd": 0.13059020000000002
+}

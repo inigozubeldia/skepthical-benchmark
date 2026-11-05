@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v3",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer marks RANSAC as SUPPORTED and notes 'Robust model fitting under outliers is the foundational purpose of RANSAC,' without flagging the 'deterministic robustness' characterization as incorrect or partially supported. The broadened-claim rule requires the reviewer to challenge the post-edit claim against the cited source, which did not happen here.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses RANSAC only as being robust to outliers and noisy correspondences, and does not challenge the post-edit claim that it is 'deterministic' or otherwise flag a methodology drift against the RANSAC citation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions RANSAC in the context of the pipeline and appendix details but does not challenge the claim of 'deterministic robustness' or flag the RANSAC description as inconsistent with the cited source.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "There is a serious numerical inconsistency in the reported full-model geometric results. Table 1 in Sec. 5.2 reports HIVE-3D CD as `0.0035`, while Table 7 in Appendix B.2 reports the Full Model CD as `0.035`, apparently for the same model and geometry ablation context.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "There is a serious numerical inconsistency in the reported full-model geometric results. Table 1 in Sec. 5.2 reports HIVE-3D CD as `0.0035`, while Table 7 in Appendix B.2 reports the Full Model CD as `0.035`, apparently for the same model and geometry ablation context.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the CD discrepancy between Table 1 (0.0035) and Table 7 (0.035), naming both values and locations, which directly corresponds to the injected 10x error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "There is a serious numerical inconsistency in the reported full-model geometric results. Table 1 in Sec. 5.2 reports HIVE-3D CD as `0.0035`, while Table 7 in Appendix B.2 reports the Full Model CD as `0.035`, apparently for the same model and geometry ablation context.",
+          "confidence": "high",
+          "reasoning": "The review explicitly names both conflicting values and locations for the same quantity, directly matching the injected 0.0035 -> 0.035 inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "There is a serious numerical inconsistency between Table 1 and Table 7 for the same apparent full-model CD value. ... Table 1 in Sec. 5.2 reports HIVE-3D CD as `0.0035`, while Table 7 in Appendix B.2 reports the Full Model CD as `0.035`",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 10x discrepancy (0.0035 vs 0.035) for the Chamfer Distance between Table 1 and Table 7 as a serious numerical inconsistency.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t2",
+      "module": "mathematics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer audits Eq. (2) and gives it a PASS, noting the loss form is 'plausible and internally consistent,' without flagging the replacement of the expectation operator with a summation over continuous variables.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The mathematical audit marks the flow-matching loss as PASS and does not mention any problem with replacing an expectation over continuous variables by a summation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's math audit specifically mentions the flow-matching loss in Eq. (2) and finds it 'plausible and internally consistent' without noting the replacement of the expectation operator with a summation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The paper relies on an empirical observation that is not reported. Sec. 5.1 states that the authors 'observed substantial degradation in generation quality when rendering fewer views,' but no ablation, figure, table, or appendix result supports this 24-view design choice. This is phantom evidence for a training-data construction decision.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The paper relies on an empirical observation that is not reported. Sec. 5.1 states that the authors 'observed substantial degradation in generation quality when rendering fewer views,' but no ablation, figure, table, or appendix result supports this 24-view design choice. This is phantom evidence for a training-data construction decision.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the phantom sub-claim about rendering fewer views causing degradation and notes it lacks supporting ablation data, directly matching the injected parenthetical.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The paper relies on an empirical observation that is not reported. Sec. 5.1 states that the authors “observed substantial degradation in generation quality when rendering fewer views,” but no ablation, figure, table, or appendix result supports this 24-view design choice. This is phantom evidence for a training-data construction decision.",
+          "confidence": "high",
+          "reasoning": "This explicitly flags the inserted unsupported sub-claim about fewer rendered views degrading quality, which is exactly the phantom-evidence injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 5.1 states that the authors ’observed substantial degradation in generation quality when rendering fewer views,’ but no ablation, figure, table, or appendix result supports this 24-view design choice. This is phantom evidence for a training-data construction decision.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the parenthetical claim about rendering fewer views as 'phantom evidence' because it is not supported by any data in the paper.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 18.626772,
+  "total_cost_usd": null,
+  "total_input_tokens": 23270,
+  "total_output_tokens": 1327,
+  "escalation_count": 0,
+  "notes": null
+}

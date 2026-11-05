@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14293",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The paper states: \"Recent implementations have extended this utility to the autonomous generation of quantum circuits, where CNNs act as sequence-to-sequence transducers to compile high-level algorithms into hardware-native gate sequences [24, 25].\" However, the paper's own reference list identifies [24] as \"Experimental online quantum dots charge autotuning using neural networks\" and [25] as \"Automatic charge state tuning of 300 mm FDSOI quantum dots using neural network segmentation of charge stability diagram.\" From the information provided in the paper, these references concern quantum-dot charge autotuning/segmentation, not autonomous quantum-circuit generation or sequence-to-sequence compilation.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The paper states: \"Recent implementations have extended this utility to the autonomous generation of quantum circuits, where CNNs act as sequence-to-sequence transducers to compile high-level algorithms into hardware-native gate sequences [24, 25].\" However, the paper's own reference list identifies [24] as \"Experimental online quantum dots charge autotuning using neural networks\" and [25] as \"Automatic charge state tuning of 300 mm FDSOI quantum dots using neural network segmentation of charge stability diagram.\" From the information provided in the paper, these references concern quantum-dot charge autotuning/segmentation, not autonomous quantum-circuit generation or sequence-to-sequence compilation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags that the claim about autonomous quantum circuit generation is not supported by the cited references, which concern quantum-dot charge autotuning — precisely the topic mis-attribution injection made.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[citation] The citations used for “autonomous generation of quantum circuits” do not appear to support that claim\n\n“The paper states: ‘Recent implementations have extended this utility to the autonomous generation of quantum circuits, where CNNs act as sequence-to-sequence transducers to compile high-level algorithms into hardware-native gate sequences [24, 25].’ However, the paper’s own reference list identifies [24] as ‘Experimental online quantum dots charge autotuning using neural networks’ and [25] as ‘Automatic charge state tuning of 300 mm FDSOI quantum dots using neural network segmentation of charge stability diagram.’ From the information provided in the paper, these references concern quantum-dot charge autotuning/segmentation, not autonomous quantum-circuit generation or sequence-to-sequence compilation.”",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit claim in Sec. II.A against the same cited sources and says the references concern charge tuning, not quantum-circuit generation. That is a specific detection under the broadened-claim/topic-misattribution rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The paper states: 'Recent implementations have extended this utility to the autonomous generation of quantum circuits... [24, 25].' However... these references concern quantum-dot charge autotuning/segmentation, not autonomous quantum-circuit generation",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the citations for the claim about autonomous circuit generation actually refer to charge-state tuning, which matches the topic mis-attribution injection.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Table VIII lists the ZCU216 as having 1,080 BRAM 36K blocks and the QICK baseline as using 309 BRAM blocks. The printed percentage is 38.61%. But 309/1080 = 0.2861, i.e. 28.61%, not 38.61%.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Table VIII lists the ZCU216 as having 1,080 BRAM 36K blocks and the QICK baseline as using 309 BRAM blocks. The printed percentage is 38.61%. But 309/1080 = 0.2861, i.e. 28.61%, not 38.61%.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exact injected error: the BRAM percentage for QICK is printed as 38.61% but the correct calculation gives 28.61%, matching the injected change precisely.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] BRAM percentage for the QICK baseline is inconsistent with the table entries\n\n“Table VIII lists the ZCU216 as having 1,080 BRAM 36K blocks and the QICK baseline as using 309 BRAM blocks. The printed percentage is 38.61%. But\n\\[\n309/1080 = 0.2861,\n\\]\ni.e. 28.61%, not 38.61%.”",
+          "confidence": "high",
+          "reasoning": "The reviewer names the exact quantity, raw value, denominator, and corrected percentage, explicitly identifying 38.61% as inconsistent with 309/1080. This is a precise match to the injected arithmetic error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table VIII lists... 309 BRAM blocks. The printed percentage is 38.61%. But 309/1080 = 0.2861, i.e. 28.61%, not 38.61%.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly calculates the correct percentage (28.61%) and points out the inconsistency with the injected value (38.61%).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "[mathematical] The χ² expression omits the sample dependence of the template and noise envelope\n\n“\\[\n\\chi^2_n(\\theta)=\\frac{1}{n}\\sum_{i=1}^n\n\\frac{(x_i-\\hat{x}(\\theta))^2}{2\\hat{\\sigma}^2(\\theta)} .\n\\]\n\n“The factor of 2 in the denominator is also not explained, despite the expression being called a reduced χ².”",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The factor of 2 in the denominator is also not explained, despite the expression being called a reduced χ². ... Rewrite the expression with explicit sample dependence, for example using x̂_i(θ) and σ̂_i(θ), and explain the normalization and the factor of 2.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the unexplained factor of 2 in the denominator of the chi-squared expression, which is exactly the spurious factor introduced by the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] The χ² expression omits the sample dependence of the template and noise envelope\n\n“\\[\n\\chi^2_n(\\theta)=\\frac{1}{n}\\sum_{i=1}^n\n\\frac{(x_i-\\hat{x}(\\theta))^2}{2\\hat{\\sigma}^2(\\theta)} .\n\\]\n\n“The factor of 2 in the denominator is also not explained, despite the expression being called a reduced χ².”",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly flags the factor of 2 in the denominator of the same χ² equation, which corresponds to the injected spurious factor. However, they phrase it as unexplained rather than definitively wrong, so confidence is medium.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The factor of 2 in the denominator is also not explained, despite the expression being called a reduced χ².",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the spurious factor of 2 in the denominator of the chi-squared definition provided in the paper.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the parenthetical claim about unstable convergence with SGD momentum as an unsupported sub-claim; none of the review items correspond to this injected sentence in Sec. 2.3.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The report criticizes other unsupported generalization claims and wording, but does not mention the injected parenthetical claim about observing unstable convergence with SGD with momentum in Sec. 2.3. No specific flag corresponds to that phantom-evidence sub-claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention the Adam optimizer or the claim about SGD with momentum's unstable convergence.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the SGD unstable convergence parenthetical as an unsupported claim or phantom evidence. None of the reviewer's issues address the training optimizer comparison or the lack of ablation supporting the SGD claim.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 33.825381,
+  "total_cost_usd": null,
+  "total_input_tokens": 26046,
+  "total_output_tokens": 3201,
+  "escalation_count": 1,
+  "notes": null
+}

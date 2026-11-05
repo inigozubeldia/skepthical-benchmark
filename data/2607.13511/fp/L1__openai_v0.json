@@ -1,0 +1,314 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-e93e0643ae6a",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states in Appendix A that Proposition 2 applies to an 'augmented' algorithm with a single-entry fallback: 'Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair... gives the larger decrease.' The paper then notes 'In practice the safeguard never activates,' acknowledging the proof does not cover the actual ALS procedure used in experiments.",
+        "evidence": {
+          "claim": "The convergence guarantee only holds for an augmented algorithm with a single-entry fallback, not for the actual ALS procedure used in experiments.",
+          "excerpt": "The convergence proof applies only to an augmented algorithm with a single-entry fallback, not to the ALS algorithm actually used. ... The theorem should be reframed more carefully ... It does not establish convergence of the proposed ALS or batched ALS procedure."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Appendix A that Proposition 2 applies to an 'augmented' algorithm with a single-entry fallback: 'Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair... gives the larger decrease.' The paper then notes 'In practice the safeguard never activates,' acknowledging the proof does not cover the actual ALS procedure used in experiments.",
+            "cost_usd": 0.0036099428571428577
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s formal convergence result is stated for a modified method, not the experimental ALS alone: Proposition 2 says, \"Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair ... Then ... ∥R_k∥_F^2 ... → 0.\" Yet the main text broadly claims \"a proof (Appendix A) that its error falls below any ε > 0 as µ grows,\" which overstates what is proved for the actual ALS/batched ALS procedure.",
+            "cost_usd": 0.008340357142857144
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's convergence proof (Appendix A) relies on a safeguard ('Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair'), explicitly noting that 'In practice the safeguard never activates', confirming it does not strictly apply to the pure ALS procedure used.",
+            "cost_usd": 0.0018922285714285715
+          }
+        ],
+        "cost_usd": 0.013842528571428573
+      },
+      {
+        "flag_id": "fp-dbb2b80e594a",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges the practical convergence is much faster than the geometric bound ('empirical convergence is much faster than geometric in mn (99% energy at µ≈2.5–3)'), but the theoretical guarantee relies on a trivial single-entry fallback. The reviewer's concern that the 'arbitrary accuracy' claim's practical relevance at useful bit budgets relies on empirical results rather than theory is valid, and the paper itself frames it as an empirical observation rather than a proven property of the useful algorithm.",
+        "evidence": {
+          "claim": "The claim of 'arbitrary accuracy' is only mathematically true in a trivial sense and is not established for practical values of k relevant for compression.",
+          "excerpt": "The “arbitrary accuracy” claim is mathematically true in a rather weak sense—any matrix can be reconstructed by enough single-entry ternary outer products—but the practical relevance at useful bit budgets is not established."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges the practical convergence is much faster than the geometric bound ('empirical convergence is much faster than geometric in mn (99% energy at µ≈2.5–3)'), but the theoretical guarantee relies on a trivial single-entry fallback. The reviewer's concern that the 'arbitrary accuracy' claim's practical relevance at useful bit budgets relies on empirical results rather than theory is valid, and the paper itself frames it as an empirical observation rather than a proven property of the useful algorithm.",
+            "cost_usd": 0.0036099428571428577
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The proof is indeed based on a very weak fallback—\"the best single-entry pair ... removes ... max_{ij} R_{ij}^2\"—so the reviewer’s concern about the mathematical sense of \"arbitrary accuracy\" has force. But the paper also provides practical evidence at useful compression levels, e.g. \"ExTernD matches Q4 K’s per-matrix accuracy at 5.2–5.5 effective bpw\" and \"a full Qwen3.5-4B conversion at µ = 3 reaches 10.10 wikitext-2 perplexity,\" so it is not fair to say practical relevance is entirely unestablished.",
+            "cost_usd": 0.008340357142857144
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper theoretically claims the error 'falls below any ε > 0 as µ grows', but at practical budgets like µ=3, it still trails bf16 ('10.10 wikitext-2 perplexity against 9.78 for bf16 (+3.2%)'), validating the reviewer's point that arbitrary accuracy isn't established for practical compression budgets.",
+            "cost_usd": 0.0018922285714285715
+          }
+        ],
+        "cost_usd": 0.013842528571428573
+      },
+      {
+        "flag_id": "fp-86228c821e5d",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The bpw formula in Eq. 5 omits the storage cost of the scale vector D explicitly. The paper notes 'its per-block fp16 scales absorb D into C's row scales for free' in the deployment section, but this is not rigorously quantified in the bpw accounting formula itself, and metadata overhead is not systematically included.",
+        "evidence": {
+          "claim": "Bit-per-weight (bpw) accounting is inconsistent and does not rigorously include all sources of storage, such as vector D, metadata, and implementation differences.",
+          "excerpt": "Storage and bit-per-weight accounting needs to be made rigorous ... The effective bpw accounting is central to the paper’s claims, but it is currently not fully consistent. ... The vector D is ignored in the main formula. This may be negligible for large matrices, but it should be quantified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The bpw formula in Eq. 5 omits the storage cost of the scale vector D explicitly. The paper notes 'its per-block fp16 scales absorb D into C's row scales for free' in the deployment section, but this is not rigorously quantified in the bpw accounting formula itself, and metadata overhead is not systematically included.",
+            "cost_usd": 0.0036099428571428577
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The central bpw formula counts only ternary factor storage: \"With sparse mask+sign packing ... storage per original weight is bpw_eff = µ · (m + n)/max(m, n) · (2 − sparsity).\" The formula does not explicitly include storage for the real vector \"D ∈ R^k\" or other metadata, and the paper does not quantify when those omissions are negligible.",
+            "cost_usd": 0.008340357142857144
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Equation 5 calculates bits-per-weight as 'bpweff = µ · (m+n)/max(m,n) · (2 − sparsity)', which entirely omits the storage cost of the k-dimensional real-valued scale vector D.",
+            "cost_usd": 0.0018922285714285715
+          }
+        ],
+        "cost_usd": 0.013842528571428573
+      },
+      {
+        "flag_id": "fp-2a1412ac4f02",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges in Section 5 that 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.' The comparison in Section 3.6 relies on weight reconstruction energy only, and the iso-BPW comparison depends on storage model assumptions that are not fully rigorous.",
+        "evidence": {
+          "claim": "The empirical comparison to PTQTP and PT2-LLM is incomplete and not directly comparable due to ambiguous storage models, missing metrics, and differences in method scope.",
+          "excerpt": "Comparisons to PTQTP and PT2-LLM are not yet convincing ... The later iso-BPW comparison is more appropriate, but it depends on the storage model ambiguity above ... Comparing only weight-reconstruction energy may understate or overstate their practical quality."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges in Section 5 that 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.' The comparison in Section 3.6 relies on weight reconstruction energy only, and the iso-BPW comparison depends on storage model assumptions that are not fully rigorous.",
+            "cost_usd": 0.0036099428571428577
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The PTQTP/PT2-LLM comparison is limited to reconstruction energy and the paper admits the missing end-to-end evaluation: \"We compare only against fixed-capacity baselines at the tensor level, but full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment.\" The later iso-BPW comparison also depends on the paper’s own storage model, which is not fully rigorous in the main formula.",
+            "cost_usd": 0.008340357142857144
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in Section 5 that it compares 'only against fixed-capacity baselines at the tensor level' and states 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment'.",
+            "cost_usd": 0.0018922285714285715
+          }
+        ],
+        "cost_usd": 0.013842528571428573
+      },
+      {
+        "flag_id": "fp-1503567ff492",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges in Section 5: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks' and 'We have not tested above 4B or on matrices larger than ~9216×2560.' The full end-to-end conversion is done only for Qwen3.5-4B with a single perplexity metric.",
+        "evidence": {
+          "claim": "The end-to-end evaluation is too limited to support claims about practical deployment and superiority over baselines: only one model, one dataset, and limited metrics are shown.",
+          "excerpt": "End-to-end evaluation is too limited for the strength of the claims ... The paper claims that ExTernD is a step toward viable ternary LLM inference and multiplication-free hardware. That may be true, but the current evidence is mostly reconstruction energy and one perplexity result."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges in Section 5: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks' and 'We have not tested above 4B or on matrices larger than ~9216×2560.' The full end-to-end conversion is done only for Qwen3.5-4B with a single perplexity metric.",
+            "cost_usd": 0.0036099428571428577
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The end-to-end evidence is explicitly narrow: \"All 200 language-model linear layers of Qwen3.5-4B ... were decomposed\" and the limitations state, \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\" That supports the reviewer’s claim that the practical-deployment case is based on one model/setting and limited metrics.",
+            "cost_usd": 0.008340357142857144
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The end-to-end evaluation in Section 3.5 is restricted to a single model (Qwen3.5-4B) and dataset (wikitext-2 PPL), with the authors admitting in Section 5: 'Evaluation is perplexity-only: no downstream benchmarks'.",
+            "cost_usd": 0.0018922285714285715
+          }
+        ],
+        "cost_usd": 0.013842528571428573
+      },
+      {
+        "flag_id": "fp-95cf8ee9b142",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'no fused kernels exist' in Section 5 and notes in Section 4 that 'the 3.4–6× op-count growth reads as slowdown only on multiplier-based datapaths.' No actual inference speed measurements or memory usage benchmarks are provided; the deployment discussion is purely theoretical.",
+        "evidence": {
+          "claim": "The discussion of runtime and deployment cost is underdeveloped: no data is provided on actual memory usage, inference speed, or feasibility vs hardware baselines.",
+          "excerpt": "Runtime and deployment cost are underdeveloped ... The method may be attractive for future ternary hardware, but on current hardware the expanded inner dimension may be costly. The paper should avoid implying practical speedups without measurements."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'no fused kernels exist' in Section 5 and notes in Section 4 that 'the 3.4–6× op-count growth reads as slowdown only on multiplier-based datapaths.' No actual inference speed measurements or memory usage benchmarks are provided; the deployment discussion is purely theoretical.",
+            "cost_usd": 0.0036099428571428577
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives an analytic cost model—\"Inference computes y = B(diag(D)(Cx)) ...\"—but no actual inference-time memory or speed measurements versus baselines. It also acknowledges implementation immaturity: \"The known levers ... are unstacked, and no fused kernels exist,\" so deployment/runtime feasibility is not empirically established.",
+            "cost_usd": 0.008340357142857144
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 4 and Section 2.6 provide theoretical hardware implications and op-count ratios (e.g., '3.4–6× op-count growth'), but the paper completely lacks actual empirical runtime, memory, or speedup measurements.",
+            "cost_usd": 0.0018922285714285715
+          }
+        ],
+        "cost_usd": 0.013842528571428573
+      },
+      {
+        "flag_id": "fp-9a20b8cac174",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The claim that joint solving 'fails completely (0–50% energy in our ablation)' is mentioned but the ablation details are not shown in the paper. Similarly, the block width rule 'b≲min(m,n)/8' is stated as a constraint but described only qualitatively ('the ternary Gram matrices become ill-conditioned') without systematic study, and refinement sweep monotonicity is stated without proof.",
+        "evidence": {
+          "claim": "Several important algorithmic claims are unsupported or overstated, such as underdetermined optimization 'failing completely,' block width rules, and assumptions about refinement sweep monotonicity.",
+          "excerpt": "Some algorithmic claims need stronger support ... “Solving for all k>min(m,n) components jointly is underdetermined and fails completely.” This needs a more careful explanation. ... “Block width must respect b≤min(m,n)/8.” This is presented as a rule but not systematically studied."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The claim that joint solving 'fails completely (0–50% energy in our ablation)' is mentioned but the ablation details are not shown in the paper. Similarly, the block width rule 'b≲min(m,n)/8' is stated as a constraint but described only qualitatively ('the ternary Gram matrices become ill-conditioned') without systematic study, and refinement sweep monotonicity is stated without proof.",
+            "cost_usd": 0.0036099428571428577
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Several strong algorithmic statements are asserted with limited backing, e.g. \"solving for all k > min(m, n) components jointly is underdetermined and fails completely (0–50% energy in our ablation, vs. 96–100% with deflation)\" and \"Block width must respect b ≲ min(m, n)/8 or the ternary Gram matrices become ill-conditioned.\" These are presented as broad rules, but the paper does not provide a systematic study or proof for them.",
+            "cost_usd": 0.008340357142857144
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Algorithmic rules are stated briefly without robust evidence, such as 'Block width must respect b ≲ min(m,n)/8 or the ternary Gram matrices become ill-conditioned' (Section 2.4) and joint optimization failing '(0–50% energy in our ablation)' (Section 2.1), leaving the claims underdeveloped.",
+            "cost_usd": 0.0018922285714285715
+          }
+        ],
+        "cost_usd": 0.013842528571428573
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0968977
+  },
+  "extractor_cost_usd": 0.01588600000000001,
+  "total_cost_usd": 0.11278370000000001
+}

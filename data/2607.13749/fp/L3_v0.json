@@ -1,0 +1,389 @@
+{
+  "paper_id": "2607.13749",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-28ad8627c117",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'Song and Ye 2026; Cullen et al. 2026; anomalous arXiv identifiers'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "Song and Ye 2026; Cullen et al. 2026; anomalous arXiv identifiers"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0035245000000001525
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-6f032fe3f82b",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: exact integer equality; values = [190, 186, 177]",
+        "evidence": {
+          "check_type": "integer_equal",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 190,
+            "reported": 177,
+            "diff_abs": 13,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 0,
+              "rel_tol": null
+            },
+            "notes": "exact integer equality; values = [190, 186, 177]"
+          },
+          "rereader": [
+            {
+              "label": "possible_INST_cells_per_initialisation",
+              "raw_observed": "190",
+              "value_observed": 190.0,
+              "notes": "Text states, 'of the 190 solved cells per initialisation (38 tasks × 5 degrees)'"
+            },
+            {
+              "label": "INST_under_random_phase",
+              "raw_observed": "186",
+              "value_observed": 186.0,
+              "notes": "Text states, '186 are INST under random-phase initialisation'"
+            },
+            {
+              "label": "INST_under_roots_of_unity",
+              "raw_observed": "177",
+              "value_observed": 177.0,
+              "notes": "Text states, '177 under roots-of-unity initialisation'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.13024599999999986
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-1db4664b7d3f",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper overstates the result: it says in the abstract that 'a non-representable target cannot be fit even on the training set,' but Theorem 3 only proves this 'With probability 1 − O(1/N) over the draw' of the training set. The proof is also explicitly incomplete in the main text, relying on an argument 'detailed in the appendix' for the needed injectivity/uniform step.",
+        "evidence": {
+          "claim": "The claim that non-representable targets 'cannot be fit even on the training set' is overstated; the proof of Theorem 3 is incomplete and potentially flawed, relying on an incomplete uniform-bound argument over an unbounded function class and missing appendix details.",
+          "excerpt": "Theorem 3 is a high-probability statement over a random training set of sufficient size, not a guarantee of non-interpolability for any finite sample. The proof sketch defers a key uniform-bound argument to a missing appendix and relies on concentration inequalities over the function class $F_k$, which is an unbounded linear space, without providing the necessary controls to make the argument rigorous."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The proof of Theorem 3 notes that 'a uniform bound over g ∈ Fk costs only a dimension-dependent constant' and defers the injectivity argument to 'the appendix,' but no appendix is present in the paper. The function class Fk is a finite-dimensional linear space (bounded on the unit circle inputs), which mitigates but does not fully resolve the concern, and the missing appendix leaves the argument incomplete.",
+            "cost_usd": 0.004495585714285715
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper overstates the result: it says in the abstract that 'a non-representable target cannot be fit even on the training set,' but Theorem 3 only proves this 'With probability 1 − O(1/N) over the draw' of the training set. The proof is also explicitly incomplete in the main text, relying on an argument 'detailed in the appendix' for the needed injectivity/uniform step.",
+            "cost_usd": 0.008740928571428571
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text explicitly defers a proof step by stating it is \"detailed in the appendix\" (page 6), but the provided document ends on page 15 without any appendix.",
+            "cost_usd": 0.0021010857142857143
+          }
+        ],
+        "cost_usd": 0.0153376
+      },
+      {
+        "flag_id": "fp-3bb70d7e28e5",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Proposition 1 proves only a necessary condition: 'a task f is representable ... only if rank(ω^f) ≤ k + 1.' But the paper later states more strongly that 'the representability boundary moves from the line m + n = k to the single condition rank(ω^f) ≤ k + 1' and that 'The lower bound of Theorem 3 carries over with this substitution,' which is not established by Proposition 1 alone.",
+        "evidence": {
+          "claim": "The analysis overstates the sufficiency of the rank condition (rank ≤ k+1) for representability under learned embeddings. The set of expressible functions is a proper subset of rank-(k+1) matrices, and the extension of Theorem 3 to this context is unjustified.",
+          "excerpt": "The set of functions expressible by the network is a specific algebraic subset of low-rank matrices, not the entire set, so the rank condition is not proven to be sufficient. Furthermore, the claim that Theorem 3 'carries over' is unjustified, as the dimension of the set of rank-$(k+1)$ matrices is much larger than $k+1$, invalidating the original sample-complexity argument."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper claims in Corollary 1 that rank-one targets 'yield a rank-one matrix and is representable under a suitable learned embedding for every k≥2,' and that Theorem 3 'carries over with this substitution, since its only input is that every network output lies in a family of dimension—here, rank—at most k+1.' The sufficiency argument for rank-one targets is provided, but the extension of the concentration/uniform-bound argument to the higher-dimensional family of rank-(k+1) matrices is not rigorously justified.",
+            "cost_usd": 0.004495585714285715
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Proposition 1 proves only a necessary condition: 'a task f is representable ... only if rank(ω^f) ≤ k + 1.' But the paper later states more strongly that 'the representability boundary moves from the line m + n = k to the single condition rank(ω^f) ≤ k + 1' and that 'The lower bound of Theorem 3 carries over with this substitution,' which is not established by Proposition 1 alone.",
+            "cost_usd": 0.008740928571428571
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper inappropriately equates matrix rank with vector space dimensionality, stating \"a family of dimension—here, rank—at most k + 1\" (page 7), which incorrectly applies the $O(1/N)$ sample complexity bound from Theorem 3 to a much larger parameter space.",
+            "cost_usd": 0.0021010857142857143
+          }
+        ],
+        "cost_usd": 0.0153376
+      },
+      {
+        "flag_id": "fp-33e568b5f1c4",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper defines INST (<200 steps gap), GROK (>500 steps gap), MEM (train>99% but test does not), and FAIL in Section 4.1, but the range 200–500 steps is unclassified, and 'PART' appears in Figure 2 without any definition in the text. The thresholds are stated without motivating their specific values.",
+        "evidence": {
+          "claim": "The taxonomy of experimental outcomes (INST, GROK, MEM, FAIL) lacks fully specified definitions and threshold justifications; key categories are undefined (e.g., PART), and the choice of thresholds is not robustly motivated.",
+          "excerpt": "The thresholds for INST ($<200$ steps) and GROK ($>500$ steps) are given without justification, the intermediate range ($200$–$500$ steps) is unclassified, and a new category 'PART' appears without definition in the ReLU baseline experiments (Sec. 4.3, Fig. 2)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper defines INST (<200 steps gap), GROK (>500 steps gap), MEM (train>99% but test does not), and FAIL in Section 4.1, but the range 200–500 steps is unclassified, and 'PART' appears in Figure 2 without any definition in the text. The thresholds are stated without motivating their specific values.",
+            "cost_usd": 0.004495585714285715
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The outcome taxonomy is incomplete in the text: 'We classify each run as INST if ... the gap ... is under 200 steps, GROK if ... above 500 steps, MEM if ... , and FAIL if ...,' leaving 200–500 steps undefined. Later Section 4.3 introduces 'a continuum of PART outcomes in between,' but PART is not defined in the protocol.",
+            "cost_usd": 0.008740928571428571
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper categorizes outcomes into INST and GROK using arbitrary step thresholds without justification (page 8) and introduces a 'PART' category in Figure 2 and Section 4.3 that is never formally defined.",
+            "cost_usd": 0.0021010857142857143
+          }
+        ],
+        "cost_usd": 0.0153376
+      },
+      {
+        "flag_id": "fp-80f58e505ba3",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper states 'Throughout the paper we assume k < p. This ensures that the integers 0,1,...,k are distinct modulo p' but does not discuss what happens when k≥p (e.g., whether characters collapse, whether the representability criterion changes, or which proofs break). This boundary case is unaddressed.",
+        "evidence": {
+          "claim": "The crucial theoretical assumption $k < p$ is not discussed in terms of what fails if $k \\geq p$, omitting important boundary behavior and impact on representability conditions.",
+          "excerpt": "The theoretical analysis in Sec. 2-3 crucially assumes $k < p$, but the paper does not explain what breaks down when $k \\geq p$. This leaves an important boundary case of the theoretical framework unaddressed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'Throughout the paper we assume k < p. This ensures that the integers 0,1,...,k are distinct modulo p' but does not discuss what happens when k≥p (e.g., whether characters collapse, whether the representability criterion changes, or which proofs break). This boundary case is unaddressed.",
+            "cost_usd": 0.004495585714285715
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does explain what the assumption is for: 'Throughout the paper we assume k < p. This ensures that the integers 0, 1, . . . , k are distinct modulo p, which in turn ensures that the k + 1 characters ... are distinct ... —a condition needed for the representability criterion to be sharp.' So the claim that the paper does not discuss what breaks when k ≥ p is factually incorrect.",
+            "cost_usd": 0.008740928571428571
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly addresses why the assumption $k < p$ is necessary on page 4, explaining that it \"ensures that the integers 0, 1, ..., k are distinct modulo p, which in turn ensures that the k + 1 characters... are distinct elements of the orthonormal basis.\"",
+            "cost_usd": 0.0021010857142857143
+          }
+        ],
+        "cost_usd": 0.0153376
+      },
+      {
+        "flag_id": "fp-8aead57eeefa",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=CONFIRMED_ISSUE, openai=AMBIGUOUS, gemini=FP",
+        "evidence": {
+          "claim": "The proof of Theorem 2 on Fourier support and non-representability for nonlinear tasks is compressed, with key steps and algebraic details left implicit, limiting self-contained verifiability.",
+          "excerpt": "The Fourier-support calculations for nonlinear tasks in the proof of Theorem 2 (Sec. 3.4) are compressed, leaving key steps implicit. For example, the derivation of the Fourier transform for $f(a,b)=ab$ is sketched without showing the change of variables and application of standard identities."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The proof of Theorem 2 sketches the Fourier computation for f=ab as 'ω̂^ab(u,v) = (1/p²)Σ_{a,b} ω^{ab-ua-vb} = ω^{-uv}/p' without showing the change of variables, and similarly for the other cases, leaving key algebraic steps implicit. The claim about self-contained verifiability is legitimate.",
+            "cost_usd": 0.004495585714285715
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The proof is indeed terse: 'We compute the Fourier support of each target directly, using the identity ...' and then for ab jumps to 'ω̂^{ab}(u, v) = 1/p^2 Σ_{a,b} ω^{ab−ua−vb} = ω^{−uv}/p' without intermediate algebra. But the main text does give the key identities and conclusions, so whether the compression materially harms verifiability is debatable.",
+            "cost_usd": 0.008740928571428571
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer incorrectly claims the proof omits standard identities; the proof of Theorem 2 explicitly states it is \"using the identity \\sum_{b \\in \\mathbb{Z}_p} \\omega^{cb} = p \\cdot [c \\equiv 0]\" right before applying it to the f(a,b)=ab case (page 5).",
+            "cost_usd": 0.0021010857142857143
+          }
+        ],
+        "cost_usd": 0.0153376
+      },
+      {
+        "flag_id": "fp-c74a0fd6d8c2",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Theorem 1 states: 'For nonnegative integers m,n with m+n≤k, this reduces to the arithmetic condition m+n=k.' The condition m+n≤k is the domain restriction (integers that are small enough that residues equal integers), and m+n=k is the representability criterion within that domain. There is no inconsistency; the two expressions serve different logical roles.",
+        "evidence": {
+          "claim": "Theorem 1's statement on representability for small non-negative $m$ and $n$ contains an apparent inconsistency ('m+n=k' vs. 'm+n<k'). The precise condition is unclear from the text.",
+          "excerpt": "The statement of the representability condition in Theorem 1 (p. 5) appears to contain an inconsistency regarding the simplified case for small non-negative integers $m$ and $n$, with materials suggesting a contradiction between '$m+n=k$' and '$m+n<k$'."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Theorem 1 states: 'For nonnegative integers m,n with m+n≤k, this reduces to the arithmetic condition m+n=k.' The condition m+n≤k is the domain restriction (integers that are small enough that residues equal integers), and m+n=k is the representability criterion within that domain. There is no inconsistency; the two expressions serve different logical roles.",
+            "cost_usd": 0.004495585714285715
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Theorem 1 is internally consistent: 'For nonnegative integers m, n with m + n ≤ k, this reduces to the arithmetic condition m + n = k.' The paper elsewhere repeats the same criterion ('the INST cells form the staircase m + n = k'), and no contradictory 'm + n < k' condition appears in the provided text.",
+            "cost_usd": 0.008740928571428571
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "There is no inconsistency; the text \"For nonnegative integers m, n with m + n \\le k, this reduces to the arithmetic condition m + n = k\" (page 5) simply means that within the domain where the sum is at most k, it must equal exactly k to be representable.",
+            "cost_usd": 0.0021010857142857143
+          }
+        ],
+        "cost_usd": 0.0153376
+      },
+      {
+        "flag_id": "fp-561b96497e6f",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "This flag is so vague as to make no testable assertion—it merely states that the theorems 'could not be independently verified via automated audit,' which is a limitation of the audit tool, not a substantive critique of the paper's correctness. The proofs are present in the paper and can be read directly.",
+        "evidence": {
+          "claim": "The core theoretical claims in Theorem 1, Theorem 2, Theorem 3, and Proposition 1 cannot be mechanically verified; their correctness relies entirely on the supplied proofs.",
+          "excerpt": "The core theoretical claims in Theorem 1, Theorem 2, Theorem 3, and Proposition 1 could not be independently verified via automated audit. Their correctness rests entirely on the proofs."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "This flag is so vague as to make no testable assertion—it merely states that the theorems 'could not be independently verified via automated audit,' which is a limitation of the audit tool, not a substantive critique of the paper's correctness. The proofs are present in the paper and can be read directly.",
+            "cost_usd": 0.004495585714285715
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "This is not a substantive defect in the paper: the paper does provide proofs for the cited results, e.g. each theorem/proposition is followed by 'Proof.' ('Proof. The target function is the single character ψ = χ_{m,n}' for Theorem 1; 'Proof. By Lemma 2, representability requires ...' for Theorem 2; 'Proof. By Lemma 2 every network output is in F_k ...' for Theorem 3; and 'Proof. The binomial expansion of Lemma 1 ...' for Proposition 1).",
+            "cost_usd": 0.008740928571428571
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The flag makes no valid scientific or technical critique of the paper; stating that mathematical claims \"could not be independently verified via automated audit\" reflects a limitation of the reviewer's automated tool, not a flaw in the paper.",
+            "cost_usd": 0.0021010857142857143
+          }
+        ],
+        "cost_usd": 0.0153376
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "general": 0.2857142857142857
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0035245000000001525,
+    "numerics": 0.13024599999999986,
+    "general": 0.10736319999999999
+  },
+  "extractor_cost_usd": 0.04115599999999997,
+  "total_cost_usd": 0.2822897
+}

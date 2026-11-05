@@ -1,0 +1,251 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "L1",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-3993ee0bb374",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: non-integer input for integer_equal: 0.1055",
+        "evidence": {
+          "check_type": "integer_equal",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "non-integer input for integer_equal: 0.1055"
+          },
+          "rereader": [
+            {
+              "label": "learned_improvement",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": "Extracted directly from 'the learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate'."
+            },
+            {
+              "label": "oracle_improvement",
+              "raw_observed": "0.0989",
+              "value_observed": 0.0989,
+              "notes": "Extracted directly from 'compared to 0.0989 and 47.0% for the oracle'."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.017877999999999998
+      },
+      {
+        "flag_id": "fp-e63478d18c1d",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.017877999999999998
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-c73a4637b0a9",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges future validation on real tissue but only briefly: 'we plan to validate on real tissue data and investigate robustness under varying observation density and noise levels.' The 2D simplification and its gap to clinical reality are not prominently discussed as a limitation in the main text, and no additional 3D or FEM experiments are provided.",
+        "evidence": {
+          "claim": "The evaluation is restricted to a 2D simulated sheet, which omits clinically relevant 3D effects like heterogeneous stiffness, contact, and self-occlusion. This is a major limitation.",
+          "excerpt": "The paper is motivated by surgical tissue retraction, but experiments use only a 2D grid with Laplacian relaxation. Real tissue exhibits 3D deformation, heterogeneous stiffness, contact and friction, and self-occlusion — none of which are modeled. The gap between the experimental setup and the motivating application is substantial and should be acknowledged more prominently, or narrowed with additional experiments (e.g., 3D cloth simulation, FEM comparisons, or use of an established deformable-manipulation benchmark)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges future validation on real tissue but only briefly: 'we plan to validate on real tissue data and investigate robustness under varying observation density and noise levels.' The 2D simplification and its gap to clinical reality are not prominently discussed as a limitation in the main text, and no additional 3D or FEM experiments are provided.",
+            "cost_usd": 0.010927312500000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The limitation is real: the paper states \"We evaluate the approach in a 2D deformable sheet simulation\" and later, \"All experiments are conducted in simulation using a randomized 2D deformable sheet model.\" It does not provide any 3D, contact-rich, or real-tissue evaluation, only saying \"in ongoing and future work, we plan to validate on real tissue data.\"",
+            "cost_usd": 0.0081325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms that 'All experiments are conducted in simulation using a randomized 2D deformable sheet model', without modeling 3D effects, contact, or heterogeneous stiffness as noted by the reviewer.",
+            "cost_usd": 0.0026645
+          }
+        ],
+        "cost_usd": 0.021724312500000002
+      },
+      {
+        "flag_id": "fp-85317d879906",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper compares only against an oracle and a naive baseline ('We compare the learned estimator against an oracle (full state access) and a naive baseline'). No ablations isolating PCA, geometry regularization, or MLP contributions are reported anywhere in the paper.",
+        "evidence": {
+          "claim": "The paper does not include several natural baselines and ablations needed to isolate the contributions of each method component.",
+          "excerpt": "The paper compares against only (i) an oracle and (ii) a naive undeformed-reference baseline. Several natural baselines are absent: ... Without ablations, the contribution of the PCA bottleneck versus the geometry regularization versus the MLP itself cannot be assessed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares only against an oracle and a naive baseline ('We compare the learned estimator against an oracle (full state access) and a naive baseline'). No ablations isolating PCA, geometry regularization, or MLP contributions are reported anywhere in the paper.",
+            "cost_usd": 0.010927312500000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation compares only a very small set of methods: \"We compare the learned estimator against an oracle (full state access) and a naive baseline.\" While the method itself combines \"a multilayer perceptron with a low-dimensional PCA latent representation\" and \"geometry-aware regularization,\" the paper reports no ablations isolating these components.",
+            "cost_usd": 0.0081325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III.A confirms the paper only compares against 'an oracle (full state access) and a naive baseline', and it lacks ablations for the individual components like PCA or geometry regularization.",
+            "cost_usd": 0.0026645
+          }
+        ],
+        "cost_usd": 0.021724312500000002
+      },
+      {
+        "flag_id": "fp-61610a51a0e7",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'achieves multi-step performance statistically equivalent to a full-state oracle' based on a ratio of means (98.1% oracle recovery) without conducting a formal equivalence test (e.g., TOST) or specifying pre-defined equivalence margins. No equivalence testing methodology is described.",
+        "evidence": {
+          "claim": "The paper claims statistical equivalence without performing a valid equivalence test. Proper testing or moderated claims are required.",
+          "excerpt": "The paper claims \"statistically equivalent to a full-state oracle\" based on nearly identical means. Statistical equivalence requires an equivalence test (e.g., TOST) with pre-specified margins, not merely non-significant differences or a ratio of means. Please rephrase claims and, where possible, conduct proper equivalence testing."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'achieves multi-step performance statistically equivalent to a full-state oracle' based on a ratio of means (98.1% oracle recovery) without conducting a formal equivalence test (e.g., TOST) or specifying pre-defined equivalence margins. No equivalence testing methodology is described.",
+            "cost_usd": 0.010927312500000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly claims \"the estimator achieves multi-step performance statistically equivalent to a full-state oracle,\" but the only reported tests are that \"statistical significance [is] measured using paired and independent t-tests.\" No equivalence-testing procedure or equivalence margin is described.",
+            "cost_usd": 0.0081325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims the estimator 'achieves multi-step performance statistically equivalent to a full-state oracle', but the paper only mentions standard 'paired and independent t-tests' rather than proper statistical equivalence testing.",
+            "cost_usd": 0.0026645
+          }
+        ],
+        "cost_usd": 0.021724312500000002
+      },
+      {
+        "flag_id": "fp-f8dc9fb6d355",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states the MLP is 'three-layer' and uses '12-dimensional latent space' and '40 observed vertices' but provides no layer widths, activations, optimizer, learning rate, or justification curves for these choices, limiting reproducibility as the reviewer notes.",
+        "evidence": {
+          "claim": "Critical design choices (e.g., number of PCA components, number of observed vertices, MLP architecture details) are insufficiently justified, limiting reproducibility.",
+          "excerpt": "- Why 12 PCA components (83.7% variance)? A variance vs. reconstruction-error curve would justify this.  - Why 40 observed vertices? Robustness to observation density is stated as future work, but at least a small sweep would strengthen the paper.  - The MLP architecture is described only as \"three-layer\" — layer widths, activations, training hyperparameters, and optimizer are not reported. This limits reproducibility."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states the MLP is 'three-layer' and uses '12-dimensional latent space' and '40 observed vertices' but provides no layer widths, activations, optimizer, learning rate, or justification curves for these choices, limiting reproducibility as the reviewer notes.",
+            "cost_usd": 0.010927312500000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Several key choices are stated but not justified or fully specified: \"PCA is applied to 5,000 randomly generated mesh states, producing a 12-dimensional latent space that captures approximately 83.7% of the variance,\" \"the system observes only 40 of 900 vertices (4.4%),\" and \"A three-layer multilayer perceptron maps the noisy, partial observations to the latent space.\" The paper gives no architecture widths/activations/optimizer details and defers robustness to density/noise to \"future work.\"",
+            "cost_usd": 0.0081325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper briefly states it uses 'A three-layer multilayer perceptron' and a '12-dimensional latent space' without providing detailed layer widths, optimization hyperparameters, or justification curves, which limits reproducibility.",
+            "cost_usd": 0.0026645
+          }
+        ],
+        "cost_usd": 0.021724312500000002
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.035755999999999996,
+    "general": 0.08689725000000001
+  },
+  "extractor_cost_usd": 0.014232000000000009,
+  "total_cost_usd": 0.13688525
+}

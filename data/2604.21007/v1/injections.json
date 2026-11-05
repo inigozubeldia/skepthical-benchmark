@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "sample7.tex",
+    "original_text": "We run the Markov Chain Monte Carlo (MCMC) code \\texttt{emcee} \\citep{2013PASP..125..306F} to infer the best-fitting parameters and their associated errors.",
+    "injected_text": "We run the nested sampling code \\texttt{emcee} \\citep{2013PASP..125..306F} to infer the best-fitting parameters and their associated errors.",
+    "rationale": "The cited paper (Foreman-Mackey et al. 2013, cite key 2013PASP..125..306F, title 'emcee: The MCMC Hammer') introduces emcee as an affine-invariant Markov Chain Monte Carlo ensemble sampler. Re-categorizing emcee as a 'nested sampling code' is a methodology-class mis-attribution at the Bayesian-sampling-paradigm level — nested sampling (MultiNest, dynesty, ultranest) and MCMC are distinct algorithmic families. Cite key preserved byte-for-byte.",
+    "ground_truth_description": "Replaced 'Markov Chain Monte Carlo (MCMC)' with 'nested sampling' in the SED-fitting sentence using emcee. emcee is explicitly an MCMC ensemble sampler per Foreman-Mackey et al. 2013.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "2013PASP..125..306F",
+      "injected_cite_key": "2013PASP..125..306F",
+      "claim_sentence_verbatim": "We run the Markov Chain Monte Carlo (MCMC) code \\texttt{emcee} \\citep{2013PASP..125..306F} to infer the best-fitting parameters and their associated errors.",
+      "section_location": "Sec. 4 (SED-fitting / Spectral Analysis)",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "sample7.tex",
+    "original_text": "we confirm three QGs in the vicinity of \\textit{Jekyll \\& Hyde}, a pair of massive QG and a dusty star-forming galaxy, at $z=3.71$ and two QGs around SXDS-27434 at $z=4.01$.",
+    "injected_text": "we confirm three QGs in the vicinity of \\textit{Jekyll \\& Hyde}, a pair of massive QG and a dusty star-forming galaxy, at $z=3.17$ and two QGs around SXDS-27434 at $z=4.01$.",
+    "rationale": "Headline-number digit swap in the abstract: the Jekyll & Hyde overdensity redshift z=3.71 (the paper's primary target redshift, mentioned 10+ times in the body — Sec. 1, Table 1, Sec. 5) is mis-quoted in the abstract as z=3.17 (digits 7↔1 swapped, both adjacent in the decimal). Body keeps the correct z=3.71; the abstract_vs_body_match predicate fires on the headline number.",
+    "ground_truth_description": "Swapped two adjacent digits in the abstract's headline redshift for the Jekyll & Hyde overdensity (z=3.71 → z=3.17). The same overdensity is correctly stated as z=3.71 in Sec. 1 ('confirmation of two overdensities ... at z=3.71') and in Table 1 (z_spec=3.7120 for DD-134=Jekyll).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "3.71",
+      "value_after_raw": "3.17",
+      "value_before_float": 3.71,
+      "value_after_float": 3.17,
+      "location_cue": "we confirm three QGs in the vicinity of Jekyll & Hyde, a pair of massive QG and a dusty star-forming galaxy, at z=3.17 and two QGs around SXDS-27434 at z=4.01",
+      "paired_location": "Intra-abstract anchor (line 298): the same abstract paragraph later reads 'The overdensity is also reproduced by the Illustris TNG300 simulation at z=3.71' — z=3.17 (injected) and z=3.71 (unedited) coexist within the abstract itself. Body anchors: Sec. 1 Introduction (line 336): 'confirmation of two overdensities of massive QGs at z=3.71 and 4.01'; Sec. 2.1 Targets (sec:target, line 341): 'Jekyll & Hyde pair [z=3.71]'; Sec. 5.2 Comparison with cosmological simulations (line 551): 'overdensity at z=3.71'",
+      "quantity_label": "redshift z of Jekyll and Hyde QG overdensity (abstract anchored to body in Sec. 1, 2.1, 5.2)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "sample7.tex",
+    "original_text": "\\delta = \\frac{n-\\bar{n}}{\\bar{n}},",
+    "injected_text": "\\delta = \\frac{n+\\bar{n}}{\\bar{n}},",
+    "rationale": "Sign flip in numerator of the canonical galaxy overdensity definition (Eq. 1). The standard cosmological overdensity is δ = (n − n̄)/n̄ (n̄ baseline, perturbation gives δ ∈ (−1, ∞), with δ=0 at n=n̄). Replacing − with + gives δ = (n + n̄)/n̄ which is structurally similar but algebraically wrong: at n=0 it gives δ=1 (instead of −1); at n=n̄ it gives δ=2 (instead of 0). Wolfram refutes against the canonical identity.",
+    "ground_truth_description": "Replaced the minus sign with a plus sign in the numerator of the overdensity definition equation, so δ = (n+n̄)/n̄ instead of δ = (n−n̄)/n̄. The canonical definition zeroes at n=n̄; the injected version equals 2 there.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2 (Environment density), Eq. 1",
+      "original_fragment_latex": "n-\\bar{n}",
+      "injected_fragment_latex": "n+\\bar{n}",
+      "full_equation_latex_before": "\\delta = \\frac{n-\\bar{n}}{\\bar{n}}",
+      "full_equation_latex_after": "\\delta = \\frac{n+\\bar{n}}{\\bar{n}}",
+      "term_role": "numerator sign in canonical overdensity definition",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "sample7.tex",
+    "original_text": "Figure \\ref{fig:dens} shows the distribution of galaxy overdensities above the average field value at $3.5<z_\\mathrm{phot}<3.9$ in the COSMOS field.",
+    "injected_text": "Figure \\ref{fig:densz4} shows the distribution of galaxy overdensities above the average field value at $3.5<z_\\mathrm{phot}<3.9$ in the COSMOS field.",
+    "rationale": "Cross-reference mis-target. The sentence describes COSMOS-field overdensities at 3.5<z_phot<3.9 — the figure that actually shows this is fig:dens. After the swap, the prose still talks about COSMOS at z~3.71 but points to fig:densz4, which is the SXDS field at z~4.01 panel. Both labels exist in the paper (no broken \\ref); only the target is wrong.",
+    "ground_truth_description": "Swapped the figure cross-reference target from \\ref{fig:dens} (COSMOS @ z~3.71) to \\ref{fig:densz4} (SXDS @ z~4.01) in a sentence whose claim describes the COSMOS field. Reader inspecting fig:densz4 sees SXDS data, not COSMOS; the prose claim and the referenced figure no longer match.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "cross_reference_mismatch",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 2.1 Targets (sec:target / line 363) — paragraph introducing the COSMOS overdensity figure. The injected reference fig:densz4 is the SXDS density figure (line 372 caption); the actually-described content (3.5<z_phot<3.9 COSMOS field) is in fig:dens (line 352 caption)",
+      "affected_span_verbatim": "Figure \\ref{fig:dens} shows the distribution of galaxy overdensities above the average field value at $3.5<z_\\mathrm{phot}<3.9$ in the COSMOS field."
+    },
+    "proposer_agent": "injector.general.S2.t1.v1"
+  }
+]

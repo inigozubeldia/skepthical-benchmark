@@ -1,0 +1,104 @@
+{
+  "paper_id": "2604.20914",
+  "reviewer_system": "L2",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-fdac21bddaa1",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper fixes the analysis window: \"The data are recorded from t = 10Mf after the merger\" and repeats in the supplement that it uses data \"starting from t = 10Mf.\" It only states that \"This choice is for illustration, but the analysis readily generalizes to other start times t,\" but does not actually marginalize over a ringdown start time or quantify how doing so would affect the reported speedup.",
+        "evidence": {
+          "claim": "The analysis assumes a fixed ringdown start time, which is unrealistic for practical detection scenarios, and not marginalizing over t_0 may invalidate the claimed computational speedup.",
+          "excerpt": "The analysis assumes a fixed ringdown start time of $t=10M_f$ after the merger (Sec. \"In this work\", Appendix C). In practical BH spectroscopy, $t_0$ is highly uncertain and is heavily marginalized over or treated as a free parameter, particularly when overtone extraction is debated. Because the basis functions $C_{\u0011 mn}(t)$ and $S_{\u0011 mn}(t)$ explicitly depend on $t$, varying $t_0$ would require recomputing the basis functions, the data inner products $s_\u001c$, and the covariance matrix $M_{\u001c\nu}$ at each step of the sampler. This would drastically increase the computational cost per likelihood evaluation in the auxiliary inference, potentially neutralizing the 200-fold speedup."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly states 'The data are recorded from t = 10Mf after the merger' and 'This choice is for illustration, but the analysis readily generalizes to other start times t,' acknowledging the fixed start time without quantifying how including t_0 as a free parameter would affect speedup. The reviewer's concern that varying t_0 would require recomputing basis functions at each sampler step is technically valid but the paper does not address whether this degrades the speedup—it only notes generalizability in principle.",
+            "cost_usd": 0.0097695
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper fixes the analysis window: \"The data are recorded from t = 10Mf after the merger\" and repeats in the supplement that it uses data \"starting from t = 10Mf.\" It only states that \"This choice is for illustration, but the analysis readily generalizes to other start times t,\" but does not actually marginalize over a ringdown start time or quantify how doing so would affect the reported speedup.",
+            "cost_usd": 0.017250500000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges fixing the start time (\"The data are recorded from t = 10Mf after the merger... This choice is for illustration\"), but it only samples over Mf, chi_f, A_lmn, and phi_lmn. It does not treat the start time as a free parameter or assess the computational overhead of recomputing the basis functions and inner products if t_0 were varied, leaving the reviewer's concern unaddressed.",
+            "cost_usd": 0.0034939000000000003
+          }
+        ],
+        "cost_usd": 0.030513900000000004
+      },
+      {
+        "flag_id": "fp-2af9906ef246",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The derivation explicitly assumes Gaussian-noise likelihoods: \"We start from the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean\" and relies on the fact that \"the log-likelihood still has a quadratic form in the residual d − h.\" The paper does not address non-stationary/non-Gaussian noise, data gaps, or overlapping-signal conditions, so the reviewer's concern is not resolved within the paper.",
+        "evidence": {
+          "claim": "The method's reliance on strictly stationary Gaussian noise does not account for real detector conditions, potentially invalidating the analytic marginalization and computational efficiency.",
+          "excerpt": "The pipeline relies on the exact quadratic structure of the likelihood (Eq. B.2), which assumes purely stationary, Gaussian noise. Space-based detectors like LISA and TianQin are expected to suffer from non-stationary noise, data gaps, and overlapping signals (e.g., millions of DWDs), requiring simultaneous fitting or non-Gaussian likelihood treatments. If the noise covariance matrix $\u000b{C}$ is not strictly constant or if robust likelihoods are needed, the analytic marginalization may break down."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states 'the likelihood is built from the TDI data channels and remains quadratic in the residual' assuming Gaussian noise, and briefly mentions extensibility to 'other GW sources in band, such as double white dwarfs and extreme mass-ratio inspirals, where similar Gaussian structures exist.' However, the paper does not address non-stationary noise, data gaps, or overlapping signals that would affect space-based detectors, leaving the reviewer's specific concern about breakdown of analytic marginalization under realistic noise conditions unaddressed but also not the central claim of the paper.",
+            "cost_usd": 0.0097695
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The derivation explicitly assumes Gaussian-noise likelihoods: \"We start from the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean\" and relies on the fact that \"the log-likelihood still has a quadratic form in the residual d − h.\" The paper does not address non-stationary/non-Gaussian noise, data gaps, or overlapping-signal conditions, so the reviewer's concern is not resolved within the paper.",
+            "cost_usd": 0.017250500000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states that FIREFLY's acceleration relies on the likelihood being \"quadratic in the residual between the data d and the model h under Gaussian noise\" (Eq. B.2). The paper does not address or model non-stationary noise, data gaps, or overlapping signals, making the reviewer's point a valid and unresolved limitation.",
+            "cost_usd": 0.0034939000000000003
+          }
+        ],
+        "cost_usd": 0.030513900000000004
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.06102780000000001
+  },
+  "extractor_cost_usd": 0.011326000000000017,
+  "total_cost_usd": 0.07235380000000002
+}

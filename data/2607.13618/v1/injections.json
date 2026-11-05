@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "paper.tex",
+    "original_text": "heuristic and reinforcement-learning baselines",
+    "injected_text": "supervised and imitation-learning baselines",
+    "rationale": "Mis-categorizes the methodology used for the baselines in the cited paper (swapping RL/heuristics for supervised/imitation learning), triggering a CONTRADICTED verdict.",
+    "ground_truth_description": "Changes the description of the baselines in the InvAgent citation from 'heuristic and reinforcement-learning' to 'supervised and imitation-learning'.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "invagent2024",
+      "injected_cite_key": "invagent2024",
+      "claim_sentence_verbatim": "In inventory management specifically, AIM-Bench \\citep{aimbench2025} finds human-like ordering biases (demand anchoring, bullwhip amplification) across five environments, and InvAgent \\citep{invagent2024} reports outcome gaps against heuristic and reinforcement-learning baselines in a fully observed twelve-period setting.",
+      "section_location": "Section 2",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "paper.tex",
+    "original_text": "  \\item \\textsc{persistent} (15 seeds), a multi-week stretch of port",
+    "injected_text": "  \\item \\textsc{persistent} (24 seeds), a multi-week stretch of port",
+    "rationale": "The paper genuinely lacks any percentage breakdowns to perturb for the 'percent_to_100' cell, so to preserve realism I fell back to the nearest equivalent (sum_eq_total) by changing a profile's seed count so the breakdown no longer sums to the stated 50 seeds.",
+    "ground_truth_description": "Perturbed the number of persistent seeds from 15 to 24 so the profile counts (12+24+23=59) no longer sum to the stated 50-seed total.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "sum_eq_total",
+      "value_before_raw": "15",
+      "value_after_raw": "24",
+      "value_before_float": 15.0,
+      "value_after_float": 24.0,
+      "location_cue": "\\item \\textsc{persistent} (24 seeds), a multi-week stretch of port",
+      "paired_location": "fifty seeds chosen this way from a 200-seed pool",
+      "quantity_label": "number of persistent seeds",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t1.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "paper.tex",
+    "original_text": "\\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+    "injected_text": "C_{\\mathrm{base}} - C_{\\mathrm{agent}}",
+    "rationale": "The paper lacks canonical physical/statistical PDFs, so the normalisation denominator is dropped from the benchmark's defined skill score; Wolfram refutes this against the prose property that the score equals 1 at the oracle mean.",
+    "ground_truth_description": "Removed the normalisation denominator from the skill score equation, turning it into an absolute cost difference.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Section 4",
+      "original_fragment_latex": "\\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+      "injected_fragment_latex": "C_{\\mathrm{base}} - C_{\\mathrm{agent}}",
+      "full_equation_latex_before": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+      "full_equation_latex_after": "\\mathrm{skill} \\;=\\; C_{\\mathrm{base}} - C_{\\mathrm{agent}}",
+      "term_role": "normalisation denominator",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "paper.tex",
+    "original_text": "\\texttt{buy\\_briefing}\n(\\$30) and \\texttt{buy\\_audit} (\\$25) reveal the true state of the canal\nand of the spot supplier, respectively.",
+    "injected_text": "\\texttt{buy\\_briefing}\n(\\$30) and \\texttt{buy\\_audit} (\\$25) emit noisy readings of the canal\nand of the spot supplier, respectively.",
+    "rationale": "Methods now claims the audit and briefing tools return noisy readings, but the Discussion still states they return near-deterministic ground truth by design.",
+    "ground_truth_description": "Changed the description of the audit and briefing tools in Methods to say they return noisy readings, contradicting the Discussion.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methods_results_inconsistency",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 3.1",
+      "affected_span_verbatim": "Each week the agent reads a dashboard of on-hand inventory, orders in\ntransit, realized demand, freight quotes, berth waiting times, canal\ntransit counts, supplier scorecards, and quality reports. It may then take\nany of five within-week actions, none of which advances time.\n\\texttt{lock\\_freight} fixes the current freight multiplier for a chosen\nnumber of weeks; the lock itself is free, but a locked rate forgoes any\ndrop in the spot index. \\texttt{expedite\\_air} flies up to 20 units in at\n\\$15 per unit; they land the following week and bypass the port entirely.\n\\texttt{inspect\\_batch} (\\$40) sorts an arriving batch so that most\ndefective units are recovered before they stock. \\texttt{buy\\_briefing}\n(\\$30) and \\texttt{buy\\_audit} (\\$25) reveal the true state of the canal\nand of the spot supplier, respectively."
+    },
+    "proposer_agent": "injector.general.S2.t2.v1"
+  }
+]

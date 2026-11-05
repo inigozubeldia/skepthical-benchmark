@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "firefly_space_merge.tex",
+    "original_text": "Recently, the LIGO-Virgo-KAGRA (LVK)\nCollaboration reported GW250114, the most significant signal to date, and\ncarried out a dedicated analysis of its ringdown\nphase~\\cite{LIGOScientific:2025rid}.",
+    "injected_text": "Recently, the LIGO-Virgo-KAGRA (LVK)\nCollaboration reported GW250114, the most significant signal to date, and\ndelivered the first direct measurement of the nonlinear gravitational-wave\nmemory effect~\\cite{LIGOScientific:2025rid}.",
+    "rationale": "Keeps \\cite{LIGOScientific:2025rid} intact but rewrites the attached claim so the cited paper is credited with measuring the nonlinear GW memory effect, a topic absent from that paper (which tests Hawking's area law and the Kerr nature of black holes via ringdown), realising a topic mis-attribution that ref.py should mark UNRELATED.",
+    "ground_truth_description": "Replaced the claim attached to \\cite{LIGOScientific:2025rid} from a ringdown analysis of GW250114 to a first direct measurement of the nonlinear gravitational-wave memory effect, a topic the cited paper does not address.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "LIGOScientific:2025rid",
+      "injected_cite_key": "LIGOScientific:2025rid",
+      "claim_sentence_verbatim": "Recently, the LIGO-Virgo-KAGRA (LVK)\nCollaboration reported GW250114, the most significant signal to date, and\ncarried out a dedicated analysis of its ringdown\nphase~\\cite{LIGOScientific:2025rid}.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "firefly_space_merge.tex",
+    "original_text": "$\\sim\n200$-fold speedup for a simulated ringdown signal including six modes",
+    "injected_text": "$\\sim\n201$-fold speedup for a simulated ringdown signal including six modes",
+    "rationale": "Perturbs the headline speedup factor in the abstract by +1 while leaving the body's two ~200 mentions untouched, creating an abstract-vs-body mismatch on the same quantity.",
+    "ground_truth_description": "Abstract speedup claim changed from ~200-fold to ~201-fold; body still reports ~200 times speedup in the main-text discussion of Fig. 1.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "200",
+      "value_after_raw": "201",
+      "value_before_float": 200.0,
+      "value_after_float": 201.0,
+      "location_cue": "we achieve a $\\sim 201$-fold speedup for a simulated ringdown signal including six modes",
+      "paired_location": "Body main text: 'FIREFLY---with high fidelity---yields a $\\sim200$ times speedup over the conventional approach' and 'FIREFLY achieves an approximately 200 times speedup, reducing the computation from about 13 hours to 4 minutes'.",
+      "quantity_label": "FIREFLY speedup factor over the conventional full-parameter sampling for the six-mode ringdown analysis",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "firefly_space_merge.tex",
+    "original_text": "(2\\uppi)^{N}",
+    "injected_text": "(2\\uppi)^{N/2}",
+    "rationale": "Halves the dimensional exponent in the canonical multivariate Gaussian normalisation prefactor (the conditional posterior of B is 2N_mode-dimensional with covariance M^{-1}, so the correct prefactor is (2pi)^{N_mode} sqrt(det M^{-1}) when N is identified with N_mode); the perturbed prefactor breaks ∫P(B|θ,d,∅) dB = 1, which Wolfram refutes by symbolic integration.",
+    "ground_truth_description": "In the Gaussian conditional posterior P(B|θ,d,∅), the normalisation prefactor (2π)^N √det(M^{-1}) is silently changed to (2π)^{N/2} √det(M^{-1}), so the distribution no longer integrates to unity.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:conditional posterior of B",
+      "equation_location": "Supplementary Material, Sec. B (FIREFLY algorithm), conditional posterior of B given θ under auxiliary prior",
+      "original_fragment_latex": "(2\\uppi)^{N}",
+      "injected_fragment_latex": "(2\\uppi)^{N/2}",
+      "full_equation_latex_before": "P(\\bmB | \\bmt, d,\\apc)\n\t =\\frac{\n\t \\call(\\bmt,\\bmB)\\pi(\\bmB|\\bmt,\\varnothing)}{\n       \\int \\call(\\bmt,\\bmB) \\pi(\\bmB|\\bmt,\\varnothing) \\rmd\\bmB \n     }=\\frac{\\exp\\left\n\t \\{-\\frac{1}{2}\\big(B^{\\mu}- \\hat{B}^{\\mu}\\big) M_{\\mu\\nu}\n\t \\big(B^{\\nu}- \\hat{B}^{\\nu}\\big)\\right \\}}{(2\\uppi)^{N}\\sqrt{{\\rm\n\t det}\\big(M^{-1}\\big)}}\\,.",
+      "full_equation_latex_after": "P(\\bmB | \\bmt, d,\\apc)\n\t =\\frac{\n\t \\call(\\bmt,\\bmB)\\pi(\\bmB|\\bmt,\\varnothing)}{\n       \\int \\call(\\bmt,\\bmB) \\pi(\\bmB|\\bmt,\\varnothing) \\rmd\\bmB \n     }=\\frac{\\exp\\left\n\t \\{-\\frac{1}{2}\\big(B^{\\mu}- \\hat{B}^{\\mu}\\big) M_{\\mu\\nu}\n\t \\big(B^{\\nu}- \\hat{B}^{\\nu}\\big)\\right \\}}{(2\\uppi)^{N/2}\\sqrt{{\\rm\n\t det}\\big(M^{-1}\\big)}}\\,.",
+      "term_role": "normalisation prefactor of multivariate Gaussian conditional posterior",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "firefly_space_merge.tex",
+    "original_text": "All samplers are\nconfigured with ${\\rm nlive =3000}$ live points and a termination criterion of\n${\\rm dlogz=0.01}$.",
+    "injected_text": "All samplers are\nconfigured with ${\\rm nlive =3000}$ live points and a termination criterion of\n${\\rm dlogz=0.01}$ (we verified that doubling ${\\rm nlive}$ yields statistically indistinguishable posteriors).",
+    "rationale": "Adds a parenthetical assertion of an empirical convergence/robustness check (a doubled-nlive comparison) that the paper does not actually report anywhere in the Results, Wasserstein-distance comparisons, or appendices; a reviewer cross-checking Methods justifications against actual evidence flags it.",
+    "ground_truth_description": "Inserted a parenthetical claim in the inference setup asserting that doubling nlive was tested and produced indistinguishable posteriors — no such test is reported anywhere in the paper.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Supplementary Materials, Sec. C (Injection and inference)",
+      "affected_span_verbatim": "All samplers are\nconfigured with ${\\rm nlive =3000}$ live points and a termination criterion of\n${\\rm dlogz=0.01}$."
+    },
+    "proposer_agent": "injector.general.S2.t3.v2"
+  }
+]

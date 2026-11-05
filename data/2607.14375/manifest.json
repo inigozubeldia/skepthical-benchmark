@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.14375",
+  "arxiv_url": "https://arxiv.org/abs/2607.14375",
+  "rotation_seed": 20260738,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S1",
+      "type": 1
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "more than a $7/8+\\epsilon$ fraction of clauses \\citep{hastad2001optimal}.",
+          "injected_text": "more than a $15/16+\\epsilon$ fraction of clauses \\citep{hastad2001optimal}.",
+          "rationale": "Because this theoretical paper lacks experimental standard deviations, we perturb Håstad's famous 7/8 E3SAT threshold to 15/16 (the 4SAT threshold) as a surrogate for a minor quantitative mis-quote.",
+          "ground_truth_description": "Changes the inapproximability threshold for E3SAT cited from Hastad (2001) from 7/8 to 15/16.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "hastad2001optimal",
+            "injected_cite_key": "hastad2001optimal",
+            "claim_sentence_verbatim": "H\\aa stad's E3SAT theorem implies that for every fixed $\\epsilon>0$, it is NP-hard to distinguish a satisfiable E3SAT formula from one in which no assignment satisfies more than a $7/8+\\epsilon$ fraction of clauses \\citep{hastad2001optimal}.",
+            "section_location": "Appendix A.1",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "The bootstrap experiment used 300 exact block optima per family/noise cell and 50,000 products per product cell.",
+          "injected_text": "The bootstrap experiment used 300 exact block optima per family/noise cell and 5,000 products per product cell.",
+          "rationale": "Introduces a factor-of-10 discrepancy in the reported number of bootstrap products between Section 6.1 (50,000) and Appendix D.3 (5,000).",
+          "ground_truth_description": "Changes the number of bootstrap products in the appendix from 50,000 to 5,000, creating an integer-equal contradiction with the main text.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "integer_equal",
+            "value_before_raw": "50,000",
+            "value_after_raw": "5,000",
+            "value_before_float": 50000.0,
+            "value_after_float": 5000.0,
+            "location_cue": "The bootstrap experiment used 300 exact block optima per family/noise cell and 5,000 products per product cell.",
+            "paired_location": "Section 6.1",
+            "quantity_label": "number of bootstrap products",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t3.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,j}(x)",
+          "injected_text": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,i}(x)",
+          "rationale": "The summation variable is j, but the summand references an unbound index i, breaking structural conformability.",
+          "ground_truth_description": "Changed the bound summation index j in the network output equation to an unbound index i.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:network",
+            "equation_location": "Eq. (5)",
+            "original_fragment_latex": "h_{C,j}(x)",
+            "injected_fragment_latex": "h_{C,i}(x)",
+            "full_equation_latex_before": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,j}(x)\n-\\sum_{C\\in\\Phi}r_C(x).",
+            "full_equation_latex_after": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,i}(x)\n-\\sum_{C\\in\\Phi}r_C(x).",
+            "term_role": "injected shape/index mismatch",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t1.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$.",
+          "injected_text": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$ (a preliminary scan showed large discretization artifacts for smaller $B$).",
+          "rationale": "The inserted parenthetical justifies the choice of B=16 by asserting a preliminary scan observation about discretization artifacts that the paper does not actually report or provide evidence for.",
+          "ground_truth_description": "Added an unsupported parenthetical claiming a preliminary scan showed large discretization artifacts for B < 16, which acts as phantom evidence for a methodological choice.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 6.1",
+            "affected_span_verbatim": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$.  Forty-four independently selected optima were cross-checked against a separate MILP model; the maximum discrepancy was $7.99\\times10^{-15}$."
+          },
+          "proposer_agent": "injector.general.S2.t3.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "Convex relaxations provide scalable bounds but face intrinsic tightness barriers without branching or additional structure \\citep{salman2019convex}.",
+          "injected_text": "Convex relaxations provide scalable bounds and overcome intrinsic tightness barriers without branching or additional structure \\citep{salman2019convex}.",
+          "rationale": "Reverses the claim that convex relaxations suffer from tightness barriers (which the cited paper proves) to claiming they overcome them, directly contradicting the cited conclusion.",
+          "ground_truth_description": "Changes the statement from saying convex relaxations face tightness barriers to saying they overcome them, contradicting the cited reference.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "salman2019convex",
+            "injected_cite_key": "salman2019convex",
+            "claim_sentence_verbatim": "Convex relaxations provide scalable bounds but face intrinsic tightness barriers without branching or additional structure \\citep{salman2019convex}.",
+            "section_location": "Related work",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "\\frac{99}{4}+\\frac{148}{9}=\\frac{1483}{36}.",
+          "injected_text": "\\frac{99}{4}+\\frac{145}{9}=\\frac{1483}{36}.",
+          "rationale": "Changing the summand's numerator from 148 to 145 breaks the explicit sum equality (the left side evaluates to 1471/36 instead of 1483/36) while staying within a 10% relative error, producing a minor arithmetic mismatch.",
+          "ground_truth_description": "Perturbed a numerator in a reported sum of fractions so that the explicit arithmetic equality no longer holds.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "sum_eq_total",
+            "value_before_raw": "148",
+            "value_after_raw": "145",
+            "value_before_float": 148.0,
+            "value_after_float": 145.0,
+            "location_cue": "Thus the semantic per-clause totals are\n\\[\n\\frac{27}{2}+\\frac{26}{3}=\\frac{133}{6},\n\\qquad\n\\frac{99}{4}+\\frac{148}{9}=\\frac{1483}{36}.\n\\]",
+            "paired_location": null,
+            "quantity_label": "numerator in overflow unit squared influence",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t2.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "\\mu=\\EE|Z|=\\sqrt{2/\\pi}.",
+          "injected_text": "\\mu=\\EE|Z|=\\sqrt{1/\\pi}.",
+          "rationale": "The expected value of a folded standard normal distribution is a canonical identity; altering the factor of 2 in the square root creates a mathematical error that Wolfram will refute by exact symbolic integration.",
+          "ground_truth_description": "Changed the expectation of the absolute standard normal distribution from \\sqrt{2/\\pi} to \\sqrt{1/\\pi}.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:CD",
+            "equation_location": "Eq. (12)",
+            "original_fragment_latex": "\\sqrt{2/\\pi}",
+            "injected_fragment_latex": "\\sqrt{1/\\pi}",
+            "full_equation_latex_before": "C=\\sum_qc_q,\n\\qquad\nD^2=\\sum_qc_q^2,\n\\qquad\n\\mu=\\EE|Z|=\\sqrt{2/\\pi}.",
+            "full_equation_latex_after": "C=\\sum_qc_q,\n\\qquad\nD^2=\\sum_qc_q^2,\n\\qquad\n\\mu=\\EE|Z|=\\sqrt{1/\\pi}.",
+            "term_role": "normalisation prefactor",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t3.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$.",
+          "injected_text": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$, although we exclude the highest noise level $\\sigma=0.063$ from the bootstrap products due to excessive variance.",
+          "rationale": "Inserting a methodology claim that the highest noise level was excluded from the bootstrap products directly contradicts the subsequent text and Figure 1 caption, which explicitly discuss the bootstrap product results at sigma=0.063.",
+          "ground_truth_description": "Added a false claim in the experiments section stating that the highest noise level was excluded from bootstrap products, contradicting the figure captions and results.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methodology_setup_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Sec. 6.1",
+            "affected_span_verbatim": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$."
+          },
+          "proposer_agent": "injector.general.S3.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "MILP formulations \\citep{tjeng2019mip,anderson2020strong}",
+          "injected_text": "SAT formulations \\citep{tjeng2019mip,anderson2020strong}",
+          "rationale": "Tjeng 2019 and Anderson 2020 propose Mixed-Integer Linear Programming (MILP) approaches, not Boolean Satisfiability (SAT) formulations; substituting SAT mis-categorises the solver methodology while keeping the logical completeness claim intact.",
+          "ground_truth_description": "The method category attributed to Tjeng et al. and Anderson et al. was changed from MILP formulations to SAT formulations.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "tjeng2019mip,anderson2020strong",
+            "injected_cite_key": "tjeng2019mip,anderson2020strong",
+            "claim_sentence_verbatim": "Reluplex and related SMT methods \\citep{katz2017reluplex,ehlers2017formal}, MILP formulations \\citep{tjeng2019mip,anderson2020strong}, and branch-and-bound methods \\citep{bunel2020branch,wang2021betacrown} exploit the piecewise-linear structure of ReLU networks while retaining completeness.",
+            "section_location": "Related work",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "For our reduction, $\\Gamma=m/60$, $\\sigma_\\star=2^{-11}$, and $h\\le2^{-20}<\\sigma_\\star$.  Using the coarser",
+          "injected_text": "For our reduction, $\\Gamma=m/600$, $\\sigma_\\star=2^{-11}$, and $h\\le2^{-20}<\\sigma_\\star$.  Using the coarser",
+          "rationale": "Changing the restated margin denominator from 60 to 600 creates a 10x order-of-magnitude contradiction with the exact same constant derived in Section 3.",
+          "ground_truth_description": "Shifted the margin denominator for Gamma from 60 to 600 in the numerical summary, contradicting the value of 60 established earlier in the text.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "60",
+            "value_after_raw": "600",
+            "value_before_float": 60.0,
+            "value_after_float": 600.0,
+            "location_cue": "For our reduction, $\\Gamma=m/60$, $\\sigma_\\star=2^{-11}$, and $h\\le2^{-20}<\\sigma_\\star$.  Using the coarser",
+            "paired_location": "Section 3 Equation (10)",
+            "quantity_label": "denominator for margin Gamma",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t2.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "\\sum_{j=1}^3 h_{C,j}(x)",
+          "injected_text": "\\sum_{j=0}^3 h_{C,j}(x)",
+          "rationale": "Changing the lower bound from j=1 to j=0 introduces an undefined term h_{C,0} in the literal-unit sum, which Wolfram symbolic evaluation will likely fail to refute decisively.",
+          "ground_truth_description": "Shifted the literal unit sum start index from j=1 to j=0.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:network",
+            "equation_location": "Sec. 3",
+            "original_fragment_latex": "\\sum_{j=1}^3",
+            "injected_fragment_latex": "\\sum_{j=0}^3",
+            "full_equation_latex_before": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,j}(x)\n-\\sum_{C\\in\\Phi}r_C(x).",
+            "full_equation_latex_after": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=0}^3 h_{C,j}(x)\n-\\sum_{C\\in\\Phi}r_C(x).",
+            "term_role": "sum lower bound",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t3.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "$\\mathrm{NP}\\not\\subseteq\\mathrm{BPP}$, there is no sound and complete verifier",
+          "injected_text": "$\\mathrm{NP}\\not\\subseteq\\mathrm{BPP}$, their is no sound and complete verifier",
+          "rationale": "A classic homophone substitution ('their' instead of 'there') introduces a purely cosmetic writing defect without changing the technical meaning, triggering a very minor presentation flag.",
+          "ground_truth_description": "Swapped 'there' for 'their' in the abstract.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D8",
+            "change_kind": "homophone_swap",
+            "expected_bucket": "very_minor",
+            "section_location": "Abstract",
+            "affected_span_verbatim": "We show that, under the standard assumption $\\mathrm{NP}\\not\\subseteq\\mathrm{BPP}$, there is no sound and complete verifier whose expected running time is polynomial in network size, bit complexity, and inverse noise level for every base instance."
+          },
+          "proposer_agent": "injector.general.S1.t1.v3"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "paper_id": "2607.14287",
+  "reviewer_system": "CL25",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-ed27e743d8f5",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states in Fig. 4's caption: \"t-SNE visualisation of ViT-B/16 feature distributions across datasets,\" yet the main model uses ViT-H (~636M params). The paper provides no t-SNE or other feature-space analysis using the actual ViT-H backbone, so the OoD partition justification is based on a different, smaller model's feature space, not the one actually used in XCT-SAM.",
+        "evidence": {
+          "claim": "The t-SNE plot used to justify benchmark splits is computed on ViT-B/16, not the ViT-H backbone used in the main experiments, so the OoD partition justification is not assured for the model's actual feature space.",
+          "excerpt": "Section IV.A relies on Fig. 4 to justify using Test-3 as validation and Test-1/2/4-6 (plus NIST) as OoD benchmarks, but the caption states \"t-SNE visualisation of **ViT-B/16** feature distributions across datasets.\" The rest of the paper uses SAM ViT-H (~636M params). Feature clusters at ViT-B/16 are not the same object as the feature space the adapter actually shifts; whether Test-1/2/4-6 and NIST form OoD clusters *in the ViT-H representation the model uses* is not shown."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Fig. 4's caption: \"t-SNE visualisation of ViT-B/16 feature distributions across datasets,\" yet the main model uses ViT-H (~636M params). The paper provides no t-SNE or other feature-space analysis using the actual ViT-H backbone, so the OoD partition justification is based on a different, smaller model's feature space, not the one actually used in XCT-SAM.",
+            "cost_usd": 0.0137766
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly uses Fig. 4 to justify the split — “As shown in Fig. 4, Train-1, Train-2, and Test-3 cluster closely ... motivating the use of Test-3 as the validation set” — but the figure is captioned “t-SNE visualisation of ViT-B/16 feature distributions across datasets,” while the main model “builds upon a SAM backbone based on the ViT-H image encoder.” The paper does not provide a corresponding ViT-H feature-space analysis or explain why the ViT-B/16 clustering should transfer to ViT-H.",
+            "cost_usd": 0.0200095
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in the caption of Fig. 4 that it shows a 't-SNE visualisation of ViT-B/16 feature distributions', despite previously stating in Section III.A that 'Our approach builds upon a SAM backbone based on the ViT-H image encoder', confirming the reviewer's claim.",
+            "cost_usd": 0.0064832
+          }
+        ],
+        "cost_usd": 0.0402693
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0402693
+  },
+  "extractor_cost_usd": 0.009492000000000118,
+  "total_cost_usd": 0.04976130000000012
+}

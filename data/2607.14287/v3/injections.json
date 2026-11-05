@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "arxiv_paper.tex",
+    "original_text": "It was shown in~\\cite{poudel2022feature} that XCT segmentation quality strongly affects defect detectability and size estimation in laser powder bed fusion parts.",
+    "injected_text": "It was shown in~\\cite{poudel2022feature} that XCT segmentation quality strongly affects defect detectability and size estimation in additive manufacturing parts.",
+    "rationale": "The cited study explicitly bounded its finding to 'laser powder bed fusion parts'; replacing this with 'additive manufacturing parts' over-generalises the claim to all AM processes, which the study did not test.",
+    "ground_truth_description": "Over-generalised the scope of the cited claim by changing its condition from specifically 'laser powder bed fusion parts' to all 'additive manufacturing parts'.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "poudel2022feature",
+      "injected_cite_key": "poudel2022feature",
+      "claim_sentence_verbatim": "It was shown in~\\cite{poudel2022feature} that XCT segmentation quality strongly affects defect detectability and size estimation in laser powder bed fusion parts.",
+      "section_location": "Related Work",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "arxiv_paper.tex",
+    "original_text": "fine-tuning only 4.15M parameters, or 0.647\\% of the full model.",
+    "injected_text": "fine-tuning only 4.15M parameters, or 0.642\\% of the full model.",
+    "rationale": "Since the paper contains no tables with explicit total rows, I injected a slight arithmetic mismatch in a stated percentage (percent_of) to fulfill the minor numeric error (S1) constraint.",
+    "ground_truth_description": "Perturbed a stated parameter percentage from 0.647% to 0.642%, breaking the arithmetic relationship with the 4.15M parameter count.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "0.647%",
+      "value_after_raw": "0.642%",
+      "value_before_float": 0.647,
+      "value_after_float": 0.642,
+      "location_cue": "The best configuration uses r=2 with eight convolutional experts, fine-tuning only 4.15M parameters, or 0.647% of the full model.",
+      "paired_location": null,
+      "quantity_label": "percentage of trainable parameters",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t2.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "arxiv_paper.tex",
+    "original_text": "\\sum_{i=1}^{N}",
+    "injected_text": "\\sum_{i=0}^{N}",
+    "rationale": "Changing the lower bound of the mixture-of-experts sum from i=1 to i=0 shifts the index out of its expected 1-based range, causing a subtle index-shift failure that might be deemed inconclusive by automated verifiers without full context.",
+    "ground_truth_description": "Changed the lower bound of the sum from i=1 to i=0 in the embedding update equation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. III.A",
+      "original_fragment_latex": "\\sum_{i=1}^{N}",
+      "injected_fragment_latex": "\\sum_{i=0}^{N}",
+      "full_equation_latex_before": "H = W_0 x + W_D \\left( \\sum_{i=1}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+      "full_equation_latex_after": "H = W_0 x + W_D \\left( \\sum_{i=0}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+      "term_role": "sum lower bound",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "arxiv_paper.tex",
+    "original_text": "As shown in Fig.~\\ref{fig:tsne_plot}, \\textit{Train-1}",
+    "injected_text": "As shown in Fig.~\\ref{fig:tsne_plto}, \\textit{Train-1}",
+    "rationale": "Misspelling the reference key for the t-SNE plot introduces a broken cross-reference that compiles to a visible '??' artefact in the PDF.",
+    "ground_truth_description": "The reference key 'fig:tsne_plot' was altered to 'fig:tsne_plto', resulting in a broken LaTeX reference.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "latex_artefact",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 4.1",
+      "affected_span_verbatim": "As shown in Fig.~\\ref{fig:tsne_plot}, \\textit{Train-1}, \\textit{Train-2}, and \\textit{Test-3} cluster closely due to similar material properties and scan settings~\\cite{tabassum_2024_adapting}, motivating the use of \\textit{Test-3} as the validation set."
+    },
+    "proposer_agent": "injector.general.S1.t2.v3"
+  }
+]

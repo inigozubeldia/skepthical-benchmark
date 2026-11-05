@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v3",
+  "reviewer_system": "L2",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's key statements section marks the Anchors claim as SUPPORTED, not CONTRADICTED or PARTIALLY_SUPPORTED. The reviewer did not flag the over-generalisation from 'local region' to 'all instances in the dataset' — they accepted the post-edit claim as correct.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly supports the Anchors statement as local and rule-based, but does not flag any contradictory or overgeneralized post-edit claim tied to Ribeiro et al. (2018). There is no challenge to a sentence claiming guarantees for all instances in the dataset.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer failed to detect the over-generalization; instead, they marked the claim as 'SUPPORTED' in their reference audit and actually used the correct 'local' phrasing in their summary, missing the error in the text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text explicitly states that simplicity scores have values 'ranging from 4 to 30.' However, Table I reports a simplicity score of 35 for LIME on Dataset 3, violating the stated textual upper bound.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text explicitly states that simplicity scores have values 'ranging from 4 to 30.' However, Table I reports a simplicity score of 35 for LIME on Dataset 3, violating the stated textual upper bound.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the value 35 in Table I as contradicting the prose statement that counts range from 4 to 30, directly matching the injected change of 30->35.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Table I reports a LIME simplicity score of 35 for Dataset 3 (Breast Cancer). Section IV.A establishes that Dataset 3 has exactly 30 features. A simplicity score of 35 violates the stated theoretical maximum of N=30.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the 35 value in Table I and contrasts it with the paper's stated maximum/range of 30 features, directly matching the injected 30→35 numerical inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table I reports a LIME simplicity score of 35 for Dataset 3 (Breast Cancer). Section IV.A establishes that Dataset 3 has exactly 30 features. A simplicity score of 35 violates the stated theoretical maximum of N=30.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flagged the value 35 in the table as contradicting the stated range and dataset dimensionality (30).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. 1 defines fidelity as the normalized sum of $\\|f(x_i)\\|^2 / \\|f(x_i) - g(x_i)\\|^2$. Under this formula, a perfect explanation model (where $g(x_i) = f(x_i)$) yields a denominator of zero, pushing the fidelity score to infinity.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. 1 defines fidelity as the normalized sum of $\\|f(x_i)\\|^2 / \\|f(x_i) - g(x_i)\\|^2$. Under this formula, a perfect explanation model (where $g(x_i) = f(x_i)$) yields a denominator of zero, pushing the fidelity score to infinity.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inverted ratio in the fidelity formula (numerator and denominator swapped) and explains the mathematical consequence — divergence to infinity under perfect surrogate agreement — which precisely matches the injected inversion.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Eq. 1 defines fidelity as the normalized sum of ||f(x_i)||^2 / ||f(x_i) - g(x_i)||^2. Under this formula, a perfect explanation model (where g(x_i) = f(x_i)) yields a denominator of zero, pushing the fidelity score to infinity... The mathematical formulation is inverted relative to the empirical results and text description.",
+          "confidence": "high",
+          "reasoning": "This exactly flags the injected inversion of the fidelity ratio, explaining that the denominator becomes zero under perfect agreement and that the formula is inverted.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. 1 defines fidelity as the normalized sum of \\|f(x_i)\\|^2 / \\|f(x_i) - g(x_i)\\|^2. ... The mathematical formulation is inverted relative to the empirical results and text description.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified that the fidelity formula was inverted, putting the residual in the denominator.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention any cross-reference mismatch between figures (Fig. 1 vs Fig. 2) or flag that a prose reference to benchmarking steps points to the wrong figure.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention any incorrect figure reference, mismatch between the benchmarking steps prose and a figure, or Sec. 4.1 cross-reference problem. No corresponding flag is present.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer report makes no mention of figure cross-reference errors or the mismatch between the text and Figure 1/2.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 24.962625,
+  "total_cost_usd": null,
+  "total_input_tokens": 16797,
+  "total_output_tokens": 2974,
+  "escalation_count": 0,
+  "notes": null
+}

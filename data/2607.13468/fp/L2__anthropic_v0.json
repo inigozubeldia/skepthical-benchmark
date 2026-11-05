@@ -1,0 +1,289 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-2e6a2ff4fe4b",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 4 occurrences; min sigfigs = 3; range = [36.5, 98.1]",
+        "evidence": {
+          "check_type": "repeated_constant",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 98.1,
+            "reported": 36.5,
+            "diff_abs": 61.599999999999994,
+            "diff_rel": 0.6279306829765545,
+            "tolerance": {
+              "abs_tol": 0.05,
+              "rel_tol": 0.005
+            },
+            "notes": "4 occurrences; min sigfigs = 3; range = [36.5, 98.1]"
+          },
+          "rereader": [
+            {
+              "label": "runtime_table_1",
+              "raw_observed": "36.5",
+              "value_observed": 36.5,
+              "notes": "Found in Table 1, p.7, under 'Ours' in the Runtime column."
+            },
+            {
+              "label": "runtime_table_5_depth1",
+              "raw_observed": "59.3",
+              "value_observed": 59.3,
+              "notes": "Found in Table 5, Appendix A.5, p.15, 'Generation (s)' row for '1 (depth = 1)'."
+            },
+            {
+              "label": "runtime_table_5_depth2_low",
+              "raw_observed": "86.6",
+              "value_observed": 86.6,
+              "notes": "Found in Table 5, Appendix A.5, p.15, 'Generation (s)' row for '2 (depth = 2)'."
+            },
+            {
+              "label": "runtime_table_5_depth2_high",
+              "raw_observed": "98.1",
+              "value_observed": 98.1,
+              "notes": "Found in Table 5, Appendix A.5, p.15, 'Generation (s)' row for '4 (depth = 2)'."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.15900400000000003
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-c3ab596d4c25",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 clearly shows HIVE-3D achieves IoU of 0.7449 versus TRELLIS's 0.8603, an approximately 13-point drop. The paper does not discuss or reconcile this discrepancy anywhere, despite claiming to deliver higher-fidelity geometry.",
+        "evidence": {
+          "claim": "HIVE-3D achieves better CD and F-Score than TRELLIS but a substantially worse IoU; the paper's central claim that HIVE-3D delivers higher-fidelity geometry is not reconciled with an ≈13-point drop in IoU.",
+          "excerpt": "HIVE-3D achieves better CD (0.0035 vs 0.0038) and F-Score (84.34 vs 81.29) than TRELLIS but a substantially worse IoU (0.7449 vs 0.8603). Since the paper's central claim is that HIVE-3D delivers \"high-resolution, high-fidelity\" geometry that is *strictly better* than TRELLIS, an ≈13-point drop in IoU deserves explicit discussion."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 clearly shows HIVE-3D achieves IoU of 0.7449 versus TRELLIS's 0.8603, an approximately 13-point drop. The paper does not discuss or reconcile this discrepancy anywhere, despite claiming to deliver higher-fidelity geometry.",
+            "cost_usd": 0.00545544
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims \"As shown in Table 1, HIVE-3D demonstrates consistently strong performance across all metrics,\" but Table 1 reports TRELLIS with higher IoU (\"0.8603\") than Ours (\"0.7449\"). It does not explicitly reconcile this drop with the Abstract’s claim that it \"significantly outperforms previous approaches, achieving state-of-the-art performance.\"",
+            "cost_usd": 0.011264
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not discuss the drop in IoU compared to TRELLIS, instead stating on page 7 that 'HIVE-3D demonstrates consistently strong performance across all metrics' despite Table 1 showing a decrease in IoU from 0.8603 to 0.7449.",
+            "cost_usd": 0.0024827599999999997
+          }
+        ],
+        "cost_usd": 0.0192022
+      },
+      {
+        "flag_id": "fp-d32a3b057ae2",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Appendix A.1 states the heads used (\"head 0, 4, and 12\") and mentions a \"predefined threshold\" but never provides the actual threshold value, sensitivity analysis, or conflict-resolution rule for overlapping voxel assignments across instances.",
+        "evidence": {
+          "claim": "The method's critical parameters for 2D-to-3D attention matching, including attention threshold and head selection, are not provided, nor is conflict resolution for overlapping components described.",
+          "excerpt": "The method depends critically on selecting voxels whose aggregated attention exceeds a \"predefined threshold\", yet the threshold value is never given, nor is a sensitivity analysis provided. The choice of averaging attention only from heads {0, 4, 12} of GL is asserted without justification or ablation. Overlapping components ... will contend for the same voxels; the paper does not describe a conflict-resolution rule."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix A.1 states the heads used (\"head 0, 4, and 12\") and mentions a \"predefined threshold\" but never provides the actual threshold value, sensitivity analysis, or conflict-resolution rule for overlapping voxel assignments across instances.",
+            "cost_usd": 0.00545544
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Appendix A.1 does provide the head choice — \"we obtain the final attention map by averaging the voxel-to-token attention maps from ... head 0, 4, and 12\" — so that part of the flag is factually wrong. However, the paper still says voxels are selected by \"applying a threshold to these aggregated scores\" / \"a predefined threshold\" without giving the value, and it does not state how conflicts are handled when \"This process is repeated independently for each instance.\"",
+            "cost_usd": 0.011264
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix A.1 mentions selecting voxels 'whose aggregated scores exceed a predefined threshold', but the threshold's exact value is never stated. There is also no justification for the head selection {0, 4, 12} or a conflict-resolution policy for overlapping instances.",
+            "cost_usd": 0.0024827599999999997
+          }
+        ],
+        "cost_usd": 0.0192022
+      },
+      {
+        "flag_id": "fp-97ad34898cdc",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Table 2 shows LPIPS worsens from depth=1 (0.38) to depth=2 (0.41) and stays at 0.41 for depth=3, while the paper claims \"the quality and level of detail in the generated scenes progressively improve as the recursion depth increases\" without reconciling the LPIPS regression.",
+        "evidence": {
+          "claim": "The claim that deeper hierarchy 'progressively improves' scene quality is only partially supported, as LPIPS worsens with depth and CLIP saturates; cost doubles per level with diminishing or negative gains.",
+          "excerpt": "Given the pipeline's cost roughly doubles per depth level, and LPIPS regresses, the paper's headline argument that 'the quality and level of detail in the generated scenes progressively improve as the recursion depth increases' is only partially supported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 2 shows LPIPS worsens from depth=1 (0.38) to depth=2 (0.41) and stays at 0.41 for depth=3, while the paper claims \"the quality and level of detail in the generated scenes progressively improve as the recursion depth increases\" without reconciling the LPIPS regression.",
+            "cost_usd": 0.00545544
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states that \"the quality and level of detail in the generated scenes progressively improve as the recursion depth increases,\" but Table 2 shows LPIPS worsening from \"0.38\" at Depth=1 to \"0.41\" at Depth=2 and Depth=3. The paper does not discuss this non-monotonic result, so the claim is only partially supported by its own metrics.",
+            "cost_usd": 0.011264
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts that scene quality 'progressively improve[s] as the recursion depth increases', yet Table 2 clearly shows LPIPS degrading from 0.38 at Depth=1 to 0.41 at Depth=3, supporting the reviewer's observation.",
+            "cost_usd": 0.0024827599999999997
+          }
+        ],
+        "cost_usd": 0.0192022
+      },
+      {
+        "flag_id": "fp-1be9388f2444",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 shows TRELLIS beats HIVE-3D on IoU (0.8603 vs 0.7449), and Table 6 shows HIVE-3D's SSIM (0.79) is lower than MIDI (0.80) and TRELLIS (0.80), and LPIPS (0.33) is worse than all competitors except Gen3DSR, yet the abstract claims the method \"significantly outperforms previous approaches\" without qualification.",
+        "evidence": {
+          "claim": "The Abstract and Conclusion claim state-of-the-art, significant outperformance by HIVE-3D, but tables show it is beaten by prior methods on some metrics; these claims are overstated relative to reported results.",
+          "excerpt": "The Abstract claims the method \"significantly outperforms previous approaches, achieving state-of-the-art performance\" and the Conclusion says HIVE-3D \"outperforms existing methods in terms of 3D scene generation quality\". However, Table 1 shows HIVE-3D is beaten by TRELLIS on IoU, and Table 6 ... shows HIVE-3D is tied or slightly beaten by other methods on SSIM ... and LPIPS ... ."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 shows TRELLIS beats HIVE-3D on IoU (0.8603 vs 0.7449), and Table 6 shows HIVE-3D's SSIM (0.79) is lower than MIDI (0.80) and TRELLIS (0.80), and LPIPS (0.33) is worse than all competitors except Gen3DSR, yet the abstract claims the method \"significantly outperforms previous approaches\" without qualification.",
+            "cost_usd": 0.00545544
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says \"Extensive experiments demonstrate that our method significantly outperforms previous approaches, achieving state-of-the-art performance\" and later that \"HIVE-3D outperforms existing methods in terms of 3D scene generation quality.\" But Table 1 shows TRELLIS has higher IoU (\"0.8603\" vs \"0.7449\"), and Table 6 shows Ours is not best on SSIM (\"0.79\" vs \"0.80\") or LPIPS (\"0.33\" vs MIDI’s \"0.25\").",
+            "cost_usd": 0.011264
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The abstract and conclusion claim HIVE-3D 'significantly outperforms previous approaches', but Table 1 shows TRELLIS achieving higher IoU (0.8603 vs 0.7449), and Table 6 shows MIDI and TRELLIS achieving equal or better SSIM and LPIPS scores.",
+            "cost_usd": 0.0024827599999999997
+          }
+        ],
+        "cost_usd": 0.0192022
+      },
+      {
+        "flag_id": "fp-79df58d9cafa",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper provides no attention-map visualizations to empirically validate that the cross-attention in GL correctly establishes image-to-voxel correspondences for scene inputs; Appendix A.1 only describes the procedural choice of heads without any diagnostic figure showing alignment quality.",
+        "evidence": {
+          "claim": "The claim that the flow transformer establishes image-to-voxel correspondences is central to the method, but no empirical attention-map visualisation is provided to support this premise.",
+          "excerpt": "No qualitative attention-map visualisation is shown in the paper to verify this holds on the specific scene images used here, and Appendix A.1 states the choice of heads {0, 4, 12} without any diagnostic figure showing their alignment quality. Given that the entire hierarchical decomposition depends on this, an empirical demonstration on at least a few scenes is warranted."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides no attention-map visualizations to empirically validate that the cross-attention in GL correctly establishes image-to-voxel correspondences for scene inputs; Appendix A.1 only describes the procedural choice of heads without any diagnostic figure showing alignment quality.",
+            "cost_usd": 0.00545544
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The method relies on the premise that \"the flow transformer-based model GL within the TRELLIS framework learns to establish correspondences between image regions and 3D voxels\" and that this \"key insight enables us\" to do 2D-to-3D lifting. Yet the paper only describes the attention extraction textually — e.g., \"averaging ... head 0, 4, and 12\" in Appendix A.1 — and provides no attention-map visualization or diagnostic figure supporting this premise on the paper’s examples.",
+            "cost_usd": 0.011264
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper heavily relies on the cross-attention maps for hierarchical 2D-to-3D segmentation, but nowhere in the main text or appendix are visualisations of these attention maps provided to empirically validate their alignment quality.",
+            "cost_usd": 0.0024827599999999997
+          }
+        ],
+        "cost_usd": 0.0192022
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.15900400000000003,
+    "general": 0.096011
+  },
+  "extractor_cost_usd": 0.02543599999999996,
+  "total_cost_usd": 0.280451
+}

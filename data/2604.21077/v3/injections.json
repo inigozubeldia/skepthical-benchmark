@@ -1,0 +1,68 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "moriond.tex",
+    "original_text": "A similar upper bound on the axion-nucleon coupling can be derived from the analysis of the cooling process of cold isolated neutron stars with ages around $\\sim10^{5}\\,$years~\\cite{Buschmann:2021juv}.",
+    "injected_text": "A similar upper bound on the axion-nucleon coupling can be derived from the analysis of the cooling process of cold neutron stars with ages around $\\sim10^{5}\\,$years~\\cite{Buschmann:2021juv}.",
+    "rationale": "Buschmann:2021juv's title and methodology are explicit that the bound is derived from *isolated* neutron stars (the Magnificent Seven); dropping the 'isolated' methodological qualifier leaves a description that is almost-but-not-quite faithful to the cited work, realising a citations-S1 type-3 methodological-qualifier drift while leaving the cite key untouched.",
+    "ground_truth_description": "The methodological qualifier 'isolated' was removed from the description of the cited Buschmann:2021juv neutron-star cooling analysis, weakening the methodological specificity of the citation while keeping the cite key intact.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Buschmann:2021juv",
+      "injected_cite_key": "Buschmann:2021juv",
+      "claim_sentence_verbatim": "A similar upper bound on the axion-nucleon coupling can be derived from the analysis of the cooling process of cold isolated neutron stars with ages around $\\sim10^{5}\\,$years~\\cite{Buschmann:2021juv}.",
+      "section_location": "Sec. 'Impact on the Supernova cooling'",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "moriond.tex",
+    "original_text": "the spectrum is characterized by a bimodal shape, since the emission peak associated with the $NN$ bremsstrahlung is located at energies $E_a\\sim50\\,$MeV, while the pion conversion contribution peaks at $E_a\\sim200\\,$MeV",
+    "injected_text": "the spectrum is characterized by a bimodal shape, with the $NN$ bremsstrahlung contribution making up about $55\\%$ of the total axion emissivity and peaking at $E_a\\sim50\\,$MeV, while the pion conversion process provides about $60\\%$ of the emissivity, peaking at $E_a\\sim200\\,$MeV",
+    "rationale": "The free-streaming axion spectrum is described as having two contributions (NN bremsstrahlung + pion conversion) that should partition the total emissivity; assigning them 55% and 60% creates an exclusive-and-exhaustive percentage breakdown summing to 115% (not 100%), causing percent_to_100 to FAIL. The relative deviation (15%) on the sum of the partition triggers the >10% upgrade rule to 'major'. Caveat: the source paper does not natively give this percentage split, so introducing the breakdown is somewhat artefactual for this paper — flagged here per the realism-tension guidance, since the cell strictly requires a percent_to_100 violation and no native breakdown was available.",
+    "ground_truth_description": "Replaced the qualitative description of the bimodal axion emission spectrum with a quantitative breakdown that assigns 55% to NN bremsstrahlung and 60% to pion conversion, so the two exclusive-and-exhaustive contributions to the total emissivity now sum to 115% instead of 100%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_to_100",
+      "value_before_raw": "100",
+      "value_after_raw": "115",
+      "value_before_float": 100.0,
+      "value_after_float": 115.0,
+      "location_cue": "the $NN$ bremsstrahlung contribution making up about $55\\%$ of the total axion emissivity and peaking at $E_a\\sim50\\,$MeV, while the pion conversion process provides about $60\\%$ of the emissivity",
+      "paired_location": null,
+      "quantity_label": "Sum of the percentage shares of NN bremsstrahlung and pion-conversion contributions to the total free-streaming axion emissivity (should equal 100%).",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "moriond.tex",
+    "original_text": "Roughly, consistency with observations requires that the axion luminosity $L_a$ computed on the unperturbed model must not exceed the total neutrino luminosity $L_\\nu$ provided by the same SN simulation at $1\\,$s after the bounce of the SN core. This criterion was employed to exclude the blue region in Fig.~\\ref{fig:CoolingBound}",
+    "injected_text": "Roughly, consistency with observations requires that the axion luminosity $L_a$ computed on the unperturbed model must not exceed the total neutrino luminosity $L_\\nu$ provided by the same SN simulation at $1\\,$s after the bounce of the SN core. The bound is obtained from self-consistent SN simulations that consistently include the axion back-reaction on the proto-neutron star dynamics, so that energy losses are captured throughout the entire cooling phase. This criterion was employed to exclude the blue region in Fig.~\\ref{fig:CoolingBound}",
+    "rationale": "An injected sentence asserts a stronger methodological property (self-consistent simulations including axion back-reaction) that directly contradicts the immediately preceding clause stating the luminosity is 'computed on the unperturbed model', producing a Methods-level inconsistency a reviewer should catch by cross-checking adjacent claims about the simulation protocol.",
+    "ground_truth_description": "Inserted a sentence in the SN cooling-bound paragraph claiming the bound comes from self-consistent simulations including axion back-reaction, contradicting the explicit statement in the same paragraph that the axion luminosity is computed on the unperturbed model.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 'Impact on the Supernova cooling'",
+      "affected_span_verbatim": "Roughly, consistency with observations requires that the axion luminosity $L_a$ computed on the unperturbed model must not exceed the total neutrino luminosity $L_\\nu$ provided by the same SN simulation at $1\\,$s after the bounce of the SN core. This criterion was employed to exclude the blue region in Fig.~\\ref{fig:CoolingBound}"
+    },
+    "proposer_agent": "injector.general.S3.t3.v3"
+  }
+]

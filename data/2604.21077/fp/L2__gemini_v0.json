@@ -1,0 +1,90 @@
+{
+  "paper_id": "2604.21077",
+  "reviewer_system": "L2",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-f3e293569bb3",
+        "paper_id": "2604.21077",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "mathematics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Maths interpreter: FAIL. The velocity factor in the decay-length formula is written as sqrt(1 - (E_a/m_a)^2), but the correct relativistic beta is beta = sqrt(1 - (m_a/E_a)^2). Under the paper's own assumption E_a > m_a, the argument (E_a/m_a)^2 > 1, making 1 - (E_a/m_a)^2 negative and the square root imaginary — a physically meaningless result. The correct expression for the boost factor gamma*beta is sqrt((E_a/m_a)^2 - 1) = sqrt(E_a^2 - m_a^2)/m_a, or equivalently the beta term should be sqrt(1 - (m_a/E_a)^2) with the ratio inverted. The transcription fidelity check confirmed the error is faithfully reproduced from the paper itself, not introduced by extraction. This error was identified via prose-level physical reasoning; the Wolfram engine was unavailable.",
+        "evidence": {
+          "maths_verdict": "FAIL",
+          "confidence": "high",
+          "impact": "critical",
+          "notes": "The velocity factor in the decay-length formula is written as sqrt(1 - (E_a/m_a)^2), but the correct relativistic beta is beta = sqrt(1 - (m_a/E_a)^2). Under the paper's own assumption E_a > m_a, the argument (E_a/m_a)^2 > 1, making 1 - (E_a/m_a)^2 negative and the square root imaginary — a physically meaningless result. The correct expression for the boost factor gamma*beta is sqrt((E_a/m_a)^2 - 1) = sqrt(E_a^2 - m_a^2)/m_a, or equivalently the beta term should be sqrt(1 - (m_a/E_a)^2) with the ratio inverted. The transcription fidelity check confirmed the error is faithfully reproduced from the paper itself, not introduced by extraction. This error was identified via prose-level physical reasoning; the Wolfram engine was unavailable.",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → confirmed (15.35s)",
+            "wolfram: Check if the velocity term evaluates to a real physical quantity or yields an imaginary result for relativistic axions. (legacy sympy → wolfram raw-LaTeX fallback) → unavailable"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.036566600000000005
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-cadec79fc17d",
+        "paper_id": "2604.21077",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "In Eq. (3), the formula uses $\\omega_a$ in the prefactor ('$\\simeq 1.3\\,\\mathrm{kpc}\\left(\\frac{\\omega_a}{100\\,\\mathrm{MeV}}\\right)$') while simultaneously using $E_a$ in the square-root term ('$\\sqrt{1-(E_a/m_a)^2}$'), and the surrounding text refers only to '$E_a$' as the axion energy ('the typical decay length for an axion with energy $E_a$'). No explanation is given for why two different symbols are used for what appears to be the same quantity, creating a genuine notational ambiguity.",
+        "evidence": {
+          "claim": "There is a major notation inconsistency in Eq. (3) and its surrounding text, with both $\\omega_a$ and $E_a$ being used to represent axion energy, causing ambiguity.",
+          "excerpt": "Sec. 3.2 exhibits a notation inconsistency within Eq. (3) and its surrounding text. The equation uses both $\\omega_a$ and $E_a$ to represent the axion energy, which creates ambiguity (especially since $\\omega_a$ scales the prefactor while $E_a$ appears in the square root)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "In Eq. (3), the formula uses $\\omega_a$ in the prefactor ('$\\simeq 1.3\\,\\mathrm{kpc}\\left(\\frac{\\omega_a}{100\\,\\mathrm{MeV}}\\right)$') while simultaneously using $E_a$ in the square-root term ('$\\sqrt{1-(E_a/m_a)^2}$'), and the surrounding text refers only to '$E_a$' as the axion energy ('the typical decay length for an axion with energy $E_a$'). No explanation is given for why two different symbols are used for what appears to be the same quantity, creating a genuine notational ambiguity.",
+            "cost_usd": 0.012962399999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The surrounding text introduces only one energy variable — \"The typical decay length for an axion with energy Ea within the laboratory reference frame is given by\" — but Eq. (3) then uses both \"(ωa/100 MeV)\" and \"√{1 − (Ea/ma)^2}\". The follow-up sentence defines only \"γa\" and \"βa\" (\"where γa is the Lorentz factor and βa is the axion velocity\"), so the paper does not resolve whether ωa and Ea are distinct or the same quantity.",
+            "cost_usd": 0.0153275
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text introduces 'an axion with energy Ea' right before Eq. (3), but the equation itself inexplicably contains both '$\\omega_a$' in the prefactor and '$E_a$' in the square root term, confirming the notation inconsistency.",
+            "cost_usd": 0.003825
+          }
+        ],
+        "cost_usd": 0.0321149
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.036566600000000005,
+    "general": 0.0321149
+  },
+  "extractor_cost_usd": 0.007755999999999985,
+  "total_cost_usd": 0.07643749999999999
+}

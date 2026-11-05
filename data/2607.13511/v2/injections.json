@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "PTQTP \\cite{ptqtp} takes the important step of using \\emph{two} trit-planes, a superposition of two ternary matrices with row-wise scales, and shows this restores much of the lost expressiveness without retraining.",
+    "injected_text": "PTQTP \\cite{ptqtp} takes the important step of using \\emph{two} trit-planes, a superposition of two ternary matrices with scales, and shows this restores much of the lost expressiveness without retraining.",
+    "rationale": "Dropping the specific 'row-wise' qualifier weakens the methodological description of how scales are applied in PTQTP, making the claim sentence less faithful to the cited paper's stated method.",
+    "ground_truth_description": "Removed the methodological qualifier 'row-wise' from the description of the PTQTP scaling scheme.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "ptqtp",
+      "injected_cite_key": "ptqtp",
+      "claim_sentence_verbatim": "PTQTP \\cite{ptqtp} takes the important step of using \\emph{two} trit-planes, a superposition of two ternary matrices with row-wise scales, and shows this restores much of the lost expressiveness without retraining.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "reaches 10.10 wikitext-2 perplexity against 9.78 for bf16 ($+3.2\\%$), placing it near",
+    "injected_text": "reaches 10.10 wikitext-2 perplexity against 9.78 for bf16 ($+2.3\\%$), placing it near",
+    "rationale": "Swaps adjacent digits in the headline relative perplexity degradation in the abstract (+3.2% to +2.3%), creating an inconsistency with the corresponding exact value still reported correctly in Table 3.",
+    "ground_truth_description": "Digit swap in the abstract's wikitext-2 perplexity degradation percentage relative to bf16, creating a contradiction with Table 3.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "3.2",
+      "value_after_raw": "2.3",
+      "value_before_float": 3.2,
+      "value_after_float": 2.3,
+      "location_cue": "reaches 10.10 wikitext-2 perplexity against 9.78 for bf16 ($+3.2\\%$), placing it near",
+      "paired_location": "Table 3",
+      "quantity_label": "wikitext-2 perplexity degradation relative to bf16 (%)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2} \\;\\le\\; \\|R_i\\|_F^2,",
+    "injected_text": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 \\;\\le\\; \\|R_i\\|_F^2,",
+    "rationale": "Deleting the subtracted projection-reduction term breaks the algebraic identity of the Frobenius norm expansion, rendering the equality mathematically false and refutable by Wolfram while maintaining valid LaTeX syntax.",
+    "ground_truth_description": "Deleted the subtracted reduction term -(u^T R_i v)^2 / (||u||^2 ||v||^2) from the residual norm proof equation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Appendix A first display",
+      "original_fragment_latex": " - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2}",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2} \\;\\le\\; \\|R_i\\|_F^2,",
+      "full_equation_latex_after": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 \\;\\le\\; \\|R_i\\|_F^2,",
+      "term_role": "squared projection reduction term",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "A simple greedy ALS already lands within $\\sim$17--20\\% of Q4\\_K's bit efficiency at matched accuracy, with identified, unstacked levers of comparable total size, while keeping inference multiplication-free.",
+    "injected_text": "A simple greedy ALS already strictly outperforms Q4\\_K's bit efficiency at matched accuracy, demonstrating that expanded rank provides superior compression, while keeping inference multiplication-free.",
+    "rationale": "The conclusion is rewritten to claim the method strictly outperforms Q4_K's bit efficiency, which directly contradicts Section 3.3 and Table 2 where the method trails Q4_K by 17-20%.",
+    "ground_truth_description": "The conclusion was altered to claim that ExTernD outperforms Q4_K's bit efficiency, directly contradicting the Results section which explicitly shows a 17-20% deficit.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "A",
+      "checklist_item_id": "A2",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Conclusion",
+      "affected_span_verbatim": "A simple greedy ALS already lands within $\\sim$17--20\\% of Q4\\_K's bit efficiency at matched accuracy, with identified, unstacked levers of comparable total size, while keeping inference multiplication-free."
+    },
+    "proposer_agent": "injector.general.S3.t1.v2"
+  }
+]

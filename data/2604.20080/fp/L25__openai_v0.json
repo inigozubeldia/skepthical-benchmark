@@ -1,0 +1,182 @@
+{
+  "paper_id": "2604.20080",
+  "reviewer_system": "L25",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-7d8725852cc8",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 90000/280000 = 0.32142857142857145; claimed 0.34",
+        "evidence": {
+          "check_type": "ratio_eq",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 0.32142857142857145,
+            "reported": 0.34,
+            "diff_abs": 0.018571428571428572,
+            "diff_rel": 0.0546218487394958,
+            "tolerance": {
+              "abs_tol": 0.005,
+              "rel_tol": 5e-05
+            },
+            "notes": "90000/280000 = 0.32142857142857145; claimed 0.34"
+          },
+          "rereader": [
+            {
+              "label": "numerator",
+              "raw_observed": "0.9",
+              "value_observed": 0.9,
+              "notes": "Found in Section 3.4: CO(2–1)/CO(1–0) ratio, in the phrase 'L'_CO(2–1) = (0.9 ± 0.6)×10^5 K km s−1 pc2'."
+            },
+            {
+              "label": "denominator",
+              "raw_observed": "2.8",
+              "value_observed": 2.8,
+              "notes": "Found in Section 3.4: CO(2–1)/CO(1–0) ratio, in the phrase 'L'_CO(1–0) = (2.8 ± 0.4) × 10^5'."
+            },
+            {
+              "label": "ratio",
+              "raw_observed": "0.34",
+              "value_observed": 0.34,
+              "notes": "Found in Section 3.4: CO(2–1)/CO(1–0) ratio, in the phrase 'resulting in R_21 = 0.34 ± 0.22'."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.184048
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-cbe70e195bd4",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Maths interpreter: PASS. The formula σ_vir ~ √(GM/R) is the standard virial velocity dispersion estimate, derivable directly from the virial theorem (2K + U = 0) for a self-gravitating sphere: the kinetic energy per unit mass is ~σ², and the gravitational potential energy per unit mass is ~GM/R, giving σ ~ √(GM/R). Dimensionally, G has units m³ kg⁻¹ s⁻², M is in kg, and R in m, so GM/R has units m² s⁻², and its square root correctly yields m s⁻¹ (velocity). The units check encountered a tool error and could not run automatically, but the dimensional argument is straightforward and unambiguous. The equation matches the canonical form used throughout the astrophysical literature for order-of-magnitude virial analyses.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "high",
+          "impact": "moderate",
+          "notes": "The formula σ_vir ~ √(GM/R) is the standard virial velocity dispersion estimate, derivable directly from the virial theorem (2K + U = 0) for a self-gravitating sphere: the kinetic energy per unit mass is ~σ², and the gravitational potential energy per unit mass is ~GM/R, giving σ ~ √(GM/R). Dimensionally, G has units m³ kg⁻¹ s⁻², M is in kg, and R in m, so GM/R has units m² s⁻², and its square root correctly yields m s⁻¹ (velocity). The units check encountered a tool error and could not run automatically, but the dimensional argument is straightforward and unambiguous. The equation matches the canonical form used throughout the astrophysical literature for order-of-magnitude virial analyses.",
+          "tools_used": []
+        },
+        "judge_panel": [],
+        "cost_usd": 1.0688060000000001
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-d2a16614caab",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "For the ratio, the paper says the CO(2–1) map was only \"re-binned to match the pixel scale of the CO(1–0) map\" and explicitly notes that this \"does not improve the angular resolution, which remains set by the synthesized beam.\" Since Table A.1 still gives different beams (\"0''.87×0''.80\" vs \"1''.21×1''.04\"), a matched-beam/matched-filtering R21 analysis is not actually demonstrated.",
+        "evidence": {
+          "claim": "CO(2–1)/CO(1–0) line-ratio analysis is not demonstrably done at matched angular resolution or spatial filtering, biasing ratio and affecting subthermal excitation conclusions.",
+          "excerpt": "The CO line-ratio analysis is not demonstrably done at matched angular resolution and matched spatial filtering...the ratio can be biased, especially for clumpy emission offset from the nucleus."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly addresses matched resolution and spatial filtering in Appendix A.3: 'The CO(2–1) moment-0 map was therefore regridded to the CO(1–0) pixel scale using the imregrid task in CASA' and 'The aligned maps were then intersected using a custom script to retain only the pixels with overlapping emission, masking all other regions.' Section 3.4 also states the map 'was re-binned to match the pixel scale of the CO(1–0) map before measuring integrated fluxes only within the overlapping region between these transitions,' directly addressing the reviewer's concern about matched resolution and spatial coverage.",
+            "cost_usd": 0.08956875
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "For the ratio, the paper says the CO(2–1) map was only \"re-binned to match the pixel scale of the CO(1–0) map\" and explicitly notes that this \"does not improve the angular resolution, which remains set by the synthesized beam.\" Since Table A.1 still gives different beams (\"0''.87×0''.80\" vs \"1''.21×1''.04\"), a matched-beam/matched-filtering R21 analysis is not actually demonstrated.",
+            "cost_usd": 0.02948025
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Appendix A.3 that when regridding the CO(2-1) map to the CO(1-0) pixel scale, 'This procedure does not improve the angular resolution, which remains set by the synthesized beam'. Since the synthesized beams (Table A.1) are different (0.87''x0.80'' vs 1.21''x1.04''), the angular resolutions are not matched.",
+            "cost_usd": 0.010271
+          }
+        ],
+        "cost_usd": 0.12932
+      },
+      {
+        "flag_id": "fp-fbe540cf02b0",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=FP, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The evidence for a significant CO-dark H2 component is plausible but overstated; the data support it as plausible, but do not conclusively demonstrate or quantify it.",
+          "excerpt": "The evidence for a “significant CO-dark H2 component” is plausible but overstated...the conclusion goes beyond what is directly established by the data."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper is appropriately hedged throughout, using language such as 'suggests,' 'consistent with,' and 'likely.' For example, Section 4.3 states 'This suggests that a substantial fraction of the molecular gas in the immediate vicinity of the SSC could be CO-dark' and the conclusions note 'caution is therefore required when using CO emission alone to infer the total molecular gas content.' The paper does not claim to conclusively demonstrate or quantify the CO-dark component, but presents it as a plausible interpretation supported by indirect evidence, which is standard practice for this type of analysis.",
+            "cost_usd": 0.08956875
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper sometimes makes a strong claim — \"leaving a significant CO-dark H2 component\" and that CO \"likely misses a substantial CO-dark component\" — but elsewhere presents it more cautiously as an inference: the gas near the SSC \"could be CO-dark\" and \"Future observations ... will be essential to test these scenarios in greater detail.\" Because the language is mixed, it is unclear whether the CO-dark-H2 conclusion is genuinely overstated or appropriately framed as plausible.",
+            "cost_usd": 0.02948025
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper infers the existence of CO-dark H2 from the lack of CO emission at the SSC (Section 4.3: 'This suggests that a substantial fraction of the molecular gas... could be CO-dark'), but lacks direct measurements (e.g., [CII] or dust-based total gas mass) to conclusively demonstrate or quantify its magnitude, making the definitive claim in the abstract overstated.",
+            "cost_usd": 0.010271
+          }
+        ],
+        "cost_usd": 0.12932
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.184048,
+    "mathematics": 1.0688060000000001,
+    "general": 0.25864
+  },
+  "extractor_cost_usd": 0.017015999999999698,
+  "total_cost_usd": 1.5285099999999998
+}

@@ -1,0 +1,188 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L1",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-9fc82070a6ca",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges in the Conclusion that \"constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors and lead to suboptimal results,\" but provides no discussion of robustness, recovery mechanisms, or graceful degradation when these models fail. The reviewer's specific concern about error propagation and recovery is not addressed.",
+        "evidence": {
+          "claim": "The system may not recover gracefully if the 2D segmentation stage (Florence-2/SAM 2) fails, leading to error propagation and potential breakdown of the 3D semantic scene tree.",
+          "excerpt": "What happens if Florence-2 fails to detect an object, or SAM 2 over-segments an object? The authors should briefly discuss the robustness of the 2D-to-3D semantic tree construction and whether the system can recover from or gracefully handle 2D segmentation errors."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges in the Conclusion that \"constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors and lead to suboptimal results,\" but provides no discussion of robustness, recovery mechanisms, or graceful degradation when these models fail. The reviewer's specific concern about error propagation and recovery is not addressed.",
+            "cost_usd": 0.00634005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges this vulnerability but does not describe any recovery mechanism: \"constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors and lead to suboptimal results.\" It also says only that future work will improve robustness, so graceful handling of Florence-2/SAM2 failures is not addressed.",
+            "cost_usd": 0.011911875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors briefly acknowledge that 'constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors and lead to suboptimal results' (Section 6), but they do not discuss any mechanisms for graceful recovery, leaving the reviewer's request for a discussion on robustness unresolved.",
+            "cost_usd": 0.0027051
+          }
+        ],
+        "cost_usd": 0.020957025
+      },
+      {
+        "flag_id": "fp-268d2ce56ffd",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper's scale estimation method (Section A.2) only discusses using mean centroid distance as a proxy for scale and notes bounding box alignment is infeasible due to pose differences, but never discusses potential failure modes for extreme aspect ratio objects or thin structures like floor lamps or plants. The specific limitation the reviewer raises is not addressed.",
+        "evidence": {
+          "claim": "The scale estimation via centroid-distance might fail or distort objects with extreme aspect ratios or thin structures, leading to potential inaccuracies in 3D object registration.",
+          "excerpt": "for objects with extreme aspect ratios or thin structures (e.g., floor lamps, plants), the coarse voxel representation might significantly truncate or alter the centroid compared to the fine generation. Does the scaling heuristic fail or introduce distortion in these edge cases? A brief discussion on the limitations of this specific scale estimation would strengthen the technical depth of the paper."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper's scale estimation method (Section A.2) only discusses using mean centroid distance as a proxy for scale and notes bounding box alignment is infeasible due to pose differences, but never discusses potential failure modes for extreme aspect ratio objects or thin structures like floor lamps or plants. The specific limitation the reviewer raises is not addressed.",
+            "cost_usd": 0.00634005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "For scale estimation, the paper only states that the centroid-distance heuristic \"serves as a robust proxy for the overall size of the object\" and uses it \"to align the scales of different objects.\" It does not discuss or evaluate failure modes for extreme aspect ratios or thin structures, so this specific concern remains unresolved.",
+            "cost_usd": 0.011911875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix A.2 details the scale factor estimation using centroid-distance ('calculating the mean distance from all points to this centroid'), but it lacks any discussion on the limitations or potential failure cases of this heuristic for objects with extreme aspect ratios or thin structures.",
+            "cost_usd": 0.0027051
+          }
+        ],
+        "cost_usd": 0.020957025
+      },
+      {
+        "flag_id": "fp-7aba25842848",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states in Section 4.3 that \"the segmented child components may be occluded, and we adopt the Amodal3R (Wu et al., 2025) framework to generate complete amodal reconstructions free from occlusion,\" but never discusses how well the Voxel-SR module handles heavily occluded inputs or the division of labor between Amodal3R and the Voxel-SR module for amodal completion. The reviewer's exact concern is unaddressed.",
+        "evidence": {
+          "claim": "It is unclear how well the Voxel-SR module, trained on isolated objects, performs in amodal completion of heavily occluded objects within scenes.",
+          "excerpt": "its ability to hallucinate unseen geometry for heavily occluded objects is critical. It would be beneficial to explicitly state how well the Objaverse-trained Voxel-SR model handles these amodal completions, or if Amodal3R does the heavy lifting before the SR step."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states in Section 4.3 that \"the segmented child components may be occluded, and we adopt the Amodal3R (Wu et al., 2025) framework to generate complete amodal reconstructions free from occlusion,\" but never discusses how well the Voxel-SR module handles heavily occluded inputs or the division of labor between Amodal3R and the Voxel-SR module for amodal completion. The reviewer's exact concern is unaddressed.",
+            "cost_usd": 0.00634005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly states that occlusion/amodal completion is handled before refinement: \"the segmented child components may be occluded, and we adopt the Amodal3R (Wu et al., 2025) framework to generate complete amodal reconstructions free from occlusion.\" So it is clear that Amodal3R, not Voxel-SR alone, does the amodal completion.",
+            "cost_usd": 0.011911875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While Section 4.3 notes that 'we adopt the Amodal3R framework to generate complete amodal reconstructions free from occlusion', it is not explicitly stated how this module integrates with the Voxel-SR step (i.e., whether it acts before SR) or how well the Voxel-SR model inherently handles heavily occluded amodal completions.",
+            "cost_usd": 0.0027051
+          }
+        ],
+        "cost_usd": 0.020957025
+      },
+      {
+        "flag_id": "fp-a55ab2c25b20",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Table 5 in Appendix A.5 provides a runtime breakdown into \"Seg. + SR\" and \"Generation\" steps, but no discussion identifies the specific computational bottleneck or breaks down whether the Voxel-SR diffusion steps or RANSAC registration dominate within those categories. The reviewer's specific request for bottleneck identification is not fulfilled.",
+        "evidence": {
+          "claim": "The runtime of HIVE-3D is significantly higher than some baselines, but the specific computational bottleneck in the pipeline is not clearly identified.",
+          "excerpt": "the authors should briefly comment on the computational bottleneck in the pipeline. Is the time predominantly spent in the Voxel-SR diffusion steps, or in the RANSAC registration?"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Table 5 in Appendix A.5 provides a runtime breakdown into \"Seg. + SR\" and \"Generation\" steps, but no discussion identifies the specific computational bottleneck or breaks down whether the Voxel-SR diffusion steps or RANSAC registration dominate within those categories. The reviewer's specific request for bottleneck identification is not fulfilled.",
+            "cost_usd": 0.00634005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper reports overall runtime and a coarse breakdown (Table 5: \"Seg. + SR (s)\" and \"Generation (s)\") and says only that \"the detailed results are summarized in Table 5.\" It does not isolate whether the main bottleneck is Voxel-SR diffusion, RANSAC registration, or another stage, so the specific bottleneck is not clearly identified.",
+            "cost_usd": 0.011911875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix A.5 and Table 5 break down runtime into 'Seg. + SR (s)' and 'Generation (s)', but they do not explicitly isolate or comment on the time spent on RANSAC registration versus the Voxel-SR diffusion steps, leaving the specific computational bottleneck unclear.",
+            "cost_usd": 0.0027051
+          }
+        ],
+        "cost_usd": 0.020957025
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0838281
+  },
+  "extractor_cost_usd": 0.009596000000000007,
+  "total_cost_usd": 0.09342410000000001
+}

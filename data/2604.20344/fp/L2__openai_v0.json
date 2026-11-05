@@ -1,0 +1,174 @@
+{
+  "paper_id": "2604.20344",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-ee7285bf243b",
+        "paper_id": "2604.20344",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. The transcription-fidelity check returned 'unverifiable' because the verbatim source snippet is truncated and does not include the right-hand side of the equation, making it impossible to confirm that the extracted LaTeX matches the paper. The knowledge-audit channel is not applicable here (this is a bespoke empirical fitting function, not a canonical textbook equation), so its inconclusive result is expected and not a refutation signal. The Wolfram engine was unavailable and the sympy check was not executed. Given that no mechanical engine ran successfully and the transcription could not be verified, there is insufficient evidence to either confirm or refute the claim. The mathematical form itself (a polynomial-in-γ expansion with ln γ interaction terms) is structurally plausible as a fitting function, but the potential γ=0 singularity noted in the assumptions raises a minor consistency concern that cannot be resolved without the full verified equation.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "moderate",
+          "notes": "The transcription-fidelity check returned 'unverifiable' because the verbatim source snippet is truncated and does not include the right-hand side of the equation, making it impossible to confirm that the extracted LaTeX matches the paper. The knowledge-audit channel is not applicable here (this is a bespoke empirical fitting function, not a canonical textbook equation), so its inconclusive result is expected and not a refutation signal. The Wolfram engine was unavailable and the sympy check was not executed. Given that no mechanical engine ran successfully and the transcription could not be verified, there is insufficient evidence to either confirm or refute the claim. The mathematical form itself (a polynomial-in-γ expansion with ln γ interaction terms) is structurally plausible as a fitting function, but the potential γ=0 singularity noted in the assumptions raises a minor consistency concern that cannot be resolved without the full verified equation.",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → inconclusive (7.81s)",
+            "wolfram: Compute the limit of the fitting function as gamma approaches 0 to demonstrate the singularity. (legacy sympy → wolfram raw-LaTeX fallback) → unavailable"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.024834199999999973
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-a05e6fb47c6a",
+        "paper_id": "2604.20344",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'We used SpheCow to calculate this critical transition parameter for a large suite of core–Sérsic models' but does not specify the radial domain, sampling strategy, criterion for declaring non-monotonicity, numerical tolerances, or root-finding method used to pinpoint αcrit. The only methodological detail given is that SpheCow uses 'an efficient high-order Gauss-Legendre numerical integration strategy,' which is insufficient to reproduce the αcrit values in Table A.1.",
+        "evidence": {
+          "claim": "The procedure used to compute α_crit is not described in enough detail to reproduce the main numerical result, including key algorithmic and implementation details.",
+          "excerpt": "The procedure used to compute \\(\\alpha_{\\rm crit}\\) is not described in enough detail to reproduce the main numerical result (Sec. 3.1, Sec. 3.3, Appendix A). The paper states that SpheCow was used ... but it does not specify the radial domain, sampling strategy, monotonicity criterion, numerical tolerances, bracketing/root-finding method, treatment of near-zero slopes, or convergence tests."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'We used SpheCow to calculate this critical transition parameter for a large suite of core–Sérsic models' but does not specify the radial domain, sampling strategy, criterion for declaring non-monotonicity, numerical tolerances, or root-finding method used to pinpoint αcrit. The only methodological detail given is that SpheCow uses 'an efficient high-order Gauss-Legendre numerical integration strategy,' which is insufficient to reproduce the αcrit values in Table A.1.",
+            "cost_usd": 0.006156600000000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only says that it used SpheCow, noting that \"The code uses an efficient high-order Gauss-Legendre numerical integration strategy\" and that \"We used SpheCow to calculate this critical transition parameter for a large suite of core–Sérsic models.\" It does not give the requested reproducibility details for how αcrit was actually located (sampling/grid, monotonicity test, tolerances, root-finding/bracketing, or convergence checks).",
+            "cost_usd": 0.008238333333333334
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions that 'We used SpheCow to calculate this critical transition parameter' but does not specify the numerical root-finding methodology, tolerances, grid resolution, or monotonicity criteria used to define and compute the values in Table A.1.",
+            "cost_usd": 0.0020344666666666667
+          }
+        ],
+        "cost_usd": 0.0164294
+      },
+      {
+        "flag_id": "fp-42c0dbc5c2b0",
+        "paper_id": "2604.20344",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The abstract and conclusions state that sharp transitions 'always generate non-monotonic intrinsic density profiles' and that 'the sharp-transition limit α→∞ is never physically admissible,' but Appendix A only samples γ≤0.5, 2≤m≤10, and 5≤Re/Rb≤100, and the paper provides no analytical proof extending these findings beyond the sampled parameter space.",
+        "evidence": {
+          "claim": "The scope of the main claim is broader than the demonstrated parameter space; universal statements are not fully supported analytically or numerically.",
+          "excerpt": "The scope of the main claim is broader than the demonstrated parameter space (Abstract, Sec. 3.2, Sec. 3.3, Sec. 4, Conclusions, Appendix A). The text states that sharp transitions “always” generate non-monotonic densities ... but Appendix A only samples \\(\\gamma\\leq 0.5\\), \\(2\\leq m\\leq 10\\), and \\(5\\leq R_{\\rm e}/R_{\\rm b}\\leq100\\)..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The abstract and conclusions state that sharp transitions 'always generate non-monotonic intrinsic density profiles' and that 'the sharp-transition limit α→∞ is never physically admissible,' but Appendix A only samples γ≤0.5, 2≤m≤10, and 5≤Re/Rb≤100, and the paper provides no analytical proof extending these findings beyond the sampled parameter space.",
+            "cost_usd": 0.006156600000000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes universal claims such as \"sharp transitions between the inner power-law core and the outer Sérsic profile (large α) always generate non-monotonic intrinsic density profiles,\" \"All sharp-transition core–Sérsic models have γ(r) < 0,\" and \"the sharp-transition limit α → ∞ ... is never physically admissible.\" But the numerical exploration explicitly reported in Appendix A is limited to sampled ranges in γ, m, and Re/Rb, and no analytic proof is provided to justify the full universality of these statements.",
+            "cost_usd": 0.008238333333333334
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text states universally that 'sharp transitions between the inner power-law core and the outer Sérsic profile (large α) always generate non-monotonic intrinsic density profiles', but this is only numerically demonstrated on a bounded parameter grid (Appendix A) without an accompanying analytic proof for all valid parameter limits.",
+            "cost_usd": 0.0020344666666666667
+          }
+        ],
+        "cost_usd": 0.0164294
+      },
+      {
+        "flag_id": "fp-34128e76f43c",
+        "paper_id": "2604.20344",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper asserts in Sec. 4 that 'if a given set of core–Sérsic parameters yields a non-monotonic density profile under the simplest spherical deprojection, it cannot correspond to a physically plausible stellar distribution under more general geometries either,' but no calculation or formal proof is provided to support this generalization; it is stated as a logical deduction without derivation.",
+        "evidence": {
+          "claim": "The extension from spherical deprojection to general geometries is asserted too strongly without calculation or proof.",
+          "excerpt": "The extension from spherical deprojection to general geometries is asserted too strongly (Sec. 4). The paper states that if a parameter set gives a non-monotonic density under spherical deprojection, “it cannot correspond to a physically plausible stellar distribution under more general geometries either.” ... but no calculation or proof is provided."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts in Sec. 4 that 'if a given set of core–Sérsic parameters yields a non-monotonic density profile under the simplest spherical deprojection, it cannot correspond to a physically plausible stellar distribution under more general geometries either,' but no calculation or formal proof is provided to support this generalization; it is stated as a logical deduction without derivation.",
+            "cost_usd": 0.006156600000000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "After stating \"Our analysis assumes spherical symmetry,\" the paper nevertheless asserts that \"If a given set of core–Sérsic parameters yields a non-monotonic density profile under the simplest spherical deprojection, it cannot correspond to a physically plausible stellar distribution under more general geometries either.\" The paper provides no calculation or proof for this extension beyond the spherical case.",
+            "cost_usd": 0.008238333333333334
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts that 'If a given set of core–Sérsic parameters yields a non-monotonic density profile under the simplest spherical deprojection, it cannot correspond to a physically plausible stellar distribution under more general geometries either', without providing a calculation or proof for non-spherical geometries.",
+            "cost_usd": 0.0020344666666666667
+          }
+        ],
+        "cost_usd": 0.0164294
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.024834199999999973,
+    "general": 0.049288200000000004
+  },
+  "extractor_cost_usd": 0.019633999999999985,
+  "total_cost_usd": 0.09375639999999996
+}

@@ -1,0 +1,188 @@
+{
+  "paper_id": "2607.14287",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-28a0053ee565",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only compares the full two-stage XCT-SAM against Conv-LoRA-SAM fine-tuned directly on XCT data ('Following the direct synthetic-XCT adaptation setting of [18], we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage'), with no epoch-matched controls, no alternative intermediate domain ablations, no Stage-I-only baseline, and no analysis ruling out that longer training rather than sequential adaptation explains the gain.",
+        "evidence": {
+          "claim": "The paper’s central claim for the superiority of sequential domain adaptation is insufficiently supported, as no epoch-matched or alternative-intermediate-domain controls are provided, and attribution to compute cannot be ruled out.",
+          "excerpt": "the sequential-adaptation hypothesis is defended primarily by one endpoint comparison (with vs. without Stage-I), leaving alternative intermediate domains, epoch-matched controls, and Stage-I-only baselines untested; ... the paper does not state whether that baseline received the equivalent epoch budget... No ablation shows what happens with an alternative intermediate domain, longer Stage-II, or Stage-I only."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only compares the full two-stage XCT-SAM against Conv-LoRA-SAM fine-tuned directly on XCT data ('Following the direct synthetic-XCT adaptation setting of [18], we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage'), with no epoch-matched controls, no alternative intermediate domain ablations, no Stage-I-only baseline, and no analysis ruling out that longer training rather than sequential adaptation explains the gain.",
+            "cost_usd": 0.00500115
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares sequential adaptation only against direct Conv-LoRA fine-tuning: \"we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage used in XCT-SAM,\" while XCT-SAM itself uses extra training stages (\"In Stage 1... up to 15 epochs... In Stage 2... an additional 20 epochs\"). No epoch-matched control, Stage-I-only result, or alternative intermediate-domain ablation is reported.",
+            "cost_usd": 0.011388000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not provide an explicit epoch-matched control for the direct adaptation baseline, nor does it present ablations for alternative intermediate domains or Stage-I-only controls; it only notes that baselines 'are optimized using the same XCT training data'.",
+            "cost_usd": 0.0019707
+          }
+        ],
+        "cost_usd": 0.018359850000000004
+      },
+      {
+        "flag_id": "fp-dec87907e33c",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states 'Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33],' yet the abstract, introduction, and conclusions repeatedly frame NIST results as 'real-world' validation without adequately foregrounding this caveat, which is confined to a single sentence in Sec. IV.A.",
+        "evidence": {
+          "claim": "All results on NIST XCT are evaluated against threshold-derived masks rather than human annotations, undermining the strength of the 'real-world' claims about NIST performance.",
+          "excerpt": "All NIST numbers (Table I, Table III, Fig. 5 blue region, Fig. 7) are therefore agreement scores against a rule-based mask, not against human annotations. This is a load-bearing caveat for the 'real-world NIST XCT scans' framing in the Abstract, Introduction, and Conclusions, but is confined to one sentence in Sec. IV.A."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33],' yet the abstract, introduction, and conclusions repeatedly frame NIST results as 'real-world' validation without adequately foregrounding this caveat, which is confined to a single sentence in Sec. IV.A.",
+            "cost_usd": 0.00500115
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The NIST evaluation is explicitly not against human annotations: \"Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks,\" and Fig. 7 reiterates that \"Ground Truth denotes threshold-derived reference masks.\" This materially weakens the paper's \"real-world NIST XCT scans\" performance claims.",
+            "cost_usd": 0.011388000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer is correct; the paper explicitly admits in Section IV.A that 'Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks', confirming that NIST evaluations rely on rule-based masks rather than human annotations.",
+            "cost_usd": 0.0019707
+          }
+        ],
+        "cost_usd": 0.018359850000000004
+      },
+      {
+        "flag_id": "fp-b7a0512e0ce2",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper justifies binary models by citing prior work: 'prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance, particularly under out-of-distribution settings [18],' but no joint-training baseline is run on this paper's own data to validate this claim in the current experimental setting.",
+        "evidence": {
+          "claim": "The justification for independent binary models lacks internal validity because no joint-multiclass baseline is run on this paper's data, weakening the methodological argument.",
+          "excerpt": "Sec. III.A justifies the two-independent-binary formulation by asserting that 'prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance ... [18]'; no joint-training baseline is run on this paper's data."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper justifies binary models by citing prior work: 'prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance, particularly under out-of-distribution settings [18],' but no joint-training baseline is run on this paper's own data to validate this claim in the current experimental setting.",
+            "cost_usd": 0.00500115
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper justifies separate binary models by citation alone: \"We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance... [18].\" The experiments then compare only \"UNet++, SAM, MedSAM, SAM-Med2D, and Conv-LoRA-SAM,\" with no joint-multiclass baseline on this paper's data.",
+            "cost_usd": 0.011388000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III.A relies entirely on citation [18] to justify independent binary models, stating 'We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance', with no joint-multiclass baseline evaluated on the authors' own data.",
+            "cost_usd": 0.0019707
+          }
+        ],
+        "cost_usd": 0.018359850000000004
+      },
+      {
+        "flag_id": "fp-c8882f2c29e2",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper presents per-test comparisons in Fig. 5 with error bars (±1 std) that visibly overlap between models on several test sets, yet Sec. IV.E describes differences as clear improvements (e.g., 'outperforming the next best method, Conv-LoRA-SAM, by a substantial margin') without reporting any statistical significance tests.",
+        "evidence": {
+          "claim": "Claims of per-test superiority are made even though confidence intervals overlap between models; no statistical test is reported to support these claims.",
+          "excerpt": "Fig. 5 error bars for several tests span a range comparable to or larger than the winning margin over the next baseline (e.g., Pores GAN Test-4, Pores NIST Test-4, Inclusions Test-2). The Quantitative Evaluation prose in Sec. IV.E discusses these differences as though they are clearly separated. No statistical test is reported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents per-test comparisons in Fig. 5 with error bars (±1 std) that visibly overlap between models on several test sets, yet Sec. IV.E describes differences as clear improvements (e.g., 'outperforming the next best method, Conv-LoRA-SAM, by a substantial margin') without reporting any statistical significance tests.",
+            "cost_usd": 0.00500115
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does not report significance testing, and Fig. 5 says the error bars are \"±1 std.\" However, the main quantitative claim is framed at the aggregate level—\"XCT-SAM achieves the best IoU and Dice performance across the three evaluation settings\"—rather than as explicit per-test significance claims, so the reviewer’s objection is only partially supported.",
+            "cost_usd": 0.011388000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 5 shows standard deviation error bars that heavily overlap across baselines for several test sets, yet Section IV.E claims superiority without reporting any statistical significance tests.",
+            "cost_usd": 0.0019707
+          }
+        ],
+        "cost_usd": 0.018359850000000004
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.07343940000000002
+  },
+  "extractor_cost_usd": 0.021914000000000017,
+  "total_cost_usd": 0.09535340000000003
+}

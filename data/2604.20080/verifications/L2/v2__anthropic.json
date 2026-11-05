@@ -1,0 +1,189 @@
+{
+  "paper_id": "2604.20080",
+  "copy_id": "v2",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly marks the Krumholz & Matzner 2009 claim as SUPPORTED, stating 'The relative contributions of feedback channels in young clusters are addressed in this reference.' The reviewer validates the injected (reversed) claim rather than flagging it as contradicted, so no detection occurred.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review explicitly endorses the injected claim: it marks 'photoionization and radiation pressure contribute negligibly' as SUPPORTED by Krumholz & Matzner 2009. That is the opposite of a contradiction/partial-support flag, so this injection was not detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer failed to detect the reversal, instead marking the post-edit claim (that photoionization and radiation pressure contribute negligibly) as 'SUPPORTED' by the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer marks the Krumholz & Matzner 2009 claim as SUPPORTED ('In the youngest and densest clusters, photoionization and radiation pressure contribute negligibly to the feedback budget compared to mechanical luminosity'), not CONTRADICTED or PARTIALLY_SUPPORTED. This directly affirms the injected (reversed) claim rather than flagging it as inconsistent with the cited source, so the injection is not detected.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "the Abstract and Sec. 5 quote inconsistent values (800 vs 80 pc). The factor-of-10 discrepancy is most likely a typo in Sec. 5 ('~80 pc' should be '~800 pc'); regardless, this fails the abstract_vs_body_match check.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "the Abstract and Sec. 5 quote inconsistent values (800 vs 80 pc). The factor-of-10 discrepancy is most likely a typo in Sec. 5 ('~80 pc' should be '~800 pc'); regardless, this fails the abstract_vs_body_match check.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 800 pc vs 80 pc discrepancy between the Abstract and Conclusions (Sec. 5), which is precisely the injected change from ~800 pc to ~80 pc in the Conclusions section.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The main limitations are ... some quantitative inconsistencies between text, tables, and figures (notably for the R21 ratio derivations and the spatial offset of CO from the SSC, quoted as \"~80 pc\" in one place but \"~800 pc\" elsewhere) ...\n\n**Internal inconsistency on the spatial offset between CO and the SSC.** The Conclusions (Sec. 5, point 1) state that the CO emission lies \"within ∼80 pc of the nucleus, and is spatially offset from the SSC\", whereas Sec. 3.6 and Sec. 4.2 state the brightest CO peak lies \"∼800 pc northwest of the SSC\", and the Abstract states \"within ∼800 pc\".\n\n[✖] **Spatial offset of CO emission from the SSC.**\n- _Reported:_ Abstract: \"within ∼800 pc\"; Sec. 3.1.1: \"∼3″.2 (∼360 pc) from the SSC\"; Sec. 5: \"within ∼80 pc of the nucleus\"\n- _Notes:_ The Abstract and Sec. 5 quote inconsistent values (800 vs 80 pc). The factor-of-10 discrepancy is most likely a typo in Sec. 5 (\"~80 pc\" should be \"~800 pc\"); regardless, this fails the abstract_vs_body_match check.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the 80 pc vs 800 pc inconsistency in the conclusions versus abstract/body, exactly matching the injected order-of-magnitude numeric change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Conclusions (Sec. 5, point 1) state that the CO emission lies \"within ∼80 pc of the nucleus, and is spatially offset from the SSC\", whereas Sec. 3.6 and Sec. 4.2 state the brightest CO peak lies \"∼800 pc northwest of the SSC\", and the Abstract states \"within ∼800 pc\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the factor-of-10 contradiction between the Abstract/Results and the Conclusions for the CO spatial extent.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[✖] Eq. (1) exponent on ν_obs. Verdict: FAIL (confidence: medium, impact: critical). Notes: The canonical Solomon et al. 1997 formula has ν_obs⁻², not ν_obs⁻³. As written, the formula would yield a luminosity off by a factor of ν_obs (in GHz) compared to the standard expression.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[✖] Eq. (1) exponent on ν_obs. Verdict: FAIL (confidence: medium, impact: critical). Notes: The canonical Solomon et al. 1997 formula has ν_obs⁻², not ν_obs⁻³. As written, the formula would yield a luminosity off by a factor of ν_obs (in GHz) compared to the standard expression.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the wrong exponent on ν_obs in Eq. (1) as -3 instead of the canonical -2, which is exactly the injected perturbation, and notes it is inconsistent with the numerical values in Table 2 which were computed with the correct ν⁻² form.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "✔ _SUPPORTED_ **The CO line luminosity is computed as L'CO = 3.25×10⁷ S∆v DL² ν_obs⁻³ (1+z)⁻³.**\n\n[✖] **Eq. (1) exponent on ν_obs.**\n- _Location:_ Sec. 3.3, Eq. (1)\n- _Verdict:_ FAIL (confidence: medium, impact: critical)\n- _Notes:_ The canonical Solomon et al. 1997 formula has ν_obs⁻², not ν_obs⁻³. As written, the formula would yield a luminosity off by a factor of ν_obs (in GHz) compared to the standard expression. ... the formula in the text has a typo in the exponent.\n\nThe prefactor 3.25×10⁷, the (1+z)⁻³ dependence, and the ν_obs⁻² (rather than ν_obs⁻³ as written ... )\n\nThe Table 2 value is reproducible using the ν⁻² form (NOT the ν⁻³ form as printed in Eq. 1), confirming Eq. 1 has a typo in the exponent.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags Eq. (1)'s ν_obs exponent as wrong, stating it should be −2 not −3. This specifically corresponds to the injected mathematical edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (1) exponent on ν_obs. ... The canonical Solomon et al. 1997 formula has ν_obs⁻², not ν_obs⁻³. ... The Table 2 value is reproducible using the ν⁻² form (NOT the ν⁻³ form as printed in Eq. 1)",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly flagged the incorrect exponent in Equation 1 and noted that the results in the table were actually based on the original (nu^-2) form.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t2",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags the sigma thresholds in Minor Issue 8 only regarding missing CO(2-1) moment-0 mask threshold in the same units as CO(1-0), not the 3σ/4σ vs 4σ/5σ inconsistency between Methods and Results sections that was injected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review mentions mask reproducibility and thresholds in Appendix A.3, but does not flag the specific Methods vs Results inconsistency between 4σ/5σ and 3σ/4σ for CO(1–0)/CO(2–1). No clear corresponding detection is present.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer commented on the mask thresholds and upper limits but did not identify the numerical inconsistency between the 4σ/5σ thresholds in the Methods and the 3σ/4σ thresholds in the Results.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 44.923458,
+  "total_cost_usd": null,
+  "total_input_tokens": 53445,
+  "total_output_tokens": 3915,
+  "escalation_count": 1,
+  "notes": null
+}

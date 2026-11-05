@@ -1,0 +1,157 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "CL25",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-8c00c11ac2af",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Mechanical predicate passed: 99.85 - 99.58 = 0.269999999999996; claimed 0.27",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "PASS",
+            "computed": 0.269999999999996,
+            "reported": 0.27,
+            "diff_abs": -3.9968028886505635e-15,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 0.015,
+              "rel_tol": null
+            },
+            "notes": "99.85 - 99.58 = 0.269999999999996; claimed 0.27"
+          },
+          "rereader": [
+            {
+              "label": "minuend",
+              "raw_observed": "99.85%",
+              "value_observed": 99.85,
+              "notes": "Mean value in the 'PTQTP K = 4 (Weighted)' column for 'L30.up proj' and Mean Energy, Table page 7."
+            },
+            {
+              "label": "subtrahend",
+              "raw_observed": "99.56%",
+              "value_observed": 99.56,
+              "notes": "Mean value in the 'τ = 1.0 (Weighted)' column for 'L30.up proj' and Mean Energy, Table page 7."
+            },
+            {
+              "label": "difference",
+              "raw_observed": "0.27%",
+              "value_observed": 0.27,
+              "notes": "Directly referenced on page 7 ('a drop of 0.27 percentage points'), matches the difference between 99.85% and 99.577% as described nearby."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0592680000000001
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-b3267f661e7a",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Sec. 2.1 and Appendix A prove that the ExTernD residual decreases monotonically and can be driven below any ε > 0, which is a claim about post-training factorization capacity. Sec. 5 then says \"our structural and representational claims against them [refs 5, 2] are proven (Sec. 2.1)\", but ref [2] (BitNet 1.58) is a training-from-scratch method, and the convergence proof for post-training fixed-weight factorization does not constrain what a jointly trained ternary model can represent — the paper provides no theorem or argument that applies to trained models.",
+        "evidence": {
+          "claim": "The Limitations claim that structural/representational claims against BitNet 1.58 are proven overstates Sec. 2.1; the stated proof only applies to fixed-plane PTQ, not to BitNet-style end-to-end trained models.",
+          "excerpt": "Sec. 5 asserts: \"our structural and representational claims against them [refs 5, 2] are proven (Sec. 2.1)\". Sec. 2.1 (and Appendix A) prove convergence ... a valid capacity argument against fixed-plane PTQ (i.e. PTQTP, ref [5]), but ref [2] is The Era of 1-bit LLMs, a training-from-scratch method: ... no post-training factorization theorem constrains it."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 2.1 and Appendix A prove that the ExTernD residual decreases monotonically and can be driven below any ε > 0, which is a claim about post-training factorization capacity. Sec. 5 then says \"our structural and representational claims against them [refs 5, 2] are proven (Sec. 2.1)\", but ref [2] (BitNet 1.58) is a training-from-scratch method, and the convergence proof for post-training fixed-weight factorization does not constrain what a jointly trained ternary model can represent — the paper provides no theorem or argument that applies to trained models.",
+            "cost_usd": 0.0081198
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says in Limitations that “our structural and representational claims against them [5, 2] are proven (Sec. 2.1),” but the actual result in Appendix A is only the representational statement that “No fixed number of ternary planes has this property; the expansion is what removes the information bottleneck.” That proves a capacity claim about fixed-plane representations, not BitNet-style end-to-end trained models in ref. [2].",
+            "cost_usd": 0.025895
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims in Section 5 that \"our structural and representational claims against them [5, 2] are proven (Sec. 2.1)\". However, as the reviewer correctly notes, Section 2.1 and Appendix A only prove the convergence of the residual for the post-training factorization algorithm, which mathematically applies to PTQ but does not constrain the representational capacity of a model trained from scratch like BitNet (Ref [2]).",
+            "cost_usd": 0.0033282
+          }
+        ],
+        "cost_usd": 0.037343
+      },
+      {
+        "flag_id": "fp-6be2daefdc5d",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Sec. 3.6 states \"utilizing Shannon entropy to account for zero-density\" but then arrives at 6.68 bpw for PTQTP K=4 at ~33% sparsity, which is exactly 4×(2−0.33)=6.68 from the mask+sign packing formula in Eq. (5). Shannon entropy of a 33% sparse Bernoulli mask would give H(0.33)≈0.917 bits per mask bit, yielding a different (lower) number, so the terminology \"Shannon entropy\" is incorrect for the calculation actually performed.",
+        "evidence": {
+          "claim": "The Iso-BPW parity paragraph in Sec. 3.6 invokes 'Shannon entropy' but the 6.68 bpw figure is the mask+sign packing formula from Eq. (5), not an entropy calculation.",
+          "excerpt": "Sec. 3.6 says \"A fairer comparison matches the effective bits-per-weight (BPW), utilizing Shannon entropy to account for zero-density. PTQTP at K = 4 (∼33% sparsity) requires 6.68 effective BPW.\" But 6.68 = 4·(2 − 0.33) is exactly the mask+sign packing bound in Eq. (5)... Either the terminology should be corrected to \"mask+sign packing (Eq. 5)\", or the 6.68 number should be recomputed under an entropy-coded model — the two are not the same..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 3.6 states \"utilizing Shannon entropy to account for zero-density\" but then arrives at 6.68 bpw for PTQTP K=4 at ~33% sparsity, which is exactly 4×(2−0.33)=6.68 from the mask+sign packing formula in Eq. (5). Shannon entropy of a 33% sparse Bernoulli mask would give H(0.33)≈0.917 bits per mask bit, yielding a different (lower) number, so the terminology \"Shannon entropy\" is incorrect for the calculation actually performed.",
+            "cost_usd": 0.0081198
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 3.6 says the comparison matches BPW by “utilizing Shannon entropy to account for zero-density,” yet the paper’s explicit BPW formula is the mask+sign packing rule “bpweff = … · (2 − sparsity)” (Eq. 5), and it separately notes this packing is only “near the entropy floor.” Thus the cited “6.68 effective BPW” is presented as entropy-based even though the paper defines BPW via Eq. (5), not Shannon entropy.",
+            "cost_usd": 0.025895
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.6 explicitly claims to be \"utilizing Shannon entropy to account for zero-density\" when calculating that PTQTP at K = 4 (33% sparsity) \"requires 6.68 effective BPW.\" The reviewer correctly identifies that 6.68 is exactly the result of the mask+sign packing formula (4 * (2 - 0.33) = 6.68) introduced in Eq. 5, not a Shannon entropy calculation, making the text factually inaccurate.",
+            "cost_usd": 0.0033282
+          }
+        ],
+        "cost_usd": 0.037343
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.0592680000000001,
+    "general": 0.074686
+  },
+  "extractor_cost_usd": 0.014531999999999795,
+  "total_cost_usd": 0.1484859999999999
+}

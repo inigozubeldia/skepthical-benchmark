@@ -1,0 +1,440 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-9fc78d09dfbd",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper frames its contribution as asking \"whether a learned state estimator operating directly on sparse noisy observations can enable effective planning\" but does not sharply delineate what is novel beyond this empirical question. No explicit novelty statement distinguishes the geometry-regularized training, the PCA integration, or the planning interface as individually new contributions.",
+        "evidence": {
+          "claim": "The manuscript does not clearly articulate what is new or distinctive compared to prior work, and the contribution is not sharpened beyond existing literature.",
+          "excerpt": "The manuscript should more clearly articulate what is *new* — is it the geometry-regularized training objective, the specific integration with a sampling-based retraction planner, or the empirical claim that a simple estimator suffices? The current framing (\"we ask whether…\") is fine for motivation but the paper does not sharpen the contribution beyond that."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper frames its contribution as asking \"whether a learned state estimator operating directly on sparse noisy observations can enable effective planning\" but does not sharply delineate what is novel beyond this empirical question. No explicit novelty statement distinguishes the geometry-regularized training, the PCA integration, or the planning interface as individually new contributions.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does state some novelty, e.g. “We propose a learned state estimator that reconstructs the full deformable mesh state from 40 noisy vertex observations” and “In contrast to these approaches, we ask whether a learned state estimator operating directly on sparse noisy observations can enable effective planning.” But it does not give an explicit, sharpened contribution list, so whether the novelty is articulated clearly enough is subjective.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not explicitly detail its novel contributions beyond asking 'whether a learned state estimator... can enable effective planning', confirming the reviewer's concern about framing.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-5b8c6989edb4",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges in the conclusion that \"we plan to validate on real tissue data\" as future work, but the experiments use only a \"randomized 2D deformable sheet model\" with Laplacian relaxation, and the conclusion broadly claims the approach enables \"deformable manipulation under realistic perception constraints\" without adequately tempering this generalization.",
+        "evidence": {
+          "claim": "The use of a simplified 2D simulation with Laplacian-relaxation dynamics leads to overstatement of generality; conclusions may not transfer to more realistic tissue models.",
+          "excerpt": "All experiments use a 2D grid with Laplacian-relaxation dynamics — a substantial simplification compared to standard mass-spring or FEM cloth models used elsewhere in the field, and very far from real surgical tissue. The conclusion should be tempered: the reported 98.1% oracle recovery may not transfer..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in the conclusion that \"we plan to validate on real tissue data\" as future work, but the experiments use only a \"randomized 2D deformable sheet model\" with Laplacian relaxation, and the conclusion broadly claims the approach enables \"deformable manipulation under realistic perception constraints\" without adequately tempering this generalization.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation is indeed narrow: “All experiments are conducted in simulation using a randomized 2D deformable sheet model” and “Deformation uses Laplacian relaxation [13].” Yet the abstract/general framing says “These results demonstrate that learned, geometry-regularized state estimation can support effective deformable manipulation under realistic perception constraints,” which goes beyond the tested model.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges this limitation by stating all experiments use a 'randomized 2D deformable sheet model' with 'Laplacian relaxation' and leaves validation on 'real tissue data' to future work.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-ec26bb1bc731",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: Section III-C states \"the primary challenge lies in state estimation under partial, noisy observations\" based on oracle saturation, but the saturation equally demonstrates a planner bottleneck. The paper does not rule out planner limitations as the primary bottleneck versus state estimation difficulty.",
+        "evidence": {
+          "claim": "The claim that 'the primary challenge lies in state estimation' is not supported; planner limitations may explain results, not state estimation difficulty.",
+          "excerpt": "Section III-C argues that comparing to the oracle is meaningful because oracle success saturates at 44.5% even with 2000 samples. But this could equally indicate that the *planner* ... is the bottleneck, not that state estimation is the hard part. ... the claim that \"the primary challenge lies in state estimation\" is not supported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section III-C states \"the primary challenge lies in state estimation under partial, noisy observations\" based on oracle saturation, but the saturation equally demonstrates a planner bottleneck. The paper does not rule out planner limitations as the primary bottleneck versus state estimation difficulty.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper directly addresses planner-limitation concerns: “We vary the number of sampled actions nsamples ∈ {200, 500, 1000, 2000}... Mean exposure improvement increases by only 2.7%... and the success rate remains constant at 44.5%,” and further, “On the remaining 89 improvable episodes, the oracle succeeds in 100% of cases (89/89).” These passages support the paper’s claim that planning is near-saturated and state estimation is the remaining challenge.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer incorrectly attributes the 44.5% saturation to planner limitations; the paper explicitly debunks this by showing the 44.5% exactly matches the fraction of improvable episodes, and 'the oracle succeeds in 100% of cases (89/89)' on those improvable episodes.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-dfe4db220aab",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper compares only against \"an oracle (full state access) and a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference,\" with no PCA-only, GP/TPS interpolation, or ablation of the MLP versus regularization components.",
+        "evidence": {
+          "claim": "The empirical comparison lacks key baselines (PCA-only, GP/TPS interpolation, ablation of regularizers, and Kalman-style estimators), making it impossible to attribute improvements to the proposed method.",
+          "excerpt": "The only comparison is against a \"naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference.\" ... Without these, it is impossible to attribute the reported performance to the geometry-aware training rather than to PCA alone."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares only against \"an oracle (full state access) and a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference,\" with no PCA-only, GP/TPS interpolation, or ablation of the MLP versus regularization components.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The comparison section states only: “We compare the learned estimator against an oracle (full state access) and a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference.” No PCA-only, interpolation, Kalman-style, or regularizer-ablation baseline is reported in the paper.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only compares the learned estimator to 'an oracle (full state access) and a naive baseline', confirming the absence of PCA-only or ablation baselines requested by the reviewer.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-35c73b0620ff",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states \"Regularization weights are fixed to λs = λe = 0.1 throughout\" with no justification or sensitivity analysis provided anywhere in the paper.",
+        "evidence": {
+          "claim": "No justification or sensitivity analysis is provided for the fixed regularizer weights; ablation over these parameters is essential to support claims about geometry-aware regularization.",
+          "excerpt": "The regularizer weights are fixed at $\\lambda_s = \\lambda_e = 0.1$ \"throughout\" with no justification and no sensitivity analysis. ... an ablation over $\\lambda_s, \\lambda_e \\in \\{0, 0.01, 0.1, 1\\}$ (and the pure reconstruction loss) is essential."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states \"Regularization weights are fixed to λs = λe = 0.1 throughout\" with no justification or sensitivity analysis provided anywhere in the paper.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s only specification is “Regularization weights are fixed to λs = λe = 0.1 throughout.” There is no reported justification, sensitivity analysis, or ablation over these hyperparameters.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that 'Regularization weights are fixed to \\lambda_s = \\lambda_e = 0.1 throughout' but does not provide any sensitivity analysis or ablation for these parameters.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-33ddb561e80f",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "All experiments use a fixed \"40 of 900 vertices (4.4%)\" and fixed \"σ = 0.02\" noise, and the paper only notes future work will \"investigate robustness under varying observation density and noise levels,\" providing no analysis across these parameters.",
+        "evidence": {
+          "claim": "Evaluation is only performed at a single noise and observation budget; missing analyses over these parameters make it impossible to judge robustness.",
+          "excerpt": "The evaluation uses a fixed observation budget (40 vertices, 4.4%) and a fixed noise level ($\\sigma = 0.02$). ... Without them, the reader cannot judge the robustness or the operating regime in which the estimator remains useful."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "All experiments use a fixed \"40 of 900 vertices (4.4%)\" and fixed \"σ = 0.02\" noise, and the paper only notes future work will \"investigate robustness under varying observation density and noise levels,\" providing no analysis across these parameters.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The setup is fixed at one operating point: “the system observes only 40 of 900 vertices (4.4%)” and “Observed vertex coordinates are corrupted by Gaussian noise with standard deviation σ = 0.02.” The paper itself acknowledges the missing analysis by saying future work will “investigate robustness under varying observation density and noise levels.”",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses fixed values for observation budget (40 vertices) and noise (\\sigma=0.02), and notes in the conclusion that investigating 'varying observation density and noise levels' is left as future work.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-50c4da5974cf",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states PCA produces \"a 12-dimensional latent space that captures approximately 83.7% of the variance\" but provides no justification for choosing 12 dimensions and no analysis of reconstruction or planning performance as a function of latent dimensionality.",
+        "evidence": {
+          "claim": "The choice of 12 PCA components is arbitrary; the paper does not justify or analyze reconstruction or planning performance as a function of latent dimensionality.",
+          "excerpt": "12 PCA components explain only 83.7% of the variance. Why 12? What does the reconstruction/planning trade-off look like as a function of latent dimensionality? Is 16.3% of unexplained variance being absorbed into planning error, and if so, does the geometry regularizer compensate?"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states PCA produces \"a 12-dimensional latent space that captures approximately 83.7% of the variance\" but provides no justification for choosing 12 dimensions and no analysis of reconstruction or planning performance as a function of latent dimensionality.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says only that PCA yields “a 12-dimensional latent space that captures approximately 83.7% of the variance.” It provides no justification for choosing 12 components and no analysis of reconstruction or planning performance versus latent dimensionality.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states it uses a '12-dimensional latent space that captures approximately 83.7% of the variance' but provides no analysis or justification for the choice of this specific dimensionality.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-fafc65c936cc",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports \"98.1% oracle recovery\" but provides no equivalence test (e.g., TOST) comparing the learned estimator to the oracle at matched sample sizes, nor confidence intervals on this ratio; only a p-value for the oracle's own saturation is reported.",
+        "evidence": {
+          "claim": "The claim of '98.1% oracle recovery' is not statistically supported; no equivalence test at matched sample sizes or confidence intervals are provided.",
+          "excerpt": "There is no test comparing the *learned estimator* to the *oracle* at matched $n_\\text{samples}$, nor confidence intervals on the 98.1% ratio itself. ... the \"equivalence\" claim needs a proper equivalence test (e.g., TOST) rather than a headline percentage."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports \"98.1% oracle recovery\" but provides no equivalence test (e.g., TOST) comparing the learned estimator to the oracle at matched sample sizes, nor confidence intervals on this ratio; only a p-value for the oracle's own saturation is reported.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports “the learned estimator achieves 0.0941... corresponding to 98.1% oracle recovery” and concludes “multi-step performance statistically equivalent to a full-state oracle,” but the only explicit test given is “An independent t-test between nsamples = 200 and 2000 yields p = 0.835,” which concerns oracle sample budgets, not learned-vs-oracle equivalence. No confidence intervals or equivalence test for the 98.1% claim are reported.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims the estimator is 'statistically equivalent to a full-state oracle' and reports a '98.1% oracle recovery', but does not provide confidence intervals or a formal equivalence test for this comparison.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-03bc5b85e298",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section II-C states the planner \"maximizes predicted exposure under the estimated state\" but does not explain how exposure is predicted from a candidate action without running relaxation dynamics, nor whether the second step uses greedy or lookahead selection.",
+        "evidence": {
+          "claim": "The planner's operation is unclear; critical details about exposure prediction, forward models, and multi-step decision-making are missing.",
+          "excerpt": "Section II-C says the planner samples 200 candidate pulls and picks the one that \"maximizes predicted exposure under the estimated state.\" Two things are unclear: (i) how is exposure *predicted* from an action without running the relaxation dynamics? ... (ii) In the multi-step setting, is the second action selected greedily or with lookahead? These choices materially affect the interpretation of the results."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section II-C states the planner \"maximizes predicted exposure under the estimated state\" but does not explain how exposure is predicted from a candidate action without running relaxation dynamics, nor whether the second step uses greedy or lookahead selection.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Some planner details are present — “Deformation in response to actions is modeled using a diffusion-based relaxation process [11]” and in multi-step the system “re-observes and re-estimates the state before selecting a second action.” But the paper does not explicitly spell out whether predicted exposure is obtained by simulating that forward model for each candidate action, nor whether the second action is greedy or uses lookahead.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states the planner chooses actions that maximize 'predicted exposure under the estimated state' but omits crucial details on how this prediction is made without running forward dynamics or whether multi-step planning uses lookahead.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      },
+      {
+        "flag_id": "fp-c896e8d349ce",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states PCA is fit on \"5,000 randomly generated mesh states\" and MLP is trained by \"sampling random mesh configurations\" but neither characterizes these generative distributions nor discusses potential distribution shift relative to the meshes encountered during multi-step planning evaluation.",
+        "evidence": {
+          "claim": "The generative distribution for PCA and MLP training is not characterized or matched to the test distribution; possible distribution shift is not addressed.",
+          "excerpt": "The PCA basis is fit on 5,000 \"randomly generated mesh states\" and the MLP is trained online by \"sampling random mesh configurations.\" Neither the generative distribution nor its match to the distribution of meshes actually encountered during multi-step planning is characterized. A distribution shift between training and test-time meshes ... should be discussed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states PCA is fit on \"5,000 randomly generated mesh states\" and MLP is trained by \"sampling random mesh configurations\" but neither characterizes these generative distributions nor discusses potential distribution shift relative to the meshes encountered during multi-step planning evaluation.",
+            "cost_usd": 0.00228039
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The training-data description is minimal: “PCA is applied to 5,000 randomly generated mesh states” and “Training data is generated during training (not pre-recorded) by sampling random mesh configurations.” The paper does not characterize this generative distribution or discuss whether it matches the mesh distribution encountered at test time.",
+            "cost_usd": 0.0068720000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states it relies on '5,000 randomly generated mesh states' and 'sampling random mesh configurations' for training without mathematically characterizing this generative distribution or comparing it to the test distribution.",
+            "cost_usd": 0.0019200000000000003
+          }
+        ],
+        "cost_usd": 0.011072390000000001
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.11072390000000001
+  },
+  "extractor_cost_usd": 0.01834199999999983,
+  "total_cost_usd": 0.12906589999999984
+}

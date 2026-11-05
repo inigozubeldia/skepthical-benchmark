@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14287",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "'We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to improved generalization performance, particularly under out-of-distribution settings [18].' ... 'The paper says it uses two independent binary models, but then justifies this choice by claiming that prior work reported benefits of \"joint multi-class training.\" This is internally inconsistent.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "'We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to improved generalization performance, particularly under out-of-distribution settings [18].' ... 'The paper says it uses two independent binary models, but then justifies this choice by claiming that prior work reported benefits of \"joint multi-class training.\" This is internally inconsistent.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the claim in Section III-A that prior work reported 'improved generalization performance' under joint multi-class training, identifying it as contradicting the use of independent binary models and potentially misattributing results to [18], which corresponds directly to the direction-reversal injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[citation] The rationale for using independent binary models contradicts the paper’s own description of the cited prior work\n\n**Where:** Section III-A: “We train two independent binary segmentation models… We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to improved generalization performance, particularly under out-of-distribution settings [18].” Also Section II-2, where [18] is described as having “trained separate binary models for material, pore, and inclusion segmentation.”\n\n**What is wrong:** The paper says it uses two independent binary models, but then justifies this choice by claiming that prior work reported benefits of “joint multi-class training.” This is internally inconsistent. Moreover, the paper’s own Related Work section describes [18] as using separate binary models, not joint multiclass training.",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit claim tied to citation [18]/tabassum_2024_adapting and says it misdescribes the cited work, which satisfies the broadened-claim detection rule for a direction reversal.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "prior work reported that joint multi-class training under extreme imbalance leads to improved generalization performance... [18]. ... The paper says it uses two independent binary models, but then justifies this choice by claiming that prior work reported benefits of 'joint multi-class training.' This is internally inconsistent. Moreover, the paper’s own Related Work section describes [18] as using separate binary models, not joint multiclass training.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the claim that joint multi-class training 'leads to improved generalization' and notes it contradicts the cited source's methodology.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "'[numerical] The paper inconsistently reports the size of the SAM ViT-H image encoder as 63M and approximately 636M parameters ... Section I: \"the image encoder (ViT-H), which alone comprises 63M parameters\"; Section III-A: \"ViT-H image encoder (~636M parameters)\"... Correct \"63M\" to the intended value, likely \"636M\"'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "'[numerical] The paper inconsistently reports the size of the SAM ViT-H image encoder as 63M and approximately 636M parameters ... Section I: \"the image encoder (ViT-H), which alone comprises 63M parameters\"; Section III-A: \"ViT-H image encoder (~636M parameters)\"... Correct \"63M\" to the intended value, likely \"636M\"'",
+          "confidence": "high",
+          "reasoning": "The reviewer directly identified the inconsistency between the 63M value in the Introduction and the 636M value in the Methodology, naming both figures and the specific location, which exactly matches the injected numeric error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] The paper inconsistently reports the size of the SAM ViT-H image encoder as 63M and approximately 636M parameters\n\n**Where:** Section I: “the image encoder (ViT-H), which alone comprises 63M parameters”; Section III-A: “ViT-H image encoder (\\(\\sim 636\\)M parameters)”; Table II percentages imply a total model size of about 641M parameters, since \\(4.15\\text{M}/0.00647 \\approx 641\\text{M}\\), \\(4.50\\text{M}/0.00702 \\approx 641\\text{M}\\), and \\(5.27\\text{M}/0.00821 \\approx 642\\text{M}\\).\n\n**What is wrong:** The 63M and 636M values are inconsistent. The table percentages are consistent with the larger value, not 63M.\n\n**Concrete fix:** Correct “63M” to the intended value, likely “636M”",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly names both inconsistent values, 63M and 636M, and identifies the exact quantity as the ViT-H encoder parameter count, which is a specific match.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section I: 'the image encoder (ViT-H), which alone comprises 63M parameters'; Section III-A: 'ViT-H image encoder (~636M parameters)' ... The 63M and 636M values are inconsistent.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the 63M parameter count as a contradiction of the 636M value found later in the text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "'[mathematical] Conv-LoRA mixture equation appears mathematically inconsistent with the described mixture-of-experts module ... The equation uses a product over experts, but the accompanying text and Fig. 2(c) describe a gated mixture of convolutional experts, which normally requires a weighted sum. Fig. 2(c) itself shows a summation ... Replace the product with a sum'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "'[mathematical] Conv-LoRA mixture equation appears mathematically inconsistent with the described mixture-of-experts module ... The equation uses a product over experts, but the accompanying text and Fig. 2(c) describe a gated mixture of convolutional experts, which normally requires a weighted sum. Fig. 2(c) itself shows a summation ... Replace the product with a sum'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the product operator in the Conv-LoRA equation as incorrect, noting it should be a summation per the figure and text description, directly corresponding to the injected swap of \\sum to \\prod.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] Conv-LoRA mixture equation appears mathematically inconsistent with the described mixture-of-experts module\n\n**Where:** Section III-A, equation for the embedding update:\n\\[\nH = W_0x + W_D\\left(\\prod_{i=1}^{N} g_i(x) E_i(W_E x)\\right).\n\\]\n\n**What is wrong:** The equation uses a product over experts, but the accompanying text and Fig. 2(c) describe a gated mixture of convolutional experts, which normally requires a weighted sum.\n\n**Concrete fix:** Replace the product with a sum if the intended operation is a standard gated mixture:\n\\[\nH = W_0x + W_D\\left(\\sum_{i=1}^{N} g_i(x)\\,E_i(W_E x)\\right).\n\\]",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the injected operator swap from summation to product in the specified equation and proposes the original correct form.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The equation uses a product over experts, but the accompanying text and Fig. 2(c) describe a gated mixture of convolutional experts, which normally requires a weighted sum. Fig. 2(c) itself shows a summation.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the equation was modified to use a product instead of the required summation for the mixture-of-experts logic.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "'[general] Unsupported universal-generalization claim in the Abstract ... \"suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.\" ... The experiments cover AM XCT defect segmentation ... They do not evaluate other NDT modalities ... This substantially overstates the scope of the evidence'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "'[general] Unsupported universal-generalization claim in the Abstract ... \"suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.\" ... The experiments cover AM XCT defect segmentation ... They do not evaluate other NDT modalities ... This substantially overstates the scope of the evidence'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the injected sweeping generalization claim in the abstract, quoting it verbatim and explaining why it is unsupported by the paper's XCT-specific experiments.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] Unsupported universal-generalization claim in the Abstract  \n**Where:** Abstract, final sentence: “suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.”  \n**What is wrong:** The experiments cover AM XCT defect segmentation using GAN-generated XCT data and NIST XCT scans. They do not evaluate other NDT modalities, such as ultrasound, thermography, eddy current, radiography without CT, etc., nor arbitrary material types.  \n**Why it matters:** This substantially overstates the scope of the evidence and changes how readers should interpret the contribution. The demonstrated result is domain adaptation for XCT-like AM defect segmentation, not universal NDT generalization.",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the exact added abstract clause and explicitly calls it unsupported overstatement beyond the paper’s evidence, which is a direct detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Abstract, final sentence: “suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.” ... The experiments cover AM XCT defect segmentation... They do not evaluate other NDT modalities... nor arbitrary material types.",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the exact injected sentence in the abstract and correctly identifies it as an unsupported overgeneralization.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 36.690882,
+  "total_cost_usd": null,
+  "total_input_tokens": 21061,
+  "total_output_tokens": 4331,
+  "escalation_count": 0,
+  "notes": null
+}

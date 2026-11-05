@@ -1,0 +1,272 @@
+{
+  "paper_id": "2607.14176",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-4b46d16de761",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'A total of 449,500 graph snapshots are generated and split into training (80%) and validation (20%) sets' with no mention of a held-out test set. All headline metrics (accuracy 0.9589, F1 0.9544) are reported 'on the validation set', and the threshold sweep including τ=0.15 for GP-MILP pruning is also performed on this same validation set, conflating model selection with evaluation.",
+        "evidence": {
+          "claim": "The paper reports all model selection and evaluation results on a validation set, with no held-out test set, conflating model selection with evaluation and compromising empirical validity.",
+          "excerpt": "No held-out test set. Sec. VI.A states the 449,500 snapshots are split into training (80%) and validation (20%) only. All headline numbers (accuracy 0.9589, F1 0.9544, latency, connectivity gains) are reported on the validation set that was also used for threshold sweeps (Sec. VI.B, Table I) and to pick the pruning threshold τ=0.15 for GP-MILP (Sec. VI.D). This conflates model selection with evaluation."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'A total of 449,500 graph snapshots are generated and split into training (80%) and validation (20%) sets' with no mention of a held-out test set. All headline metrics (accuracy 0.9589, F1 0.9544) are reported 'on the validation set', and the threshold sweep including τ=0.15 for GP-MILP pruning is also performed on this same validation set, conflating model selection with evaluation.",
+            "cost_usd": 0.003838
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. VI.A says, \"A total of 449,500 graph snapshots are generated and split into training (80%) and validation (20%) sets,\" with no test split mentioned, and Sec. V.D adds, \"At validation time, a threshold sweep is performed.\" The paper reports headline predictive metrics \"on the validation set\" (Sec. VI.B), so model selection/evaluation are not cleanly separated.",
+            "cost_usd": 0.007316916666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states that the 449,500 snapshots are 'split into training (80%) and validation (20%) sets', and reports its link-level performance on the validation set without mentioning a separate held-out test set.",
+            "cost_usd": 0.002191966666666667
+          }
+        ],
+        "cost_usd": 0.013346883333333334
+      },
+      {
+        "flag_id": "fp-7f6b9346b5ee",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's experimental comparisons are limited to 'the MILP oracle and a 1-hop MILP baseline' (Sec. VI), with no ablation against other GNN architectures (GCN, GAT, GIN without edge features) or classical heuristics, making it impossible to isolate the contribution of the GINE+edge-projection design choice despite the related work (Sec. II) explicitly mentioning such alternatives.",
+        "evidence": {
+          "claim": "The paper lacks non-oracle learning and classical heuristic baselines necessary to substantiate its contribution claims regarding edge-aware and GINE-specific performance.",
+          "excerpt": "Baselines are inadequate to support the paper's contribution claims. The only comparison is against a 1-hop MILP oracle (Sec. VI.C) and the full MILP (Sec. VI.D). No comparison is made against (a) other GNN baselines (plain GCN, GraphSAGE, GAT, GIN without edge features) that would isolate the value of the GINE + edge-projection choice, or (b) simple heuristics (shortest-path on capacity-weighted edges, greedy max-throughput, k-hop MILP relaxations) that the Related Work (Sec. II) itself mentions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's experimental comparisons are limited to 'the MILP oracle and a 1-hop MILP baseline' (Sec. VI), with no ablation against other GNN architectures (GCN, GAT, GIN without edge features) or classical heuristics, making it impossible to isolate the contribution of the GINE+edge-projection design choice despite the related work (Sec. II) explicitly mentioning such alternatives.",
+            "cost_usd": 0.003838
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation scope is explicitly narrow: \"Results are compared against the MILP oracle and a 1-hop MILP baseline\" (Sec. VI), and the paper claims \"an edge-aware L2O framework based on a Graph Isomorphism Network with Edge Features (GINE) is proposed\" (Sec. I). No quoted section reports comparisons to other GNNs or classical heuristics, so the paper does not isolate the value of the GINE/edge-aware design.",
+            "cost_usd": 0.007316916666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experimental evaluation only compares the proposed method against a '1-hop MILP baseline' and the full MILP oracle (Sec. VI.C and VI.D), with no other GNN architectures or classical heuristics included as baselines.",
+            "cost_usd": 0.002191966666666667
+          }
+        ],
+        "cost_usd": 0.013346883333333334
+      },
+      {
+        "flag_id": "fp-262c5ba5af68",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section VI.C reports only that 'the proposed framework achieves an average connectivity gain of 9.2%' and 'the gain increases up to 12%' with no standard deviation, confidence interval, per-graph-size breakdown, or clarification of how many snapshots correspond to each RSU configuration, providing no uncertainty quantification for these figures.",
+        "evidence": {
+          "claim": "The reported average connectivity gains lack uncertainty quantification (no standard deviation, confidence interval, or per-scenario breakdown), undermining the strength of these results.",
+          "excerpt": "Connectivity gains lack uncertainty and per-scenario detail. Sec. VI.C reports averages of 9.2% (4 RSUs) and 12% (2 RSUs) with no standard deviation, no confidence interval, no distribution over graph sizes, no number of snapshots per RSU count, and no clarification of whether these are GINE-only or GP-MILP figures."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section VI.C reports only that 'the proposed framework achieves an average connectivity gain of 9.2%' and 'the gain increases up to 12%' with no standard deviation, confidence interval, per-graph-size breakdown, or clarification of how many snapshots correspond to each RSU configuration, providing no uncertainty quantification for these figures.",
+            "cost_usd": 0.003838
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. VI.C reports only point estimates: \"the proposed framework achieves an average connectivity gain of 9.2%, while in infrastructure-sparse scenarios with only two RSUs the gain increases up to 12%.\" No standard deviation, confidence interval, or distributional/per-scenario breakdown is given in the reported results.",
+            "cost_usd": 0.007316916666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports average connectivity gains (e.g., 'average connectivity gain of 9.2%' and 'up to 12%') in Sec. VI.C without providing standard deviations, confidence intervals, or a detailed breakdown of the distribution.",
+            "cost_usd": 0.002191966666666667
+          }
+        ],
+        "cost_usd": 0.013346883333333334
+      },
+      {
+        "flag_id": "fp-560c56317475",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges that 'the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time' (Sec. II) but does not quantify the rate of infeasible outputs or describe any post-processing to handle them, so it is unclear how the connectivity numbers in Sec. VI.C are computed from potentially infeasible GINE predictions.",
+        "evidence": {
+          "claim": "The paper does not quantify the rate of infeasible configurations produced by GINE inference despite constraints not being enforced at inference time, so the reported connectivity numbers may not be meaningful.",
+          "excerpt": "Inference does not enforce constraints, so a fraction of GINE outputs may be infeasible, yet the paper does not quantify this. Sec. V and Sec. I both note that flow conservation, single-outgoing-link, and loop-freeness are not enforced at inference. The connectivity numbers in Sec. VI.C are therefore only meaningful if infeasible predictions are somehow post-processed, and no such post-processing is described."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges that 'the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time' (Sec. II) but does not quantify the rate of infeasible outputs or describe any post-processing to handle them, so it is unclear how the connectivity numbers in Sec. VI.C are computed from potentially infeasible GINE predictions.",
+            "cost_usd": 0.003838
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states, \"the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time\" (Sec. I/II discussion), and future work will address \"constraint-aware post-processing to further enhance feasibility\" (Sec. VII). Yet no section reports the rate of infeasible GINE outputs, despite connectivity results being presented in Sec. VI.C.",
+            "cost_usd": 0.007316916666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that the model 'does not explicitly enforce routing or flow-conservation constraints at inference time' (Sec. I) and lists 'constraint-aware post-processing to further enhance feasibility' as future work (Sec. VII), but does not quantify the rate of infeasible predictions produced by the raw GINE outputs.",
+            "cost_usd": 0.002191966666666667
+          }
+        ],
+        "cost_usd": 0.013346883333333334
+      },
+      {
+        "flag_id": "fp-7aec55702b6f",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The claim that GP-MILP yields MILP-equivalent solutions is inconsistent, since pruning unavoidably removes some oracle-active links, with no evidence presented that this does not harm optimality.",
+          "excerpt": "GP-MILP \"MILP-equivalent\" claim vs. 99% recall pruning is not fully consistent. Sec. VI.D states pruning is done at τ=0.15 to retain oracle-active links \"with high probability (99%)\", then claims GP-MILP preserves \"MILP-equivalent solutions (same objective value)\". Since 1% of the oracle-active links are, by construction, pruned away, GP-MILP cannot in general reach the exact optimum on those instances; either the claim needs re-scoping (e.g. \"on X% of validation instances\") or evidence must be given that alternative equally-optimal solutions always exist within the pruned graph."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper claims GP-MILP 'preserves MILP-equivalent solutions on the evaluated dataset, i.e., yielding the same objective value' while also stating pruning retains oracle-active links 'with high probability (99%)'. The paper appears to be making an empirical claim verified on the dataset rather than a theoretical guarantee, but does not clarify what fraction of instances were affected by the 1% miss rate, leaving the consistency of the claim unclear.",
+            "cost_usd": 0.003838
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper does not make a universal guarantee; it explicitly scopes the claim empirically: \"Experimental results demonstrate that GP-MILP ... [preserves] MILP-equivalent solutions on the evaluated dataset, i.e., yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs\" (Sec. VI.D). The simultaneous statement that pruning retains oracle-active links \"with high probability (99%)\" is not logically inconsistent with dataset-level objective equivalence.",
+            "cost_usd": 0.007316916666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper asserts that GP-MILP preserves 'MILP-equivalent solutions on the evaluated dataset' (Sec. VI.D) despite pruning at a 99% recall threshold, but provides no empirical breakdown or theoretical justification to explain how optimality is maintained when 1% of oracle-active links are discarded.",
+            "cost_usd": 0.002191966666666667
+          }
+        ],
+        "cost_usd": 0.013346883333333334
+      },
+      {
+        "flag_id": "fp-d31776d2889d",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper evaluates exclusively on 'a 1 km² dense urban area of Rome (Porta Pia)' with fixed simulation parameters ('5.9 GHz carrier, 800 MHz effective bandwidth, RSU and vehicle transmit powers of 10 dBm and 0 dBm'), yet the Abstract and Conclusion make broad claims about compatibility with 'NR-V2X latency budgets' generally, without cross-scenario or cross-parameter validation.",
+        "evidence": {
+          "claim": "The broad scope claims in the Abstract and Conclusion regarding practical applicability to NR-V2X latency budgets are not supported, as evaluation is limited to a single scenario and fixed simulation parameters.",
+          "excerpt": "Rhetoric vs. evidence on generalisability. The Conclusion states the framework enables \"MILP-grade optimisation practically compatible with stringent latency budgets\" and the Abstract projects the method to \"NR-V2X latency budgets\" broadly, but evaluation is entirely on one Porta Pia (Rome) footprint with a fixed simulator stack (SUMO + GEMV² + fixed radio parameters at 5.9 GHz / 800 MHz / 10 dBm / 0 dBm — Sec. VI.A) and 2–4 RSUs. No cross-scenario, cross-mobility, or cross-density study is reported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper evaluates exclusively on 'a 1 km² dense urban area of Rome (Porta Pia)' with fixed simulation parameters ('5.9 GHz carrier, 800 MHz effective bandwidth, RSU and vehicle transmit powers of 10 dBm and 0 dBm'), yet the Abstract and Conclusion make broad claims about compatibility with 'NR-V2X latency budgets' generally, without cross-scenario or cross-parameter validation.",
+            "cost_usd": 0.003838
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The experimental setup is limited to one scenario with fixed parameters: \"Vehicular mobility is modelled in SUMO over a 1 km2 dense urban area of Rome (Porta Pia)\" and \"Simulations use a 5.9 GHz carrier, 800 MHz effective bandwidth...\" with \"the number of active RSUs varies between 2 and 4\" (Sec. VI.A). This is narrower than the broad Abstract/Conclusion claims about compatibility with \"stringent NR-V2X latency budgets.\"",
+            "cost_usd": 0.007316916666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation dataset is restricted to a single 1 km² dense urban area in Rome (Porta Pia) simulated with fixed parameters ('5.9 GHz carrier, 800 MHz effective bandwidth... varying between 2 and 4 RSUs'), supporting the reviewer's concern about the lack of cross-scenario validation.",
+            "cost_usd": 0.002191966666666667
+          }
+        ],
+        "cost_usd": 0.013346883333333334
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0800813
+  },
+  "extractor_cost_usd": 0.027182000000000067,
+  "total_cost_usd": 0.10726330000000006
+}

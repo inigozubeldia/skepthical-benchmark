@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "The parameters are taken as\n$v_{0}=-458.4$ MeV,\n$\\rho_{c}=0.08$ fm$^{-3}$,\n$\\eta=0.845$, and\n$\\alpha=0.59$~\\cite{Matsuo:2005vf,Matsuo:2010jj,Okihashi:2020kqg}.\nThese parameters are chosen to reproduce the neutron pairing gap in neutron matter obtained in BCS calculations with a bare nuclear force in the ${}^1S_0$ channel.",
+    "injected_text": "The parameters are taken as\n$v_{0}=-458.4$ MeV,\n$\\rho_{c}=0.08$ fm$^{-3}$,\n$\\eta=0.845$, and\n$\\alpha=0.59$~\\cite{Matsuo:2005vf,Matsuo:2010jj,Okihashi:2020kqg}.\nThese parameters are chosen to reproduce the neutron pairing gap in neutron matter obtained in BCS calculations with a nuclear force in the ${}^1S_0$ channel.",
+    "rationale": "The cited paper Matsuo:2005vf explicitly specifies that the pairing gap is reproduced using a 'bare' nuclear force in the 1S0 channel, a methodological qualifier that distinguishes it from renormalized or effective-interaction approaches; dropping 'bare' makes the claim almost-but-not-quite faithful to the cited paper's stated methodology.",
+    "ground_truth_description": "The qualifier 'bare' was removed from 'bare nuclear force in the 1S0 channel', weakening the methodological precision of the claim relative to what Matsuo:2005vf explicitly states.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Matsuo:2005vf",
+      "injected_cite_key": "Matsuo:2005vf",
+      "claim_sentence_verbatim": "These parameters are chosen to reproduce the neutron pairing gap in neutron matter obtained in BCS calculations with a bare nuclear force in the ${}^1S_0$ channel.",
+      "section_location": "Sec. 3.1 (DFT setup, under Determination of the effective potential)",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "Our result is smaller by about a factor of seven compared with this crude estimate.",
+    "injected_text": "Our result is smaller by about a factor of three compared with this crude estimate.",
+    "rationale": "The text explicitly states the two compared values: $\\bar{v}_{\\mathrm{Skyrme}}(0)=-4.7\\times10^4$ MeV fm$^3$ and the microscopic result $\\bar{v}_{\\mathrm{eff}}(0)=7.1\\times10^3$ MeV fm$^3$; their ratio is $4.7\\times10^4/7.1\\times10^3\\approx6.6\\approx7$, so changing the stated factor from seven to three makes the ratio_eq predicate fail by ~57% relative difference, qualifying as MAJOR.",
+    "ground_truth_description": "Changed the stated suppression factor between the Skyrme-Hartree-Fock estimate ($4.7\\times10^4$ MeV fm$^3$) and the microscopic result ($7.1\\times10^3$ MeV fm$^3$) from the correct value of approximately seven to an incorrect value of three.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "seven",
+      "value_after_raw": "three",
+      "value_before_float": 7.0,
+      "value_after_float": 3.0,
+      "location_cue": "Our result is smaller by about a factor of seven compared with this crude estimate",
+      "paired_location": "prose near equation bar_v_0(0) = -4.7e4 MeV fm^3 and bar_v_eff(0) = 7.1e3 MeV fm^3",
+      "quantity_label": "ratio of naive Skyrme-Hartree-Fock interaction strength to microscopic effective interaction strength",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "g_0^2 v_s^2=\n\\frac{\\rho_{cl}\\rho_n}{Mm}\n|\\bar v_{\\mathrm{eff}}(0)|^2 ,",
+    "injected_text": "g_0^2 v_s^2=\n\\frac{\\rho_n}{Mm}\n|\\bar v_{\\mathrm{eff}}(0)|^2 ,",
+    "rationale": "Deleting the cluster number density factor ρ_cl from the numerator of the dispersion-relation coupling coefficient removes a load-bearing term that Wolfram symbolic equality would refute against the intact original, realising a type-1 (term deletion) mathematics S2 injection.",
+    "ground_truth_description": "The factor ρ_cl (cluster number density) was deleted from the numerator of the expression for g₀²v_s², leaving the formula dimensionally and physically incorrect by missing the cluster density prefactor.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 4.1, dispersion relation discussion (unnumbered equation following Eq. (Eq:dispersion1))",
+      "original_fragment_latex": "\\frac{\\rho_{cl}\\rho_n}{Mm}",
+      "injected_fragment_latex": "\\frac{\\rho_n}{Mm}",
+      "full_equation_latex_before": "g_0^2 v_s^2=\n\\frac{\\rho_{cl}\\rho_n}{Mm}\n|\\bar v_{\\mathrm{eff}}(0)|^2 ,",
+      "full_equation_latex_after": "g_0^2 v_s^2=\n\\frac{\\rho_n}{Mm}\n|\\bar v_{\\mathrm{eff}}(0)|^2 ,",
+      "term_role": "cluster number density prefactor ρ_cl, required for dimensional consistency and for matching g₀ as defined in Eq. (Eq:coupling constant)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": true
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "The solid curve corresponds to the peak at $E=0.931$ MeV in Fig.~\\ref{fig-strength_function}\\,(a).",
+    "injected_text": "The solid curve corresponds to the peak at $E=0.931$ MeV in Fig.~\\ref{fig-strength_function}\\,(b).",
+    "rationale": "Swapping panel (a) to panel (b) in the cross-reference for the uniform-superfluid transition density makes the prose point to the configuration WITH a nuclear cluster (panel b) instead of WITHOUT (panel a), so a reader checking the cited panel sees content that contradicts the surrounding claim about the uniform neutron superfluid.",
+    "ground_truth_description": "In the caption of Fig. 2 / body text describing Fig. 1(a), the reference to the strength-function panel for the transition density of the uniform superfluid was changed from panel (a) to panel (b), which actually shows the cluster-embedded configuration.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "cross_reference_mismatch",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 3.2 (Superfluid phonon mode in neutron superfluid)",
+      "affected_span_verbatim": "The solid curve corresponds to the peak at $E=0.931$ MeV in Fig.~\\ref{fig-strength_function}\\,(a)."
+    },
+    "proposer_agent": "injector.general.S2.t1.v3"
+  }
+]

@@ -1,0 +1,369 @@
+{
+  "paper_id": "2604.21099",
+  "arxiv_url": "https://arxiv.org/abs/2604.21099",
+  "rotation_seed": 0,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S2",
+      "type": 1
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "we can weigh these values using Sommers relative exposure \\cite{Sommers:2000relative}",
+          "injected_text": "we can weigh these values using Sommers' Monte Carlo exposure estimates \\cite{Sommers:2000relative}",
+          "rationale": "Sommers (2000) derives a closed-form analytical relative-exposure formula based on detector latitude and zenith-angle cut; recasting it as 'Monte Carlo exposure estimates' mis-categorises the methodology (analytical/geometric -> simulation-based) while leaving the cite key intact, the topic correct, and the sentence coherent.",
+          "ground_truth_description": "Replaced 'Sommers relative exposure' with 'Sommers' Monte Carlo exposure estimates', mis-attributing the cited paper's analytical exposure derivation as a Monte Carlo method.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Sommers:2000relative",
+            "injected_cite_key": "Sommers:2000relative",
+            "claim_sentence_verbatim": "By utilizing the trans-GZK UHECR data, we can weigh these values using Sommers relative exposure \\cite{Sommers:2000relative} with the cited exposure values for these experiments as well as their geographic positions \\cite{AGASA:exposure, PAO:exposure}.",
+            "section_location": "Sec. 4 (Estimate of the Magnetic Monopole Fraction of UHECR Flux)",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "720 cosmic rays above the GZK limit from PAO and AGASA",
+          "injected_text": "72 cosmic rays above the GZK limit from PAO and AGASA",
+          "rationale": "Drops one zero from the figure-3 caption count of trans-GZK UHECRs, so the caption reports 72 events while the body text in Sec. III still states there are 720 events in the dataset, producing an integer_equal disagreement detectable by re-reading the paper.",
+          "ground_truth_description": "Changed the figure 3 caption's reported number of cosmic rays in the PAO+AGASA trans-GZK dataset from 720 to 72, while the surrounding text (and the same figure's description in the body) continues to refer to the dataset of 720 events.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "integer_equal",
+            "value_before_raw": "720",
+            "value_after_raw": "72",
+            "value_before_float": 720.0,
+            "value_after_float": 72.0,
+            "location_cue": "720 cosmic rays above the GZK limit from PAO and AGASA",
+            "paired_location": "Section III body text: 'Appendix A contains the 36 most energetic events of the 720 trans-GZK UHECRs detected by PAO and AGASA' and 'Figure 3 is a skymap of all 720 UHECRs'",
+            "quantity_label": "Number of trans-GZK UHECRs in the PAO+AGASA dataset shown in Figure 3",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t3.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "    \\sigma_{I_{MM}}^2=\\sigma_{I_v}^2+R_0^2\\sigma_{nv}^2+I_{nv}^2\\sigma_{R_0}^2",
+          "injected_text": "    \\sigma_{I_{MM}}^2=\\sigma_{I_v}^2+R_0^2\\sigma_{nv}^2",
+          "rationale": "Deletes the +I_{nv}^2 sigma_{R_0}^2 term from the displayed Poissonian error-propagation equation for sigma_{I_{MM}}^2; this term encodes the uncertainty contribution from the baseline ratio R_0 and is required by standard error propagation of I_{MM}=I_v - R_0 I_{nv}, so its omission is a load-bearing term-deletion that Wolfram refutes against the intact propagated-variance identity.",
+          "ground_truth_description": "Removed the I_{nv}^2 sigma_{R_0}^2 term (uncertainty from the baseline ratio R_0) from the error-propagation equation defining sigma_{I_{MM}}^2.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 4 (Estimate of the MM Fraction of UHECR Flux), error-propagation equation for sigma_{I_{MM}}^2",
+            "original_fragment_latex": "+I_{nv}^2\\sigma_{R_0}^2",
+            "injected_fragment_latex": "",
+            "full_equation_latex_before": "\\sigma_{I_{MM}}^2=\\sigma_{I_v}^2+R_0^2\\sigma_{nv}^2+I_{nv}^2\\sigma_{R_0}^2",
+            "full_equation_latex_after": "\\sigma_{I_{MM}}^2=\\sigma_{I_v}^2+R_0^2\\sigma_{nv}^2",
+            "term_role": "uncertainty contribution from the baseline ratio R_0 in propagated variance of I_{MM}=I_v - R_0 I_{nv}",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t1.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "    f_{MM}(E)=\\frac{I_{MM}(E)}{I_{v}(E)}",
+          "injected_text": "    F_{MM}(E)=\\frac{I_{MM}(E)}{I_{v}(E)}",
+          "rationale": "Renames the MM-fraction symbol to capital F_{MM} only in its defining equation while the surrounding prose, the Table 1 caption, and the Table 1 header continue to call the same quantity f_{MM}, producing a local notation drift consistent with G·S1·t3 (cosmetic, single-symbol case mismatch).",
+          "ground_truth_description": "In the MM-fraction definition equation in Section 4, the symbol f_{MM}(E) is changed to F_{MM}(E) while every other reference (Table 1 caption, Table 1 header, surrounding text) still uses lowercase f_{MM}.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D3",
+            "change_kind": "notation_drift",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 4 (Estimate of the Magnetic Monopole Fraction of UHECR Flux)",
+            "affected_span_verbatim": "    f_{MM}(E)=\\frac{I_{MM}(E)}{I_{v}(E)}"
+          },
+          "proposer_agent": "injector.general.S1.t3.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "The central value of its measured energy was $2.46\\times 10^{20}$ eV.",
+          "injected_text": "The central value of its measured energy was $2.57\\times 10^{20}$ eV.",
+          "rationale": "The Telescope Array paper (TelescopeArray:2023sbd) reports the Amaterasu particle energy as 2.44×10^20 eV with an uncertainty of roughly 0.11×10^20 eV (∼5%), so shifting the quoted central value from 2.46 to 2.57 (a change of +0.11×10^20 eV ≈ 1σ) places the mis-quote just outside the 1σ envelope while remaining within 2σ — realising a C·S1·type-2 qualifier mis-quote with the cite key left intact.",
+          "ground_truth_description": "The quoted central energy of the Amaterasu event was changed from 2.46×10^20 eV (close to the published 2.44×10^20 eV) to 2.57×10^20 eV, a shift of approximately 1σ outside the reported uncertainty.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "TelescopeArray:2023sbd",
+            "injected_cite_key": "TelescopeArray:2023sbd",
+            "claim_sentence_verbatim": "The central value of its measured energy was $2.46\\times 10^{20}$ eV.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "10$^{20}$ eV",
+          "injected_text": "10$^{02}$ eV",
+          "rationale": "[2026-05-01 patch: spans tightened to the atomic digit-swap so they no longer clash with general.S3.t1's full-sentence rewrite of the same abstract paragraph.]  Swapping adjacent digits '20' to '02' in the abstract's headline energy threshold creates an abstract_vs_body_match mismatch, since the correct value 10^{20} eV appears repeatedly in the body text.",
+          "ground_truth_description": "The exponent '20' in '10^{20} eV' in the abstract was changed to '02', while the correct value 10^{20} eV remains in the body (e.g., Introduction and Section IV).",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "10^{20}",
+            "value_after_raw": "10^{02}",
+            "value_before_float": 1e+20,
+            "value_after_float": 100.0,
+            "location_cue": "their relative fraction above 10^{20} eV can be found from full sky observations",
+            "paired_location": "Introduction: 'free magnetic monopoles can naturally have energies above $10^{20}$ eV'",
+            "quantity_label": "energy threshold for UHECR magnetic monopole fraction in eV",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "E\n\\sim\\,g\\,B\\,\\xi\\, ",
+          "injected_text": "E\n\\sim\\,g\\,B\\, ",
+          "rationale": "Deleting the coherence-length factor ξ from the key kinetic-energy equation removes the dimensional scaling that ties the monopole energy gain to the field coherence length, so Wolfram refutes the equation against the intended E ~ g B ξ relation.",
+          "ground_truth_description": "The coherence-length term ξ was deleted from the monopole kinetic-energy equation E ~ g B ξ, leaving only E ~ g B and breaking the fundamental energy-gain scaling relation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "Ekin",
+            "equation_location": "Sec. 2, labeled equation Ekin",
+            "original_fragment_latex": "g\\,B\\,\\xi\\,",
+            "injected_fragment_latex": "g\\,B\\,",
+            "full_equation_latex_before": "E\n\\sim\\,g\\,B\\,\\xi\\,",
+            "full_equation_latex_after": "E\n\\sim\\,g\\,B\\,",
+            "term_role": "coherence-length factor ξ that gives monopole energy gain its spatial extent scaling",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": true
+          },
+          "proposer_agent": "injector.mathematics.S2.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "We use this fact to argue that  at least some of these these cosmic rays are relatively light magnetic monopoles and\n that their relative fraction  above 10$^{02}$ eV can be found from full sky observations.",
+          "injected_text": "We use this fact to argue that  at least some of these these cosmic rays are relatively light magnetic monopoles, but\n that their relative fraction  above 10$^{02}$ eV is consistent with zero and cannot be meaningfully constrained from current full sky observations.",
+          "rationale": "[2026-05-01 patch: original_text re-anchored from `10$^{20}$` to `10$^{02}$` because numerics.S2.t1 already perturbed that magnitude in the abstract; the general-module flip stacks on top.]  The abstract now claims the MM fraction above 10^20 eV is consistent with zero and unconstrained, directly contradicting the body (Section IV, Table 1) which reports positive f_MM values reaching 0.520 at 100–110 EeV with Z_MM values hinting at tension, and the conclusion which explicitly states a substantial MM fraction may be coming from the local void — a major internal contradiction detectable by cross-checking abstract against results.",
+          "ground_truth_description": "The abstract's claim about the MM fraction above 10^20 eV was flipped from 'can be found from full sky observations' to 'is consistent with zero and cannot be meaningfully constrained', contradicting Table 1 and the Discussion section which report non-zero f_MM values and positive Z_MM trends.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "A",
+            "checklist_item_id": "A2",
+            "change_kind": "internal_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Abstract",
+            "affected_span_verbatim": "We use this fact to argue that  at least some of these these cosmic rays are relatively light magnetic monopoles and\n that their relative fraction  above 10$^{20}$ eV can be found from full sky observations."
+          },
+          "proposer_agent": "injector.general.S3.t1.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "\\cite{Greisen:1966jv,Zatsepin:1966jv} limit of $E\\sim 5\\times 10^{19}$ eV (or GZK cutoff) is the upper bound on the   energy for a   cosmic ray protons traveling from their production in very distant galaxies through the intergalactic medium to us.",
+          "injected_text": "\\cite{Greisen:1966jv,Zatsepin:1966jv} limit of $E\\sim 5\\times 10^{19}$ eV (or GZK cutoff) is the lower bound on the   energy for a   cosmic ray protons traveling from their production in very distant galaxies through the intergalactic medium to us.",
+          "rationale": "Direction reversal of cited conclusion. Greisen (1966) and Zatsepin & Kuzmin (1966) — the founding papers on the GZK cutoff (cite keys preserved byte-for-byte) — establish that the cutoff is the UPPER bound on the energy of cosmic ray protons that can survive intergalactic propagation. Reversing 'upper bound' → 'lower bound' contradicts the physics of the GZK process (proton energy degradation by CMB photons via pion production) and contradicts the cited papers' stated result.",
+          "ground_truth_description": "Polarity flip of the GZK-cutoff direction claim: 'upper bound' → 'lower bound'. Greisen 1966 + Zatsepin-Kuzmin 1966 establish the GZK as an UPPER bound on cosmic-ray-proton energies above ~5×10^19 eV; the injected sentence reverses the direction.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Greisen:1966jv",
+            "injected_cite_key": "Greisen:1966jv",
+            "claim_sentence_verbatim": "\\cite{Greisen:1966jv,Zatsepin:1966jv} limit of $E\\sim 5\\times 10^{19}$ eV (or GZK cutoff) is the upper bound on the   energy for a   cosmic ray protons traveling from their production in very distant galaxies through the intergalactic medium to us.",
+            "section_location": "Sec. 1 (Introduction), GZK-cutoff discussion preceding the Amaterasu-from-void argument",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "their relative fraction  above 10$^{20}$ eV can be found from full sky observations.",
+          "injected_text": "their relative fraction  above 10$^{19}$ eV can be found from full sky observations.",
+          "rationale": "Abstract↔body major numerical mismatch. The abstract's 'above 10^20 eV' is the headline energy threshold for the magnetic-monopole UHECR claim — anchored throughout the body (Sec. 1 line 49 'free magnetic monopoles can naturally have energies above 10^20 eV', 'central value of its measured energy was 2.46×10^20 eV', etc.). Replacing the abstract '10^20' with '10^19' produces a 10× discrepancy with every body anchor; abstract_vs_body_match fires at MAJOR.",
+          "ground_truth_description": "Replaced the abstract's headline energy threshold '10^20 eV' with '10^19 eV', a 10× factor mismatch. The body keeps the correct 10^20 eV anchor (multiple occurrences: Frampton-context magnetic-monopole energy claim; Amaterasu's 2.46×10^20 eV measured energy).",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "10^{20}",
+            "value_after_raw": "10^{19}",
+            "value_before_float": 1e+20,
+            "value_after_float": 1e+19,
+            "location_cue": "their relative fraction above 10^{19} eV can be found from full sky observations",
+            "paired_location": "Sec. 1 Introduction body retains 10^{20} eV as the canonical magnetic-monopole UHECR energy threshold ('free magnetic monopoles can naturally have energies above $10^{20}$ eV', and 'central value of its measured energy was 2.46x10^{20} eV'); also Sec. 4 (line 217+) repeats 10^{20} eV as the trans-GZK threshold",
+            "quantity_label": "energy threshold for UHECR magnetic monopole fraction (eV) — abstract anchored to body Sec. 1 + Sec. 4",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t2.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "g=e/2\\alpha=3.3\\times10^{-8} \\;\\rm{esu}",
+          "injected_text": "g=2e\\alpha=3.3\\times10^{-8} \\;\\rm{esu}",
+          "rationale": "Wrong-but-plausible formula. The Dirac monopole charge in Gaussian units is g₀ = e/(2α) where α is the fine-structure constant (so g/e = 1/(2α) ≈ 68.5, giving g ≈ 3.3×10^-8 esu). Replacing with g = 2eα flips the relationship: the injected formula gives g ≈ 7×10^-12 esu (4 orders of magnitude smaller than the stated value 3.3×10^-8). Wolfram refutes by symbolic comparison against the canonical Dirac quantization e·g = ℏc/2 (Gaussian) → g = ℏc/(2e) = e/(2α).",
+          "ground_truth_description": "Replaced the canonical Dirac monopole charge formula 'g = e/(2α)' with the structurally similar but algebraically wrong 'g = 2eα'. The numerical value '3.3×10^-8 esu' (correct for the original formula) is preserved, creating an internal inconsistency between formula and value.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "charge",
+            "equation_location": "Sec. 2 (MM acceleration / Hillas), Eq. (charge)",
+            "original_fragment_latex": "e/2\\alpha",
+            "injected_fragment_latex": "2e\\alpha",
+            "full_equation_latex_before": "g=e/2\\alpha=3.3\\times10^{-8}",
+            "full_equation_latex_after": "g=2e\\alpha=3.3\\times10^{-8}",
+            "term_role": "Dirac monopole charge expression",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+          "original_text": "We can then generate a graph for the ratio of void- to non-void rays shown as the blue line in Figure 5.",
+          "injected_text": "We can then generate a graph for the ratio of void- to non-void rays shown as the blue line in Figure 4.",
+          "rationale": "Cross-reference mis-target. The sentence describes the void-to-non-void ratio plot, which is actually Figure 5 (the section's figure showing the blue line for the ratio + orange line for MM fraction). After the swap, the prose still describes the ratio plot but points to Figure 4, which is the energy breakdown of void rays — different content. Both Figure 4 and Figure 5 exist in the paper.",
+          "ground_truth_description": "Swapped the figure cross-reference target from Figure 5 (the void-to-non-void ratio plot) to Figure 4 (the void-rays energy breakdown). Reader inspecting Figure 4 sees an energy histogram, not the ratio curve the prose describes.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "cross_reference_mismatch",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 4 Estimate of the Magnetic Monopole Fraction of UHECR Flux (line 219) — sentence describing the void-vs-non-void ratio plot. The injected reference 'Figure 4' is the trans-GZK skymap; the actually-described content (ratio of void- to non-void rays as the blue line) is Figure 5 (VoidRatio_MonopoleFraction.png)",
+            "affected_span_verbatim": "We can then generate a graph for the ratio of void- to non-void rays shown as the blue line in Figure 5."
+          },
+          "proposer_agent": "injector.general.S2.t1.v3"
+        }
+      ]
+    }
+  ]
+}

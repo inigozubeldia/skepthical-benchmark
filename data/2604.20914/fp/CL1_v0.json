@@ -1,0 +1,272 @@
+{
+  "paper_id": "2604.20914",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-416e75528b20",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "The paper clearly distinguishes the existing FIREFLY methodology (reference [11]) from the new TDI-compatible reformulation, stating 'for the first time we design and accelerate a practical ringdown analysis pipeline for space-borne detectors by implementing FIREFLY [11]' and 'for the first time demonstrate its compatibility and effectiveness with the time-delay interferometry (TDI) observables.' The paper explicitly frames FIREFLY as a prior work and the TDI adaptation as the new contribution.",
+        "evidence": {
+          "claim": "The abstract and introduction overstate the originality of the work regarding adapting FIREFLY to space-borne detectors, without sufficiently distinguishing prior work from new contributions.",
+          "excerpt": "the abstract and introduction overstate the originality somewhat (\"for the first time we design and accelerate a practical ringdown analysis pipeline for space-borne detectors\"). I would suggest a more measured framing that distinguishes (a) the FIREFLY methodology (existing) from (b) the TDI-compatible reformulation and validation (new)"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper clearly distinguishes the existing FIREFLY methodology (reference [11]) from the new TDI-compatible reformulation, stating 'for the first time we design and accelerate a practical ringdown analysis pipeline for space-borne detectors by implementing FIREFLY [11]' and 'for the first time demonstrate its compatibility and effectiveness with the time-delay interferometry (TDI) observables.' The paper explicitly frames FIREFLY as a prior work and the TDI adaptation as the new contribution.",
+            "cost_usd": 0.025866249999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly separates prior FIREFLY work from the new contribution: it says it is \"implementing FIREFLY, a novel algorithm validated in ground-based detectors\" and \"for the first time demonstrate its compatibility and effectiveness with the time-delay interferometry (TDI) observables.\"",
+            "cost_usd": 0.0161325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly distinguishes the existing method from the new contribution in the abstract, stating it develops the pipeline 'by implementing FIREFLY, a novel acceleration algorithm validated in ground-based detectors, and for the first time demonstrate its compatibility and effectiveness with the time-delay interferometry (TDI) observables.'",
+            "cost_usd": 0.004101333333333334
+          }
+        ],
+        "cost_usd": 0.04610008333333333
+      },
+      {
+        "flag_id": "fp-1c976b030666",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper fixes sky location and other geometric parameters: 'Other geometric parameters such as the sky location are fixed to their injected values' and only states without quantitative support that 'changing the injected geometric parameters does not affect the speedup substantially.' Per rule R1, mere acknowledgement without quantitative evidence does not resolve the reviewer's concern about the generality of the 200× speedup figure.",
+        "evidence": {
+          "claim": "The validation focuses only on a non-spinning binary and fixed parameters, likely making the headline 200× speedup figure overly optimistic for general use.",
+          "excerpt": "Both choices substantially reduce the dimensionality of θ in the auxiliary step and likely flatter the speedup. The authors acknowledge this in the SM (\"changing the injected geometric parameters does not affect the speedup substantially\"), but no quantitative evidence is shown."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper fixes sky location and other geometric parameters: 'Other geometric parameters such as the sky location are fixed to their injected values' and only states without quantitative support that 'changing the injected geometric parameters does not affect the speedup substantially.' Per rule R1, mere acknowledgement without quantitative evidence does not resolve the reviewer's concern about the generality of the 200× speedup figure.",
+            "cost_usd": 0.025866249999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The validation is indeed built around one illustrative setup — \"As an example, we consider a non-spinning MBHB\" and \"Other geometric parameters such as the sky location are fixed to their injected values\" — but the paper only claims \"we achieve a ∼ 200-fold speedup for a simulated ringdown signal,\" not a universal speedup, and it also states \"changing the injected geometric parameters does not affect the speedup substantially\" without quantifying that claim.",
+            "cost_usd": 0.0161325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that 'Other geometric parameters such as the sky location are fixed to their injected values' and claims that 'changing the injected geometric parameters does not affect the speedup substantially', but provides no quantitative evidence to support this.",
+            "cost_usd": 0.004101333333333334
+          }
+        ],
+        "cost_usd": 0.04610008333333333
+      },
+      {
+        "flag_id": "fp-3a3a3499d373",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'The data are recorded from t = 10Mf after the merger' and acknowledges 'This choice is for illustration, but the analysis readily generalizes to other start times t,' but provides no actual discussion or analysis of how the pipeline behaves under start-time variation or inclusion of higher overtones like (2,2,2). Per R1, mere acknowledgement does not constitute the discussion the reviewer requests.",
+        "evidence": {
+          "claim": "The use of the (2,2,1) overtone at a contentious start time raises unresolved issues and requires discussion of the pipeline's performance under varying start times and higher overtones.",
+          "excerpt": "the choice of starting time t = 10 M_f sits in a regime where overtone modeling is contentious (cf. Refs. [4], [5], and the broader debate following GW150914/GW250114). A short discussion of how the FIREFLY pipeline behaves under (a) start-time variation and (b) inclusion of higher overtones (2,2,2) would strengthen the paper."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'The data are recorded from t = 10Mf after the merger' and acknowledges 'This choice is for illustration, but the analysis readily generalizes to other start times t,' but provides no actual discussion or analysis of how the pipeline behaves under start-time variation or inclusion of higher overtones like (2,2,2). Per R1, mere acknowledgement does not constitute the discussion the reviewer requests.",
+            "cost_usd": 0.025866249999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does not study start-time variation or a higher overtone like (2,2,2), though it notes that the chosen setup is illustrative: \"The data are recorded from t = 10Mf after the merger... This choice is for illustration, but the analysis readily generalizes to other start times t.\" That partially addresses start-time generality, but not the specific overtone/variation analysis requested.",
+            "cost_usd": 0.0161325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that the start time 't = 10Mf [...] choice is for illustration, but the analysis readily generalizes to other start times', yet it lacks an actual discussion or quantitative analysis demonstrating the pipeline's robustness under different start times or when including higher overtones.",
+            "cost_usd": 0.004101333333333334
+          }
+        ],
+        "cost_usd": 0.04610008333333333
+      },
+      {
+        "flag_id": "fp-8e13eadd5893",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper does not report effective sample sizes after the importance-sampling step anywhere in the main text or supplementary material. The paper only states parameter counts for the importance sampling (nw=50000, n⊗=20000, nB=5000) but provides no ESS diagnostics, particularly for high-N runs where auxiliary–target divergence may grow.",
+        "evidence": {
+          "claim": "The authors do not quantify effective sample size after the importance-sampling step, leaving robustness of resampled posteriors for high-N unresolved.",
+          "excerpt": "It would help the reader if the authors quantified the effective sample size (ESS) after the importance-sampling step, particularly for high-N runs where the auxiliary–target divergence presumably grows."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not report effective sample sizes after the importance-sampling step anywhere in the main text or supplementary material. The paper only states parameter counts for the importance sampling (nw=50000, n⊗=20000, nB=5000) but provides no ESS diagnostics, particularly for high-N runs where auxiliary–target divergence may grow.",
+            "cost_usd": 0.025866249999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "While no effective sample size is reported, the paper does quantitatively test robustness of the resampled posteriors: \"In all runs, FIREFLY yields consistent results with the full-parameter sampling\" and \"the distances between the two methods are at the same level as the internal fluctuations within each method and are less than 5% of the standard deviation.\"",
+            "cost_usd": 0.0161325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper specifies the number of samples drawn during importance sampling (e.g., 'nw = 50000 draws') but does not quantify or report the effective sample size (ESS) or weight variance to evaluate robustness.",
+            "cost_usd": 0.004101333333333334
+          }
+        ],
+        "cost_usd": 0.04610008333333333
+      },
+      {
+        "flag_id": "fp-c52c5239d784",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'the evidences given by FIREFLY and the full-parameter sampling have slight differences at the level of 10^−3... One possible reason is the insufficient exploration of the B parameter space in the full-parameter sampling' and then says 'A detailed comparison and explanation about the evidence is left for future work.' Per R1, this is merely an acknowledgement without quantitative substantiation, leaving the strong claim about baseline accuracy unresolved.",
+        "evidence": {
+          "claim": "The claim that FIREFLY is more accurate than the full-parameter baseline in evidence is strong and not adequately substantiated; as stated, it risks propagating errors in model selection.",
+          "excerpt": "This is a strong claim that effectively asserts FIREFLY is *more* accurate than the brute-force baseline, yet it is relegated to a single sentence and \"left for future work.\" Either flesh out the diagnostic (e.g., by running the baseline with substantially more live points and showing convergence), or weaken the claim."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'the evidences given by FIREFLY and the full-parameter sampling have slight differences at the level of 10^−3... One possible reason is the insufficient exploration of the B parameter space in the full-parameter sampling' and then says 'A detailed comparison and explanation about the evidence is left for future work.' Per R1, this is merely an acknowledgement without quantitative substantiation, leaving the strong claim about baseline accuracy unresolved.",
+            "cost_usd": 0.025866249999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes only a speculative, weakly supported claim about evidence accuracy: \"One possible reason is the insufficient exploration of the B parameter space in the full-parameter sampling\" and then admits that \"A detailed comparison and explanation about the evidence is left for future work.\" That does not substantiate the stronger implication that FIREFLY may be more accurate than the baseline.",
+            "cost_usd": 0.0161325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims differences in evidence calculation may be due to 'insufficient exploration of the B parameter space in the full-parameter sampling', but leaves this unsubstantiated by noting that 'A detailed comparison and explanation about the evidence is left for future work.'",
+            "cost_usd": 0.004101333333333334
+          }
+        ],
+        "cost_usd": 0.04610008333333333
+      },
+      {
+        "flag_id": "fp-f9fa97956de5",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper assumes stationary Gaussian noise throughout (e.g., 'the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean') and provides no discussion of how FIREFLY's analytic structure would interact with non-Gaussian, non-stationary effects, glitches, gaps, or confusion noise in the LISA/TianQin band. No such paragraph or discussion exists in the paper.",
+        "evidence": {
+          "claim": "The likelihood ignores non-Gaussian, non-stationary effects known to affect the detectors, and the paper lacks discussion on how FIREFLY would interact with those realistic conditions.",
+          "excerpt": "The likelihood assumes stationary, Gaussian noise with a fixed PSD and ignores instrumental glitches, gaps, and the well-known foreground confusion noise in the LISA/TianQin band. None of this needs to be solved here, but a paragraph in the main text on the limitations of the noise assumption — and how FIREFLY's analytic structure would interact with non-stationary or gap-affected data — would be appropriate."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper assumes stationary Gaussian noise throughout (e.g., 'the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean') and provides no discussion of how FIREFLY's analytic structure would interact with non-Gaussian, non-stationary effects, glitches, gaps, or confusion noise in the LISA/TianQin band. No such paragraph or discussion exists in the paper.",
+            "cost_usd": 0.025866249999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The methodology is explicitly developed under an idealized assumption — \"We start from the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean\" — and the paper does not add a discussion of glitches, gaps, confusion noise, or other non-stationary/non-Gaussian effects.",
+            "cost_usd": 0.0161325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper specifies 'We start from the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean' but does not discuss the limitations of this assumption or how the model would interact with gaps, glitches, or non-stationary noise.",
+            "cost_usd": 0.004101333333333334
+          }
+        ],
+        "cost_usd": 0.04610008333333333
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.16666666666666666
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.2766005
+  },
+  "extractor_cost_usd": 0.013299999999999979,
+  "total_cost_usd": 0.2899005
+}

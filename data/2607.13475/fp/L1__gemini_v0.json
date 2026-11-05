@@ -1,0 +1,241 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "L1",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-a69825336860",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Mechanical predicate passed: 0.1055 - 0.0989 = 0.006599999999999995; claimed 0.0066",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "PASS",
+            "computed": 0.006599999999999995,
+            "reported": 0.0066,
+            "diff_abs": -5.204170427930421e-18,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 0.00015000000000000001,
+              "rel_tol": null
+            },
+            "notes": "0.1055 - 0.0989 = 0.006599999999999995; claimed 0.0066"
+          },
+          "rereader": [
+            {
+              "label": "minuend",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": ""
+            },
+            {
+              "label": "subtrahend",
+              "raw_observed": "0.0989",
+              "value_observed": 0.0989,
+              "notes": ""
+            },
+            {
+              "label": "difference",
+              "raw_observed": null,
+              "value_observed": null,
+              "notes": "No explicit numeric value for the difference is printed in the cited passage; only the minuend and subtrahend are given."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.035469999999999974
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-58fb48d1dfc2",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only acknowledges this limitation in the conclusion as future work: 'we plan to validate on real tissue data and investigate robustness under varying observation density and noise levels.' No justification or extension to 3D or nonlinear deformations is provided, and the concern about PCA's linearity in 3D settings remains unaddressed.",
+        "evidence": {
+          "claim": "The use of a 2D model and linear PCA may not generalize to real, nonlinear 3D surgical tasks without justification or extension.",
+          "excerpt": "Real surgical retraction inherently involves 3D deformations (e.g., out-of-plane buckling, folding, and self-occlusion). Furthermore, the use of PCA—a linear dimensionality reduction technique—captures 83.7% of the variance in 12 dimensions for this 2D task. However, nonlinear deformations in 3D tissue often require nonlinear manifolds..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only acknowledges this limitation in the conclusion as future work: 'we plan to validate on real tissue data and investigate robustness under varying observation density and noise levels.' No justification or extension to 3D or nonlinear deformations is provided, and the concern about PCA's linearity in 3D settings remains unaddressed.",
+            "cost_usd": 0.003236475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper is limited to a simplified setting: it states, \"We evaluate the approach in a 2D deformable sheet simulation\" and uses \"a 12-dimensional latent space\" from PCA, while only saying, \"In ongoing and future work, we plan to validate on real tissue data.\" It does not provide a justification or extension showing that this 2D linear representation generalizes to nonlinear 3D surgical tissue retraction.",
+            "cost_usd": 0.008167875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation, stating it uses a \"2D deformable sheet model\" and notes that \"In ongoing and future work, we plan to validate on real tissue data\"; it does not resolve the concern about 3D generalization in the current text.",
+            "cost_usd": 0.002673
+          }
+        ],
+        "cost_usd": 0.014077349999999999
+      },
+      {
+        "flag_id": "fp-92f850828795",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper does not include any ablation varying the number of observed vertices or noise levels. The conclusion only states future plans to 'investigate robustness under varying observation density and noise levels,' meaning the operational boundaries are not mapped quantitatively in this work.",
+        "evidence": {
+          "claim": "No ablation study varying observed vertices or noise is included, leaving robustness and operational boundaries unexplored.",
+          "excerpt": "the authors should include an ablation study varying the number of observed vertices (e.g., 10, 20, 40, 80) and the noise levels. This would map the operational boundaries of the proposed method and demonstrate at what sparsity threshold the PCA-MLP pipeline fails."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not include any ablation varying the number of observed vertices or noise levels. The conclusion only states future plans to 'investigate robustness under varying observation density and noise levels,' meaning the operational boundaries are not mapped quantitatively in this work.",
+            "cost_usd": 0.003236475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experimental setup fixes both sparsity and noise: \"the system observes only 40 of 900 vertices (4.4%)\" and observations are corrupted with \"Gaussian noise with standard deviation σ = 0.02.\" The paper explicitly defers this analysis, saying it will \"investigate robustness under varying observation density and noise levels\" in future work, so the requested ablation is not present.",
+            "cost_usd": 0.008167875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper lacks the requested ablation study and merely acknowledges it as a future direction: \"In ongoing and future work, we plan to... investigate robustness under varying observation density and noise levels.\"",
+            "cost_usd": 0.002673
+          }
+        ],
+        "cost_usd": 0.014077349999999999
+      },
+      {
+        "flag_id": "fp-d468c54a3af4",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: The paper explicitly admits to this methodological choice, stating: \"The reported 44.5% success rate is computed over all 200 episodes, including unimprovable ones.\" The reviewer correctly identifies that the main metric setup does not filter these out.",
+        "evidence": {
+          "claim": "Metric reporting is potentially misleading due to inclusion of unimprovable test episodes; setup should filter these out for accurate assessment.",
+          "excerpt": "the authors note that 57% of the test episodes begin with the target already fully exposed, rendering them \"unimprovable.\" Consequently, the reported 45% overall success rate is slightly misleading at first glance."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges and explains the issue: 'Approximately 57% of episodes begin with the target already fully exposed... The reported 44.5% success rate is computed over all 200 episodes, including unimprovable ones, confirming that the planner is near-optimal.' The authors clearly flag the inclusion of unimprovable episodes and contextualize the metric accordingly.",
+            "cost_usd": 0.003236475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper directly quantifies and explains the unimprovable-episode effect: \"Approximately 57% of episodes begin with the target already fully exposed... and are thus unimprovable\" and \"The reported 44.5% success rate is computed over all 200 episodes, including unimprovable ones.\" Because the paper explicitly discloses this distribution and its impact, the concern that the metric is misleading is addressed in-text.",
+            "cost_usd": 0.008167875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly admits to this methodological choice, stating: \"The reported 44.5% success rate is computed over all 200 episodes, including unimprovable ones.\" The reviewer correctly identifies that the main metric setup does not filter these out.",
+            "cost_usd": 0.002673
+          }
+        ],
+        "cost_usd": 0.014077349999999999
+      },
+      {
+        "flag_id": "fp-7eb908819778",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper uses Laplacian relaxation (citing Desbrun et al. SIGGRAPH 1999) as its deformation model and does not address its fidelity relative to FEM models. The conclusion only mentions future plans to 'validate on real tissue data' without discussing the physics fidelity gap between Laplacian relaxation and FEM-based simulation.",
+        "evidence": {
+          "claim": "Use of Laplacian relaxation for simulation may not faithfully represent soft tissue physics as in FEM models, raising concerns about real-world performance.",
+          "excerpt": "The simulation relies on Laplacian relaxation. While computationally convenient, this is a very rudimentary approximation of soft tissue physics compared to Finite Element Method (FEM) models typically used in surgical simulations (e.g., SOFA framework)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses Laplacian relaxation (citing Desbrun et al. SIGGRAPH 1999) as its deformation model and does not address its fidelity relative to FEM models. The conclusion only mentions future plans to 'validate on real tissue data' without discussing the physics fidelity gap between Laplacian relaxation and FEM-based simulation.",
+            "cost_usd": 0.003236475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms it uses a simple simulator rather than a validated tissue-physics model: \"All experiments are conducted in simulation using a randomized 2D deformable sheet model\" and \"Deformation uses Laplacian relaxation [13].\" It offers no evidence that this approximation faithfully matches real soft-tissue physics, only noting future validation: \"we plan to validate on real tissue data.\"",
+            "cost_usd": 0.008167875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms the use of this simplified simulation method, stating \"Deformation uses Laplacian relaxation [13]\", without demonstrating its equivalence to more faithful soft-tissue FEM models.",
+            "cost_usd": 0.002673
+          }
+        ],
+        "cost_usd": 0.014077349999999999
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.035469999999999974,
+    "general": 0.056309399999999996
+  },
+  "extractor_cost_usd": 0.010122000000000034,
+  "total_cost_usd": 0.1019014
+}

@@ -1,0 +1,188 @@
+{
+  "paper_id": "2604.20344",
+  "reviewer_system": "B1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-43db2c799ecf",
+        "paper_id": "2604.20344",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states \"all sharp-transition core–Sérsic models have γ(r) < 0 for r ≲ Rb\" and supports this with numerical deprojections and a footnote confirming results with Mathematica, but provides no local asymptotic derivation near R ≈ Rb that would rigorously prove the 'always' claim for any parameter combination.",
+        "evidence": {
+          "claim": "The major claim for the α → ∞ limit and for large α is not rigorously proven; a local asymptotic derivation near R ≈ Rb is missing, which weakens the always statement of inadmissibility.",
+          "excerpt": "The main claim for the α → ∞ limit and for large α is argued physically and numerically but not rigorously proven; a local asymptotic derivation near R ≈ Rb would greatly strengthen the “always” statement."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states \"all sharp-transition core–Sérsic models have γ(r) < 0 for r ≲ Rb\" and supports this with numerical deprojections and a footnote confirming results with Mathematica, but provides no local asymptotic derivation near R ≈ Rb that would rigorously prove the 'always' claim for any parameter combination.",
+            "cost_usd": 0.029174625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explicitly bases the result on numerics: the abstract says, \"Using numerical deprojections, we show that many formally allowed parameter combinations cannot represent realistic stellar systems,\" and Sect. 3.3 says, \"We used SpheCow to calculate this critical transition parameter.\" It does not provide the requested local asymptotic or rigorous proof for the blanket \"always\" inadmissibility statement.",
+            "cost_usd": 0.016855625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper relies entirely on numerical integration (via the SpheCow package and Mathematica) to demonstrate non-monotonicity and does not provide an analytical local asymptotic derivation near the break radius.",
+            "cost_usd": 0.004097
+          }
+        ],
+        "cost_usd": 0.05012725
+      },
+      {
+        "flag_id": "fp-c9fc5d354251",
+        "paper_id": "2604.20344",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The fitting formula (Eq. 5) contains \"a2 ln γ\" and \"a5 ln γ\" and \"a8 ln γ\" terms, which are undefined at γ = 0. The paper states \"For γ = 0, we always find αcrit = 2\" as a separate result but gives no prescription for how to handle γ → 0 within the fitting formula itself, leaving the practical implementation ambiguous.",
+        "evidence": {
+          "claim": "The αcrit fitting function includes ln γ terms and appears undefined at γ = 0; the special case (αcrit = 2) handling requires clearer and numerically stable domain/limit prescriptions for practical use.",
+          "excerpt": "The αcrit fitting function includes ln γ terms and appears undefined at γ = 0; the special case (αcrit = 2) is handled separately but the practical implementation needs clearer domain/limit handling."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The fitting formula (Eq. 5) contains \"a2 ln γ\" and \"a5 ln γ\" and \"a8 ln γ\" terms, which are undefined at γ = 0. The paper states \"For γ = 0, we always find αcrit = 2\" as a separate result but gives no prescription for how to handle γ → 0 within the fitting formula itself, leaving the practical implementation ambiguous.",
+            "cost_usd": 0.029174625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states, \"For γ = 0, we always find αcrit = 2,\" but then gives Eq. (5) with \"ln(αcrit,fit − 2) = ... + a2 ln γ ...\" and later says, \"For practical applications, Eq. (5) provides a convenient approximation.\" There is no explicit domain/limit prescription for using the fit at γ = 0, so the practical implementation issue remains.",
+            "cost_usd": 0.016855625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Equation (5) contains multiple 'ln γ' terms which become mathematically undefined at γ = 0. Although the text states 'For γ = 0, we always find αcrit = 2', the paper does not provide an explicit numerical prescription for safely evaluating the fitting function near this limit in practice.",
+            "cost_usd": 0.004097
+          }
+        ],
+        "cost_usd": 0.05012725
+      },
+      {
+        "flag_id": "fp-cd63f68629d2",
+        "paper_id": "2604.20344",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states the code \"uses an efficient high-order Gauss-Legendre numerical integration strategy\" and mentions a footnote confirming results with Mathematica, but no formal error analysis, convergence diagnostics, or quantitative accuracy estimates near r ≈ Rb are reported.",
+        "evidence": {
+          "claim": "No formal error analysis or convergence diagnostics are reported for the deprojection near the break radius r ≈ Rb, where numerical sensitivity is greatest.",
+          "excerpt": "No formal error analysis for the deprojection near the break radius r ≈ Rb, where the kernels are most sensitive; quantitative numerical convergence tests are not reported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states the code \"uses an efficient high-order Gauss-Legendre numerical integration strategy\" and mentions a footnote confirming results with Mathematica, but no formal error analysis, convergence diagnostics, or quantitative accuracy estimates near r ≈ Rb are reported.",
+            "cost_usd": 0.029174625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The numerical method is described only qualitatively: \"The code uses an efficient high-order Gauss-Legendre numerical integration strategy,\" and the only cross-check reported is, \"We have checked our results using numerical integration with Mathematica.\" The paper does not report formal error estimates or convergence diagnostics near the sensitive break radius.",
+            "cost_usd": 0.016855625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While the authors mention using an 'efficient high-order Gauss-Legendre numerical integration strategy' and state that they 'checked our results using numerical integration with Mathematica', they do not report any formal convergence diagnostics or quantitative error analysis near the sensitive break radius.",
+            "cost_usd": 0.004097
+          }
+        ],
+        "cost_usd": 0.05012725
+      },
+      {
+        "flag_id": "fp-8a53498ceceb",
+        "paper_id": "2604.20344",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper presents observational data from Richings et al. (2011) and Dullo & Graham (2013) in Fig. 3 and states \"Six galaxies...are located above the red line\" without propagating parameter uncertainties; no probabilistic assessment of whether these galaxies are truly inadmissible within their fitting errors is provided.",
+        "evidence": {
+          "claim": "The observational comparison does not propagate uncertainties on fitted parameters into probabilities of (in)admissibility; this risks overinterpreting results for cases near the critical boundary.",
+          "excerpt": "The comparison to observational samples does not propagate uncertainties on fitted parameters into probabilities of (in)admissibility; individual “inadmissible” cases might be consistent within errors."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents observational data from Richings et al. (2011) and Dullo & Graham (2013) in Fig. 3 and states \"Six galaxies...are located above the red line\" without propagating parameter uncertainties; no probabilistic assessment of whether these galaxies are truly inadmissible within their fitting errors is provided.",
+            "cost_usd": 0.029174625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "In the observational comparison, the paper simply plots literature best-fit parameters: \"These 21 galaxies are shown as blue squares in Fig. 3\" and concludes, \"Six galaxies, however, labelled with their NGC numbers, are located above the red line, and thus correspond to non-monotonic density profiles.\" No parameter uncertainties are propagated into probabilities of admissibility/inadmissibility.",
+            "cost_usd": 0.016855625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper plots best-fit parameters from observational samples (Richings et al. 2011; Dullo & Graham 2013) as single points in Figure 3 and states 'Six galaxies... are located above the red line', but does not incorporate or propagate fitting uncertainties for these specific points.",
+            "cost_usd": 0.004097
+          }
+        ],
+        "cost_usd": 0.05012725
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.200509
+  },
+  "extractor_cost_usd": 0.012078000000000005,
+  "total_cost_usd": 0.212587
+}

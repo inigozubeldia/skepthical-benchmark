@@ -1,0 +1,408 @@
+{
+  "paper_id": "2607.14024",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-ea7016081a23",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'support for numerical and novelty claims in Introduction/Related Work'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "support for numerical and novelty claims in Introduction/Related Work"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-4faded482282",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {minuend, subtrahend, difference}",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {minuend, subtrahend, difference}"
+          },
+          "rereader": [
+            {
+              "label": "start_date",
+              "raw_observed": "2018/07/01",
+              "value_observed": null,
+              "notes": "Found as part of the date range '2018/07/01 to 2019/06/13'; a date, not a number."
+            },
+            {
+              "label": "end_date",
+              "raw_observed": "2019/06/13",
+              "value_observed": null,
+              "notes": "Found as part of the date range '2018/07/01 to 2019/06/13'; a date, not a number."
+            },
+            {
+              "label": "claimed_days",
+              "raw_observed": "300",
+              "value_observed": 300.0,
+              "notes": "Appears explicitly in passage: 'It contains 300 days of data from 2018/07/01 to 2019/06/13 at a 15-minute periodicity.'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.092136
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-d49ddee5d6e1",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "L3 maths flags require manual review (automated adjudication would be circular).",
+        "evidence": {},
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-81e6c1a9575d",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper explicitly frames WT-S2 as predicting with 'features that would realistically be available at forecast time, for instance, by querying Numerical Weather Prediction (NWP) models,' suggesting a forecasting intent, but the experimental setup uses contemporaneous features and a standard train/val/test temporal split without any explicit forecast horizon or lead time. The paper never clearly defines a future prediction horizon, making the 'forecasting' framing ambiguous at best and misleading at worst.",
+        "evidence": {
+          "claim": "The paper's framing is misleading, presenting the work as forecasting or prediction, but the experiments are contemporaneous regression/nowcasting rather than true forecasting.",
+          "excerpt": "The paper's framing is misleading. The title and introduction emphasize 'prediction' and 'forecasting,' but the experimental setup appears to be contemporaneous regression (nowcasting) rather than true forecasting over a future horizon."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explicitly frames WT-S2 as predicting with 'features that would realistically be available at forecast time, for instance, by querying Numerical Weather Prediction (NWP) models,' suggesting a forecasting intent, but the experimental setup uses contemporaneous features and a standard train/val/test temporal split without any explicit forecast horizon or lead time. The paper never clearly defines a future prediction horizon, making the 'forecasting' framing ambiguous at best and misleading at worst.",
+            "cost_usd": 0.004311128571428571
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly includes non-forecasting tasks—\"wind turbine power curve modeling\" and, for WT-S1, a goal to \"obtain an accurate digital twin model\"—but it also says WT-S2 uses features \"that would realistically be available at forecast time.\" Because no prediction horizon is specified anywhere, it is unclear whether the experiments are intended as true forecasting or broader contemporaneous power-prediction/regression tasks.",
+            "cost_usd": 0.009315214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms this by describing the WT-S1 task as aiming to 'obtain an accurate digital twin model that may serve as a reference... as deviations between predicted and actual power may indicate sensor faults,' and for S2 maps concurrent NWP inputs, which represents contemporaneous regression rather than multi-step forecasting.",
+            "cost_usd": 0.0019333428571428573
+          }
+        ],
+        "cost_usd": 0.015559685714285714
+      },
+      {
+        "flag_id": "fp-a4afb3c568c8",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper provides only a high-level conceptual description of CSFS in Section 3.2 and Fig. 2, with no formal definition of the non-inferiority test (no hypothesis, margin, statistic, or significance level stated), no specification of which clustering algorithms and parameters are used, and no detailed HPO budget/search space. The paper defers to the GitHub repository for implementation details, which does not satisfy reproducibility from the text alone.",
+        "evidence": {
+          "claim": "The CSFS algorithm and hyperparameter optimization protocol are critically underspecified, lacking formal definitions and clear parameterization, which prevents reproducibility.",
+          "excerpt": "The CSFS algorithm and the hyperparameter optimization (HPO) protocol are critically underspecified, preventing reproducibility from the text alone. Key missing details include: (i) the formal definition of the non-inferiority test (hypotheses, margin, statistic, significance level, correction for multiple testing); (ii) the specific clustering algorithms and their parameters; (iii) the stopping criteria and the 'conditional force-remove' rule; (iv) the HPO protocol, specifically whether hyperparameters are re-tuned for every candidate subset, and what the budget and search spaces are."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides only a high-level conceptual description of CSFS in Section 3.2 and Fig. 2, with no formal definition of the non-inferiority test (no hypothesis, margin, statistic, or significance level stated), no specification of which clustering algorithms and parameters are used, and no detailed HPO budget/search space. The paper defers to the GitHub repository for implementation details, which does not satisfy reproducibility from the text alone.",
+            "cost_usd": 0.004311128571428571
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.2 only states that \"The FS algorithm is enhanced by a non-inferiority test\" and that clustering \"can be performed based on feature correlations, RF FI as an initial best guess, or randomly,\" but it gives no formal test definition, significance level, or clustering algorithm/parameters. Section 5.1 likewise says only \"We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set,\" with no search spaces or budgets reported in the paper text.",
+            "cost_usd": 0.009315214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper lacks formal definitions for the non-inferiority test, specific clustering algorithm parameters, and stopping criteria, providing only high-level descriptions such as 'a conditional force-remove of the worst feature or cluster is triggered'.",
+            "cost_usd": 0.0019333428571428573
+          }
+        ],
+        "cost_usd": 0.015559685714285714
+      },
+      {
+        "flag_id": "fp-3d80aa4afada",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper itself acknowledges this as a threat to validity: 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station.' Despite this acknowledgment, the paper still makes general claims about wrapper methods providing better feature selections 'for renewable energy prediction pipelines,' which are not supported by a single-asset design.",
+        "evidence": {
+          "claim": "The external validity is severely limited because results are based on single wind and PV assets, making generalization claims unsupported.",
+          "excerpt": "The external validity of the findings is severely limited by the use of only a single wind turbine and a single PV station for the entire evaluation (Sec. 4.2–4.3). Feature importance and model performance can be highly asset-specific. Conclusions about the general superiority of wrapper methods or the performance of CSFS for 'renewable energy prediction pipelines' are not well-supported by this N=1 design."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself acknowledges this as a threat to validity: 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station.' Despite this acknowledgment, the paper still makes general claims about wrapper methods providing better feature selections 'for renewable energy prediction pipelines,' which are not supported by a single-asset design.",
+            "cost_usd": 0.004311128571428571
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation is indeed based on one asset per domain: \"For our study, we select wind turbine T11\" and \"For our study, we select station 01.\" The authors also acknowledge that \"Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station,\" so broad generalization is limited.",
+            "cost_usd": 0.009315214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates the methods on an N=1 basis ('we select wind turbine T11' and 'station 01') and explicitly acknowledges this limitation, stating 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station'.",
+            "cost_usd": 0.0019333428571428573
+          }
+        ],
+        "cost_usd": 0.015559685714285714
+      },
+      {
+        "flag_id": "fp-249ff30bdf29",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set,' confirming that the same fixed validation set is used repeatedly for both feature selection decisions and hyperparameter tuning throughout the wrapper-based search. This risk is not quantified or mitigated beyond the bootstrapping of the final test evaluation.",
+        "evidence": {
+          "claim": "The validation protocol risks overfitting by using a single, fixed validation set for both feature selection and hyperparameter tuning, creating selection bias.",
+          "excerpt": "The validation protocol, which repeatedly uses a single, fixed validation set for both feature selection and hyperparameter tuning, is prone to overfitting. Wrapper methods make many sequential decisions based on small performance differences on the validation set, creating a high risk that the selected features and hyperparameters are overly tailored to this specific time window."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set,' confirming that the same fixed validation set is used repeatedly for both feature selection decisions and hyperparameter tuning throughout the wrapper-based search. This risk is not quantified or mitigated beyond the bootstrapping of the final test evaluation.",
+            "cost_usd": 0.004311128571428571
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses a single temporal split and repeatedly reuses the validation set: \"we apply a (50%/25%/25%) temporal split\" and \"We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set.\" Since wrapper selection also makes sequential decisions on that same validation window, the concern about validation-set overfitting/selection bias is not resolved in the paper.",
+            "cost_usd": 0.009315214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The methodology confirms the use of a fixed set for tuning, stating 'We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set', validating the reviewer's concern about selection bias and the risk of overfitting.",
+            "cost_usd": 0.0019333428571428573
+          }
+        ],
+        "cost_usd": 0.015559685714285714
+      },
+      {
+        "flag_id": "fp-32eec1ae616e",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's evidence for comparable performance consists entirely of visual inspection of boxplots aggregated over models and feature set sizes (Fig. 3-4), with no formal statistical hypothesis tests. The paper acknowledges 'high IQR of the results due to clear differences in feature set sizes' but performs no correction, and the non-inferiority test used within CSFS/SFS is not applied to compare the two methods' final performance.",
+        "evidence": {
+          "claim": "The claim that CSFS achieves 'comparable performance' to SFS lacks rigorous statistical support and relies only on overlapping boxplots with no hypothesis testing.",
+          "excerpt": "The central claim that CSFS achieves 'comparable performance' to SFS is not rigorously supported. The evidence is based on visual inspection of aggregated boxplots (Fig. 3-4), which mix results from different models and feature set sizes, obscuring direct comparisons. Given the overlapping IQRs, the observed small differences may not be statistically significant."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's evidence for comparable performance consists entirely of visual inspection of boxplots aggregated over models and feature set sizes (Fig. 3-4), with no formal statistical hypothesis tests. The paper acknowledges 'high IQR of the results due to clear differences in feature set sizes' but performs no correction, and the non-inferiority test used within CSFS/SFS is not applied to compare the two methods' final performance.",
+            "cost_usd": 0.004311128571428571
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The support for the claim is descriptive rather than inferential: the paper says \"Fig. 3 reveals\" and concludes that \"overall CSFS performs on par with SFS,\" based on results \"aggregated over all models and target feature sizes.\" Although it mentions \"test-set bootstrapping\" and repeating evaluation ten times, no formal hypothesis test comparing CSFS and SFS is reported.",
+            "cost_usd": 0.009315214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates comparative performance visually using aggregated boxplots ('Fig. 3 reveals that...') and states 'overall CSFS performs on par with SFS', but provides no formal statistical hypothesis testing to rigorously support this claim.",
+            "cost_usd": 0.0019333428571428573
+          }
+        ],
+        "cost_usd": 0.015559685714285714
+      },
+      {
+        "flag_id": "fp-7e4c71ba81b9",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper explicitly states 'For a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut at the feature level whenever non-inferiority is provided,' meaning the baseline SFS shares the non-inferiority test with CSFS, making it impossible to isolate the contribution of clustering versus the shared safe-remove mechanism to the observed runtime and performance differences.",
+        "evidence": {
+          "claim": "The experimental design confounds the effects of clustering with those of the safe-remove shortcut, making it impossible to isolate the contribution of each component due to the design of the SFS baseline.",
+          "excerpt": "The experimental design confounds the effects of clustering with the effects of the safe-remove mechanism. The SFS baseline is an 'enhanced' variant that also uses the safe-remove shortcut (Sec. 5.1–5.2). This makes it impossible to determine how much of CSFS's performance and runtime profile is due to the clustering strategy versus the shared non-inferiority test logic."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'For a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut at the feature level whenever non-inferiority is provided,' meaning the baseline SFS shares the non-inferiority test with CSFS, making it impossible to isolate the contribution of clustering versus the shared safe-remove mechanism to the observed runtime and performance differences.",
+            "cost_usd": 0.004311128571428571
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly controls for the safe-remove mechanism in the baseline: \"For a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut at the feature level whenever non-inferiority is provided.\" It further notes that \"the SFS baseline includes the same safe-remove shortcut at the feature level as used in CSFS,\" so the comparison is not confounded in the specific way claimed.",
+            "cost_usd": 0.009315214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer incorrectly claims the experimental design confounds the effects. The paper explicitly controls for the shared test logic by including it in the baseline: 'the SFS baseline includes the same safe-remove shortcut... Therefore, the reported runtime improvements are conservative,' which successfully isolates the improvements due strictly to clustering.",
+            "cost_usd": 0.0019333428571428573
+          }
+        ],
+        "cost_usd": 0.015559685714285714
+      },
+      {
+        "flag_id": "fp-71f493af1042",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper describes a review methodology relying on 'the first 30 results on Google Scholar from 11 different queries' using a 'berry picking information retrieval model,' which is explicitly informal and dependent on non-reproducible search rankings. While the paper provides data on GitHub, the search process itself is not reproducible in the systematic sense, and the paper does not claim otherwise.",
+        "evidence": {
+          "claim": "The WTPC literature review is presented as 'structured' but relies on informal and hard-to-reproduce processes (Google Scholar ranking, 'berry-picking', arbitrary cutoffs), undermining claims of a systematic review.",
+          "excerpt": "The methodology for the WTPC literature review is presented as 'structured' but appears informal and hard to reproduce (Sec. 2.1). The reliance on the 'first 30 results' from Google Scholar (whose rankings are unstable and personalized), 'berry-picking,' and an arbitrary pre-2015 cutoff weakens the claims of a systematic analysis."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper describes a review methodology relying on 'the first 30 results on Google Scholar from 11 different queries' using a 'berry picking information retrieval model,' which is explicitly informal and dependent on non-reproducible search rankings. While the paper provides data on GitHub, the search process itself is not reproducible in the systematic sense, and the paper does not claim otherwise.",
+            "cost_usd": 0.004311128571428571
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The review method is described as \"follow[ing] the berry picking information retrieval model,\" \"starting with the initial query 'wind power curve' and considering the first 30 results on Google Scholar from 11 different queries.\" It also applies an ad hoc recency filter—\"we discarded 90 results from 2014 and older\"—so the concern about a hard-to-reproduce, not fully systematic review process is supported by the paper text.",
+            "cost_usd": 0.009315214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims to perform a 'Structured Literature Review (SLR)' but explicitly relies on 'the berry picking information retrieval model', 'the first 30 results on Google Scholar', and discarding '90 results from 2014 and older', confirming the reviewer's concern about informal search processes.",
+            "cost_usd": 0.0019333428571428573
+          }
+        ],
+        "cost_usd": 0.015559685714285714
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 1,
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "numerics": 0.092136,
+    "mathematics": 0.0,
+    "general": 0.1089178
+  },
+  "extractor_cost_usd": 0.037472000000000116,
+  "total_cost_usd": 0.23852580000000012
+}

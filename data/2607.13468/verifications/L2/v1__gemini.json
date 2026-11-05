@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Factual mischaracterization of RANSAC in the methodology. Sec. 4.3 states: '...we employ RANSAC, which formulates the alignment as a differentiable optimal transport problem...' This is factually incorrect. RANSAC (Random Sample Consensus) is a non-differentiable, randomized sampling algorithm based on inlier maximization, whereas differentiable optimal transport usually refers to methods like Sinkhorn distances.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Factual mischaracterization of RANSAC in the methodology. Sec. 4.3 states: '...we employ RANSAC, which formulates the alignment as a differentiable optimal transport problem...' This is factually incorrect. RANSAC (Random Sample Consensus) is a non-differentiable, randomized sampling algorithm based on inlier maximization, whereas differentiable optimal transport usually refers to methods like Sinkhorn distances.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exact injected claim about RANSAC being a differentiable optimal transport method and marks it as [CONTRADICTED] against the Fischler & Bolles RANSAC citation, which is precisely the injected misattribution.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "\"Factual mischaracterization of RANSAC in the methodology. Sec. 4.3 states: '...we employ RANSAC, which formulates the alignment as a differentiable optimal transport problem...' This is factually incorrect.\" ; \"✖ [CONTRADICTED] The RANSAC algorithm formulates alignment as a differentiable optimal transport problem.\"",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit claim about RANSAC against the cited RANSAC source, which satisfies the broadened-claim detection rule for claim_topic_mis_attribution.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Major issues ... 1. Factual mischaracterization of RANSAC ... Sec. 4.3 states: '...we employ RANSAC, which formulates the alignment as a differentiable optimal transport problem...' This is factually incorrect.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes the injected text and identifies the topic misattribution regarding the RANSAC algorithm and differentiable optimal transport.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t1",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer flags a contradiction between Table 1 runtime (36.5s) and Table 5 runtime (59.3s), but does not flag the F-Score value discrepancy (84.34 vs 48.34) which is the actual injection. The runtime issue appears to be a pre-existing or separately injected discrepancy unrelated to the F-Score digit swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer flags a runtime contradiction between Table 1 and Table 5, but the injected numeric error is the F-Score changing from 84.34 to 48.34. There is no mention of the F-Score value or that cross-table mismatch.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer flags a numerical contradiction regarding runtime values (36.5s vs 59.3s), but completely fails to detect the injected digit swap in the F-Score (84.34 to 48.34).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the runtime contradiction (Table 1 vs Table 5) as a numerical inconsistency, but did not flag the F-Score discrepancy between Table 1 (48.34) and the ablation Table 7 (84.34). The reviewer's numerical audit does not mention the F-Score value or any mismatch between these two tables.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Dimensionality error in the definition of structured latent voxel coordinates. Sec. 3, Eq. (1) defines the positional index of an active voxel as $p_i \\in \\{0, 1, \\dots, N-1\\}^2$. Given that the grid represents 3D voxels with spatial length $N$, this coordinate space should be three-dimensional. Recommendation: Correct the exponent in Eq. (1) to read $p_i \\in \\{0, 1, \\dots, N-1\\}^3$.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Dimensionality error in the definition of structured latent voxel coordinates. Sec. 3, Eq. (1) defines the positional index of an active voxel as $p_i \\in \\{0, 1, \\dots, N-1\\}^2$. Given that the grid represents 3D voxels with spatial length $N$, this coordinate space should be three-dimensional. Recommendation: Correct the exponent in Eq. (1) to read $p_i \\in \\{0, 1, \\dots, N-1\\}^3$.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies the injected error: the positional index exponent being 2 instead of 3, matching the ground truth injection exactly.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "\"Dimensionality error in the definition of structured latent voxel coordinates. Sec. 3, Eq. (1) defines the positional index of an active voxel as $p_i \\in \\{0, 1, \\dots, N-1\\}^2$. Given that the grid represents 3D voxels with spatial length $N$, this coordinate space should be three-dimensional.\" ; \"[✖] The spatial coordinate of an active voxel in the 3D grid is defined as a 2D integer vector.\"",
+          "confidence": "high",
+          "reasoning": "The review precisely identifies the altered exponent in Eq. (1) and states it should be 3D, directly matching the injected change from ^3 to ^2.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Minor issues ... 1. Dimensionality error in the definition of structured latent voxel coordinates. Sec. 3, Eq. (1) defines the positional index of an active voxel as $p_i \\in \\{0, 1, \\dots, N-1\\}^2$. Given that the grid represents 3D voxels with spatial length $N$, this coordinate space should be three-dimensional.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific equation and the dimensionality error (2D instead of 3D) introduced in the injection.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag any notation inconsistency between the method section using $\\mathcal{Q}_k$ and the appendix using $\\mathcal{O}_k$ for the object instance representation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention any notation drift between $\\mathcal{O}_k$ and $\\mathcal{Q}_k$ or any inconsistency for the object-instance symbol across sections or appendix.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention the notation drift between the methods section (using Q_k) and the appendix (using O_k).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the notation inconsistency between Q_k in the methods section and O_k in the appendix. The reviewer's mathematical and notation checks focus on the exponent in Eq. (1) and the rigid transformation matrix, not on the object instance notation drift.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 48.207756,
+  "total_cost_usd": null,
+  "total_input_tokens": 26975,
+  "total_output_tokens": 6030,
+  "escalation_count": 2,
+  "notes": null
+}

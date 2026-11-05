@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "arxiv_paper.tex",
+    "original_text": "Era et al.~\\cite{era2025unsupervised} proposed an unsupervised prompt-generation framework for SAM-based porosity segmentation, reducing the need for manual annotation but remaining prompt-dependent under noisy backgrounds, heavy-tailed defect distributions, and complex morphologies.",
+    "injected_text": "Era et al.~\\cite{era2025unsupervised} proposed a prompt-generation framework for SAM-based porosity segmentation, reducing the need for manual annotation but remaining prompt-dependent under noisy backgrounds, heavy-tailed defect distributions, and complex morphologies.",
+    "rationale": "The cited paper explicitly presents its method as an 'unsupervised' approach; dropping this qualifier removes the specific methodological detail that justifies the subsequent clause, resulting in a partially supported description of the referenced work.",
+    "ground_truth_description": "Dropped the 'unsupervised' methodological qualifier from the description of the prompt-generation framework proposed by Era et al.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "era2025unsupervised",
+      "injected_cite_key": "era2025unsupervised",
+      "claim_sentence_verbatim": "Era et al.~\\cite{era2025unsupervised} proposed an unsupervised prompt-generation framework for SAM-based porosity segmentation, reducing the need for manual annotation but remaining prompt-dependent under noisy backgrounds, heavy-tailed defect distributions, and complex morphologies.",
+      "section_location": "Related Work",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "arxiv_paper.tex",
+    "original_text": "and keeping over 99\\% of the model frozen",
+    "injected_text": "and keeping over 88\\% of the model frozen",
+    "rationale": "The paper states the frozen share of SAM twice ('keeping over 99% of the model frozen' in the abstract and 'keeping over 99% of SAM parameters frozen' in the method) and states the complementary trainable share as 'less than 1% of the total parameters'. Changing one occurrence to 88% breaks the parts-of-a-whole relationship twice over: it no longer complements the <1% trainable share, and it contradicts the other 99% statement. Only an existing figure is perturbed.",
+    "ground_truth_description": "Abstract: frozen share changed 99% -> 88%, so it no longer complements the stated <1% trainable share and disagrees with the 99% restated in the method section.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_to_100",
+      "value_before_raw": "99%",
+      "value_after_raw": "88%",
+      "value_before_float": 99.0,
+      "value_after_float": 88.0,
+      "location_cue": "training approximately 4.15M parameters and keeping over 99\\% of the model frozen",
+      "paired_location": "method section: 'keeping over 99% of SAM parameters frozen'; and 'less than $1\\%$ of the total parameters'",
+      "quantity_label": "share of SAM parameters kept frozen (%)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "arxiv_paper.tex",
+    "original_text": "E_i(W_E x) \\right),",
+    "injected_text": "E_i(W_E) x \\right),",
+    "rationale": "In the mixture-of-experts update each expert E_i is applied to the projected input W_E x. The injected form applies E_i to the projection matrix W_E and then right-multiplies by x, which is structurally similar but not the same operator: the expert now acts on a matrix rather than on the projected feature vector, and the result no longer matches the architecture the surrounding text describes. Perturbs the existing equation in place.",
+    "ground_truth_description": "MoE update: expert application changed from E_i(W_E x) to E_i(W_E) x, so the expert acts on the projection matrix instead of the projected input.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Method — LoRA/MoE hidden-state update display",
+      "original_fragment_latex": "E_i(W_E x)",
+      "injected_fragment_latex": "E_i(W_E) x",
+      "full_equation_latex_before": "H = W_0 x + W_D \\left( \\sum_{i=1}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+      "full_equation_latex_after": "H = W_0 x + W_D \\left( \\sum_{i=1}^{N} g_i(x)\\, E_i(W_E) x \\right),",
+      "term_role": "expert application to the projected input",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "arxiv_paper.tex",
+    "original_text": "In Stage 2, we further adapt the model to the target AM XCT domain using a reduced learning rate of $8\\times10^{-5}$ for an additional 20 epochs while keeping the same batch size.",
+    "injected_text": "In Stage 2, we further adapt the model to the target AM XCT domain using a reduced learning rate of $8\\times10^{-5}$ for an additional 20 epochs while keeping the same batch size (we observed that larger batch sizes degraded inclusion segmentation performance).",
+    "rationale": "The inserted parenthetical asserts an ablation finding ('we observed that larger batch sizes degraded inclusion segmentation performance') that the Results section does not actually report, introducing an unsupported sub-claim.",
+    "ground_truth_description": "Added a parenthetical claiming that larger batch sizes degraded inclusion segmentation performance, which is not supported by any evidence in the paper.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 4.4",
+      "affected_span_verbatim": "In Stage 2, we further adapt the model to the target AM XCT domain using a reduced learning rate of $8\\times10^{-5}$ for an additional 20 epochs while keeping the same batch size."
+    },
+    "proposer_agent": "injector.general.S2.t3.v2"
+  }
+]

@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v2",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer notes in the key statements section that 'DINOv2 provides robust visual features' and its justification correctly identifies it as 'a self-supervised visual-feature model,' but this is listed as SUPPORTED rather than CONTRADICTED/PARTIALLY_SUPPORTED. The reviewer does not flag the paper's use of 'supervised DINOv2' as contradicting the cited source. The minor issue #4 mentions Eq.(2) referencing x_0-epsilon but does not challenge the 'supervised DINOv2' characterization.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly states that DINOv2 is a self-supervised visual-feature model, but does not explicitly flag the paper's claim in Sec. 4.1 that described DINOv2 as supervised or challenge that claim against the cited source. Under the broadened-claim rule, this is not a specific detection of the injected miscategorisation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer failed to flag the miscategorization of DINOv2 as supervised; they even marked the relevant claim as SUPPORTED in their checklist, despite correctly identifying DINOv2 as self-supervised in their own justification.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[✖] **The IoU value for the full HIVE-3D model is not repeated consistently across the main geometry table and the geometry ablation table.** ... Table 1 reports HIVE-3D IoU as 0.7449, while Table 7 reports the Full Model IoU as 0.7459. The difference is small but exceeds exact repetition at the printed precision.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[✖] **The IoU value for the full HIVE-3D model is not repeated consistently across the main geometry table and the geometry ablation table.** ... Table 1 reports HIVE-3D IoU as 0.7449, while Table 7 reports the Full Model IoU as 0.7459. The difference is small but exceeds exact repetition at the printed precision.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inconsistency between IoU 0.7449 in Table 1 and 0.7459 in the appendix ablation table, which is precisely the injected discrepancy.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[✖] **The IoU value for the full HIVE-3D model is not repeated consistently across the main geometry table and the geometry ablation table.**\n- _Location:_ Sec. 5.2 Table 1 vs Appendix B.2 Table 7\n- _Reported:_ 0.7449 and 0.7459 / _Computed:_ —\n- _Notes:_ Table 1 reports HIVE-3D IoU as 0.7449, while Table 7 reports the Full Model IoU as 0.7459. The difference is small but exceeds exact repetition at the printed precision.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the exact repeated-constant mismatch, quotes both conflicting values, and names the two locations involved. It is a precise match to the injected numeric drift.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table 1 reports HIVE-3D IoU as 0.7449, while Table 7 reports the Full Model IoU as 0.7459. The difference is small but exceeds exact repetition at the printed precision.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the discrepancy between the two IoU values (0.7449 and 0.7459) in their numerical results audit.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. (2) in Sec. 4.2 is missing definitions needed to reproduce the flow-matching objective. The equation defines the target as \\(x_0-\\epsilon\\)... [⚠] **The voxel super-resolution model is trained with the conditional flow-matching loss ... -(x_0-\\epsilon)\\|_2^2**... _Verdict:_ UNCERTAIN",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags Eq.(2) and specifically references the target x_0-epsilon as uncertain/needing verification. However, the reviewer does not explicitly state that the sign is wrong relative to the canonical CFM formulation — they call it 'plausible' — so this is a borderline detection that flags the specific equation and value but does not firmly identify it as an error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions Eq. (2) uses the target x0-ε, but labels it plausible and only complains about missing definitions of x, interpolation path, and t-distribution. They do not flag the sign reversal as wrong or contradictory, so the specific injected mathematical error was not detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly stated that the injected formula (x_0 - epsilon) is consistent with standard formulations, thereby failing to recognize it as a sign reversal error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "The paper overstates comparative performance relative to its own results. The Conclusion states that HIVE-3D “outperforms existing methods in terms of 3D scene generation quality,” but Sec. 5.2 and Appendix B.1 show mixed outcomes: TRELLIS has higher IoU in Table 1, MIDI/TRELLIS have higher SSIM in Table 6, and MIDI/TRELLIS have better LPIPS than HIVE-3D in Table 6.\n\nThe conclusion also overstates the results relative to the tables, especially given that TRELLIS has higher IoU and several baselines have better SSIM/LPIPS in the reported comparisons.",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The paper overstates comparative performance relative to its own results. The Conclusion states that HIVE-3D 'outperforms existing methods in terms of 3D scene generation quality,' but Sec. 5.2 and Appendix B.1 show mixed outcomes: TRELLIS has higher IoU in Table 1, MIDI/TRELLIS have higher SSIM in Table 6, and MIDI/TRELLIS have better LPIPS than HIVE-3D in Table 6.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies a contradiction between the paper's claims of outperforming baselines and the actual results tables, which directly corresponds to the injected flip of the abstract's concluding claim from outperforming to only achieving comparable performance.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The paper overstates comparative performance relative to its own results. The Conclusion states that HIVE-3D “outperforms existing methods in terms of 3D scene generation quality,” but Sec. 5.2 and Appendix B.1 show mixed outcomes: TRELLIS has higher IoU in Table 1, MIDI/TRELLIS have higher SSIM in Table 6, and MIDI/TRELLIS have better LPIPS than HIVE-3D in Table 6.\n\nThe conclusion also overstates the results relative to the tables, especially given that TRELLIS has higher IoU and several baselines have better SSIM/LPIPS in the reported comparisons.",
+          "confidence": "medium",
+          "reasoning": "The injection flipped the abstract/concluding claim from outperforming to not surpassing SOTA, creating an internal contradiction with the results. The reviewer explicitly flags that the paper's concluding performance claim is inconsistent with the tables, which corresponds to detecting this internal-contradiction edit, though they discuss the conclusion rather than naming the abstract specifically.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer critiqued the paper for overstating performance in the conclusion, which contradicts the injected text in the abstract stating the method does not yet surpass state-of-the-art. They missed the abstract's claim and the resulting internal contradiction.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 42.519895,
+  "total_cost_usd": null,
+  "total_input_tokens": 22013,
+  "total_output_tokens": 6227,
+  "escalation_count": 0,
+  "notes": null
+}

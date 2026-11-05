@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the 'deterministic robustness' characterization of RANSAC. The review mentions RANSAC in context of ablation claims (Major issue 4) but only notes the lack of a success-rate metric, not that RANSAC is mischaracterised as deterministic.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review mentions a RANSAC-related overclaim about success rate and registration accuracy, but it does not specifically challenge the claim that RANSAC is 'deterministic' or otherwise mischaracterises the cited RANSAC source. This does not clearly target the injected methodological qualifier drift.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions RANSAC in the summary and compares its performance metrics in Major Issue 4, but never challenges the claim that the algorithm is 'deterministic' or mischaracterized.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags the word 'deterministic' as a mischaracterisation of RANSAC, nor challenges the claim about RANSAC's robustness qualifier against the cited source. The reviewer mentions RANSAC extensively but only in the context of runtime inconsistency and ablation conclusions, not the methodological characterisation of the algorithm.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Table 1 reports HIVE-3D/Ours with CD = 0.0035, F-Score = 84.34, IoU = 0.7449. Table 7 reports \"Full Model\" with CD = 0.035, F-Score = 84.34, IoU = 0.7449. The F-Score and IoU values are identical, but the CD differs by a factor of 10.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Table 1 reports HIVE-3D/Ours with CD = 0.0035, F-Score = 84.34, IoU = 0.7449. Table 7 reports \"Full Model\" with CD = 0.035, F-Score = 84.34, IoU = 0.7449. The F-Score and IoU values are identical, but the CD differs by a factor of 10.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the factor-of-10 discrepancy in Chamfer Distance between Table 1 (0.0035) and Table 7 (0.035), which is precisely the injected inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "2. [numerical] The full-model Chamfer Distance is inconsistent between Table 1 and Table 7.\n\n**What is wrong:** Table 1 reports HIVE-3D/Ours with CD = 0.0035, F-Score = 84.34, IoU = 0.7449. Table 7 reports “Full Model” with CD = 0.035, F-Score = 84.34, IoU = 0.7449. The F-Score and IoU values are identical, but the CD differs by a factor of 10.",
+          "confidence": "high",
+          "reasoning": "This explicitly names the two locations and the conflicting values 0.0035 vs 0.035 for the same full-model Chamfer Distance, exactly matching the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table 1 reports HIVE-3D/Ours with CD = 0.0035 ... Table 7 reports “Full Model” with CD = 0.035 ... the CD differs by a factor of 10.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the factor-of-ten discrepancy between the two tables for the Chamfer Distance metric.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "4. [mathematical] The training objective in Equation 2 uses an undefined variable.\n\n**What is wrong:** Equation 2 defines\n\\[\n\\mathcal{L}_{CFM}(\\theta)=\\sum_{t,x_0,\\epsilon}\\|v_\\theta(x,t)-(\\epsilon-x_0)\\|_2^2,\n\\]\n...\n**Concrete fix:** Define \\(x\\) explicitly before or immediately after Equation 2, e.g. as the noisy/interpolated sample used in TRELLIS’s flow-matching objective. Also specify whether the summation denotes an empirical average or expectation.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Equation 2 defines \\mathcal{L}_{CFM}(\\theta)=\\sum_{t,x_0,\\epsilon}\\|v_\\theta(x,t)-(\\epsilon-x_0)\\|_2^2 ... Also specify whether the summation denotes an empirical average or expectation.",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the summation form of the CFM objective and flags uncertainty about whether it should be a summation or expectation, directly corresponding to the injected swap of E to sum.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "4. [mathematical] The training objective in Equation 2 uses an undefined variable.\n\n**What is wrong:** Equation 2 defines\n\\[\n\\mathcal{L}_{CFM}(\\theta)=\\sum_{t,x_0,\\epsilon}\\|v_\\theta(x,t)-(\\epsilon-x_0)\\|_2^2,\n\\]\n...\n**Concrete fix:** Define \\(x\\) explicitly before or immediately after Equation 2, e.g. as the noisy/interpolated sample used in TRELLIS’s flow-matching objective. Also specify whether the summation denotes an empirical average or expectation.",
+          "confidence": "medium",
+          "reasoning": "The reviewer quotes the corrupted equation with a summation and specifically notes that one should 'specify whether the summation denotes an empirical average or expectation,' which directly corresponds to the expectation-to-summation injection, even though their main focus is the undefined variable.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Equation 2 defines \\mathcal{L}_{CFM}(\\theta)=\\sum_{t,x_0,\\epsilon}\\|v_\\theta(x,t)-(\\epsilon-x_0)\\|_2^2, ... specify whether the summation denotes an empirical average or expectation.",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the objective function containing the injected summation symbol and correctly identifies that an expectation or average is expected instead.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the inserted parenthetical about rendering fewer views causing degradation. None of the reviewer's issues correspond to a phantom claim about view count ablation data.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review broadly criticizes ablation conclusions and unsupported claims, but it does not specifically flag the inserted parenthetical claim in Section 4.1 that fewer rendered views substantially degrade quality without evidence. No clear mention of the rendering-views sub-claim appears.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses other issues in Section 4.1 (hierarchy construction and SAM2) but does not mention the phantom claim regarding the number of rendered views.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the injected parenthetical claim about rendering fewer views causing degradation or note that no ablation data supports it. None of the reviewer's listed issues correspond to this specific phantom sub-claim inserted into the dataset construction description.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 53.325513,
+  "total_cost_usd": null,
+  "total_input_tokens": 33805,
+  "total_output_tokens": 3189,
+  "escalation_count": 2,
+  "notes": null
+}

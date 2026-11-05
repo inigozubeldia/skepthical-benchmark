@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v2",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer did not flag the description of DINOv2 as 'supervised.' The minor citation issue flagged (item 1 under Minor issues) concerns Paschalidou et al. 2021 / ATISS, not DINOv2's training methodology.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review flags a different citation mismatch involving Paschalidou et al. (2021), but does not mention DINOv2 or challenge the claim that DINOv2 is supervised/self-supervised. Therefore the specific injected citation-methodology swap is not detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention the DINOv2 model or the mischaracterization of its training methodology (supervised vs. self-supervised) anywhere in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the mischaracterization of DINOv2 as 'supervised.' The reviewer's citation concern (Minor issue 1) addresses Paschalidou et al. (2021), not DINOv2. No part of the report challenges the 'supervised DINOv2' claim against the cited DINOv2 source.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Table 1: Ours IoU = 0.7449. Table 7: Full Model IoU = 0.7459. These tables appear to report the same full HIVE-3D geometry evaluation on the synthetic/3D-FRONT setting, with the same CD = 0.0035 and F-Score = 84.34, but the IoU differs by 0.0010.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Table 1: Ours IoU = 0.7449. Table 7: Full Model IoU = 0.7459. These tables appear to report the same full HIVE-3D geometry evaluation on the synthetic/3D-FRONT setting, with the same CD = 0.0035 and F-Score = 84.34, but the IoU differs by 0.0010.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the discrepancy between IoU 0.7449 in Table 1 and 0.7459 in Table 7 (appendix ablation), which directly corresponds to the injected change from 0.7449 to 0.7459 in the appendix table.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] The same HIVE-3D IoU result is reported inconsistently.\n\n**Where it occurs:**  \n- Table 1: Ours IoU = 0.7449.  \n- Table 7: Full Model IoU = 0.7459.\n\n**What is wrong:**  \nThese tables appear to report the same full HIVE-3D geometry evaluation on the synthetic/3D-FRONT setting, with the same CD = 0.0035 and F-Score = 84.34, but the IoU differs by 0.0010.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the injected repeated-constant discrepancy, naming both values and the two table locations.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table 1: Ours IoU = 0.7449. - Table 7: Full Model IoU = 0.7459. ... These tables appear to report the same full HIVE-3D geometry evaluation ... but the IoU differs by 0.0010.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the numerical discrepancy in the IoU value for the 'Full Model' between Table 1 and the appendix ablation table (Table 7).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Equation (2), Section 4.2: \\mathcal{L}_{CFM}(\\theta)=E_{t,x_0,\\epsilon}\\|v_\\theta(x,t)-(x_0-\\epsilon)\\|_2^2. The variable x is not defined... Also include the image and coarse-voxel conditions in the notation if they are part of the model input.",
+          "confidence": "medium",
+          "reasoning": "The reviewer did flag the equation containing the injected term (x_0 - epsilon) but focused primarily on the undefined variable x rather than explicitly identifying that the sign of the CFM target is reversed relative to the canonical formulation; however, the reviewer directly quoted and flagged the post-edit equation form.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer notes an undefined variable x in the training objective, but does not flag the sign-reversed target (x0 - epsilon) versus the canonical form. That is a different mathematical issue than the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "While the reviewer quotes the part of Equation 2 containing the reversal (x0 - epsilon), they do not flag the sign reversal as an error; instead, they critique the equation for using an undefined variable 'x'.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Abstract: 'performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity.' ... Section 6: 'Extensive experiments have demonstrated that HIVE-3D outperforms existing methods in terms of 3D scene generation quality.' The claims are not consistently supported by the reported metrics.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Abstract: 'performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity.' ... Section 6: 'Extensive experiments have demonstrated that HIVE-3D outperforms existing methods in terms of 3D scene generation quality.' The claims are not consistently supported by the reported metrics.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the abstract's claim of 'comparable' performance contradicting the results section's outperformance claims, directly corresponding to the injected flip of the abstract's concluding sentence.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] Inconsistent and overbroad performance claims relative to the reported results.\n\n**Where it occurs:**  \n- Abstract: “performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity.”\n...\n**What is wrong:**  \nThe claims are not consistently supported by the reported metrics.\n...\nThus the paper cannot simply claim that HIVE-3D “outperforms existing methods” in overall 3D scene generation quality...\n...\n**Concrete fix:**  \nRewrite the abstract, Section 5.2, and conclusion to state the result metric-by-metric.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the abstract sentence that says the method does not surpass SOTA and treats it as inconsistent with the paper's reported results, which directly matches the injected internal contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Abstract: “performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity.” ... Section 6: “Extensive experiments have demonstrated that HIVE-3D outperforms existing methods ...” ... The claims are not consistently supported by the reported metrics.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the internal contradiction created by the injection, noting that the abstract's claim of not surpassing SOTA is inconsistent with the 'outperforms' claims in the rest of the paper.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 43.327953,
+  "total_cost_usd": null,
+  "total_input_tokens": 25937,
+  "total_output_tokens": 5694,
+  "escalation_count": 1,
+  "notes": null
+}

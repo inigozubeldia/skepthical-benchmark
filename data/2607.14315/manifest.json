@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.14315",
+  "arxiv_url": "https://arxiv.org/abs/2607.14315",
+  "rotation_seed": 20260737,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S2",
+      "type": 1
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "conference.tex",
+          "original_text": "SHAP values are based on game theory",
+          "injected_text": "SHAP values are based on information theory",
+          "rationale": "Drifts the methodological basis attributed to the SHAP citation from game theory to information theory. SHAP is explicitly built on Shapley values from cooperative game theory — the cited paper is 'A Unified Approach to Interpreting Model Predictions' and the acronym itself expands to SHapley Additive exPlanations — so the injected basis mis-describes the cited method. Cite key untouched; two existing words perturbed.",
+          "ground_truth_description": "SHAP citation: theoretical basis changed from 'game theory' to 'information theory', mis-describing the cited method's foundation.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "lundberg2017unified",
+            "injected_cite_key": "lundberg2017unified",
+            "claim_sentence_verbatim": "SHAP (SHapley Additive exPlanations) \\cite{lundberg2017unified}: SHAP values are based on game theory and provide a unified measure of feature importance for individual predictions.",
+            "section_location": "Sec. 2 (Background — XAI methods list)",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "conference.tex",
+          "original_text": "3       & 0.4673   & 30         & 1.0000",
+          "injected_text": "3       & 4.6730   & 30         & 1.0000",
+          "rationale": "The LIME fidelity score 0.4673 appears both in the results table and in the prose ('fidelity scores for LIME range from 0.4397 to 0.4673'). The table occurrence is shifted by one order of magnitude to 4.6730 while the prose retains 0.4673, so the same measurement disagrees by 10x between the two statements. The injected value is additionally outside the [0,1] range a fidelity score can take.",
+          "ground_truth_description": "Results table: LIME fidelity changed 0.4673 -> 4.6730 (x10), contradicting the 0.4673 restated in the prose and exceeding the valid [0,1] range for fidelity.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "repeated_constant",
+            "value_before_raw": "0.4673",
+            "value_after_raw": "4.6730",
+            "value_before_float": 0.4673,
+            "value_after_float": 4.673,
+            "location_cue": "3       & 0.4673   & 30         & 1.0000",
+            "paired_location": "prose: 'The fidelity scores for LIME range from 0.4397 to 0.4673'",
+            "quantity_label": "LIME fidelity score",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t2.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "conference.tex",
+          "original_text": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+          "injected_text": "Fidelity = \\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+          "rationale": "Removed the 1/N averaging prefactor from the Fidelity metric equation, making it an unnormalized total sum rather than a normalized average.",
+          "ground_truth_description": "Dropped the 1/N normalisation factor in the definition of Fidelity.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.1.1",
+            "original_fragment_latex": "\\frac{1}{N}\\sum_{i=1}^N",
+            "injected_fragment_latex": "\\sum_{i=1}^N",
+            "full_equation_latex_before": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+            "full_equation_latex_after": "Fidelity = \\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+            "term_role": "normalisation prefactor",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t3.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "conference.tex",
+          "original_text": "In each benchmarking experiment, we applied the XAI techniques to AI/ML models trained on a specific dataset and then evaluate the resulting explanations using the XAI quantification scheme.",
+          "injected_text": "In each benchmarking experiment, we applied the XAI techniques to AI/ML models trained on a specific dataset and then evaluate the resulting explanations using the XAI quantification scheme. To ensure robust performance estimates, we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.",
+          "rationale": "The inserted methodology claim states that standard deviations are reported across ten independent runs, which is visibly contradicted by Tables 1 and 2 in the Results section that only report single scalar values without any variance metrics.",
+          "ground_truth_description": "Added a methodology claim about computing and reporting standard deviations from multiple independent runs, which is never actually reported in the results.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methodology_setup_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Sec. 4.1",
+            "affected_span_verbatim": "In each benchmarking experiment, we applied the XAI techniques to AI/ML models trained on a specific dataset and then evaluate the resulting explanations using the XAI quantification scheme."
+          },
+          "proposer_agent": "injector.general.S3.t3.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "conference.tex",
+          "original_text": "    \\item Counterfactual Explanations \\cite{arrieta2020explainable}: Counterfactual explanations provide insights into the model's decision-making process by identifying the minimal changes required in the input data to achieve a different prediction outcome.",
+          "injected_text": "    \\item Counterfactual Explanations \\cite{arrieta2020explainable}: Counterfactual explanations provide insights into the model's decision-making process by identifying the minimal changes required in the input data to achieve the same prediction outcome.",
+          "rationale": "Swapping 'different' for 'same' reverses the cited definition of a counterfactual explanation, directly contradicting the mathematical mechanism detailed in Arrieta et al. (2020).",
+          "ground_truth_description": "Reversed the outcome of counterfactual explanations from achieving a different prediction to achieving the same prediction.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "arrieta2020explainable",
+            "injected_cite_key": "arrieta2020explainable",
+            "claim_sentence_verbatim": "Counterfactual Explanations \\cite{arrieta2020explainable}: Counterfactual explanations provide insights into the model's decision-making process by identifying the minimal changes required in the input data to achieve a different prediction outcome.",
+            "section_location": "Sec. 2.1",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "conference.tex",
+          "original_text": "3       & 0.4673   & 30         & 1.0000    \\\\ \\hline",
+          "injected_text": "3       & 0.4663   & 30         & 1.0000    \\\\ \\hline",
+          "rationale": "The paper lacks any explicit summations or tables with totals, so the constraint was adapted to create a repeated_constant mismatch by slightly altering a table value that is later cited in the text (0.4673 changed to 0.4663), mimicking a transcription typo.",
+          "ground_truth_description": "Changed the fidelity score for Dataset 3 in Table 1 from 0.4673 to 0.4663, creating a discrepancy with the text which correctly states the range goes up to 0.4673.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "repeated_constant",
+            "value_before_raw": "0.4673",
+            "value_after_raw": "0.4663",
+            "value_before_float": 0.4673,
+            "value_after_float": 0.4663,
+            "location_cue": "2       & 0.4397   & 13         & 0.5556    \\\\\n3       & 0.4673   & 30         & 1.0000    \\\\ \\hline",
+            "paired_location": "Section 5 text ('The fidelity scores for LIME range from 0.4397 to 0.4673')",
+            "quantity_label": "Fidelity score for LIME on Dataset 3",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t2.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "conference.tex",
+          "original_text": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+          "injected_text": "Fidelity = \\frac{1}{N}\\sum_{i=0}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+          "rationale": "Changing the sum index from i=1 to i=0 introduces an off-by-one boundary error that is highly typical of author drafting mistakes, but may evade detection in random numerical sampling.",
+          "ground_truth_description": "Shifted the lower bound of the Fidelity summation from i=1 to i=0.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.1.1",
+            "original_fragment_latex": "\\sum_{i=1}^N",
+            "injected_fragment_latex": "\\sum_{i=0}^N",
+            "full_equation_latex_before": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+            "full_equation_latex_after": "Fidelity = \\frac{1}{N}\\sum_{i=0}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+            "term_role": "sum lower bound",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t3.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "conference.tex",
+          "original_text": "as depicted in Fig.\\ref{fig:modelxgb}",
+          "injected_text": "as depicted in Fig.\\ref{fig:modlxgb}",
+          "rationale": "Intentionally misspelled a figure reference label to produce a '??' LaTeX artefact in the compiled PDF.",
+          "ground_truth_description": "Changed a figure reference label from 'fig:modelxgb' to 'fig:modlxgb', causing it to render as an unresolved reference ('??').",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "latex_artefact",
+            "expected_bucket": "very_minor",
+            "section_location": "Section 3",
+            "affected_span_verbatim": "In addition to the aforementioned requirements, we will also incorporate performance evaluation into our work, assessing the accuracy, precision, recall, and other relevant metrics of the AI models, to ensure that our explainability efforts do not compromise the effectiveness of the model's predictions as depicted in Fig.\\ref{fig:modelxgb}"
+          },
+          "proposer_agent": "injector.general.S1.t2.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "conference.tex",
+          "original_text": "guarantee the same prediction for instances in a local region.",
+          "injected_text": "guarantee the same prediction for all instances in the dataset.",
+          "rationale": "Ribeiro et al. (2018) describe Anchors as providing rule-based explanations that hold locally for specific predictions; broadening this condition to 'all instances in the dataset' over-generalises the claim and contradicts the paper's explicitly local scope.",
+          "ground_truth_description": "Broadens the validity condition of the Anchors method's prediction guarantee from a local region to the entire dataset.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "ribeiro2018anchors",
+            "injected_cite_key": "ribeiro2018anchors",
+            "claim_sentence_verbatim": "\\item Anchors \\cite{ribeiro2018anchors}: Anchors provide rule-based explanations by identifying a minimal set of conditions (anchors) that, when satisfied, guarantee the same prediction for instances in a local region.",
+            "section_location": "Sec. 2.1.1",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "conference.tex",
+          "original_text": "3       & 0.4673   & 30         & 1.0000",
+          "injected_text": "3       & 0.4673   & 35         & 1.0000",
+          "rationale": "The prose states the number of features in the explanations ranges 'from 4 to 30', and the results table reports 30 for that row. Changing the table entry to 35 puts the tabulated count outside the range the text asserts, a self-contained integer disagreement using only values the paper reports. No percentage or split is invented.",
+          "ground_truth_description": "Results table: feature count changed 30 -> 35, contradicting the prose statement that counts range from 4 to 30.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "integer_equal",
+            "value_before_raw": "30",
+            "value_after_raw": "35",
+            "value_before_float": 30.0,
+            "value_after_float": 35.0,
+            "location_cue": "3       & 0.4673   & 30         & 1.0000",
+            "paired_location": "prose: explanation sizes 'ranging from 4 to 30'",
+            "quantity_label": "number of features in the explanation",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t3.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "conference.tex",
+          "original_text": "\\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2}",
+          "injected_text": "\\frac{\\lVert f(x_i) \\rVert^2}{\\lVert f(x_i) - g(x_i) \\rVert^2}",
+          "rationale": "Inverts the Fidelity ratio so the residual norm becomes the denominator. The form is structurally similar but wrong: the metric is defined as a normalised residual that goes to 0 as the surrogate g approaches the model f, whereas the inverted form diverges in that limit — contradicting the paper's own reading of low fidelity values as good agreement. Perturbs the existing equation in place rather than appending a claim.",
+          "ground_truth_description": "Fidelity definition: ratio inverted from ||f-g||^2 / ||f||^2 to ||f||^2 / ||f-g||^2, so the metric diverges instead of vanishing under perfect surrogate agreement.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Metrics section — Fidelity definition display",
+            "original_fragment_latex": "\\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2}",
+            "injected_fragment_latex": "\\frac{\\lVert f(x_i) \\rVert^2}{\\lVert f(x_i) - g(x_i) \\rVert^2}",
+            "full_equation_latex_before": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+            "full_equation_latex_after": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) \\rVert^2}{\\lVert f(x_i) - g(x_i) \\rVert^2} \\right),",
+            "term_role": "normalised-residual ratio in the fidelity metric",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "conference.tex",
+          "original_text": "involves the following steps as depicted in Fig. \\ref{fig:banchmarking}:",
+          "injected_text": "involves the following steps as depicted in Fig. \\ref{fig:modelxgb}:",
+          "rationale": "Swaps the cross-reference from the benchmarking steps figure to the logical architecture figure, causing a mismatch between the prose claim (which discusses steps) and the referenced figure (which shows the overall XAI score architecture).",
+          "ground_truth_description": "Changed the figure reference at the end of Section 4.1 from Fig 2 (benchmarking steps) to Fig 1 (logical architecture).",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "cross_reference_mismatch",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 4.1",
+            "affected_span_verbatim": "In summary, our methodology for benchmarking XAI techniques and creating a knowledge base for assessing the explainability score of each model involves the following steps as depicted in Fig. \\ref{fig:banchmarking}:"
+          },
+          "proposer_agent": "injector.general.S2.t1.v3"
+        }
+      ]
+    }
+  ]
+}

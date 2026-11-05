@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-5}$",
+    "injected_text": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-4}$",
+    "rationale": "Wu2024 reports the threshold mass ratio as ~10^{-5}; shifting it to ~10^{-4} moves the stated value by approximately one order of magnitude — a 1–2σ mis-quote of the specific quantitative threshold reported in that paper — while leaving the cite key, surrounding prose, and direction of the claim intact, so a careful reader comparing to Wu2024 flags the discrepancy but a casual reader does not.",
+    "ground_truth_description": "The threshold mass ratio below which turbulent torques dominate was changed from ~10^{-5} (as reported in Wu2024) to ~10^{-4}, a mild but detectable quantitative mis-quote of the cited paper's result.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Wu2024",
+      "injected_cite_key": "Wu2024",
+      "claim_sentence_verbatim": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-5}$, which corresponds to the EMRI regime in the case of AGN disks.",
+      "section_location": "Sec. 2 (Inspiration for our turbulent torque model)",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "mass ratio $q=5\\times10^{-5}$ in its final four-year evolution at redshift $z=0.276$",
+    "injected_text": "mass ratio $q=5\\times10^{-5}$ in its final four-year evolution at redshift $z=0.267$",
+    "rationale": "Swapping adjacent digits 7↔6 in the redshift value in the abstract (0.276→0.267) while the body correctly states z=0.276 in Eq.(golden) and the Conclusion, triggering an abstract_vs_body_match predicate failure at major severity.",
+    "ground_truth_description": "The redshift of the golden EMRI in the abstract was changed from z=0.276 to z=0.267 (digit swap of adjacent digits 7 and 6), while the correct value z=0.276 remains in the body (Results section Eq. golden and Conclusion).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "0.276",
+      "value_after_raw": "0.267",
+      "value_before_float": 0.276,
+      "value_after_float": 0.267,
+      "location_cue": "mass ratio q=5times10^{-5} in its final four-year evolution at redshift z=0.267",
+      "paired_location": "Results section Eq. (golden) and Conclusion paragraph",
+      "quantity_label": "redshift z of the golden EMRI",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+    "injected_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^4},",
+    "rationale": "Changing the exponent in the denominator from a^3 to a^4 alters the power-law dependence of the GW-driven inspiral rate on semi-major axis, producing an equation inconsistent with the Peters (1964) formula that Wolfram symbolic equality would refute against the correct a^{-3} dependence.",
+    "ground_truth_description": "The denominator exponent of semi-major axis a in the GW-driven inspiral rate equation was changed from a^3 to a^4, corrupting the Peters formula for the rate of change of semi-major axis due to gravitational wave emission.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3 (Model), second displayed equation for dot{a}_{GW}",
+      "original_fragment_latex": "\\frac{q M_z^3}{a^3}",
+      "injected_fragment_latex": "\\frac{q M_z^3}{a^4}",
+      "full_equation_latex_before": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+      "full_equation_latex_after": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^4},",
+      "term_role": "semi-major axis power-law factor in Peters inspiral rate formula",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "Hence, this work strongly motivates MHD simulations of gas disks embedded near-coalescence EMRIs to extract maximum science in the LISA era.",
+    "injected_text": "Hence, this work strongly motivates MHD simulations of gas disks embedded near-coalescence EMRIs to extract maximum science in the LISA era, and further demonstrates that turbulence-driven stochastic torques will generically dominate orbital evolution across all classes of compact binary inspirals embedded in any astrophysical accretion disk, regardless of the mass ratio or turbulence source.",
+    "rationale": "The added clause asserts that stochastic torques 'generically dominate' for all compact binary classes and all astrophysical disks, but the Results are confined to a single golden EMRI with q=5e-5 in one parametric regime, providing no support for this sweeping universal claim; the overreach is grammatically integrated into the existing concluding sentence making it read as an organic author flourish.",
+    "ground_truth_description": "A sweeping generalisation clause was appended to the final sentence of the Conclusion, claiming turbulent torques dominate all compact binary inspirals in any accretion disk, far beyond what the paper's single-system results support.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B7",
+      "change_kind": "overstated_conclusion",
+      "expected_bucket": "major",
+      "section_location": "Conclusion",
+      "affected_span_verbatim": "Hence, this work strongly motivates MHD simulations of gas disks embedded near-coalescence EMRIs to extract maximum science in the LISA era."
+    },
+    "proposer_agent": "injector.general.S3.t2.v3"
+  }
+]

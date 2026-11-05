@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "For models with an isotropic orbital structure, monotonicity of the density profile is a necessary, though not by itself sufficient, condition for consistency \\citep{Binney2008, Ciotti2021}.",
+    "injected_text": "Monotonicity of the density profile is a necessary, though not by itself sufficient, condition for consistency \\citep{Binney2008, Ciotti2021}.",
+    "rationale": "Binney2008 (and Ciotti2021) prove the monotonicity-necessity condition specifically for isotropic orbital structures; dropping the scope qualifier 'For models with an isotropic orbital structure' over-generalises the result to all dynamical models, directly contradicting both the cited sources and the very next sentence's caveat that for general anisotropic structures the problem is notoriously difficult.",
+    "ground_truth_description": "Removed the explicit scope qualifier 'For models with an isotropic orbital structure,' so the necessity-of-monotonicity claim appears to apply to all orbital structures rather than only the isotropic case supported by the cited papers.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Binney2008",
+      "injected_cite_key": "Binney2008",
+      "claim_sentence_verbatim": "For models with an isotropic orbital structure, monotonicity of the density profile is a necessary, though not by itself sufficient, condition for consistency \\citep{Binney2008, Ciotti2021}.",
+      "section_location": "Sec. 4 (Discussion)",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "A substantial fraction of the formal core--S\\'ersic parameter space is therefore physically inadmissible.",
+    "injected_text": "A substantial fraction (approximately 40\\%) of the formal core--S\\'ersic parameter space is therefore physically inadmissible, while the remaining 75\\% corresponds to physically acceptable models.",
+    "rationale": "This paper is a weak target for percent_to_100 (no pre-existing percentage breakdown exists); the best viable site is the conclusion item 3 where 'substantial fraction' is quantified by injecting two complementary percentages that sum to 115% (40+75) instead of 100%, triggering a blatant percent_to_100 failure consistent with a tired author's arithmetic slip when adding specific values to a previously qualitative statement.",
+    "ground_truth_description": "Changed 'A substantial fraction' to 'approximately 40%... while the remaining 75%', introducing percentages that sum to 115% instead of 100%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_to_100",
+      "value_before_raw": "100",
+      "value_after_raw": "115",
+      "value_before_float": 100.0,
+      "value_after_float": 115.0,
+      "location_cue": "approximately 40% of the formal core--Sérsic parameter space is therefore physically inadmissible, while the remaining 75% corresponds to physically acceptable models",
+      "paired_location": "Conclusions, item 3",
+      "quantity_label": "sum of percentage breakdown of inadmissible and admissible core-Sérsic parameter space",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t1.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "\\nu(r) = -\\frac{1}{\\pi} \\int_r^\\infty \\frac{\\txd I(R)}{\\txd R}\\,\\frac{\\txd R}{\\sqrt{R^2-r^2}}.",
+    "injected_text": "\\nu(r) = -\\frac{1}{\\pi} \\sum_r^\\infty \\frac{\\txd I(R)}{\\txd R}\\,\\frac{\\txd R}{\\sqrt{R^2-r^2}}.",
+    "rationale": "Swapping the integral operator \\int to \\sum in the inverse Abel transform replaces a continuous convolution identity with a meaningless discrete sum, which Wolfram refutes against the known Abel inversion formula while leaving the integrand/summand syntactically intact.",
+    "ground_truth_description": "The integral sign in the inverse Abel transform (Sec. 3.1) was changed from \\int to \\sum, replacing the correct continuous deprojection formula with an incorrect discrete-sum form.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3.1",
+      "original_fragment_latex": "\\int_r^\\infty",
+      "injected_fragment_latex": "\\sum_r^\\infty",
+      "full_equation_latex_before": "\\nu(r) = -\\frac{1}{\\pi} \\int_r^\\infty \\frac{\\txd I(R)}{\\txd R}\\,\\frac{\\txd R}{\\sqrt{R^2-r^2}}.",
+      "full_equation_latex_after": "\\nu(r) = -\\frac{1}{\\pi} \\sum_r^\\infty \\frac{\\txd I(R)}{\\txd R}\\,\\frac{\\txd R}{\\sqrt{R^2-r^2}}.",
+      "term_role": "outer operator swap",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "They considered three discrete values for $\\alpha$: 10, 5, and 2, representing sharp, moderate, and broad transition regions, respectively",
+    "injected_text": "They considered three discreet values for $\\alpha$: 10, 5, and 2, representing sharp, moderate, and broad transition regions, respectively",
+    "rationale": "Classic homophone swap of 'discrete' (distinct/separate) to 'discreet' (cautious/unobtrusive) — a cosmetic writing error a tired author might plausibly make, leaving meaning intact but introducing a clear editorial defect.",
+    "ground_truth_description": "The word 'discrete' was changed to the homophone 'discreet' in the description of Dullo2013's fitting choices in Section 3.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D2",
+      "change_kind": "homophone_swap",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 3 (Luminosity density)",
+      "affected_span_verbatim": "They considered three discrete values for $\\alpha$: 10, 5, and 2, representing sharp, moderate, and broad transition regions, respectively"
+    },
+    "proposer_agent": "injector.general.S1.t1.v1"
+  }
+]

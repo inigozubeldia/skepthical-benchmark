@@ -1,0 +1,188 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-9e496592e2bb",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper itself acknowledges in Section 5: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks' and 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.' The theoretical guarantee (Appendix A) applies to the safeguarded algorithm, not the practical ALS used, and the sole end-to-end result shows ExTernD trailing Q4_K (10.099 vs 10.015 PPL) at higher bpw (~5.7 vs ~4.9).",
+        "evidence": {
+          "claim": "The paper claims practical viability and that ExTernD approaches any quantization level, but the theoretical guarantees only apply to matrix reconstruction and not end-to-end model accuracy or the practical algorithm, and the limited empirical evidence shows a non-trivial accuracy gap.",
+          "excerpt": "The paper's strongest claims about practical viability and 'approaching any quantization level' are overstated and not fully supported by the evidence. The theoretical guarantee in Appendix A concerns matrix reconstruction in Frobenius norm for a safeguarded algorithm, which is not proven to be the same as the practical algorithm used. More importantly, this guarantee does not directly translate to end-to-end model accuracy. The sole end-to-end result (Qwen3.5-4B on wikitext-2) shows a non-trivial perplexity gap to bf16 ($10.10$ vs $9.78$) and even to standard k-quants (Q4_K at $10.02$), indicating that at the system level, the method is not yet competitive on a perplexity-vs-bpw basis."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself acknowledges in Section 5: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks' and 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.' The theoretical guarantee (Appendix A) applies to the safeguarded algorithm, not the practical ALS used, and the sole end-to-end result shows ExTernD trailing Q4_K (10.099 vs 10.015 PPL) at higher bpw (~5.7 vs ~4.9).",
+            "cost_usd": 0.00538365
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The proof is only for reconstruction error of an augmented extraction rule: Appendix A states, \"Proposition 2 (Convergence to arbitrary accuracy). Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair...\" and concludes only that \"For every ε > 0 there is a finite inner rank k with ∥A − B diag(D)C∥F < ε.\" The paper itself also shows a remaining end-to-end gap in Table 3 (\"ternary decomposition, µ=3 ... 10.099\" vs. \"bf16 ... 9.782\" and \"Q4 K pure + imatrix ... 10.015\") and admits in Limitations that \"end-to-end task accuracy is not yet measured\" for ternary comparisons.",
+            "cost_usd": 0.014145625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer is correct: the theoretical guarantee in Appendix A bounds the Frobenius error of the matrix reconstruction (\"Corollary 1... the decomposition reaches the bf16 weights arbitrarily closely\"), while the empirical end-to-end evaluation in Table 3 shows a perplexity gap to bf16 (10.099 vs 9.782) and standard Q4_K.",
+            "cost_usd": 0.0024048999999999997
+          }
+        ],
+        "cost_usd": 0.021934175
+      },
+      {
+        "flag_id": "fp-556c7513dc11",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's bpw_eff formula (Eq. 5) explicitly omits D scale storage, and Section 5 acknowledges 'no fused kernels exist.' No empirical latency or throughput measurements are provided; claims about hardware-friendliness are speculative, as the paper itself notes the 'op-count growth reads as slowdown only on multiplier-based datapaths.'",
+        "evidence": {
+          "claim": "The proposed cost model omits significant storage (real-valued scales, metadata), and no empirical inference latency or throughput is reported, so claims about storage/performance trade-offs and hardware-friendliness are unsubstantiated.",
+          "excerpt": "The cost model is idealized and the performance analysis is incomplete, potentially giving a misleading impression of real-world trade-offs. The $\u000boperatorname{bpw}_\u000btext{eff}$ formula in Sec. 2.6 omits the storage cost of the real-valued $D$ scales and any other metadata/alignment overheads. Furthermore, the paper provides no empirical latency or throughput measurements on current hardware (GPUs/CPUs). Claims about hardware-friendliness are speculative, as unstructured sparsity and two-pass factorized application can be slow without dedicated, highly optimized kernels."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's bpw_eff formula (Eq. 5) explicitly omits D scale storage, and Section 5 acknowledges 'no fused kernels exist.' No empirical latency or throughput measurements are provided; claims about hardware-friendliness are speculative, as the paper itself notes the 'op-count growth reads as slowdown only on multiplier-based datapaths.'",
+            "cost_usd": 0.00538365
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The cost model counts only ternary-factor bits: Sec. 2.6 says \"with sparse mask+sign packing... storage per original weight is bpweff = µ · (m + n)/max(m, n) · (2 − sparsity),\" which does not include the real-valued D vector or other overheads. The paper also provides no inference latency/throughput results, and even notes in Limitations that \"no fused kernels exist,\" so the hardware/performance claims remain largely speculative.",
+            "cost_usd": 0.014145625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 2.6 provides a formula for effective bpw that only accounts for the ternary factors and sparsity, omitting the real-valued scale vector D. Furthermore, the paper provides no empirical latency or throughput numbers, noting only that emerging ASICs \"stand to exploit this the most\" (Section 4).",
+            "cost_usd": 0.0024048999999999997
+          }
+        ],
+        "cost_usd": 0.021934175
+      },
+      {
+        "flag_id": "fp-443c5d4ffb55",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states evaluation used 'llama-perplexity, 580 chunks' but omits wikitext-2 version/split, context length, stride, and tokenization details. For the PTQTP/PT2-LLM comparison (Sec. 3.6), there is no mention of whether results were re-run or cited, what calibration data was used, or precise BPW calculation methodology for baseline methods.",
+        "evidence": {
+          "claim": "The main end-to-end and baseline comparisons are missing crucial evaluation details (datasets, tokenization, splits, source and exact setup for baseline methods), making it difficult to reproduce results or interpret the competitiveness of the method.",
+          "excerpt": "The experimental comparisons to baselines are under-specified, hindering reproducibility and interpretation. The main Qwen3.5-4B perplexity evaluation (Sec. 3.5) lacks crucial details (wikitext-2 version/split, context length, stride, tokenization). The layer-level comparison to other ternary methods like PTQTP and PT2-LLM (Sec. 3.6) is opaque regarding their implementation source (re-run vs. cited), hyperparameters, calibration data, and the precise calculation of their effective BPW."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states evaluation used 'llama-perplexity, 580 chunks' but omits wikitext-2 version/split, context length, stride, and tokenization details. For the PTQTP/PT2-LLM comparison (Sec. 3.6), there is no mention of whether results were re-run or cited, what calibration data was used, or precise BPW calculation methodology for baseline methods.",
+            "cost_usd": 0.00538365
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The end-to-end evaluation is specified only minimally as \"Table 3: First full end-to-end validation (llama-perplexity, 580 chunks, same imatrix for all calibrated rows),\" without giving the wikitext-2 split/version, tokenization, context length, or stride. Likewise Sec. 3.6 only says \"we compare... PT2-LLM [6]... and PTQTP [5]\" and \"evaluate PTQTP at group size G = 128,\" but does not state the implementation source, calibration setup, or fuller baseline details.",
+            "cost_usd": 0.014145625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.5 mentions using \"llama-perplexity, 580 chunks\" but omits details like context length or stride, and Section 3.6 presents comparisons to PTQTP and PT2-LLM in Table 4 without clarifying if these were re-run, nor what calibration data or hyperparameters were used.",
+            "cost_usd": 0.0024048999999999997
+          }
+        ],
+        "cost_usd": 0.021934175
+      },
+      {
+        "flag_id": "fp-58d24a4c8e0c",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper makes quantitative claims—'naive batching collapses (99.5% → 50% energy at b=256),' 'refinement sweeps ≈+0.4 points,' 'corrected V-step 0.3–1.8 points,' 'convergence cliff near τ=2.5'—but provides no ablation tables, plots, or experiments isolating these effects; the only supporting data is the τ sweep in Sec. 3.2 which partially addresses the sparsity dial but not the other claims.",
+        "evidence": {
+          "claim": "Key algorithmic choices are justified by quantitative performance claims (e.g., about batching, refinement sweeps, corrected update, convergence cliffs) that are not supported by any ablation data or plots in the paper.",
+          "excerpt": "Several key algorithmic design choices are justified by quantitative claims that are not supported by any data in the paper. This makes it difficult to verify the rationale behind the final algorithm. Examples include the claims that naive batching 'collapses' performance (Sec. 2.4), refinement sweeps yield '$+0.4$ points' (Sec. 2.4), the corrected V-step gives '$0.3$–$1.8$ points' (Sec. 2.5), and that there is a 'convergence cliff near $\\tau = 2.5$' (Sec. 3.2)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes quantitative claims—'naive batching collapses (99.5% → 50% energy at b=256),' 'refinement sweeps ≈+0.4 points,' 'corrected V-step 0.3–1.8 points,' 'convergence cliff near τ=2.5'—but provides no ablation tables, plots, or experiments isolating these effects; the only supporting data is the τ sweep in Sec. 3.2 which partially addresses the sparsity dial but not the other claims.",
+            "cost_usd": 0.00538365
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Several quantitative justifications are presented only as text assertions, e.g. \"The naive batching... collapses (99.5% → 50% energy at b = 256),\" \"Refinement sweeps... ≈+0.4 points,\" \"solving it against W loses 0.3–1.8 points,\" and \"a convergence cliff near τ = 2.5.\" The paper includes some summary tables, but no dedicated ablation table/plot substantiating these specific design-choice claims.",
+            "cost_usd": 0.014145625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although Table 1 does contain the data supporting the refinement sweeps claim, the reviewer correctly identifies that the claims about naive batching collapse (Sec. 2.4), the V-step correction losing 0.3-1.8 points (Sec. 2.5), and the convergence cliff (Sec. 3.2) are stated without any accompanying ablation data, tables, or plots.",
+            "cost_usd": 0.0024048999999999997
+          }
+        ],
+        "cost_usd": 0.021934175
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0877367
+  },
+  "extractor_cost_usd": 0.03077200000000002,
+  "total_cost_usd": 0.11850870000000002
+}

@@ -1,0 +1,314 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-e4ddc3f1c3f1",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 clearly shows HIVE-3D IoU of 0.7449 vs TRELLIS IoU of 0.8603, a substantial regression, and the paper provides no discussion or explanation of this degradation anywhere in the text, while still claiming 'state-of-the-art performance' in the abstract.",
+        "evidence": {
+          "claim": "HIVE-3D achieves lower IoU than TRELLIS, which undercuts the 'state-of-the-art' claim in the abstract, and no explanation is given for this regression.",
+          "excerpt": "In Table 1, HIVE-3D improves CD marginally over TRELLIS (0.0035 vs. 0.0038) and F-Score more clearly (84.34 vs. 81.29), but *IoU actually degrades* (0.7449 vs. 0.8603). This is a striking regression that the paper does not discuss. Given that IoU is arguably the metric most sensitive to scene-level layout coherence, the authors owe the reader an explanation — is this a scale/registration artefact? An occlusion/amodal completion artefact? Without a diagnosis, the \"state-of-the-art\" claim in the abstract is overstated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 clearly shows HIVE-3D IoU of 0.7449 vs TRELLIS IoU of 0.8603, a substantial regression, and the paper provides no discussion or explanation of this degradation anywhere in the text, while still claiming 'state-of-the-art performance' in the abstract.",
+            "cost_usd": 0.004550314285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims in the abstract that it \"significantly outperforms previous approaches, achieving state-of-the-art performance,\" but Table 1 reports \"TRELLIS ... IoU 0.8603\" versus \"Ours ... 0.7449.\" The text also does not explain this drop, instead stating \"HIVE-3D demonstrates consistently strong performance across all metrics.\"",
+            "cost_usd": 0.008244285714285714
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer correctly points out that Table 1 shows HIVE-3D achieves a lower IoU (0.7449) compared to TRELLIS (0.8603), and the paper fails to discuss this degradation, instead claiming it \"demonstrates consistently strong performance across all metrics.\"",
+            "cost_usd": 0.002081714285714286
+          }
+        ],
+        "cost_usd": 0.014876314285714285
+      },
+      {
+        "flag_id": "fp-254122872795",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper explicitly states 'inspired by Fuse3D (Jin et al., 2025), which observed that the flow transformer-based model GL within the TRELLIS framework learns to establish correspondences between image regions and 3D voxels' and 'Inspired by IP-Adapter (Ye et al., 2023), we implement our voxel super-resolution model,' but provides no direct experimental comparison against Fuse3D, and the novelty delineation relative to these prior works is largely qualitative.",
+        "evidence": {
+          "claim": "The paper does not precisely delineate what is new in HIVE-3D versus what is composed from TRELLIS, Fuse3D, and IP-Adapter; a direct comparison to Fuse3D is missing.",
+          "excerpt": "Each of the three components has a clear antecedent: the 2D-to-3D attention matching is explicitly attributed to Fuse3D (Jin et al., 2025); the SR conditioning strategy is explicitly attributed to IP-Adapter (Ye et al., 2023); and the overall backbone is TRELLIS. The paper reads as a careful and well-engineered integration, but the authors should more precisely delineate what is *new* rather than *composed*. In particular, a direct head-to-head with Fuse3D (which shares the attention-lifting mechanism) is missing."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explicitly states 'inspired by Fuse3D (Jin et al., 2025), which observed that the flow transformer-based model GL within the TRELLIS framework learns to establish correspondences between image regions and 3D voxels' and 'Inspired by IP-Adapter (Ye et al., 2023), we implement our voxel super-resolution model,' but provides no direct experimental comparison against Fuse3D, and the novelty delineation relative to these prior works is largely qualitative.",
+            "cost_usd": 0.004550314285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does state explicit contributions (e.g., \"We introduce a 2D-to-3D matching strategy\" and \"We propose a voxel super-resolution model\") while also acknowledging inspirations such as \"inspired by Fuse3D\" and \"Inspired by IP-Adapter.\" However, there is no direct experimental comparison to Fuse3D in the paper, so whether the novelty is sufficiently delineated is debatable.",
+            "cost_usd": 0.008244285714285714
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not include a direct comparison to Fuse3D in its evaluation baselines (Table 1, Section 5.1, or Appendices), despite relying on its 2D-to-3D attention matching strategy.",
+            "cost_usd": 0.002081714285714286
+          }
+        ],
+        "cost_usd": 0.014876314285714285
+      },
+      {
+        "flag_id": "fp-941ce7f0f419",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper evaluates on 3D-FRONT and real-world images (Table 6 in appendix), but does not include ScanNet or Structured3D, does not report confidence intervals or statistical significance across seeds, and does not include a user study, though it does provide some multi-metric evaluation.",
+        "evidence": {
+          "claim": "The evaluation uses only one dataset with limited experimental detail, omitting standard additional datasets, confidence intervals, per-category breakdown, and user study.",
+          "excerpt": "Only one quantitative table on 3D-FRONT (Table 1) is presented in the main text, with unspecified test-set size, no confidence intervals, and no per-category breakdown. For a paper claiming SOTA on scene generation, standard practice would include (a) results on additional scene datasets (e.g. ScanNet, Structured3D), (b) statistical significance across multiple seeds given the stochasticity of the generator, and (c) user studies for perceptual quality, which is the *actual* target quantity for the SSIM/PSNR/LPIPS/CLIP numbers in Table 2/3."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper evaluates on 3D-FRONT and real-world images (Table 6 in appendix), but does not include ScanNet or Structured3D, does not report confidence intervals or statistical significance across seeds, and does not include a user study, though it does provide some multi-metric evaluation.",
+            "cost_usd": 0.004550314285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The main quantitative evaluation is explicitly described as \"We evaluate our method and all baselines on the 3D-FRONT dataset using CD, F-Score, and IoU,\" and the supplementary adds \"3D-FRONT and real data\" results. Nowhere does the paper report test-set size, confidence intervals, per-category breakdowns, multiple-seed statistics, or a user study.",
+            "cost_usd": 0.008244285714285714
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer's observations are factually correct; the evaluation primarily relies on Table 1 (3D-FRONT) and Appendix Table 6, and does not provide confidence intervals, per-category breakdowns, or user studies.",
+            "cost_usd": 0.002081714285714286
+          }
+        ],
+        "cost_usd": 0.014876314285714285
+      },
+      {
+        "flag_id": "fp-cd1027f065b1",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper does not describe the rendering protocol used to compute PSNR/SSIM values in Tables 2, 3, and 6, making the extremely low values (PSNR ~10-12 dB, SSIM ~0.7) uninterpretable without knowing the render setup, viewpoint sampling, or normalization procedure.",
+        "evidence": {
+          "claim": "The PSNR and SSIM values reported are very low and the rendering protocol is not described, making the results ambiguous and undermining claims of improvement.",
+          "excerpt": "**PSNR/SSIM values in Tables 2 and 3 are extremely low** (PSNR ≈ 10–12 dB, SSIM ≈ 0.7). The rendering setup used to compute these must be described in the main text; as reported, the numbers are not interpretable, and the ~1 dB improvements do not clearly exceed noise."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper does not describe the rendering protocol used to compute PSNR/SSIM values in Tables 2, 3, and 6, making the extremely low values (PSNR ~10-12 dB, SSIM ~0.7) uninterpretable without knowing the render setup, viewpoint sampling, or normalization procedure.",
+            "cost_usd": 0.004550314285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper reports image metrics (e.g., Table 2/3 and \"We also conduct complementary evaluations on both synthetic datasets and real-world images using SSIM, PSNR, LPIPS, and CLIP\"), but the exact metric/rendering protocol is only partially described later as \"We render the final images from two viewpoints.\" So the reviewer is right that interpretation is under-specified, but wrong that there is no rendering description at all.",
+            "cost_usd": 0.008244285714285714
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reported PSNR values in Tables 2, 3, and 6 are unusually low (10-13 dB), and the paper lacks a detailed description of the rendering protocol used to compute these metrics beyond stating they render from two viewpoints (Appendix C.1).",
+            "cost_usd": 0.002081714285714286
+          }
+        ],
+        "cost_usd": 0.014876314285714285
+      },
+      {
+        "flag_id": "fp-f71ba17aba43",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges in the conclusion that 'constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors and lead to suboptimal results,' and Figure 12 shows one failure case, but no quantitative robustness analysis (e.g., detection F1 vs. downstream CD) is provided.",
+        "evidence": {
+          "claim": "Errors in early pipeline stages may corrupt final results, but the paper lacks a quantitative robustness analysis to support repeatability and reliability claims.",
+          "excerpt": "The pipeline is strictly cascaded: Florence-2 → SAM2 → TRELLIS root → attention lifting → voxel SR → registration. A single bad detection at depth 1 will corrupt the entire subtree. The failure-mode discussion in the conclusion acknowledges this in one sentence but provides no quantitative characterisation. A robustness analysis (e.g. detection F1 vs. downstream CD) would substantially strengthen the paper."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in the conclusion that 'constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors and lead to suboptimal results,' and Figure 12 shows one failure case, but no quantitative robustness analysis (e.g., detection F1 vs. downstream CD) is provided.",
+            "cost_usd": 0.004550314285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself acknowledges cascading fragility: \"constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors\" and \"downstream components of the pipeline may struggle to function correctly.\" It provides only qualitative failure discussion (Figure 12), not the quantitative robustness analysis requested.",
+            "cost_usd": 0.008244285714285714
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only qualitatively acknowledges cascading failure modes in Appendix D (\"Specifically, this leads to failures in the registration stage...\") but does not provide the requested quantitative robustness analysis.",
+            "cost_usd": 0.002081714285714286
+          }
+        ],
+        "cost_usd": 0.014876314285714285
+      },
+      {
+        "flag_id": "fp-f0bcf5834fba",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper mentions 'we adopt the Amodal3R (Wu et al., 2025) framework to generate complete amodal reconstructions free from occlusion' in Section 4.3, but no ablation study isolates Amodal3R's contribution and no experiment measures occlusion reconstruction quality.",
+        "evidence": {
+          "claim": "Amodal3R is used to handle occlusion, but there is no ablation isolating its contribution and no measurement of occlusion reconstruction performance.",
+          "excerpt": "Amodal3R (Wu et al., 2025) is used to handle occlusion when partitioning child components, but no ablation isolates its contribution and no experiment measures the quality of reconstructed occluded parts."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions 'we adopt the Amodal3R (Wu et al., 2025) framework to generate complete amodal reconstructions free from occlusion' in Section 4.3, but no ablation study isolates Amodal3R's contribution and no experiment measures occlusion reconstruction quality.",
+            "cost_usd": 0.004550314285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Amodal3R is indeed introduced in the method: \"we adopt the Amodal3R (Wu et al., 2025) framework to generate complete amodal reconstructions free from occlusion.\" But the stated ablations cover only \"1) the depth ... 2) the voxel super-resolution module, 3) the scale factor estimation, and 4) the RANSAC-based point cloud registration,\" with no Amodal3R isolation or occlusion-specific metric.",
+            "cost_usd": 0.008244285714285714
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the paper mentions adopting Amodal3R for handling occlusions (Section 4.3), there are no ablation studies or quantitative measurements isolating its contribution to occlusion reconstruction performance.",
+            "cost_usd": 0.002081714285714286
+          }
+        ],
+        "cost_usd": 0.014876314285714285
+      },
+      {
+        "flag_id": "fp-0d91b01cf1b2",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=AMBIGUOUS: Table 5 in the appendix does report runtime for varying numbers of nodes (1-4 nodes at depth 1-2), providing some scaling analysis, but does not report behavior for higher depths (depth=3) or larger numbers of components, leaving scaling behavior incompletely characterized.",
+        "evidence": {
+          "claim": "The paper reports runtime for a fixed scene depth and component number but does not analyze or report scaling with increased scene complexity, which matters for downstream use.",
+          "excerpt": "36.5 s per scene is competitive, but this appears to be for a fixed depth (which?) and a fixed number of components. Scaling behaviour with scene complexity (K components at depth d) is not reported and matters for the \"content-creation\" motivation in the impact statement."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Table 5 in the appendix does report runtime for varying numbers of nodes (1-4 nodes at depth 1-2), providing some scaling analysis, but does not report behavior for higher depths (depth=3) or larger numbers of components, leaving scaling behavior incompletely characterized.",
+            "cost_usd": 0.004550314285714285
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does report scaling behavior in Appendix A.5: \"we categorize the runtime performance according to the number of nodes in the scene tree (a single root at depth 1, or 2–4 nodes when expanding to depth 2),\" with Table 5 listing runtimes for \"1 (depth = 1)\" through \"4 (depth = 2).\" This directly analyzes runtime versus scene complexity/components.",
+            "cost_usd": 0.008244285714285714
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer incorrectly claims that scaling behavior with scene complexity is not reported. Appendix A.5 includes a \"Runtime Analysis\" with Table 5 categorizing runtime performance by \"the number of nodes in the scene tree\" and depth.",
+            "cost_usd": 0.002081714285714286
+          }
+        ],
+        "cost_usd": 0.014876314285714285
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.1041342
+  },
+  "extractor_cost_usd": 0.01646600000000016,
+  "total_cost_usd": 0.12060020000000016
+}

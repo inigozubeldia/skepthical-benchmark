@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.14287",
+  "arxiv_url": "https://arxiv.org/abs/2607.14287",
+  "rotation_seed": 20260735,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S1",
+      "type": 2
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "imbalance leads to reduced generalization performance,",
+          "injected_text": "imbalance leads to improved generalization performance,",
+          "rationale": "Replacing 'reduced' with 'improved' reverses the directional claim attributed to the cited work, ensuring a direct contradiction that a reviewer should flag.",
+          "ground_truth_description": "Altered the citation claim to state that joint multi-class training improves rather than reduces generalization performance, contradicting the referenced paper.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "tabassum_2024_adapting",
+            "injected_cite_key": "tabassum_2024_adapting",
+            "claim_sentence_verbatim": "We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance, particularly under out-of-distribution settings~\\cite{tabassum_2024_adapting}.",
+            "section_location": "Framework Overview",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "arises from its image encoder (ViT-H), which alone comprises 636M parameters, and fine-tuning",
+          "injected_text": "arises from its image encoder (ViT-H), which alone comprises 63M parameters, and fine-tuning",
+          "rationale": "We simulate a typo dropping a digit in the ViT-H parameter count in the Introduction, creating a factor-of-10 contradiction with the correct 636M count reported in the Methodology section.",
+          "ground_truth_description": "The parameter count of the ViT-H image encoder in the Introduction was changed from 636M to 63M, contradicting the 636M figure in the Methodology.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "integer_equal",
+            "value_before_raw": "636",
+            "value_after_raw": "63",
+            "value_before_float": 636.0,
+            "value_after_float": 63.0,
+            "location_cue": "arises from its image encoder (ViT-H), which alone comprises 63M parameters, and fine-tuning",
+            "paired_location": "Section 3.1 Framework Overview",
+            "quantity_label": "ViT-H parameter count in millions",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t3.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "H = W_0 x + W_D \\left( \\sum_{i=1}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+          "injected_text": "H = W_0 x + W_D \\left( \\prod_{i=1}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+          "rationale": "Swaps the summation operator for a product in the Conv-LoRA embedding update equation, breaking the additive mixture-of-experts logic.",
+          "ground_truth_description": "Changes the summation of convolutional expert outputs to a product in the Conv-LoRA equation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Section III.A",
+            "original_fragment_latex": "\\sum_{i=1}^{N}",
+            "injected_fragment_latex": "\\prod_{i=1}^{N}",
+            "full_equation_latex_before": "H = W_0 x + W_D \\left( \\sum_{i=1}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+            "full_equation_latex_after": "H = W_0 x + W_D \\left( \\prod_{i=1}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+            "term_role": "outer operator swap",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t2.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "These results demonstrate the effectiveness of intermediate domain adaptation with parameter-efficient adapters for industrial XCT defect segmentation.",
+          "injected_text": "These results demonstrate the effectiveness of intermediate domain adaptation with parameter-efficient adapters for industrial XCT defect segmentation, suggesting that the framework generalizes universally to all non-destructive testing modalities and arbitrary material types.",
+          "rationale": "The abstract is modified to append a sweeping generalization claiming universal applicability across all NDT modalities and material types, which is not supported by the paper's XCT-specific results.",
+          "ground_truth_description": "Added a sweeping generalization clause to the abstract claiming universal applicability across all non-destructive testing modalities and materials.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B7",
+            "change_kind": "overstated_conclusion",
+            "expected_bucket": "major",
+            "section_location": "Abstract",
+            "affected_span_verbatim": "These results demonstrate the effectiveness of intermediate domain adaptation with parameter-efficient adapters for industrial XCT defect segmentation."
+          },
+          "proposer_agent": "injector.general.S3.t2.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "Era et al.~\\cite{era2025unsupervised} proposed an unsupervised prompt-generation framework for SAM-based porosity segmentation, reducing the need for manual annotation but remaining prompt-dependent under noisy backgrounds, heavy-tailed defect distributions, and complex morphologies.",
+          "injected_text": "Era et al.~\\cite{era2025unsupervised} proposed a prompt-generation framework for SAM-based porosity segmentation, reducing the need for manual annotation but remaining prompt-dependent under noisy backgrounds, heavy-tailed defect distributions, and complex morphologies.",
+          "rationale": "The cited paper explicitly presents its method as an 'unsupervised' approach; dropping this qualifier removes the specific methodological detail that justifies the subsequent clause, resulting in a partially supported description of the referenced work.",
+          "ground_truth_description": "Dropped the 'unsupervised' methodological qualifier from the description of the prompt-generation framework proposed by Era et al.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "era2025unsupervised",
+            "injected_cite_key": "era2025unsupervised",
+            "claim_sentence_verbatim": "Era et al.~\\cite{era2025unsupervised} proposed an unsupervised prompt-generation framework for SAM-based porosity segmentation, reducing the need for manual annotation but remaining prompt-dependent under noisy backgrounds, heavy-tailed defect distributions, and complex morphologies.",
+            "section_location": "Related Work",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "and keeping over 99\\% of the model frozen",
+          "injected_text": "and keeping over 88\\% of the model frozen",
+          "rationale": "The paper states the frozen share of SAM twice ('keeping over 99% of the model frozen' in the abstract and 'keeping over 99% of SAM parameters frozen' in the method) and states the complementary trainable share as 'less than 1% of the total parameters'. Changing one occurrence to 88% breaks the parts-of-a-whole relationship twice over: it no longer complements the <1% trainable share, and it contradicts the other 99% statement. Only an existing figure is perturbed.",
+          "ground_truth_description": "Abstract: frozen share changed 99% -> 88%, so it no longer complements the stated <1% trainable share and disagrees with the 99% restated in the method section.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_to_100",
+            "value_before_raw": "99%",
+            "value_after_raw": "88%",
+            "value_before_float": 99.0,
+            "value_after_float": 88.0,
+            "location_cue": "training approximately 4.15M parameters and keeping over 99\\% of the model frozen",
+            "paired_location": "method section: 'keeping over 99% of SAM parameters frozen'; and 'less than $1\\%$ of the total parameters'",
+            "quantity_label": "share of SAM parameters kept frozen (%)",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "E_i(W_E x) \\right),",
+          "injected_text": "E_i(W_E) x \\right),",
+          "rationale": "In the mixture-of-experts update each expert E_i is applied to the projected input W_E x. The injected form applies E_i to the projection matrix W_E and then right-multiplies by x, which is structurally similar but not the same operator: the expert now acts on a matrix rather than on the projected feature vector, and the result no longer matches the architecture the surrounding text describes. Perturbs the existing equation in place.",
+          "ground_truth_description": "MoE update: expert application changed from E_i(W_E x) to E_i(W_E) x, so the expert acts on the projection matrix instead of the projected input.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Method — LoRA/MoE hidden-state update display",
+            "original_fragment_latex": "E_i(W_E x)",
+            "injected_fragment_latex": "E_i(W_E) x",
+            "full_equation_latex_before": "H = W_0 x + W_D \\left( \\sum_{i=1}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+            "full_equation_latex_after": "H = W_0 x + W_D \\left( \\sum_{i=1}^{N} g_i(x)\\, E_i(W_E) x \\right),",
+            "term_role": "expert application to the projected input",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "In Stage 2, we further adapt the model to the target AM XCT domain using a reduced learning rate of $8\\times10^{-5}$ for an additional 20 epochs while keeping the same batch size.",
+          "injected_text": "In Stage 2, we further adapt the model to the target AM XCT domain using a reduced learning rate of $8\\times10^{-5}$ for an additional 20 epochs while keeping the same batch size (we observed that larger batch sizes degraded inclusion segmentation performance).",
+          "rationale": "The inserted parenthetical asserts an ablation finding ('we observed that larger batch sizes degraded inclusion segmentation performance') that the Results section does not actually report, introducing an unsupported sub-claim.",
+          "ground_truth_description": "Added a parenthetical claiming that larger batch sizes degraded inclusion segmentation performance, which is not supported by any evidence in the paper.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 4.4",
+            "affected_span_verbatim": "In Stage 2, we further adapt the model to the target AM XCT domain using a reduced learning rate of $8\\times10^{-5}$ for an additional 20 epochs while keeping the same batch size."
+          },
+          "proposer_agent": "injector.general.S2.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "It was shown in~\\cite{poudel2022feature} that XCT segmentation quality strongly affects defect detectability and size estimation in laser powder bed fusion parts.",
+          "injected_text": "It was shown in~\\cite{poudel2022feature} that XCT segmentation quality strongly affects defect detectability and size estimation in additive manufacturing parts.",
+          "rationale": "The cited study explicitly bounded its finding to 'laser powder bed fusion parts'; replacing this with 'additive manufacturing parts' over-generalises the claim to all AM processes, which the study did not test.",
+          "ground_truth_description": "Over-generalised the scope of the cited claim by changing its condition from specifically 'laser powder bed fusion parts' to all 'additive manufacturing parts'.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "poudel2022feature",
+            "injected_cite_key": "poudel2022feature",
+            "claim_sentence_verbatim": "It was shown in~\\cite{poudel2022feature} that XCT segmentation quality strongly affects defect detectability and size estimation in laser powder bed fusion parts.",
+            "section_location": "Related Work",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "fine-tuning only 4.15M parameters, or 0.647\\% of the full model.",
+          "injected_text": "fine-tuning only 4.15M parameters, or 0.642\\% of the full model.",
+          "rationale": "Since the paper contains no tables with explicit total rows, I injected a slight arithmetic mismatch in a stated percentage (percent_of) to fulfill the minor numeric error (S1) constraint.",
+          "ground_truth_description": "Perturbed a stated parameter percentage from 0.647% to 0.642%, breaking the arithmetic relationship with the 4.15M parameter count.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_of",
+            "value_before_raw": "0.647%",
+            "value_after_raw": "0.642%",
+            "value_before_float": 0.647,
+            "value_after_float": 0.642,
+            "location_cue": "The best configuration uses r=2 with eight convolutional experts, fine-tuning only 4.15M parameters, or 0.647% of the full model.",
+            "paired_location": null,
+            "quantity_label": "percentage of trainable parameters",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t2.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "\\sum_{i=1}^{N}",
+          "injected_text": "\\sum_{i=0}^{N}",
+          "rationale": "Changing the lower bound of the mixture-of-experts sum from i=1 to i=0 shifts the index out of its expected 1-based range, causing a subtle index-shift failure that might be deemed inconclusive by automated verifiers without full context.",
+          "ground_truth_description": "Changed the lower bound of the sum from i=1 to i=0 in the embedding update equation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. III.A",
+            "original_fragment_latex": "\\sum_{i=1}^{N}",
+            "injected_fragment_latex": "\\sum_{i=0}^{N}",
+            "full_equation_latex_before": "H = W_0 x + W_D \\left( \\sum_{i=1}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+            "full_equation_latex_after": "H = W_0 x + W_D \\left( \\sum_{i=0}^{N} g_i(x)\\, E_i(W_E x) \\right),",
+            "term_role": "sum lower bound",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t3.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "arxiv_paper.tex",
+          "original_text": "As shown in Fig.~\\ref{fig:tsne_plot}, \\textit{Train-1}",
+          "injected_text": "As shown in Fig.~\\ref{fig:tsne_plto}, \\textit{Train-1}",
+          "rationale": "Misspelling the reference key for the t-SNE plot introduces a broken cross-reference that compiles to a visible '??' artefact in the PDF.",
+          "ground_truth_description": "The reference key 'fig:tsne_plot' was altered to 'fig:tsne_plto', resulting in a broken LaTeX reference.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "latex_artefact",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 4.1",
+            "affected_span_verbatim": "As shown in Fig.~\\ref{fig:tsne_plot}, \\textit{Train-1}, \\textit{Train-2}, and \\textit{Test-3} cluster closely due to similar material properties and scan settings~\\cite{tabassum_2024_adapting}, motivating the use of \\textit{Test-3} as the validation set."
+          },
+          "proposer_agent": "injector.general.S1.t2.v3"
+        }
+      ]
+    }
+  ]
+}

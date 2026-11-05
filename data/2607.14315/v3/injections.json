@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "conference.tex",
+    "original_text": "guarantee the same prediction for instances in a local region.",
+    "injected_text": "guarantee the same prediction for all instances in the dataset.",
+    "rationale": "Ribeiro et al. (2018) describe Anchors as providing rule-based explanations that hold locally for specific predictions; broadening this condition to 'all instances in the dataset' over-generalises the claim and contradicts the paper's explicitly local scope.",
+    "ground_truth_description": "Broadens the validity condition of the Anchors method's prediction guarantee from a local region to the entire dataset.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "ribeiro2018anchors",
+      "injected_cite_key": "ribeiro2018anchors",
+      "claim_sentence_verbatim": "\\item Anchors \\cite{ribeiro2018anchors}: Anchors provide rule-based explanations by identifying a minimal set of conditions (anchors) that, when satisfied, guarantee the same prediction for instances in a local region.",
+      "section_location": "Sec. 2.1.1",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "conference.tex",
+    "original_text": "3       & 0.4673   & 30         & 1.0000",
+    "injected_text": "3       & 0.4673   & 35         & 1.0000",
+    "rationale": "The prose states the number of features in the explanations ranges 'from 4 to 30', and the results table reports 30 for that row. Changing the table entry to 35 puts the tabulated count outside the range the text asserts, a self-contained integer disagreement using only values the paper reports. No percentage or split is invented.",
+    "ground_truth_description": "Results table: feature count changed 30 -> 35, contradicting the prose statement that counts range from 4 to 30.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "integer_equal",
+      "value_before_raw": "30",
+      "value_after_raw": "35",
+      "value_before_float": 30.0,
+      "value_after_float": 35.0,
+      "location_cue": "3       & 0.4673   & 30         & 1.0000",
+      "paired_location": "prose: explanation sizes 'ranging from 4 to 30'",
+      "quantity_label": "number of features in the explanation",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t3.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "conference.tex",
+    "original_text": "\\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2}",
+    "injected_text": "\\frac{\\lVert f(x_i) \\rVert^2}{\\lVert f(x_i) - g(x_i) \\rVert^2}",
+    "rationale": "Inverts the Fidelity ratio so the residual norm becomes the denominator. The form is structurally similar but wrong: the metric is defined as a normalised residual that goes to 0 as the surrogate g approaches the model f, whereas the inverted form diverges in that limit — contradicting the paper's own reading of low fidelity values as good agreement. Perturbs the existing equation in place rather than appending a claim.",
+    "ground_truth_description": "Fidelity definition: ratio inverted from ||f-g||^2 / ||f||^2 to ||f||^2 / ||f-g||^2, so the metric diverges instead of vanishing under perfect surrogate agreement.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Metrics section — Fidelity definition display",
+      "original_fragment_latex": "\\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2}",
+      "injected_fragment_latex": "\\frac{\\lVert f(x_i) \\rVert^2}{\\lVert f(x_i) - g(x_i) \\rVert^2}",
+      "full_equation_latex_before": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+      "full_equation_latex_after": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) \\rVert^2}{\\lVert f(x_i) - g(x_i) \\rVert^2} \\right),",
+      "term_role": "normalised-residual ratio in the fidelity metric",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "conference.tex",
+    "original_text": "involves the following steps as depicted in Fig. \\ref{fig:banchmarking}:",
+    "injected_text": "involves the following steps as depicted in Fig. \\ref{fig:modelxgb}:",
+    "rationale": "Swaps the cross-reference from the benchmarking steps figure to the logical architecture figure, causing a mismatch between the prose claim (which discusses steps) and the referenced figure (which shows the overall XAI score architecture).",
+    "ground_truth_description": "Changed the figure reference at the end of Section 4.1 from Fig 2 (benchmarking steps) to Fig 1 (logical architecture).",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "cross_reference_mismatch",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 4.1",
+      "affected_span_verbatim": "In summary, our methodology for benchmarking XAI techniques and creating a knowledge base for assessing the explainability score of each model involves the following steps as depicted in Fig. \\ref{fig:banchmarking}:"
+    },
+    "proposer_agent": "injector.general.S2.t1.v3"
+  }
+]

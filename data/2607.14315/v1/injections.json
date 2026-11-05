@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "conference.tex",
+    "original_text": "SHAP values are based on game theory",
+    "injected_text": "SHAP values are based on information theory",
+    "rationale": "Drifts the methodological basis attributed to the SHAP citation from game theory to information theory. SHAP is explicitly built on Shapley values from cooperative game theory — the cited paper is 'A Unified Approach to Interpreting Model Predictions' and the acronym itself expands to SHapley Additive exPlanations — so the injected basis mis-describes the cited method. Cite key untouched; two existing words perturbed.",
+    "ground_truth_description": "SHAP citation: theoretical basis changed from 'game theory' to 'information theory', mis-describing the cited method's foundation.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "lundberg2017unified",
+      "injected_cite_key": "lundberg2017unified",
+      "claim_sentence_verbatim": "SHAP (SHapley Additive exPlanations) \\cite{lundberg2017unified}: SHAP values are based on game theory and provide a unified measure of feature importance for individual predictions.",
+      "section_location": "Sec. 2 (Background — XAI methods list)",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "conference.tex",
+    "original_text": "3       & 0.4673   & 30         & 1.0000",
+    "injected_text": "3       & 4.6730   & 30         & 1.0000",
+    "rationale": "The LIME fidelity score 0.4673 appears both in the results table and in the prose ('fidelity scores for LIME range from 0.4397 to 0.4673'). The table occurrence is shifted by one order of magnitude to 4.6730 while the prose retains 0.4673, so the same measurement disagrees by 10x between the two statements. The injected value is additionally outside the [0,1] range a fidelity score can take.",
+    "ground_truth_description": "Results table: LIME fidelity changed 0.4673 -> 4.6730 (x10), contradicting the 0.4673 restated in the prose and exceeding the valid [0,1] range for fidelity.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "0.4673",
+      "value_after_raw": "4.6730",
+      "value_before_float": 0.4673,
+      "value_after_float": 4.673,
+      "location_cue": "3       & 0.4673   & 30         & 1.0000",
+      "paired_location": "prose: 'The fidelity scores for LIME range from 0.4397 to 0.4673'",
+      "quantity_label": "LIME fidelity score",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "conference.tex",
+    "original_text": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+    "injected_text": "Fidelity = \\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+    "rationale": "Removed the 1/N averaging prefactor from the Fidelity metric equation, making it an unnormalized total sum rather than a normalized average.",
+    "ground_truth_description": "Dropped the 1/N normalisation factor in the definition of Fidelity.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3.1.1",
+      "original_fragment_latex": "\\frac{1}{N}\\sum_{i=1}^N",
+      "injected_fragment_latex": "\\sum_{i=1}^N",
+      "full_equation_latex_before": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+      "full_equation_latex_after": "Fidelity = \\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+      "term_role": "normalisation prefactor",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "conference.tex",
+    "original_text": "In each benchmarking experiment, we applied the XAI techniques to AI/ML models trained on a specific dataset and then evaluate the resulting explanations using the XAI quantification scheme.",
+    "injected_text": "In each benchmarking experiment, we applied the XAI techniques to AI/ML models trained on a specific dataset and then evaluate the resulting explanations using the XAI quantification scheme. To ensure robust performance estimates, we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.",
+    "rationale": "The inserted methodology claim states that standard deviations are reported across ten independent runs, which is visibly contradicted by Tables 1 and 2 in the Results section that only report single scalar values without any variance metrics.",
+    "ground_truth_description": "Added a methodology claim about computing and reporting standard deviations from multiple independent runs, which is never actually reported in the results.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 4.1",
+      "affected_span_verbatim": "In each benchmarking experiment, we applied the XAI techniques to AI/ML models trained on a specific dataset and then evaluate the resulting explanations using the XAI quantification scheme."
+    },
+    "proposer_agent": "injector.general.S3.t3.v1"
+  }
+]

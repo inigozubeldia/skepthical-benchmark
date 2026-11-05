@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "sample7.tex",
+    "original_text": "using the Bayesian code \\texttt{pysersic} \\citep{Pasha2023}",
+    "injected_text": "using the code \\texttt{pysersic} \\citep{Pasha2023}",
+    "rationale": "Methodological-qualifier drop. The cited paper Pasha & Miller 2023 (Pasha2023) is titled 'pysersic: A Bayesian Sérsic Fitting Code' — 'Bayesian' is the central methodological qualifier the paper carries. Dropping the 'Bayesian' qualifier from the citing sentence produces an almost-but-not-quite faithful description: pysersic is identified as 'the code' but the Bayesian inference framing (which is core to its design) is lost. ref.py returns PARTIALLY_SUPPORTED.",
+    "ground_truth_description": "Removed the methodological qualifier 'Bayesian' from the description of pysersic in the photometry-deblending paragraph. pysersic (Pasha2023) is explicitly a Bayesian Sérsic fitter; dropping the qualifier weakens the methodological characterization while preserving the cite key.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Pasha2023",
+      "injected_cite_key": "Pasha2023",
+      "claim_sentence_verbatim": "We simultaneously fit the emission of both galaxies in all available HST (...) and JWST/NIRCam (...) from PRIMER using the Bayesian code \\texttt{pysersic} \\citep{Pasha2023}.",
+      "section_location": "Sec. 4.1 (Photometry Extraction and Deblending)",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "sample7.tex",
+    "original_text": "with 3.8 times more galaxies than the average ($\\delta \\sim 2.8$)",
+    "injected_text": "with 5.5 times more galaxies than the average ($\\delta \\sim 2.8$)",
+    "rationale": "Ratio arithmetic blatantly wrong. The overdensity δ and the linear ratio of densities are related by ratio = δ + 1: δ = 2.8 → ratio = 3.8. Replacing the ratio with 5.5 (while keeping δ ~ 2.8) breaks the arithmetic by ~45% (5.5 vs 3.8). All three operands are explicit in the prose (the ratio '5.5 times', δ '~2.8', and the implicit '+1' constant). ratio_eq predicate fires at MAJOR.",
+    "ground_truth_description": "Perturbed the ratio claim 'X times more galaxies than the average' from 3.8 to 5.5 in the TNG300 simulation paragraph, while keeping δ ~ 2.8 unchanged. Standard δ-to-ratio relation says ratio = δ + 1, so δ ~ 2.8 implies ratio ~ 3.8 — the injected 5.5 is blatantly inconsistent (~45% off).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "3.8",
+      "value_after_raw": "5.5",
+      "value_before_float": 3.8,
+      "value_after_float": 5.5,
+      "location_cue": "with 5.5 times more galaxies than the average (delta ~ 2.8)",
+      "paired_location": "Same sentence (line 553, Sec. 5.2 subsec:TNG): delta ~ 2.8 quoted; arithmetic relation ratio = delta + 1 means correct ratio is 3.8",
+      "quantity_label": "ratio of TNG300 galaxy density to field average (must equal delta + 1 with delta ~ 2.8 in same sentence)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "sample7.tex",
+    "original_text": "we consider redshift slices of $dz = 0.2$ (corresponding to $\\sim 60\\,\\mathrm{pMpc}$)",
+    "injected_text": "we consider redshift slices of $dz = 0.4$ (corresponding to $\\sim 60\\,\\mathrm{pMpc}$)",
+    "rationale": "Bound-shift-style minor math edit on the redshift integration window: dz = 0.2 → dz = 0.4 (doubled). The paired physical-distance anchor '~60 pMpc' was correctly computed for dz = 0.2 at z~3.7 (the paper's value); for dz = 0.4 at the same redshift the physical distance would be ~120 pMpc, not 60. The internal inconsistency is detectable via cosmology/comoving-distance evaluation. The paper has no \\sum or \\int display math, so this is the closest available 'integration bound' equivalent (the redshift slice width is the integration window for the overdensity calculation).",
+    "ground_truth_description": "Doubled the redshift slice width in the overdensity-calculation paragraph (dz = 0.2 → dz = 0.4) while keeping the paired physical-distance anchor '~60 pMpc' unchanged. At z~3.7, dz = 0.4 corresponds to ~120 pMpc, not 60 pMpc.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2 (Environment density), prose immediately after Eq. 1",
+      "original_fragment_latex": "dz = 0.2",
+      "injected_fragment_latex": "dz = 0.4",
+      "full_equation_latex_before": "redshift slices of $dz = 0.2$ (corresponding to $\\sim 60\\,\\mathrm{pMpc}$)",
+      "full_equation_latex_after": "redshift slices of $dz = 0.4$ (corresponding to $\\sim 60\\,\\mathrm{pMpc}$)",
+      "term_role": "redshift integration window width",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "sample7.tex",
+    "original_text": "to infer the best-fitting parameters and their associated errors",
+    "injected_text": "to infer the best-fitting parameters and their their associated errors",
+    "rationale": "Cosmetic word repetition — 'their' duplicated in the SED-fitting Methods paragraph. Meaning is unaffected; total_reviewer buckets as very_minor (checklist D2/D8).",
+    "ground_truth_description": "Inserted a duplicated 'their' in the SED-fitting paragraph ('and their their associated errors'). Pure cosmetic typo, very_minor severity.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D2",
+      "change_kind": "word_repetition",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 3.3 Spectro-photometric Fitting (sec:prospector / line 436) — Methods paragraph describing FSPS+emcee SED fitting protocol",
+      "affected_span_verbatim": "to infer the best-fitting parameters and their associated errors"
+    },
+    "proposer_agent": "injector.general.S1.t1.v2"
+  }
+]

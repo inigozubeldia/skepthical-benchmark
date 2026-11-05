@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "text/02-Related-Work.tex",
+    "original_text": "Gupta and Singh~\\cite{gupta_pv_2021} show in a comprehensive study that supervised learning is widely used.",
+    "injected_text": "Gupta and Singh~\\cite{gupta_pv_2021} show in a comprehensive study that federated learning can effectively bypass data privacy constraints in smart grids.",
+    "rationale": "The edit replaces a general claim about supervised learning in PV forecasting with an unrelated claim about federated learning and data privacy, which is a different subfield and not discussed in the cited review by Gupta and Singh.",
+    "ground_truth_description": "The claim attributed to Gupta and Singh was modified to discuss federated learning and data privacy instead of supervised learning.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "gupta_pv_2021",
+      "injected_cite_key": "gupta_pv_2021",
+      "claim_sentence_verbatim": "Gupta and Singh~\\cite{gupta_pv_2021} show in a comprehensive study that federated learning can effectively bypass data privacy constraints in smart grids.",
+      "section_location": "Sec. 2.2",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "text/02-Related-Work.tex",
+    "original_text": "which states that no wind turbine can extract more than 59.3\\% of the kinetic energy contained in the wind stream:\n%The theoretical upper bound of $C_p$ is given by the Betz limit \n$C_{p,\\text{Betz}} = \\frac{16}{27} \\approx 0.593$.",
+    "injected_text": "which states that no wind turbine can extract more than 89.3\\% of the kinetic energy contained in the wind stream:\n%The theoretical upper bound of $C_p$ is given by the Betz limit \n$C_{p,\\text{Betz}} = \\frac{16}{27} \\approx 0.893$.",
+    "rationale": "A typo in the theoretical max power coefficient (0.593 -> 0.893, adjacent keys) introduces a blatant ratio_eq failure (16/27 = 0.593 != 0.893) yielding a ~50% error that flags as major.",
+    "ground_truth_description": "Changed the decimal and percentage values of the Betz limit ratio (16/27) from 0.593 to 0.893, introducing a substantial arithmetic error.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "0.593",
+      "value_after_raw": "0.893",
+      "value_before_float": 0.593,
+      "value_after_float": 0.893,
+      "location_cue": "kinetic energy contained in the wind stream:\n%The theoretical upper bound of $C_p$ is given by the Betz limit \n$C_{p,\\text{Betz}} = \\frac{16}{27} \\approx 0.893$.",
+      "paired_location": null,
+      "quantity_label": "Betz limit power coefficient $C_p$",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "text/04-Approach.tex",
+    "original_text": "\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}",
+    "injected_text": "\\left[\n\\max_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}",
+    "rationale": "The inner empirical risk minimization problem canonically minimizes the error function; flipping this to a maximization produces a subtle but field-recognisable anomaly that the Stage-1b knowledge audit will easily flag.",
+    "ground_truth_description": "Changed the inner optimization of the model training objective from a minimization to a maximization.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:approach:problem_definition:optimization_problem",
+      "equation_location": "Sec. 3.1",
+      "original_fragment_latex": "\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}",
+      "injected_fragment_latex": "\\max_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}",
+      "full_equation_latex_before": "    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}",
+      "full_equation_latex_after": "    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\max_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}",
+      "term_role": "inner empirical risk minimization operator / canonical objective form",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "text/05-Experimental-Setup.tex",
+    "original_text": "Second, features with a missing value rate exceeding 5\\% are removed.",
+    "injected_text": "Second, features with a missing value rate exceeding 5\\% are removed (preliminary experiments showed severe performance degradation at higher thresholds).",
+    "rationale": "The edit inserts a parenthetical claiming empirical support (severe performance degradation) for a specific threshold, which acts as a phantom evidence claim since the paper does not present any ablation studies or results regarding missing value thresholds.",
+    "ground_truth_description": "Added an unsupported sub-claim about preliminary experiments regarding the missing value rate threshold.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 5.4",
+      "affected_span_verbatim": "For both datasets, first, duplicates are detected and removed. Second, features with a missing value rate exceeding 5\\% are removed. Third, observations with at least one missing value are removed."
+    },
+    "proposer_agent": "injector.general.S2.t3.v3"
+  }
+]

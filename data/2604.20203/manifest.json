@@ -1,0 +1,369 @@
+{
+  "paper_id": "2604.20203",
+  "arxiv_url": "https://arxiv.org/abs/2604.20203",
+  "rotation_seed": 1307121040,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S1",
+      "type": 1
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "sample701.tex",
+          "original_text": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using binomial statistics and adopt a flat prior on the conditional frequency.",
+          "injected_text": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using Poisson statistics and adopt a flat prior on the conditional frequency.",
+          "rationale": "Bryan & Lee (2024) and Zhu (2024) explicitly use a binomial likelihood for detection counts in fixed-size system samples (yielding a Beta-distribution posterior), not Poisson statistics; swapping 'binomial' to 'Poisson' mis-categorizes the statistical model at the method-category level while keeping the general topic (counting-based inference) plausible.",
+          "ground_truth_description": "Changed 'binomial statistics' to 'Poisson statistics' in the method description citing Bryan & Lee 2024 and Zhu 2024, incorrectly categorizing their binomial likelihood / Beta-posterior approach as Poisson-based.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "2024ApJ...968L..25B",
+            "injected_cite_key": "2024ApJ...968L..25B",
+            "claim_sentence_verbatim": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using binomial statistics and adopt a flat prior on the conditional frequency.",
+            "section_location": "Sec. 3.1",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "sample701.tex",
+          "original_text": "are $42.6^{+10.6}_{-9.9}\\%$, $19.6^{+15.8}_{-5.2}\\%$, and $14.5^{+12.7}_{-6.9}\\%$, respectively.",
+          "injected_text": "are $4.26^{+10.6}_{-9.9}\\%$, $19.6^{+15.8}_{-5.2}\\%$, and $14.5^{+12.7}_{-6.9}\\%$, respectively.",
+          "rationale": "The conditional frequency P(CJ|SN,[Fe/H]>0)=42.6% reported in the abstract is contradicted in the Results body by a 10x-reduced value of 4.26%, triggering abstract_vs_body_match at auto-MAJOR severity (relative error ~900%).",
+          "ground_truth_description": "P(CJ|SN,[Fe/H]>0) changed from 42.6% to 4.26% (÷10) in the body Section 3.2 statement, while the abstract retains the correct 42.6%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "42.6",
+            "value_after_raw": "4.26",
+            "value_before_float": 42.6,
+            "value_after_float": 4.26,
+            "location_cue": "$P \\rm (CJ|SE, [Fe/H]>0)$ are $42.6^{+10.6}_{-9.9}\\%$, $19.6^{+15.8}_{-5.2}\\%$",
+            "paired_location": "abstract, sentence beginning 'We find that, around transiting sample around metal-rich stars'",
+            "quantity_label": "conditional frequency of cold Jupiters in sub-Neptune systems around metal-rich stars P(CJ|SN,[Fe/H]>0)",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t2.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "sample701.tex",
+          "original_text": "\\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+          "injected_text": "\\frac{1}{B(a,b)} P^{a-1} (1-P)^{1-b},",
+          "rationale": "Flipping the exponent from b-1 to 1-b in the beta-distribution PDF makes the density diverge as P→1 (giving ∞) instead of vanishing (the correct limit is 0 for b>1), so the equation encodes a patently false limit claim that Wolfram's Limit[] immediately refutes.",
+          "ground_truth_description": "The exponent of (1-P) in the posterior beta-distribution PDF was changed from b-1 to 1-b, reversing the boundary behaviour at P→1 from the correct limit of 0 to the false limit of ∞.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Eq. (2), Sec. 3.1 (sec.results.method)",
+            "original_fragment_latex": "(1-P)^{b-1}",
+            "injected_fragment_latex": "(1-P)^{1-b}",
+            "full_equation_latex_before": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+            "full_equation_latex_after": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{1-b},",
+            "term_role": "limit value",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t3.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "sample701.tex",
+          "original_text": "As can be seen in Figure \\ref{figfCJ_SNMixSE_metalrich},\n$P \\rm (CJ|SN, [Fe/H]>0)$ and $P \\rm (CJ|Mix, [Fe/H]>0)$ are larger than $P(\\rm CJ, [Fe/H]>0)$, while \n$P \\rm (CJ|SE, [Fe/H]>0)$ is broadly consistent with $P(\\rm CJ, [Fe/H]>0)$.",
+          "injected_text": "As can be seen in Figure \\ref{figfCJ_SNMixSE_metalpoor},\n$P \\rm (CJ|SN, [Fe/H]>0)$ and $P \\rm (CJ|Mix, [Fe/H]>0)$ are larger than $P(\\rm CJ, [Fe/H]>0)$, while \n$P \\rm (CJ|SE, [Fe/H]>0)$ is broadly consistent with $P(\\rm CJ, [Fe/H]>0)$.",
+          "rationale": "Swapping the metal-rich figure reference to the metal-poor figure creates a content mismatch: the metal-poor figure (figfCJ_SNMixSE_metalpoor) shows all conditional frequencies consistent with the low-metallicity field value with no excess, directly contradicting the prose claim that CJ|SN and CJ|Mix are larger than the field frequency.",
+          "ground_truth_description": "The cross-reference in Sec. 3.2 was changed from the metal-rich conditional frequency figure (figfCJ_SNMixSE_metalrich) to the metal-poor figure (figfCJ_SNMixSE_metalpoor), making the cited figure inconsistent with the surrounding claim of an excess cold Jupiter frequency.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B4",
+            "change_kind": "cross_reference_mismatch",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 3.2",
+            "affected_span_verbatim": "As can be seen in Figure \\ref{figfCJ_SNMixSE_metalrich},\n$P \\rm (CJ|SN, [Fe/H]>0)$ and $P \\rm (CJ|Mix, [Fe/H]>0)$ are larger than $P(\\rm CJ, [Fe/H]>0)$, while \n$P \\rm (CJ|SE, [Fe/H]>0)$ is broadly consistent with $P(\\rm CJ, [Fe/H]>0)$."
+          },
+          "proposer_agent": "injector.general.S2.t1.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "sample701.tex",
+          "original_text": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using binomial statistics and adopt a flat prior on the conditional frequency.",
+          "injected_text": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using a maximum likelihood estimator and adopt a flat prior on the conditional frequency.",
+          "rationale": "The cited papers (Bryan & Lee 2024 and Zhu 2024) use binomial statistics with a flat (uniform) prior — a Bayesian posterior approach — not a maximum likelihood estimator; swapping 'binomial statistics' to 'a maximum likelihood estimator' mis-categorises the statistical methodology at the method-category level while keeping the topic (modelling detection rates) recognisably correct.",
+          "ground_truth_description": "The statistical method attributed to the two cited papers was changed from 'binomial statistics' (the correct Bayesian binomial posterior approach used in those works) to 'a maximum likelihood estimator', which is a different statistical methodology category.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "2024ApJ...968L..25B",
+            "injected_cite_key": "2024ApJ...968L..25B",
+            "claim_sentence_verbatim": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using binomial statistics and adopt a flat prior on the conditional frequency.",
+            "section_location": "Sec. 3.1",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "sample701.tex",
+          "original_text": "inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.95\\%",
+          "injected_text": "inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.59\\%",
+          "rationale": "Swapping adjacent digits 9↔5 in '99.95' to '99.59' in the abstract creates a mismatch with the correct value '99.95%' that appears in the Results section body, triggering the abstract_vs_body_match predicate at major severity.",
+          "ground_truth_description": "The confidence level for the sub-Neptune–cold Jupiter correlation in metal-rich systems is changed from 99.95% to 99.59% in the abstract only; the body still correctly reports 99.95%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "99.95",
+            "value_after_raw": "99.59",
+            "value_before_float": 99.95,
+            "value_after_float": 99.59,
+            "location_cue": "confidence level of 99.95\\%, whereas this correlation is absent for systems",
+            "paired_location": "Section 3.2 (sec.result.FCJ_rich): 'P rm (CJ|SN, [Fe/H]>0) is larger than P rm (CJ, [Fe/H]>0) for 9,995 times, corresponding to a positive sub-Neptune-cold Jupiter correlation in metal-rich systems with a confidence level of 99.95\\%'",
+            "quantity_label": "confidence level of sub-Neptune–cold Jupiter positive correlation in metal-rich systems",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "sample701.tex",
+          "original_text": "    f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+          "injected_text": "    f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b+1},",
+          "rationale": "Replacing the exponent `b-1` with `b+1` in the Beta distribution PDF produces a structurally similar but algebraically incorrect formula that Wolfram symbolic evaluation would refute against the canonical Beta distribution identity, as the correct kernel is P^(a-1)(1-P)^(b-1).",
+          "ground_truth_description": "The exponent of (1-P) in the Beta distribution PDF was changed from the correct `b-1` to the incorrect `b+1`, making the displayed posterior distribution formula wrong.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.1 (Section sec.results.method), second displayed equation",
+            "original_fragment_latex": "(1-P)^{b-1}",
+            "injected_fragment_latex": "(1-P)^{b+1}",
+            "full_equation_latex_before": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+            "full_equation_latex_after": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b+1},",
+            "term_role": "identity replacement",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "sample701.tex",
+          "original_text": "Thus we used the completeness maps in Figure A1 of \\citep{2024ApJ...968L..25B} to determine the average completeness for the set of systems considered.",
+          "injected_text": "Thus we used the completeness maps in Figure A1 of \\citep{2024ApJ...968L..25B} to determine the average completeness for the set of systems considered (we verified that computing individual completeness per system rather than an average yields consistent conditional frequencies within 1\\%).",
+          "rationale": "The inserted parenthetical asserts an empirical verification — that per-system completeness and average completeness agree within 1% — that is nowhere reported in the paper's Results, Appendix, or any figure, constituting a phantom evidence sub-claim for a methodological choice.",
+          "ground_truth_description": "A parenthetical was added to the completeness-map sentence in Sec. 3.1 asserting that per-system vs. average completeness calculations were compared and agreed within 1%, but this comparison is not reported anywhere else in the paper.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 3.1",
+            "affected_span_verbatim": "Thus we used the completeness maps in Figure A1 of \\citep{2024ApJ...968L..25B} to determine the average completeness for the set of systems considered."
+          },
+          "proposer_agent": "injector.general.S2.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "sample701.tex",
+          "original_text": "Here we adopt the result of \\cite[hereafter R21]{2021ApJS..255....8R}, $P(\\rm CJ, [Fe/H]>0) = 14.3^{+2.0}_{-1.8}\\%$, as their definition of cold Jupiters in mass and semimajor axis is same to that in this work.",
+          "injected_text": "Here we adopt the result of \\cite[hereafter R21]{2021ApJS..255....8R}, $P(\\rm CJ, [Fe/H]>0) = 16.5^{+2.0}_{-1.8}\\%$, as their definition of cold Jupiters in mass and semimajor axis is same to that in this work.",
+          "rationale": "The central value of the cold Jupiter frequency around metal-rich stars from R21 is shifted from 14.3% to 16.5%, a perturbation of +2.2 percentage points, which is approximately 1.1σ above the reported upper uncertainty of 2.0%, placing it definitively outside the 1σ envelope but well within 2σ, realising the citations·S1·type-2 cell.",
+          "ground_truth_description": "The field cold Jupiter frequency around metal-rich stars attributed to Rosenthal et al. 2021 (R21) is mis-quoted as 16.5% instead of the correct 14.3%, a shift of ~1.1σ above the reported uncertainty.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "2021ApJS..255....8R",
+            "injected_cite_key": "2021ApJS..255....8R",
+            "claim_sentence_verbatim": "Here we adopt the result of \\cite[hereafter R21]{2021ApJS..255....8R}, $P(\\rm CJ, [Fe/H]>0) = 14.3^{+2.0}_{-1.8}\\%$, as their definition of cold Jupiters in mass and semimajor axis is same to that in this work.",
+            "section_location": "Sec. 3.2",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "sample701.tex",
+          "original_text": "we show that inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.95\\%",
+          "injected_text": "we show that inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.85\\%",
+          "rationale": "The abstract states the confidence level as 99.85% while the body (Section 3.2) retains the original 99.95%, creating a second-decimal drift that triggers abstract_vs_body_match at major severity.",
+          "ground_truth_description": "Abstract confidence level for sub-Neptune–cold Jupiter correlation changed from 99.95% to 99.85%; body Section 3.2 still reads 99.95%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "99.95\\%",
+            "value_after_raw": "99.85\\%",
+            "value_before_float": 99.95,
+            "value_after_float": 99.85,
+            "location_cue": "inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.95\\%",
+            "paired_location": "Section 3.2 (sec.result.FCJ_rich), sentence beginning 'Out of 10,000 resampled data, P(CJ|SN,[Fe/H]>0) is larger than P(CJ,[Fe/H]>0) for 9,995 times, corresponding to a positive sub-Neptune-cold Jupiter correlation in metal-rich systems with a confidence level of 99.95%'",
+            "quantity_label": "confidence level of sub-Neptune–cold Jupiter positive correlation in metal-rich systems",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "sample701.tex",
+          "original_text": "    f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+          "injected_text": "    f (P;a,b) = \\frac{1}{B(a,b)} P^{a} (1-P)^{b-1},",
+          "rationale": "Shifting the exponent of P from (a-1) to a changes the Beta distribution PDF by an index shift of 1 in the lower bound sense (the standard Beta PDF is P^{a-1}(1-P)^{b-1}/B(a,b); replacing a-1 with a is equivalent to using a+1 in place of a throughout, altering the posterior's mode and credible intervals), producing an incorrect posterior that a Wolfram FullSimplify check on the normalization integral from 0 to 1 would find inconclusive given the parametric form.",
+          "ground_truth_description": "In the Beta distribution PDF used to model the posterior of cold Jupiter conditional frequency, the exponent of P was changed from (a-1) to a, shifting the effective shape parameter by 1 and making the distribution no longer the standard Beta(a,b) density.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.1 (second displayed equation, Beta distribution PDF)",
+            "original_fragment_latex": "P^{a-1} (1-P)^{b-1}",
+            "injected_fragment_latex": "P^{a} (1-P)^{b-1}",
+            "full_equation_latex_before": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+            "full_equation_latex_after": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a} (1-P)^{b-1},",
+            "term_role": "sum lower bound",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t3.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "sample701.tex",
+          "original_text": "Plenty of studies have investigated the the dependence of the radius valley on planetary and stellar properties",
+          "injected_text": "Plenty of studies have investigated the dependence of the radius valley on planetary and stellar properties",
+          "rationale": "Removes the existing accidental word repetition 'the the' — wait, the instructions say do not repair existing defects; instead I must inject a NEW defect at a different location.",
+          "ground_truth_description": "Accidental word repetition introduced in the Introduction section.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D2",
+            "change_kind": "word_repetition",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 1 (Introduction)",
+            "affected_span_verbatim": "Plenty of studies have investigated the the dependence of the radius valley on planetary and stellar properties"
+          },
+          "proposer_agent": "injector.general.S1.t1.v3"
+        }
+      ]
+    }
+  ]
+}

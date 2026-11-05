@@ -1,0 +1,188 @@
+{
+  "paper_id": "2607.13613",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-93b0ede20d2a",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper asserts 'Mt is the global centroid movement (entropy proxy) at epoch t' without any formal derivation, citation, or empirical evidence connecting the L2 displacement sum to an entropy measure. The term is used repeatedly in the title, abstract, and body but is never justified beyond an informal analogy.",
+        "evidence": {
+          "claim": "The 'entropy proxy' framing for M_t is asserted without any formal justification or empirical evidence linking it to an entropy or clustering-uncertainty measure, making the terminology misleading.",
+          "excerpt": "The \"entropy proxy\" framing (title, Abstract, Sec. 1, Sec. 2.4) is asserted without any formal justification. $M_t$ is simply the sum of per-centroid L2 displacements; it is not an entropy of any distribution, nor is a connection to a clustering-uncertainty entropy (e.g., over assignments) derived, cited, or shown empirically."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts 'Mt is the global centroid movement (entropy proxy) at epoch t' without any formal derivation, citation, or empirical evidence connecting the L2 displacement sum to an entropy measure. The term is used repeatedly in the title, abstract, and body but is never justified beyond an informal analogy.",
+            "cost_usd": 0.0036162
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper repeatedly labels movement as entropy without justification: the abstract says centroid movement \"serves as a training entropy proxy,\" Sec. 1 says it \"treats global centroid movement per epoch as an entropy proxy for clustering uncertainty,\" and Eq. (7) defines only \"the global centroid movement (entropy proxy)\" as a sum of L2 displacements. No derivation, citation, or empirical validation of an entropy/uncertainty connection is provided in the paper.",
+            "cost_usd": 0.006819625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper repeatedly uses the term 'entropy proxy' (e.g., in the title, abstract, and Section 2.4 where it states 'Mt is the global centroid movement (entropy proxy)'), but provides no mathematical derivation or empirical analysis linking this L2 displacement sum to any formal entropy measure.",
+            "cost_usd": 0.00239145
+          }
+        ],
+        "cost_usd": 0.012827274999999999
+      },
+      {
+        "flag_id": "fp-a33a9c4f7fca",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section 3.1 states FastCentNN is evaluated 'under identical parameter settings' but nowhere in the paper are the numerical values of τ, P, ε, ε0, or the mode (absolute vs. stage-relative) disclosed, making the experiments non-reproducible without consulting external code.",
+        "evidence": {
+          "claim": "Key experimental hyperparameters used to produce Tables 1–2, such as threshold, patience, split perturbation, and stability floor, are not disclosed, making results non-reproducible and precluding assessment of sensitivity.",
+          "excerpt": "Key experimental hyperparameters are undisclosed (Sec. 3.1, Sec. 3.2, Sec. 3.3). The method has at least four knobs: threshold $\\tau$, patience $P$, split perturbation $\\epsilon$, and stability floor $\\varepsilon_0$. Neither the mode used (absolute vs. stage-relative) nor the numerical values are given anywhere in the paper, making the reported runtimes and MSEs impossible to reproduce and precluding any assessment of sensitivity to the threshold."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.1 states FastCentNN is evaluated 'under identical parameter settings' but nowhere in the paper are the numerical values of τ, P, ε, ε0, or the mode (absolute vs. stage-relative) disclosed, making the experiments non-reproducible without consulting external code.",
+            "cost_usd": 0.0036162
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The method requires several tunable quantities — Algorithm 1 lists \"split scale ε, movement threshold τ, patience P,\" and Eq. (9) introduces \"ε0 > 0\" — and Sec. 2.4 also states \"The threshold can be configured in two modes. In the absolute mode... whereas in the stage-relative mode....\" But Sec. 3 only says the model is \"evaluated against the original CentNN under identical parameter settings\" and gives no actual values or which threshold mode was used.",
+            "cost_usd": 0.006819625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 2 introduces hyperparameters such as movement threshold (τ), patience (P), split perturbation (ϵ), and stability floor (ε0), but Sections 3.1-3.3 and the accompanying tables do not disclose the numerical values or the threshold mode (absolute vs. stage-relative) used for the experiments.",
+            "cost_usd": 0.00239145
+          }
+        ],
+        "cost_usd": 0.012827274999999999
+      },
+      {
+        "flag_id": "fp-784e91c98c7a",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Tables 1 and 2 report only ΔMSE as the clustering quality metric (Eq. 10), and no external metrics (ARI, NMI, purity) or internal metrics (silhouette) are provided, even for MNIST and Fashion-MNIST where ground-truth labels are available, leaving the claim of 'comparable clustering quality' under-supported.",
+        "evidence": {
+          "claim": "Clustering quality is evaluated only by MSE, with no external (ARI/NMI/purity) or internal (silhouette) metrics, making the claim of 'comparable clustering quality' under-supported.",
+          "excerpt": "Clustering quality is evaluated only through ΔMSE (Sec. 3.1, Eq. (10); Tables 1, 2). ... Standard external / internal clustering metrics (ARI, NMI, purity, silhouette) are not reported, and no labelled evaluation is offered even for MNIST/Fashion-MNIST where labels are trivially available. As a result, the abstract's claim of \"clustering quality comparable to CentNN\" is under-supported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Tables 1 and 2 report only ΔMSE as the clustering quality metric (Eq. 10), and no external metrics (ARI, NMI, purity) or internal metrics (silhouette) are provided, even for MNIST and Fashion-MNIST where ground-truth labels are available, leaving the claim of 'comparable clustering quality' under-supported.",
+            "cost_usd": 0.0036162
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Sec. 3.1 states that \"the relative difference in mean squared error (MSE) is reported as: ΔMSE(%)...\" and Tables 1–2 report only runtime, epochs, ΔMSE, and speed-up. The paper makes broad claims like \"achieves clustering quality comparable to CentNN\" and \"preserving clustering quality,\" but provides no ARI/NMI/purity/silhouette or other clustering-quality metrics beyond MSE.",
+            "cost_usd": 0.006819625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.1 explicitly states that 'the relative difference in mean squared error (MSE) is reported', and Tables 1 and 2 only present ∆MSE. No external or internal clustering metrics (such as ARI, NMI, or silhouette) are provided to support the clustering quality claims.",
+            "cost_usd": 0.00239145
+          }
+        ],
+        "cost_usd": 0.012827274999999999
+      },
+      {
+        "flag_id": "fp-9ae022b87cec",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Tables 1 and 2 report single runtime measurements with no repetitions, standard deviations, or confidence intervals. For small absolute differences such as 'R15: 0.077 s vs 0.073 s' and 'MNIST: 8.344 s vs 7.924 s', single-run measurements are insufficient to establish statistical significance of the reported speed-ups.",
+        "evidence": {
+          "claim": "No repetition or variance is reported for runtime and epoch measurements, making reported speed-up numbers uninterpretable, especially given small wall-clock differences.",
+          "excerpt": "No repetition or variance is reported for the runtime and epoch measurements (Sec. 3, Tables 1 and 2). Wall-clock differences of 5% on sub-second workloads (R15: 0.077 s vs 0.073 s) and even on 8-second runs (MNIST: 8.344 s vs 7.924 s) are within typical single-machine noise unless averaged over many runs; without variance the speed-up numbers cannot be interpreted."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Tables 1 and 2 report single runtime measurements with no repetitions, standard deviations, or confidence intervals. For small absolute differences such as 'R15: 0.077 s vs 0.073 s' and 'MNIST: 8.344 s vs 7.924 s', single-run measurements are insufficient to establish statistical significance of the reported speed-ups.",
+            "cost_usd": 0.0036162
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experimental section reports single values such as \"R15 15 600 0.077 / 0.073\" in Table 1 and \"MNIST 10 10,000 8.344 / 7.924\" in Table 2, and the text says \"the runtime is improved from 8.344 s to 7.924 s, corresponding to a speed-up of 5.03%.\" Nowhere does the paper mention repeated runs, averaging, standard deviations, or any variance estimate for runtime/epochs.",
+            "cost_usd": 0.006819625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Tables 1 and 2 report single point estimates for runtimes (e.g., '8.344 / 7.924' for MNIST) and epochs, and the text in Section 3 mentions no statistical repetitions, standard deviations, or variance measures to validate the significance of the reported speed-ups.",
+            "cost_usd": 0.00239145
+          }
+        ],
+        "cost_usd": 0.012827274999999999
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.051309099999999996
+  },
+  "extractor_cost_usd": 0.019307999999999992,
+  "total_cost_usd": 0.07061709999999999
+}

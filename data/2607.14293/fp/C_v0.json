@@ -1,0 +1,341 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-ad5695d31078",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. The transcription of the equation was confirmed as faithful to the paper. However, the units check could not be executed due to a tool error, so dimensional consistency of φ(n_g) = 2πε(n_g)t_idle/ℏ could not be verified mechanically. Mathematically, if ε(n_g) is an energy (joules), then ε·t/ℏ is dimensionless, which is consistent with a phase. However, charge dispersion is sometimes quoted in frequency units (Hz), in which case the formula would need 2πε·t_idle (without ℏ) to be dimensionally consistent — the 2π/ℏ prefactor would be incorrect. The paper should clarify explicitly whether ε(n_g) is an energy or a frequency, as this determines whether the formula is correct.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "critical",
+          "notes": "The transcription of the equation was confirmed as faithful to the paper. However, the units check could not be executed due to a tool error, so dimensional consistency of φ(n_g) = 2πε(n_g)t_idle/ℏ could not be verified mechanically. Mathematically, if ε(n_g) is an energy (joules), then ε·t/ℏ is dimensionless, which is consistent with a phase. However, charge dispersion is sometimes quoted in frequency units (Hz), in which case the formula would need 2πε·t_idle (without ℏ) to be dimensionally consistent — the 2π/ℏ prefactor would be incorrect. The paper should clarify explicitly whether ε(n_g) is an energy or a frequency, as this determines whether the formula is correct.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.02183219999999997
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-aead93d77e4e",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Fig. 1 shows input shape (128, 2) while Sec. II B states 'Each scan consists of N = 80 samples.' The paper never explains how 80-sample scans are mapped to the 128-length input tensor, leaving a genuine reproducibility gap.",
+        "evidence": {
+          "claim": "There is an internal inconsistency between the input tensor shape (128) as shown in Fig. 1, and the scan length (80 samples) as described in the text. It is never explained how the 80-sample scan is matched to the 128-length input, which affects reproducibility and the interpretation of reported latency/resource numbers.",
+          "excerpt": "It is never explained how an 80-sample scan is fed to a 128-length input, nor whether the extra 42 positions are padding, upsampling, or a sliding window over concatenated scans. This directly affects reproducibility and interpretation of the reported latency/resource numbers."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Fig. 1 shows input shape (128, 2) while Sec. II B states 'Each scan consists of N = 80 samples.' The paper never explains how 80-sample scans are mapped to the 128-length input tensor, leaving a genuine reproducibility gap.",
+            "cost_usd": 0.0036965142857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Fig. 1 labels the model input as \"Input (128, 2)\", but Sec. II.B states that \"Each scan consists of N = 80 samples\" and nowhere explains how an 80-sample scan is converted to length 128. This leaves the preprocessing/interface to the deployed model unspecified.",
+            "cost_usd": 0.006024142857142857
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text states that \"Each scan consists of N = 80 samples\" (Sec. II B), but Figure 1 shows an \"Input (128, 2)\" tensor, and the paper never explains the padding, upsampling, or mismatch.",
+            "cost_usd": 0.0016779428571428569
+          }
+        ],
+        "cost_usd": 0.0113986
+      },
+      {
+        "flag_id": "fp-f877dc4c317b",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The evaluation is explicitly per-scan — \"Classifying whether a scan contains a charge jump is inherently a binary classification problem\" — but the deployment section says the CNN \"operates on a sliding window of Ramsey charge tomography data\" and that AXI4-Stream feeds \"the sequential sliding window of the DCCNN.\" The paper does not reconcile these two operating modes.",
+        "evidence": {
+          "claim": "There is ambiguity in whether the deployed model operates in a sliding-window streaming mode or as a per-scan classifier; deployment and evaluation protocols do not match, undermining the validity of performance claims.",
+          "excerpt": "The deployment description in Sec. IV A therefore does not match the training/evaluation protocol."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper describes the CNN as operating on 'a sliding window of Ramsey charge tomography data' in Sec. IV A, while training/evaluation uses per-scan classification on 80-sample scans. The mismatch between 'sliding window' deployment and per-scan training/evaluation is noted but not reconciled, creating genuine ambiguity about whether inference and evaluation protocols match.",
+            "cost_usd": 0.0036965142857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The evaluation is explicitly per-scan — \"Classifying whether a scan contains a charge jump is inherently a binary classification problem\" — but the deployment section says the CNN \"operates on a sliding window of Ramsey charge tomography data\" and that AXI4-Stream feeds \"the sequential sliding window of the DCCNN.\" The paper does not reconcile these two operating modes.",
+            "cost_usd": 0.006024142857142857
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper trains and evaluates on fixed 80-sample scans (Sec. III A), but describes deployment as operating on a \"sequential sliding window\" over a \"continuous data flow\" (Sec. IV B), creating an unexplained discrepancy between evaluation and operational modes.",
+            "cost_usd": 0.0016779428571428569
+          }
+        ],
+        "cost_usd": 0.0113986
+      },
+      {
+        "flag_id": "fp-342e1bf08006",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: The sentence \"In that application, the network classifies individual readout samples...\" directly follows a sentence describing the present CNN's sliding window application, creating a jarring non-sequitur that conflates the two different tasks.",
+        "evidence": {
+          "claim": "A paragraph in Sec. IV A confuses the present work with a previous I-Q state-discrimination work, potentially misleading readers about what application the current CNN targets.",
+          "excerpt": "As written, \"In that application\" reads as if the present CNN classifies I-Q points, which contradicts every other section of the paper."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly clarifies: 'In that application, the network classifies individual readout samples in the in-phase/quadrature (I-Q) plane' refers to the prior Di Guglielmo et al. work being adapted, not the current CNN. The phrase 'We adapt this approach for charge jump detection: rather than classifying single I-Q points..., our CNN operates on a sliding window of Ramsey charge tomography data' makes the distinction clear.",
+            "cost_usd": 0.0036965142857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paragraph explicitly distinguishes prior I-Q state-discrimination work from the present task: \"We adapt this approach for charge jump detection: rather than classifying single I-Q points for state discrimination, our CNN operates on a sliding window of Ramsey charge tomography data.\" The follow-up sentence, \"In that application, the network classifies individual readout samples in the in-phase/quadrature (I-Q) plane,\" refers back to the prior application, not the present one.",
+            "cost_usd": 0.006024142857142857
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The sentence \"In that application, the network classifies individual readout samples...\" directly follows a sentence describing the present CNN's sliding window application, creating a jarring non-sequitur that conflates the two different tasks.",
+            "cost_usd": 0.0016779428571428569
+          }
+        ],
+        "cost_usd": 0.0113986
+      },
+      {
+        "flag_id": "fp-d8426b980b31",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paragraph beginning 'Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ (with Δx₀ = 0). The first-difference channel exposes local sample-to-sample variation, which is the primary signature of a discontinuous phase shift.' appears verbatim twice in immediate succession on page 4, confirming an editorial oversight.",
+        "evidence": {
+          "claim": "A paragraph describing the two-channel input and first-difference is duplicated verbatim in immediate succession, reducing clarity and indicating an editorial oversight.",
+          "excerpt": "The paragraph beginning \"Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ (with Δx₀ = 0). The first-difference channel exposes local sample-to-sample variation, which is the primary signature of a discontinuous phase shift.\" appears verbatim twice in immediate succession."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paragraph beginning 'Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ (with Δx₀ = 0). The first-difference channel exposes local sample-to-sample variation, which is the primary signature of a discontinuous phase shift.' appears verbatim twice in immediate succession on page 4, confirming an editorial oversight.",
+            "cost_usd": 0.0036965142857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The exact paragraph beginning \"Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δx_i = x_i − x_{i−1} (with Δx_0 = 0)\" appears twice consecutively in Sec. II.B. This is a clear editorial duplication.",
+            "cost_usd": 0.006024142857142857
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paragraph beginning \"Each scan is converted to a two-channel input...\" is printed verbatim twice in a row in Section II.C.",
+            "cost_usd": 0.0016779428571428569
+          }
+        ],
+        "cost_usd": 0.0113986
+      },
+      {
+        "flag_id": "fp-5a6f42c39fb2",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "The paper explicitly states the difference: Sec. III B reports the mean of five per-qubit efficiencies with standard deviation across qubits as error, while Sec. III C reports 'the standard deviation of the per-qubit mean efficiency across 75 independent sets of simulated scans.' The paper says 'this differs from the efficiency calculated in Sec. III B, as the efficiency reported here is the per-qubit mean efficiency,' acknowledging the methodological difference.",
+        "evidence": {
+          "claim": "Two apparently incompatible DCCNN 'overall efficiency' results and uncertainties are reported in different sections and tables, with different methodologies, without clearly explaining the difference, leading to possible confusion about which number should be cited.",
+          "excerpt": "This must be explained, since it is precisely the smaller uncertainty (0.022) that the Abstract and Conclusion quote for the DCCNN↔χ² comparison."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly states the difference: Sec. III B reports the mean of five per-qubit efficiencies with standard deviation across qubits as error, while Sec. III C reports 'the standard deviation of the per-qubit mean efficiency across 75 independent sets of simulated scans.' The paper says 'this differs from the efficiency calculated in Sec. III B, as the efficiency reported here is the per-qubit mean efficiency,' acknowledging the methodological difference.",
+            "cost_usd": 0.0036965142857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly explains that the Sec. III.C numbers use a different metric and uncertainty definition: \"this differs from the efficiency calculated in Sec. III B\" and \"Statistical uncertainties are estimated as the standard deviation of the per-qubit mean efficiency across 75 independent sets of simulated scans.\" Sec. III.B separately states its error is \"the standard deviation across qubits quoted as the error to characterize qubit-to-qubit variation.\"",
+            "cost_usd": 0.006024142857142857
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly explains the difference in Section III.C: \"this differs from the efficiency calculated in Sec. III B, as the efficiency reported here is the per-qubit mean efficiency. Statistical uncertainties are estimated as the standard deviation... across 75 independent sets\".",
+            "cost_usd": 0.0016779428571428569
+          }
+        ],
+        "cost_usd": 0.0113986
+      },
+      {
+        "flag_id": "fp-623b7cca52c2",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'a bit-width sweep was performed across three configurations: ap_fixed<6,1>, ap_fixed<8,3>, and ap_fixed<16,6>' and that '<16,6> was chosen, as it achieved the highest accuracy,' but provides no numerical accuracy values, tables, or figures comparing the three configurations to substantiate this claim.",
+        "evidence": {
+          "claim": "Claims are made about a sweep of fixed-point precisions yielding the highest accuracy for <16,6>, but there are no reported numbers, tables, or figures to back up the stated accuracy or resource cost comparisons. The claim is therefore unsupported by any evidence.",
+          "excerpt": "No numbers, table, or figure is provided for the accuracy comparison across bit widths, nor is the resource cost at the smaller precisions reported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'a bit-width sweep was performed across three configurations: ap_fixed<6,1>, ap_fixed<8,3>, and ap_fixed<16,6>' and that '<16,6> was chosen, as it achieved the highest accuracy,' but provides no numerical accuracy values, tables, or figures comparing the three configurations to substantiate this claim.",
+            "cost_usd": 0.0036965142857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts that \"a bit-width sweep was performed across three configurations: ap fixed<6,1>, ap fixed<8,3>, and ap fixed<16,6>\" and that \"ap fixed<16,6> was chosen, as it achieved the highest accuracy,\" but provides no table, figure, or numerical results for those comparisons. The selection is therefore unsupported in the presented evidence.",
+            "cost_usd": 0.006024142857142857
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors state in Sec. II.A that a sweep across three configurations was performed and ap_fixed<16,6> \"achieved the highest accuracy\", but no data, figures, or tables are provided to show the resource or accuracy comparisons for the other bit-widths.",
+            "cost_usd": 0.0016779428571428569
+          }
+        ],
+        "cost_usd": 0.0113986
+      },
+      {
+        "flag_id": "fp-14e0e14be8d7",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper trains and evaluates on the same five NEXUS qubit templates (Q1–Q4), and no held-out qubit is tested. The claim that the approach 'requires no per-qubit hyperparameter tuning' is demonstrated only on qubits whose templates were used in training, so generalization to truly new qubits is not empirically validated.",
+        "evidence": {
+          "claim": "The paper claims its approach 'requires no hyperparameter tuning when applied to a new qubit', but only demonstrates generalisation across the same five qubit templates used for training; there is no evaluation on a held-out or new qubit.",
+          "excerpt": "No held-out qubit was evaluated, so \"generalises to new qubits\" is not shown."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper trains and evaluates on the same five NEXUS qubit templates (Q1–Q4), and no held-out qubit is tested. The claim that the approach 'requires no per-qubit hyperparameter tuning' is demonstrated only on qubits whose templates were used in training, so generalization to truly new qubits is not empirically validated.",
+            "cost_usd": 0.0036965142857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims the method \"requires no hyperparameter tuning when applied to a new qubit,\" but the training data were generated \"For each of the five qubit configurations considered in Ref. [17]\" and the reported comparison says \"A single trained model serves all five qubit templates.\" No held-out new qubit is evaluated.",
+            "cost_usd": 0.006024142857142857
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims the approach \"requires no hyperparameter tuning when applied to a new qubit\" (Sec. V), but only evaluates performance on the exact same five qubit templates (Q1-Q4) used to generate the training data (Sec. II.B), failing to demonstrate true generalization to a held-out qubit.",
+            "cost_usd": 0.0016779428571428569
+          }
+        ],
+        "cost_usd": 0.0113986
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.0,
+    "general": 0.14285714285714285
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.02183219999999997,
+    "general": 0.0797902
+  },
+  "extractor_cost_usd": 0.026040000000000202,
+  "total_cost_usd": 0.12766240000000018
+}

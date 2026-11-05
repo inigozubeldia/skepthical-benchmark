@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "The distinguishing\ncharacteristics of this architecture are the addition of residual connections between\nconvolution blocks and two changes to the convolution operator: (1) causality, which\nguarantees no information leakage from future to past; and (2) dilation, which ``skips''\na fixed number of neighboring time-steps to have a wider view of the signal without\nadditional parameters \\cite{DBLP:journals/corr/abs-1803-01271}.",
+    "injected_text": "The distinguishing\ncharacteristics of this architecture are two changes to the convolution operator: (1) causality, which\nguarantees no information leakage from future to past; and (2) dilation, which ``skips''\na fixed number of neighboring time-steps to have a wider view of the signal without\nadditional parameters \\cite{DBLP:journals/corr/abs-1803-01271}.",
+    "rationale": "Removing the mention of residual connections weakens the methodological description, making it only partially consistent with the cited Bai et al. 2018 paper, which explicitly defines TCNs as relying on causal convolutions, dilated convolutions, AND residual connections.",
+    "ground_truth_description": "The mention of residual connections was removed from the list of defining characteristics of the Temporal Convolutional Network.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "DBLP:journals/corr/abs-1803-01271",
+      "injected_cite_key": "DBLP:journals/corr/abs-1803-01271",
+      "claim_sentence_verbatim": "The distinguishing\ncharacteristics of this architecture are the addition of residual connections between\nconvolution blocks and two changes to the convolution operator: (1) causality, which\nguarantees no information leakage from future to past; and (2) dilation, which ``skips''\na fixed number of neighboring time-steps to have a wider view of the signal without\nadditional parameters \\cite{DBLP:journals/corr/abs-1803-01271}.",
+      "section_location": "Sec. 2.1",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "70,000, 15,000, and 15,000 scans respectively",
+    "injected_text": "70,000, 15,000, and 150,000 scans respectively",
+    "rationale": "The paper states a 100,000-scan dataset split 70,000 / 15,000 / 15,000, which sums correctly. The test split is shifted by one order of magnitude to 150,000, so the three parts now sum to 235,000 against a stated total of 100,000. The real counts and the real total are the paper's own; nothing is reformatted or invented.",
+    "ground_truth_description": "Test split changed 15,000 -> 150,000, so the train/val/test counts no longer sum to the stated 100,000-scan dataset.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "sum_eq_total",
+      "value_before_raw": "15,000",
+      "value_after_raw": "150,000",
+      "value_before_float": 15000.0,
+      "value_after_float": 150000.0,
+      "location_cue": "split into training, validation, and test sets containing 70,000, 15,000, and 15,000 scans respectively",
+      "paired_location": "stated dataset size of 100,000 scans",
+      "quantity_label": "test-set size (number of scans)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "\\frac{(x_i - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)}",
+    "injected_text": "\\frac{(x_j - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)}",
+    "rationale": "Introduces an unbound index j in the sum over i, rendering the chi-squared definition non-conformable.",
+    "ground_truth_description": "Changes the bound index x_i to x_j in the chi-squared formula, creating a shape/index mismatch.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. I.C",
+      "original_fragment_latex": "(x_i - \\hat{x}(\\theta))^2",
+      "injected_fragment_latex": "(x_j - \\hat{x}(\\theta))^2",
+      "full_equation_latex_before": "\\chi^2_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^{n}\n  \\frac{(x_i - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)} \\,.",
+      "full_equation_latex_after": "\\chi^2_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^{n}\n  \\frac{(x_j - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)} \\,.",
+      "term_role": "injected shape/index mismatch",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "Table~\\ref{tab:model-size} compares the two models",
+    "injected_text": "Table~\\ref{tab:modelsize} compares the two models",
+    "rationale": "Introduces a typo in a cross-reference label, causing a '??' LaTeX rendering artefact in the compiled PDF.",
+    "ground_truth_description": "Changed the reference label for the model size table to an undefined one, creating a broken reference '??' in the text.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "latex_artefact",
+      "expected_bucket": "very_minor",
+      "section_location": "Algorithm Design and Training",
+      "affected_span_verbatim": "Table~\\ref{tab:model-size} compares the two models in terms of trainable and\nnon-trainable parameters."
+    },
+    "proposer_agent": "injector.general.S1.t2.v3"
+  }
+]

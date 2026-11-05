@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "sample701.tex",
+    "original_text": "Here we adopt the result of \\cite[hereafter R21]{2021ApJS..255....8R}, $P(\\rm CJ, [Fe/H]>0) = 14.3^{+2.0}_{-1.8}\\%$, as their definition of cold Jupiters in mass and semimajor axis is same to that in this work.",
+    "injected_text": "Here we adopt the result of \\cite[hereafter R21]{2021ApJS..255....8R}, $P(\\rm CJ, [Fe/H]>0) = 16.5^{+2.0}_{-1.8}\\%$, as their definition of cold Jupiters in mass and semimajor axis is same to that in this work.",
+    "rationale": "The central value of the cold Jupiter frequency around metal-rich stars from R21 is shifted from 14.3% to 16.5%, a perturbation of +2.2 percentage points, which is approximately 1.1σ above the reported upper uncertainty of 2.0%, placing it definitively outside the 1σ envelope but well within 2σ, realising the citations·S1·type-2 cell.",
+    "ground_truth_description": "The field cold Jupiter frequency around metal-rich stars attributed to Rosenthal et al. 2021 (R21) is mis-quoted as 16.5% instead of the correct 14.3%, a shift of ~1.1σ above the reported uncertainty.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "2021ApJS..255....8R",
+      "injected_cite_key": "2021ApJS..255....8R",
+      "claim_sentence_verbatim": "Here we adopt the result of \\cite[hereafter R21]{2021ApJS..255....8R}, $P(\\rm CJ, [Fe/H]>0) = 14.3^{+2.0}_{-1.8}\\%$, as their definition of cold Jupiters in mass and semimajor axis is same to that in this work.",
+      "section_location": "Sec. 3.2",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "sample701.tex",
+    "original_text": "we show that inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.95\\%",
+    "injected_text": "we show that inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.85\\%",
+    "rationale": "The abstract states the confidence level as 99.85% while the body (Section 3.2) retains the original 99.95%, creating a second-decimal drift that triggers abstract_vs_body_match at major severity.",
+    "ground_truth_description": "Abstract confidence level for sub-Neptune–cold Jupiter correlation changed from 99.95% to 99.85%; body Section 3.2 still reads 99.95%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "99.95\\%",
+      "value_after_raw": "99.85\\%",
+      "value_before_float": 99.95,
+      "value_after_float": 99.85,
+      "location_cue": "inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.95\\%",
+      "paired_location": "Section 3.2 (sec.result.FCJ_rich), sentence beginning 'Out of 10,000 resampled data, P(CJ|SN,[Fe/H]>0) is larger than P(CJ,[Fe/H]>0) for 9,995 times, corresponding to a positive sub-Neptune-cold Jupiter correlation in metal-rich systems with a confidence level of 99.95%'",
+      "quantity_label": "confidence level of sub-Neptune–cold Jupiter positive correlation in metal-rich systems",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "sample701.tex",
+    "original_text": "    f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+    "injected_text": "    f (P;a,b) = \\frac{1}{B(a,b)} P^{a} (1-P)^{b-1},",
+    "rationale": "Shifting the exponent of P from (a-1) to a changes the Beta distribution PDF by an index shift of 1 in the lower bound sense (the standard Beta PDF is P^{a-1}(1-P)^{b-1}/B(a,b); replacing a-1 with a is equivalent to using a+1 in place of a throughout, altering the posterior's mode and credible intervals), producing an incorrect posterior that a Wolfram FullSimplify check on the normalization integral from 0 to 1 would find inconclusive given the parametric form.",
+    "ground_truth_description": "In the Beta distribution PDF used to model the posterior of cold Jupiter conditional frequency, the exponent of P was changed from (a-1) to a, shifting the effective shape parameter by 1 and making the distribution no longer the standard Beta(a,b) density.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3.1 (second displayed equation, Beta distribution PDF)",
+      "original_fragment_latex": "P^{a-1} (1-P)^{b-1}",
+      "injected_fragment_latex": "P^{a} (1-P)^{b-1}",
+      "full_equation_latex_before": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+      "full_equation_latex_after": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a} (1-P)^{b-1},",
+      "term_role": "sum lower bound",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "sample701.tex",
+    "original_text": "Plenty of studies have investigated the the dependence of the radius valley on planetary and stellar properties",
+    "injected_text": "Plenty of studies have investigated the dependence of the radius valley on planetary and stellar properties",
+    "rationale": "Removes the existing accidental word repetition 'the the' — wait, the instructions say do not repair existing defects; instead I must inject a NEW defect at a different location.",
+    "ground_truth_description": "Accidental word repetition introduced in the Introduction section.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D2",
+      "change_kind": "word_repetition",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 1 (Introduction)",
+      "affected_span_verbatim": "Plenty of studies have investigated the the dependence of the radius valley on planetary and stellar properties"
+    },
+    "proposer_agent": "injector.general.S1.t1.v3"
+  }
+]

@@ -1,0 +1,440 @@
+{
+  "paper_id": "2607.13613",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-6a0b801aedaf",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper calls total centroid movement a 'training entropy proxy' repeatedly but provides no mathematical derivation or empirical validation linking it to any formal entropy measure. The paper only states 'Mt is the global centroid movement (entropy proxy) at epoch t' without justification.",
+        "evidence": {
+          "claim": "The paper's use of 'entropy proxy' for centroid movement is not mathematically or empirically justified, risking conceptual overstatement.",
+          "excerpt": "The paper repeatedly refers to total centroid movement as a “training entropy proxy,” but this claim is not mathematically or empirically justified. Centroid movement is a measure of optimization dynamics, not entropy in the usual information-theoretic sense."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper calls total centroid movement a 'training entropy proxy' repeatedly but provides no mathematical derivation or empirical validation linking it to any formal entropy measure. The paper only states 'Mt is the global centroid movement (entropy proxy) at epoch t' without justification.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper repeatedly makes the claim but does not justify it beyond naming: the abstract says centroid movement 'serves as a training entropy proxy,' and Sec. 2.4 defines 'Mt is the global centroid movement (entropy proxy) at epoch t.' There is no mathematical derivation or empirical validation in the paper linking this quantity to entropy.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces the term by stating it \"treats global centroid movement per epoch as an entropy proxy\" in the abstract and section 2.4, but provides no mathematical derivation or empirical analysis to justify this connection.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-b3d0887893aa",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper does not specify values of τ, P, ε0, or the split perturbation ε used in experiments, nor does it explain how initial assignments are computed, how B_r is initialized before the first split, or how empty clusters are handled. Algorithm 1 and Section 2 leave these details unspecified.",
+        "evidence": {
+          "claim": "Key algorithmic and implementation details are missing or ambiguous, impacting reproducibility of the method.",
+          "excerpt": "Several implementation details are not sufficiently specified, which affects reproducibility.\n\nImportant missing details include:\n\n- How are initial assignments computed after centroid initialization?\n- How is the baseline movement \\(B_r\\) initialized before the first split?\n- In stage-relative mode, how exactly is \\(B_r\\) measured “immediately after the latest split”? Is it the first epoch movement after a split, the movement at the split epoch, or an average over several epochs?\n- What value of \\(\\epsilon_0\\) is used?\n- What values of \\(\\tau\\), \\(P\\), and split perturbation \\(\\epsilon\\) are used in experiments?\n- Are the same thresholds used across all datasets?\n- Does the algorithm recompute assignments immediately after splitting?\n- How are empty clusters handled?\n- How is the largest-variance feature selected for the split perturbation?\n- Are data standardized or normalized before clustering?"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not specify values of τ, P, ε0, or the split perturbation ε used in experiments, nor does it explain how initial assignments are computed, how B_r is initialized before the first split, or how empty clusters are handled. Algorithm 1 and Section 2 leave these details unspecified.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Several key details are left unspecified. For example, Algorithm 1 only says 'Initialize cluster assignments and baseline movement B,' and Sec. 2.4 says 'Br is the baseline movement measured immediately after the latest split stage r' and 'ε0 > 0 is a small constant for numerical stability,' but the paper never gives concrete initialization/procedures or the actual hyperparameter values used in experiments.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper outlines the method but omits specific hyperparameter values used in the experiments, leaving out details like the values for \"patience P\" and \"movement threshold \\tau_t\" from the text.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-28c7438035a7",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states 'FastCentNN is evaluated against the original CentNN under identical parameter settings' and includes no comparisons to other clustering baselines such as k-means or other competitive learning methods, limiting the practical value assessment.",
+        "evidence": {
+          "claim": "The experimental evaluation is too limited, lacking comparisons against other clustering baselines beyond CentNN, undermining practical value assessment.",
+          "excerpt": "The experimental section compares only CentNN and FastCentNN. Since FastCentNN is proposed as a clustering method, the evaluation should include additional baselines, at least for context."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'FastCentNN is evaluated against the original CentNN under identical parameter settings' and includes no comparisons to other clustering baselines such as k-means or other competitive learning methods, limiting the practical value assessment.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly frames FastCentNN as an acceleration of CentNN rather than a standalone new clustering family: 'FastCentNN is evaluated against the original CentNN under identical parameter settings' and 'Since the primary objective is to improve computational efficiency while preserving clustering quality...' Within that stated goal, comparison to CentNN is the directly relevant baseline.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation only compares FastCentNN to the original CentNN, as stated in the setup: \"FastCentNN is evaluated against the original CentNN under identical parameter settings\", lacking comparisons to any other clustering baselines.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-937760ad4826",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Tables 1 and 2 report single runtime numbers (e.g., '1.575 / 1.312') with no standard deviations, confidence intervals, or mention of repeated trials, so the statistical reliability of the reported speed-ups cannot be assessed.",
+        "evidence": {
+          "claim": "Reported runtime improvements are modest and are not statistically validated with repeated trials, standard deviations, or confidence intervals.",
+          "excerpt": "The reported speed-ups are approximately 4–17% on synthetic datasets and about 5% on MNIST/Fashion-MNIST. These are useful but relatively small. The paper reports only single runtime numbers, without standard deviations, confidence intervals, or repeated trials."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Tables 1 and 2 report single runtime numbers (e.g., '1.575 / 1.312') with no standard deviations, confidence intervals, or mention of repeated trials, so the statistical reliability of the reported speed-ups cannot be assessed.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Tables 1 and 2 report only single runtime values (e.g., 'MNIST ... 8.344 / 7.924' and 'Fashion-MNIST ... 8.220 / 7.775'), and the paper nowhere mentions repeated trials, standard deviations, or confidence intervals. Thus the reported speedups are not statistically characterized.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The results in Tables 1 and 2 present single point estimates for \"Runtime (s)\" and \"Epochs\" without reporting any standard deviations, confidence intervals, or repeated trials.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-574a2af8424c",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports only ΔMSE relative to CentNN and does not report external clustering metrics (e.g., NMI, ARI, accuracy) for the labeled MNIST and Fashion-MNIST datasets, which would better capture clustering quality on datasets with ground-truth labels.",
+        "evidence": {
+          "claim": "Clustering quality is assessed only via MSE, which is insufficient for labeled data; additional external clustering metrics should be reported.",
+          "excerpt": "The paper primarily reports MSE difference relative to CentNN. While MSE is relevant for prototype-based clustering, it does not fully capture clustering quality, especially on labeled datasets such as MNIST and Fashion-MNIST."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports only ΔMSE relative to CentNN and does not report external clustering metrics (e.g., NMI, ARI, accuracy) for the labeled MNIST and Fashion-MNIST datasets, which would better capture clustering quality on datasets with ground-truth labels.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation states that 'the relative difference in mean squared error (MSE) is reported as: ΔMSE(%) = ...' and then Tables 1–2 report ΔMSE, runtime, and epochs only. No external clustering metrics are provided for labeled datasets such as MNIST or Fashion-MNIST.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper assesses clustering quality exclusively through the relative difference in mean squared error, defined in equation 10 as \"\\Delta MSE(%)\", without reporting external metrics for labeled image datasets.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-c94586435788",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper introduces τ and P as new hyperparameters but presents no sensitivity analysis for these parameters. The experiments show results for a single configuration without discussing how performance varies with different threshold or patience values.",
+        "evidence": {
+          "claim": "No parameter sensitivity study is presented for the new hyperparameters (movement threshold, patience), limiting understanding of the method's robustness.",
+          "excerpt": "FastCentNN introduces at least two important hyperparameters: movement threshold \\(\\tau\\) and patience \\(P\\). If stage-relative thresholding is used, its scaling also matters. The paper does not analyze how sensitive performance is to these parameters."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces τ and P as new hyperparameters but presents no sensitivity analysis for these parameters. The experiments show results for a single configuration without discussing how performance varies with different threshold or patience values.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The method introduces new controls—'A split is triggered when Mt remains below a threshold for a predefined patience window' with threshold 'τt' and patience 'P'—but Sec. 3 contains only performance tables and no sensitivity or robustness study over these hyperparameters.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces the \"movement threshold \\tau\" and \"patience P\" parameters in Section 2.4, but the experimental section contains no sensitivity analysis regarding how these affect clustering performance.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-f7733c56f3a9",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper describes both absolute (τt=τ) and stage-relative (τt=τBr) modes but the experimental sections (3.2 and 3.3) do not state which mode is used, and there is no empirical comparison between the two modes.",
+        "evidence": {
+          "claim": "The paper introduces absolute and stage-relative thresholding but does not clearly indicate which is used in experiments or compare them empirically.",
+          "excerpt": "The paper describes both absolute and stage-relative movement thresholds, but the experiments do not clearly state which mode is used. Nor is there a comparison between the two modes."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper describes both absolute (τt=τ) and stage-relative (τt=τBr) modes but the experimental sections (3.2 and 3.3) do not state which mode is used, and there is no empirical comparison between the two modes.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 2.4 states, 'The threshold can be configured in two modes. In the absolute mode, τt = τ, whereas in the stage-relative mode, τt = τBr,' but the experimental sections never say which mode was used, nor do they compare the two modes empirically.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text explains that the threshold \"can be configured in two modes\" (absolute and stage-relative), but Section 3 completely omits which mode was used in the reported experiments and does not compare them.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-3f911a22f88e",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Algorithm 1 shows 'split ← (patience ≥ P) ∨ (Ct = 0)' and then separately 'else if Ct = 0 then break', creating an interaction between movement-threshold convergence and assignment-change convergence that is not explained in the text, and no analysis of this interaction's effect on final quality is provided.",
+        "evidence": {
+          "claim": "The convergence and stopping logic in Algorithm 1, and its impact on final clustering quality, should be clarified and better analyzed.",
+          "excerpt": "This means that if assignments stop changing before reaching \\(K\\), the algorithm will split. But if \\(k_t = K\\) and assignments stop changing, it stops. This appears reasonable, but the interaction between assignment-change convergence and movement-threshold convergence should be explained more clearly."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Algorithm 1 shows 'split ← (patience ≥ P) ∨ (Ct = 0)' and then separately 'else if Ct = 0 then break', creating an interaction between movement-threshold convergence and assignment-change convergence that is not explained in the text, and no analysis of this interaction's effect on final quality is provided.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The algorithmic logic itself is stated explicitly in Algorithm 1: 'split ← (patience ≥ P) ∨ (Ct = 0)' followed by 'if kt < K and split then ... else if Ct = 0 then break.' However, beyond the small 'ΔMSE' tables, the paper does not separately analyze how this stopping/splitting interaction affects final clustering quality.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While Algorithm 1 includes logic for \"C_t = 0\" alongside the patience counter, the text in Section 2.4 only discusses triggering a split when \"M_t remains below a threshold for a predefined patience window\", lacking discussion of the interaction.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-85a7f9b6573a",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states only 'the asymptotic computational complexity remains unchanged' without providing any formal complexity expression or explicit per-epoch cost comparison between CentNN and FastCentNN.",
+        "evidence": {
+          "claim": "Computational complexity analysis is too brief and lacks explicit formal comparison; a formal runtime expression is needed.",
+          "excerpt": "The paper states that the asymptotic complexity remains unchanged, but no detailed complexity analysis is provided. A more explicit comparison would be useful."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states only 'the asymptotic computational complexity remains unchanged' without providing any formal complexity expression or explicit per-epoch cost comparison between CentNN and FastCentNN.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives only a brief qualitative statement—'Although the asymptotic computational complexity remains unchanged, FastCentNN improves practical efficiency by reducing unnecessary low-information epochs between split operations.' It does not provide an explicit formal runtime or complexity comparison.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper briefly claims in the introduction that \"the asymptotic computational complexity remains unchanged\", but it does not provide any formal complexity derivations or runtime expressions.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      },
+      {
+        "flag_id": "fp-c0a789a98dac",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section 3.3 only states that MNIST and Fashion-MNIST use '10,000 instances and 10 target clusters' without specifying preprocessing steps (flattening, normalization, PCA), how the 10,000 samples were selected, or whether the same subset is used for both algorithms.",
+        "evidence": {
+          "claim": "The experimental setup for MNIST/Fashion-MNIST lacks essential details including preprocessing, sampling, and replication procedures.",
+          "excerpt": "The paper states that MNIST and Fashion-MNIST use 10,000 instances and 10 clusters, but does not specify:\n\n- whether images are flattened to 784-dimensional vectors,\n- whether pixel values are normalized,\n- whether PCA or other preprocessing is applied,\n- whether the 10,000 samples are randomly selected,\n- whether the same subset is used for both algorithms,\n- whether class labels are used only for evaluation,\n- how many runs are performed.\n\nThese details should be added."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.3 only states that MNIST and Fashion-MNIST use '10,000 instances and 10 target clusters' without specifying preprocessing steps (flattening, normalization, PCA), how the 10,000 samples were selected, or whether the same subset is used for both algorithms.",
+            "cost_usd": 0.00231708
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The MNIST/Fashion-MNIST setup is described only as 'FastCentNN was also evaluated on two high-dimensional image datasets, MNIST and Fashion-MNIST, each configured with 10 target clusters' and Table 2 lists 'Instances 10,000.' The paper does not specify preprocessing, sampling, or replication details.",
+            "cost_usd": 0.004575850000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experimental setup for the image datasets only notes they are \"configured with 10 target clusters\" and use 10,000 instances (Table 2), omitting crucial preprocessing and sampling details.",
+            "cost_usd": 0.0020194
+          }
+        ],
+        "cost_usd": 0.008912330000000001
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.08912330000000002
+  },
+  "extractor_cost_usd": 0.01921399999999998,
+  "total_cost_usd": 0.1083373
+}

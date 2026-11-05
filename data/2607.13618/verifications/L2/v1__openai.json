@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13618",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags the InvAgent claim as WEAKLY_SUPPORTED and notes the baseline details 'are not independently verifiable,' but does not challenge the specific method-category swap from heuristic/RL to supervised/imitation-learning baselines as contradicted by the cited source. Under the BROADENED-CLAIM rule, the reviewer needed to mark it CONTRADICTED or 'mischaracterises' the cited source; instead it was marked WEAKLY_SUPPORTED with no challenge to the post-edit claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review mentions the InvAgent claim and notes it is only weakly supported because exact baseline and horizon details are not independently verifiable, but it does not specifically challenge the post-edit claim as contradicted or mischaracterizing the cited source. Under the broadened-claim rule, this is not a specific enough source-claim contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer marked the claim as 'WEAKLY_SUPPORTED' but stated they could not independently verify the details, rather than flagging the claim as a mischaracterization or contradiction of the source.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The listed stress-profile seed counts should sum to the claimed fifty fixed seeds. ... The printed group counts sum to 59, not 50. This is a clear numerical inconsistency and affects stress-profile denominators. ... Sec. 3.3 says the benchmark fixes fifty seeds but lists ISOLATED = 12, PERSISTENT = 24, and COMPOUND = 23, which sums to 59",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The listed stress-profile seed counts should sum to the claimed fifty fixed seeds. ... The printed group counts sum to 59, not 50. This is a clear numerical inconsistency and affects stress-profile denominators. ... Sec. 3.3 says the benchmark fixes fifty seeds but lists ISOLATED = 12, PERSISTENT = 24, and COMPOUND = 23, which sums to 59",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the PERSISTENT seed count of 24 and notes 12+24+23=59≠50, directly matching the injected error of changing 15 to 24.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The stress-profile seed counts are internally inconsistent. Sec. 3.3 says the benchmark fixes fifty seeds but lists ISOLATED = 12, PERSISTENT = 24, and COMPOUND = 23, which sums to 59; Sec. 4 / Sec. 5 instead imply 49 scoreable seeds split as 11/15/23 after excluding one seed.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the persistent count as 24 and states the counts sum to 59 rather than the claimed 50, which directly matches the injected numerical perturbation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 3.3 says the benchmark fixes fifty seeds but lists ISOLATED = 12, PERSISTENT = 24, and COMPOUND = 23, which sums to 59",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the specific injected value (24) and flagged the resulting summation inconsistency with the stated total of 50.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The displayed equation prints `skill = Cbase − Cagent`, which is an unnormalized cost difference. The surrounding prose and worked example require `skill = (Cbase − Cagent)/(Cbase − Corc)`. The first incorrect step is the omission of the denominator `Cbase − Corc`; without it, the metric cannot have the stated anchors 0 and 1.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The displayed equation prints `skill = Cbase − Cagent`, which is an unnormalized cost difference. The surrounding prose and worked example require `skill = (Cbase − Cagent)/(Cbase − Corc)`. The first incorrect step is the omission of the denominator `Cbase − Corc`; without it, the metric cannot have the stated anchors 0 and 1.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the missing normalisation denominator in Eq. (1), directly matching the injected removal of the denominator from the skill score formula.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The skill-score definition is mathematically inconsistent with the prose and worked example: Eq. (1) in Sec. 4 prints `skill = Cbase − Cagent`, but the text, scale interpretation, and example require division by `Cbase − Corc`.\n\nThe displayed skill-score equation is missing its denominator\n\nThe displayed equation prints `skill = Cbase − Cagent`, which is an unnormalized cost difference. The surrounding prose and worked example require `skill = (Cbase − Cagent)/(Cbase − Corc)`. The first incorrect step is the omission of the denominator `Cbase − Corc`",
+          "confidence": "high",
+          "reasoning": "The review explicitly states that Eq. (1) is missing the denominator and gives the corrected formula, directly matching the removed normalization denominator injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (1) in Sec. 4 prints skill = Cbase − Cagent, but the text, scale interpretation, and example require division by Cbase − Corc. This directly affects the central metric used throughout Sec. 5.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified that the denominator was missing from the skill score equation and quoted the incorrect post-edit formula.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t2",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer's minor issue 1 about the oracle not buying briefings/audits touches on these tools but does not flag the inconsistency between Methods describing them as 'noisy readings' versus Discussion stating they return near-deterministic ground truth. No reviewer comment addresses this specific methods-results contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer discusses asymmetry in the oracle and LLM action space around briefings/audits, but does not flag any contradiction about whether those tools reveal true state versus emit noisy readings, nor any Methods–Discussion inconsistency on this point.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discussed the audit and briefing tools in the context of action space symmetry but did not mention the noise levels or the inconsistency between the Methods and Discussion sections.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's minor issue 1 in the oracle action space section notes that the oracle never buys briefings/audits, and minor issue 2 in Sec 3.1 notes the agent 'may take any of five within-week actions,' but nowhere does the reviewer flag a contradiction between Methods describing audit/briefing as 'noisy' versus Discussion describing them as 'near-deterministic ground truth.' The reviewer did not identify this internal inconsistency.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 34.32963,
+  "total_cost_usd": null,
+  "total_input_tokens": 28744,
+  "total_output_tokens": 3380,
+  "escalation_count": 1,
+  "notes": null
+}

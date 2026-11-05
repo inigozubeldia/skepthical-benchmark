@@ -1,0 +1,223 @@
+{
+  "paper_id": "2604.20914",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-4d1d75a1d241",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: sum of 6 parts = 525.27; reported total = 212; worst-case additive half-ULP tolerance = 1.655",
+        "evidence": {
+          "check_type": "sum_eq_total",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 525.27,
+            "reported": 212.0,
+            "diff_abs": 313.27,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 1.655,
+              "rel_tol": null
+            },
+            "notes": "sum of 6 parts = 525.27; reported total = 212; worst-case additive half-ULP tolerance = 1.655"
+          },
+          "rereader": [
+            {
+              "label": "part_1",
+              "raw_observed": "202",
+              "value_observed": 202.0,
+              "notes": "Aℓmn for (2, 2, 0) in Table C.1"
+            },
+            {
+              "label": "part_2",
+              "raw_observed": "168",
+              "value_observed": 168.0,
+              "notes": "Aℓmn for (2, 2, 1) in Table C.1"
+            },
+            {
+              "label": "part_3",
+              "raw_observed": "6.8",
+              "value_observed": 6.8,
+              "notes": "Aℓmn for (3, 3, 0) in Table C.1"
+            },
+            {
+              "label": "part_4",
+              "raw_observed": "19",
+              "value_observed": 19.0,
+              "notes": "Aℓmn for (3, 3, 1) in Table C.1"
+            },
+            {
+              "label": "part_5",
+              "raw_observed": "7.9",
+              "value_observed": 7.9,
+              "notes": "Aℓmn for (4, 4, 0) in Table C.1"
+            },
+            {
+              "label": "part_6",
+              "raw_observed": "1.2",
+              "value_observed": 1.2,
+              "notes": "Aℓmn for (5, 5, 0) in Table C.1"
+            },
+            {
+              "label": "total",
+              "raw_observed": "212",
+              "value_observed": 212.0,
+              "notes": "SNR for 'All 6 modes' in Table C.1"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.13024399999999992
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-c8e6a0a93adf",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper says only that it uses Gaussian-noise likelihoods whose covariance 'is determined by the noise’s auto-correlation function, or equivalently, the power spectral density' and that 'We record the data ... in the A and E channels of TianQin,' but it never states whether the mock data are zero-noise or include a stochastic noise realization, nor does it specify the actual TianQin PSD/noise model used for the reported results. While it notes generically that 'For correlated channels such as XYZ channels ... [one uses] the full covariance matrix,' the concrete noise treatment for the showcased injection/posteriors is not fully specified.",
+        "evidence": {
+          "claim": "The paper does not specify whether the injection contains a stochastic noise realisation or is zero-noise, which PSD/noise model is assumed, or how channel correlations are handled, and this is essential because reported SNRs and posterior widths depend on these choices.",
+          "excerpt": "The injection / inference noise specification is incomplete... This is load-bearing because reported SNRs and posterior widths depend directly on these choices."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The Supplementary Material (Section C) specifies the sampling rate, duration, and channels (TianQin A and E), and Section B notes the noise covariance matrix and its relation to the PSD, but the paper does not explicitly state whether a stochastic noise realization or zero-noise injection is used, nor does it specify the exact PSD/noise model employed. The paper says 'We record the data from t=10Mf after the merger, in the A and E channels of TianQin, with a sampling rate of 1 Hz and a duration of 5000 s' but does not fully resolve the noise-realization question the reviewer raises.",
+            "cost_usd": 0.007119
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says only that it uses Gaussian-noise likelihoods whose covariance 'is determined by the noise’s auto-correlation function, or equivalently, the power spectral density' and that 'We record the data ... in the A and E channels of TianQin,' but it never states whether the mock data are zero-noise or include a stochastic noise realization, nor does it specify the actual TianQin PSD/noise model used for the reported results. While it notes generically that 'For correlated channels such as XYZ channels ... [one uses] the full covariance matrix,' the concrete noise treatment for the showcased injection/posteriors is not fully specified.",
+            "cost_usd": 0.018631166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper notes that data are recorded 'in the A and E channels of TianQin' (Appendix C) and mentions 'corresponding noise properties' (Appendix B), but never explicitly specifies the exact PSD used, whether the injection contains a specific stochastic noise realization versus zero-noise, or the explicit handling of channel correlations in the simulated data.",
+            "cost_usd": 0.0026492666666666667
+          }
+        ],
+        "cost_usd": 0.028399433333333335
+      },
+      {
+        "flag_id": "fp-02e17a818e9c",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper presents results for only a single fiducial MBHB source and acknowledges 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations,' without providing quantitative evidence that the ~200× speedup holds for other source geometries or mode contents. The paper does not demonstrate robustness of the speedup across different configurations, only asserting generalizability.",
+        "evidence": {
+          "claim": "The claimed ~200× speedup for FIREFLY is demonstrated for only a single fiducial source; no evidence is given that similar speedup holds for other source geometries, times, or mode contents.",
+          "excerpt": "Robustness of the 200× speedup beyond the single fiducial source is asserted but not shown... readers cannot tell whether the cost scaling in Fig. 2 is generic or geometry-dependent."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents results for only a single fiducial MBHB source and acknowledges 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations,' without providing quantitative evidence that the ~200× speedup holds for other source geometries or mode contents. The paper does not demonstrate robustness of the speedup across different configurations, only asserting generalizability.",
+            "cost_usd": 0.007119
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The reviewer is partly wrong because the paper does vary mode content: 'Figure 2 further shows the time scaling of the two methods with the number of QNMs included.' But for other start times/geometries it only asserts, rather than demonstrates, that 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations' and that 'changing the injected geometric parameters does not affect the speedup substantially.'",
+            "cost_usd": 0.018631166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the paper demonstrates the speedup scaling with the number of modes (Figure 2), it tests only a single fiducial source geometry and time, stating 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations' without providing a quantitative demonstration across other source geometries.",
+            "cost_usd": 0.0026492666666666667
+          }
+        ],
+        "cost_usd": 0.028399433333333335
+      },
+      {
+        "flag_id": "fp-a9339254ec97",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper discusses the importance-sampling procedure and shows posterior comparisons via Wasserstein distances, but does not report diagnostics such as effective sample size, weight histograms, or max-weight ratios to validate the reweighting quality, particularly for low-SNR modes like (5,5,0). The paper states 'We evaluate the MC integration of the first importance-sampling step with nw=50000 draws' but provides no quality diagnostics for the reweighting.",
+        "evidence": {
+          "claim": "FIREFLY's importance-sampling procedure could silently fail in weak-mode regimes, as no diagnostic (effective sample size, weight histogram, max-weight ratio) is reported to validate the reweighting for low-SNR modes.",
+          "excerpt": "The B-prior reweighting could fail silently in regimes the demonstration does not exercise... no diagnostic (e.g., effective sample size, weight histograms, max-weight ratio) is reported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper discusses the importance-sampling procedure and shows posterior comparisons via Wasserstein distances, but does not report diagnostics such as effective sample size, weight histograms, or max-weight ratios to validate the reweighting quality, particularly for low-SNR modes like (5,5,0). The paper states 'We evaluate the MC integration of the first importance-sampling step with nw=50000 draws' but provides no quality diagnostics for the reweighting.",
+            "cost_usd": 0.007119
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper does provide a quantitative validation in a weak-mode regime: Table C.1 lists the '(5, 5, 0)' mode with 'SNR 3.07,' Fig. 1 enlarges its posterior, and the text states that 'for the subdominant, low-SNR modes like (5, 5, 0), the amplitude from the auxiliary inference is visibly overestimated, while FIREFLY keeps fidelity.' It also reports that 'the distances between the two methods are at the same level as the internal fluctuations within each method and are less than 5% of the standard deviation,' so the claim that there is no diagnostic validating reweighting is factually too strong, even though ESS/weight histograms are not shown.",
+            "cost_usd": 0.018631166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors detail the importance sampling weighting procedure in Appendix B (e.g., 'calculates the weight $w_{k|j}$'), but do not report specific importance sampling diagnostics such as effective sample size or weight histograms to validate the efficiency of the sampling.",
+            "cost_usd": 0.0026492666666666667
+          }
+        ],
+        "cost_usd": 0.028399433333333335
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.13024399999999992,
+    "general": 0.0851983
+  },
+  "extractor_cost_usd": 0.023163999999999962,
+  "total_cost_usd": 0.23860629999999988
+}

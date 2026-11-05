@@ -1,0 +1,104 @@
+{
+  "paper_id": "2604.20080",
+  "reviewer_system": "L2",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-ee1a52490e7d",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper applies a global correction directly: \"Accounting for the estimated flux recovery factors (f1−0 ≈ 0.42, f2−1 ≈ 0.5), the corrected CO line ratio becomes Rcorr21 ≈ 0.29,\" while Table 3 shows the comparison uses different single-dish beams (\"21.5 (beam)\" for CO(1–0) and \"10.7 (beam)\" for CO(2–1)). Nowhere do the authors justify that the filtered-out gas has the same excitation as the detected gas, so the reviewer’s concern is not resolved.",
+        "evidence": {
+          "claim": "The calculation of the corrected CO(2-1)/CO(1-0) line ratio ($R_{21}^{corr}$) using global single-dish recovery fractions from mismatched beam sizes assumes spatially uniform excitation, which may yield a physically unrepresentative local correction.",
+          "excerpt": "Calculating a corrected interferometric ratio based on scaling by disparate single-dish recovery factors implicitly assumes that the unseen, filtered-out gas possesses a spatially uniform excitation temperature and density. If the extended molecular gas has different excitation properties than the dense clumps, this global correction is physically unrepresentative of the local gas properties."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper acknowledges in Sect. 3.5 that 'Accounting for the estimated flux recovery factors (f1−0 ≈ 0.42, f2−1 ≈ 0.5), the corrected CO line ratio becomes R21corr ≈ 0.29' but does not address whether the filtered-out extended gas has the same excitation as the detected clumps. The paper does note that 'ALMA recovers about half of the single-dish flux, suggesting the presence of extended, low-surface-brightness molecular gas,' implying different spatial components may have different properties, but no quantitative assessment of the excitation bias in the correction is provided. This is a real methodological limitation that is acknowledged but not resolved.",
+            "cost_usd": 0.011500199999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper applies a global correction directly: \"Accounting for the estimated flux recovery factors (f1−0 ≈ 0.42, f2−1 ≈ 0.5), the corrected CO line ratio becomes Rcorr21 ≈ 0.29,\" while Table 3 shows the comparison uses different single-dish beams (\"21.5 (beam)\" for CO(1–0) and \"10.7 (beam)\" for CO(2–1)). Nowhere do the authors justify that the filtered-out gas has the same excitation as the detected gas, so the reviewer’s concern is not resolved.",
+            "cost_usd": 0.021483250000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper calculates a \"corrected CO line ratio\" of R_{21}^{corr} \\approx 0.29 by applying global single-dish flux recovery factors directly to the ALMA observations, but it does not account for the fact that the spatially filtered-out gas may have different excitation properties than the dense clumps.",
+            "cost_usd": 0.0030489000000000002
+          }
+        ],
+        "cost_usd": 0.036032350000000005
+      },
+      {
+        "flag_id": "fp-ce2b8a58948b",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper derives a 3σ upper limit for CO(1-0) at the SSC position of '45 mJy km s−1' and converts it to 'an upper limit in molecular mass of 4.1×10^6 M⊙' using the globally adopted metallicity-dependent αCO. While the paper extensively discusses that the SSC environment has extreme UV radiation fields and high excitation (Sect. 4.3, 4.4), it never addresses that αCO in this extreme environment would deviate from the galaxy-wide value, making the upper limit mass estimate unreliable in exactly the way the reviewer describes.",
+        "evidence": {
+          "claim": "Deriving a CO-based mass upper limit at the SSC using a global metallicity-scaled alpha_CO is unreliable, as the immediate SSC environment has much higher radiation fields and temperatures, causing alpha_CO to deviate substantially from galaxy-wide averages.",
+          "excerpt": "This calculation implicitly applies the globally adopted metallicity-scaled $\\alpha_{CO}$. However, the text extensively establishes that the immediate vicinity of the SSC is flooded with an extreme UV radiation field and exhibits much higher localized excitation and electron temperatures (Figure 9). In such an intense, unshielded environment, $\\alpha_{CO}$ is expected to deviate wildly from galaxy-wide averages, making the $H_2$ upper mass limit highly precarious."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper derives a 3σ upper limit for CO(1-0) at the SSC position of '45 mJy km s−1' and converts it to 'an upper limit in molecular mass of 4.1×10^6 M⊙' using the globally adopted metallicity-dependent αCO. While the paper extensively discusses that the SSC environment has extreme UV radiation fields and high excitation (Sect. 4.3, 4.4), it never addresses that αCO in this extreme environment would deviate from the galaxy-wide value, making the upper limit mass estimate unreliable in exactly the way the reviewer describes.",
+            "cost_usd": 0.011500199999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The SSC upper limit is converted with the paper’s global metallicity-based factor (\"We adopted the metallicity-dependent conversion factor... αCO ≈ 69... for 12 + log(O/H) = 7.94\") and then used locally: \"For a central aperture of 0′′.8... This corresponds to an upper limit in molecular mass of 4.1 × 106 M⊙.\" Yet the same section states the SSC vicinity \"could be CO-dark, likely due to efficient photodissociation,\" so the paper does not resolve whether using the global αCO is valid in that extreme local environment.",
+            "cost_usd": 0.021483250000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses a global metallicity-scaled alpha_CO to derive a strict \"upper limit in molecular mass of 4.1\\times 10^6 M_\\odot\" at the SSC, without quantitatively accounting for the extreme local UV radiation fields that would cause the local alpha_CO to deviate significantly.",
+            "cost_usd": 0.0030489000000000002
+          }
+        ],
+        "cost_usd": 0.036032350000000005
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.07206470000000001
+  },
+  "extractor_cost_usd": 0.012235999999999997,
+  "total_cost_usd": 0.0843007
+}

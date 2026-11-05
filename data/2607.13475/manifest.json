@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.13475",
+  "arxiv_url": "https://arxiv.org/abs/2607.13475",
+  "rotation_seed": 20260726,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S3",
+      "type": 1
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "paper.tex",
+          "original_text": "Bayesian nonparametric cloth models for real-time state estimation [8]",
+          "injected_text": "Bayesian cloth models for real-time state estimation [8]",
+          "rationale": "Dropping the specific 'nonparametric' qualifier creates a subtle methodological drift, making the citing claim slightly too general and only partially consistent with the cited paper's explicit methodology.",
+          "ground_truth_description": "The specific methodological qualifier 'nonparametric' is removed from the description of the cited Bayesian cloth models.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "8",
+            "injected_cite_key": "8",
+            "claim_sentence_verbatim": "More generally, deformable state estimation and cloth modeling have been studied using approaches such as point registration with dynamic simulation [7] and Bayesian nonparametric cloth models for real-time state estimation [8].",
+            "section_location": "INTRODUCTION",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "paper.tex",
+          "original_text": "On the remaining 89 improvable episodes, the oracle succeeds in 100\\% of cases (89/89).",
+          "injected_text": "On the remaining 89 improvable episodes, the oracle succeeds in 85\\% of cases (89/89).",
+          "rationale": "Modifying the success percentage from 100% to 85% while leaving the raw fraction (89/89) intact breaks the percent_of arithmetic relationship by 15%, triggering a major severity failure.",
+          "ground_truth_description": "Altered the stated percentage of oracle success from 100% to 85% without changing the accompanying fraction (89/89), creating an arithmetic inconsistency.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_of",
+            "value_before_raw": "100",
+            "value_after_raw": "85",
+            "value_before_float": 100.0,
+            "value_after_float": 85.0,
+            "location_cue": "On the remaining 89 improvable episodes, the oracle succeeds in 85\\% of cases (89/89).",
+            "paired_location": null,
+            "quantity_label": "success percentage",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t2.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "paper.tex",
+          "original_text": "\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2",
+          "injected_text": "\\|\\hat{X}_{i,j} - X_{i,k}\\|_2^2",
+          "rationale": "Introduces an unbound free index 'k' in the reconstruction loss summand, causing a shape/index mismatch that breaks the summation.",
+          "ground_truth_description": "Changed the ground truth mesh indices from X_{i,j} to X_{i,k}, leaving k as an unbound index in a sum over i and j.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. II.B second display",
+            "original_fragment_latex": "\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2",
+            "injected_fragment_latex": "\\|\\hat{X}_{i,j} - X_{i,k}\\|_2^2",
+            "full_equation_latex_before": "\\mathcal{L}_{\\text{recon}} \n= \\frac{1}{HW} \\sum_{i,j} \n\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2.",
+            "full_equation_latex_after": "\\mathcal{L}_{\\text{recon}} \n= \\frac{1}{HW} \\sum_{i,j} \n\\|\\hat{X}_{i,j} - X_{i,k}\\|_2^2.",
+            "term_role": "injected shape/index mismatch",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t1.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "paper.tex",
+          "original_text": "Regularization weights are fixed to $\\lambda_s = \\lambda_e = 0.1$ throughout.",
+          "injected_text": "Regularization weights are fixed to $\\lambda_s = \\lambda_e = 0.1$ throughout (we observed substantial degradation in reconstruction accuracy at higher weights).",
+          "rationale": "Inserts an unsupported parenthetical claim about an ablation finding (degradation at higher weights) that is never presented in the Results section.",
+          "ground_truth_description": "Added a phantom methodological justification claiming performance degradation at higher regularization weights, which is not supported by any evidence in the paper.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 2.2",
+            "affected_span_verbatim": "Regularization weights are fixed to $\\lambda_s = \\lambda_e = 0.1$ throughout."
+          },
+          "proposer_agent": "injector.general.S2.t3.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "paper.tex",
+          "original_text": "diffusion-based generative state estimation for cloth manipulation [9]",
+          "injected_text": "diffusion-based generative state estimation for generic deformable materials [9]",
+          "rationale": "The edit replaces the specific condition 'for cloth manipulation' with 'for generic deformable materials', over-generalizing the cited paper's claim beyond its actual scope.",
+          "ground_truth_description": "Over-generalized the scope of citation [9] from 'cloth manipulation' to 'generic deformable materials'.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "9",
+            "injected_cite_key": "9",
+            "claim_sentence_verbatim": "Recent advances in learned dynamics and representation learning for deformable objects include diffusion-based generative state estimation for cloth manipulation [9].",
+            "section_location": "INTRODUCTION",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "paper.tex",
+          "original_text": "corresponding to $98.1\\%$ oracle recovery",
+          "injected_text": "corresponding to $9.81\\%$ oracle recovery",
+          "rationale": "Shifting the decimal point reduces the recovery metric in the multi-step results section by a factor of 10, creating a blatant contradiction with the correctly stated 98.1% figure in the Abstract.",
+          "ground_truth_description": "Changed the multi-step oracle recovery percentage in Section III.B from 98.1% to 9.81%, introducing an order-of-magnitude mismatch with the Abstract.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "98.1",
+            "value_after_raw": "9.81",
+            "value_before_float": 98.1,
+            "value_after_float": 9.81,
+            "location_cue": "with the same success rate, corresponding to $98.1\\%$ oracle recovery",
+            "paired_location": "Abstract",
+            "quantity_label": "oracle recovery percentage",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t2.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "paper.tex",
+          "original_text": "= \\frac{1}{HW} \\sum_{i,j}",
+          "injected_text": "= \\sum_{i,j}",
+          "rationale": "Dropping the 1/(HW) prefactor from the reconstruction loss equation breaks its definition as a 'mean squared error' (converting it to a sum of squared errors), which Wolfram can refute by comparing the mathematical definition of MSE to the formula provided.",
+          "ground_truth_description": "Dropped the 1/(HW) normalisation prefactor from the mean squared error reconstruction loss equation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2.2 second display",
+            "original_fragment_latex": "\\frac{1}{HW}",
+            "injected_fragment_latex": "",
+            "full_equation_latex_before": "\\mathcal{L}_{\\text{recon}} \n= \\frac{1}{HW} \\sum_{i,j} \n\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2.",
+            "full_equation_latex_after": "\\mathcal{L}_{\\text{recon}} \n= \\sum_{i,j} \n\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2.",
+            "term_role": "normalisation prefactor",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t3.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "paper.tex",
+          "original_text": "The overall system pipeline is illustrated in Fig.~\\ref{fig:workflow}.",
+          "injected_text": "The overall system pipeline is illustrated in Fig.~\\ref{fig:worklfow}.",
+          "rationale": "Misspelling the figure label inside a \\ref command breaks the cross-reference, resulting in an unrendered '??' artefact in the PDF.",
+          "ground_truth_description": "Introduced a typo in a figure cross-reference key, causing it to render as '??' in the text.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "latex_artefact",
+            "expected_bucket": "very_minor",
+            "section_location": "I. INTRODUCTION",
+            "affected_span_verbatim": "The overall system pipeline is illustrated in Fig.~\\ref{fig:workflow}."
+          },
+          "proposer_agent": "injector.general.S1.t2.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "paper.tex",
+          "original_text": "Surgical perception work has also explored reconstructing dense soft-tissue surfaces from stereo laparoscopy [6].",
+          "injected_text": "Surgical perception work has also explored the automated tracking of rigid laparoscopic instruments [6].",
+          "rationale": "The claim is changed to describe rigid instrument tracking instead of soft-tissue surface reconstruction, attributing a completely different surgical sub-topic to the cited paper.",
+          "ground_truth_description": "Replaced the claim about dense soft-tissue surface reconstruction with one about automated tracking of rigid laparoscopic instruments, a topic not discussed in the cited paper.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "6",
+            "injected_cite_key": "6",
+            "claim_sentence_verbatim": "Surgical perception work has also explored reconstructing dense soft-tissue surfaces from stereo laparoscopy [6].",
+            "section_location": "INTRODUCTION",
+            "mutation_kind": "claim_topic_mis_attribution",
+            "detection_target_verdict": "UNRELATED"
+          },
+          "proposer_agent": "injector.citations.S3.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "paper.tex",
+          "original_text": "Results show that the learned estimator achieves 98.1\\% of oracle performance in multi-step retraction while supporting efficient inference.",
+          "injected_text": "Results show that the learned estimator achieves 98.2\\% of oracle performance in multi-step retraction while supporting efficient inference.",
+          "rationale": "Perturbs the abstract's stated oracle recovery percentage from 98.1% to 98.2% while leaving the Section III.B body text at 98.1%, creating an abstract_vs_body_match failure.",
+          "ground_truth_description": "Changes the oracle recovery percentage in the abstract to 98.2%, contradicting the 98.1% claimed in the multi-step results section.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "98.1",
+            "value_after_raw": "98.2",
+            "value_before_float": 98.1,
+            "value_after_float": 98.2,
+            "location_cue": "Results show that the learned estimator achieves 98.1\\% of oracle performance in multi-step retraction while supporting efficient inference.",
+            "paired_location": "Section III.B Multi-Step Results",
+            "quantity_label": "oracle recovery percentage",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "paper.tex",
+          "original_text": "+ \\lambda_s \\mathcal{L}_{\\text{smooth}}",
+          "injected_text": "- \\lambda_s \\mathcal{L}_{\\text{smooth}}",
+          "rationale": "Flipping the sign on a regularization term in a canonical composite loss function is a subtle but recognizable error that contradicts the domain-standard practice of penalizing (adding) regularization.",
+          "ground_truth_description": "Flipped the sign of the smoothness regularization term in the composite loss function from positive to negative.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. II.B, first equation",
+            "original_fragment_latex": "+ \\lambda_s \\mathcal{L}_{\\text{smooth}}",
+            "injected_fragment_latex": "- \\lambda_s \\mathcal{L}_{\\text{smooth}}",
+            "full_equation_latex_before": "\\mathcal{L} = \\mathcal{L}_{\\text{recon}} \n+ \\lambda_s \\mathcal{L}_{\\text{smooth}} \n+ \\lambda_e \\mathcal{L}_{\\text{stretch}}.",
+            "full_equation_latex_after": "\\mathcal{L} = \\mathcal{L}_{\\text{recon}} \n- \\lambda_s \\mathcal{L}_{\\text{smooth}} \n+ \\lambda_e \\mathcal{L}_{\\text{stretch}}.",
+            "term_role": "smoothness regularization term sign",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t1.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "paper.tex",
+          "original_text": "By combining a PCA-based latent representation with geometry-aware regularization, the estimator achieves multi-step performance statistically equivalent to a full-state oracle. These results suggest that planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints.",
+          "injected_text": "By combining a PCA-based latent representation with geometry-aware regularization, the estimator's multi-step performance remains significantly lower than that of a full-state oracle. These results suggest that while planning-sufficient learned representations offer efficient inference, they cannot yet replace expensive physical simulation for deformable manipulation under realistic perception constraints.",
+          "rationale": "The Conclusion is rewritten to claim the method performs significantly worse than the oracle and cannot replace physical simulation, structurally contradicting the Results section which explicitly reports a 98.1% oracle recovery.",
+          "ground_truth_description": "Rewrote the conclusion to state the method fails to match the oracle, contradicting the positive results reported in the abstract and body.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B4",
+            "change_kind": "internal_contradiction",
+            "expected_bucket": "major",
+            "section_location": "CONCLUSION",
+            "affected_span_verbatim": "By combining a PCA-based latent representation with geometry-aware regularization, the estimator achieves multi-step performance statistically equivalent to a full-state oracle. These results suggest that planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints."
+          },
+          "proposer_agent": "injector.general.S3.t1.v3"
+        }
+      ]
+    }
+  ]
+}

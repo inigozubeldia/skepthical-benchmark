@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14375",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Appendix A.1 says \"no assignment satisfies more than a 15/16 + ε fraction\" and then \"Set ε = 1/40. Then 7/8 + 1/40 = 9/10\". The 15/16 appears to be a typo (should be 7/8)... Appendix A.1 writes \"15/16+ε\" (which is the MAX-4SAT threshold, not MAX-E3SAT); this is a documentation error",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Appendix A.1 says \"no assignment satisfies more than a 15/16 + ε fraction\" and then \"Set ε = 1/40. Then 7/8 + 1/40 = 9/10\". The 15/16 appears to be a typo (should be 7/8)... Appendix A.1 writes \"15/16+ε\" (which is the MAX-4SAT threshold, not MAX-E3SAT); this is a documentation error",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 15/16 value in Appendix A.1 as incorrect (should be 7/8) and names the Håstad (2001) source, which is exactly the injected numerical mis-quote. This satisfies the VALUE-OR-NUMERIC rule for claim_qualifier_1to2_sigma.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Håstad's theorem (Sec. 3, Appendix A.1) is standardly stated for MAX-E3SAT as: for every ε > 0, it is NP-hard to distinguish (7/8+ε)-satisfiable from satisfiable, not (15/16+ε) as written in Appendix A.1. Appendix A.1 says \"no assignment satisfies more than a 15/16 + ε fraction\" ... The 15/16 appears to be a typo (should be 7/8)",
+          "confidence": "high",
+          "reasoning": "The review explicitly names Håstad 2001 / Appendix A.1 and challenges the incorrect threshold value 15/16 against the cited source, which satisfies the value-or-numeric detection rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Håstad's theorem (Sec. 3, Appendix A.1) is standardly stated for MAX-E3SAT as: for every ε > 0, it is NP-hard to distinguish (7/8+ε)-satisfiable from satisfiable, not (15/16+ε) as written in Appendix A.1. Appendix A.1 says \"no assignment satisfies more than a 15/16 + ε fraction\" and then \"Set ε = 1/40. Then 7/8 + 1/40 = 9/10\". The 15/16 appears to be a typo (should be 7/8)",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies that the inapproximability threshold in Appendix A.1 was incorrectly stated as 15/16 instead of 7/8, specifically naming Håstad and quoting the incorrect value.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's numerical audit does not flag any discrepancy between 50,000 (Section 6.1) and 5,000 (Appendix D.3) bootstrap products. The review only notes the 300 optima count and 44 cross-checks as consistent, with no mention of the bootstrap products contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention any inconsistency between 50,000 and 5,000 bootstrap products, nor any appendix/main-text contradiction about the number of bootstrap products.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer notes that the diagnostic results in Section 6.1 are 'consistent with the text' and finds 'nothing to fix', failing to notice the factor-of-10 discrepancy (5,000 vs 50,000) in bootstrap products between the main text and the appendix.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t1",
+      "module": "mathematics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer audits Eq. (5) / the network output equation area but does not flag the unbound index i in h_{C,i}(x) vs. the summation variable j. No mention of an index mismatch in the summand anywhere in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review's mathematical audit does not flag Eq. (5) or any unbound index/summation-variable mismatch involving h_{C,i} versus h_{C,j}.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer audits several equations (Eq. 7, 8, 13, 19, etc.) for mathematical correctness but does not mention Eq. (5) or its index mismatch (unbound index i inside a summation over j).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the injected parenthetical about a 'preliminary scan showed large discretization artifacts for smaller B' as unsupported or phantom evidence. The B=16 choice is mentioned in the context of Sec. 4.1's precision-guard gadget (B≥20) but the specific unsupported parenthetical in Sec. 6.1 is not challenged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "Although the reviewer comments that the empirical section is diagnostic rather than probative, they do not specifically flag the inserted unsupported parenthetical about a preliminary scan showing large discretization artifacts for B < 16.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions the precision-guard gadget requiring B >= 20 and confirms the numbers in Section 6.1 match the reproducibility archive, but they do not flag the unsupported parenthetical claim regarding preliminary scans or discretization artifacts for B < 16.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 34.516867,
+  "total_cost_usd": null,
+  "total_input_tokens": 35810,
+  "total_output_tokens": 4360,
+  "escalation_count": 0,
+  "notes": null
+}

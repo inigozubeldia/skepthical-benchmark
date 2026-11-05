@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[✖] _CONTRADICTED_ **SHAP values are based on information theory and provide a unified measure of feature importance for individual predictions, fairly distributing the prediction output among input features.** ... Lundberg & Lee (2017) ground SHAP in cooperative *game theory* (Shapley values), not information theory. ... SHAP is described in Sec. II.A as \"based on information theory\" — SHAP is based on cooperative game theory (Shapley values), not information theory.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[✖] _CONTRADICTED_ **SHAP values are based on information theory and provide a unified measure of feature importance for individual predictions, fairly distributing the prediction output among input features.** ... Lundberg & Lee (2017) ground SHAP in cooperative *game theory* (Shapley values), not information theory. ... SHAP is described in Sec. II.A as \"based on information theory\" — SHAP is based on cooperative game theory (Shapley values), not information theory.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the post-edit claim that SHAP is 'based on information theory' as CONTRADICTED, noting that Lundberg & Lee (2017) grounds SHAP in cooperative game theory, directly addressing this injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Several claims in the Related Work / Motivation are not supported by the cited works as characterised. E.g. SHAP is described in Sec. II.A as \"based on information theory\" — SHAP is based on cooperative game theory (Shapley values), not information theory.\n\n[✖] _CONTRADICTED_ **SHAP values are based on information theory and provide a unified measure of feature importance for individual predictions, fairly distributing the prediction output among input features.**\n- _Reference(s):_ [9]\n- _Justification:_ Lundberg & Lee (2017) ground SHAP in cooperative *game theory* (Shapley values), not information theory.",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit SHAP claim against the same cited source and explicitly says SHAP is based on game theory, not information theory. That satisfies the broadened-claim detection rule for methodology drift.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "SHAP is described in Sec. II.A as \"based on information theory\" — SHAP is based on cooperative game theory (Shapley values), not information theory.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the error in Sec. II.A where the foundation of SHAP was changed to information theory and provides the correct foundation (game theory).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[⚠] **\"The fidelity scores for LIME range from 0.4397 to 0.4673\" (Sec. V) versus Table I values 0.4406, 0.4397, 4.6730.** ... Table I shows max = \"4.6730\" (not 0.4673); _Computed:_ 0.4673 vs 4.6730 differ by a factor of 10.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[⚠] **\"The fidelity scores for LIME range from 0.4397 to 0.4673\" (Sec. V) versus Table I values 0.4406, 0.4397, 4.6730.** ... Table I shows max = \"4.6730\" (not 0.4673); _Computed:_ 0.4673 vs 4.6730 differ by a factor of 10.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the discrepancy between the prose value 0.4673 and the table value 4.6730, noting they differ by a factor of 10, which directly corresponds to the injected 10x magnitude error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[⚠] **\"The fidelity scores for LIME range from 0.4397 to 0.4673\" (Sec. V) versus Table I values 0.4406, 0.4397, 4.6730.**\n- _Location:_ Sec. V vs Table I.\n- _check_type:_ abstract_vs_body_match\n- _Reported:_ \"0.4397 to 0.4673\" in prose; Table I shows max = \"4.6730\" (not 0.4673); _Computed:_ 0.4673 vs 4.6730 differ by a factor of 10.\n- _Expected severity bucket:_ major\n- _Notes:_ Either the table has a decimal-point error (4.6730 vs 0.4673) or the prose.",
+          "confidence": "high",
+          "reasoning": "The reviewer names the exact quantity, quotes both conflicting values, and identifies the factor-of-10 mismatch between prose and table. This is a specific match to the injected numeric error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table I shows max = \"4.6730\" (not 0.4673) ... Either the table has a decimal-point error (4.6730 vs 0.4673) or the prose.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the discrepancy between the table value (4.6730) and the prose value (0.4673), correctly spotting the order-of-magnitude error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Fidelity definition in Eq. (1) is an unnormalised sum over samples (not averaged), so its magnitude scales with the number of samples ... It is also mislabelled ... Eq. (1): `Fidelity = Σ_i ||f(x_i) − g(x_i)||² / ||f(x_i)||²` is a well-formed non-negative quantity, but ... unbounded above and scales with N because there is no `1/N` normaliser.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Fidelity definition in Eq. (1) is an unnormalised sum over samples (not averaged), so its magnitude scales with the number of samples ... It is also mislabelled ... Eq. (1): `Fidelity = Σ_i ||f(x_i) − g(x_i)||² / ||f(x_i)||²` is a well-formed non-negative quantity, but ... unbounded above and scales with N because there is no `1/N` normaliser.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the missing 1/N normalisation factor in the Fidelity equation, noting it is an 'unnormalised sum' that 'scales with N because there is no 1/N normaliser', directly matching the injected removal of the 1/N prefactor.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The Fidelity definition in Eq. (1) is an unnormalised sum over samples (not averaged), so its magnitude scales with the number of samples...\n\n*Recommendation:* Rename to \"infidelity\" (or invert the sign, e.g. `1 − normalized_error`), divide by N to make it sample-count-independent...\n\n[⚠] **Eq. (1): `Fidelity = Σ_i ||f(x_i) − g(x_i)||² / ||f(x_i)||²` is a well-defined non-negative quantity...**\n- _Notes:_ The formula computes a squared normalised residual (an *infidelity*). It is unbounded above and scales with N because there is no `1/N` normaliser.",
+          "confidence": "high",
+          "reasoning": "The review explicitly points out that Eq. (1) is missing averaging by N and recommends dividing by N. That clearly corresponds to the dropped 1/N normalisation prefactor.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Fidelity definition in Eq. (1) is an unnormalised sum over samples (not averaged), so its magnitude scales with the number of samples ... Recommendation: ... divide by N to make it sample-count-independent.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that Eq. (1) is missing the 1/N normalization factor and notes it should be averaged over samples.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "\"We compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation\" (Sec. IV) is not reflected in Tables I–II, which contain only single point estimates. ... Sec. IV promises \"mean and standard deviation\"; Tables I–II report no standard deviations. ... The abstract promises \"mean and standard deviation across ten independent random initializations\" (Sec. IV), but the tables report only point estimates with no standard deviations.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "\"We compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation\" (Sec. IV) is not reflected in Tables I–II, which contain only single point estimates. ... Sec. IV promises \"mean and standard deviation\"; Tables I–II report no standard deviations. ... The abstract promises \"mean and standard deviation across ten independent random initializations\" (Sec. IV), but the tables report only point estimates with no standard deviations.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags that the methodology claim about computing metrics across ten independent random initializations and reporting mean and standard deviation is contradicted by the tables that only show point estimates, directly matching the injected methodology claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The Sec. V narrative includes several claims contradicted by the tables. ... (d) The abstract promises \"mean and standard deviation across ten independent random initializations\" (Sec. IV), but the tables report only point estimates with no standard deviations.\n\n[⚠] **\"We compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation\" (Sec. IV) is not reflected in Tables I–II, which contain only single point estimates.**\n- _Reported:_ Sec. IV promises \"mean and standard deviation\"; Tables I–II report no standard deviations.",
+          "confidence": "high",
+          "reasoning": "This directly flags the injected methodology claim about ten runs and reporting mean/std as contradicted by the results tables. It is a specific match to the setup-versus-results inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The abstract promises \"mean and standard deviation across ten independent random initializations\" (Sec. IV), but the tables report only point estimates with no standard deviations.",
+          "confidence": "high",
+          "reasoning": "The reviewer points out the direct contradiction between the injected methodological claim of reporting standard deviations from multiple runs and the actual data in the tables.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 31.15628,
+  "total_cost_usd": null,
+  "total_input_tokens": 29876,
+  "total_output_tokens": 3338,
+  "escalation_count": 0,
+  "notes": null
+}

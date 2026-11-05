@@ -1,0 +1,205 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L25",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-5882bbc1533c",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 4 occurrences; min sigfigs = 3; range = [36.5, 98.1]",
+        "evidence": {
+          "check_type": "abstract_vs_body_match",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 98.1,
+            "reported": 36.5,
+            "diff_abs": 61.599999999999994,
+            "diff_rel": 0.6279306829765545,
+            "tolerance": {
+              "abs_tol": 0.05,
+              "rel_tol": 0.005
+            },
+            "notes": "4 occurrences; min sigfigs = 3; range = [36.5, 98.1]"
+          },
+          "rereader": [
+            {
+              "label": "Table_1_runtime",
+              "raw_observed": "36.5",
+              "value_observed": 36.5,
+              "notes": "Located in Table 1 (page 7), 'Ours' row, 'Runtime' column."
+            },
+            {
+              "label": "Appendix_depth_1_generation_time",
+              "raw_observed": "59.3",
+              "value_observed": 59.3,
+              "notes": "Located in Appendix Table 5 (page 15), row '1 (depth = 1)', 'Generation (s)' column."
+            },
+            {
+              "label": "Appendix_depth_2_generation_time_low",
+              "raw_observed": "86.6",
+              "value_observed": 86.6,
+              "notes": "Located in Appendix Table 5 (page 15), row '2 (depth = 2)', 'Generation (s)' column."
+            },
+            {
+              "label": "Appendix_depth_2_generation_time_high",
+              "raw_observed": "98.1",
+              "value_observed": 98.1,
+              "notes": "Located in Appendix Table 5 (page 15), row '4 (depth = 2)', 'Generation (s)' column."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.15862999999999983
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-83a087d1c4fc",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 shows HIVE-3D has IoU of 0.7449 vs TRELLIS's 0.8603, and Table 6 shows HIVE-3D has SSIM of 0.79 vs TRELLIS's 0.80 and LPIPS of 0.33 vs MIDI's 0.25, yet the abstract claims the method 'significantly outperforms previous approaches, achieving state-of-the-art performance.' These numbers directly contradict the blanket claim of outperforming on all metrics.",
+        "evidence": {
+          "claim": "The paper repeatedly claims 'state-of-the-art' or 'outperforms' status, but HIVE-3D is not best on all reported metrics, weakening the main conclusion.",
+          "excerpt": "The paper repeatedly states that HIVE-3D “significantly outperforms previous approaches” and achieves “state-of-the-art performance.” However, the reported numbers do not support this across all metrics."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 shows HIVE-3D has IoU of 0.7449 vs TRELLIS's 0.8603, and Table 6 shows HIVE-3D has SSIM of 0.79 vs TRELLIS's 0.80 and LPIPS of 0.33 vs MIDI's 0.25, yet the abstract claims the method 'significantly outperforms previous approaches, achieving state-of-the-art performance.' These numbers directly contradict the blanket claim of outperforming on all metrics.",
+            "cost_usd": 0.0079544
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims “our method significantly outperforms previous approaches, achieving state-of-the-art performance” and later that “HIVE-3D outperforms existing methods,” but its own tables are mixed: in Table 1, “TRELLIS 0.8603” IoU exceeds “Ours 0.7449,” and in Table 6 “TRELLIS 0.80” SSIM and “MIDI 0.25” LPIPS are better than “Ours 0.79” and “0.33.”",
+            "cost_usd": 0.010454166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 shows TRELLIS achieves a higher IoU (0.8603) than HIVE-3D (0.7449), and Table 6 shows MIDI achieves a better LPIPS (0.25) than HIVE-3D (0.33), confirming that the method does not outperform prior works on all reported metrics.",
+            "cost_usd": 0.0031804666666666666
+          }
+        ],
+        "cost_usd": 0.021589033333333334
+      },
+      {
+        "flag_id": "fp-d0dd2509abef",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states Table 6 covers '3D-FRONT and real data' using SSIM, PSNR, and LPIPS, but provides no explanation of what ground-truth references are used for real-world images or how the metrics are computed for real data. The supplementary only states 'we conduct complementary evaluations on both synthetic datasets and real-world images' without specifying the reference selection methodology.",
+        "evidence": {
+          "claim": "The evaluation protocol for Table 6 is underspecified, especially for real data; the metrics require references whose selection/use is not explained.",
+          "excerpt": "Table 6 is titled “Quantitative Comparisons on 3D-FRONT and real data” and reports SSIM, PSNR, LPIPS, and CLIP. SSIM, PSNR, and LPIPS require a reference image, but the paper does not explain what references are used for real-world images, which viewpoints are rendered, whether the input view is used as the reference, or whether the real-data metrics are separated from the synthetic-data metrics."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states Table 6 covers '3D-FRONT and real data' using SSIM, PSNR, and LPIPS, but provides no explanation of what ground-truth references are used for real-world images or how the metrics are computed for real data. The supplementary only states 'we conduct complementary evaluations on both synthetic datasets and real-world images' without specifying the reference selection methodology.",
+            "cost_usd": 0.0079544
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The protocol for Table 6 is not specified beyond saying “we conduct complementary evaluations on both synthetic datasets and real-world images using SSIM, PSNR, LPIPS, and CLIP,” while the table is titled “Quantitative Comparisons on 3D-FRONT and real data.” The paper never states what reference images/viewpoints are used for SSIM/PSNR/LPIPS on real images or whether synthetic and real results are separated.",
+            "cost_usd": 0.010454166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The caption of Table 6 states \"Quantitative Comparisons on 3D-FRONT and real data,\" yet the paper fails to explain what reference images are used to compute SSIM, PSNR, and LPIPS for real-world images, and does not provide a breakdown separating synthetic and real-data performance.",
+            "cost_usd": 0.0031804666666666666
+          }
+        ],
+        "cost_usd": 0.021589033333333334
+      },
+      {
+        "flag_id": "fp-09ea4328a483",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'Table 4 provides a quantitative comparison, demonstrating that RANSAC significantly outperforms ICP in both success rate and registration accuracy,' but Table 4 only reports SSIM, PSNR, LPIPS, and CLIP — no registration-specific metrics like success rate or registration error are included.",
+        "evidence": {
+          "claim": "The paper claims RANSAC-based registration 'significantly outperforms ICP' in success rate and accuracy, but Table 4 only reports image metrics, not registration-specific measures.",
+          "excerpt": "The text states that Table 4 demonstrates RANSAC “significantly outperforms ICP in both success rate and registration accuracy.” However, Table 4 reports only SSIM, PSNR, LPIPS, and CLIP. It does not report registration success rate or a direct registration-accuracy measure."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'Table 4 provides a quantitative comparison, demonstrating that RANSAC significantly outperforms ICP in both success rate and registration accuracy,' but Table 4 only reports SSIM, PSNR, LPIPS, and CLIP — no registration-specific metrics like success rate or registration error are included.",
+            "cost_usd": 0.0079544
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text explicitly says “Table 4 provides a quantitative comparison, demonstrating that RANSAC significantly outperforms ICP in both success rate and registration accuracy,” but Table 4 reports only “SSIM↑ PSNR↑ LPIPS↓ CLIP↑.” No registration-specific metric or success-rate statistic is shown there.",
+            "cost_usd": 0.010454166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims that Table 4 demonstrates RANSAC \"significantly outperforms ICP in both success rate and registration accuracy,\" but Table 4 only reports image metrics (SSIM, PSNR, LPIPS, CLIP) without providing any explicit registration success rate or accuracy numbers.",
+            "cost_usd": 0.0031804666666666666
+          }
+        ],
+        "cost_usd": 0.021589033333333334
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.15862999999999983,
+    "general": 0.0647671
+  },
+  "extractor_cost_usd": 0.014295999999999948,
+  "total_cost_usd": 0.23769309999999977
+}

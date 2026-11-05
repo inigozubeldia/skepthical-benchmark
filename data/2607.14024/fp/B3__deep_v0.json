@@ -1,0 +1,185 @@
+{
+  "paper_id": "2607.14024",
+  "reviewer_system": "B3",
+  "provider_tag": "deep",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-5798c308c4a5",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "B3"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.049298000000000064
+      },
+      {
+        "flag_id": "fp-d8a61ebe511e",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "B3"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 5 occurrences; min sigfigs = 2; range = [9.3, 39.8]",
+        "evidence": {
+          "check_type": "abstract_vs_body_match",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 39.8,
+            "reported": 9.3,
+            "diff_abs": 30.499999999999996,
+            "diff_rel": 0.7663316582914572,
+            "tolerance": {
+              "abs_tol": 0.5,
+              "rel_tol": 0.05
+            },
+            "notes": "5 occurrences; min sigfigs = 2; range = [9.3, 39.8]"
+          },
+          "rereader": [
+            {
+              "label": "abstract_avg_reduction",
+              "raw_observed": "21%",
+              "value_observed": 21.0,
+              "notes": "Found in Abstract: 'CSFS achieves a predictive performance comparable to SFS while reducing computational cost by an average of 21%.'"
+            },
+            {
+              "label": "WT-S1_reduction",
+              "raw_observed": "19.4%",
+              "value_observed": 19.4,
+              "notes": "Found in Section 5.2 Runtime Comparison: 'overall runtime reduction of 19.4%, 9.3%, 25.3%, and 39.8% in comparison to SFS for the four dataset scenarios, respectively.' Corresponds to WT-S1 (first value)."
+            },
+            {
+              "label": "WT-S2_reduction",
+              "raw_observed": "9.3%",
+              "value_observed": 9.3,
+              "notes": "Found in Section 5.2 Runtime Comparison: 'overall runtime reduction of 19.4%, 9.3%, 25.3%, and 39.8% in comparison to SFS for the four dataset scenarios, respectively.' Corresponds to WT-S2 (second value)."
+            },
+            {
+              "label": "PV-S1_reduction",
+              "raw_observed": "25.3%",
+              "value_observed": 25.3,
+              "notes": "Found in Section 5.2 Runtime Comparison: 'overall runtime reduction of 19.4%, 9.3%, 25.3%, and 39.8% in comparison to SFS for the four dataset scenarios, respectively.' Corresponds to PV-S1 (third value)."
+            },
+            {
+              "label": "PV-S2_reduction",
+              "raw_observed": "39.8%",
+              "value_observed": 39.8,
+              "notes": "Found in Section 5.2 Runtime Comparison: 'overall runtime reduction of 19.4%, 9.3%, 25.3%, and 39.8% in comparison to SFS for the four dataset scenarios, respectively.' Corresponds to PV-S2 (fourth value)."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.049298000000000064
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-eb2f503f0ae4",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "B3"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=CONFIRMED_ISSUE, gemini=FP",
+        "evidence": {
+          "claim": "The integration of the clustering mechanism into the wrapper selection process for CSFS is not clearly detailed, potentially resulting in oversimplification in the method logic.",
+          "excerpt": "the implementation details do not fully clarify how the clustering mechanism is applied or integrated into the wrapper selection process, potentially leading to oversimplifications or inaccuracies in the method's logic."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper provides a high-level description of CSFS in Section 3.2 and Fig. 2, stating it 'operates on clusters of features' and uses 'a non-inferiority test that allows for safe and early discarding of feature clusters,' but does not provide algorithmic pseudocode or detailed integration steps. Whether this constitutes an 'oversimplification' depends on whether a conference-style paper is expected to provide full algorithmic detail, making the verdict genuinely unclear.",
+            "cost_usd": 0.00946095
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 3.2 gives only a high-level sketch: “Clustering can be performed based on feature correlations, RF FI as an initial best guess, or randomly” and “If at the cluster-level no safe-removable cluster is found, a fine-grained feature-level analysis... is conducted.” The paper does not specify the concrete clustering procedure or exactly how clusters are formed and integrated into each wrapper-selection step.",
+            "cost_usd": 0.01352825
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly details how the clustering mechanism is integrated into the wrapper process through a four-step bulleted list and a flowchart (Fig. 2), explaining that CSFS first attempts a 'safe-removal of worst cluster', then falls back to a 'fine-grained feature-level analysis' if needed.",
+            "cost_usd": 0.0046628
+          }
+        ],
+        "cost_usd": 0.027652
+      },
+      {
+        "flag_id": "fp-e3499c8164e3",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "B3"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Section 2.3 explicitly states that wrapper methods 'are computationally more expensive than filter methods, since they require fitting the ML model to iteratively assess feature subsets, but are capable of finding a better solution,' and Section 6 discusses the trade-off by noting 'wrapper-based techniques overall provide better-performing selections of features than simpler filter-based or embedded baseline methods' at the cost of 'higher computational complexity,' adequately covering the key trade-offs.",
+        "evidence": {
+          "claim": "The description of wrapper methods is oversimplified and neglects important trade-offs, giving an incomplete understanding of their advantages and limitations.",
+          "excerpt": "The description of wrapper methods in Section 2.3 is oversimplified and does not fully reflect the nuanced trade-offs between computational cost and performance improvements, potentially leading to an incomplete understanding of their advantages and limitations."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Section 2.3 explicitly states that wrapper methods 'are computationally more expensive than filter methods, since they require fitting the ML model to iteratively assess feature subsets, but are capable of finding a better solution,' and Section 6 discusses the trade-off by noting 'wrapper-based techniques overall provide better-performing selections of features than simpler filter-based or embedded baseline methods' at the cost of 'higher computational complexity,' adequately covering the key trade-offs.",
+            "cost_usd": 0.00946095
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly states the relevant trade-off: “Wrapper methods... are computationally more expensive than filter methods... but are capable of finding a better solution [4].” It also contrasts embedded methods as “typically faster than wrapper methods, but might not find an optimal feature subset,” so the claim that trade-offs are neglected is not supported by the text.",
+            "cost_usd": 0.01352825
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer claims the paper neglects the trade-offs between computational cost and performance improvements for wrapper methods, but Section 2.3 explicitly states this exact trade-off: 'They are computationally more expensive than filter methods... but are capable of finding a better solution'.",
+            "cost_usd": 0.0046628
+          }
+        ],
+        "cost_usd": 0.027652
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.5
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.09859600000000013,
+    "general": 0.055304
+  },
+  "extractor_cost_usd": 0.007691999999999838,
+  "total_cost_usd": 0.16159199999999996
+}

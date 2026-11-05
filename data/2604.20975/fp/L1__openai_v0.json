@@ -1,0 +1,356 @@
+{
+  "paper_id": "2604.20975",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-be9414b34e58",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper’s forecasts are explicitly based on an SNR threshold — “in the following, we set SNRth = 3” — while also conceding that “to confidently detect a zombie binary, it is not enough to have a high SNR” and that “The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.” That leaves the trials-factor/real-search detectability concern unresolved quantitatively.",
+        "evidence": {
+          "claim": "The manuscript overstates the detectability of zombie binaries by equating SNR > 3 with realistic detection, without accounting for the trials factor and phase incoherence in PTA searches.",
+          "excerpt": "the interpretation of “detectability” based on SNR > 3 is optimistic, the treatment of pulsar distances and coherent phase information needs to be discussed more carefully, and the waveform/model assumptions near merger should be made explicit."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly states 'we emphasize that, to confidently detect a zombie binary, it is not enough to have a high SNR: the signal must also be observed in the data of multiple pulsars' and acknowledges that 'their confident identification might be challenging,' but does not quantify the trials factor or provide a rigorous detection threshold accounting for false alarm rates.",
+            "cost_usd": 0.0036412874999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper’s forecasts are explicitly based on an SNR threshold — “in the following, we set SNRth = 3” — while also conceding that “to confidently detect a zombie binary, it is not enough to have a high SNR” and that “The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.” That leaves the trials-factor/real-search detectability concern unresolved quantitatively.",
+            "cost_usd": 0.010041375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation without addressing it quantitatively, stating: 'The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.'",
+            "cost_usd": 0.0017637500000000001
+          }
+        ],
+        "cost_usd": 0.0154464125
+      },
+      {
+        "flag_id": "fp-897986141ff3",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges in the Discussion that 'the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic,' deferring coherent reconstruction to future work. The reviewer's concern about the centrality of this issue and its inadequate prominence is valid per rule R1 since no quantitative assessment of the distance uncertainty impact is provided.",
+        "evidence": {
+          "claim": "The manuscript's SNR calculation assumes known pulsar distances and coherent summing, which may not be justified given realistic distance uncertainties and their impact on phase and frequency.",
+          "excerpt": "That coherence depends sensitively on pulsar distances because the pulsar-term phase and frequency depend on the delay \\( \\tau_a = (1+\\hat p_a\\cdot \\hat n)D_a/c . \\)\n\nThe manuscript discusses pulsar distance uncertainty only in the final section. Given how central this issue is, it deserves more prominent treatment."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges in the Discussion that 'the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic,' deferring coherent reconstruction to future work. The reviewer's concern about the centrality of this issue and its inadequate prominence is valid per rule R1 since no quantitative assessment of the distance uncertainty impact is provided.",
+            "cost_usd": 0.0036412874999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The manuscript explicitly admits this limitation: “the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic.” It does not propagate distance uncertainty through the coherent summing or quantify its effect on phase/frequency consistency.",
+            "cost_usd": 0.010041375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The manuscript acknowledges that 'the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic' but defers resolving this to future work.",
+            "cost_usd": 0.0017637500000000001
+          }
+        ],
+        "cost_usd": 0.0154464125
+      },
+      {
+        "flag_id": "fp-1977df6ca2f7",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states only the start-time condition “a zombie binary will affect the timing residuals of a given pulsar a only if τa > τc” and then computes SNRs from simulated residuals, but nowhere specifies how cases are handled when a pulsar term reaches ISCO/merger during the finite observing span. The waveform treatment for such within-dataset terminations is not described.",
+        "evidence": {
+          "claim": "The treatment of the waveform near the merger is inadequately specified, particularly regarding how the pulsar term is handled when it passes through ISCO or merger within an observation.",
+          "excerpt": "What happens when, during the finite observing time, the pulsar term itself reaches the ISCO and disappears? For some pulsars with \\(\\tau_a \\approx \\tau_c\\), the pulsar term may terminate during the PTA observation. Are such “pulsar-term merger during the dataset” cases included in the simulated residuals?"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "low",
+            "reason": "The paper states it considers binaries 'that either merged before the PTA experiment began or which are on the verge of merging' and assumes 'forb = f(ISCO)orb' at coalescence, but does not explicitly address what happens when the pulsar term passes through ISCO during the finite observation window. This edge case is not numerically quantified but likely affects only a small fraction of sources.",
+            "cost_usd": 0.0036412874999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states only the start-time condition “a zombie binary will affect the timing residuals of a given pulsar a only if τa > τc” and then computes SNRs from simulated residuals, but nowhere specifies how cases are handled when a pulsar term reaches ISCO/merger during the finite observing span. The waveform treatment for such within-dataset terminations is not described.",
+            "cost_usd": 0.010041375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper specifies how the SNR is calculated from the initial orbital frequency of the pulsar term, but does not explicitly detail the treatment of signals where the pulsar term reaches ISCO and terminates within the observation window.",
+            "cost_usd": 0.0017637500000000001
+          }
+        ],
+        "cost_usd": 0.0154464125
+      },
+      {
+        "flag_id": "fp-48b866931767",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper acknowledges 'our choice of models reflects the current uncertainty regarding the population of SMBHBs' and that results are dominated by massive systems (Mc,r > 10^9 solar masses), and the three Schechter models span a range, but the reviewer's concern that the high-mass tail uncertainties are not fully quantified beyond these three analytic models is valid — no broader uncertainty analysis is provided.",
+        "evidence": {
+          "claim": "The predicted number of sources is dominated by the uncertain high-mass tail of the SMBHB population; the results depend sensitively on how the stochastic background amplitude is distributed in mass and redshift.",
+          "excerpt": "This is precisely the regime where the SMBHB mass function, merger rate, binary occupation fraction, and host-galaxy scaling relations are most uncertain. The three Schechter-like models are useful, but the results appear strongly controlled by the high-mass tail."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges 'our choice of models reflects the current uncertainty regarding the population of SMBHBs' and that results are dominated by massive systems (Mc,r > 10^9 solar masses), and the three Schechter models span a range, but the reviewer's concern that the high-mass tail uncertainties are not fully quantified beyond these three analytic models is valid — no broader uncertainty analysis is provided.",
+            "cost_usd": 0.0036412874999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "This dependence is already a central part of the paper’s analysis: “In order to quantify the dependence of our results on the comoving merger density model, we follow [47] and consider three different sets of parameters,” and “our choice of models reflects the current uncertainty regarding the population of SMBHBs.” Figure 4 and the quoted yields across M1/M2/M3 explicitly show the sensitivity to the high-mass tail.",
+            "cost_usd": 0.010041375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly evaluates and addresses this sensitivity by employing three different population models (M1, M2, and M3) to show how 'M1 includes a large number of relatively low-mass binaries, while M2 favors a smaller number of higher-mass systems', directly exploring the impact of the high-mass tail on detectability.",
+            "cost_usd": 0.0017637500000000001
+          }
+        ],
+        "cost_usd": 0.0154464125
+      },
+      {
+        "flag_id": "fp-91dcf1e5b697",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=FP, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "It is unclear whether model normalization is consistent across all mass/redshift ranges and population assumptions; rates above 10^9 solar masses should be made explicit.",
+          "excerpt": "the manuscript should clarify whether the normalization includes all binaries over the same mass/redshift range used later, and whether the same circular, GW-driven assumption is used in computing the background."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly states 'For each model, we adjust the value of n_dot_0 so that the GW background characteristic strain amplitude induced by the population is consistent with current PTA observations. Using Phinney theorem, we set hc(f=1/year) = 3×10^-15,' and integrates over z∈[10^-2,4] and logMc,r/M⊙∈[7,11], making the normalization procedure and mass/redshift range explicit.",
+            "cost_usd": 0.0036412874999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper gives partial normalization details — “For each model, we adjust the value of n˙0 so that the GW background characteristic strain amplitude induced by the population is consistent with current PTA observations” and “we set hc(f = 1/year) = 3 × 10−15” — plus the later integration ranges “z ∈ [10−2, 4] and logMc,r/M⊙ ∈ [7, 11].” But it does not spell out enough to verify from the text alone that the same mass/redshift range and assumptions are used consistently in all normalization steps or to read off >10^9 M⊙ rates directly.",
+            "cost_usd": 0.010041375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While the paper mentions using the Phinney theorem to adjust the normalizing factor, it does not explicitly clarify if this normalization integral uses the exact same mass and redshift ranges that are used later in the analysis.",
+            "cost_usd": 0.0017637500000000001
+          }
+        ],
+        "cost_usd": 0.0154464125
+      },
+      {
+        "flag_id": "fp-fdb910ad755b",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper acknowledges the SKA configuration 'assumes 130 pulsars' with 50 ns timing precision and notes 'Even in a far more pessimistic scenario where σMN=300 ns for all SKA pulsars,' providing one sensitivity check, but the reviewer's concern about the idealization is partially valid as the paper itself notes the IPTA sensitivity is 'a conservative baseline' while the SKA configuration may still be optimistic.",
+        "evidence": {
+          "claim": "The PTA configurations (especially IPTA and SKA) are highly idealized and optimistic, potentially overstating the sensitivity and expected signal yield.",
+          "excerpt": "The SKA configuration assumes 130 pulsars with \\(50\\,\\rm ns\\) timing precision. This is optimistic and may apply only to the best-timed subset of pulsars."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges the SKA configuration 'assumes 130 pulsars' with 50 ns timing precision and notes 'Even in a far more pessimistic scenario where σMN=300 ns for all SKA pulsars,' providing one sensitivity check, but the reviewer's concern about the idealization is partially valid as the paper itself notes the IPTA sensitivity is 'a conservative baseline' while the SKA configuration may still be optimistic.",
+            "cost_usd": 0.0036412874999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The manuscript openly frames these as simplified forecasting setups — “we consider representative configurations for past, current and future PTA datasets” — and it explicitly stress-tests the optimistic SKA assumption: “Even in a far more pessimistic scenario where σMN = 300 ns for all SKA pulsars, ⟨Nz⟩ remains around 1 for both the M2 and M3 models.” So the paper does not hide the idealization and partially quantifies its impact.",
+            "cost_usd": 0.010041375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper directly addresses this concern by computing the expected number of sources for a less idealized scenario, stating: 'Even in a far more pessimistic scenario where \\sigma_{MN} = 300 ns for all SKA pulsars, \\langle N_z \\rangle remains around 1 for both the M2 and M3 models'.",
+            "cost_usd": 0.0017637500000000001
+          }
+        ],
+        "cost_usd": 0.0154464125
+      },
+      {
+        "flag_id": "fp-021ca5984692",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The authors explicitly state that their efficiencies “do not take into account the spatially-correlated nature of the GW background noise,” adding only that this “should not have strong impact on our results.” Because the effect is acknowledged but not modeled or quantified, the reviewer’s concern remains unresolved.",
+        "evidence": {
+          "claim": "The SNR calculations neglect the spatial correlation of the stochastic background, which could affect detection prospects and signal confusion in SKA-like datasets.",
+          "excerpt": "The SNR calculation includes measurement noise and a red-noise process corresponding to the astrophysical stochastic background, but neglects the spatial correlations of the background."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation: 'the PTA detection efficiencies that we derive neglect the presence of potential intrinsic red noise components...and do not take into account the spatially-correlated nature of the GW background noise. However, these assumptions should not have strong impact on our results, since these red noise components typically have a sub-dominant contribution to PTA sensitivities at the frequencies where zombie binaries are found.'",
+            "cost_usd": 0.0036412874999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors explicitly state that their efficiencies “do not take into account the spatially-correlated nature of the GW background noise,” adding only that this “should not have strong impact on our results.” Because the effect is acknowledged but not modeled or quantified, the reviewer’s concern remains unresolved.",
+            "cost_usd": 0.010041375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges neglecting this spatial correlation ('and do not take into account the spatially-correlated nature of the GW background noise') but merely assumes it will not have a strong impact without quantitatively demonstrating it.",
+            "cost_usd": 0.0017637500000000001
+          }
+        ],
+        "cost_usd": 0.0154464125
+      },
+      {
+        "flag_id": "fp-2f520315f0f0",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: The paper asserts that 'this threshold choice has a negligible impact on our results' based on a qualitative argument about the relative number of binaries, but provides no numerical proof or quantitative statement as requested by the reviewer.",
+        "evidence": {
+          "claim": "The operational definition of what constitutes a 'zombie binary' and the robustness of the chosen frequency threshold are not fully justified or numerically supported.",
+          "excerpt": "The definition of zombie binaries uses an Earth-term orbital-frequency threshold \\( f_{\\rm th}=3\\times 10^{-7}\\,\\rm Hz \\). The paper states that the precise choice has negligible impact. It would be useful to support this with a short numerical statement"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly states 'we emphasize that this threshold choice has a negligible impact on our results, since the number of binaries that merge during the PTA observation (or shortly thereafter) is negligible compared to the number of binaries that have merged in the past thousands of years,' providing a physical justification for why the threshold choice is insensitive.",
+            "cost_usd": 0.0036412874999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The operational definition and threshold robustness are stated directly: “we define zombie binaries as binaries whose Earth term orbital frequency at t0, f(E)orb, exceeds a threshold frequency, fth… In this paper, we use fth = 3×10−7 Hz,” and “this threshold choice has a negligible impact on our results, since the number of binaries that merge during the PTA observation (or shortly thereafter) is negligible.” That is an explicit justification for the chosen threshold.",
+            "cost_usd": 0.010041375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts that 'this threshold choice has a negligible impact on our results' based on a qualitative argument about the relative number of binaries, but provides no numerical proof or quantitative statement as requested by the reviewer.",
+            "cost_usd": 0.0017637500000000001
+          }
+        ],
+        "cost_usd": 0.0154464125
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.1235713
+  },
+  "extractor_cost_usd": 0.017905999999999977,
+  "total_cost_usd": 0.14147729999999997
+}

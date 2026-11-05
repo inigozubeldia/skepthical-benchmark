@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "is reported to outperform prompt-only optimizers",
+    "injected_text": "is reported to underperform prompt-only optimizers",
+    "rationale": "Reversing 'outperform' to 'underperform' directly contradicts the cited paper's core finding that Maestro beats prompt-only baselines even when its search space is similarly restricted.",
+    "ground_truth_description": "Changed the claim about Maestro's relative performance to incorrectly state it underperforms prompt-only optimizers instead of outperforming them.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "maestro2025",
+      "injected_cite_key": "maestro2025",
+      "claim_sentence_verbatim": "Maestro targets this same gap with a richer topology space, jointly searching non-sequential DAGs, persistent/global state, and context gating alongside node-level configuration, and is reported to outperform prompt-only optimizers such as GEPA and MIPROv2 even when restricted to prompt-only search, with further gains once graph search is enabled~\\citep{maestro2025}.",
+      "section_location": "Sec. 2.1",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "overall (76.4\\% vs.\\ 66.0\\% for GEPA",
+    "injected_text": "overall (76.5\\% vs.\\ 66.0\\% for GEPA",
+    "rationale": "Perturbs the abstract's report of RELAI-VCL's lifelong average pass rate by 0.1, creating a mismatch with the body (Table 1 and Section 6.4) which still correctly states 76.4%.",
+    "ground_truth_description": "Changes the RELAI-VCL lifelong average pass rate in the abstract from 76.4% to 76.5%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "76.4\\%",
+      "value_after_raw": "76.5\\%",
+      "value_before_float": 76.4,
+      "value_after_float": 76.5,
+      "location_cue": "highest lifelong average pass rate overall (76.4\\% vs.\\ 66.0\\% for GEPA",
+      "paired_location": "Table 1 and Section 6.4",
+      "quantity_label": "RELAI-VCL lifelong average pass rate %",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r],",
+    "injected_text": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } s],",
+    "rationale": "The summation over trials binds the index 'r', but the indicator function inside the sum references an unquantified index 's', creating an unbound free index on the RHS.",
+    "ground_truth_description": "Altered the bound index 'r' to an unbound index 's' in the summand of the PassRate equation, leaving it unquantified.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3.3 first display",
+      "original_fragment_latex": "\\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r]",
+      "injected_fragment_latex": "\\mathbbm{1}[A \\text{ solves } t \\text{ on trial } s]",
+      "full_equation_latex_before": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r],",
+      "full_equation_latex_after": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } s],",
+      "term_role": "injected shape/index mismatch",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "measuring transfer to the newly introduced Phase 2 tasks (the Transfer metric). After Phase 2 optimization, the final agent is evaluated on the full task union (the Final metric).",
+    "injected_text": "measuring transfer to the newly introduced Phase 2 tasks (the Transfer metric). To ensure only robust methods proceed, any optimizer that scores below the unoptimized baseline during transfer is automatically disqualified from Phase 2. After Phase 2 optimization, the final agent is evaluated on the full task union (the Final metric).",
+    "rationale": "The inserted methodology rule claims that any optimizer performing below baseline during transfer is disqualified from Phase 2, but the Results section explicitly reports that GEPA falls below the baseline in transfer yet is still evaluated in Phase 2.",
+    "ground_truth_description": "Added a methodology claim that optimizers performing worse than the unoptimized baseline during transfer are disqualified from Phase 2, which contradicts the results showing GEPA proceeding to Phase 2 despite poor transfer.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 5.3",
+      "affected_span_verbatim": "We then evaluate the same Phase 1-optimized agent on the combined 22-task union without additional optimization, measuring transfer to the newly introduced Phase 2 tasks (the Transfer metric). After Phase 2 optimization, the final agent is evaluated on the full task union (the Final metric)."
+    },
+    "proposer_agent": "injector.general.S3.t3.v2"
+  }
+]

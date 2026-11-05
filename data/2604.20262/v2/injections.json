@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "2026-0218.tex",
+    "original_text": "This model approximates the results obtained from the electromagnetic (EM) field simulation by \\cite{Sun_2022}, as thoroughly validated in the work of \\cite{Yusimu}.",
+    "injected_text": "This model approximates the results obtained from the simulation by \\cite{Sun_2022}, as thoroughly validated in the work of \\cite{Yusimu}.",
+    "rationale": "Drops the precise methodological qualifier 'electromagnetic (EM) field' from a citation to Sun_2022, whose central contribution (per its title 'The Electromagnetic Characteristics of the Tianlai Cylindrical Pathfinder Array') is specifically electromagnetic field simulation; the citing claim becomes generic 'simulation', which is less faithful to the cited paper's stated method.",
+    "ground_truth_description": "Removed the methodological qualifier 'electromagnetic (EM) field' from the description of Sun_2022's simulation, leaving the cite key intact but weakening the methodological characterization.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Sun_2022",
+      "injected_cite_key": "Sun_2022",
+      "claim_sentence_verbatim": "This model approximates the results obtained from the electromagnetic (EM) field simulation by \\cite{Sun_2022}, as thoroughly validated in the work of \\cite{Yusimu}.",
+      "section_location": "Sec. 2.2 (Methods, Primary Beam Model)",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "2026-0218.tex",
+    "original_text": "we show the visibility for a short north-south baseline at 750 MHz.",
+    "injected_text": "we show the visibility for a short north-south baseline at 570 MHz.",
+    "rationale": "The abstract of this paper contains no numerical claim at all, so a strict 'abstract headline number' digit-swap is not realisable; the closest analog is the most prominent quoted result-figure caption sentence in the body. I swap the adjacent digits 7<->5 in '750 MHz' (the center frequency repeatedly stated as the TCPA's operating center, e.g. Sec. 2.3.1 'The center frequency of the TCPA is 750 MHz' and the Fig. 2 caption '(750 MHz)'). After the edit the same headline value is quoted both as 570 MHz (Sec. 3.3, describing the best-fit data_fit figure) and as 750 MHz (Sec. 2.3.1 and Fig. 2 caption), creating a same-paper internal inconsistency for the predicate, and crossing the band boundary (700-800 MHz) which makes it factually obviously wrong on a single read.",
+    "ground_truth_description": "Adjacent-digit swap of the headline frequency at which the data-fit example is shown, changing '750 MHz' to '570 MHz' in Sec. 3.3 while the same value remains correctly quoted as '750 MHz' in Sec. 2.3.1 and the Fig. 2 caption.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "750",
+      "value_after_raw": "570",
+      "value_before_float": 750.0,
+      "value_after_float": 570.0,
+      "location_cue": "we show the visibility for a short north-south baseline at 570 MHz",
+      "paired_location": "Sec. 2.3.1 (Baseline Selection): 'The center frequency of the TCPA is 750 MHz, corresponding to a wavelength lambda of 0.4 m'; also Fig. 2 caption '(750 MHz)'.",
+      "quantity_label": "TCPA observing center frequency (MHz) at which the data-fit example in Fig. fig:data_fit is shown",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "2026-0218.tex",
+    "original_text": "    V_{ij} = \\frac{g_ig_j^*}{\\tau}\\int \\dif^2 \\vec{n} \\dif t\\ \\ |A(\\vec{n})|^2 e^{-\\frac{2\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}I(\\vec{n}) + <\\eta_i \\eta_j^*>",
+    "injected_text": "    V_{ij} = \\frac{g_ig_j^*}{\\tau}\\int \\dif^2 \\vec{n} \\dif t\\ \\ |A(\\vec{n})|^2 e^{-\\frac{\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}I(\\vec{n}) + <\\eta_i \\eta_j^*>",
+    "rationale": "The displayed visibility equation is a load-bearing instance of the van Cittert--Zernike relation; replacing the canonical Fourier-kernel coefficient 2\\pi/\\lambda by \\pi/\\lambda produces a structurally similar but algebraically incorrect formula (factor-of-2 perturbation of a well-known physics-law coefficient), exactly the mechanism specified for mathematics S3 type 2.",
+    "ground_truth_description": "In the calibrated visibility equation (eq2:calvis), the standard interferometric phase factor exp(-2\\pi i (r_j-r_i)\\cdot n / \\lambda) was replaced by exp(-\\pi i (r_j-r_i)\\cdot n / \\lambda), halving the canonical coefficient.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq2:calvis",
+      "equation_location": "Eq. (5), Sect. 2.3.2 (Phase Calibration)",
+      "original_fragment_latex": "e^{-\\frac{2\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}",
+      "injected_fragment_latex": "e^{-\\frac{\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}",
+      "full_equation_latex_before": "V_{ij} = \\frac{g_ig_j^*}{\\tau}\\int \\dif^2 \\vec{n} \\dif t\\ \\ |A(\\vec{n})|^2 e^{-\\frac{2\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}I(\\vec{n}) + <\\eta_i \\eta_j^*>",
+      "full_equation_latex_after": "V_{ij} = \\frac{g_ig_j^*}{\\tau}\\int \\dif^2 \\vec{n} \\dif t\\ \\ |A(\\vec{n})|^2 e^{-\\frac{\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}I(\\vec{n}) + <\\eta_i \\eta_j^*>",
+      "term_role": "Fourier-kernel phase coefficient (canonical 2\\pi/\\lambda in van Cittert--Zernike visibility relation)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "2026-0218.tex",
+    "original_text": "The length of these baselines are all 3.2m.",
+    "injected_text": "The length of these baselines are all 3.2m. The visibilities from all 12 baselines are then jointly combined into a single stacked likelihood, which suppresses per-baseline systematics and ensures that the recovered N-S beam parameters are consistent across the full set of selected baselines.",
+    "rationale": "The inserted sentence asserts that all 12 selected N-S baselines are jointly combined in a stacked likelihood for the beam fit, but the Results section ('Measurement of the North-South Primary Beam') explicitly states that the fit uses visibilities from only three baselines (A1-A9, A2-A10, A4-A12), so a reviewer cross-checking Methods against Results sees a clear protocol inconsistency.",
+    "ground_truth_description": "Added a sentence to the Methods (N-S beam) claiming a joint stacked-likelihood fit over all 12 selected baselines, contradicting the Results section which fits using only 3 baselines.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 2.4 (Methods, North-South Beam Measurement)",
+      "affected_span_verbatim": "We adopt a multivariate Gaussian likelihood function of the form\n\\begin{equation}\n    \\label{eq2:likelihood}\n    \\log(L(\\alpha, \\beta)) \\sim (V_{ij} - V_{ij}^{\\rm simu}) (V_{ij} - V_{ij}^{\\rm simu})^* / \\sigma^2\n\\end{equation}\nHere, we assume that $\\alpha$ and $\\beta$ satisfy a uniform distribution, and $\\sigma$ is the standard deviation of the thermal noise, which is determined by observing an `empty' sky region devoid of bright radio source."
+    },
+    "proposer_agent": "injector.general.S3.t3.v2"
+  }
+]

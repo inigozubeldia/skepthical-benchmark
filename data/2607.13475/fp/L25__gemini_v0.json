@@ -1,0 +1,224 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "L25",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-9293e5071e21",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'References [11] and [13]'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "References [11] and [13]"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-809b22e67d44",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {minuend, subtrahend, difference}",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {minuend, subtrahend, difference}"
+          },
+          "rereader": [
+            {
+              "label": "single_step_oracle",
+              "raw_observed": "0.0989",
+              "value_observed": 0.0989,
+              "notes": "Numeric directly in target sentence."
+            },
+            {
+              "label": "single_step_learned",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": "Numeric directly in target sentence."
+            },
+            {
+              "label": "multi_step_oracle",
+              "raw_observed": "0.0958",
+              "value_observed": 0.0958,
+              "notes": "Numeric directly in target sentence."
+            },
+            {
+              "label": "multi_step_learned",
+              "raw_observed": "0.0941",
+              "value_observed": 0.0941,
+              "notes": "Numeric directly in target sentence."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.02436900000000003
+      },
+      {
+        "flag_id": "fp-4877a767969f",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {base, percent, result}",
+        "evidence": {
+          "check_type": "percent_of",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {base, percent, result}"
+          },
+          "rereader": [
+            {
+              "label": "total_episodes",
+              "raw_observed": "200",
+              "value_observed": 200.0,
+              "notes": "Numeric in sentence: 'We evaluate performance over 200 episodes with a fixed random seed.'"
+            },
+            {
+              "label": "improvable_episodes",
+              "raw_observed": "89",
+              "value_observed": 89.0,
+              "notes": "Numeric in sentence: 'On the remaining 89 improvable episodes, the oracle succeeds in 100% of cases (89/89).' "
+            },
+            {
+              "label": "success_rate_oracle",
+              "raw_observed": "47.0%",
+              "value_observed": 47.0,
+              "notes": "Numeric in sentence: '...0.0989 and 47.0% for the oracle...'"
+            },
+            {
+              "label": "success_rate_learned",
+              "raw_observed": "50.0%",
+              "value_observed": 50.0,
+              "notes": "Numeric in sentence: '...learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate...'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.02436900000000003
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-f15fc1e9d7ca",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The smoothness loss definition in Eq. (3) was checked for transcription accuracy against the paper's verbatim text, and the formula was confirmed to be faithfully reproduced. The definition — mean squared Euclidean distance over horizontal and vertical neighbor pairs, normalized by the total number of such pairs — is a standard and well-formed edge-length penalty consistent with the stated claim. No errors were found.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "moderate",
+          "notes": "The smoothness loss definition in Eq. (3) was checked for transcription accuracy against the paper's verbatim text, and the formula was confirmed to be faithfully reproduced. The definition — mean squared Euclidean distance over horizontal and vertical neighbor pairs, normalized by the total number of such pairs — is a standard and well-formed edge-length penalty consistent with the stated claim. No errors were found.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.016101000000000032
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-a573ad7e0f75",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports that in single-step retraction the learned estimator achieves 0.1055 mean exposure improvement and 50.0% success rate, both exceeding the oracle's 0.0989 and 47.0%, without providing any justification for why a partial-observation estimator outperforms a full-state oracle. The paper offers no explanation (e.g., noise smoothing, regularization benefit) for this logically inconsistent result, and simply states the numbers without acknowledging the anomaly.",
+        "evidence": {
+          "claim": "The learned estimator achieves higher mean exposure improvement and success rate than the full-state oracle, which is logically inconsistent unless explicitly justified, undermining the claim that the oracle represents an optimal upper bound.",
+          "excerpt": "It is logically inconsistent for an estimator to outperform the ground-truth oracle on the same planning task without explicit justification (e.g., explaining if the MLP smoothed out adversarial noise that somehow negatively impacts the planner). This undermines the claim that the oracle represents an optimal upper bound."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports that in single-step retraction the learned estimator achieves 0.1055 mean exposure improvement and 50.0% success rate, both exceeding the oracle's 0.0989 and 47.0%, without providing any justification for why a partial-observation estimator outperforms a full-state oracle. The paper offers no explanation (e.g., noise smoothing, regularization benefit) for this logically inconsistent result, and simply states the numbers without acknowledging the anomaly.",
+            "cost_usd": 0.0078549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports that \"In single-step retraction, the learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate, compared to 0.0989 and 47.0% for the oracle,\" yet later claims the oracle analysis shows it is \"effectively near-optimal even at low compute.\" The paper does not explicitly explain how the estimator can outperform this full-state oracle, so the reviewer’s inconsistency concern is not resolved.",
+            "cost_usd": 0.019909
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Section III.A that the learned estimator achieves a higher mean exposure improvement (0.1055) and success rate (50.0%) compared to the oracle (0.0989 and 47.0%), but provides no explanation for why the learned estimator outperforms the ground-truth full-state oracle.",
+            "cost_usd": 0.006672
+          }
+        ],
+        "cost_usd": 0.0344359
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 2,
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "numerics": 0.04873800000000006,
+    "mathematics": 0.016101000000000032,
+    "general": 0.0344359
+  },
+  "extractor_cost_usd": 0.011935999999999919,
+  "total_cost_usd": 0.1112109
+}

@@ -1,0 +1,173 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-6abef561553b",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The transcription of the matrix expressions was confirmed faithful. Wolfram could not evaluate the symbolic matrix conformability check, so the verdict rests on mathematical reasoning. Checking dimensions directly: for the V update, U^⊤U is (b×b), adding εI gives (b×b), its inverse is (b×b), multiplied by U^⊤ (b×m) gives (b×m), then by R (m×n) gives (b×n), and transposing yields (n×b), which matches V's declared shape. For the U update, RV is (m×b), V^⊤V is (b×b), adding εI gives (b×b), its inverse is (b×b), and RV times that inverse is (m×b), matching U's declared shape. Both updates are dimensionally well-formed.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "critical",
+          "notes": "The transcription of the matrix expressions was confirmed faithful. Wolfram could not evaluate the symbolic matrix conformability check, so the verdict rests on mathematical reasoning. Checking dimensions directly: for the V update, U^⊤U is (b×b), adding εI gives (b×b), its inverse is (b×b), multiplied by U^⊤ (b×m) gives (b×m), then by R (m×n) gives (b×n), and transposing yields (n×b), which matches V's declared shape. For the U update, RV is (m×b), V^⊤V is (b×b), adding εI gives (b×b), its inverse is (b×b), and RV times that inverse is (m×b), matching U's declared shape. Both updates are dimensionally well-formed.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.02896099999999996
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-d25192ff4286",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Appendix A's Proposition 2 and Corollary 1 prove arbitrary convergence only for an 'augmented' algorithm that adds a single-entry fallback step, but the paper states in Sec. 5 'In practice the safeguard never activates' and the actual method in Sec. 2.3 and experiments never use this fallback. Yet the Abstract claims 'ExTernD approaches bf16 accuracy arbitrarily closely' and Sec. 1 calls it 'to our knowledge the only ternary quantization that can provably reach any target accuracy,' presenting the augmented guarantee as if it applies to the implemented method.",
+        "evidence": {
+          "claim": "The claimed convergence guarantees for ExTernD apply only to an augmented algorithm with a single-entry fallback, which is not part of the described or implemented method, yet the Abstract and main text state these claims as if proved for the actual method.",
+          "excerpt": "The strongest convergence and “arbitrarily close to bf16” claims are not established for the algorithm actually described and evaluated. The main method in Sec. 2.3 uses greedy ALS plus deflation, while Appendix A proves arbitrary convergence only after augmenting each step with a best single-entry fallback. The Abstract, Sec. 1, Sec. 2.1, and Conclusion state or imply that ExTernD itself monotonically reaches any target accuracy, but the safeguard is not part of the stated algorithm or experiments."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix A's Proposition 2 and Corollary 1 prove arbitrary convergence only for an 'augmented' algorithm that adds a single-entry fallback step, but the paper states in Sec. 5 'In practice the safeguard never activates' and the actual method in Sec. 2.3 and experiments never use this fallback. Yet the Abstract claims 'ExTernD approaches bf16 accuracy arbitrarily closely' and Sec. 1 calls it 'to our knowledge the only ternary quantization that can provably reach any target accuracy,' presenting the augmented guarantee as if it applies to the implemented method.",
+            "cost_usd": 0.0060822
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 2.3 gives the actual method as plain greedy ALS — \"With residual R ← A, for i = 1, . . . , k: 1. Alternating ternary fit ... 3. Deflate\" — but Appendix A proves arbitrary convergence only for a modified procedure: \"Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair ... Then ||R_k||_F^2 <= (1 - 1/mn)^k ||A||_F^2 -> 0.\" The Abstract nevertheless states \"ExTernD approaches bf16 accuracy arbitrarily closely.\"",
+            "cost_usd": 0.018642500000000003
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's convergence proof in Appendix A (Proposition 2) requires the algorithm to 'Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair', but this safeguard is not part of the primary method described in Section 2.3.",
+            "cost_usd": 0.002380933333333333
+          }
+        ],
+        "cost_usd": 0.027105633333333337
+      },
+      {
+        "flag_id": "fp-ba94a3d20a85",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper itself acknowledges in Sec. 5: 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.' The Sec. 3.6 comparison is only at the tensor reconstruction energy level, not end-to-end perplexity or downstream benchmarks.",
+        "evidence": {
+          "claim": "The empirical comparison against ternary baselines is insufficient for broad claims about fixed-plane methods; full end-to-end evaluation against established ternary schemes is missing.",
+          "excerpt": "The empirical comparison against ternary baselines is not yet sufficient for the paper’s broad claims about fixed-plane methods. Sec. 3.6 compares PT2-LLM and PTQTP only at the tensor reconstruction level, while Sec. 3.5 gives end-to-end perplexity only for ExTernD and k-quant baselines; Sec. 5 acknowledges that full end-to-end evaluation against established ternary schemes is missing."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself acknowledges in Sec. 5: 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment: our structural and representational claims against them are proven (Sec. 2.1), but end-to-end task accuracy is not yet measured.' The Sec. 3.6 comparison is only at the tensor reconstruction energy level, not end-to-end perplexity or downstream benchmarks.",
+            "cost_usd": 0.0060822
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s ternary-baseline comparison is indeed only tensor-level: Sec. 3.6 says it compares \"weight-reconstruction energy\" against PT2-LLM and PTQTP, while the only end-to-end PPL table (Table 3) includes ExTernD and k-quant baselines, not those ternary methods. Sec. 5 explicitly concedes this: \"We compare only against fixed-capacity baselines at the tensor level, but full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment... end-to-end task accuracy is not yet measured.\"",
+            "cost_usd": 0.018642500000000003
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The author explicitly admits this limitation in Section 5, stating that 'full end-to-end evaluation against established ternary schemes [5, 2] is the most valuable missing experiment' and 'end-to-end task accuracy is not yet measured.'",
+            "cost_usd": 0.002380933333333333
+          }
+        ],
+        "cost_usd": 0.027105633333333337
+      },
+      {
+        "flag_id": "fp-1a13bdade7bc",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper's Abstract and Conclusion make broad claims about 'any target accuracy' and making 'ternary LLMs viable' without the qualifications noted in Sec. 5: 'We have not tested above 4B or on matrices larger than ~9216×2560, so the behaviour of µ at 30B–70B+ is unknown. Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.' These limitations are not reflected in the headline claims.",
+        "evidence": {
+          "claim": "Headline scope claims about accuracy and viability are overstated relative to the tested regime; the Abstract and Conclusion state broad claims not qualified by the limited model sizes and benchmark coverage actually tested.",
+          "excerpt": "Several headline scope claims are overstated relative to the tested regime. The Abstract and Conclusion say ExTernD can approach “any quantization level,” “any target accuracy,” and make “ternary LLMs viable,” while the Results cover only matrices from three models up to 4B scale and one full perplexity run on Qwen3.5-4B. Sec. 5 correctly notes that behavior above 4B, downstream benchmarks, long-context checks, and fused kernels are untested, but the Abstract and Conclusion do not carry these qualifications."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's Abstract and Conclusion make broad claims about 'any target accuracy' and making 'ternary LLMs viable' without the qualifications noted in Sec. 5: 'We have not tested above 4B or on matrices larger than ~9216×2560, so the behaviour of µ at 30B–70B+ is unknown. Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.' These limitations are not reflected in the headline claims.",
+            "cost_usd": 0.0060822
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The headline claims are broad — e.g. the title/abstract says \"Ternary LLM PTQ with Accuracy Approaching Any Quantization Level\" and the conclusion says \"This is what makes ternary LLMs viable\" — but Sec. 5 sharply limits the tested regime: \"We have not tested above 4B... Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\" Those qualifications are not reflected in the Abstract/Conclusion.",
+            "cost_usd": 0.018642500000000003
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 5 explicitly acknowledges the narrow evaluation regime ('We have not tested above 4B' and 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks'), confirming that the broad claims of viability in the Abstract and Conclusion are overstated relative to the tested scope.",
+            "cost_usd": 0.002380933333333333
+          }
+        ],
+        "cost_usd": 0.027105633333333337
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.02896099999999996,
+    "general": 0.08131690000000001
+  },
+  "extractor_cost_usd": 0.021458000000000046,
+  "total_cost_usd": 0.13173590000000002
+}

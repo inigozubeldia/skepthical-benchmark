@@ -1,0 +1,356 @@
+{
+  "paper_id": "2607.14287",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-71f21549a91d",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper's related work section is brief and the baselines compared are limited (UNet++, SAM, MedSAM, SAM-Med2D, Conv-LoRA-SAM). The paper does not discuss or compare with other two-stage or curriculum adaptation strategies beyond citing the general concept, and the three contributions are indeed combinations of Conv-LoRA [26] and sequential fine-tuning without a broader comparative discussion of similar strategies.",
+        "evidence": {
+          "claim": "The paper overstates its novelty and does not sufficiently discuss or compare with related two-stage or curriculum adaptation strategies.",
+          "excerpt": "Novelty and positioning are somewhat overstated. The three declared contributions largely combine already-published components ... At present the paper contrasts XCT-SAM mainly with single-stage Conv-LoRA-SAM [18]; more general comparators are missing."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper's related work section is brief and the baselines compared are limited (UNet++, SAM, MedSAM, SAM-Med2D, Conv-LoRA-SAM). The paper does not discuss or compare with other two-stage or curriculum adaptation strategies beyond citing the general concept, and the three contributions are indeed combinations of Conv-LoRA [26] and sequential fine-tuning without a broader comparative discussion of similar strategies.",
+            "cost_usd": 0.003330825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper claims novelty with “We introduce a two-stage material-to-XCT adaptation strategy” and compares against “UNet++, SAM, MedSAM, SAM-Med2D, and Conv-LoRA-SAM,” but the PDF does not discuss prior two-stage/curriculum adaptation methods. Still, whether this makes the novelty claim genuinely overstated cannot be determined from the paper alone.",
+            "cost_usd": 0.007584312500000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares its method against zero-shot models and single-stage medical adaptations like \"MedSAM [23] and SAM-Med2D [24]\", but lacks discussion or comparison with broader curriculum or two-stage domain adaptation methodologies.",
+            "cost_usd": 0.00176115
+          }
+        ],
+        "cost_usd": 0.012676287500000001
+      },
+      {
+        "flag_id": "fp-c63c80b4ad3f",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper provides no ablation comparing XCT-SAM Stage II initialized from natural-image SAM vs. alloy-adapted SAM. The ablation studies in Tables II and III only examine rank and loss function; there is no direct test of 'Stage I vs. no Stage I' to validate that the intermediate alloy-microstructure stage is essential, which is the paper's central claim.",
+        "evidence": {
+          "claim": "The central claim that alloy-microstructure intermediate adaptation is essential is not tested because appropriate ablation experiments are missing.",
+          "excerpt": "This is the most important weakness. The paper's central claim — that the alloy-microstructure intermediate stage is essential — is not directly tested. Needed experiments: ... Without these, the two-stage claim is not evidenced."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides no ablation comparing XCT-SAM Stage II initialized from natural-image SAM vs. alloy-adapted SAM. The ablation studies in Tables II and III only examine rank and loss function; there is no direct test of 'Stage I vs. no Stage I' to validate that the intermediate alloy-microstructure stage is essential, which is the paper's central claim.",
+            "cost_usd": 0.003330825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does directly test the value of the intermediate stage via its single-stage baseline: “Following the direct synthetic-XCT adaptation setting of [18], we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage used in XCT-SAM.” Table I then compares this “Conv-LoRA-SAM” baseline against “XCT-SAM (ours).”",
+            "cost_usd": 0.007584312500000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer incorrectly claims the two-stage approach is not ablated. The paper explicitly tests the essentiality of the intermediate stage by evaluating the Conv-LoRA-SAM baseline, which it notes is fine-tuned \"without the intermediate alloy-microstructure [34] adaptation stage used in XCT-SAM.\"",
+            "cost_usd": 0.00176115
+          }
+        ],
+        "cost_usd": 0.012676287500000001
+      },
+      {
+        "flag_id": "fp-8b12eac16cb0",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports error bars in Fig. 5 as '±1 std' but does not state the number of random seeds or repeated runs used. No significance tests are reported anywhere, leaving the 'consistently outperforms' claim without statistical backing.",
+        "evidence": {
+          "claim": "The statistical significance of reported results is unsupported; number of runs, nature of error bars, and significance tests are missing.",
+          "excerpt": "Please: - Report the number of seeds / repeats used to compute the standard deviations. - Add explicit significance tests ... the \"consistently outperforms\" claim needs stronger statistical backing."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports error bars in Fig. 5 as '±1 std' but does not state the number of random seeds or repeated runs used. No significance tests are reported anywhere, leaving the 'consistently outperforms' claim without statistical backing.",
+            "cost_usd": 0.003330825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The only statistical note is that in Fig. 5, “the error bars indicate ±1 std.” Nowhere in the paper are the number of runs/seeds or any significance tests reported, so the claim that XCT-SAM “consistently outperforms” is not statistically substantiated.",
+            "cost_usd": 0.007584312500000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the paper clarifies the nature of the error bars by stating they \"indicate ±1 std\" in the Figure 5 caption, it fails to report the number of independent seeds/runs used to compute these deviations, and no statistical significance tests are provided.",
+            "cost_usd": 0.00176115
+          }
+        ],
+        "cost_usd": 0.012676287500000001
+      },
+      {
+        "flag_id": "fp-fb0eb14d0142",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges 'we generate threshold-derived binary reference masks following the image-processing pipeline of [33]' but does not discuss or quantify the potential bias introduced by using these as ground truth rather than manual annotations, nor does it control for this limitation.",
+        "evidence": {
+          "claim": "The NIST reference masks used as ground truth are threshold-derived, not manual, potentially biasing results; this is not adequately discussed or controlled.",
+          "excerpt": "The authors state that the NIST reference masks were generated by an image-processing pipeline ... The evaluation is effectively measuring agreement with an Otsu-like thresholding pipeline, not with true defects."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges 'we generate threshold-derived binary reference masks following the image-processing pipeline of [33]' but does not discuss or quantify the potential bias introduced by using these as ground truth rather than manual annotations, nor does it control for this limitation.",
+            "cost_usd": 0.003330825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states, “Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33],” and Fig. 7 reiterates that “Ground Truth denotes threshold-derived reference masks.” The PDF does not provide a quantitative control or deeper analysis of the bias this may introduce.",
+            "cost_usd": 0.007584312500000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors explicitly note that \"Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33]\", but they do not discuss or control for the potential bias of evaluating against algorithmic thresholding rather than true defect bounds.",
+            "cost_usd": 0.00176115
+          }
+        ],
+        "cost_usd": 0.012676287500000001
+      },
+      {
+        "flag_id": "fp-1418ea7fff02",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance, particularly under out-of-distribution settings [18]' but provides no direct ablation comparing binary vs. multi-class training in their own experimental setup.",
+        "evidence": {
+          "claim": "Training separate binary models for pores and inclusions is only briefly justified, and the impact of this design vs. a single multi-class model is not directly ablated.",
+          "excerpt": "This design choice — and its comparison against a joint multi-class model — is only briefly justified by citation of [18]. Since class imbalance is a central motivating problem, a direct ablation ... would strengthen the paper."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance, particularly under out-of-distribution settings [18]' but provides no direct ablation comparing binary vs. multi-class training in their own experimental setup.",
+            "cost_usd": 0.003330825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The justification is only citation-based: “We train two independent binary segmentation models... We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance.” No direct ablation against a single joint multi-class model is reported.",
+            "cost_usd": 0.007584312500000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The use of separate binary models is justified solely via a citation: \"We adopt this multi-model formulation because prior work reported that joint multi-class training under extreme imbalance leads to reduced generalization performance... [18]\". A direct ablation comparing this setup against a joint multi-class model on the authors' own architecture is missing.",
+            "cost_usd": 0.00176115
+          }
+        ],
+        "cost_usd": 0.012676287500000001
+      },
+      {
+        "flag_id": "fp-4eea2217a73d",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The alloy-microstructure dataset [34] is described only as 'an alloy-microstructure dataset [34] as an intermediate domain' and 'a real metallic texture and microstructural patterns,' with Stage-I details limited to 'learning rate of 2×10^−4, a batch size of 8, and trained for up to 15 epochs.' No image count, resolution, modality, or class information is provided.",
+        "evidence": {
+          "claim": "Insufficient description of the alloy-microstructure dataset and Stage-I training setup prevents reproducibility and evaluation of generalizability.",
+          "excerpt": "The alloy-microstructure dataset [34] is described only in one line. Please add: - Number of images, resolution, imaging modality (SEM? optical? XCT slice?), classes if any. - Whether Stage-I is supervised segmentation ..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The alloy-microstructure dataset [34] is described only as 'an alloy-microstructure dataset [34] as an intermediate domain' and 'a real metallic texture and microstructural patterns,' with Stage-I details limited to 'learning rate of 2×10^−4, a batch size of 8, and trained for up to 15 epochs.' No image count, resolution, modality, or class information is provided.",
+            "cost_usd": 0.003330825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Stage I is only briefly described as “we use an alloy-microstructure dataset [34] as an intermediate domain” and “In Stage 1, we perform intermediate domain adaptation on the alloy dataset [34] using a learning rate of 2 × 10−4, a batch size of 8, and trained for up to 15 epochs.” The paper does not state the alloy dataset size, image modality/resolution, labels, or the exact supervised Stage-I task.",
+            "cost_usd": 0.007584312500000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces the intermediate training data by stating, \"For Stage-I adaptation, we use an alloy-microstructure dataset [34] as an intermediate domain\", but omits necessary reproducible details such as the number of images, imaging modality, and the specific label setup used for the intermediate supervision.",
+            "cost_usd": 0.00176115
+          }
+        ],
+        "cost_usd": 0.012676287500000001
+      },
+      {
+        "flag_id": "fp-ba27e75f8305",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'Following the direct synthetic-XCT adaptation setting of [18], we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage' but does not explicitly confirm that the rank, expert count, loss, optimizer, and learning-rate schedule are identical to XCT-SAM Stage II, leaving open the possibility of confounded hyperparameter differences.",
+        "evidence": {
+          "claim": "It is not confirmed that the Conv-LoRA-SAM baseline is trained with an identical regime as the proposed method, making reported improvements potentially attributable to hyperparameter differences.",
+          "excerpt": "It is important that Conv-LoRA-SAM in Table I is trained under *identical* rank, expert count, loss, optimizer, learning-rate schedule, and epochs as XCT-SAM Stage II. Please confirm this explicitly."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'Following the direct synthetic-XCT adaptation setting of [18], we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage' but does not explicitly confirm that the rank, expert count, loss, optimizer, and learning-rate schedule are identical to XCT-SAM Stage II, leaving open the possibility of confounded hyperparameter differences.",
+            "cost_usd": 0.003330825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper gives only a general fairness statement: “For fair comparison, all trainable baselines are optimized using the same XCT training data, preprocessing pipeline, and post-processing procedures where applicable.” It does not explicitly confirm identical Conv-LoRA-specific rank, expert count, loss, optimizer, schedule, or epoch settings for the Conv-LoRA-SAM baseline.",
+            "cost_usd": 0.007584312500000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that \"all trainable baselines are optimized using the same XCT training data, preprocessing pipeline, and post-processing procedures\", but it does not explicitly confirm that the Conv-LoRA-SAM baseline employs the identical hyperparameters (rank, epochs, LR schedule, and expert count) as Stage II of the proposed method.",
+            "cost_usd": 0.00176115
+          }
+        ],
+        "cost_usd": 0.012676287500000001
+      },
+      {
+        "flag_id": "fp-8d37dfb43623",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The 'real-world' evaluation uses only 'the NIST XCT dataset from the CoCr laser powder bed fusion study' with a single material system. The paper claims general industrial applicability but does not soften these claims or include additional real-scan datasets from different materials or machines.",
+        "evidence": {
+          "claim": "The claim of general industrial applicability is unsupported due to evaluation on a single dataset; additional datasets or softer claims are needed.",
+          "excerpt": "The \"real-world\" evaluation is a single NIST dataset comprising CoCr laser-powder-bed-fusion parts. Claims of general industrial applicability should be softened accordingly, or additional real-scan datasets ... added."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The 'real-world' evaluation uses only 'the NIST XCT dataset from the CoCr laser powder bed fusion study' with a single material system. The paper claims general industrial applicability but does not soften these claims or include additional real-scan datasets from different materials or machines.",
+            "cost_usd": 0.003330825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "For real data, the paper says, “To evaluate cross-distribution generalization on real XCT images, we use the NIST XCT dataset,” i.e., a single real dataset, yet it makes broader claims such as “We validate XCT-SAM on both synthetic and real-world Out of Distribution (OoD) benchmarks” and “XCT-SAM provides a scalable framework for AM XCT defect segmentation.” The paper does not present additional real industrial datasets or explicitly soften those broader applicability claims.",
+            "cost_usd": 0.007584312500000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The real-world evaluation relies exclusively on one source, describing it as \"the NIST XCT dataset from the CoCr laser powder bed fusion study\", yet the paper asserts strong cross-distribution generalization and industrial scalability without evaluating additional real datasets or softening its claims.",
+            "cost_usd": 0.00176115
+          }
+        ],
+        "cost_usd": 0.012676287500000001
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.10141030000000001
+  },
+  "extractor_cost_usd": 0.014709999999999945,
+  "total_cost_usd": 0.11612029999999995
+}

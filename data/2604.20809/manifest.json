@@ -1,0 +1,369 @@
+{
+  "paper_id": "2604.20809",
+  "arxiv_url": "https://arxiv.org/abs/2604.20809",
+  "rotation_seed": 776079517,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S2",
+      "type": 2
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "morion2026.tex",
+          "original_text": "It has been known since work by Tolman in the 1930s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+          "injected_text": "It has been known since work by Tolman in the 1930s that cyclic cosmology does not suffer from the problem of entropy growth \\cite{Tolman:1931fei}.",
+          "rationale": "Tolman (1931) explicitly argued that entropy growth obstructs periodic/cyclic behaviour of the universe; reversing 'suffers from' to 'does not suffer from' inverts the polarity of the cited conclusion while leaving the cite key intact, so a careful reader of Tolman 1931 returns CONTRADICTED.",
+          "ground_truth_description": "Polarity of the Tolman 1931 attribution is flipped: the sentence now claims cyclic cosmology does NOT suffer from entropy growth, the opposite of what the cited paper actually concludes.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Tolman:1931fei",
+            "injected_cite_key": "Tolman:1931fei",
+            "claim_sentence_verbatim": "It has been known since work by Tolman in the 1930s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+            "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete), opening sentence",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "morion2026.tex",
+          "original_text": "    \\begin{equation}\n        F\\left(\\gamma\\right) = \\frac{3}{\\gamma},\n    \\end{equation}\n    if $\\mathcal{C}$ is null.",
+          "injected_text": "    \\begin{equation}\n        F\\left(\\gamma\\right) = \\frac{2}{\\gamma},\n    \\end{equation}\n    if $\\mathcal{C}$ is null.",
+          "rationale": "This proceedings paper is a weak target for the abstract_vs_body_match cell: the abstract contains no numerical values and the body has no decimal headline measurements, so a true second-decimal drift is unavailable. Best available substitute is the constant 3 in F(gamma)=3/gamma for null geodesics, which appears both at Eq. (eq:FNull) earlier in Section 3 and again in the formal Theorem statement; perturbing only the Theorem-statement occurrence to 2/gamma creates a single cross-location numerical contradiction in the same spirit as the cell's mechanism, with the original value still visibly present at the paired location.",
+          "ground_truth_description": "Changed the constant in F(gamma) for the null-geodesic case from 3/gamma to 2/gamma in the formal Theorem statement of Section 3, leaving the matching value 3/gamma intact at the earlier derivation in Eq. (eq:FNull).",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "3",
+            "value_after_raw": "2",
+            "value_before_float": 3.0,
+            "value_after_float": 2.0,
+            "location_cue": "F\\left(\\gamma\\right) = \\frac{3}{\\gamma}, \\end{equation} if $\\mathcal{C}$ is null.",
+            "paired_location": "Section 3 (BGV Theorem: General Case), Eq. (eq:FNull): the line ending '= -\\int{\\frac{3 d\\gamma}{\\gamma^2}} = \\frac{3}{\\gamma}.', which still gives the coefficient as 3.",
+            "quantity_label": "Coefficient of 1/gamma in F(gamma) for the null-geodesic branch (derives from spatial dimensionality, d=3)",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "morion2026.tex",
+          "original_text": "    \\gamma^2 = \\frac{1}{1 - v^2},",
+          "injected_text": "    \\gamma^2 = \\frac{1}{\\sqrt{1 - v^2}},",
+          "rationale": "Replaces the canonical Lorentz-factor identity gamma^2 = 1/(1 - v^2) with the structurally similar but algebraically incorrect gamma^2 = 1/sqrt(1 - v^2) (which is in fact the formula for gamma, not gamma^2) -- a plausible authorial slip that Wolfram symbolic equality refutes for any 0 < v < 1.",
+          "ground_truth_description": "In the displayed equation defining the squared Lorentz boost, the right-hand side 1/(1 - v^2) was replaced by 1/sqrt(1 - v^2); the modified relation conflates gamma with gamma^2 and is algebraically false except at v = 0.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 1 (Geodesic Completeness in FRW spacetime), displayed equation defining gamma^2 immediately after Eq. (\\ref{eq:dtdstimelike})",
+            "original_fragment_latex": "\\gamma^2 = \\frac{1}{1 - v^2}",
+            "injected_fragment_latex": "\\gamma^2 = \\frac{1}{\\sqrt{1 - v^2}}",
+            "full_equation_latex_before": "\\gamma^2 = \\frac{1}{1 - v^2},",
+            "full_equation_latex_after": "\\gamma^2 = \\frac{1}{\\sqrt{1 - v^2}},",
+            "term_role": "identity replacement (canonical Lorentz-factor identity)",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "morion2026.tex",
+          "original_text": "We assume that the bounce is rapid enough that we can take $H\\left(t\\right)$ to be discontinuous across the bounce at the boundary of the interval, with scale factor $a\\left(t\\right)$ continuous.",
+          "injected_text": "We assume that the bounce is rapid enough that we can take $H\\left(t\\right)$ to be discontinuous across the bounce at the boundary of the interval, with scale factor $a\\left(t\\right)$ continuous, and we require that the Null Energy Condition holds throughout the entire cycle, including at the bounce itself.",
+          "rationale": "Inserts a setup-level methodological claim that the NEC is imposed throughout the cycle including the bounce; this directly contradicts the explicit subsequent statement that the NEC is required to hold 'everywhere except the bounce', and is also inconsistent with the bounce dynamics actually used (a sign flip in H requires \\dot H > 0, i.e. NEC violation). A reviewer cross-checking Methods against the body would flag this as a major internal inconsistency.",
+          "ground_truth_description": "Inserted a clause into the IS-cyclic-model setup asserting that the Null Energy Condition is imposed throughout the entire cycle including the bounce, contradicting the paper's later requirement that the NEC hold everywhere except the bounce.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methodology_setup_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete)",
+            "affected_span_verbatim": "We assume that the bounce is rapid enough that we can take $H\\left(t\\right)$ to be discontinuous across the bounce at the boundary of the interval, with scale factor $a\\left(t\\right)$ continuous."
+          },
+          "proposer_agent": "injector.general.S3.t3.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "morion2026.tex",
+          "original_text": "It has been known since work by Tolman in the 1930s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+          "injected_text": "It has been known since work by Tolman in the 1920s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+          "rationale": "This paper is a weak target for a 1-2 sigma quantitative-qualifier mis-quote: it is a theoretical proceedings with no numerical measurements attributed to any cited paper, so no explicit +/- sigma value exists to perturb in the [1 sigma, 2 sigma] band. The closest available quantitative qualifier attributed to a citation is the decade qualifier on Tolman; shifting '1930s' to '1920s' creates a mild numerical mis-quote (the cited Tolman paper is from 1931) that a casual reader does not catch but a careful reader comparing the sentence to the cited paper flags. Cell-fit tension: this is a discrete decade label, not a continuous mean +/- sigma; mutation_kind is the closest enum match.",
+          "ground_truth_description": "Changed the decade attributed to Tolman from '1930s' to '1920s' in the sentence introducing the entropy-growth problem in cyclic cosmology, while leaving the cite key Tolman:1931fei intact.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Tolman:1931fei",
+            "injected_cite_key": "Tolman:1931fei",
+            "claim_sentence_verbatim": "It has been known since work by Tolman in the 1930s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+            "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete)",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "morion2026.tex",
+          "original_text": "A simplified example is an expanding phase dominated by a cosmological constant $w_+ = -1$, so that $H_+ = \\mathrm{const.}$, and $a_+\\left(t\\right) = e^{H t}$.",
+          "injected_text": "A simplified example is an expanding phase dominated by a cosmological constant $w_+ = -1$, so that $H_+ = \\mathrm{const.}$, and $a_+\\left(t\\right) = e^{H t}$. In typical realizations of this scenario, the expanding phase accounts for roughly 70\\% of the total cycle duration, the contracting phase about 25\\%, and the bounce transition the remaining 15\\%.",
+          "rationale": "Cell requires a percent_to_100 failure, but this theoretical proceedings has zero native percentage breakdowns; per the operating instructions for weak-target papers, I picked the most plausible insertion site (the ekpyrotic cycle decomposition) and added a three-part breakdown of cycle duration (70+25+15=110%), so percent_to_100 FAILs blatantly with >10% relative excess on the sum (triggering the major upgrade). Constraint tension: the inserted sentence is somewhat artefactual because no realistic equivalent statistic exists in this paper.",
+          "ground_truth_description": "Inserted a fabricated three-way percentage breakdown of cycle duration (70%/25%/15%) into the ekpyrotic example discussion; the parts sum to 110% rather than 100%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_to_100",
+            "value_before_raw": "(no percentages present)",
+            "value_after_raw": "70% + 25% + 15% = 110%",
+            "value_before_float": 100.0,
+            "value_after_float": 110.0,
+            "location_cue": "the expanding phase accounts for roughly 70\\% of the total cycle duration, the contracting phase about 25\\%, and the bounce transition the remaining 15\\%",
+            "paired_location": null,
+            "quantity_label": "Fractional decomposition of total cycle duration into expanding, contracting, and bounce phases",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "morion2026.tex",
+          "original_text": "    \\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu} + u^\\mu u^\\nu",
+          "injected_text": "    \\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu}",
+          "rationale": "Deletes the +u^mu u^nu term at the '+' operator boundary in the load-bearing definition of the spatial projection tensor used throughout the general BGV proof; Wolfram refutes against the required projection property lambda_{mu nu} u^nu = 0.",
+          "ground_truth_description": "Removed the +u^mu u^nu term from the definition of the spatial projection tensor lambda^{mu nu}, so it is now equated to g^{mu nu} alone instead of g^{mu nu} + u^mu u^nu.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3 (BGV Theorem: General Case), definition of the spatial projection tensor",
+            "original_fragment_latex": "\\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu} + u^\\mu u^\\nu",
+            "injected_fragment_latex": "\\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu}",
+            "full_equation_latex_before": "\\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu} + u^\\mu u^\\nu",
+            "full_equation_latex_after": "\\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu}",
+            "term_role": "timelike-projector subtraction term (u^mu u^nu) that turns the inverse metric g^{mu nu} into the spatial projection tensor orthogonal to u^mu",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "morion2026.tex",
+          "original_text": "The second law of thermodynamics operates identically whether the universe is expanding or contracting",
+          "injected_text": "The second law of thermodynamics operates identically whether the the universe is expanding or contracting",
+          "rationale": "Introduces an accidental duplication of the article 'the' — a classic typo/word-repetition cosmetic defect that does not change meaning, plausibly missed in proofreading.",
+          "ground_truth_description": "Duplicated the word 'the' in the sentence about the second law of thermodynamics in Section 2 (Ijjas-Steinhardt Cyclic Model), creating a 'the the' repetition typo.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D2",
+            "change_kind": "word_repetition",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete)",
+            "affected_span_verbatim": "The second law of thermodynamics operates identically whether the universe is expanding or contracting, and the growth of entropy with time prevents cyclic behavior."
+          },
+          "proposer_agent": "injector.general.S1.t1.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "morion2026.tex",
+          "original_text": "The well-known Borde-Guth-Vilenkin Theorem shows that inflationary spacetimes are generically geodesically past-incomplete, necessitating the existence of a pre-inflationary boundary of some sort, possibly singular.",
+          "injected_text": "The well-known Borde-Guth-Vilenkin Theorem shows that all expanding spacetimes are generically geodesically past-incomplete, necessitating the existence of a pre-inflationary boundary of some sort, possibly singular.",
+          "rationale": "The cited Borde-Guth-Vilenkin paper explicitly conditions its past-incompleteness conclusion on inflationary spacetimes (those with positive average expansion rate H_av along a past-directed geodesic); replacing 'inflationary' with the broader 'all expanding' drops that scope qualifier and over-generalises to spacetimes such as loitering / asymptotically-Minkowski models which are expanding but past-complete, while leaving the cite key, the directional claim, and the methodological language (BGV theorem, past-incompleteness) untouched.",
+          "ground_truth_description": "In the abstract, the scope qualifier 'inflationary' attached to the BGV-theorem statement was replaced with 'all expanding', over-generalising the cited claim to spacetimes for which Borde-Guth-Vilenkin do not establish past-incompleteness.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Borde:2001nh",
+            "injected_cite_key": "Borde:2001nh",
+            "claim_sentence_verbatim": "The well-known Borde-Guth-Vilenkin Theorem shows that inflationary spacetimes are generically geodesically past-incomplete, necessitating the existence of a pre-inflationary boundary of some sort, possibly singular.",
+            "section_location": "Abstract",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "morion2026.tex",
+          "original_text": "        F\\left(\\gamma\\right) = \\frac{3}{2} \\ln\\left(\\frac{\\gamma + 1}{\\gamma - 1}\\right),",
+          "injected_text": "        F\\left(\\gamma\\right) = \\frac{2}{3} \\ln\\left(\\frac{\\gamma + 1}{\\gamma - 1}\\right),",
+          "rationale": "The abstract of this paper contains no numerical content, so the strict cell target (adjacent-digit swap on an abstract headline number with a body anchor) has no eligible site. The best available realisation is a body-vs-body numerical mismatch: the timelike F(gamma) coefficient 3/2 is stated in eq:FTimelike and then quoted again in the Theorem's proof block; swapping numerator and denominator in the proof's restatement (3/2 -> 2/3) creates an internal numerical inconsistency between two locations stating the same closed-form result, which abstract_vs_body_match can flag as a cross-location quantitative contradiction.",
+          "ground_truth_description": "In the Theorem's proof block, the prefactor of ln((gamma+1)/(gamma-1)) in the timelike F(gamma) was changed from 3/2 to 2/3, contradicting eq:FTimelike where the same quantity is correctly given as 3/2.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "3/2",
+            "value_after_raw": "2/3",
+            "value_before_float": 1.5,
+            "value_after_float": 0.6666666666666666,
+            "location_cue": "F\\left(\\gamma\\right) = \\frac{2}{3} \\ln\\left(\\frac{\\gamma + 1}{\\gamma - 1}\\right), if $\\mathcal{C}$ is timelike",
+            "paired_location": "eq:FTimelike (Section: BGV Theorem: General Case), where the same coefficient is correctly given as 3/2 in the line '= \\frac{3}{2} \\ln\\left(\\frac{\\gamma + 1}{\\gamma - 1}\\right).'",
+            "quantity_label": "Prefactor of ln((gamma+1)/(gamma-1)) in the timelike F(gamma) appearing in the generalized BGV theorem",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "morion2026.tex",
+          "original_text": "    \\gamma^2 = \\frac{1}{1 - v^2},",
+          "injected_text": "    \\gamma^2 = \\frac{1}{1 + v^2},",
+          "rationale": "Subtle sign perturbation on the canonical special-relativistic Lorentz factor gamma^2 = 1/(1 - v^2) — a textbook field-canonical identity imported into the paper to define the boost in the geodesic-completeness derivation; flipping the minus sign to a plus still typesets and reads naturally but is unmistakably wrong against the canonical form a domain reader would recall, which is exactly the Stage-1b knowledge-audit pathway this cell calibrates.",
+          "ground_truth_description": "In the displayed equation defining the Lorentz boost factor, the denominator was changed from (1 - v^2) to (1 + v^2), inverting the sign relative to the canonical Lorentz factor.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 1 (Geodesic Completeness in FRW spacetime), displayed equation defining gamma^2 as the Lorentz boost factor",
+            "original_fragment_latex": "\\gamma^2 = \\frac{1}{1 - v^2}",
+            "injected_fragment_latex": "\\gamma^2 = \\frac{1}{1 + v^2}",
+            "full_equation_latex_before": "\\gamma^2 = \\frac{1}{1 - v^2},",
+            "full_equation_latex_after": "\\gamma^2 = \\frac{1}{1 + v^2},",
+            "term_role": "denominator sign in the canonical special-relativistic Lorentz factor (textbook field-canonical form)",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t1.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "morion2026.tex",
+          "original_text": "where $\\tau$ is the duration of the expanding phase.",
+          "injected_text": "where $\\tau$ is the duration of the contracting phase.",
+          "rationale": "The setup paragraph in Sec. 2 now defines $\\tau$ as the duration of the contracting phase, but the subsequent simplified-example calculation $N_+ = \\int_0^\\tau H_+(t)\\,dt \\simeq H_+\\tau$ continues to treat $[0,\\tau]$ as the expanding phase (as does the entropy condition where the upper limit of the $H_+$ integral is $\\tau$ and the lower limit of the $H_-$ integral is $\\tau$), creating an internal Methods/Results inconsistency about which segment of the cycle $\\tau$ labels.",
+          "ground_truth_description": "Changed the definition of the cycle-segment duration $\\tau$ from 'expanding phase' to 'contracting phase' in the IS cyclic-model setup, while leaving the downstream calculations (which integrate the expansion rate $H_+$ from 0 to $\\tau$ to get the e-folds of expansion) untouched.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methods_results_inconsistency",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete)",
+            "affected_span_verbatim": "where $\\tau$ is the duration of the expanding phase."
+          },
+          "proposer_agent": "injector.general.S2.t2.v3"
+        }
+      ]
+    }
+  ]
+}

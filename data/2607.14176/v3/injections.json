@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "making them unsuitable for real-time NR-V2X operation \\cite{Chen2024MILP}.",
+    "injected_text": "making them highly suitable for real-time NR-V2X operation \\cite{Chen2024MILP}.",
+    "rationale": "Reverses the direction of the claim, asserting that MILP's complexity growth makes it suitable for real-time operation, directly contradicting the cited paper on the limitations of MILP.",
+    "ground_truth_description": "Changed 'unsuitable' to 'highly suitable' to reverse the cited paper's conclusion regarding the applicability of MILP to real-time operations.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Chen2024MILP",
+      "injected_cite_key": "Chen2024MILP",
+      "claim_sentence_verbatim": "While these methods can achieve optimal or near-optimal solutions, their computational complexity grows rapidly with network size and graph density, making them unsuitable for real-time NR-V2X operation \\cite{Chen2024MILP}.",
+      "section_location": "Sec. 2 (Related Work)",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "split into training ($80\\%$) and validation ($20\\%$) sets.",
+    "injected_text": "split into training ($95\\%$) and validation ($20\\%$) sets.",
+    "rationale": "Changing the training set split from 80% to 95% makes the dataset split sum to 115% instead of 100%, causing a blatant percent_to_100 failure.",
+    "ground_truth_description": "Altered the dataset split percentages so they no longer sum to 100%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_to_100",
+      "value_before_raw": "80\\%",
+      "value_after_raw": "95\\%",
+      "value_before_float": 80.0,
+      "value_after_float": 95.0,
+      "location_cue": "generated and split into training ($80\\%$) and validation ($20\\%$) sets",
+      "paired_location": null,
+      "quantity_label": "training set split percentage",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "+\\tilde{\\mathbf{e}}_{ij}^{(\\ell)})\\Big),",
+    "injected_text": "+\\tilde{\\mathbf{e}}_{ik}^{(\\ell)})\\Big),",
+    "rationale": "Replacing the bound index j with an unbound index k in the GNN message-passing equation creates an index-set mismatch, rendering the tensor conformability invalid.",
+    "ground_truth_description": "Replaced the bound index j with an unbound index k in the edge feature term of the GINE node update equation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. V.B",
+      "original_fragment_latex": "\\tilde{\\mathbf{e}}_{ij}^{(\\ell)}",
+      "injected_fragment_latex": "\\tilde{\\mathbf{e}}_{ik}^{(\\ell)}",
+      "full_equation_latex_before": "\\mathbf{h}_i^{(\\ell+1)}=\\mathrm{MLP}^{(\\ell)}\\!\\Big(\\mathbf{h}_i^{(\\ell)}+\\!\\!\\sum_{j\\in\\mathcal{N}(i)}\\!\\mathrm{ReLU}(\\mathbf{h}_j^{(\\ell)}+\\tilde{\\mathbf{e}}_{ij}^{(\\ell)})\\Big),",
+      "full_equation_latex_after": "\\mathbf{h}_i^{(\\ell+1)}=\\mathrm{MLP}^{(\\ell)}\\!\\Big(\\mathbf{h}_i^{(\\ell)}+\\!\\!\\sum_{j\\in\\mathcal{N}(i)}\\!\\mathrm{ReLU}(\\mathbf{h}_j^{(\\ell)}+\\tilde{\\mathbf{e}}_{ik}^{(\\ell)})\\Big),",
+      "term_role": "injected shape/index mismatch",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "a batch size of 64, and a dropout probability of 0.4.",
+    "injected_text": "a batch size of 64, and a dropout probability of 0.4 (as we observed severe overfitting at lower dropout rates).",
+    "rationale": "Inserts a phantom empirical justification for a hyperparameter choice that is not actually supported by any ablation or result in the paper.",
+    "ground_truth_description": "Added a parenthetical claim that lower dropout rates caused severe overfitting, despite no such ablation being reported in the text.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. VI.A",
+      "affected_span_verbatim": "The GIN encoder consists of $L=3$ layers with 256-dimensional embeddings and is trained for 200 epochs with Adam, a learning rate of $10^{-3}$, a batch size of 64, and a dropout probability of 0.4."
+    },
+    "proposer_agent": "injector.general.S2.t3.v3"
+  }
+]

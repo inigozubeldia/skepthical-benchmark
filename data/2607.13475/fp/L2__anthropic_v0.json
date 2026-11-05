@@ -1,0 +1,343 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-cb578ef13112",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {base, percent, result}",
+        "evidence": {
+          "check_type": "percent_of",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {base, percent, result}"
+          },
+          "rereader": [
+            {
+              "label": "base_oracle",
+              "raw_observed": "0.0989",
+              "value_observed": 0.0989,
+              "notes": "Extracted from: 'learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate, compared to 0.0989 and 47.0% for the oracle'"
+            },
+            {
+              "label": "result_oracle",
+              "raw_observed": "0.0958",
+              "value_observed": 0.0958,
+              "notes": "Extracted from: 'After two steps, the oracle achieves a mean improvement of 0.0958 with a 45.0% success rate'"
+            },
+            {
+              "label": "improvement_oracle_percent",
+              "raw_observed": "7.3%",
+              "value_observed": 7.3,
+              "notes": "Extracted from: 'Relative to step-one performance, multi-step planning yields improvements of 7.3% for the oracle and 15.5% for the learned estimator.'"
+            },
+            {
+              "label": "base_learned",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": "Extracted from: 'In single-step retraction, the learned estimator achieves a mean exposure improvement of 0.1055'"
+            },
+            {
+              "label": "result_learned",
+              "raw_observed": "0.0941",
+              "value_observed": 0.0941,
+              "notes": "Extracted from: 'the learned estimator achieves 0.0941 with the same\nsuccess rate'"
+            },
+            {
+              "label": "improvement_learned_percent",
+              "raw_observed": "15.5%",
+              "value_observed": 15.5,
+              "notes": "Extracted from: 'Relative to step-one performance, multi-step planning yields improvements of 7.3% for the oracle and 15.5% for the learned estimator.'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.04305599999999998
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-17e339ed30a7",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states 'All experiments are conducted in simulation using a randomized 2D deformable sheet model' with 'Laplacian relaxation' and no real tissue material properties, 3D geometry, camera model, or comparison to prior surgical retraction methods. The framing as 'surgical tissue retraction' throughout the abstract, introduction, and conclusion substantially overstates what the 2D toy simulation supports.",
+        "evidence": {
+          "claim": "The paper frames its contributions as surgical tissue retraction but only evaluates on a 2D toy simulation with no real tissue model, 3D geometry, camera, robot, or comparison to prior surgical retraction methods, overstating the generalisation to surgical settings.",
+          "excerpt": "the paper's problem framing (autonomous **surgical tissue** retraction) is not matched by the evaluation, which is a 2D deformable-sheet toy simulation with Laplacian relaxation, no tissue material model, no 3D geometry, no camera / occlusion model, no robot kinematics, and no comparison to any prior surgical retraction method (Sec. II, Sec. III). The abstract, introduction, and conclusion make surgical claims ... that go substantially beyond what the experiments support."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'All experiments are conducted in simulation using a randomized 2D deformable sheet model' with 'Laplacian relaxation' and no real tissue material properties, 3D geometry, camera model, or comparison to prior surgical retraction methods. The framing as 'surgical tissue retraction' throughout the abstract, introduction, and conclusion substantially overstates what the 2D toy simulation supports.",
+            "cost_usd": 0.0030321500000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly says, \"We evaluate the approach in a 2D deformable sheet simulation,\" while still framing the contribution as \"autonomous surgical tissue retraction\" and concluding that it supports manipulation \"under realistic perception constraints.\" Nothing in the paper adds a real tissue model, 3D geometry, camera/robot model, or comparison to prior surgical retraction systems, so the surgical generalization is broader than the evaluation supports.",
+            "cost_usd": 0.0066465000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper frames the problem around \"autonomous surgical tissue retraction\" in the Abstract and Intro, but the experiments are explicitly conducted on a \"randomized 2D deformable sheet model\" (Section III) with no real tissue or 3D surgical elements evaluated.",
+            "cost_usd": 0.002621
+          }
+        ],
+        "cost_usd": 0.01229965
+      },
+      {
+        "flag_id": "fp-4c3d62e8f89f",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=CONFIRMED_ISSUE, openai=AMBIGUOUS, gemini=FP",
+        "evidence": {
+          "claim": "The learned estimator and naïve baseline outperform the oracle in single-step results, suggesting either the oracle is not a true upper bound or there is a methodological flaw in the definition or evaluation protocol for the oracle.",
+          "excerpt": "the learned estimator (0.1055, 50.0%) *outperforms* the oracle (0.0989, 47.0%), and the naïve baseline (0.0951, 45.5%) also outperforms the oracle. A learned estimator beating a full-state oracle indicates either (a) the oracle is not actually an upper bound, (b) the planner is not exploiting the oracle's information, (c) there is stochasticity between runs that is not being controlled or reported, or (d) an evaluation-protocol asymmetry. This is unaddressed in the text."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports that 'the learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate, compared to 0.0989 and 47.0% for the oracle,' but provides no explanation for why the oracle is outperformed by both the learned estimator and naive baseline in single-step planning. This paradox is entirely unaddressed in the text.",
+            "cost_usd": 0.0030321500000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does report that \"the learned estimator achieves a mean exposure improvement of 0.1055 ... compared to 0.0989 ... for the oracle,\" and it does not explain why the estimator exceeds the oracle in single-step results. However, the excerpt is factually wrong that the \"naive baseline ... also outperforms the oracle,\" because the paper reports \"0.0951\" for the naive baseline versus \"0.0989\" for the oracle.",
+            "cost_usd": 0.0066465000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's factual claim that the 'naïve baseline (0.0951, 45.5%) also outperforms the oracle' is mathematically incorrect. The paper reports '0.0989 and 47.0% for the oracle and 0.0951 and 45.5% for the naive baseline', meaning the naive baseline does not beat the oracle.",
+            "cost_usd": 0.002621
+          }
+        ],
+        "cost_usd": 0.01229965
+      },
+      {
+        "flag_id": "fp-079e883def2f",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports '98.1% of oracle performance' and the conclusion states 'statistically equivalent to a full-state oracle,' but no statistical test comparing the learned estimator to the oracle is reported for the multi-step headline comparison. The only statistical test reported (p=0.835) is for varying nsamples in the oracle analysis, not for learned estimator vs. oracle equivalence.",
+        "evidence": {
+          "claim": "The main quantitative claim of statistical equivalence with the oracle is not supported by confidence intervals or significance test outcomes for the headline comparisons between the learned estimator and the oracle.",
+          "excerpt": "The Abstract's '98.1% of oracle performance' and the Conclusion's 'statistically equivalent to a full-state oracle' are strong claims not backed by a reported statistical test."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports '98.1% of oracle performance' and the conclusion states 'statistically equivalent to a full-state oracle,' but no statistical test comparing the learned estimator to the oracle is reported for the multi-step headline comparison. The only statistical test reported (p=0.835) is for varying nsamples in the oracle analysis, not for learned estimator vs. oracle equivalence.",
+            "cost_usd": 0.0030321500000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The headline comparison is reported as \"the learned estimator achieves 0.0941 ... corresponding to 98.1% oracle recovery,\" and the conclusion claims it is \"statistically equivalent to a full-state oracle,\" but no confidence interval or p-value is given for learned-vs-oracle. The only explicit significance result quoted is for a different comparison: \"An independent t-test between nsamples = 200 and 2000 yields p = 0.835.\"",
+            "cost_usd": 0.0066465000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The Conclusion claims the estimator achieves performance \"statistically equivalent to a full-state oracle\", but Section III only reports an independent t-test for comparing sampling budgets (p=0.835) and provides no statistical test or p-value for the headline comparison between the learned estimator and the oracle.",
+            "cost_usd": 0.002621
+          }
+        ],
+        "cost_usd": 0.01229965
+      },
+      {
+        "flag_id": "fp-c6af7403c905",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper describes 'a three-layer multilayer perceptron' but omits layer widths, activations, optimizer, learning rate, and training steps. Action parameterization, boundary conditions for relaxation, and the exposure score formula are also not concretely specified, making the work non-reproducible as written.",
+        "evidence": {
+          "claim": "Several key experimental details necessary for reproducibility are missing, including network architecture, action parameterisation, target region, exposure metric definition, and simulation details.",
+          "excerpt": "Several load-bearing methodological details are missing, making the work not reproducible (Sec. II, Sec. III): (i) the MLP layer widths / activations / optimiser / learning rate / training-step count are not specified; (ii) the action parameterisation ('patch-based pulling operations parameterized by a grasp point on the sheet and a pull displacement') is not concretely defined ... (iii) the exposure score is defined verbally ... (iv) the diffusion / Laplacian relaxation is referenced but boundary conditions, grasp constraints, and time-integration details are omitted."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper describes 'a three-layer multilayer perceptron' but omits layer widths, activations, optimizer, learning rate, and training steps. Action parameterization, boundary conditions for relaxation, and the exposure score formula are also not concretely specified, making the work non-reproducible as written.",
+            "cost_usd": 0.0030321500000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Several load-bearing details are only described at a high level, e.g. \"A three-layer multilayer perceptron maps the noisy, partial observations to the latent space\" and \"Actions correspond to patch-based pulling operations parameterized by a grasp point on the sheet and a pull displacement.\" The paper also says deformation is \"modeled using a diffusion-based relaxation process [11]\" / \"Laplacian relaxation [13]\" without specifying the full implementation details needed to reproduce the experiments.",
+            "cost_usd": 0.0066465000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper omits many necessary details for reproducibility. For instance, the network is merely described as a \"three-layer multilayer perceptron\" (Section II.A) without layer widths or training hyperparameters, and actions are described qualitatively as \"parameterized by a grasp point on the sheet and a pull displacement\" (Section II) without rigorous mathematical definition.",
+            "cost_usd": 0.002621
+          }
+        ],
+        "cost_usd": 0.01229965
+      },
+      {
+        "flag_id": "fp-86672850ab90",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper compares only against a naive baseline and an oracle, with no comparison to any prior surgical retraction method cited in the introduction (refs 1-5) and no ablation of the geometry-aware regularization terms (λs, λe) that are central to the proposed method.",
+        "evidence": {
+          "claim": "No comparison is made to prior work, other planners, or ablations of the training objective, weakening the empirical and scientific claims regarding the benefit of the proposed method.",
+          "excerpt": "The naïve baseline (fill observed vertices, leave others at the undeformed reference) is the only non-oracle non-learned comparison, and no comparison is made to any prior work — no physics-simulation planner [1, 2], no learning-from-demonstration approach [4, 5], no visual reconstruction pipeline [6], and no ablation of the geometry-aware regularisers themselves ..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares only against a naive baseline and an oracle, with no comparison to any prior surgical retraction method cited in the introduction (refs 1-5) and no ablation of the geometry-aware regularization terms (λs, λe) that are central to the proposed method.",
+            "cost_usd": 0.0030321500000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experiments state, \"We compare the learned estimator against an oracle ... and a naive baseline,\" and no other empirical comparator is reported. Although the training loss includes \"two geometry-aware regularization terms,\" the paper provides no ablation isolating those terms and no experimental comparison to prior methods cited in the references.",
+            "cost_usd": 0.0066465000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III.A confirms that the method is only compared \"against an oracle (full state access) and a naive baseline\", with no comparisons to prior work or ablations of the geometry-regularized training weights, which are \"fixed to γ_s = γ_e = 0.1 throughout\" (Section II.B).",
+            "cost_usd": 0.002621
+          }
+        ],
+        "cost_usd": 0.01229965
+      },
+      {
+        "flag_id": "fp-ab103341eace",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The conclusion states 'planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints,' but the entire evaluation is on a 2D simulated sheet with additive Gaussian noise on 40 vertices. The paper itself acknowledges in future work the need to 'validate on real tissue data,' confirming the current evidence does not support the sweeping claim.",
+        "evidence": {
+          "claim": "The assertion that learned representations can replace expensive simulation for deformable manipulation under realistic perception constraints is not supported by the evaluation, which only uses simulated 2D data with Gaussian noise.",
+          "excerpt": "Sweeping generalisation in the Conclusion. The final sentences claim 'planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints.' The evaluation is a single 2D toy in simulation with no perception model beyond additive Gaussian noise on 40 vertices — 'realistic perception constraints' is not demonstrated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion states 'planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints,' but the entire evaluation is on a 2D simulated sheet with additive Gaussian noise on 40 vertices. The paper itself acknowledges in future work the need to 'validate on real tissue data,' confirming the current evidence does not support the sweeping claim.",
+            "cost_usd": 0.0030321500000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims, \"These results suggest that planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints,\" but the evaluation is limited to \"a 2D deformable sheet simulation\" with \"40 noisy vertex observations\" corrupted by Gaussian noise. That evidence does not by itself demonstrate replacement of simulation under genuinely realistic perception constraints.",
+            "cost_usd": 0.0066465000000000005
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The Conclusion asserts the approach works under \"realistic perception constraints,\" but Section II reveals the observation model is merely a 2D simulation where \"Observed vertex coordinates are corrupted by Gaussian noise with standard deviation σ = 0.02,\" which does not robustly validate realistic surgical perception.",
+            "cost_usd": 0.002621
+          }
+        ],
+        "cost_usd": 0.01229965
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.04305599999999998,
+    "general": 0.0737979
+  },
+  "extractor_cost_usd": 0.024702000000000057,
+  "total_cost_usd": 0.14155590000000004
+}

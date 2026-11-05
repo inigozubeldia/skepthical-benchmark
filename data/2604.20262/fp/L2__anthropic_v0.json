@@ -1,0 +1,314 @@
+{
+  "paper_id": "2604.20262",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-ebd9c78e0eac",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Eq. (11) defines `A_NS(θ) = (A_NS^simu)^((1+α)/2)` as a reparameterization, but the paper never explicitly states what θ_NS value corresponds to A_NS^simu, nor does Sect. 3.3 convert the reported `α = 0.116 ± 0.002` back to the physically meaningful θ_NS. The relationship between α and θ_NS is stated implicitly through Eq. (2) and Eq. (11) but never made explicit with numerical values.",
+        "evidence": {
+          "claim": "The parameter α is undefined in the N-S beam parameterization and its relationship to the physically meaningful θ_NS is never made explicit, leaving results under-specified.",
+          "excerpt": "Eq. (11) reparameterizes the Gaussian N-S beam as `A_NS(θ) = (A_NS^simu)^((1+α)/2)`, but the relationship between `α` and `θ_NS` is never made explicit; the meaning of `A_NS^simu` is also under-specified (best-fit from EM sim of Sun et al. 2022, but at what frequency / which θ_NS value?). Sect. 3.3 reports `α = 0.116 ± 0.002` but never reports the corresponding `θ_NS`, which is the physically meaningful quantity that should be compared to simulations and drone measurements."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Eq. (11) defines `A_NS(θ) = (A_NS^simu)^((1+α)/2)` as a reparameterization, but the paper never explicitly states what θ_NS value corresponds to A_NS^simu, nor does Sect. 3.3 convert the reported `α = 0.116 ± 0.002` back to the physically meaningful θ_NS. The relationship between α and θ_NS is stated implicitly through Eq. (2) and Eq. (11) but never made explicit with numerical values.",
+            "cost_usd": 0.0043785000000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reparameterizes the N-S beam as “For computational convenience here, we transform the form of \\(A_{NS}\\) to ... \\((A^{\\mathrm{simu}}_{NS})^{(1+\\alpha)/2}\\)” and only adds that “\\(A^{\\mathrm{simu}}_{NS}\\) is the \\(A_{NS}\\) corresponding to the best-fit \\(\\theta_{NS}\\) obtained from electromagnetic simulations.” It then reports only “the best-fit parameters \\(\\alpha = 0.116\\pm0.002, \\beta = 1.45\\pm0.002\\),” without giving the explicit \\(\\alpha\\leftrightarrow\\theta_{NS}\\) relation or the corresponding fitted \\(\\theta_{NS}\\).",
+            "cost_usd": 0.007717214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides the fit parameter 'α = 0.116 ± 0.002' in Sect. 3.3, but neither reports the corresponding physically meaningful beamwidth 'θ_NS' nor provides the value of 'θ_NS^simu' needed to calculate it from Eq. (11).",
+            "cost_usd": 0.0021634000000000002
+          }
+        ],
+        "cost_usd": 0.014259114285714285
+      },
+      {
+        "flag_id": "fp-aad8c4cbd938",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: Sect. 2.4 lists 12 baselines (A1-A9 through A12-A20), but Sect. 3.3 states 'we fit the beam by using the visibility data from a group of relatively short North-South baselines including A1-A9, A2-A10, A4-A12' — A4-A12 does not appear in Sect. 2.4's list — creating a genuine inconsistency about which baselines were actually used.",
+        "evidence": {
+          "claim": "There is an inconsistency between the described and actual baselines used for the N-S fit, leaving it ambiguous which baselines were fit and shown in demonstration figures.",
+          "excerpt": "Sect. 2.4 lists 12 baselines from feeds A1 through A20 (e.g. A1-A9, A2-A10, …, A12-A20), all of length 3.2 m. Sect. 3.3 begins by saying \"we fit … using … visibility data from a group of relatively short North-South baselines including A1-A9, A2-A10, A4-A12\" — A4-A12 is a different baseline from those in Sect. 2.4 — and then says \"We have selected 12 similar short baselines located on the A cylindrical surface.\" It is unclear whether 3 or 12 baselines were used and which feeds."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sect. 2.4 lists 12 baselines (A1-A9 through A12-A20), but Sect. 3.3 states 'we fit the beam by using the visibility data from a group of relatively short North-South baselines including A1-A9, A2-A10, A4-A12' — A4-A12 does not appear in Sect. 2.4's list — creating a genuine inconsistency about which baselines were actually used.",
+            "cost_usd": 0.0043785000000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Sect. 2.4 explicitly lists “A1-A9, A2-A10, A3-A11, A4-A12, ... A12-A20,” so the reviewer’s claim that “A4-A12 is a different baseline from those in Sect. 2.4” is factually wrong. Sect. 3.3 says these baselines are used “including A1-A9, A2-A10, A4-A12” and also states “We have selected 12 similar short baselines,” which is consistent with using the 12-baseline set.",
+            "cost_usd": 0.007717214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's factual claim is incorrect; Sect. 2.4 explicitly includes 'A4-A12' in its list of the 12 selected baselines ('we selected the following baselines A1-A9, A2-A10, A3-A11, A4-A12...').",
+            "cost_usd": 0.0021634000000000002
+          }
+        ],
+        "cost_usd": 0.014259114285714285
+      },
+      {
+        "flag_id": "fp-54522680b923",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'the beam width remains largely invariant regardless of the Sun's position' and shows Fig. 6, but does not statistically quantify whether the visible jump in FWHM between datasets (e.g., from ~2.05° to ~2.25°) is within noise, nor does it test whether the full E-W shape (not just FWHM) is invariant. The discussion of separability validation is qualitative rather than rigorous.",
+        "evidence": {
+          "claim": "The central factorizability (separability) assumption is only asserted and not rigorously tested; discrepancies in transit FWHM and residuals are not statistically quantified.",
+          "excerpt": "The validation in Sect. 3.2 / Fig. 5 / Fig. 6 shows that the FWHM of the E-W beam varies by only a few percent across solar zenith angles 20°–66°, which is suggestive but not a rigorous test of factorizability. Genuine factorizability would also predict that the *full E-W shape*, not just the FWHM, is invariant with elevation, and that any departures (e.g. the visible left-right skew differences in Fig. 5) are within calibration noise. Furthermore, Fig. 6 shows what appears to be a real upward jump in FWHM from ~2.05° to ~2.25° between data sets 1 and 7, well above the quoted 3σ error bars; this is not discussed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'the beam width remains largely invariant regardless of the Sun's position' and shows Fig. 6, but does not statistically quantify whether the visible jump in FWHM between datasets (e.g., from ~2.05° to ~2.25°) is within noise, nor does it test whether the full E-W shape (not just FWHM) is invariant. The discussion of separability validation is qualitative rather than rigorous.",
+            "cost_usd": 0.0043785000000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper’s validation is qualitative: “It is evident that the beam width remains largely invariant regardless of the Sun’s position. These profiles are very similar, with nearly identical width, as predicted by the separable form we assumed for the beam profile.” It provides visual comparisons and FWHM values, but no statistical test of full-profile invariance or quantitative discussion of apparent deviations.",
+            "cost_usd": 0.007717214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts that 'the beam width remains largely invariant regardless of the Sun’s position' (Sect. 3.2), but does not statistically quantify or discuss the visually apparent jumps in the FWHM (Fig. 6) or departures in the full E-W beam shape.",
+            "cost_usd": 0.0021634000000000002
+          }
+        ],
+        "cost_usd": 0.014259114285714285
+      },
+      {
+        "flag_id": "fp-7cf945613b00",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports `β = 1.45 ± 0.002` in Sect. 3.3 and states in Sect. 2.4 that 'If the sky model matches the actual situation, its value should be 1,' but never addresses why β deviates from 1 by 45% while Sect. 4 cites flux uncertainties of only ~5%. The formal error ±0.002 is inconsistent with the systematic uncertainties discussed in Sect. 4.",
+        "evidence": {
+          "claim": "The best-fit flux scaling parameter β = 1.45 ± 0.002 is unrealistically large and its tiny quoted error is inconsistent with systematic uncertainties, both left unaddressed.",
+          "excerpt": "A factor of 1.45 between the simulated and observed visibilities — well beyond any plausible flux uncertainty in PyGDSM, Cas A, or Cyg A (cited as ≲ 5% in Sect. 4) — implies a substantial calibration offset that is left unaddressed. The quoted formal uncertainty (±0.002) is implausibly small given the systematic uncertainties listed in Sect. 4 and is internally inconsistent with that error budget."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports `β = 1.45 ± 0.002` in Sect. 3.3 and states in Sect. 2.4 that 'If the sky model matches the actual situation, its value should be 1,' but never addresses why β deviates from 1 by 45% while Sect. 4 cites flux uncertainties of only ~5%. The formal error ±0.002 is inconsistent with the systematic uncertainties discussed in Sect. 4.",
+            "cost_usd": 0.0043785000000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states of the flux scale that “If the sky model matches the actual situation, its value should be 1,” yet reports “the best-fit parameters \\(\\alpha = 0.116\\pm0.002, \\beta = 1.45\\pm0.002\\)” and never explains this large offset. Later it only notes that “The relative error of the observed flux is within or around 5%,” which does not reconcile either the size of \\(\\beta\\) or the tiny quoted formal uncertainty with the stated systematics.",
+            "cost_usd": 0.007717214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports a best-fit scaling parameter 'β = 1.45 ± 0.002' (Sect. 3.3), implying a 45% offset, which is not reconciled with the statement in Sect. 4 that 'The relative error of the observed flux is within or around 5%'.",
+            "cost_usd": 0.0021634000000000002
+          }
+        ],
+        "cost_usd": 0.014259114285714285
+      },
+      {
+        "flag_id": "fp-7e63c2719bbf",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Fig. 10 shows the N-S beam morphology across frequencies (~720-780 MHz) but no table or text reports θ_NS(ν), α(ν), or β(ν) as a function of frequency, preventing verification of wavelength scaling. The paper states 'We fit the primary beam parameters at the different frequencies separately' but never tabulates or discusses the frequency dependence of fit parameters.",
+        "evidence": {
+          "claim": "No N-S beam or fit parameter results are reported as a function of frequency in the main text, preventing verification of the expected wavelength scaling.",
+          "excerpt": "Fig. 10 plots the N-S beam vs frequency only between ~720–780 MHz, while the E-W beam (Fig. 7) covers 700–800 MHz. No table reports θ_NS(ν), α(ν), or β(ν). The reader cannot verify the wavelength scaling expected for a focal-plane antenna."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Fig. 10 shows the N-S beam morphology across frequencies (~720-780 MHz) but no table or text reports θ_NS(ν), α(ν), or β(ν) as a function of frequency, preventing verification of wavelength scaling. The paper states 'We fit the primary beam parameters at the different frequencies separately' but never tabulates or discusses the frequency dependence of fit parameters.",
+            "cost_usd": 0.0043785000000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does report frequency-dependent N-S beam results: “We fit the primary beam parameters at the different frequencies separately,” and “The shapes of the north-south primary beams for different frequencies are shown in Fig. 10.” Thus the claim that no N-S beam results are reported as a function of frequency is incorrect.",
+            "cost_usd": 0.007717214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents the N-S beam vs. frequency as a color map in Fig. 10 but never reports the actual fitted parameters (such as α, β, or θ_NS) as a function of frequency in the text or a table.",
+            "cost_usd": 0.0021634000000000002
+          }
+        ],
+        "cost_usd": 0.014259114285714285
+      },
+      {
+        "flag_id": "fp-47029a3f1dd4",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Sect. 3.2 states 'Our analysis shows that this convolution effect is negligible compared to our measurement precision' but provides no figure, table, or numerical result to support this claim, making it an assertion without quantitative backing as the reviewer correctly identifies.",
+        "evidence": {
+          "claim": "The claim that the convolution effect of the solar disk is negligible is unsupported, with no quantitative result or figure provided.",
+          "excerpt": "Sect. 3.2 states \"We evaluated this effect by convolving our beam model with a uniform solar disk and performing a deconvolution on the observational data. Our analysis shows that this convolution effect is negligible compared to our measurement precision.\" No figure, table, or numerical result supporting this evaluation is provided."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sect. 3.2 states 'Our analysis shows that this convolution effect is negligible compared to our measurement precision' but provides no figure, table, or numerical result to support this claim, making it an assertion without quantitative backing as the reviewer correctly identifies.",
+            "cost_usd": 0.0043785000000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only states, “We evaluated this effect by convolving our beam model with a uniform solar disk and performing a deconvolution on the observational data. Our analysis shows that this convolution effect is negligible compared to our measurement precision.” No figure, table, or numerical estimate is provided to substantiate that claim.",
+            "cost_usd": 0.007717214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper merely states that 'Our analysis shows that this convolution effect is negligible compared to our measurement precision' (Sect. 3.2) without providing any quantitative results, figures, or tables to support this evaluation.",
+            "cost_usd": 0.0021634000000000002
+          }
+        ],
+        "cost_usd": 0.014259114285714285
+      },
+      {
+        "flag_id": "fp-bb0dbce6c822",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Sect. 4 lists three error categories but states only that 'the relative error of the observed flux is within or around 5%' and that resampling gives errors 'within 10%' for E-W; no combined error budget is propagated to the final beam profiles, and the resampling in Fig. 13 captures only statistical fluctuations, not the systematic sky model errors acknowledged in the same section.",
+        "evidence": {
+          "claim": "No comprehensive error budget is provided for the final beam profile, with systematics and statistical errors not combined or propagated to the main results.",
+          "excerpt": "Sect. 4 enumerates three categories of error (instrument modelling, sky modelling, measurement noise), but no quantitative budget is propagated to the reported beam profiles. The \"relative error\" quoted in Fig. 13 is from a resampling exercise that captures only statistical fluctuations, not systematic errors from the sky model (Cyg A / Cas A flux uncertainty, GDSM amplitude calibration)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sect. 4 lists three error categories but states only that 'the relative error of the observed flux is within or around 5%' and that resampling gives errors 'within 10%' for E-W; no combined error budget is propagated to the final beam profiles, and the resampling in Fig. 13 captures only statistical fluctuations, not the systematic sky model errors acknowledged in the same section.",
+            "cost_usd": 0.0043785000000000004
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sect. 4 lists qualitative error sources — “The errors in our methodology may arise from several sources: 1) Modeling error in the instruments... 2) Modeling error of the sky... 3) Measurement errors” — but only gives a partial estimate for the E-W beam: “within the primary beam range, the relative error of the measurement is within 10%.” For the N-S case it only says sky-flux errors are “within or around 5%” and does not propagate a combined statistical+systematic uncertainty to the final beam profiles.",
+            "cost_usd": 0.007717214285714286
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "While Sect. 4 discusses various systematic error sources (e.g., sky model flux uncertainty), it does not quantitatively combine these with statistical errors into a comprehensive error budget for the final reported beam profiles.",
+            "cost_usd": 0.0021634000000000002
+          }
+        ],
+        "cost_usd": 0.014259114285714285
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0998138
+  },
+  "extractor_cost_usd": 0.01721799999999997,
+  "total_cost_usd": 0.11703179999999996
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "We will work under simple general assumptions that treat the effect of turbulence as a stochastic forcing term superimposed on the classic linear Lindblad torque \\citep{Paardekooper2010}.",
+    "injected_text": "We will work under simple general assumptions that treat the effect of turbulence as a deterministic perturbative correction superimposed on the classic linear Lindblad torque \\citep{Paardekooper2010}.",
+    "rationale": "Paardekooper2010 develops a torque prescription based on linear (Lindblad and corotation) torque formulae, not a deterministic perturbative correction framework; changing 'stochastic forcing term' to 'deterministic perturbative correction' mis-categorises the method type so that ref.py reading the cited paper returns CONTRADICTED.",
+    "ground_truth_description": "The description of the turbulence treatment method was changed from a 'stochastic forcing term' (correct) to a 'deterministic perturbative correction' (incorrect method category), while the cite key Paardekooper2010 remains unchanged.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Paardekooper2010",
+      "injected_cite_key": "Paardekooper2010",
+      "claim_sentence_verbatim": "We will work under simple general assumptions that treat the effect of turbulence as a stochastic forcing term superimposed on the classic linear Lindblad torque \\citep{Paardekooper2010}.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "turbulence normalization $\\coeff$ ($=~360$ in the aforementioned HD study)",
+    "injected_text": "turbulence normalization $\\coeff$ ($=~370$ in the aforementioned HD study)",
+    "rationale": "The turbulence normalization constant C=360 from Wu2024 appears in the abstract as 370 but is stated as 360 in the body (Sec. 3 equation text and Conclusion), creating a repeated_constant mismatch of ~2.8% that numerics.py will flag.",
+    "ground_truth_description": "The turbulence normalization coefficient C is changed from 360 to 370 in the abstract, while it remains 360 in the main body and conclusion, introducing an inconsistency in a repeated constant.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "360",
+      "value_after_raw": "370",
+      "value_before_float": 360.0,
+      "value_after_float": 370.0,
+      "location_cue": "turbulence normalization C (= 370 in the aforementioned HD study)",
+      "paired_location": "Sec. 3 (Eq. 6 text) and Sec. 5 Conclusion: 'C and N_max with values 360 and ~100'",
+      "quantity_label": "turbulence normalization coefficient C in the Wu2024 HD study",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t3.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+    "injected_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^4},",
+    "rationale": "The Peters (1964) GW-driven orbital decay equation has the canonical form with a^3 in the denominator; changing a^3 to a^4 is a subtle exponent perturbation that a domain LLM will recognise as inconsistent with the standard Peters formula, while the equation still typesets naturally and retains dimensional plausibility at a glance.",
+    "ground_truth_description": "The exponent of the semi-major axis a in the denominator of the GW-driven inspiral rate equation (Peters 1964) was changed from a^3 to a^4, corrupting the canonical form of the quadrupole-radiation orbital decay formula.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3 (Model), second displayed equation for dot{a}_GW",
+      "original_fragment_latex": "\\frac{q M_z^3}{a^3}",
+      "injected_fragment_latex": "\\frac{q M_z^3}{a^4}",
+      "full_equation_latex_before": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+      "full_equation_latex_after": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^4},",
+      "term_role": "semi-major axis power in Peters (1964) quadrupole-radiation orbital decay formula",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "Then we vary these four parameters of interest for $N_{\\rm max}=100$, which is chosen based upon how often the torque changes magnitude or sign in \\citet{Wu2024}:",
+    "injected_text": "Then we vary these four parameters of interest for $N_{\\rm max}=100$, which is chosen based upon how often the torque changes magnitude or sign in \\citet{Wu2024} (we verified that results are insensitive to values of $N_{\\rm max}$ between $50$ and $200$, with deviations below $5\\%$):",
+    "rationale": "The inserted parenthetical asserts a sensitivity/robustness check ('insensitive to values of N_max between 50 and 200, with deviations below 5%') that the Results section and Appendices do not actually report, constituting a phantom evidence subclaim about a parameter sweep that was never shown.",
+    "ground_truth_description": "A parenthetical claiming robustness of results to N_max values between 50 and 200 (with <5% deviation) was inserted into the parameter-choice sentence in Sec. 4, but no such sensitivity analysis appears anywhere else in the paper.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 4 (Results)",
+      "affected_span_verbatim": "Then we vary these four parameters of interest for $N_{\\rm max}=100$, which is chosen based upon how often the torque changes magnitude or sign in \\citet{Wu2024}:"
+    },
+    "proposer_agent": "injector.general.S2.t3.v2"
+  }
+]

@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer raises citation issues (bibliography years) but does not flag the 'deterministic robustness' mis-description of RANSAC. The RANSAC mention is noted in the summary but not challenged as methodologically incorrect.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention the RANSAC citation or challenge the claim that RANSAC is deterministic versus randomized. The only citation issue raised concerns incorrect publication years, which is unrelated.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions RANSAC in the summary but does not challenge the methodological description of the algorithm as 'deterministic' nor does it reference any issues in Section 4.3 regarding this claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never challenges the description of RANSAC as having 'deterministic robustness' nor flags any mischaracterization of RANSAC as a deterministic (vs. randomized) algorithm. The reviewer's mention of RANSAC is only in the summary and as part of the pipeline description, with no critique of the methodological qualifier used to describe it.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "In Table 1 (page 9), the Chamfer Distance (CD) for \"Ours\" is reported as 0.0035. However, in Table 7 (page 17), the CD for the exact same \"Full Model\" is reported as 0.035—a factor of 10 difference.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "In Table 1 (page 9), the Chamfer Distance (CD) for \"Ours\" is reported as 0.0035. However, in Table 7 (page 17), the CD for the exact same \"Full Model\" is reported as 0.035—a factor of 10 difference.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 10x discrepancy between Table 1 (0.0035) and the appendix Table 7 (0.035) for the full model Chamfer Distance, which exactly matches the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "In Table 1 (page 9), the Chamfer Distance (CD) for \"Ours\" is reported as 0.0035. However, in Table 7 (page 17), the CD for the exact same \"Full Model\" is reported as 0.035—a factor of 10 difference.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the injected numeric inconsistency, naming both locations and the conflicting values 0.0035 vs 0.035 for the full model Chamfer Distance.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "In Table 1 (page 9), the Chamfer Distance (CD) for \"Ours\" is reported as 0.0035. However, in Table 7 (page 17), the CD for the exact same \"Full Model\" is reported as 0.035—a factor of 10 difference.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 10x discrepancy between Table 1 and the appendix table for the Chamfer Distance metric, quoting the exact values before and after the injection.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The loss function is written as $L_{CFM}(\\theta) = \\sum_{t, x_0, \\epsilon} ||v_\\theta(x, t) - (\\epsilon - x_0)||_2^2$. The text immediately below states that \"$\\epsilon$ denotes noise samples drawn from a prior distribution (typically a standard normal distribution)\". Because $\\epsilon$ is a continuous random variable, integrating over it requires an expectation ($\\mathbb{E}$), not a summation ($\\sum$).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The loss function is written as $L_{CFM}(\\theta) = \\sum_{t, x_0, \\epsilon} ||v_\\theta(x, t) - (\\epsilon - x_0)||_2^2$. The text immediately below states that \"$\\epsilon$ denotes noise samples drawn from a prior distribution (typically a standard normal distribution)\". Because $\\epsilon$ is a continuous random variable, integrating over it requires an expectation ($\\mathbb{E}$), not a summation ($\\sum$).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the summation operator used over continuous variables and calls for replacement with the expectation operator, directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The loss function is written as $L_{CFM}(\\theta) = \\sum_{t, x_0, \\epsilon} ||v_\\theta(x, t) - (\\epsilon - x_0)||_2^2$. The text immediately below states that \"$\\epsilon$ denotes noise samples drawn from a prior distribution (typically a standard normal distribution)\". Because $\\epsilon$ is a continuous random variable, integrating over it requires an expectation ($\\mathbb{E}$), not a summation ($\\sum$).\n- *Fix:* Rewrite the equation using the expectation operator, e.g., $\\mathbb{E}_{t, x_0, \\epsilon} \\left[ ... \\right]$",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the exact equation and explains that the continuous variables require an expectation rather than a summation, directly matching the injected operator swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The loss function is written as $L_{CFM}(\\theta) = \\sum_{t, x_0, \\epsilon} ||v_\\theta(x, t) - (\\epsilon - x_0)||_2^2. ... Because \\epsilon$ is a continuous random variable, integrating over it requires an expectation ($\\mathbb{E}$), not a summation ($\\sum$).",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the replacement of the expectation operator with a summation in the CFM objective equation as a mathematical error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the inserted parenthetical about rendering fewer views causing degradation, nor question the missing ablation data supporting that sub-claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention the inserted claim about fewer rendered views degrading quality or note missing ablation evidence for that statement. Other general critiques concern unrelated overclaims and table/text contradictions.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies several other instances where textual claims contradict data (Major issues 2 and 4), but does not mention the specific phantom claim regarding the number of rendered views from Section 4.1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags the parenthetical claim about rendering fewer views causing performance degradation, nor questions the absence of supporting ablation data for that specific sub-claim. The reviewer's comments focus on table inconsistencies, runtime contradictions, and other issues unrelated to this injection.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 35.374598,
+  "total_cost_usd": null,
+  "total_input_tokens": 19366,
+  "total_output_tokens": 2854,
+  "escalation_count": 2,
+  "notes": null
+}

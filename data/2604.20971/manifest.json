@@ -1,0 +1,369 @@
+{
+  "paper_id": "2604.20971",
+  "arxiv_url": "https://arxiv.org/abs/2604.20971",
+  "rotation_seed": 1918931634,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S3",
+      "type": 2
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-5}$",
+          "injected_text": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star exceeds $\\sim10^{-5}$",
+          "rationale": "Wu2024 explicitly concludes that turbulent torques dominate when the mass ratio falls below ~10^-5 (i.e. small companions); reversing 'falls below' to 'exceeds' contradicts the directional conclusion of the cited paper while leaving the cite key intact, so ref.py should return CONTRADICTED.",
+          "ground_truth_description": "The direction of the mass-ratio threshold in the Wu2024 claim was reversed from 'falls below ~10^-5' to 'exceeds ~10^-5', contradicting the cited paper's actual conclusion.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Wu2024",
+            "injected_cite_key": "Wu2024",
+            "claim_sentence_verbatim": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-5}$, which corresponds to the EMRI regime in the case of AGN disks.",
+            "section_location": "Sec. 2 (Inspiration for our turbulent torque model)",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "symmetric mass ratio $q/(1+q)^2\\approx q$ because $q\\ll1$",
+          "injected_text": "symmetric mass ratio $q/(1+q)^2\\approx q/4$ because $q\\ll1$",
+          "rationale": "The symmetric mass ratio q/(1+q)^2 reduces to q for q<<1, but the injected text claims it equals q/4, making the ratio_eq predicate fail by a factor of 4 (>20% relative error) — a blatant arithmetic error on an explicitly stated numerator/denominator/ratio triple.",
+          "ground_truth_description": "Changed the leading-order approximation of the symmetric mass ratio from q to q/4, introducing a factor-of-4 arithmetic error in an explicitly stated ratio relationship.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "ratio_eq",
+            "value_before_raw": "q",
+            "value_after_raw": "q/4",
+            "value_before_float": 1.0,
+            "value_after_float": 0.25,
+            "location_cue": "approximated the symmetric mass ratio q/(1+q)^2 approx q because q ll 1",
+            "paired_location": null,
+            "quantity_label": "leading-order approximation of the symmetric mass ratio q/(1+q)^2 for q<<1",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t3.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+          "injected_text": "    \\dot{a}_{\\rm GW}=-\\frac{32}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+          "rationale": "Replacing the canonical Peters (1964) GW energy-loss coefficient 64 with 32 produces a structurally identical but algebraically incorrect formula that Wolfram can refute against the standard result by direct numeric comparison.",
+          "ground_truth_description": "The leading coefficient in the GW-driven rate of change of semi-major axis was changed from 64/5 to 32/5, halving the canonical Peters formula result.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3 (Model), second displayed equation for da/dt_GW",
+            "original_fragment_latex": "\\frac{64}{5}",
+            "injected_fragment_latex": "\\frac{32}{5}",
+            "full_equation_latex_before": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+            "full_equation_latex_after": "    \\dot{a}_{\\rm GW}=-\\frac{32}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+            "term_role": "leading numerical coefficient in Peters (1964) orbital decay formula",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "see Appendix~\\ref{App:A} for details",
+          "injected_text": "see Appendix~\\ref{App:B} for details",
+          "rationale": "Changing the \\ref target from App:A to App:B causes a cross-reference mismatch that renders as the correct number but points to the wrong appendix (the error appendix instead of the derivation appendix), a plausible typo an author might make, visible as a wrong section number in the PDF.",
+          "ground_truth_description": "The \\ref to Appendix A in the analytical estimates sentence was changed to point to Appendix B, producing a cross-reference mismatch visible in the rendered PDF.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "cross_reference_mismatch",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 3 (Model)",
+            "affected_span_verbatim": "see Appendix~\\ref{App:A} for details"
+          },
+          "proposer_agent": "injector.general.S1.t2.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "We will work under simple general assumptions that treat the effect of turbulence as a stochastic forcing term superimposed on the classic linear Lindblad torque \\citep{Paardekooper2010}.",
+          "injected_text": "We will work under simple general assumptions that treat the effect of turbulence as a deterministic perturbative correction superimposed on the classic linear Lindblad torque \\citep{Paardekooper2010}.",
+          "rationale": "Paardekooper2010 develops a torque prescription based on linear (Lindblad and corotation) torque formulae, not a deterministic perturbative correction framework; changing 'stochastic forcing term' to 'deterministic perturbative correction' mis-categorises the method type so that ref.py reading the cited paper returns CONTRADICTED.",
+          "ground_truth_description": "The description of the turbulence treatment method was changed from a 'stochastic forcing term' (correct) to a 'deterministic perturbative correction' (incorrect method category), while the cite key Paardekooper2010 remains unchanged.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Paardekooper2010",
+            "injected_cite_key": "Paardekooper2010",
+            "claim_sentence_verbatim": "We will work under simple general assumptions that treat the effect of turbulence as a stochastic forcing term superimposed on the classic linear Lindblad torque \\citep{Paardekooper2010}.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "turbulence normalization $\\coeff$ ($=~360$ in the aforementioned HD study)",
+          "injected_text": "turbulence normalization $\\coeff$ ($=~370$ in the aforementioned HD study)",
+          "rationale": "The turbulence normalization constant C=360 from Wu2024 appears in the abstract as 370 but is stated as 360 in the body (Sec. 3 equation text and Conclusion), creating a repeated_constant mismatch of ~2.8% that numerics.py will flag.",
+          "ground_truth_description": "The turbulence normalization coefficient C is changed from 360 to 370 in the abstract, while it remains 360 in the main body and conclusion, introducing an inconsistency in a repeated constant.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "repeated_constant",
+            "value_before_raw": "360",
+            "value_after_raw": "370",
+            "value_before_float": 360.0,
+            "value_after_float": 370.0,
+            "location_cue": "turbulence normalization C (= 370 in the aforementioned HD study)",
+            "paired_location": "Sec. 3 (Eq. 6 text) and Sec. 5 Conclusion: 'C and N_max with values 360 and ~100'",
+            "quantity_label": "turbulence normalization coefficient C in the Wu2024 HD study",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t3.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+          "injected_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^4},",
+          "rationale": "The Peters (1964) GW-driven orbital decay equation has the canonical form with a^3 in the denominator; changing a^3 to a^4 is a subtle exponent perturbation that a domain LLM will recognise as inconsistent with the standard Peters formula, while the equation still typesets naturally and retains dimensional plausibility at a glance.",
+          "ground_truth_description": "The exponent of the semi-major axis a in the denominator of the GW-driven inspiral rate equation (Peters 1964) was changed from a^3 to a^4, corrupting the canonical form of the quadrupole-radiation orbital decay formula.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3 (Model), second displayed equation for dot{a}_GW",
+            "original_fragment_latex": "\\frac{q M_z^3}{a^3}",
+            "injected_fragment_latex": "\\frac{q M_z^3}{a^4}",
+            "full_equation_latex_before": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+            "full_equation_latex_after": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^4},",
+            "term_role": "semi-major axis power in Peters (1964) quadrupole-radiation orbital decay formula",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "Then we vary these four parameters of interest for $N_{\\rm max}=100$, which is chosen based upon how often the torque changes magnitude or sign in \\citet{Wu2024}:",
+          "injected_text": "Then we vary these four parameters of interest for $N_{\\rm max}=100$, which is chosen based upon how often the torque changes magnitude or sign in \\citet{Wu2024} (we verified that results are insensitive to values of $N_{\\rm max}$ between $50$ and $200$, with deviations below $5\\%$):",
+          "rationale": "The inserted parenthetical asserts a sensitivity/robustness check ('insensitive to values of N_max between 50 and 200, with deviations below 5%') that the Results section and Appendices do not actually report, constituting a phantom evidence subclaim about a parameter sweep that was never shown.",
+          "ground_truth_description": "A parenthetical claiming robustness of results to N_max values between 50 and 200 (with <5% deviation) was inserted into the parameter-choice sentence in Sec. 4, but no such sensitivity analysis appears anywhere else in the paper.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 4 (Results)",
+            "affected_span_verbatim": "Then we vary these four parameters of interest for $N_{\\rm max}=100$, which is chosen based upon how often the torque changes magnitude or sign in \\citet{Wu2024}:"
+          },
+          "proposer_agent": "injector.general.S2.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-5}$",
+          "injected_text": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-4}$",
+          "rationale": "Wu2024 reports the threshold mass ratio as ~10^{-5}; shifting it to ~10^{-4} moves the stated value by approximately one order of magnitude — a 1–2σ mis-quote of the specific quantitative threshold reported in that paper — while leaving the cite key, surrounding prose, and direction of the claim intact, so a careful reader comparing to Wu2024 flags the discrepancy but a casual reader does not.",
+          "ground_truth_description": "The threshold mass ratio below which turbulent torques dominate was changed from ~10^{-5} (as reported in Wu2024) to ~10^{-4}, a mild but detectable quantitative mis-quote of the cited paper's result.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Wu2024",
+            "injected_cite_key": "Wu2024",
+            "claim_sentence_verbatim": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-5}$, which corresponds to the EMRI regime in the case of AGN disks.",
+            "section_location": "Sec. 2 (Inspiration for our turbulent torque model)",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "mass ratio $q=5\\times10^{-5}$ in its final four-year evolution at redshift $z=0.276$",
+          "injected_text": "mass ratio $q=5\\times10^{-5}$ in its final four-year evolution at redshift $z=0.267$",
+          "rationale": "Swapping adjacent digits 7↔6 in the redshift value in the abstract (0.276→0.267) while the body correctly states z=0.276 in Eq.(golden) and the Conclusion, triggering an abstract_vs_body_match predicate failure at major severity.",
+          "ground_truth_description": "The redshift of the golden EMRI in the abstract was changed from z=0.276 to z=0.267 (digit swap of adjacent digits 7 and 6), while the correct value z=0.276 remains in the body (Results section Eq. golden and Conclusion).",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "0.276",
+            "value_after_raw": "0.267",
+            "value_before_float": 0.276,
+            "value_after_float": 0.267,
+            "location_cue": "mass ratio q=5times10^{-5} in its final four-year evolution at redshift z=0.267",
+            "paired_location": "Results section Eq. (golden) and Conclusion paragraph",
+            "quantity_label": "redshift z of the golden EMRI",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+          "injected_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^4},",
+          "rationale": "Changing the exponent in the denominator from a^3 to a^4 alters the power-law dependence of the GW-driven inspiral rate on semi-major axis, producing an equation inconsistent with the Peters (1964) formula that Wolfram symbolic equality would refute against the correct a^{-3} dependence.",
+          "ground_truth_description": "The denominator exponent of semi-major axis a in the GW-driven inspiral rate equation was changed from a^3 to a^4, corrupting the Peters formula for the rate of change of semi-major axis due to gravitational wave emission.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3 (Model), second displayed equation for dot{a}_{GW}",
+            "original_fragment_latex": "\\frac{q M_z^3}{a^3}",
+            "injected_fragment_latex": "\\frac{q M_z^3}{a^4}",
+            "full_equation_latex_before": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+            "full_equation_latex_after": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^4},",
+            "term_role": "semi-major axis power-law factor in Peters inspiral rate formula",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t1.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "ChaoticEMRIs.tex",
+          "original_text": "Hence, this work strongly motivates MHD simulations of gas disks embedded near-coalescence EMRIs to extract maximum science in the LISA era.",
+          "injected_text": "Hence, this work strongly motivates MHD simulations of gas disks embedded near-coalescence EMRIs to extract maximum science in the LISA era, and further demonstrates that turbulence-driven stochastic torques will generically dominate orbital evolution across all classes of compact binary inspirals embedded in any astrophysical accretion disk, regardless of the mass ratio or turbulence source.",
+          "rationale": "The added clause asserts that stochastic torques 'generically dominate' for all compact binary classes and all astrophysical disks, but the Results are confined to a single golden EMRI with q=5e-5 in one parametric regime, providing no support for this sweeping universal claim; the overreach is grammatically integrated into the existing concluding sentence making it read as an organic author flourish.",
+          "ground_truth_description": "A sweeping generalisation clause was appended to the final sentence of the Conclusion, claiming turbulent torques dominate all compact binary inspirals in any accretion disk, far beyond what the paper's single-system results support.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B7",
+            "change_kind": "overstated_conclusion",
+            "expected_bucket": "major",
+            "section_location": "Conclusion",
+            "affected_span_verbatim": "Hence, this work strongly motivates MHD simulations of gas disks embedded near-coalescence EMRIs to extract maximum science in the LISA era."
+          },
+          "proposer_agent": "injector.general.S3.t2.v3"
+        }
+      ]
+    }
+  ]
+}

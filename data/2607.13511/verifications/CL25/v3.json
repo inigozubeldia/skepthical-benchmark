@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v3",
+  "reviewer_system": "CL25",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Refs [3] (Ternary Weight Networks) and [4] (Trained Ternary Quantization) are misattributed to spiking neural networks. Section 1 states: \"ternary weight networks [3] and trained ternary quantization [4] established the format earlier *for spiking neural networks*.\" Both cited works are, in fact, about standard (non-spiking) deep CNNs",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Refs [3] (Ternary Weight Networks) and [4] (Trained Ternary Quantization) are misattributed to spiking neural networks. Section 1 states: \"ternary weight networks [3] and trained ternary quantization [4] established the format earlier *for spiking neural networks*.\" Both cited works are, in fact, about standard (non-spiking) deep CNNs",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the misattribution of TWN and TTQ to spiking neural networks and correctly states they are about standard deep CNNs, directly matching the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[citation] Refs [3] (Ternary Weight Networks) and [4] (Trained Ternary Quantization) are misattributed to spiking neural networks.** Section 1 states: \"ternary weight networks [3] and trained ternary quantization [4] established the format earlier *for spiking neural networks*.\" Both cited works are, in fact, about standard (non-spiking) deep CNNs",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit claim against the cited sources TWN and TTQ and says the application domain is misattributed, satisfying the broadened-claim rule for claim_topic_mis_attribution.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Refs [3] (Ternary Weight Networks) and [4] (Trained Ternary Quantization) are misattributed to spiking neural networks. Section 1 states: 'ternary weight networks [3] and trained ternary quantization [4] established the format earlier for spiking neural networks.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies that the cited papers are about standard CNNs and that the claim of them establishing a format for spiking neural networks is inaccurate.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t1",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the layer count breakdown (96 MLP, 55 attention, 72 gated-DeltaNet summing to 223 ≠ 200). The numerical issues flagged are about sparsity/bpw arithmetic and entropy rounding, not the attention layer count.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review flags other numerical inconsistencies, but nowhere mentions the 200-layer breakdown or that 96 + 55 + 72 sums to 223 rather than 200. No specific match to the injected attention-layer count error is present.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer flags several other numerical issues regarding bpw calculations and budget arithmetic, but does not mention the layer count breakdown or the sum error (223 vs 200).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Proposition 1 has a factor-of-two error in the substituted expression... not \\|R\\|_F^2 - 2\\frac{(u^\\top R v)^2}{\\|u\\|^2\\|v\\|^2} as stated in the displayed equation of Proposition 1 (Appendix A, p. 6).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Proposition 1 has a factor-of-two error in the substituted expression... not \\|R\\|_F^2 - 2\\frac{(u^\\top R v)^2}{\\|u\\|^2\\|v\\|^2} as stated in the displayed equation of Proposition 1 (Appendix A, p. 6).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the spurious factor of 2 in the residual energy identity in Appendix A Proposition 1, providing full algebraic justification, which directly matches the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[mathematical] Proposition 1 has a factor-of-two error in the substituted expression.** With $d^\\star = u^\\top R v /(\\|u\\|^2\\|v\\|^2)$ the correct minimum is\n$$\\|R - d^\\star uv^\\top\\|_F^2 = \\|R\\|_F^2 - \\frac{(u^\\top R v)^2}{\\|u\\|^2\\|v\\|^2},$$\nnot\n$$\\|R\\|_F^2 - 2\\frac{(u^\\top R v)^2}{\\|u\\|^2\\|v\\|^2}$$\nas stated in the displayed equation of Proposition 1 (Appendix A, p. 6).",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies the exact erroneous factor of 2 in the relevant Appendix A display and provides the corrected identity. It is a precise match to the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Proposition 1 has a factor-of-two error in the substituted expression. ... the arithmetic in the very next display, however, keeps the leading -2 from the cross term without cancelling it against the quadratic term.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the erroneous factor of 2 in the residual energy identity located in Appendix A.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Duplicated article in Sec. 2.1: \"$\\mu = k/\\min(m,n)$ becomes the *the* accuracy dial.\" Delete one \"the\".",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Duplicated article in Sec. 2.1: \"$\\mu = k/\\min(m,n)$ becomes the *the* accuracy dial.\" Delete one \"the\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the duplicated word 'the' in Section 2.1, exactly matching the injected word repetition.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[general] Duplicated article in Sec. 2.1:** \"$\\mu = k/\\min(m,n)$ becomes the *the* accuracy dial.\" Delete one \"the\".",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the exact sentence with the duplicated word in Sec. 2.1 and recommends removing one instance. This is an exact detection of the cosmetic word repetition injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Duplicated article in Sec. 2.1: 'Δ̐ = k/min(m,n) becomes the the accuracy dial.' Delete one 'the'.",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the exact duplicated word 'the' in the correct section of the paper.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 26.988131,
+  "total_cost_usd": null,
+  "total_input_tokens": 18198,
+  "total_output_tokens": 3153,
+  "escalation_count": 0,
+  "notes": null
+}

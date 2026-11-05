@@ -1,0 +1,188 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-b15a5f5af12b",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's own conclusions state 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans and demonstrating in-loop integration with the QICK control firmware.' This confirms that real-time, in-loop operation has NOT been demonstrated, yet the abstract calls it 'an online detector' and 'a control-loop primitive' as if already achieved.",
+        "evidence": {
+          "claim": "The manuscript overstates demonstrated 'real-time' and 'in-the-loop' operation: the data are synthetic, firmware results are estimates, but 'online detector' and 'control-loop primitive' are claimed as already achieved.",
+          "excerpt": "the Abstract and Conclusions describe an 'online detector' and a 'control-loop primitive' as already achieved (Sec. II.B, Sec. IV.C, Conclusions)"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's own conclusions state 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans and demonstrating in-loop integration with the QICK control firmware.' This confirms that real-time, in-loop operation has NOT been demonstrated, yet the abstract calls it 'an online detector' and 'a control-loop primitive' as if already achieved.",
+            "cost_usd": 0.00489765
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents the method as already achieved in operation (e.g. “an online detector of charge jumps ... is presented” and “This shifts charge-jump detection from a post-hoc diagnostic to a control-loop primitive”), but the evidence is still synthetic/estimated: “the network is trained on synthetic Ramsey tomography scans” and “Vitis HLS C-synthesis ... estimates a per-inference latency,” while “Future work will focus on deploying the DCCNN on real-time data acquisition ... and demonstrating in-loop integration.”",
+            "cost_usd": 0.01621625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly lists physical in-the-loop implementation as future work, stating, \"Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware... and demonstrating in-loop integration with the QICK control firmware\" (Sec. V), which confirms the reviewer's concern that the achievement is overstated.",
+            "cost_usd": 0.00264175
+          }
+        ],
+        "cost_usd": 0.023755650000000003
+      },
+      {
+        "flag_id": "fp-dc0d6bdb0b93",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section II.B states 'Each scan consists of N = 80 samples' and the training data uses 80-point scans, yet Fig. 1 and Sec. II.A specify input shape (128, 2). No resampling, padding, windowing, or any transformation from 80 to 128 points is described anywhere in the paper.",
+        "evidence": {
+          "claim": "The CNN input shape is inconsistent: Fig. 1 and Sec. II.A specify (128, 2) inputs, while other sections describe 80-point scans, but no transformation is stated.",
+          "excerpt": "No padding, resampling, sliding-window, or truncation step is described (Sec. II.A, Sec. II.B, Sec. III.C)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section II.B states 'Each scan consists of N = 80 samples' and the training data uses 80-point scans, yet Fig. 1 and Sec. II.A specify input shape (128, 2). No resampling, padding, windowing, or any transformation from 80 to 128 points is described anywhere in the paper.",
+            "cost_usd": 0.00489765
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 labels the model input as “Input (128, 2),” but the data pipeline says “Each scan consists of N = 80 samples” and “Each scan is converted to a two-channel input,” which implies an 80×2 input. No quoted passage explains any resampling, padding, or windowing step that turns 80 samples into 128.",
+            "cost_usd": 0.01621625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 illustrates an architecture expecting an \"Input (128, 2)\", but Section II.B states that \"Each scan consists of N = 80 samples\", and no padding, interpolation, or sliding-window mechanism is provided in the text to explain this discrepancy.",
+            "cost_usd": 0.00264175
+          }
+        ],
+        "cost_usd": 0.023755650000000003
+      },
+      {
+        "flag_id": "fp-7a3d7276cf85",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper's conclusions acknowledge 'Future work will focus on...validating the simulation-trained model on measured scans,' confirming no held-out-qubit or real-data validation is provided, yet the abstract claims the model requires 'no per-qubit hyperparameter tuning' as a demonstrated property across all qubit configurations tested only on synthetic data from the same five qubits used in training.",
+        "evidence": {
+          "claim": "Generalization and 'no per-qubit tuning' claims are overstated: there is no held-out-qubit, held-out-device, or measured-data validation.",
+          "excerpt": "No held-out-qubit, held-out-device, or measured-data validation is shown."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's conclusions acknowledge 'Future work will focus on...validating the simulation-trained model on measured scans,' confirming no held-out-qubit or real-data validation is provided, yet the abstract claims the model requires 'no per-qubit hyperparameter tuning' as a demonstrated property across all qubit configurations tested only on synthetic data from the same five qubits used in training.",
+            "cost_usd": 0.00489765
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The manuscript makes forward-looking generalization claims such as “A single trained model serves all five qubit templates” and “requires no hyperparameter tuning when applied to a new qubit,” but it shows no held-out-qubit/device or measured-data validation; indeed it states “Future work will focus on ... validating the simulation-trained model on measured scans.”",
+            "cost_usd": 0.01621625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusions claim that the approach \"requires no hyperparameter tuning when applied to a new qubit\"; however, as Section II.C notes, the training data was generated from \"each of the five qubit configurations,\" meaning the model was never validated on a held-out, previously unseen qubit.",
+            "cost_usd": 0.00264175
+          }
+        ],
+        "cost_usd": 0.023755650000000003
+      },
+      {
+        "flag_id": "fp-5cfb5e2e1852",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper claims comparison at a “matched false-positive rate,” yet Sec. III.C says the χ² method was tuned “subject to a false-positive-rate (FPR) constraint of 5%,” and that “This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively).” That is only an approximate compromise, not a truly matched operating point for the compared quantized DCCNN.",
+        "evidence": {
+          "claim": "The χ² comparison is not performed at a truly matched false-positive operating point as claimed.",
+          "excerpt": "no ROC / threshold sweep is provided to match the two methods exactly (Abstract, Sec. III.A, Sec. III.C)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states 'the χ² algorithm parameters were tuned...to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%. This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively).' This describes approximate matching to a range rather than exact ROC-curve matching, making it unclear whether the comparison is truly at a matched operating point, but the methodology is at least partially described.",
+            "cost_usd": 0.00489765
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims comparison at a “matched false-positive rate,” yet Sec. III.C says the χ² method was tuned “subject to a false-positive-rate (FPR) constraint of 5%,” and that “This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively).” That is only an approximate compromise, not a truly matched operating point for the compared quantized DCCNN.",
+            "cost_usd": 0.01621625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While the abstract claims the comparison is at a \"matched false-positive rate,\" Section III.C states that the χ² FPR constraint was set to 5% \"to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively).\" The threshold was not strictly matched to the 4% FPR of the quantized DCCNN.",
+            "cost_usd": 0.00264175
+          }
+        ],
+        "cost_usd": 0.023755650000000003
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.09502260000000001
+  },
+  "extractor_cost_usd": 0.01752400000000004,
+  "total_cost_usd": 0.11254660000000005
+}

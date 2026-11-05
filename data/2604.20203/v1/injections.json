@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "sample701.tex",
+    "original_text": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using binomial statistics and adopt a flat prior on the conditional frequency.",
+    "injected_text": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using Poisson statistics and adopt a flat prior on the conditional frequency.",
+    "rationale": "Bryan & Lee (2024) and Zhu (2024) explicitly use a binomial likelihood for detection counts in fixed-size system samples (yielding a Beta-distribution posterior), not Poisson statistics; swapping 'binomial' to 'Poisson' mis-categorizes the statistical model at the method-category level while keeping the general topic (counting-based inference) plausible.",
+    "ground_truth_description": "Changed 'binomial statistics' to 'Poisson statistics' in the method description citing Bryan & Lee 2024 and Zhu 2024, incorrectly categorizing their binomial likelihood / Beta-posterior approach as Poisson-based.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "2024ApJ...968L..25B",
+      "injected_cite_key": "2024ApJ...968L..25B",
+      "claim_sentence_verbatim": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using binomial statistics and adopt a flat prior on the conditional frequency.",
+      "section_location": "Sec. 3.1",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "sample701.tex",
+    "original_text": "are $42.6^{+10.6}_{-9.9}\\%$, $19.6^{+15.8}_{-5.2}\\%$, and $14.5^{+12.7}_{-6.9}\\%$, respectively.",
+    "injected_text": "are $4.26^{+10.6}_{-9.9}\\%$, $19.6^{+15.8}_{-5.2}\\%$, and $14.5^{+12.7}_{-6.9}\\%$, respectively.",
+    "rationale": "The conditional frequency P(CJ|SN,[Fe/H]>0)=42.6% reported in the abstract is contradicted in the Results body by a 10x-reduced value of 4.26%, triggering abstract_vs_body_match at auto-MAJOR severity (relative error ~900%).",
+    "ground_truth_description": "P(CJ|SN,[Fe/H]>0) changed from 42.6% to 4.26% (÷10) in the body Section 3.2 statement, while the abstract retains the correct 42.6%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "42.6",
+      "value_after_raw": "4.26",
+      "value_before_float": 42.6,
+      "value_after_float": 4.26,
+      "location_cue": "$P \\rm (CJ|SE, [Fe/H]>0)$ are $42.6^{+10.6}_{-9.9}\\%$, $19.6^{+15.8}_{-5.2}\\%$",
+      "paired_location": "abstract, sentence beginning 'We find that, around transiting sample around metal-rich stars'",
+      "quantity_label": "conditional frequency of cold Jupiters in sub-Neptune systems around metal-rich stars P(CJ|SN,[Fe/H]>0)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "sample701.tex",
+    "original_text": "\\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+    "injected_text": "\\frac{1}{B(a,b)} P^{a-1} (1-P)^{1-b},",
+    "rationale": "Flipping the exponent from b-1 to 1-b in the beta-distribution PDF makes the density diverge as P→1 (giving ∞) instead of vanishing (the correct limit is 0 for b>1), so the equation encodes a patently false limit claim that Wolfram's Limit[] immediately refutes.",
+    "ground_truth_description": "The exponent of (1-P) in the posterior beta-distribution PDF was changed from b-1 to 1-b, reversing the boundary behaviour at P→1 from the correct limit of 0 to the false limit of ∞.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Eq. (2), Sec. 3.1 (sec.results.method)",
+      "original_fragment_latex": "(1-P)^{b-1}",
+      "injected_fragment_latex": "(1-P)^{1-b}",
+      "full_equation_latex_before": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+      "full_equation_latex_after": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{1-b},",
+      "term_role": "limit value",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t3.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "sample701.tex",
+    "original_text": "As can be seen in Figure \\ref{figfCJ_SNMixSE_metalrich},\n$P \\rm (CJ|SN, [Fe/H]>0)$ and $P \\rm (CJ|Mix, [Fe/H]>0)$ are larger than $P(\\rm CJ, [Fe/H]>0)$, while \n$P \\rm (CJ|SE, [Fe/H]>0)$ is broadly consistent with $P(\\rm CJ, [Fe/H]>0)$.",
+    "injected_text": "As can be seen in Figure \\ref{figfCJ_SNMixSE_metalpoor},\n$P \\rm (CJ|SN, [Fe/H]>0)$ and $P \\rm (CJ|Mix, [Fe/H]>0)$ are larger than $P(\\rm CJ, [Fe/H]>0)$, while \n$P \\rm (CJ|SE, [Fe/H]>0)$ is broadly consistent with $P(\\rm CJ, [Fe/H]>0)$.",
+    "rationale": "Swapping the metal-rich figure reference to the metal-poor figure creates a content mismatch: the metal-poor figure (figfCJ_SNMixSE_metalpoor) shows all conditional frequencies consistent with the low-metallicity field value with no excess, directly contradicting the prose claim that CJ|SN and CJ|Mix are larger than the field frequency.",
+    "ground_truth_description": "The cross-reference in Sec. 3.2 was changed from the metal-rich conditional frequency figure (figfCJ_SNMixSE_metalrich) to the metal-poor figure (figfCJ_SNMixSE_metalpoor), making the cited figure inconsistent with the surrounding claim of an excess cold Jupiter frequency.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B4",
+      "change_kind": "cross_reference_mismatch",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 3.2",
+      "affected_span_verbatim": "As can be seen in Figure \\ref{figfCJ_SNMixSE_metalrich},\n$P \\rm (CJ|SN, [Fe/H]>0)$ and $P \\rm (CJ|Mix, [Fe/H]>0)$ are larger than $P(\\rm CJ, [Fe/H]>0)$, while \n$P \\rm (CJ|SE, [Fe/H]>0)$ is broadly consistent with $P(\\rm CJ, [Fe/H]>0)$."
+    },
+    "proposer_agent": "injector.general.S2.t1.v1"
+  }
+]

@@ -1,0 +1,213 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "CL25",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-92aa9ed68104",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for '[13]'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "[13]"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-fda2ae651619",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {base, percent, result}",
+        "evidence": {
+          "check_type": "percent_of",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {base, percent, result}"
+          },
+          "rereader": [
+            {
+              "label": "multi_step_oracle",
+              "raw_observed": "0.0958",
+              "value_observed": 0.0958,
+              "notes": ""
+            },
+            {
+              "label": "single_step_oracle",
+              "raw_observed": "0.0989",
+              "value_observed": 0.0989,
+              "notes": ""
+            },
+            {
+              "label": "reported_percent_oracle",
+              "raw_observed": "7.3%",
+              "value_observed": 7.3,
+              "notes": ""
+            },
+            {
+              "label": "multi_step_learned",
+              "raw_observed": "0.0941",
+              "value_observed": 0.0941,
+              "notes": ""
+            },
+            {
+              "label": "single_step_learned",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": ""
+            },
+            {
+              "label": "reported_percent_learned",
+              "raw_observed": "15.5%",
+              "value_observed": 15.5,
+              "notes": ""
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.020377999999999896
+      },
+      {
+        "flag_id": "fp-b8aa6dfd3522",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.020377999999999896
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-53c9a64f8398",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports the learned estimator achieving 0.1055 mean exposure improvement vs. the oracle's 0.0989 in single-step retraction without any statistical test or confidence intervals to determine if this difference is significant, and provides no explanation for why the learned estimator can outperform full-state oracle access. The paper does not comment on this anomaly at all, stating only the raw numbers: 'the learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate, compared to 0.0989 and 47.0% for the oracle.'",
+        "evidence": {
+          "claim": "Learned estimator exceeds full-state oracle in single-step, which should not be possible; the reviewer flags a need for statistical testing or a detailed check of what \"oracle\" means.",
+          "excerpt": "The oracle has access to the ground-truth state and uses the same 200-candidate planner, so it should upper-bound the learned estimator. Beating it is either evidence of stochastic variance not being accounted for (in which case a paired significance test and confidence intervals are essential), evidence that the \"oracle\" is not really an oracle... The paper does not comment on this at all, yet later uses \"98.1% of oracle\" as the framing metric."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports the learned estimator achieving 0.1055 mean exposure improvement vs. the oracle's 0.0989 in single-step retraction without any statistical test or confidence intervals to determine if this difference is significant, and provides no explanation for why the learned estimator can outperform full-state oracle access. The paper does not comment on this anomaly at all, stating only the raw numbers: 'the learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate, compared to 0.0989 and 47.0% for the oracle.'",
+            "cost_usd": 0.00522795
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly defines the comparator as an \"oracle (full state access)\" and then reports that \"the learned estimator achieves a mean exposure improvement of 0.1055 ... compared to 0.0989 ... for the oracle,\" but it gives no paired significance test or explanation for how the learned method outperforms a full-state oracle in single-step evaluation.",
+            "cost_usd": 0.01062575
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports that in single-step retraction, the learned estimator outperforms the oracle (achieving '0.1055 with a 50.0% success rate, compared to 0.0989 and 47.0% for the oracle') but provides no statistical tests for this comparison or commentary on how a learned estimator could exceed a full-state oracle.",
+            "cost_usd": 0.004276
+          }
+        ],
+        "cost_usd": 0.0201297
+      },
+      {
+        "flag_id": "fp-5d17ceecf948",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper uses 'oracle' to mean both a planner with full ground-truth state access (in single/multi-step comparisons) and a near-optimal planner validated via action sampling analysis ('the oracle is effectively near-optimal even at low compute'), without explicitly defining or distinguishing these usages. The central framing metric '98.1% of oracle recovery' conflates these two notions without clarification.",
+        "evidence": {
+          "claim": "The term \"oracle\" is inconsistently used across the paper for distinct notions (full-state access vs. nearly-optimal planner), undermining the central performance comparison.",
+          "excerpt": "The name \"oracle\" is used in two incompatible ways ... These are different notions ... and the paper's central claim that matching oracle performance is \"a meaningful target\" depends on which one is meant. *Fix:* define \"oracle\" explicitly once and use the term consistently..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper uses 'oracle' to mean both a planner with full ground-truth state access (in single/multi-step comparisons) and a near-optimal planner validated via action sampling analysis ('the oracle is effectively near-optimal even at low compute'), without explicitly defining or distinguishing these usages. The central framing metric '98.1% of oracle recovery' conflates these two notions without clarification.",
+            "cost_usd": 0.00522795
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper defines oracle consistently as \"an oracle (full state access)\" and later analyzes that same method's planning budget, concluding it is \"effectively near-optimal even at low compute.\" This is a property of the same oracle baseline, not a second incompatible definition.",
+            "cost_usd": 0.01062575
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly defines the oracle once as having 'full state access' in Section III.A. The analysis in Section III.C does not redefine the term, but merely demonstrates that the 200-sample planner used by this full-state oracle is 'effectively near-optimal even at low compute', contradicting the claim of inconsistent definitions.",
+            "cost_usd": 0.004276
+          }
+        ],
+        "cost_usd": 0.0201297
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "numerics": 0.04075599999999979,
+    "general": 0.0402594
+  },
+  "extractor_cost_usd": 0.014406000000000196,
+  "total_cost_usd": 0.09542139999999999
+}

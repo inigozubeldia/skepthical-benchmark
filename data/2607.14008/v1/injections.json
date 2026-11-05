@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "template-A4.tex",
+    "original_text": "Soft Actor-Critic~(SAC)~\\cite{haarnoja2018soft} is an off-policy algorithm that optimizes both expected return and policy entropy for continuous control tasks.",
+    "injected_text": "Soft Actor-Critic~(SAC)~\\cite{haarnoja2018soft} is an on-policy algorithm that optimizes both expected return and policy entropy for continuous control tasks.",
+    "rationale": "Swapping 'off-policy' for 'on-policy' mis-categorises the SAC algorithm, contradicting the explicit methodological classification in the title and text of the cited paper.",
+    "ground_truth_description": "The claim citing haarnoja2018soft was modified to incorrectly categorize Soft Actor-Critic as an on-policy algorithm instead of off-policy.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "haarnoja2018soft",
+      "injected_cite_key": "haarnoja2018soft",
+      "claim_sentence_verbatim": "Soft Actor-Critic~(SAC)~\\cite{haarnoja2018soft} is an off-policy algorithm that optimizes both expected return and policy entropy for continuous control tasks.",
+      "section_location": "Sec. 2.3",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "template-A4.tex",
+    "original_text": "OpAmp: 6,000 training + 50 targets",
+    "injected_text": "OpAmp: 5,980 training + 50 targets",
+    "rationale": "The paper lacks a table with sums, so an explicit in-text sum relationship (training + targets*steps = total budget) is perturbed by slightly changing the training budget component, causing a sum_eq_total failure.",
+    "ground_truth_description": "Changed the stated training budget component in the total simulation budget calculation from 6,000 to 5,980, breaking the arithmetic sum (5,980 + 1,500 != 7,500).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "sum_eq_total",
+      "value_before_raw": "6,000",
+      "value_after_raw": "5,980",
+      "value_before_float": 6000.0,
+      "value_after_float": 5980.0,
+      "location_cue": "for the two-stage OpAmp: 5,980 training + 50 targets",
+      "paired_location": null,
+      "quantity_label": "training simulations component",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "template-A4.tex",
+    "original_text": "\\big( Q_{\\theta_i}(s,a) - y \\big)^2",
+    "injected_text": "Q_{\\theta_i}(s,a)^2 - y^2",
+    "rationale": "Replaces the canonical squared error term (Q - y)^2 with the algebraically incorrect Q^2 - y^2, a classic transcription error that is structurally similar but mathematically refuted.",
+    "ground_truth_description": "Changed the Bellman error squared loss from (Q - y)^2 to Q^2 - y^2.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2.3 first align environment",
+      "original_fragment_latex": "\\big( Q_{\\theta_i}(s,a) - y \\big)^2",
+      "injected_fragment_latex": "Q_{\\theta_i}(s,a)^2 - y^2",
+      "full_equation_latex_before": "\\begin{align}\n    L_Q(\\theta_i) &= \\mathbb{E}_{(s,a,r,s') \\sim \\mathcal{D}} \\Big[ \\big( Q_{\\theta_i}(s,a) - y \\big)^2 \\Big] \\\\\n    y &= r + \\gamma(Q_{\\text{target}}(s',a') - \\alpha \\log \\pi_\\phi(a'|s'))\n\\end{align}",
+      "full_equation_latex_after": "\\begin{align}\n    L_Q(\\theta_i) &= \\mathbb{E}_{(s,a,r,s') \\sim \\mathcal{D}} \\Big[ Q_{\\theta_i}(s,a)^2 - y^2 \\Big] \\\\\n    y &= r + \\gamma(Q_{\\text{target}}(s',a') - \\alpha \\log \\pi_\\phi(a'|s'))\n\\end{align}",
+      "term_role": "identity replacement",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "template-A4.tex",
+    "original_text": "As shown in Table~\\ref{tab:comprehensive_comparison}, Lighthouse RL outperforms all other methods across every evaluation metric:",
+    "injected_text": "As shown in Table~\\ref{tab:rl_circuit_params}, Lighthouse RL outperforms all other methods across every evaluation metric:",
+    "rationale": "Swaps a table cross-reference so that the prose about evaluation metrics points to a table listing parameter counts instead, creating a mismatch between the claim and the referenced table's contents.",
+    "ground_truth_description": "Changes the cross-reference for the comprehensive results table to point to the parameter count table.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "cross_reference_mismatch",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 5.3",
+      "affected_span_verbatim": "Our first experiment tests whether each method can meet diverse target objectives within the training ranges~(Table~\\ref{tab:design_spec_ranges}), i.e., finding parameters that satisfy varying gain, bandwidth, phase margin, and gain margin requirements without retraining. As shown in Table~\\ref{tab:comprehensive_comparison}, Lighthouse RL outperforms all other methods across every evaluation metric:"
+    },
+    "proposer_agent": "injector.general.S2.t1.v1"
+  }
+]

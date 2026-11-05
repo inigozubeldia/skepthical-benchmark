@@ -1,0 +1,87 @@
+{
+  "paper_id": "2607.13749",
+  "reviewer_system": "L25",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-23267bd2f8f7",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The inner product definition ⟨f, g⟩ = |G|⁻¹ Σ f(a,b) ḡ(a,b) is the standard normalised inner product on the group algebra ℂG, consistent with the convention used in harmonic analysis on finite abelian groups. With this normalisation the characters of G form an orthonormal basis, exactly as claimed via Schur's theorem. The transcription fidelity check was inconclusive, but the formula as extracted matches the verbatim source snippet and the canonical textbook definition, so no discrepancy was found.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "minor",
+          "notes": "The inner product definition ⟨f, g⟩ = |G|⁻¹ Σ f(a,b) ḡ(a,b) is the standard normalised inner product on the group algebra ℂG, consistent with the convention used in harmonic analysis on finite abelian groups. With this normalisation the characters of G form an orthonormal basis, exactly as claimed via Schur's theorem. The transcription fidelity check was inconclusive, but the formula as extracted matches the verbatim source snippet and the canonical textbook definition, so no discrepancy was found.",
+          "tools_used": []
+        },
+        "judge_panel": [],
+        "cost_usd": 0.017694199999999993
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-121bec1df6c3",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper makes inconsistent claims in Section 4.5: it first states, \"Under both initialisations, 38 of the 39 tasks are learned to INST at every degree and every seed,\" but then later says, \"of the 190 solved cells per initialisation ... 186 are INST under random-phase initialisation and 177 under roots-of-unity initialisation\" and that \"A small minority of cells do exhibit a short grokking-style gap—six clean GROK cells ... under the roots-of-unity initialisation.\" These statements cannot all be true simultaneously.",
+        "evidence": {
+          "claim": "There is a logical contradiction in the reported INST outcomes for learned encodings: the paper claims all 38 of 39 tasks are learned to INST at every degree and seed, but subsequent data and text reveal this is not possible due to GROK cases.",
+          "excerpt": "It is logically impossible for the 38 tasks to reach INST at *every* seed and degree if some of those specific runs result in GROK. *Why it matters*: This contradiction obscures the true distribution of outcomes for the learned encoding ablation, which is a key experimental result."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly clarifies that 'all 38 tasks are learned to INST' is a summary with acknowledged exceptions: 'of the 190 solved cells per initialisation (38 tasks × 5 degrees), 186 are INST under random-phase initialisation and 177 under roots-of-unity initialisation' and 'A small minority of cells do exhibit a short grokking-style gap—six clean GROK cells and a handful of borderline cases under the roots-of-unity initialisation, and none under random phases.' The claim of '38 of 39 tasks learned to INST' refers to the task-level outcome (38 tasks succeed, 1 fails), not that every single seed/degree run is INST, so there is no logical contradiction—just a distinction between task-level and run-level statistics that the paper makes explicit.",
+            "cost_usd": 0.0189801
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes inconsistent claims in Section 4.5: it first states, \"Under both initialisations, 38 of the 39 tasks are learned to INST at every degree and every seed,\" but then later says, \"of the 190 solved cells per initialisation ... 186 are INST under random-phase initialisation and 177 under roots-of-unity initialisation\" and that \"A small minority of cells do exhibit a short grokking-style gap—six clean GROK cells ... under the roots-of-unity initialisation.\" These statements cannot all be true simultaneously.",
+            "cost_usd": 0.0224065
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper contains a direct contradiction on page 11, first claiming '38 of the 39 tasks are learned to INST at every degree and every seed' but in the next paragraph stating that of those 190 cells, only '186 are INST under random-phase initialisation and 177 under roots-of-unity initialisation' due to a small minority exhibiting GROK.",
+            "cost_usd": 0.0063762
+          }
+        ],
+        "cost_usd": 0.0477628
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.017694199999999993,
+    "general": 0.0477628
+  },
+  "extractor_cost_usd": 0.007010000000000072,
+  "total_cost_usd": 0.07246700000000006
+}

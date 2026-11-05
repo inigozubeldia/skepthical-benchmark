@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v2",
+  "reviewer_system": "L25",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the counterfactual explanation definition or challenge the claim that minimal changes are made to achieve the 'same' prediction outcome. No mention of arrieta2020explainable or counterfactual explanations in any citation-related concern.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention counterfactual explanations, Arrieta et al. (2020), or any contradiction about achieving the same versus a different prediction outcome. No specific citation-based challenge corresponding to this injected direction reversal is present.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer report makes no mention of Section 2.1, the definition of counterfactual explanations, or the Arrieta et al. (2020) citation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the counterfactual explanation definition (Sec. 2.1, citing Arrieta et al.) as contradicted or mischaracterised. The reviewer's citation issue raised (Minor issue 4) concerns Reference [11]'s incomplete citation, not the counterfactual explanation claim. No reviewer comment challenges the 'same prediction outcome' wording against the cited source.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t2",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's major issue #3 discusses LIME fidelity values from the tables but does not specifically identify the discrepancy between the table value 0.4663 and the text value 0.4673, nor does it name or quote these specific values as inconsistent with each other.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses trend claims and cites nearby fidelity values, but does not specifically identify the Dataset 3 LIME fidelity mismatch between Table I and the text range endpoint 0.4673 versus 0.4663. Under the numeric rule, the exact inconsistency was not flagged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "While the reviewer critiques the authors' claims about trends in Section 5 using values from Table I, they do not identify the specific numerical discrepancy between the table value (0.4663) and the text value (0.4673) for Dataset 3.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "In Equation (1), the summation index runs from $i=0$ to $N$. If there are $N$ total samples, summing from $0$ to $N$ yields $N+1$ terms, but the multiplier is $1/N$. Fix: Change the summation index in Equation (1) to run from $i=1$ to $N$, which correctly yields $N$ terms and maintains consistency with Equations (2) and (3).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "In Equation (1), the summation index runs from $i=0$ to $N$. If there are $N$ total samples, summing from $0$ to $N$ yields $N+1$ terms, but the multiplier is $1/N$. Fix: Change the summation index in Equation (1) to run from $i=1$ to $N$, which correctly yields $N$ terms and maintains consistency with Equations (2) and (3).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the off-by-one error in the Fidelity summation (Equation 1), noting it starts at i=0 instead of i=1, which directly corresponds to the injected change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "2. [mathematical] Summation index bounds mismatch in Equation (1).\nIn Equation (1), the summation index runs from $i=0$ to $N$. If there are $N$ total samples, summing from $0$ to $N$ yields $N+1$ terms, but the multiplier is $1/N$.\n**Fix**: Change the summation index in Equation (1) to run from $i=1$ to $N$, which correctly yields $N$ terms and maintains consistency with Equations (2) and (3).",
+          "confidence": "high",
+          "reasoning": "This directly identifies the off-by-one lower-bound error introduced in the fidelity summation, explicitly contrasting i=0 to the correct i=1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Summation index bounds mismatch in Equation (1). In Equation (1), the summation index runs from $i=0$ to $N$.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies that the summation in Equation 1 starts at i=0, which correctly flags the injected off-by-one boundary error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "In Section III, paragraph 1, the text says \"predictions as depicted in Fig.??\". Fix: Replace the missing reference with the appropriate figure number (likely Fig. 1).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "In Section III, paragraph 1, the text says \"predictions as depicted in Fig.??\". Fix: Replace the missing reference with the appropriate figure number (likely Fig. 1).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the unresolved figure reference '??' in Section III, which directly corresponds to the injected misspelled label 'fig:modlxgb' causing a LaTeX artefact.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "1. [general] Unresolved figure reference.\nIn Section III, paragraph 1, the text says \"predictions as depicted in Fig.??\".\n**Fix**: Replace the missing reference with the appropriate figure number (likely Fig. 1).",
+          "confidence": "high",
+          "reasoning": "This exactly matches the injected broken LaTeX figure reference that renders as an unresolved '??' artifact.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Unresolved figure reference. In Section III, paragraph 1, the text says \"predictions as depicted in Fig.??\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the \"Fig.??\" LaTeX artifact caused by the intentional misspelling of the figure reference label.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 36.493293,
+  "total_cost_usd": null,
+  "total_input_tokens": 16157,
+  "total_output_tokens": 4921,
+  "escalation_count": 1,
+  "notes": null
+}

@@ -1,0 +1,91 @@
+{
+  "paper_id": "2604.20971",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-b162a040c1db",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Adjudicator error: RuntimeError: Gemini API key not found (set GEMINI_API_KEY or GOOGLE_API_KEY).",
+        "evidence": {},
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-9ad0ef9e115a",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly says its model is borrowed from a different physical regime: “The inspiration for our turbulent torque model comes from a set of global HD simulations presented in Wu et al. (2024)… turbulence driven by GI… in a proto-planetary disk,” while also admitting “LISA EMRIs will likely be most affected by MRI turbulence.” It further states that “Nmax = 100… is chosen based upon how often the torque changes magnitude or sign in Wu et al. (2024)” and that parameter “C” is introduced “to capture the strength of MRI with respect to GI,” but provides no first-principles or simulation-based mapping.",
+        "evidence": {
+          "claim": "The calibration of the chaotic-torque distribution is based on gravitational-instability simulations of protoplanetary disks, not MRI-driven AGN disks, and the scaling parameters C and N_max are adopted heuristically without first-principles or simulation-based mapping to the physical system being modeled.",
+          "excerpt": "The entire torque-distribution machinery is calibrated against Wu et al. (2024)'s gravitational-instability simulations of protoplanetary disks (PPDs), but the physical setup in the paper is MRI-driven turbulence in AGN disks (Sec. 2, Sec. 3, Sec. 5.1). The free parameter C \"captures the strength of MRI with respect to GI\" (Sec. 4) but no first-principles or simulation-based mapping between GI's σ_T_turb and MRI's σ_T_turb is provided — C is varied in {10^2, 10^{2.5}, 10^3} as a heuristic. The persistence-length parameter N_max is also fixed at 100 from a GI simulation (Sec. 4 — \"chosen based upon how often the torque changes magnitude or sign in Wu et al. 2024\"), and σ_turb ∝ √N_max in Eq. (16), so this calibration is load-bearing for every reported bound."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly says its model is borrowed from a different physical regime: “The inspiration for our turbulent torque model comes from a set of global HD simulations presented in Wu et al. (2024)… turbulence driven by GI… in a proto-planetary disk,” while also admitting “LISA EMRIs will likely be most affected by MRI turbulence.” It further states that “Nmax = 100… is chosen based upon how often the torque changes magnitude or sign in Wu et al. (2024)” and that parameter “C” is introduced “to capture the strength of MRI with respect to GI,” but provides no first-principles or simulation-based mapping.",
+            "cost_usd": 0.030663750000000004
+          }
+        ],
+        "cost_usd": 0.030663750000000004
+      },
+      {
+        "flag_id": "fp-69d98b44bf52",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper uses the heuristic threshold as its operative detectability rule: “At the first order, a dephasing is observable if its more than 8/SNR,” and then defines “Λ = (|∆ψlin| + 2σ̂turb)/(8/SNR0)” to decide when turbulent effects are observable. It also concedes this is not a full detectability analysis: “Lastly, we use a simple criterion of 8/SNR0… In principle, one has to do Bayesian inference to conclude that,” while giving no justification for the specific “+ 2σ̂turb” upper-tail choice.",
+        "evidence": {
+          "claim": "The observability threshold |Δψ_gas| > 8/SNR_0 is used as a strict detection boundary throughout, even though the paper itself acknowledges that only a full Bayesian parameter-estimation would provide a proper detectability threshold, and the choice of a 2σ proxy for the Gaussian upper tail is unjustified.",
+          "excerpt": "The observability criterion |Δψ_gas| > 8/SNR_0 underpins every numerical conclusion in Sec. 4 and the Conclusion, yet Sec. 6 itself acknowledges that \"in principle, one has to do Bayesian inference to conclude that by varying all parameters of interest ... since small changes in other parameters can mimic Δψ_gas as a number.\" Λ and Λ̄ in Eq. (17) inherit the same heuristic and use 2σ̂_turb as a proxy for the upper tail of a Gaussian, with no justification of the 2σ choice (vs e.g. 1.96σ, 3σ, or a tail-area integral)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses the heuristic threshold as its operative detectability rule: “At the first order, a dephasing is observable if its more than 8/SNR,” and then defines “Λ = (|∆ψlin| + 2σ̂turb)/(8/SNR0)” to decide when turbulent effects are observable. It also concedes this is not a full detectability analysis: “Lastly, we use a simple criterion of 8/SNR0… In principle, one has to do Bayesian inference to conclude that,” while giving no justification for the specific “+ 2σ̂turb” upper-tail choice.",
+            "cost_usd": 0.030663750000000004
+          }
+        ],
+        "cost_usd": 0.030663750000000004
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.0,
+    "general": 0.06132750000000001
+  },
+  "extractor_cost_usd": 0.030691999999999997,
+  "total_cost_usd": 0.0920195
+}

@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the Anchors claim (ribeiro2018anchors) or the over-generalisation of 'local region' to 'all instances in the dataset'. The citation minor issue raised concerns a different citation (saliency maps / VGG paper), not the Anchors entry.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The report criticizes experimental scope overstatement generally, but it does not specifically challenge the Anchors sentence or cite Ribeiro et al. (2018) as overgeneralising a local guarantee to all instances.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not identify the over-generalization of the Anchors method's local guarantee in Section 2.1.1, nor did they flag that specific claim sentence as contradictory to the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer did not flag the over-generalisation of the Anchors guarantee from a local region to 'all instances in the dataset.' The citation minor issues raised concern saliency maps and unnamed toolkits, not the Anchors claim.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Table I reports LIME simplicity of 35 for Dataset 3, exceeding the 30 features stated for the Breast Cancer dataset. ... The text says simplicity values range \"from 4 to 30,\" but Table I includes 35 and Table II includes 28.31.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Table I reports LIME simplicity of 35 for Dataset 3, exceeding the 30 features stated for the Breast Cancer dataset. ... The text says simplicity values range \"from 4 to 30,\" but Table I includes 35 and Table II includes 28.31.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags that the Table I value of 35 for Dataset 3 exceeds the stated range of 4 to 30 and the 30 features for the Breast Cancer dataset, directly corresponding to the injected change of 30→35 in the table.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "- Table I reports LIME simplicity of 35 for Dataset 3, exceeding the 30 features stated for the Breast Cancer dataset.\n- The text says simplicity values range “from 4 to 30,” but Table I includes 35 and Table II includes 28.31.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the changed table entry 35 and contrasts it with the paper's stated range from 4 to 30, matching the injected integer inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table I reports LIME simplicity of 35 for Dataset 3, exceeding the 30 features stated for the Breast Cancer dataset... The text says simplicity values range “from 4 to 30,” but Table I includes 35.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identified the injected value 35 in the results table and correctly noted that it contradicted the prose statement that values range from 4 to 30.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Equation (1) defines Fidelity = (1/N) sum_i ||f(x_i)||^2 / ||f(x_i)-g(x_i)||^2. Under this equation, if the explanation model exactly matches the original model, then ||f(x_i)-g(x_i)||^2 = 0, so the score becomes infinite or undefined, not close to zero.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Equation (1) defines Fidelity = (1/N) sum_i ||f(x_i)||^2 / ||f(x_i)-g(x_i)||^2. Under this equation, if the explanation model exactly matches the original model, then ||f(x_i)-g(x_i)||^2 = 0, so the score becomes infinite or undefined, not close to zero.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies and quotes the inverted fidelity ratio and explains exactly why it is wrong — it diverges under perfect agreement rather than vanishing — which directly corresponds to the injected inversion of the numerator and denominator.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Equation (1) defines\n\n\\[\nFidelity = \\frac{1}{N}\\sum_i \\frac{\\|f(x_i)\\|^2}{\\|f(x_i)-g(x_i)\\|^2}.\n\\]\n\nUnder this equation, if the explanation model exactly matches the original model, then \\(\\|f(x_i)-g(x_i)\\|^2 = 0\\), so the score becomes infinite or undefined, not close to zero.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the inverted fidelity ratio and explains why it contradicts the intended interpretation, which is exactly the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Equation (1) defines Fidelity = \\frac{1}{N}\\sum_i \\frac{\\|f(x_i)\\|^2}{\\|f(x_i)-g(x_i)\\|^2}. Under this equation, if the explanation model exactly matches the original model, then \\(\\|f(x_i)-g(x_i)\\|^2 = 0\\), so the score becomes infinite or undefined, not close to zero.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the inverted ratio in Equation (1) and explained that it causes the metric to diverge rather than vanish when surrogate agreement is perfect.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text says the benchmarking and knowledge-base steps are 'depicted in Fig. 1,' but Figure 2 is captioned 'Benchmarking experiments for Knowledge Base development' and appears to correspond more directly to that process. ... Check whether the intended reference is Figure 2 and correct the figure reference if necessary.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text says the benchmarking and knowledge-base steps are 'depicted in Fig. 1,' but Figure 2 is captioned 'Benchmarking experiments for Knowledge Base development' and appears to correspond more directly to that process. ... Check whether the intended reference is Figure 2 and correct the figure reference if necessary.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags that the figure reference in the benchmarking methodology paragraph points to Fig. 1 instead of Fig. 2, which corresponds directly to the injected cross-reference mismatch (Fig. 2 benchmarking → Fig. 1 logical architecture).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] The reference to Figure 1 appears inconsistent with the described benchmarking process.\n\n**Where:** Section IV, paragraph beginning “In summary, our methodology…”\n\n**What is wrong:** The text says the benchmarking and knowledge-base steps are “depicted in Fig. 1,” but Figure 2 is captioned “Benchmarking experiments for Knowledge Base development” and appears to correspond more directly to that process.\n\n**Concrete fix:** Check whether the intended reference is Figure 2 and correct the figure reference if necessary.",
+          "confidence": "high",
+          "reasoning": "This specifically flags the figure cross-reference mismatch between the benchmarking-steps discussion and Figure 1 versus Figure 2, corresponding to the injected wrong reference.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text says the benchmarking and knowledge-base steps are “depicted in Fig. 1,” but Figure 2 is captioned “Benchmarking experiments for Knowledge Base development” and appears to correspond more directly to that process.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the cross-reference error in Section 4 where the text points to Figure 1 instead of the intended Figure 2.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 33.450385,
+  "total_cost_usd": null,
+  "total_input_tokens": 27599,
+  "total_output_tokens": 4016,
+  "escalation_count": 1,
+  "notes": null
+}

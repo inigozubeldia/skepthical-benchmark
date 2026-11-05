@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "Among modern clustering approaches, centroid neural network (CentNN) \\cite{park2000centroid} is a prototype-based algorithm that follows a competitive-learning paradigm, where centroid vectors are updated online through winner-loser dynamics.",
+    "injected_text": "Among modern clustering approaches, centroid neural network (CentNN) \\cite{park2000centroid} is a density-based algorithm that follows a competitive-learning paradigm, where centroid vectors are updated online through winner-loser dynamics.",
+    "rationale": "Swapping 'prototype-based' to 'density-based' miscategorises the fundamental methodology of the cited algorithm (CentNN), presenting a realistic within-domain author error that directly contradicts the cited paper.",
+    "ground_truth_description": "The methodology of the cited paper (park2000centroid) was incorrectly changed from a 'prototype-based' algorithm to a 'density-based' algorithm.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "park2000centroid",
+      "injected_cite_key": "park2000centroid",
+      "claim_sentence_verbatim": "Among modern clustering approaches, centroid neural network (CentNN) \\cite{park2000centroid} is a prototype-based algorithm that follows a competitive-learning paradigm, where centroid vectors are updated online through winner-loser dynamics.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "On MNIST, the runtime is improved from 8.344\\,s to 7.924\\,s, corresponding to a speed-up of 5.03\\%,",
+    "injected_text": "On MNIST, the runtime is improved from 8.345\\,s to 7.924\\,s, corresponding to a speed-up of 5.03\\%,",
+    "rationale": "Slightly perturbs the baseline runtime for MNIST in the body text to 8.345s, creating a minimum-detectable repeated-constant drift against the 8.344s value still printed in Table 2.",
+    "ground_truth_description": "Changes the baseline MNIST runtime in the Section 3.3 text from 8.344 to 8.345, introducing a slight mismatch with Table 2.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "8.344",
+      "value_after_raw": "8.345",
+      "value_before_float": 8.344,
+      "value_after_float": 8.345,
+      "location_cue": "On MNIST, the runtime is improved from 8.345\\,s to 7.924\\,s, corresponding to a speed-up",
+      "paired_location": "Table 2",
+      "quantity_label": "baseline MNIST runtime in seconds",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t3.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "s=\\arg\\max_j E_j,\\quad\nE_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_2.",
+    "injected_text": "s=\\arg\\max_j E_j,\\quad\nE_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_1.",
+    "rationale": "Replaces the L2 distance norm with an L1 norm in the within-cluster error equation, creating a subtle cross-equation inconsistency with the L2 norm used for winner selection earlier in the text.",
+    "ground_truth_description": "Alters the distance metric from L2 to L1 in the within-cluster error definition, contradicting the L2 metric used for cluster assignments.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2.3 first equation",
+      "original_fragment_latex": "E_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_2",
+      "injected_fragment_latex": "E_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_1",
+      "full_equation_latex_before": "s=\\arg\\max_j E_j,\\quad\nE_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_2.",
+      "full_equation_latex_after": "s=\\arg\\max_j E_j,\\quad\nE_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_1.",
+      "term_role": "cross-equation inconsistency: distance metric in assignment vs error evaluation",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t2.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "Experiments on some benchmark datasets show that FastCentNN consistently achieves clustering quality comparable to CentNN while reducing runtime by up to 16\\% on synthetic 2D datasets and about 5\\% on high-dimensional datasets.",
+    "injected_text": "Experiments on some benchmark datasets show that FastCentNN consistently achieves clustering quality comparable to CentNN while reducing runtime by up to 16\\% on synthetic 2D datasets but increasing it by about 5\\% on high-dimensional datasets.",
+    "rationale": "The abstract is modified to claim a runtime increase on high-dimensional datasets, directly contradicting Section 3.3 and the Conclusion which report a consistent ~5% speed-up on MNIST and Fashion-MNIST.",
+    "ground_truth_description": "The abstract was modified to state that FastCentNN increases runtime on high-dimensional datasets, creating a clear internal contradiction with the speed-ups reported in the Results.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "A",
+      "checklist_item_id": "A2",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Abstract",
+      "affected_span_verbatim": "Experiments on some benchmark datasets show that FastCentNN consistently achieves clustering quality comparable to CentNN while reducing runtime by up to 16\\% on synthetic 2D datasets and about 5\\% on high-dimensional datasets."
+    },
+    "proposer_agent": "injector.general.S3.t1.v3"
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "paper.tex",
+    "original_text": "produce a correct rationale for 87\\% of decisions",
+    "injected_text": "produce a correct rationale for 91\\% of decisions",
+    "rationale": "Since the source paper lacks explicitly bounded \\pm \\sigma cited values, the 87\\% accuracy claim was shifted by 4 points to 91\\%, serving as a plausible 1-2\\sigma perturbation for a behavioral ML trial without introducing unnatural formatting.",
+    "ground_truth_description": "Changed the reported rationale correctness rate for Schmied et al. (2025) from 87\\% to 91\\%.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "schmied2025greedy",
+      "injected_cite_key": "schmied2025greedy",
+      "claim_sentence_verbatim": "In bandit tasks, models produce a correct rationale for 87\\% of decisions and still take the greedy action over the optimal action they just derived \\citep{schmied2025greedy}.",
+      "section_location": "Sec. 2",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "paper.tex",
+    "original_text": "scores from $0.62$ to $-0.23$:",
+    "injected_text": "scores from $0.63$ to $-0.23$:",
+    "rationale": "Perturbs the upper bound of the skill score range in the abstract by +0.01, creating a minor mismatch with the true value in Table 2.",
+    "ground_truth_description": "Abstract's upper skill score bound drifted from 0.62 to 0.63, contradicting the body's Table 2.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "0.62",
+      "value_after_raw": "0.63",
+      "value_before_float": 0.62,
+      "value_after_float": 0.63,
+      "location_cue": "scores from $0.62$ to $-0.23$: two of the four end below",
+      "paired_location": "Table 2",
+      "quantity_label": "maximum agent skill score",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "paper.tex",
+    "original_text": "\\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+    "injected_text": "\\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{orc}} - C_{\\mathrm{base}}}",
+    "rationale": "The canonical skill score normalises as (baseline - model) / (baseline - reference); the injected form reverses the denominator to (reference - baseline), which negates the score. It directly contradicts the sentence immediately following the display, which states the quantity is 0 at the symptom-blind floor and 1 at the oracle mean — under the injected form it would be -1 at the oracle mean.",
+    "ground_truth_description": "Skill-score definition: denominator (C_base - C_orc) replaced by (C_orc - C_base), inverting the sign of the normalised score.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 4, skill-score definition display",
+      "original_fragment_latex": "{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+      "injected_fragment_latex": "{C_{\\mathrm{orc}} - C_{\\mathrm{base}}}",
+      "full_equation_latex_before": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+      "full_equation_latex_after": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{orc}} - C_{\\mathrm{base}}}",
+      "term_role": "skill-score normalisation denominator",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "paper.tex",
+    "original_text": "Table~\\ref{tab:related} summarizes the benchmarks closest to ours.",
+    "injected_text": "Table~\\ref{tab:relatd} summarizes the benchmarks closest to ours.",
+    "rationale": "A broken \\ref target introduces a '??' into the rendered PDF, acting as a minor presentation defect.",
+    "ground_truth_description": "Introduced a typo in a \\ref command to generate a '??' rendering artefact.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "latex_artefact",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 2",
+      "affected_span_verbatim": "Table~\\ref{tab:related} summarizes the benchmarks closest to ours."
+    },
+    "proposer_agent": "injector.general.S1.t2.v3"
+  }
+]

@@ -1,0 +1,62 @@
+{
+  "paper_id": "2607.14176",
+  "reviewer_system": "L25",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-764cee47b5e4",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'A total of 449,500 graph snapshots are generated and split into training (80%) and validation (20%) sets' with no mention of a separate held-out test set. Table I reports final link-level metrics (accuracy 0.9589, F1 0.9544) 'on the validation set,' and the threshold sweep is also performed on this same validation set, meaning hyperparameter selection and final performance reporting both use the identical validation partition, with no independent test set evaluation reported.",
+        "evidence": {
+          "claim": "The manuscript lacks evaluation on an independent test set, reporting final model results on the same validation set used for hyperparameter tuning, leading to potential overestimation of model performance.",
+          "excerpt": "the final performance results (Table I) are reported directly on this same validation set. Tuning hyperparameters (such as the activation threshold) on the validation set and reporting final evaluation metrics on that identical set leaks information and risks overstating the model's performance."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'A total of 449,500 graph snapshots are generated and split into training (80%) and validation (20%) sets' with no mention of a separate held-out test set. Table I reports final link-level metrics (accuracy 0.9589, F1 0.9544) 'on the validation set,' and the threshold sweep is also performed on this same validation set, meaning hyperparameter selection and final performance reporting both use the identical validation partition, with no independent test set evaluation reported.",
+            "cost_usd": 0.010758
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that the dataset was \"split into training (80%) and validation (20%) sets\" with no independent test set mentioned, and the main results are reported \"on the validation set\" (Table I: \"Link-level performance on the validation set at selected thresholds\"). It also says \"At validation time, a threshold sweep is performed,\" so the same validation split is used for threshold selection/analysis and final reporting.",
+            "cost_usd": 0.017194
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states that the dataset is 'split into training (80%) and validation (20%) sets' and reports the final metrics in 'TABLE I: Link-level performance on the validation set at selected thresholds', confirming the absence of an independent test set.",
+            "cost_usd": 0.0049454
+          }
+        ],
+        "cost_usd": 0.0328974
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0328974
+  },
+  "extractor_cost_usd": 0.005450000000000031,
+  "total_cost_usd": 0.03834740000000003
+}

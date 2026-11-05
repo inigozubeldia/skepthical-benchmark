@@ -1,0 +1,237 @@
+{
+  "paper_id": "2607.13749",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-975cc224abe9",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. This theorem asserts that the minimum empirical training loss is bounded below by δ² − O(N^{−1/2}) with high probability. The transcription of the inequality from the paper was confirmed as faithful. However, no mechanical engine (Wolfram or units check) was able to evaluate the inequality, and no LLM knowledge-audit check was performed on it—likely because it is a bespoke theoretical result specific to this paper's construction rather than a canonical textbook formula. Without access to the full proof of Theorem 3 and its underlying spectral decomposition argument, there is insufficient evidence to confirm or refute the bound independently. The claim is plausible in structure (a concentration inequality of order N^{−1/2} via standard Hoeffding-type arguments is consistent with the setting), but correctness ultimately rests on the paper's internal proof, which cannot be verified from the statement alone.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "critical",
+          "notes": "This theorem asserts that the minimum empirical training loss is bounded below by δ² − O(N^{−1/2}) with high probability. The transcription of the inequality from the paper was confirmed as faithful. However, no mechanical engine (Wolfram or units check) was able to evaluate the inequality, and no LLM knowledge-audit check was performed on it—likely because it is a bespoke theoretical result specific to this paper's construction rather than a canonical textbook formula. Without access to the full proof of Theorem 3 and its underlying spectral decomposition argument, there is insufficient evidence to confirm or refute the bound independently. The claim is plausible in structure (a concentration inequality of order N^{−1/2} via standard Hoeffding-type arguments is consistent with the setting), but correctness ultimately rests on the paper's internal proof, which cannot be verified from the statement alone.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01657729999999999
+      },
+      {
+        "flag_id": "fp-81a0276f72ef",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. The claim that the training-loss lower bound extends to the learned-embedding setting by substituting tail singular-value energy for the spectral gap is a structural proposition about how Theorem 3 generalises. The transcription was confirmed as faithful. However, no mechanical engine was able to evaluate this property (no Wolfram or units check was applicable or returned a result), and no LLM knowledge check was run against a canonical reference. The claim rests on the paper's argument that Theorem 3 only requires the network output to lie in a family of dimension at most k+1, so the substitution δ² = Σ σᵢ(ωᶠ)² (i from k+2 to p) is the natural analogue of the spectral gap in the fixed-encoding case. This reasoning is internally plausible, but without a mechanical or independent reference check, the correctness of the bound's extension cannot be confirmed from the evidence available.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "critical",
+          "notes": "The claim that the training-loss lower bound extends to the learned-embedding setting by substituting tail singular-value energy for the spectral gap is a structural proposition about how Theorem 3 generalises. The transcription was confirmed as faithful. However, no mechanical engine was able to evaluate this property (no Wolfram or units check was applicable or returned a result), and no LLM knowledge check was run against a canonical reference. The claim rests on the paper's argument that Theorem 3 only requires the network output to lie in a family of dimension at most k+1, so the substitution δ² = Σ σᵢ(ωᶠ)² (i from k+2 to p) is the natural analogue of the spectral gap in the fixed-encoding case. This reasoning is internally plausible, but without a mechanical or independent reference check, the correctness of the bound's extension cannot be confirmed from the evidence available.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01657729999999999
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-0820349250a7",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Proposition 1 proves only necessity: \"a task f is representable under some choice of (e1, e2, W, v) only if rank(ω^f) ≤ k + 1.\" But the paper later states that \"under a learned encoding the representability boundary moves from the line m + n = k to the single condition rank(ω^f) ≤ k + 1,\" while proving sufficiency only for the rank-one families in Corollary 1.",
+        "evidence": {
+          "claim": "The claim that the representability boundary for learned scalar embeddings is rank(ω^f) ≤ k+1 is overstated—the architecture only outputs a special subset of rank-(k+1) matrices, not all of them; sufficiency is not proved.",
+          "excerpt": "the paper repeatedly suggests that this condition becomes the representability boundary under learned embeddings. That is stronger than what Proposition 1 proves."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Proposition 1 proves only a necessary condition (rank ≤ k+1), and Corollary 1 separately proves sufficiency for rank-one targets by an explicit construction. However, the paper states 'under a learned encoding the representability boundary moves from the line m+n=k to the single condition rank(ω^f)≤k+1,' which does claim this as a complete characterization. The sufficiency proof in Corollary 1 only covers rank-one targets, not all rank-(k+1) matrices, so the reviewer's concern that sufficiency is not proved in full generality has merit, though the paper's experimental claims are narrower.",
+            "cost_usd": 0.0066657750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Proposition 1 proves only necessity: \"a task f is representable under some choice of (e1, e2, W, v) only if rank(ω^f) ≤ k + 1.\" But the paper later states that \"under a learned encoding the representability boundary moves from the line m + n = k to the single condition rank(ω^f) ≤ k + 1,\" while proving sufficiency only for the rank-one families in Corollary 1.",
+            "cost_usd": 0.0185335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims that \"under a learned encoding the representability boundary moves from the line m + n = k to the single condition rank(ω^f) ≤ k + 1\" (Section 3.6), but Proposition 1 only proves this as a necessary condition (\"only if\"), and sufficiency is only shown for rank-1 targets in Corollary 1.",
+            "cost_usd": 0.0026834
+          }
+        ],
+        "cost_usd": 0.027882675000000003
+      },
+      {
+        "flag_id": "fp-f2006b24b3b2",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The surjectivity result is explicitly conditional: \"Lemma 3 (Surjectivity). For any hidden width H ≥ k + 1 ... every element of Fk is the output of some network.\" Yet the paper also says \"Increasing the hidden width H does nothing to enlarge this subspace; it only introduces redundancy within it\" and that \"Fk is exactly the expressible class,\" which overstates what is proved for H < k + 1.",
+        "evidence": {
+          "claim": "The paper claims that the expressible class is 'exactly F_k' independent of hidden width, but in fact this is proven only for width H ≥ k+1; wording should reflect distinction between containment and surjectivity.",
+          "excerpt": "For every width H, the network output is contained in F_k. For H≥k+1, Lemma 3 proves that every element of F_k is reachable. Thus the exact equality between the network’s expressible class and F_k is only proved for H≥k+1."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Lemmas 1-3: 'Lemmas 1–3 together say that F_k is exactly the expressible class: neither more nor less' and Lemma 3 requires H≥k+1 for surjectivity, while Lemma 2 covers containment for any H. The experimental protocol uses H=128 which exceeds k+1 for all k≤6, and the paper's Section 4.1 specifies H=128, so the distinction is operationally satisfied throughout. The paper's prose is consistent with this distinction.",
+            "cost_usd": 0.0066657750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The surjectivity result is explicitly conditional: \"Lemma 3 (Surjectivity). For any hidden width H ≥ k + 1 ... every element of Fk is the output of some network.\" Yet the paper also says \"Increasing the hidden width H does nothing to enlarge this subspace; it only introduces redundancy within it\" and that \"Fk is exactly the expressible class,\" which overstates what is proved for H < k + 1.",
+            "cost_usd": 0.0185335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that \"Lemmas 1–3 together say that F_k is exactly the expressible class: neither more nor less\" (Section 3.3) without qualifying the width, even though Lemma 3 explicitly requires \"H ≥ k + 1\" to prove surjectivity onto F_k.",
+            "cost_usd": 0.0026834
+          }
+        ],
+        "cost_usd": 0.027882675000000003
+      },
+      {
+        "flag_id": "fp-ae8a0b94853c",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The theorem is scoped as \"Under the assumption k < p, none of the tasks ... is representable for any k,\" but nearby prose makes broader claims such as nonlinear-phase targets \"no finite degree k suffices to represent them\" and \"no choice of degree k resolves this.\" The paper does not supply a separate explicit proof for arbitrary k outside the stated k < p regime.",
+        "evidence": {
+          "claim": "The role of the assumption k<p in Theorem 2 is not made clear; claims about the inexpressibility of nonlinear-phase targets should consistently reflect the valid range for k or be supported by explicit proof.",
+          "excerpt": "Theorem 2 is stated under k<p, but the surrounding prose sometimes says that no finite degree k suffices for nonlinear-phase targets...The paper should either: restrict the claim to k<p, consistently; or add a short proof for arbitrary k"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "Theorem 2 is explicitly stated 'Under the assumption k<p,' and the abstract and introduction say 'no finite degree k suffices' for nonlinear-phase targets. For the ab case, the proof shows its Fourier support is all of (Z_p)^2 with p^2 elements, while |S_k|=k+1≤p, so containment is impossible for any k<p; since increasing k beyond p would require k≥p violating the assumption, the claim holds for all architecturally valid k. The prose claim about 'no finite k' is informally supported by the geometric argument that the support shape (not size) is the obstruction.",
+            "cost_usd": 0.0066657750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The theorem is scoped as \"Under the assumption k < p, none of the tasks ... is representable for any k,\" but nearby prose makes broader claims such as nonlinear-phase targets \"no finite degree k suffices to represent them\" and \"no choice of degree k resolves this.\" The paper does not supply a separate explicit proof for arbitrary k outside the stated k < p regime.",
+            "cost_usd": 0.0185335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The introduction broadly claims that for nonlinear-phase targets \"no finite degree k suffices to represent them\" (Page 2), contradicting Theorem 2 which is explicitly restricted \"Under the assumption k < p\" (Page 5).",
+            "cost_usd": 0.0026834
+          }
+        ],
+        "cost_usd": 0.027882675000000003
+      },
+      {
+        "flag_id": "fp-341b8025cdf3",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section 4.1 provides some details (AdamW, lr=10^-3, weight decay=10^-2, H=128, 40% training split, 3 seeds) but omits: total training steps for the main holomorphic runs, how complex-valued AdamW is implemented, how accuracy is computed from complex-valued outputs, and code/reproducibility information. The paper does not address these gaps explicitly, leaving reproducibility details underspecified.",
+        "evidence": {
+          "claim": "The experiments are underspecified: details necessary to assess reproducibility and compare models are missing (optimizer, accuracy computation, splitting, stopping/classification rules, code sharing, and baseline specifics).",
+          "excerpt": "The experiments are central to the paper, but several implementation details are missing or underspecified. Please clarify: the total number of training steps...how complex-valued AdamW is implemented...how accuracy is computed...etc."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 4.1 provides some details (AdamW, lr=10^-3, weight decay=10^-2, H=128, 40% training split, 3 seeds) but omits: total training steps for the main holomorphic runs, how complex-valued AdamW is implemented, how accuracy is computed from complex-valued outputs, and code/reproducibility information. The paper does not address these gaps explicitly, leaving reproducibility details underspecified.",
+            "cost_usd": 0.0066657750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the protocol gives some settings — e.g. \"The network has hidden width H = 128 ... and trains full-batch with AdamW at learning rate 10−3 and weight decay 10−2\" and \"We classify each run as INST...\" — it omits key reproducibility details for the main holomorphic runs, such as the total training budget (contrast the ReLU baseline's \"8000 training steps\"), and nowhere explains how complex outputs are converted into \"accuracy\" or how complex-valued AdamW is implemented.",
+            "cost_usd": 0.0185335
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's protocol in Section 4.1 lacks critical experimental details; notably, it defines classification rules based on when \"train and test accuracy exceed 99%\" but never specifies how this discrete accuracy metric is computed from the continuous network outputs on the unit circle.",
+            "cost_usd": 0.0026834
+          }
+        ],
+        "cost_usd": 0.027882675000000003
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.03315459999999998,
+    "general": 0.11153070000000001
+  },
+  "extractor_cost_usd": 0.015666000000000097,
+  "total_cost_usd": 0.16035130000000009
+}

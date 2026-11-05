@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "The central value of its measured energy was $2.46\\times 10^{20}$ eV.",
+    "injected_text": "The central value of its measured energy was $2.57\\times 10^{20}$ eV.",
+    "rationale": "The Telescope Array paper (TelescopeArray:2023sbd) reports the Amaterasu particle energy as 2.44×10^20 eV with an uncertainty of roughly 0.11×10^20 eV (∼5%), so shifting the quoted central value from 2.46 to 2.57 (a change of +0.11×10^20 eV ≈ 1σ) places the mis-quote just outside the 1σ envelope while remaining within 2σ — realising a C·S1·type-2 qualifier mis-quote with the cite key left intact.",
+    "ground_truth_description": "The quoted central energy of the Amaterasu event was changed from 2.46×10^20 eV (close to the published 2.44×10^20 eV) to 2.57×10^20 eV, a shift of approximately 1σ outside the reported uncertainty.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "TelescopeArray:2023sbd",
+      "injected_cite_key": "TelescopeArray:2023sbd",
+      "claim_sentence_verbatim": "The central value of its measured energy was $2.46\\times 10^{20}$ eV.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "10$^{20}$ eV",
+    "injected_text": "10$^{02}$ eV",
+    "rationale": "[2026-05-01 patch: spans tightened to the atomic digit-swap so they no longer clash with general.S3.t1's full-sentence rewrite of the same abstract paragraph.]  Swapping adjacent digits '20' to '02' in the abstract's headline energy threshold creates an abstract_vs_body_match mismatch, since the correct value 10^{20} eV appears repeatedly in the body text.",
+    "ground_truth_description": "The exponent '20' in '10^{20} eV' in the abstract was changed to '02', while the correct value 10^{20} eV remains in the body (e.g., Introduction and Section IV).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "10^{20}",
+      "value_after_raw": "10^{02}",
+      "value_before_float": 1e+20,
+      "value_after_float": 100.0,
+      "location_cue": "their relative fraction above 10^{20} eV can be found from full sky observations",
+      "paired_location": "Introduction: 'free magnetic monopoles can naturally have energies above $10^{20}$ eV'",
+      "quantity_label": "energy threshold for UHECR magnetic monopole fraction in eV",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "E\n\\sim\\,g\\,B\\,\\xi\\, ",
+    "injected_text": "E\n\\sim\\,g\\,B\\, ",
+    "rationale": "Deleting the coherence-length factor ξ from the key kinetic-energy equation removes the dimensional scaling that ties the monopole energy gain to the field coherence length, so Wolfram refutes the equation against the intended E ~ g B ξ relation.",
+    "ground_truth_description": "The coherence-length term ξ was deleted from the monopole kinetic-energy equation E ~ g B ξ, leaving only E ~ g B and breaking the fundamental energy-gain scaling relation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "Ekin",
+      "equation_location": "Sec. 2, labeled equation Ekin",
+      "original_fragment_latex": "g\\,B\\,\\xi\\,",
+      "injected_fragment_latex": "g\\,B\\,",
+      "full_equation_latex_before": "E\n\\sim\\,g\\,B\\,\\xi\\,",
+      "full_equation_latex_after": "E\n\\sim\\,g\\,B\\,",
+      "term_role": "coherence-length factor ξ that gives monopole energy gain its spatial extent scaling",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": true
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "We use this fact to argue that  at least some of these these cosmic rays are relatively light magnetic monopoles and\n that their relative fraction  above 10$^{02}$ eV can be found from full sky observations.",
+    "injected_text": "We use this fact to argue that  at least some of these these cosmic rays are relatively light magnetic monopoles, but\n that their relative fraction  above 10$^{02}$ eV is consistent with zero and cannot be meaningfully constrained from current full sky observations.",
+    "rationale": "[2026-05-01 patch: original_text re-anchored from `10$^{20}$` to `10$^{02}$` because numerics.S2.t1 already perturbed that magnitude in the abstract; the general-module flip stacks on top.]  The abstract now claims the MM fraction above 10^20 eV is consistent with zero and unconstrained, directly contradicting the body (Section IV, Table 1) which reports positive f_MM values reaching 0.520 at 100–110 EeV with Z_MM values hinting at tension, and the conclusion which explicitly states a substantial MM fraction may be coming from the local void — a major internal contradiction detectable by cross-checking abstract against results.",
+    "ground_truth_description": "The abstract's claim about the MM fraction above 10^20 eV was flipped from 'can be found from full sky observations' to 'is consistent with zero and cannot be meaningfully constrained', contradicting Table 1 and the Discussion section which report non-zero f_MM values and positive Z_MM trends.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "A",
+      "checklist_item_id": "A2",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Abstract",
+      "affected_span_verbatim": "We use this fact to argue that  at least some of these these cosmic rays are relatively light magnetic monopoles and\n that their relative fraction  above 10$^{20}$ eV can be found from full sky observations."
+    },
+    "proposer_agent": "injector.general.S3.t1.v2"
+  }
+]

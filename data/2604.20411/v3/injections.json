@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "aa58752-25.tex",
+    "original_text": "supervised machine learning technique from \\cite{Huertas24}",
+    "injected_text": "machine learning technique from \\cite{Huertas24}",
+    "rationale": "Drops the precise methodological qualifier 'supervised' from the description of Huertas24's morphological classification; Huertas24 specifically employs supervised deep-learning (CNN-based) models, so the bare 'machine learning technique' is almost-but-not-quite faithful to the cited paper's stated contribution while leaving the cite key untouched.",
+    "ground_truth_description": "Removed the word 'supervised' before 'machine learning technique' in the sentence attributing the COSMOS-Web morphological classification method to Huertas24, leaving the citation itself unchanged.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Huertas24",
+      "injected_cite_key": "Huertas24",
+      "claim_sentence_verbatim": "Galaxies are classified into three broad morphological types (early-type, spiral and irregular) using supervised machine learning technique from \\cite{Huertas24}.",
+      "section_location": "Sec. 5.3 (The role of morphology on SFR-M_star relation; Discussion)",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "aa58752-25.tex",
+    "original_text": "This master morphology catalog is then cross matched with our COSMOS2020 catalog using a 1$\\arcsec$ radius, yielding 177,604 counterparts, among which 19,251 are early-type galaxies and 78,307 are spirals and 80,046 are irregulars.",
+    "injected_text": "This master morphology catalog is then cross matched with our COSMOS2020 catalog using a 1$\\arcsec$ radius, yielding 177,604 counterparts, among which 19,251 are early-type galaxies (an early-type fraction of $\\sim$35\\%), 78,307 are spirals and 80,046 are irregulars.",
+    "rationale": "The paper does not contain a pre-existing explicit numerator/denominator/ratio triple in prose; the most natural and realistic place to introduce a ratio_eq violation is the morphology cross-match paragraph, which already names both an explicit numerator (19,251 early-type galaxies) and denominator (177,604 counterparts). A tired author could plausibly add a parenthetical fraction; here the inserted ~35% is blatantly wrong (the correct value is 19251/177604 \\approx 10.8%), giving a >200% relative error on a ratio_eq predicate, well above the major-upgrade threshold.",
+    "ground_truth_description": "Inserted a parenthetical claim that early-type galaxies make up ~35% of the cross-matched morphology sample, while the explicit counts in the same sentence imply the true fraction is ~10.8% (19,251/177,604).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "10.8%",
+      "value_after_raw": "$\\sim$35\\%",
+      "value_before_float": 10.84,
+      "value_after_float": 35.0,
+      "location_cue": "19,251 are early-type galaxies (an early-type fraction of $\\sim$35\\%), 78,307 are spirals and 80,046 are irregulars",
+      "paired_location": "Section 5 (morp), morphology cross-match paragraph",
+      "quantity_label": "early-type galaxy fraction in the cross-matched morphology sample (19,251 / 177,604)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "aa58752-25.tex",
+    "original_text": "\\mathrm{log(SFR)=S_0-log[(10^{M_\\star}/10^{M_0})^{-\\gamma_1}+(10^{M_\\star}/10^{M_0})^{\\gamma_2}]}",
+    "injected_text": "\\mathrm{log(SFR)=S_0+10^{M_\\star}-log[(10^{M_\\star}/10^{M_0})^{-\\gamma_1}+(10^{M_\\star}/10^{M_0})^{\\gamma_2}]}",
+    "rationale": "Adds a bare mass term 10^{M_*} (units of M_sun, since M_* is described as log-scale so 10^{M_*} is the linear stellar mass) to a dimensionless equation whose other terms (log SFR, S_0, logs of mass ratios) are unitless; this is the canonical 'forgot to take the log' mistake and pint refutes it trivially.",
+    "ground_truth_description": "Inserted an unlogged stellar-mass term 10^{M_*} (carrying mass units of M_sun) into the right-hand side of the dimensionless SFR-M* parameterization (Eq. 1), creating a dimensional mismatch with log(SFR) on the left-hand side.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq1",
+      "equation_location": "Eq. (1), Section 3.1 (Parameterizing the SFR-M_star relation)",
+      "original_fragment_latex": "S_0-log[",
+      "injected_fragment_latex": "S_0+10^{M_\\star}-log[",
+      "full_equation_latex_before": "\\mathrm{log(SFR)=S_0-log[(10^{M_\\star}/10^{M_0})^{-\\gamma_1}+(10^{M_\\star}/10^{M_0})^{\\gamma_2}]}",
+      "full_equation_latex_after": "\\mathrm{log(SFR)=S_0+10^{M_\\star}-log[(10^{M_\\star}/10^{M_0})^{-\\gamma_1}+(10^{M_\\star}/10^{M_0})^{\\gamma_2}]}",
+      "term_role": "injected unit mismatch (bare linear stellar mass added to a dimensionless log-scale equation)",
+      "expected_engine": "pint",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": true
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "aa58752-25.tex",
+    "original_text": "We note that objects in the Tasca catalog are selected with $i$-band magnitude $<23$, substantially brighter than the COSMOS2020 limiting magnitude of $i=26$. The Tasca sample is therefore biased toward intrinsically luminous galaxies with elevated SFRs relative to the parent population.",
+    "injected_text": "We note that objects in the Tasca catalog are selected with $i$-band magnitude $<23$, substantially brighter than the COSMOS2020 limiting magnitude of $i=26$. The Tasca sample is therefore biased toward intrinsically luminous galaxies with elevated SFRs relative to the parent population. To remove this bias, we apply a luminosity-weighted statistical correction that reweights the Tasca-classified galaxies to recover the morphological mix of the parent COSMOS2020 population before merging the two morphology catalogs.",
+    "rationale": "Inserts a Methods-side claim that the Tasca-sample luminosity-selection bias has been corrected via a reweighting procedure, which directly contradicts the Results discussion of Figures 8-9 where the authors attribute the upward skew of morphology-sample galaxies above the best-fit relation to this same uncorrected selection bias, and again invoke the bias to explain elevated z>2 spiral SFRs.",
+    "ground_truth_description": "Added a sentence to the morphology data description claiming a luminosity-weighted statistical correction was applied to remove the Tasca i-band selection bias, even though the Results explicitly attribute observed offsets to this uncorrected bias.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 5.2 (morp) — morphology data description",
+      "affected_span_verbatim": "We note that objects in the Tasca catalog are selected with $i$-band magnitude $<23$, substantially brighter than the COSMOS2020 limiting magnitude of $i=26$. The Tasca sample is therefore biased toward intrinsically luminous galaxies with elevated SFRs relative to the parent population."
+    },
+    "proposer_agent": "injector.general.S3.t3.v3"
+  }
+]

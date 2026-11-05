@@ -1,0 +1,272 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-7f7e0195e108",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states in Sec. II B that 'Each scan consists of N = 80 samples' but Fig. 1 and architecture descriptions consistently show 'Input (128, 2)' tensors. No explanation is provided anywhere in the paper for how 80-sample scans become 128-sample inputs, creating a genuine reproducibility issue.",
+        "evidence": {
+          "claim": "There is an input length inconsistency between the scan length used for data generation (N=80) and the input tensor/architecture figure (128), which is not reconciled or explained; this ambiguity impacts reproducibility, interpretation of resource utilization, and the latency claim.",
+          "excerpt": "However, Fig. 1 (Sec. II A) shows the network Input tensor as (128, 2) and every intermediate convolutional layer output as (128, ...); Table IX ...It is not stated anywhere how 80-sample scans become 128-sample tensors (padding? another upsampling? a different scan length used only for FPGA?). This ambiguity affects reproducibility, resource-utilization interpretation, and the latency claim."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Sec. II B that 'Each scan consists of N = 80 samples' but Fig. 1 and architecture descriptions consistently show 'Input (128, 2)' tensors. No explanation is provided anywhere in the paper for how 80-sample scans become 128-sample inputs, creating a genuine reproducibility issue.",
+            "cost_usd": 0.0044806
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that \"Each scan consists of N = 80 samples\" (Sec. II B), but Fig. 1 labels the model input as \"Input (128, 2)\" and all intermediate tensors as length 128. I could not find any passage explaining how 80-point scans are transformed into 128-point inputs, so the inconsistency is unresolved.",
+            "cost_usd": 0.006403583333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Sec. II B that 'Each scan consists of N = 80 samples' but Figure 1 specifies an 'Input (128, 2)' tensor shape, without explaining how the 80-sample scan is converted or padded to 128 samples.",
+            "cost_usd": 0.0019711333333333335
+          }
+        ],
+        "cost_usd": 0.012855316666666667
+      },
+      {
+        "flag_id": "fp-5040f7e5bdf8",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paragraph beginning 'Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ (with Δx₀ = 0)' appears verbatim twice in succession in Sec. II B, which is a clear editorial error that may obscure missing methodological content (e.g., normalization or windowing to 128 samples).",
+        "evidence": {
+          "claim": "There is a duplicate paragraph in Sec. II B, suggesting a revision mismatch or possible omission of intended methodological content important for understanding preprocessing steps.",
+          "excerpt": "The paragraph beginning \"Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ …\" appears twice, back-to-back, in Sec. II B. Beyond the editorial defect, the repetition suggests a revision mismatch: readers cannot tell whether an intended additional sentence (e.g., about normalisation, windowing to length 128, or scaling) has been overwritten."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paragraph beginning 'Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ (with Δx₀ = 0)' appears verbatim twice in succession in Sec. II B, which is a clear editorial error that may obscure missing methodological content (e.g., normalization or windowing to 128 samples).",
+            "cost_usd": 0.0044806
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Sec. II B repeats the same paragraph verbatim twice: \"Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δx_i = x_i − x_{i−1} (with Δx_0 = 0).\" The duplication is a real editorial/methodological defect, and the paper gives no indication that the repeated text was intentional.",
+            "cost_usd": 0.006403583333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The text 'Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel...' is indeed duplicated verbatim on page 4, right before Section II.C.",
+            "cost_usd": 0.0019711333333333335
+          }
+        ],
+        "cost_usd": 0.012855316666666667
+      },
+      {
+        "flag_id": "fp-9d4a64adf409",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively)' — tuning χ² to 5% FPR on training data to match a DCCNN range of 4–6% is not a strict matched-FPR comparison, and the paper does not report the FPRs actually realized on the evaluation sets used for the efficiency comparison.",
+        "evidence": {
+          "claim": "The central comparison between DCCNN and χ² states 'matched FPR' but the matching is asymmetric and imprecise; realized FPRs are not reported, so the principal comparison is not supported as claimed.",
+          "excerpt": "A 5% tuning against a DCCNN operating point of either 6% or 4% is not a matched-FPR comparison in a strict sense ... the χ² FPR is tuned on the training set, whereas the reported efficiencies are on separate simulated sets, so the FPRs actually realized on the evaluation sets are not reported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively)' — tuning χ² to 5% FPR on training data to match a DCCNN range of 4–6% is not a strict matched-FPR comparison, and the paper does not report the FPRs actually realized on the evaluation sets used for the efficiency comparison.",
+            "cost_usd": 0.0044806
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says the χ² method was tuned \"subject to a false-positive-rate (FPR) constraint of 5%\" and that this was chosen to match DCCNN rates of \"6% and 4%, respectively\" (Sec. III C), yet the Abstract claims comparison \"at matched false-positive rate.\" A 5% constraint is not a strict match to either 6% or 4%, and the realized evaluation-set FPRs are not reported.",
+            "cost_usd": 0.006403583333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states the chi-squared algorithm was tuned to an 'FPR constraint of 5%. This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively)', confirming the matching is asymmetric, and the realized FPR on the evaluation set is not reported in Table VII.",
+            "cost_usd": 0.0019711333333333335
+          }
+        ],
+        "cost_usd": 0.012855316666666667
+      },
+      {
+        "flag_id": "fp-169b06a348e2",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table VIII notes 'post-place-and-route' resource numbers but Sec. IV C explicitly states 'Vitis HLS C-synthesis at a 3.33 ns target clock estimates a per-inference latency of 1,860 cycles (6.19 µs),' and the Conclusion states 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware,' confirming the latency is an estimate, not a measured result, while the Abstract presents it as a realized fact.",
+        "evidence": {
+          "claim": "The 'real-time' and '6.19 µs latency' claims are based entirely on HLS C-synthesis estimates, with no end-to-end hardware measurement; the framing in the Abstract and other sections overstates the implementation's readiness.",
+          "excerpt": "The abstract, introduction, Sec. IV C, and Conclusion all describe the DCCNN as operating in real time on QICK. Table VIII carries \"post-place-and-route, Vivado 2023.1\" resource numbers, and Sec. IV C reports \"Vitis HLS C-synthesis\" latency estimates. The Conclusion (Sec. V) states that \"Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware\", indicating that the system has not been run on measured data. The framing in the Abstract (\"reaching a per-inference latency of 6.19 µs on the Zynq UltraScale+ RFSoC ZCU216\") is stronger than the evidence."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table VIII notes 'post-place-and-route' resource numbers but Sec. IV C explicitly states 'Vitis HLS C-synthesis at a 3.33 ns target clock estimates a per-inference latency of 1,860 cycles (6.19 µs),' and the Conclusion states 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware,' confirming the latency is an estimate, not a measured result, while the Abstract presents it as a realized fact.",
+            "cost_usd": 0.0044806
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. IV C explicitly states that \"Vitis HLS C-synthesis at a 3.33 ns target clock estimates a per-inference latency of 1,860 cycles (6.19 µs),\" while Sec. V says \"Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware.\" Thus the latency is an HLS estimate rather than an end-to-end hardware measurement, so the stronger framing in the Abstract is not fully supported by demonstrated deployment.",
+            "cost_usd": 0.006403583333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section IV.C explicitly states that 'Vitis HLS C-synthesis... estimates a per-inference latency of 1,860 cycles (6.19 µs)' and Section V notes 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware', confirming that the latency is a synthesis estimate rather than an on-hardware end-to-end measurement.",
+            "cost_usd": 0.0019711333333333335
+          }
+        ],
+        "cost_usd": 0.012855316666666667
+      },
+      {
+        "flag_id": "fp-9c5eb25c1c60",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: Sec. III B defines efficiency as a binary per-scan classification metric with uncertainty being 'standard deviation across qubits,' while Sec. III C defines it as 'the per-qubit mean efficiency' over 15 jump-size bins with uncertainty as 'standard deviation of the per-qubit mean efficiency across 75 independent sets.' The paper does not explain the difference between these definitions or why the uncertainty shrinks substantially (±0.0791 vs. ±0.022) when switching metrics.",
+        "evidence": {
+          "claim": "Sec. III B defines efficiency differently than Sec. III C, with different denominators and uncertainty structures; this obscures the main comparison between DCCNN and χ² and is not explained.",
+          "excerpt": "Sec. III B defines efficiency as \"the number of jump-containing signals correctly classified as such over the total number of signals that contain a jump\" (a per-scan binary detection), with the DCCNN reaching 0.8349 ± 0.0791. Sec. III C then adopts \"the binned per-qubit efficiency metric used in Ref. [17]\", reporting 0.843 ± 0.022 as a \"per-qubit mean efficiency\" over 15 bins of |Δq|. The two definitions and their uncertainty structures differ substantially (one is a variance across qubits, the other appears to be a statistical error over repeated simulations). Neither the difference nor the reason the higher-uncertainty per-qubit-scatter metric drops when switching to the binned metric is explained."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. III B defines efficiency as a binary per-scan classification metric with uncertainty being 'standard deviation across qubits,' while Sec. III C defines it as 'the per-qubit mean efficiency' over 15 jump-size bins with uncertainty as 'standard deviation of the per-qubit mean efficiency across 75 independent sets.' The paper does not explain the difference between these definitions or why the uncertainty shrinks substantially (±0.0791 vs. ±0.022) when switching metrics.",
+            "cost_usd": 0.0044806
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly explains the distinction: in Sec. III C, \"Detection efficiency is defined as the fraction of injected charge jumps that are correctly identified; this differs from the efficiency calculated in Sec. III B, as the efficiency reported here is the per-qubit mean efficiency.\" It also specifies different uncertainty treatment: \"Statistical uncertainties are estimated as the standard deviation of the per-qubit mean efficiency across 75 independent sets of simulated scans.\"",
+            "cost_usd": 0.006403583333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does explicitly explain the difference in definitions and why it was adopted, stating 'To enable a direct comparison with the χ2 algorithm, we adopt the binned per-qubit efficiency metric... this differs from the efficiency calculated in Sec. III B... Statistical uncertainties are estimated as the standard deviation of the per-qubit mean efficiency across 75 independent sets...'",
+            "cost_usd": 0.0019711333333333335
+          }
+        ],
+        "cost_usd": 0.012855316666666667
+      },
+      {
+        "flag_id": "fp-52b486509e03",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper claims 'no per-qubit hyperparameter tuning' in the Abstract and Sec. V, but Sec. II B states that 'per-qubit template x̂(θ) and noise envelope σ̂(θ) are obtained from qubit calibration data' and used in training. The paper does not test generalization to a new qubit not included in training, making the 'no tuning' claim overstated for genuinely unseen qubits.",
+        "evidence": {
+          "claim": "The claim that the DCCNN requires 'no per-qubit hyperparameter tuning' is unsupported, as training is performed with per-qubit templates and noise; generalizability to new qubits without retraining is untested.",
+          "excerpt": "The Abstract, Sec. III C, and Sec. V all emphasise that the DCCNN requires \"no per-qubit hyperparameter tuning.\" However, the training set (Sec. II C) is generated using per-qubit templates x̂(θ) and per-qubit noise envelopes σ̂(θ). The model is trained across all five qubit configurations. Whether the trained model would generalise to a genuinely new qubit (different EJ/EC, different template) without retraining is not tested. The claim as stated in the Abstract/Conclusion overstates generality."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper claims 'no per-qubit hyperparameter tuning' in the Abstract and Sec. V, but Sec. II B states that 'per-qubit template x̂(θ) and noise envelope σ̂(θ) are obtained from qubit calibration data' and used in training. The paper does not test generalization to a new qubit not included in training, making the 'no tuning' claim overstated for genuinely unseen qubits.",
+            "cost_usd": 0.0044806
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper makes the strong claim that the method \"requires no hyperparameter tuning when applied to a new qubit\" (Sec. V), but the training data are built from \"a per-qubit template x̂(θ) and noise envelope σ̂(θ)\" for the five studied configurations (Sec. II B). The paper does not test generalization to an unseen qubit/template, so that broader claim is unsupported by the presented evidence.",
+            "cost_usd": 0.006403583333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'A single trained model serves all five qubit templates, eliminating the per-qubit tuning', but it does not demonstrate that this model would generalize to an unseen qubit without retraining, making the blanket claim that it 'requires no per-qubit hyperparameter tuning' unsupported for novel qubits.",
+            "cost_usd": 0.0019711333333333335
+          }
+        ],
+        "cost_usd": 0.012855316666666667
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0771319
+  },
+  "extractor_cost_usd": 0.029743999999999965,
+  "total_cost_usd": 0.10687589999999997
+}

@@ -1,0 +1,104 @@
+{
+  "paper_id": "2604.20203",
+  "reviewer_system": "L2",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-17215d11f193",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only reports the significance of P(CJ|SN,[Fe/H]>0) versus the field frequency (99.95%), but never directly computes or reports the statistical significance of the difference between the sub-Neptune posterior (42.6%) and the super-Earth posterior (14.5%). The text states 'P(CJ|SE,[Fe/H]>0) is statistically indistinguishable from P(CJ,[Fe/H]>0) within ~1-σ uncertainties' but does not compare the two conditional posteriors against each other directly.",
+        "evidence": {
+          "claim": "The paper claims sub-Neptunes have a stronger correlation with cold Jupiters than super-Earths, but fails to compute or report any direct statistical significance or probability between these posteriors, calling into question the rhetorical certainty of the central thesis.",
+          "excerpt": "The central thesis of the paper—encoded in the title itself—is that sub-Neptunes show a *stronger* correlation with cold Jupiters *than* super-Earths do. However, in Sec. 3.2, the authors only calculate the statistical significance of the sub-Neptune excess compared to the general field rate ($99.95\\%$). They do not report the statistical significance of the difference between the sub-Neptune posterior ($42.6_{-9.9}^{+10.6}\\%$) and the super-Earth posterior ($14.5_{-6.9}^{+12.7}\\%$). Given the large, overlapping uncertainty bounds, the direct difference between these two populations is likely much less significant than $99.95\\%$."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only reports the significance of P(CJ|SN,[Fe/H]>0) versus the field frequency (99.95%), but never directly computes or reports the statistical significance of the difference between the sub-Neptune posterior (42.6%) and the super-Earth posterior (14.5%). The text states 'P(CJ|SE,[Fe/H]>0) is statistically indistinguishable from P(CJ,[Fe/H]>0) within ~1-σ uncertainties' but does not compare the two conditional posteriors against each other directly.",
+            "cost_usd": 0.0085206
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 3.2 quantifies significance only against the field rate: \"P(CJ|SN, [Fe/H] > 0) is larger than P(CJ, [Fe/H] > 0) for 9,995 times\" and \"P(CJ|SE, [Fe/H] > 0) is statistically indistinguishable from P(CJ, [Fe/H] > 0).\" The paper does not report any direct statistical comparison between the sub-Neptune and super-Earth posteriors themselves, despite the title's comparative claim.",
+            "cost_usd": 0.0117435
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper calculates the significance of the sub-Neptune excess compared to the field frequency (stating 'P(CJ|SN, [Fe/H] > 0) is larger than P(CJ, [Fe/H] > 0) for 9,995 times'), but does not report the statistical significance of the direct difference between the sub-Neptune and super-Earth conditional frequencies.",
+            "cost_usd": 0.0034228
+          }
+        ],
+        "cost_usd": 0.0236869
+      },
+      {
+        "flag_id": "fp-616a96296a80",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 lists only N_total and N_det, and the text in Section 3.1 states 'neff is the effective total number after correcting for detection completeness to gas giants' and references 'Figure A1 of (M. L. Bryan & E. J. Lee 2024)' for completeness maps, but nowhere in the paper are the actual n_eff values reported, making the posterior calculations not independently reproducible.",
+        "evidence": {
+          "claim": "The effective sample sizes $n_{\\text{eff}}$ used to construct the posterior distributions are never reported, making posterior calculations irreproducible.",
+          "excerpt": "In Sec. 3.1, the paper states that the parameter $b$ of the Beta posterior relies on $n_{\\text{eff}}$, which is the effective total number of systems after correcting for detection completeness using maps from Bryan & Lee (2024). However, the actual $n_{\\text{eff}}$ values used for the calculations are never reported in the text or in Table 1 (which only lists $N_{\\text{total}}$ and $N_{\\text{det}}$). Without providing $n_{\\text{eff}}$, the posterior distributions shown in Figures 2-5 are effectively black boxes and cannot be reproduced by the reader."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 lists only N_total and N_det, and the text in Section 3.1 states 'neff is the effective total number after correcting for detection completeness to gas giants' and references 'Figure A1 of (M. L. Bryan & E. J. Lee 2024)' for completeness maps, but nowhere in the paper are the actual n_eff values reported, making the posterior calculations not independently reproducible.",
+            "cost_usd": 0.0085206
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The method explicitly depends on an unreported quantity: \"b = neff - ndet + 1. neff is the effective total number after correcting for detection completeness to gas giants,\" and \"we used the completeness maps... to determine the average completeness for the set of systems considered.\" But Table 1 reports only \"Ntotal\" and \"Ndet,\" and the paper nowhere lists the actual neff values used for the posteriors.",
+            "cost_usd": 0.0117435
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that the beta distribution parameter 'b = n_eff - n_det + 1', but neither the text nor Table 1 reports the actual values of 'n_eff' (effective total number after completeness correction) used to calculate the posteriors.",
+            "cost_usd": 0.0034228
+          }
+        ],
+        "cost_usd": 0.0236869
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0473738
+  },
+  "extractor_cost_usd": 0.012232000000000041,
+  "total_cost_usd": 0.05960580000000004
+}

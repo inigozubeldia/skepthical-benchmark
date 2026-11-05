@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "In the youngest and densest clusters, photoionization and radiation pressure can also contribute significantly to the feedback budget \\citep[e.g.,][]{Krumholz2009}.",
+    "injected_text": "In the youngest and densest clusters, photoionization and radiation pressure contribute negligibly to the feedback budget \\citep[e.g.,][]{Krumholz2009}.",
+    "rationale": "Reverses the polarity of a directional claim attributed to Krumholz & Matzner 2009, which explicitly argues that radiation pressure becomes a dominant feedback mechanism in young, dense H II regions; the reversed wording asserts the opposite, while the cite key is preserved verbatim.",
+    "ground_truth_description": "Flipped the claim about Krumholz2009 from 'contribute significantly' to 'contribute negligibly', reversing the conclusion attributed to the cited paper without altering the cite key.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Krumholz2009",
+      "injected_cite_key": "Krumholz2009",
+      "claim_sentence_verbatim": "In the youngest and densest clusters, photoionization and radiation pressure can also contribute significantly to the feedback budget \\citep[e.g.,][]{Krumholz2009}.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "The CO emission is distributed in compact, clumpy structures within $\\sim$800\\,pc of the nucleus, and is spatially offset from the SSC and the most highly ionized regions.",
+    "injected_text": "The CO emission is distributed in compact, clumpy structures within $\\sim$80\\,pc of the nucleus, and is spatially offset from the SSC and the most highly ionized regions.",
+    "rationale": "The abstract states the CO clouds are detected within ~800 pc of the starburst; perturbing the restated value in the Conclusions to ~80 pc creates a 10x order-of-magnitude disagreement between abstract and body that the abstract_vs_body_match predicate flags at major severity.",
+    "ground_truth_description": "Changed the CO extent quoted in the Conclusions section from ~800 pc to ~80 pc, contradicting the abstract value of ~800 pc by a factor of 10.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "800",
+      "value_after_raw": "80",
+      "value_before_float": 800.0,
+      "value_after_float": 80.0,
+      "location_cue": "compact, clumpy structures within $\\sim$80\\,pc of the nucleus, and is spatially offset",
+      "paired_location": "Abstract: 'We detect compact CO clouds within $\\sim$800\\,pc of the starburst'",
+      "quantity_label": "Spatial extent (pc) of CO-emitting clumpy structures from the nucleus",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "L'_{\\rm CO} = 3.25\\times10^{7}\\,\n\\left(\\frac{S_{\\rm line}\\Delta v}{\\rm Jy\\,km\\,s^{-1}}\\right)\n\\left(\\frac{D_L}{\\rm Mpc}\\right)^2\n\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-2}\n(1+z)^{-3},",
+    "injected_text": "L'_{\\rm CO} = 3.25\\times10^{7}\\,\n\\left(\\frac{S_{\\rm line}\\Delta v}{\\rm Jy\\,km\\,s^{-1}}\\right)\n\\left(\\frac{D_L}{\\rm Mpc}\\right)^2\n\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-3}\n(1+z)^{-3},",
+    "rationale": "The observed frequency nu_obs appears as a quantity in two displayed equations: Eq. (1) (the Solomon+97 CO luminosity relation, with nu_obs^{-2}) and the appendix brightness-temperature-to-flux-density conversion (S Delta nu = 2 k_B nu_obs^2 / c^2 * I_T_B * Omega * 1e26). Perturbing only Eq. (1)'s exponent from -2 to -3 makes the two displayed equations mutually inconsistent: deriving L' from the appendix conversion yields L' proportional to S/nu^2, which contradicts the perturbed nu^{-3} dependence in Eq. (1). The appendix equation is left untouched as the anchor for cross-equation detection; this is exactly an M.S1.t2-style within-paper consistency break with no external-literature dependency required.",
+    "ground_truth_description": "Changed the exponent of (nu_obs/GHz) in the CO luminosity formula (Eq. 1) from -2 to -3, breaking consistency with the brightness-temperature/flux conversion equation in Appendix A.4 which retains the canonical nu_obs^2 dependence.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Eq. (1), Section 3.4 (Molecular gas estimations)",
+      "original_fragment_latex": "\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-2}",
+      "injected_fragment_latex": "\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-3}",
+      "full_equation_latex_before": "L'_{\\rm CO} = 3.25\\times10^{7}\\,\\left(\\frac{S_{\\rm line}\\Delta v}{\\rm Jy\\,km\\,s^{-1}}\\right)\\left(\\frac{D_L}{\\rm Mpc}\\right)^2\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-2}(1+z)^{-3}",
+      "full_equation_latex_after": "L'_{\\rm CO} = 3.25\\times10^{7}\\,\\left(\\frac{S_{\\rm line}\\Delta v}{\\rm Jy\\,km\\,s^{-1}}\\right)\\left(\\frac{D_L}{\\rm Mpc}\\right)^2\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-3}(1+z)^{-3}",
+      "term_role": "cross-equation inconsistency: nu_obs frequency-scaling exponent in Eq. (1) (Solomon CO luminosity relation) vs Appendix A.4 brightness-temperature/flux-density conversion equation (which has nu_obs^2 and implies L' proportional to nu^{-2})",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t2.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "To ensure robust detections, we applied thresholds of 3$\\sigma$ for CO(1--0) and 4$\\sigma$ for CO(2--1).",
+    "injected_text": "To ensure robust detections, we applied thresholds of 4$\\sigma$ for CO(1--0) and 5$\\sigma$ for CO(2--1).",
+    "rationale": "Methods now states 4σ/5σ masking thresholds for CO(1–0)/CO(2–1), while Results (Sec. 3.1) still says 'All maps are masked below 3σ (CO(1–0)) or 4σ (CO(2–1))' and the Appendix masking description (75 mJy ∼3σ for CO(1–0); 9.2 mJy ∼4σ for CO(2–1)) also uses the 3σ/4σ levels — a Methods↔Results internal inconsistency a careful reader would flag.",
+    "ground_truth_description": "Changed the Methods-section moment-map detection thresholds from 3σ/4σ (CO 1–0/CO 2–1) to 4σ/5σ, while leaving the Results-section description of '3σ/4σ' masking unchanged.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methods_results_inconsistency",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 2.1 (ALMA data), with contradiction against Sec. 3.1 (Moment maps)",
+      "affected_span_verbatim": "To ensure robust detections, we applied thresholds of 3$\\sigma$ for CO(1--0) and 4$\\sigma$ for CO(2--1)."
+    },
+    "proposer_agent": "injector.general.S2.t2.v2"
+  }
+]

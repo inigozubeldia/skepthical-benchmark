@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.14024",
+  "arxiv_url": "https://arxiv.org/abs/2607.14024",
+  "rotation_seed": 20260731,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "text/01-Introduction.tex",
+          "original_text": "increasing by 16\\% in 2024~\\cite{PARASCHIV2023276}",
+          "injected_text": "increasing by 18\\% in 2024~\\cite{PARASCHIV2023276}",
+          "rationale": "Because the paper lacks quantitative claims with explicitly reported standard deviations, we perturb a cited growth rate by 2 percentage points (from 16% to 18%) to emulate a small, 1-2 sigma-equivalent quantitative mis-quote that a careful reader would flag as partially supported.",
+          "ground_truth_description": "Perturbed the cited growth rate for wind and solar power from 16% to 18%.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "PARASCHIV2023276",
+            "injected_cite_key": "PARASCHIV2023276",
+            "claim_sentence_verbatim": "Accordingly, global power production from renewable energies has more than doubled in the last ten years, from 1,851,114~MW to 4,448,051~MW in 2024 worldwide~\\cite{Irena25_Energy} with wind and solar being the fastest-growing areas increasing by 16\\% in 2024~\\cite{PARASCHIV2023276}.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "text/02-Related-Work.tex",
+          "original_text": "Only 4.4\\% of the reviewed papers provide the source code",
+          "injected_text": "Only 4 (14.4\\%) of the 90 reviewed papers provide the source code",
+          "rationale": "The paper does not explicitly state base-percent-result triplets, so I expanded an existing percentage to include the implicit base (90) and count (4), whilst introducing a typo in the percentage (14.4% instead of 4.4%) to create a major percent_of failure.",
+          "ground_truth_description": "Expanded a percentage to include its base and count, but injected a typo into the percentage (14.4% instead of 4.4%) so the arithmetic no longer balances.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_of",
+            "value_before_raw": "4.4\\%",
+            "value_after_raw": "14.4\\%",
+            "value_before_float": 4.4,
+            "value_after_float": 14.4,
+            "location_cue": "Only 4 (14.4\\%) of the 90 reviewed papers provide the source code",
+            "paired_location": null,
+            "quantity_label": "percentage of reviewed papers providing source code",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t2.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "text/04-Approach.tex",
+          "original_text": "    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+          "injected_text": "    \\mathcal{F}_{n}^{*}\n= \\arg\\max_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+          "rationale": "The paper contains only one displayed equation, so the outer argmin is swapped to argmax to structurally invalidate the bi-level optimization objective by searching for the worst instead of the best feature set.",
+          "ground_truth_description": "Changes the bi-level optimization problem to select the feature set that maximizes, rather than minimizes, the model loss.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:approach:problem_definition:optimization_problem",
+            "equation_location": "Sec. 3.1 Eq. (1)",
+            "original_fragment_latex": "\\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+            "injected_fragment_latex": "\\arg\\max_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+            "full_equation_latex_before": "    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}",
+            "full_equation_latex_after": "    \\mathcal{F}_{n}^{*}\n= \\arg\\max_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}",
+            "term_role": "identity replacement",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "text/02-Related-Work.tex",
+          "original_text": "The actual power produced by a wind turbine can be expressed as $P_{\\text{WT}} = 0.5 C_p A \\rho v^{3}$, where $A$ is the rotor swept area, $\\rho$ represents the air density, and $v$ is the wind speed.",
+          "injected_text": "The actual power produced by a wind turbine can be expressed as $P_{\\text{WT}} = 0.5 C_p A \\rho w^{3}$, where $A$ is the rotor swept area, $\\rho$ represents the air density, and $w$ is the wind speed.",
+          "rationale": "The wind speed variable is renamed from $v$ to $w$ in the power equation, but it remains $v$ in the subsequent paragraph, introducing a local notation inconsistency.",
+          "ground_truth_description": "Changed the variable for wind speed from $v$ to $w$ in the main equation, without updating the subsequent reference to $v$.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D3",
+            "change_kind": "notation_drift",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 2.1",
+            "affected_span_verbatim": "The actual power produced by a wind turbine can be expressed as $P_{\\text{WT}} = 0.5 C_p A \\rho v^{3}$, where $A$ is the rotor swept area, $\\rho$ represents the air density, and $v$ is the wind speed."
+          },
+          "proposer_agent": "injector.general.S1.t3.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "text/04-Approach.tex",
+          "original_text": "In general, wrapper-based methods are capable of providing a good approximation of the optimal feature set~\\cite{DBLP:journals/apin/DhalA22}.",
+          "injected_text": "Wrapper-based methods provide the optimal feature set~\\cite{DBLP:journals/apin/DhalA22}.",
+          "rationale": "Dropping the qualifiers 'In general' and 'are capable of providing a good approximation' over-generalises the claim, asserting that wrapper methods unconditionally find the exact optimal feature set rather than just providing a good heuristic approximation.",
+          "ground_truth_description": "Over-generalised a conditional claim about wrapper-based methods approximating the optimal feature set into an absolute claim that they provide the exact optimal set.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "DBLP:journals/apin/DhalA22",
+            "injected_cite_key": "DBLP:journals/apin/DhalA22",
+            "claim_sentence_verbatim": "Wrapper-based methods provide the optimal feature set~\\cite{DBLP:journals/apin/DhalA22}.",
+            "section_location": "Sec. 3.2",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "text/01-Introduction.tex",
+          "original_text": "with \\ac{RMSE} values of $(32.49 \\pm 0.30)$~kW for a 2~MW \\ac{WT}",
+          "injected_text": "with \\ac{RMSE} values of $(32.48 \\pm 0.30)$~kW for a 2~MW \\ac{WT}",
+          "rationale": "Perturbs the WT-S1 RMSE value in the introduction summary by -0.01, creating a second-decimal mismatch with the corresponding value in Table 1.",
+          "ground_truth_description": "Changes the WT-S1 RMSE value in the Introduction from 32.49 to 32.48, creating a mismatch with the true value recorded in Table 1.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "32.49",
+            "value_after_raw": "32.48",
+            "value_before_float": 32.49,
+            "value_after_float": 32.48,
+            "location_cue": "with \\ac{RMSE} values of $(32.49 \\pm 0.30)$~kW for a 2~MW \\ac{WT}",
+            "paired_location": "Table 1 (RMSE row)",
+            "quantity_label": "RMSE for WT-S1",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "text/04-Approach.tex",
+          "original_text": "= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+          "injected_text": "= \\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+          "rationale": "As there is no displayed normalisation prefactor in the text, dropped the '\\arg' operator from '\\argmin'; this changes the objective's RHS from a feature set to a scalar loss value, which Wolfram refutes against the LHS feature set.",
+          "ground_truth_description": "Dropped the arg operator from the argmin function in the feature selection objective equation, changing it to a simple minimum.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:approach:problem_definition:optimization_problem",
+            "equation_location": "Eq. (1)",
+            "original_fragment_latex": "= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+            "injected_fragment_latex": "= \\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+            "full_equation_latex_before": "\\begin{equation}\n    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}\n\\end{equation}",
+            "full_equation_latex_after": "\\begin{equation}\n    \\mathcal{F}_{n}^{*}\n= \\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}\n\\end{equation}",
+            "term_role": "argmin operator",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t3.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "text/07-Conclusion.tex",
+          "original_text": "Thereby, our proposed approach CSFS achieves a predictive performance comparable to SFS while reducing computational cost by an average of 21\\%.\nHence, we consider the presented approach a reasonable alternative, providing faster time-to-result while delivering reasonable results.",
+          "injected_text": "However, our proposed approach CSFS suffers a significant drop in predictive performance compared to SFS, despite reducing computational cost by an average of 21\\%.\nHence, we consider the presented approach a reasonable alternative for constrained environments, providing faster time-to-result albeit with inferior results.",
+          "rationale": "Rewrites the conclusion to claim a significant performance penalty for the proposed method, which directly contradicts the Results section's explicit statement that the method performs 'on par' with the baseline.",
+          "ground_truth_description": "Rewrote the conclusion to claim a significant predictive performance drop compared to SFS, contradicting the main body's claim of comparable performance.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "A",
+            "checklist_item_id": "A2",
+            "change_kind": "internal_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Conclusion",
+            "affected_span_verbatim": "In our evaluation, we show that the wrapper-based techniques overall provide better-performing selections of features than simpler filter-based or embedded baseline methods. Thereby, our proposed approach CSFS achieves a predictive performance comparable to SFS while reducing computational cost by an average of 21\\%.\nHence, we consider the presented approach a reasonable alternative, providing faster time-to-result while delivering reasonable results."
+          },
+          "proposer_agent": "injector.general.S3.t1.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "text/02-Related-Work.tex",
+          "original_text": "Gupta and Singh~\\cite{gupta_pv_2021} show in a comprehensive study that supervised learning is widely used.",
+          "injected_text": "Gupta and Singh~\\cite{gupta_pv_2021} show in a comprehensive study that federated learning can effectively bypass data privacy constraints in smart grids.",
+          "rationale": "The edit replaces a general claim about supervised learning in PV forecasting with an unrelated claim about federated learning and data privacy, which is a different subfield and not discussed in the cited review by Gupta and Singh.",
+          "ground_truth_description": "The claim attributed to Gupta and Singh was modified to discuss federated learning and data privacy instead of supervised learning.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "gupta_pv_2021",
+            "injected_cite_key": "gupta_pv_2021",
+            "claim_sentence_verbatim": "Gupta and Singh~\\cite{gupta_pv_2021} show in a comprehensive study that federated learning can effectively bypass data privacy constraints in smart grids.",
+            "section_location": "Sec. 2.2",
+            "mutation_kind": "claim_topic_mis_attribution",
+            "detection_target_verdict": "UNRELATED"
+          },
+          "proposer_agent": "injector.citations.S3.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "text/02-Related-Work.tex",
+          "original_text": "which states that no wind turbine can extract more than 59.3\\% of the kinetic energy contained in the wind stream:\n%The theoretical upper bound of $C_p$ is given by the Betz limit \n$C_{p,\\text{Betz}} = \\frac{16}{27} \\approx 0.593$.",
+          "injected_text": "which states that no wind turbine can extract more than 89.3\\% of the kinetic energy contained in the wind stream:\n%The theoretical upper bound of $C_p$ is given by the Betz limit \n$C_{p,\\text{Betz}} = \\frac{16}{27} \\approx 0.893$.",
+          "rationale": "A typo in the theoretical max power coefficient (0.593 -> 0.893, adjacent keys) introduces a blatant ratio_eq failure (16/27 = 0.593 != 0.893) yielding a ~50% error that flags as major.",
+          "ground_truth_description": "Changed the decimal and percentage values of the Betz limit ratio (16/27) from 0.593 to 0.893, introducing a substantial arithmetic error.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "ratio_eq",
+            "value_before_raw": "0.593",
+            "value_after_raw": "0.893",
+            "value_before_float": 0.593,
+            "value_after_float": 0.893,
+            "location_cue": "kinetic energy contained in the wind stream:\n%The theoretical upper bound of $C_p$ is given by the Betz limit \n$C_{p,\\text{Betz}} = \\frac{16}{27} \\approx 0.893$.",
+            "paired_location": null,
+            "quantity_label": "Betz limit power coefficient $C_p$",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t3.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "text/04-Approach.tex",
+          "original_text": "\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}",
+          "injected_text": "\\left[\n\\max_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}",
+          "rationale": "The inner empirical risk minimization problem canonically minimizes the error function; flipping this to a maximization produces a subtle but field-recognisable anomaly that the Stage-1b knowledge audit will easily flag.",
+          "ground_truth_description": "Changed the inner optimization of the model training objective from a minimization to a maximization.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:approach:problem_definition:optimization_problem",
+            "equation_location": "Sec. 3.1",
+            "original_fragment_latex": "\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}",
+            "injected_fragment_latex": "\\max_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}",
+            "full_equation_latex_before": "    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}",
+            "full_equation_latex_after": "    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\max_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}",
+            "term_role": "inner empirical risk minimization operator / canonical objective form",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t1.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "text/05-Experimental-Setup.tex",
+          "original_text": "Second, features with a missing value rate exceeding 5\\% are removed.",
+          "injected_text": "Second, features with a missing value rate exceeding 5\\% are removed (preliminary experiments showed severe performance degradation at higher thresholds).",
+          "rationale": "The edit inserts a parenthetical claiming empirical support (severe performance degradation) for a specific threshold, which acts as a phantom evidence claim since the paper does not present any ablation studies or results regarding missing value thresholds.",
+          "ground_truth_description": "Added an unsupported sub-claim about preliminary experiments regarding the missing value rate threshold.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 5.4",
+            "affected_span_verbatim": "For both datasets, first, duplicates are detected and removed. Second, features with a missing value rate exceeding 5\\% are removed. Third, observations with at least one missing value are removed."
+          },
+          "proposer_agent": "injector.general.S2.t3.v3"
+        }
+      ]
+    }
+  ]
+}

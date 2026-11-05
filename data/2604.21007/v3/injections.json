@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "sample7.tex",
+    "original_text": "\\cite{Gonzalez2025} confirm the AGN component from \\textit{Hyde} and surrounding sources",
+    "injected_text": "\\cite{Gonzalez2025} rule out an AGN component from \\textit{Hyde} and surrounding sources",
+    "rationale": "Direction reversal of cited conclusion. Gonzalez et al. 2025 (Gonzalez2025) report G235H high-resolution IFU observations that CONFIRM AGN-driven broad-line emission from Hyde and the surrounding overdensity members. Reversing the polarity from 'confirm the AGN component' to 'rule out an AGN component' contradicts the cited paper's central result; cite key is preserved byte-for-byte.",
+    "ground_truth_description": "Polarity flip of the citation claim: 'confirm the AGN component' → 'rule out an AGN component'. Gonzalez2025 explicitly confirms AGN-driven broad-line emission from Hyde via JWST/NIRSpec G235H IFU; the injected sentence asserts the opposite.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Gonzalez2025",
+      "injected_cite_key": "Gonzalez2025",
+      "claim_sentence_verbatim": "\\cite{Gonzalez2025} confirm the AGN component from \\textit{Hyde} and surrounding sources, implying that major mergers can trigger AGN activity within this overdense environment",
+      "section_location": "Sec. 5 (Discussion), AGN/merger paragraph",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "sample7.tex",
+    "original_text": "(especially for high-redshift QGs such as \\textit{Jekyll}; $z_\\mathrm{phot}=0.9756$)",
+    "injected_text": "(especially for high-redshift QGs such as \\textit{Jekyll}; $z_\\mathrm{phot}=1.0756$)",
+    "rationale": "Minor table-vs-body numeric mismatch (closest available analogue to S1.t2 'table-row-total mismatch' on a paper that uses deluxetable rather than summed tables). Body parenthetical claims Jekyll's COSMOS2025 z_phot = 0.9756, which rounds to 0.98 in Table 1's COSMOS2025 column (DD-134 row: $0.98^{+0.03}_{-0.01}$). Perturbing the body value to 1.0756 (one digit shifted in the leading decimal) breaks the rounding-tolerance match between body and table by ~10%.",
+    "ground_truth_description": "Shifted Jekyll's COSMOS2025 photometric redshift from z_phot=0.9756 (rounds to 0.98) to z_phot=1.0756 (rounds to 1.08). Table 1's COSMOS2025 column for DD-134 is unchanged at $0.98^{+0.03}_{-0.01}$, so the body and table no longer agree within rounding tolerance.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "0.9756",
+      "value_after_raw": "1.0756",
+      "value_before_float": 0.9756,
+      "value_after_float": 1.0756,
+      "location_cue": "differences between spectroscopic redshifts and photometric redshifts are large (especially for high-redshift QGs such as Jekyll; z_phot=1.0756)",
+      "paired_location": "Table 1 (label tab:morp), row DD-134, COSMOS2025 column shows z_phot=0.98 +0.03/-0.01 — body parenthetical at line 398 quotes 1.0756 which neither rounds to 0.98 nor matches the rest of the photometric redshift cells",
+      "quantity_label": "z_phot for Jekyll (DD-134) — body parenthetical paired against Table 1 tab:morp row DD-134 COSMOS2025 column",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t2.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "sample7.tex",
+    "original_text": "\\delta = \\frac{n-\\bar{n}}{\\bar{n}},",
+    "injected_text": "\\delta = \\frac{n-\\bar{n}}{2\\bar{n}},",
+    "rationale": "Normalisation prefactor drop on the canonical overdensity definition. Standard δ = (n−n̄)/n̄. Adding a factor of 2 in the denominator gives δ = (n−n̄)/(2n̄), which underestimates the overdensity by 50%. Wolfram refutes against the canonical identity δ + 1 = n/n̄ (any direct substitution of n=2n̄ would give δ=1 in canonical, δ=0.5 in injected).",
+    "ground_truth_description": "Inserted a factor of 2 in the denominator of the overdensity definition: δ = (n−n̄)/n̄ → δ = (n−n̄)/(2n̄). The canonical normalisation is broken; δ now reaches 0.5 (instead of 1) at n = 2n̄.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2 (Environment density), Eq. 1",
+      "original_fragment_latex": "\\bar{n}",
+      "injected_fragment_latex": "2\\bar{n}",
+      "full_equation_latex_before": "\\delta = \\frac{n-\\bar{n}}{\\bar{n}}",
+      "full_equation_latex_after": "\\delta = \\frac{n-\\bar{n}}{2\\bar{n}}",
+      "term_role": "denominator normalisation prefactor",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "sample7.tex",
+    "original_text": "the number density of galaxies is three times higher than the average in the COSMOS (SXDS) field",
+    "injected_text": "the number density of galaxies is comparable to the average in the COSMOS (SXDS) field",
+    "rationale": "Abstract↔body internal contradiction. The abstract previously claimed a quantitative overdensity ('three times higher than the average'); the body / Sec. 5 (TNG300 paragraph) reports δ~2.8 with 3.8× more galaxies than the average. After the abstract is rewritten to 'comparable to the average', the abstract qualitatively contradicts the body's quantitative finding (a clear three-to-four-fold density excess).",
+    "ground_truth_description": "Rewrote the abstract's quantitative density claim from 'three times higher than the average' to 'comparable to the average', flipping the headline finding. The body keeps the original claim ('with 3.8 times more galaxies than the average') and δ~2.8, so the abstract and body now contradict.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "A",
+      "checklist_item_id": "A2",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Abstract (line 298, post-edit reads 'comparable to the average') — paired against Sec. 5.2 Comparison with cosmological simulations (line 553) which still reports '3.8 times more galaxies than the average (delta ~ 2.8)' for the TNG300 analog",
+      "affected_span_verbatim": "the number density of galaxies is three times higher than the average in the COSMOS (SXDS) field"
+    },
+    "proposer_agent": "injector.general.S3.t1.v3"
+  }
+]

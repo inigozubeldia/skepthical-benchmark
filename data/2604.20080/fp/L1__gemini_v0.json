@@ -1,0 +1,99 @@
+{
+  "paper_id": "2604.20080",
+  "reviewer_system": "L1",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-eb20f21dd596",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.029966999999999966
+      },
+      {
+        "flag_id": "fp-9a1e9de24458",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.029966999999999966
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-20ae50231e0f",
+        "paper_id": "2604.20080",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states only that \"the CO(2–1) moment-0 map was therefore regridded to the CO(1–0) pixel scale\" and explicitly notes that this \"does not improve the angular resolution, which remains set by the synthesized beam,\" while Table A.1 gives different beams (\"0''.87×0''.80\" vs. \"1''.21×1''.04\"). The paper never says the maps were convolved to a common synthesized beam before deriving R21, so the reviewer’s beam-matching concern is not resolved.",
+        "evidence": {
+          "claim": "Calculation of the R21 CO line ratio map is compromised if the synthesized beams were not matched before regridding, potentially introducing severe artifacts.",
+          "excerpt": "there is no mention of matching the synthesized beams before regridding. The CO(1-0) beam is 0.87\" x 0.80\", while the CO(2-1) beam is 1.21\" x 1.04\". Taking the ratio of maps with different angular resolutions introduces severe artifacts, as the maps sample different spatial frequencies."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Appendix A.3 explicitly states: 'The CO(2–1) moment-0 map was therefore regridded to the CO(1–0) pixel scale using the imregrid task in CASA. This procedure does not improve the angular resolution, which remains set by the synthesized beam.' Furthermore, Section 3.4 states that integrated fluxes were measured 'only within the overlapping region between these transitions,' and the beams differ by only ~40% in area, with the CO(2–1) beam (1.21\"×1.04\") being larger than CO(1–0) (0.87\"×0.80\"), meaning CO(2–1) already smooths to coarser resolution. The R21 ratio is computed from integrated luminosities over matched regions, not pixel-by-pixel, which mitigates the beam-mismatch artifact concern.",
+            "cost_usd": 0.0201414
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states only that \"the CO(2–1) moment-0 map was therefore regridded to the CO(1–0) pixel scale\" and explicitly notes that this \"does not improve the angular resolution, which remains set by the synthesized beam,\" while Table A.1 gives different beams (\"0''.87×0''.80\" vs. \"1''.21×1''.04\"). The paper never says the maps were convolved to a common synthesized beam before deriving R21, so the reviewer’s beam-matching concern is not resolved.",
+            "cost_usd": 0.035611500000000004
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer correctly identifies that the synthesized beams were not matched before the maps were compared to derive the R21 ratio. The paper explicitly confirms this, stating that the regridding \"does not improve the angular resolution, which remains set by the synthesized beam\" before intersecting the maps to measure the integrated fluxes.",
+            "cost_usd": 0.0044484
+          }
+        ],
+        "cost_usd": 0.060201300000000006
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.05993399999999993,
+    "general": 0.060201300000000006
+  },
+  "extractor_cost_usd": 0.008596000000000159,
+  "total_cost_usd": 0.1287313000000001
+}

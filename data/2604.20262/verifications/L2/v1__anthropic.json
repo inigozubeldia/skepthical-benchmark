@@ -1,0 +1,189 @@
+{
+  "paper_id": "2604.20262",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer discusses the CHIME beam measurement approach and solar variability but never flags that the paper mis-categorizes CHIME's method as 'holographic' versus the actual Sun-tracking/beamforming technique described in chimebeam. No mention of the word 'holographic' or a contradiction between the cited CHIME paper and the claimed method category.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review discusses CHIME-style solar variability correction but does not specifically challenge the sentence's characterization of the chimebeam source as a 'holographic method' or say that CHIME used Sun-tracking/beamforming rather than holography.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "While the reviewer mentions the CHIME approach and notes its struggle with solar flux variability, they do not challenge the specific mis-categorization of the method as 'holographic'.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never challenges the use of the word 'holographic' to describe the CHIME method, nor flags that the CHIME paper uses a beamforming/Sun-tracking approach rather than a holographic one. The CHIME reference is discussed only in the context of the solar variability concern and the redundant-baseline point, not the method categorization in Sec. 2.3.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "**Maximum baseline length for point-source approximation: L < 45.8 m at θ > 1°.** ... Reported: 45.8 m (claim of L_max for θ > 1°) ... Computed: λ/sin(1°) = 0.4 / sin(1°) = 0.4 / 0.01745 = 22.9 m ... Verdict: FAIL ... This is a factor-of-2 numerical inconsistency that should be checked.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "**Maximum baseline length for point-source approximation: L < 45.8 m at θ > 1°.** ... Reported: 45.8 m (claim of L_max for θ > 1°) ... Computed: λ/sin(1°) = 0.4 / sin(1°) = 0.4 / 0.01745 = 22.9 m ... Verdict: FAIL ... This is a factor-of-2 numerical inconsistency that should be checked.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly computed L_max = 22.9 m from the stated formula and identified the reported 45.8 m as a factor-of-2 error, directly matching the injected change from 22.9 m to 45.8 m.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "4.  [✖] **Maximum baseline length for point-source approximation: L < 45.8 m at θ > 1°.**\n    - _Location:_ Sec. 2.3.1\n    - _check_type:_ ratio_eq\n    - _Reported:_ 45.8 m (claim of L_max for θ > 1°)\n    - _Computed:_ λ/sin(1°) = 0.4 / sin(1°) = 0.4 / 0.01745 = 22.9 m\n    - _Verdict:_ FAIL\n    - _Expected severity bucket:_ minor\n    - _Notes:_ Using θ ≈ λ/L → L_max = λ/θ. For θ = 1° = 0.01745 rad, L_max = 0.4/0.01745 ≈ 22.9 m, not 45.8 m. The number 45.8 m appears to use θ ≈ λ/(2L) (Rayleigh-like factor) or θ in degrees rather than radians (0.4/(0.5°·π/180) ≈ 45.8 m if one used 0.5°). This is a factor-of-2 numerical inconsistency that should be checked.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the injected value 45.8 m, recomputes the correct value 22.9 m from λ = 0.4 m and θ = 1°, and labels it a fail. This is a direct detection of the numeric injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Using θ ≈ λ/L → L_max = λ/θ. For θ = 1° = 0.01745 rad, L_max = 0.4/0.01745 ≈ 22.9 m, not 45.8 m. The number 45.8 m appears to use θ ≈ λ/(2L) (Rayleigh-like factor) or θ in degrees rather than radians ... This is a factor-of-2 numerical inconsistency that should be checked.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly calculates the correct baseline length (22.9 m) required for the stated angular resolution (1 degree) and identifies the 45.8 m value as a factor-of-2 error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. (2) defines A_NS = exp(−θ²/θ²_NS), but Eq. (11) reads A_NS(θ) = exp(−θ²/(2θ²_NS)) — a factor-of-2 difference in the exponent. Either Eq. (2) or Eq. (11) is internally inconsistent. ... Verdict: FAIL (confidence: high, impact: critical)",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. (2) defines A_NS = exp(−θ²/θ²_NS), but Eq. (11) reads A_NS(θ) = exp(−θ²/(2θ²_NS)) — a factor-of-2 difference in the exponent. Either Eq. (2) or Eq. (11) is internally inconsistent. ... Verdict: FAIL (confidence: high, impact: critical)",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the cross-equation inconsistency between Eq. (2) and Eq. (11) regarding the factor of 2 in the exponent of the Gaussian A_NS, which is precisely the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "7.  [✔] **Reparametrisation: A_NS(θ) = exp(−θ²/2θ²_NS) = (A_NS^simu)^{(1+α)/2}.**\n    - _Location:_ Eq. (11)\n    - _Verdict:_ FAIL (confidence: high, impact: critical)\n    - _Notes:_ Eq. (2) defines A_NS = exp(−θ²/θ²_NS), but Eq. (11) reads A_NS(θ) = exp(−θ²/(2θ²_NS)) — a factor-of-2 difference in the exponent. Either Eq. (2) or Eq. (11) is internally inconsistent. The substitution into the simulated reference also obscures the recovered physical θ_NS (only α is reported). This is a transcription/notation error that affects the physical interpretation of α.",
+          "confidence": "high",
+          "reasoning": "The review precisely identifies the cross-equation inconsistency between Eq. (2) and Eq. (11), including the injected extra factor of 2 in the exponent denominator. This exactly matches the mathematics injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (2) defines A_NS = exp(−θ²/θ²_NS), but Eq. (11) reads A_NS(θ) = exp(−θ²/(2θ²_NS)) — a factor-of-2 difference in the exponent. Either Eq. (2) or Eq. (11) is internally inconsistent.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific cross-equation inconsistency where a factor of 2 was injected into the exponent of the re-stated beam definition.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "confusing parameter definitions (e.g. β vs. γ, α vs. θ_NS) ... Eq. (10) introduces a leading factor 'γ', but the prose immediately afterwards discusses parameter β as the overall flux scale, with no γ defined. The likelihood Eq. (12) uses (α, β) but β does not appear in any equation.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "confusing parameter definitions (e.g. β vs. γ, α vs. θ_NS) ... Eq. (10) introduces a leading factor 'γ', but the prose immediately afterwards discusses parameter β as the overall flux scale, with no γ defined. The likelihood Eq. (12) uses (α, β) but β does not appear in any equation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the β/γ notation drift in Major issue #5 and in the mathematical audit, directly corresponding to the injection that changed β to γ in the equation while the surrounding text still uses β.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The main weaknesses are ... (iv) several internal inconsistencies between Methods and Results regarding which baselines are actually used, and confusing parameter definitions (e.g. β vs. γ, α vs. θ_NS).\n\n5.  **The \"extra\" parameter β appears in Eq. (10)/Eq. (12) but its role is inconsistent with the text.** Eq. (10) introduces a leading factor \"γ\", but the prose immediately afterwards discusses parameter β as the overall flux scale, with no γ defined. The likelihood Eq. (12) uses (α, β) but β does not appear in any equation. Sec. 3.3 reports a best-fit β = 1.45 ± 0.002 — a 45% departure from unity that is then not discussed.\n\n    *Recommendation:* (i) Fix the γ/β notation.\n\n8.  [⚠] **Likelihood: log L(α, β) ∝ (V_ij − V_ij^simu)(V_ij − V_ij^simu)* / σ².**\n    - _Notes:_ Standard form for complex Gaussian residuals if σ² is the per-sample noise variance (real and imaginary independent). However, β does not appear on the right-hand side (it should multiply V_ij^simu in Eq. 10 — only γ appears there). The likelihood is functionally a function of α and γ, not (α, β); the notation is inconsistent.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the β/γ notation inconsistency in Eq. (10), surrounding prose, likelihood, and results. This directly corresponds to the injected symbol swap from β to γ causing notation drift.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (10) introduces a leading factor \"γ\", but the prose immediately afterwards discusses parameter β as the overall flux scale, with no γ defined. ... Fix the γ/β notation.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the notation drift where gamma was substituted for beta in the equation but not the surrounding text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 43.706339,
+  "total_cost_usd": null,
+  "total_input_tokens": 47473,
+  "total_output_tokens": 4098,
+  "escalation_count": 1,
+  "notes": null
+}

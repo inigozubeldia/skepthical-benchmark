@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "conference.tex",
+    "original_text": "    \\item Counterfactual Explanations \\cite{arrieta2020explainable}: Counterfactual explanations provide insights into the model's decision-making process by identifying the minimal changes required in the input data to achieve a different prediction outcome.",
+    "injected_text": "    \\item Counterfactual Explanations \\cite{arrieta2020explainable}: Counterfactual explanations provide insights into the model's decision-making process by identifying the minimal changes required in the input data to achieve the same prediction outcome.",
+    "rationale": "Swapping 'different' for 'same' reverses the cited definition of a counterfactual explanation, directly contradicting the mathematical mechanism detailed in Arrieta et al. (2020).",
+    "ground_truth_description": "Reversed the outcome of counterfactual explanations from achieving a different prediction to achieving the same prediction.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "arrieta2020explainable",
+      "injected_cite_key": "arrieta2020explainable",
+      "claim_sentence_verbatim": "Counterfactual Explanations \\cite{arrieta2020explainable}: Counterfactual explanations provide insights into the model's decision-making process by identifying the minimal changes required in the input data to achieve a different prediction outcome.",
+      "section_location": "Sec. 2.1",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "conference.tex",
+    "original_text": "3       & 0.4673   & 30         & 1.0000    \\\\ \\hline",
+    "injected_text": "3       & 0.4663   & 30         & 1.0000    \\\\ \\hline",
+    "rationale": "The paper lacks any explicit summations or tables with totals, so the constraint was adapted to create a repeated_constant mismatch by slightly altering a table value that is later cited in the text (0.4673 changed to 0.4663), mimicking a transcription typo.",
+    "ground_truth_description": "Changed the fidelity score for Dataset 3 in Table 1 from 0.4673 to 0.4663, creating a discrepancy with the text which correctly states the range goes up to 0.4673.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "0.4673",
+      "value_after_raw": "0.4663",
+      "value_before_float": 0.4673,
+      "value_after_float": 0.4663,
+      "location_cue": "2       & 0.4397   & 13         & 0.5556    \\\\\n3       & 0.4673   & 30         & 1.0000    \\\\ \\hline",
+      "paired_location": "Section 5 text ('The fidelity scores for LIME range from 0.4397 to 0.4673')",
+      "quantity_label": "Fidelity score for LIME on Dataset 3",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t2.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "conference.tex",
+    "original_text": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+    "injected_text": "Fidelity = \\frac{1}{N}\\sum_{i=0}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+    "rationale": "Changing the sum index from i=1 to i=0 introduces an off-by-one boundary error that is highly typical of author drafting mistakes, but may evade detection in random numerical sampling.",
+    "ground_truth_description": "Shifted the lower bound of the Fidelity summation from i=1 to i=0.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3.1.1",
+      "original_fragment_latex": "\\sum_{i=1}^N",
+      "injected_fragment_latex": "\\sum_{i=0}^N",
+      "full_equation_latex_before": "Fidelity = \\frac{1}{N}\\sum_{i=1}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+      "full_equation_latex_after": "Fidelity = \\frac{1}{N}\\sum_{i=0}^N \\left( \\frac{\\lVert f(x_i) - g(x_i) \\rVert^2}{\\lVert f(x_i) \\rVert^2} \\right),",
+      "term_role": "sum lower bound",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "conference.tex",
+    "original_text": "as depicted in Fig.\\ref{fig:modelxgb}",
+    "injected_text": "as depicted in Fig.\\ref{fig:modlxgb}",
+    "rationale": "Intentionally misspelled a figure reference label to produce a '??' LaTeX artefact in the compiled PDF.",
+    "ground_truth_description": "Changed a figure reference label from 'fig:modelxgb' to 'fig:modlxgb', causing it to render as an unresolved reference ('??').",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "latex_artefact",
+      "expected_bucket": "very_minor",
+      "section_location": "Section 3",
+      "affected_span_verbatim": "In addition to the aforementioned requirements, we will also incorporate performance evaluation into our work, assessing the accuracy, precision, recall, and other relevant metrics of the AI models, to ensure that our explainability efforts do not compromise the effectiveness of the model's predictions as depicted in Fig.\\ref{fig:modelxgb}"
+    },
+    "proposer_agent": "injector.general.S1.t2.v2"
+  }
+]

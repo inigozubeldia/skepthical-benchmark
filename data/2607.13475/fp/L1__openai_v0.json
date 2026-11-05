@@ -1,0 +1,409 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-8fbaf61984be",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Mechanical predicate passed: 0.1055 - 0.0989 = 0.006599999999999995; claimed 0.0066",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "PASS",
+            "computed": 0.006599999999999995,
+            "reported": 0.0066,
+            "diff_abs": -5.204170427930421e-18,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 0.00015000000000000001,
+              "rel_tol": null
+            },
+            "notes": "0.1055 - 0.0989 = 0.006599999999999995; claimed 0.0066"
+          },
+          "rereader": [
+            {
+              "label": "minuend",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": "Located in Section III.A: 'the learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate'"
+            },
+            {
+              "label": "subtrahend",
+              "raw_observed": "0.0989",
+              "value_observed": 0.0989,
+              "notes": "Located in Section III.A: 'compared to 0.0989 and 47.0% for the oracle'"
+            },
+            {
+              "label": "difference",
+              "raw_observed": null,
+              "value_observed": null,
+              "notes": "No numerical value for 'difference' is explicitly printed in the text; value must be computed."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.03657199999999999
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-65c4e5a8e53d",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states 'All experiments are conducted in simulation using a randomized 2D deformable sheet model' with 'Laplacian relaxation' and acknowledges future work to 'validate on real tissue data,' confirming the simulation is far from realistic surgical tissue and generalization claims are unvalidated.",
+        "evidence": {
+          "claim": "The experimental setup uses an overly simplified 2D cloth simulation that is not representative of real surgical tissue retraction, making the generalization of results to surgery unjustified.",
+          "excerpt": "The simulation uses a 2D cloth-like sheet with a regular 30×30 grid and Laplacian relaxation. This is a reasonable toy environment, but it is quite far from realistic surgical tissue deformation. Tissue is often nonuniform, anisotropic, constrained by attachments, subject to contact/friction, and observed through highly structured occlusions rather than random visible vertices."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'All experiments are conducted in simulation using a randomized 2D deformable sheet model' with 'Laplacian relaxation' and acknowledges future work to 'validate on real tissue data,' confirming the simulation is far from realistic surgical tissue and generalization claims are unvalidated.",
+            "cost_usd": 0.0024432374999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates only in a simplified simulator: it uses a “2D deformable sheet simulation,” with the tissue “discretized on a regular 30×30 grid of vertices” and “Deformation uses Laplacian relaxation [13].” The paper itself says “in ongoing and future work, we plan to validate on real tissue data,” so it does not justify generalization to real surgery from this setup alone.",
+            "cost_usd": 0.0063953125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states it uses a \"randomized 2D deformable sheet model\" with a \"regular 30x30 grid\" and \"Laplacian relaxation,\" confirming the reviewer's concern about the simplified experimental setup.",
+            "cost_usd": 0.00204525
+          }
+        ],
+        "cost_usd": 0.010883799999999999
+      },
+      {
+        "flag_id": "fp-cf9f9433b80f",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper describes 'A three-layer multilayer perceptron' and 'PCA is applied to 5,000 randomly generated mesh states, producing a 12-dimensional latent space' but omits hidden layer sizes, activation functions, optimizer, learning rate, batch size, epochs, and train/test split, making reproduction infeasible.",
+        "evidence": {
+          "claim": "The paper omits important implementation and methodological details necessary for reproducibility, such as the MLP architecture, training procedure, input encoding, PCA details, and action parameterization.",
+          "excerpt": "The paper does not provide enough detail to reproduce the method. Missing details include:\n\n- MLP architecture: hidden layer sizes, activation functions, normalization, dropout, etc.\n- Training procedure: optimizer, learning rate, batch size, number of iterations/epochs, train/test split."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper describes 'A three-layer multilayer perceptron' and 'PCA is applied to 5,000 randomly generated mesh states, producing a 12-dimensional latent space' but omits hidden layer sizes, activation functions, optimizer, learning rate, batch size, epochs, and train/test split, making reproduction infeasible.",
+            "cost_usd": 0.0024432374999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Method details are only high-level: “A three-layer multilayer perceptron maps the noisy, partial observations to the latent space” and “Training data is generated during training (not pre-recorded).” The paper does not give hidden sizes, activations, optimizer, learning rate, batch size, epochs/iterations, or a train/test split, leaving reproducibility incomplete.",
+            "cost_usd": 0.0063953125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions a \"three-layer multilayer perceptron\" and composite loss, but completely omits hyperparameters such as hidden layer sizes, activation functions, learning rates, and optimization details.",
+            "cost_usd": 0.00204525
+          }
+        ],
+        "cost_usd": 0.010883799999999999
+      },
+      {
+        "flag_id": "fp-536e8bc41e7d",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper compares only against 'an oracle (full state access) and a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference,' which is a very weak baseline with no classical or intermediate alternatives evaluated.",
+        "evidence": {
+          "claim": "The baselines used for comparison are inadequate, including only a naive fill-in method, making it unclear whether the proposed approach is genuinely effective.",
+          "excerpt": "The only non-oracle baseline is a naive fill-in method that leaves unobserved vertices at their undeformed reference positions. This is a very weak baseline and does not establish that the learned estimator is superior to reasonable classical or simple statistical alternatives."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares only against 'an oracle (full state access) and a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference,' which is a very weak baseline with no classical or intermediate alternatives evaluated.",
+            "cost_usd": 0.0024432374999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The comparison set is limited: “We compare the learned estimator against an oracle (full state access) and a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference.” No stronger non-oracle estimator baseline is reported.",
+            "cost_usd": 0.0063953125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III.A confirms that the only baseline evaluated against the learned estimator and the oracle is \"a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference.\"",
+            "cost_usd": 0.00204525
+          }
+        ],
+        "cost_usd": 0.010883799999999999
+      },
+      {
+        "flag_id": "fp-d4c1f654c3ac",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper attributes performance to 'combining a multilayer perceptron with a low-dimensional PCA latent representation' and 'geometry-aware regularization' but provides no ablation experiments isolating the contribution of PCA dimensionality, smoothness loss, or stretch loss individually.",
+        "evidence": {
+          "claim": "The paper claims performance stems from PCA latent representation and regularization, but provides no ablation studies to measure their individual contributions.",
+          "excerpt": "The paper attributes performance to the combination of PCA latent representation and geometry-aware regularization, but no ablation results are shown. The reader cannot determine whether the smoothness and stretch losses matter."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper attributes performance to 'combining a multilayer perceptron with a low-dimensional PCA latent representation' and 'geometry-aware regularization' but provides no ablation experiments isolating the contribution of PCA dimensionality, smoothness loss, or stretch loss individually.",
+            "cost_usd": 0.0024432374999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper attributes performance to “a PCA-based latent representation with geometry-aware regularization” and defines the composite loss “L = Lrecon + λsLsmooth + λeLstretch,” but the experiments report no ablations isolating PCA, smoothness, or stretch terms. The results sections only compare learned/oracle/naive planners.",
+            "cost_usd": 0.0063953125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces a composite loss with geometry-aware regularization (Eq. 1) and a PCA latent space, but provides no ablation experiments to validate their individual contributions to performance.",
+            "cost_usd": 0.00204525
+          }
+        ],
+        "cost_usd": 0.010883799999999999
+      },
+      {
+        "flag_id": "fp-35ae575c53f0",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports only one p-value (p=0.835 for oracle sampling budget) and provides means and success rates without standard deviations, confidence intervals, or paired test results comparing the learned estimator to oracle and baseline in the main results.",
+        "evidence": {
+          "claim": "Statistical analysis is insufficiently reported; key metrics (means, standard deviations, tests, confidence intervals) are missing, and claims of equivalence are not justified.",
+          "excerpt": "The paper mentions paired and independent t-tests, but only one p-value is provided for the oracle sampling-budget analysis. For the main comparisons, the paper should report:\n\n- Mean ± standard deviation or standard error.\n- Confidence intervals.\n- Paired test results between oracle, learned estimator, and baseline."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports only one p-value (p=0.835 for oracle sampling budget) and provides means and success rates without standard deviations, confidence intervals, or paired test results comparing the learned estimator to oracle and baseline in the main results.",
+            "cost_usd": 0.0024432374999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the paper says “Metrics include exposure improvement, success rate, and statistical significance measured using paired and independent t-tests,” the only explicit test result reported is “An independent t-test between nsamples = 200 and 2000 yields p = 0.835.” For the main learned-vs-oracle comparisons, it reports means and success rates but no standard deviations/confidence intervals or p-values, despite concluding “statistically equivalent to a full-state oracle.”",
+            "cost_usd": 0.0063953125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that \"statistical significance measured using paired and independent t-tests\" is used, but only reports a single p-value (p = 0.835) in Section III.C, omitting standard deviations, confidence intervals, and p-values for the main comparisons.",
+            "cost_usd": 0.00204525
+          }
+        ],
+        "cost_usd": 0.010883799999999999
+      },
+      {
+        "flag_id": "fp-22b72cf06253",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper evaluates only downstream exposure improvement and success rate as metrics; it does not report full-mesh MSE, observed vs. unobserved vertex error, edge-length distortion, or any direct reconstruction quality metric for the state estimator.",
+        "evidence": {
+          "claim": "The reconstruction quality of the state estimator is not directly evaluated using relevant metrics, making it unclear if accurate deformable states are actually recovered.",
+          "excerpt": "The paper focuses on downstream exposure improvement, which is good, but it should also report reconstruction metrics, such as:\n\n- Full-mesh MSE.\n- Observed versus unobserved vertex error.\n- Edge-length distortion.\n- Smoothness or bending metrics.\n- Error as a function of observation count and noise."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates only downstream exposure improvement and success rate as metrics; it does not report full-mesh MSE, observed vs. unobserved vertex error, edge-length distortion, or any direct reconstruction quality metric for the state estimator.",
+            "cost_usd": 0.0024432374999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation metrics are purely downstream planning metrics: “Metrics include exposure improvement, success rate...” and the results sections report only exposure improvements and success rates. The paper never reports direct reconstruction accuracy of the estimated mesh (e.g., full-mesh error on observed/unobserved vertices).",
+            "cost_usd": 0.0063953125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation in Section III only reports downstream task metrics (\"mean exposure improvement\" and \"success rate\") and does not report direct reconstruction metrics like MSE or edge-length distortion.",
+            "cost_usd": 0.00204525
+          }
+        ],
+        "cost_usd": 0.010883799999999999
+      },
+      {
+        "flag_id": "fp-144f4ff52306",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The conclusion states 'planning-sufficient learned representations can replace expensive physical simulation' but the described planner 'selects actions by sampling 200 candidate pulls and choosing the one that maximizes predicted exposure under the estimated state,' which still relies on a simulation model for deformation evaluation, making the claim misleading.",
+        "evidence": {
+          "claim": "It is unclear what elements of planning or simulation are replaced by the estimator, casting doubt on claims of replacing expensive physical simulation.",
+          "excerpt": "The conclusion says that learned representations can replace expensive physical simulation, but the described planner still appears to rely on model-based rollout/evaluation of candidate pulls. This claim should be revised or clarified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The conclusion states 'planning-sufficient learned representations can replace expensive physical simulation' but the described planner 'selects actions by sampling 200 candidate pulls and choosing the one that maximizes predicted exposure under the estimated state,' which still relies on a simulation model for deformation evaluation, making the claim misleading.",
+            "cost_usd": 0.0024432374999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The conclusion claims “planning-sufficient learned representations can replace expensive physical simulation,” but the method still uses model-based action evaluation: “Actions are selected by sampling 200 candidate pulls and choosing the one that maximizes predicted exposure under the estimated state,” and “Deformation in response to actions is modeled using a diffusion-based relaxation process [11].” The paper does not clearly explain what simulation is actually being replaced.",
+            "cost_usd": 0.0063953125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims the method can \"replace expensive physical simulation,\" yet Section II.C notes the planner chooses actions that \"maximize predicted exposure under the estimated state,\" which seemingly implies relying on simulation for forward rollouts.",
+            "cost_usd": 0.00204525
+          }
+        ],
+        "cost_usd": 0.010883799999999999
+      },
+      {
+        "flag_id": "fp-ee18ab7107fd",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'the system observes only 40 of 900 vertices (4.4%), resampled at random each time' with 'Gaussian noise with standard deviation σ=0.02,' which assumes known vertex indices sampled uniformly—an unrealistic assumption compared to real surgical perception from images or point clouds with registration uncertainty.",
+        "evidence": {
+          "claim": "The observation model assumes known mesh vertex indices sampled uniformly at random, which is unrealistic compared to practical surgical perception scenarios.",
+          "excerpt": "The method assumes that 40 vertex indices and their noisy coordinates are available, with vertices sampled uniformly at random. In real surgical perception, observations are not random known mesh vertices. Instead, observations come from images or point clouds with occlusions, registration uncertainty, missing regions, specularities, and correspondence ambiguity."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'the system observes only 40 of 900 vertices (4.4%), resampled at random each time' with 'Gaussian noise with standard deviation σ=0.02,' which assumes known vertex indices sampled uniformly—an unrealistic assumption compared to real surgical perception from images or point clouds with registration uncertainty.",
+            "cost_usd": 0.0024432374999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly assumes idealized correspondence information: “the system observes only 40 of 900 vertices (4.4%), resampled at random each time” and “The network takes as input the observed vertex coordinates and their indices.” It does not model the more realistic image/point-cloud observation ambiguities raised in the flag.",
+            "cost_usd": 0.0063953125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly assumes access to vertex correspondence, noting that \"the network takes as input the observed vertex coordinates and their indices,\" and that vertices are \"resampled at random each time,\" which justifies the reviewer's concern regarding real-world applicability.",
+            "cost_usd": 0.00204525
+          }
+        ],
+        "cost_usd": 0.010883799999999999
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.03657199999999999,
+    "general": 0.08707039999999999
+  },
+  "extractor_cost_usd": 0.012095999999999996,
+  "total_cost_usd": 0.13573839999999998
+}

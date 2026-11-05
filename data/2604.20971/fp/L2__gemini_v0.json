@@ -1,0 +1,90 @@
+{
+  "paper_id": "2604.20971",
+  "reviewer_system": "L2",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-96a70c016635",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. Interpreter call failed: JSONDecodeError: Expecting value: line 1 column 2 (char 1)",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "minor",
+          "notes": "Interpreter call failed: JSONDecodeError: Expecting value: line 1 column 2 (char 1)",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → confirmed (10.30s)",
+            "pint: Check if the stated GW frequency expression is dimensionally consistent, testing the reviewer's claim that a square root is missing. → error"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.030924000000000174
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-51797233432c",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges in Section 5.1 that 'our description of the turbulent torque is based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks' and that 'in the future, a realistic spectrum tailored to specific turbulence drivers will need to be considered,' but it provides no quantitative analysis of how different MRI coherence timescales or anisotropies would affect the torque resampling timescale Nmax or the Gaussian statistics. The concern about whether Nmax scales with orbital period identically for MRI and GI is not addressed beyond a qualitative acknowledgment.",
+        "evidence": {
+          "claim": "The paper assumes that torque statistics from gravitational instability in protoplanetary disks apply to magneto-rotational instability in AGN disks by normalizing a constant, without sufficient justification for critical physical differences, especially regarding coherence timescales.",
+          "excerpt": "The model fundamentally assumes that the statistical properties of turbulence-induced torques derived from Wu et al. (2024)—which studies gravitational instability (GI) in protoplanetary disks—can be ported to the magneto-rotational instability (MRI) in an inner AGN disk simply by tuning a normalisation constant $\\mathcal{C}$. While the authors acknowledge this in the Sec. 5.1 caveats, the abstraction ignores potential differences in the characteristic coherence times and structural anisotropies of MRI. For instance, whether the torque resampling timescale ($N \\sim \\mathcal{U}(1, N_{\\text{max}})$) scales linearly with the orbital period in the same way for both instabilities is a massive physical leap."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in Section 5.1 that 'our description of the turbulent torque is based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks' and that 'in the future, a realistic spectrum tailored to specific turbulence drivers will need to be considered,' but it provides no quantitative analysis of how different MRI coherence timescales or anisotropies would affect the torque resampling timescale Nmax or the Gaussian statistics. The concern about whether Nmax scales with orbital period identically for MRI and GI is not addressed beyond a qualitative acknowledgment.",
+            "cost_usd": 0.0164016
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly ports a GI-based prescription to MRI-dominated AGN disks by tuning parameters: \"While LISA EMRIs will likely be most affected by MRI turbulence, we modeled the turbulent torque as a Gaussian around the linear torque in Eq. (5) based on fits provided by Wu et al. (2024) and introduced parameter C to enhance or reduce the effect of turbulence to capture the strength of MRI with respect to GI.\" It also concedes the key unresolved physics the flag raises: \"the detailed properties of MRI in 3D are very complex, showing pattern changes on timescales even longer than the orbital time... [and] cannot be captured by a simple analytical model,\" while the resampling timescale is assumed ad hoc from Wu et al.: \"we can model this by selecting a new ξ after N GW-driven inspiral orbits, where N is chosen from a uniform distribution between 1 to Nmax.\"",
+            "cost_usd": 0.024549
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation in Section 5.1 ('Caveats'), stating that their model is 'based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks' and that 'in the future, a realistic spectrum tailored to specific turbulence drivers will need to be considered to further assess our quantitative predictions.' Since the paper only acknowledges this but leaves proper justification to future work, it is a confirmed issue.",
+            "cost_usd": 0.0042748000000000005
+          }
+        ],
+        "cost_usd": 0.0452254
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.030924000000000174,
+    "general": 0.0452254
+  },
+  "extractor_cost_usd": 0.010121999999999826,
+  "total_cost_usd": 0.0862714
+}

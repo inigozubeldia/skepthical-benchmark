@@ -1,0 +1,230 @@
+{
+  "paper_id": "2607.13613",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-5cfb01ab7de0",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper simply asserts that Mt is 'the global centroid movement (entropy proxy) at epoch t' without any theoretical or empirical justification linking this displacement metric to formal entropy or clustering uncertainty. The reviewer's concern about the net epoch-to-epoch displacement being a weak proxy is valid and unaddressed.",
+        "evidence": {
+          "claim": "The central concept of an 'entropy proxy' is unsubstantiated, with no theoretical or empirical justification linking the proposed displacement metric $M_t$ to entropy or clustering uncertainty, and the metric itself may be a weak proxy for stability.",
+          "excerpt": "The central concept of an \"entropy proxy\" is unsubstantiated and potentially misleading. The paper provides no theoretical or empirical justification linking the proposed metric, $M_t$ (total centroid displacement), to any formal notion of entropy or clustering uncertainty. Furthermore, Eq. (7) appears to define $M_t$ as the net epoch-to-epoch displacement of centroids, not the accumulated intra-epoch movement. This is a potentially weak proxy for stability, as significant training activity could occur within an epoch with little net change in centroid positions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper simply asserts that Mt is 'the global centroid movement (entropy proxy) at epoch t' without any theoretical or empirical justification linking this displacement metric to formal entropy or clustering uncertainty. The reviewer's concern about the net epoch-to-epoch displacement being a weak proxy is valid and unaddressed.",
+            "cost_usd": 0.0032367599999999996
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only asserts the link, e.g. it \"treats global centroid movement per epoch as an entropy proxy for clustering uncertainty\" and defines \"Mt is the global centroid movement (entropy proxy) at epoch t,\" but provides no theorem, analysis, or dedicated experiment validating this as entropy or uncertainty.",
+            "cost_usd": 0.008038700000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts that FastCentNN \"treats global centroid movement per epoch as an entropy proxy for clustering uncertainty\" but provides no theoretical derivation or empirical analysis to substantiate this link. Furthermore, Equation (7) indeed defines $M_t$ as the epoch-to-epoch net displacement, leaving the criticism of it being a weak proxy for intra-epoch stability unaddressed.",
+            "cost_usd": 0.0030912
+          }
+        ],
+        "cost_usd": 0.01436666
+      },
+      {
+        "flag_id": "fp-3594be94d25a",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper does not report the specific values of τ, P, ε, or ε0 used in the experiments, nor does it specify whether absolute or stage-relative mode was used for Tables 1–2, nor preprocessing steps, hardware, or software environment, making the results not reproducible.",
+        "evidence": {
+          "claim": "The experiments are not reproducible due to missing hyperparameters and setup details, including threshold, patience, initialization parameters, threshold mode, preprocessing, and hardware/software environment.",
+          "excerpt": "The experiments are not reproducible due to missing hyperparameters and setup details. Critical parameters defining FastCentNN's behavior—the threshold $\\tau$, patience $P$, initialization/split perturbation $\\epsilon$, and stabilization constant $\\epsilon_0$—are not reported. It is also not stated whether the absolute or stage-relative threshold mode was used for the results in Tables 1-2. Key setup details like data preprocessing (e.g., MNIST/Fashion-MNIST sub-sampling, normalization), data ordering within epochs, maximum epoch limits, and the hardware/software environment are also omitted."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not report the specific values of τ, P, ε, or ε0 used in the experiments, nor does it specify whether absolute or stage-relative mode was used for Tables 1–2, nor preprocessing steps, hardware, or software environment, making the results not reproducible.",
+            "cost_usd": 0.0032367599999999996
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The method introduces tunable settings—\"Require: Dataset X, target num of clusters K, max epochs T, split scale ϵ, movement threshold τ, patience P\"—and two modes, \"In the absolute mode, τt = τ, whereas in the stage-relative mode, τt = τBr,\" but the experiment section never reports the actual values/mode used or other setup details beyond saying it was run \"under identical parameter settings.\"",
+            "cost_usd": 0.008038700000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experiments section (Section 3.1) states that FastCentNN was evaluated \"under identical parameter settings\" but entirely omits the actual values for critical hyperparameters introduced in the paper, such as $\\tau$, $P$, $\\epsilon$, and whether the absolute or stage-relative threshold mode was used.",
+            "cost_usd": 0.0030912
+          }
+        ],
+        "cost_usd": 0.01436666
+      },
+      {
+        "flag_id": "fp-4049f69ef490",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports single-run results with no variance or statistical significance analysis (e.g., 'FastCentNN achieves an average runtime reduction of approximately 9.6%'), and there is no sensitivity analysis for τ and P, nor discussion of failure modes on noisy or imbalanced datasets.",
+        "evidence": {
+          "claim": "The paper lacks analysis of robustness and sensitivity; speed-up gains are not statistically validated, and the method's performance is not confirmed to be significant or stable.",
+          "excerpt": "The paper lacks a proper analysis of the method's robustness and sensitivity, and results are not statistically validated. The modest speed-ups ($\\sim 5\\%$ on image datasets) are reported from what appear to be single runs, with no information on variance. It is therefore unclear if these gains are statistically significant or fall within run-to-run noise. There is no sensitivity analysis for the key hyperparameters $\\tau$ and $P$, nor any discussion of potential failure modes, such as premature splits on imbalanced or noisy datasets."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports single-run results with no variance or statistical significance analysis (e.g., 'FastCentNN achieves an average runtime reduction of approximately 9.6%'), and there is no sensitivity analysis for τ and P, nor discussion of failure modes on noisy or imbalanced datasets.",
+            "cost_usd": 0.0032367599999999996
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Tables 1–2 report only single point estimates such as \"MNIST 10 10,000 8.344 / 7.924 141 / 132\" and the text simply says \"FastCentNN consistently reduces both runtime and the number of training epochs,\" with no quoted evidence of repeated runs, variance/error bars, statistical testing, or sensitivity sweeps over the key parameters \"τ\" and \"P.\"",
+            "cost_usd": 0.008038700000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Tables 1 and 2 report single scalar values for runtimes (e.g., \"8.344 / 7.924\") without error bars, standard deviations, or any statistical significance tests, and the paper lacks a sensitivity analysis for its novel hyperparameters $\\tau$ and $P$.",
+            "cost_usd": 0.0030912
+          }
+        ],
+        "cost_usd": 0.01436666
+      },
+      {
+        "flag_id": "fp-8dc324f28877",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only compares FastCentNN to the original CentNN ('FastCentNN is evaluated against the original CentNN under identical parameter settings') with no baselines like k-means, and uses only MSE as the quality metric with no external validation metrics (NMI, ARI) for the labeled MNIST datasets.",
+        "evidence": {
+          "claim": "The evaluation is insufficient because it lacks comparisons to standard clustering baselines and uses only MSE without external validation metrics; this limits assessment of practical value and clustering quality.",
+          "excerpt": "The evaluation is insufficient, as it lacks comparisons to standard baselines and uses a very narrow measure of clustering quality. FastCentNN is only compared to the original CentNN, making it difficult to assess its practical value relative to other well-established algorithms (e.g., k-means, mini-batch k-means). Quality is evaluated solely via MSE, the objective being optimized. For labeled datasets like MNIST, no external validation metrics (e.g., NMI, ARI, \\rm Accuracy) are used to confirm that the discovered cluster structure is meaningful."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only compares FastCentNN to the original CentNN ('FastCentNN is evaluated against the original CentNN under identical parameter settings') with no baselines like k-means, and uses only MSE as the quality metric with no external validation metrics (NMI, ARI) for the labeled MNIST datasets.",
+            "cost_usd": 0.0032367599999999996
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly limits evaluation to the parent method—\"FastCentNN is evaluated against the original CentNN\"—and clustering quality is summarized via \"the relative difference in mean squared error (MSE)\" plus runtime/epochs, so the reviewer is right that broader baselines and external metrics are absent. However, because the method is positioned as a \"practical and efficient drop-in replacement for CentNN,\" whether comparisons to unrelated clustering baselines are required is debatable.",
+            "cost_usd": 0.008038700000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3 confirms that \"FastCentNN is evaluated against the original CentNN\" exclusively, omitting standard baselines like k-means. Furthermore, Table 2 relies entirely on $\\Delta$MSE for MNIST and Fashion-MNIST, lacking external cluster validation metrics such as NMI or ARI.",
+            "cost_usd": 0.0030912
+          }
+        ],
+        "cost_usd": 0.01436666
+      },
+      {
+        "flag_id": "fp-3c35cae1ff67",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Eq. (9) sets Br+1 using the low Mt value that triggered the split rather than a post-split measurement, and Algorithm 1 line 8 includes both the new patience trigger and the original Ct=0 condition without discussing their interaction; the original CentNN stabilization criterion is also not formally defined.",
+        "evidence": {
+          "claim": "There are critical ambiguities and contradictions in the algorithm’s definition and logic, including inconsistencies in the baseline update, split conditions, and lack of formal definition of the original CentNN criterion.",
+          "excerpt": "There are critical ambiguities in the definition and logic of the algorithm. First, the update rule for the stage-relative baseline $B_r$ in Eq. (9) appears contradictory: the text states $B_r$ is measured *after* a split, but the formula seems to set the new baseline using the low $M_t$ value that *triggered* the split. Second, the split condition in Algorithm 1—$(\\text{patience} \\geq P) \\vee (C_t = 0)$—suggests the original stabilization rule is retained alongside the new trigger, but the implications of this dual-trigger design are not discussed. Finally, the original CentNN split criterion itself is not formally defined."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Eq. (9) sets Br+1 using the low Mt value that triggered the split rather than a post-split measurement, and Algorithm 1 line 8 includes both the new patience trigger and the original Ct=0 condition without discussing their interaction; the original CentNN stabilization criterion is also not formally defined.",
+            "cost_usd": 0.0032367599999999996
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "There is a real ambiguity: the text says \"Br is the baseline movement measured immediately after the latest split stage r,\" yet the reset rule is \"Br+1 ← max(Mt, ε0),\" which uses the triggering epoch's movement. Also, Algorithm 1 uses \"split ← (patience ≥ P) ∨ (Ct = 0)\" even though standard CentNN is only described informally as updating \"until local stabilization is reached,\" without a formal definition of that original criterion.",
+            "cost_usd": 0.008038700000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Algorithm 1, line 8 implements the split condition as `(patience >= P) ∨ (Ct = 0)`, silently retaining a dual-trigger mechanism that is not analyzed in the text. Additionally, Equation (9) sets the post-split baseline $B_{r+1}$ using $M_t$, which reflects the low pre-split movement rather than post-split activity, confirming the ambiguity.",
+            "cost_usd": 0.0030912
+          }
+        ],
+        "cost_usd": 0.01436666
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0718333
+  },
+  "extractor_cost_usd": 0.028852000000000086,
+  "total_cost_usd": 0.10068530000000009
+}

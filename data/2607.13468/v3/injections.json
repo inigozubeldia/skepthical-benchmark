@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "sec/4_experiment.tex",
+    "original_text": "which is known for its strong robustness against outliers and noise",
+    "injected_text": "which is known for its deterministic robustness against outliers and noise",
+    "rationale": "Drifts the methodological qualifier attached to the RANSAC citation from 'strong' to 'deterministic'. RANSAC is Random Sample Consensus — a randomised sampling method whose output varies between runs — so describing it as deterministic mis-qualifies the cited method while the robustness-to-outliers part of the claim remains true. Cite key untouched; a single existing word is perturbed.",
+    "ground_truth_description": "RANSAC citation: methodological qualifier 'strong robustness' changed to 'deterministic robustness', mis-describing a randomised algorithm as deterministic.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "RANSAC",
+      "injected_cite_key": "RANSAC",
+      "claim_sentence_verbatim": "Ultimately, we adopted the RANSAC algorithm~\\cite{RANSAC}, which is known for its strong robustness against outliers and noise, and successfully achieved the desired alignment.",
+      "section_location": "Sec. 4.3 (Ablation Study — RANSAC-based point cloud registration)",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "sec/6_appendix.tex",
+    "original_text": "Full Model & \\textbf{0.0035} & \\textbf{84.34} & \\textbf{0.7449}",
+    "injected_text": "Full Model & \\textbf{0.035} & \\textbf{84.34} & \\textbf{0.7449}",
+    "rationale": "Chamfer Distance for the full model is reported as 0.0035 in Table 1 and restated as 0.0035 in the appendix ablation table. The appendix occurrence is shifted by exactly one order of magnitude to 0.035, a 10x disagreement between two statements of the same measurement. Predicate recorded as repeated_constant rather than the cell's nominal abstract_vs_body_match because this paper's abstract contains no numbers — the restatement is table-to-table.",
+    "ground_truth_description": "Appendix ablation table: full-model Chamfer Distance changed 0.0035 -> 0.035 (x10), contradicting the 0.0035 in Table 1.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "0.0035",
+      "value_after_raw": "0.035",
+      "value_before_float": 0.0035,
+      "value_after_float": 0.035,
+      "location_cue": "Full Model & \\textbf{0.0035} & \\textbf{84.34} & \\textbf{0.7449}",
+      "paired_location": "Table 1 (Quantitative Comparisons on Geometry), 'Ours' row, CD column — retains 0.0035",
+      "quantity_label": "Chamfer Distance on 3D-FRONT (full model)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "sec/3_method.tex",
+    "original_text": "\\mathcal{L}_{CFM}(\\theta)=\\mathbb{E}_{t,\\boldsymbol{x}_0,\\boldsymbol{\\epsilon}}\\|\\boldsymbol{v}_\\theta(\\boldsymbol{x},t)-(\\boldsymbol{\\epsilon}-\\boldsymbol{x}_0)\\|_2^2 ,",
+    "injected_text": "\\mathcal{L}_{CFM}(\\theta)=\\sum_{t,\\boldsymbol{x}_0,\\boldsymbol{\\epsilon}}\\|\\boldsymbol{v}_\\theta(\\boldsymbol{x},t)-(\\boldsymbol{\\epsilon}-\\boldsymbol{x}_0)\\|_2^2 ,",
+    "rationale": "Swaps the expectation operator for a summation: the CFM objective is an expectation over the continuous timestep t, the data sample x_0 and the Gaussian noise epsilon, so a bare discrete sum over those continuous variables is not a well-defined objective.",
+    "ground_truth_description": "CFM training objective: the expectation operator E_{t,x_0,epsilon} was replaced by a summation sum_{t,x_0,epsilon} over continuous variables.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3 (Method), conditional flow-matching objective",
+      "original_fragment_latex": "\\mathbb{E}_{t,\\boldsymbol{x}_0,\\boldsymbol{\\epsilon}}",
+      "injected_fragment_latex": "\\sum_{t,\\boldsymbol{x}_0,\\boldsymbol{\\epsilon}}",
+      "full_equation_latex_before": "\\mathcal{L}_{CFM}(\\theta)=\\mathbb{E}_{t,\\boldsymbol{x}_0,\\boldsymbol{\\epsilon}}\\|\\boldsymbol{v}_\\theta(\\boldsymbol{x},t)-(\\boldsymbol{\\epsilon}-\\boldsymbol{x}_0)\\|_2^2 ,",
+      "full_equation_latex_after": "\\mathcal{L}_{CFM}(\\theta)=\\sum_{t,\\boldsymbol{x}_0,\\boldsymbol{\\epsilon}}\\|\\boldsymbol{v}_\\theta(\\boldsymbol{x},t)-(\\boldsymbol{\\epsilon}-\\boldsymbol{x}_0)\\|_2^2 ,",
+      "term_role": "expectation operator over (t, x_0, epsilon)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t2.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "sec/4_experiment.tex",
+    "original_text": "For each asset, we first rendered 24 multi-view images and then downsampled them to generate corresponding coarse voxels.",
+    "injected_text": "For each asset, we first rendered 24 multi-view images (we observed substantial degradation in generation quality when rendering fewer views) and then downsampled them to generate corresponding coarse voxels.",
+    "rationale": "The inserted parenthetical asserts an ablation finding regarding the number of rendered views that the Results section of the paper does not actually report.",
+    "ground_truth_description": "Inserted a phantom methodological sub-claim asserting that rendering fewer views degrades performance, without providing the corresponding ablation data.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 4.1",
+      "affected_span_verbatim": "For each asset, we first rendered 24 multi-view images and then downsampled them to generate corresponding coarse voxels."
+    },
+    "proposer_agent": "injector.general.S2.t3.v3"
+  }
+]

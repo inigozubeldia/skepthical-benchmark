@@ -1,0 +1,146 @@
+{
+  "paper_id": "2604.20914",
+  "reviewer_system": "L1",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-88bb6bc99f86",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper itself says evidence/model-selection use is not settled: \"FIREFLY can also calculate the evidence Z... Compared with the posteriors, the evidences given by FIREFLY and the full-parameter sampling have slight differences at the level of 10^-3\" and \"in this study we conservatively apply the FIREFLY for only calculating the posteriors. A detailed comparison and explanation about the evidence is left for future work.\"",
+        "evidence": {
+          "claim": "The applicability of the FIREFLY algorithm to accurate model selection via Bayes factors is unclear, due to small but non-negligible evidence discrepancies.",
+          "excerpt": "Given that calculating Bayes factors relies on accurate evidence estimation, the authors should add a brief discussion in the main text regarding FIREFLY's applicability to model selection. Can the importance sampling weights be reliably used to compute the evidence for space-borne data, or does this require further algorithmic development?"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper acknowledges the evidence discrepancy in the Supplementary Material: 'the evidences given by FIREFLY and the full-parameter sampling have slight differences at the level of 10^{-3}' and states 'in this study we conservatively apply the FIREFLY for only calculating the posteriors. A detailed comparison and explanation about the evidence is left for future work.' This acknowledges the limitation but does not resolve whether evidence-based model selection is reliable, and no discussion of this appears in the main text as the reviewer requests.",
+            "cost_usd": 0.006714
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself says evidence/model-selection use is not settled: \"FIREFLY can also calculate the evidence Z... Compared with the posteriors, the evidences given by FIREFLY and the full-parameter sampling have slight differences at the level of 10^-3\" and \"in this study we conservatively apply the FIREFLY for only calculating the posteriors. A detailed comparison and explanation about the evidence is left for future work.\"",
+            "cost_usd": 0.008586166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper notes in Appendix B that \"a detailed comparison and explanation about the evidence is left for future work,\" acknowledging the limitation but not resolving the reviewer's request for a discussion of model selection in the main text.",
+            "cost_usd": 0.0024758000000000002
+          }
+        ],
+        "cost_usd": 0.017775966666666667
+      },
+      {
+        "flag_id": "fp-a2c51d0f61da",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations' but provides no quantitative discussion or demonstration of how FIREFLY's speedup facilitates rapid iteration over start times, nor any discussion of sensitivity to start time choice for multi-mode fits or overtones.",
+        "evidence": {
+          "claim": "The stability of multi-mode ringdown fits is highly sensitive to the chosen start time, and it is unclear if the FIREFLY algorithm enables rapid exploration of this parameter.",
+          "excerpt": "the stability of multi-mode fits (especially for overtones) is notoriously sensitive to the start time. A brief comment on whether the FIREFLY algorithm's speedup allows for rapid iterations over multiple start times—a common strategy in testing the \"no-hair\" theorem—would strengthen the motivation for this work."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations' but provides no quantitative discussion or demonstration of how FIREFLY's speedup facilitates rapid iteration over start times, nor any discussion of sensitivity to start time choice for multi-mode fits or overtones.",
+            "cost_usd": 0.006714
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper only notes that \"The data are recorded from t = 10Mf after the merger... This choice is for illustration, but the analysis readily generalizes to other start times t,\" but it does not actually discuss start-time sensitivity of multimode fits or whether FIREFLY enables efficient scans over many start times.",
+            "cost_usd": 0.008586166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While the paper briefly states that \"the analysis readily generalizes to other start times t\" (page 2), it does not address the stability sensitivity or discuss whether the speedup explicitly facilitates rapid iterations over start times for testing the no-hair theorem.",
+            "cost_usd": 0.0024758000000000002
+          }
+        ],
+        "cost_usd": 0.017775966666666667
+      },
+      {
+        "flag_id": "fp-11a0d43df516",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's derivation explicitly assumes Gaussian noise ('the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean') and the paper does not discuss non-stationary noise, data gaps, or overlapping signals anywhere in the main text or supplementary material, leaving the reviewer's concern unaddressed.",
+        "evidence": {
+          "claim": "The FIREFLY algorithm depends on the assumption of stationary, Gaussian noise, which may not hold for space-borne detector data. Its robustness to realistic noise artifacts is unaddressed.",
+          "excerpt": "The derivation of the linear likelihood inherently relies on the assumption of stationary, Gaussian noise (Eq. B.2). Space-borne detectors are expected to encounter non-stationary noise, data gaps, and overlapping signals. The authors should briefly discuss how FIREFLY might handle (or be limited by) realistic data artifacts."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's derivation explicitly assumes Gaussian noise ('the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean') and the paper does not discuss non-stationary noise, data gaps, or overlapping signals anywhere in the main text or supplementary material, leaving the reviewer's concern unaddressed.",
+            "cost_usd": 0.006714
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The derivation explicitly assumes idealized noise: \"We start from the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean\" and the paper does not provide any discussion of non-stationary noise, data gaps, or overlapping signals in space-borne data. Thus the robustness to realistic artifacts is left unaddressed.",
+            "cost_usd": 0.008586166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly relies on \"the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean\" (Appendix B) but lacks any discussion regarding non-stationary noise, data gaps, or robustness to realistic space-borne detector artifacts.",
+            "cost_usd": 0.0024758000000000002
+          }
+        ],
+        "cost_usd": 0.017775966666666667
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0533279
+  },
+  "extractor_cost_usd": 0.00838000000000004,
+  "total_cost_usd": 0.06170790000000004
+}

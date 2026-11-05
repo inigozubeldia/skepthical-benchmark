@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v1",
+  "reviewer_system": "CL25",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "\"[citation, very minor] '[5]' is cited for the phrase 'reasoning collapses' in Sec. 1.\" PTQTP does describe single-plane ternary as causing 'sophisticated reasoning (such as mathematics) to collapse,' so the citation supports the wording, but the claim in the referenced paper is about their own comparison, not an independent proof; a slightly more careful gloss (e.g. 'reasoning degrades sharply [5]') would be more faithful.",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "[citation, very minor] \"[5]\" is cited for the phrase \"reasoning collapses\" in Sec. 1.\" PTQTP does describe single-plane ternary as causing \"sophisticated reasoning (such as mathematics) to collapse,\" so the citation supports the wording, but the claim in the referenced paper is about their own comparison, not an independent proof; a slightly more careful gloss (e.g. \"reasoning degrades sharply [5]\") would be more faithful.",
+          "confidence": "low",
+          "reasoning": "The reviewer's comment on [5] notes the citation is slightly imprecise but says the citation 'supports the wording' — this is not a challenge to the post-edit claim as PARTIALLY_SUPPORTED or overgeneralised. The reviewer does not flag that 'post-training' condition was dropped or that the claim is overly broad; they only suggest softer wording. This does not meet the BROADENED-CLAIM detection rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[citation, very minor] \"[5]\" is cited for the phrase \"reasoning collapses\" in Sec. 1.** PTQTP does describe single-plane ternary as causing \"sophisticated reasoning (such as mathematics) to collapse,\" so the citation supports the wording, but the claim in the referenced paper is about their own comparison, not an independent proof; a slightly more careful gloss (e.g. \"reasoning degrades sharply [5]\") would be more faithful.",
+          "confidence": "medium",
+          "reasoning": "The reviewer specifically challenges the post-edit claim sentence against the cited PTQTP source, saying the citation only supports a narrower claim and the wording should be more careful. Under the broadened-claim rule, this counts as detection of the dropped qualifier/overgeneralisation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states that the citation supports the wording of the claim, which means they did not identify that the claim had been overgeneralized by the removal of the post-training condition.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "\"[citation, very minor] '[5]' is cited for the phrase 'reasoning collapses' in Sec. 1.\" PTQTP does describe single-plane ternary as causing 'sophisticated reasoning (such as mathematics) to collapse,' so the citation supports the wording, but the claim in the referenced paper is about their own comparison, not an independent proof; a slightly more careful gloss (e.g. 'reasoning degrades sharply [5]') would be more faithful.",
+          "confidence": "low",
+          "reasoning": "The reviewer flagged the 'reasoning collapses' claim as somewhat over-reaching relative to what [5] (PTQTP) actually shows, but did not specifically note that the 'post-training' qualifier was dropped or that the claim was overgeneralised to cover non-PTQ settings. The flag concerns faithfulness of the citation gloss rather than the dropped 'post-training' scope condition, so it is at best a weak/partial match under the BROADENED-CLAIM rule.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "τ = 1.0 sparsity quoted inconsistently. Sec. 1 (page 2) says \"τ=1.0 → ~57%\"; Sec. 3.2 says \"the optimum is interior at τ = 1.0 (~58% sparsity).\" A quick check under a Gaussian model gives 57.5%, so both roundings are defensible, but pick one.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "τ = 1.0 sparsity quoted inconsistently. Sec. 1 (page 2) says \"τ=1.0 → ~57%\"; Sec. 3.2 says \"the optimum is interior at τ = 1.0 (~58% sparsity).\" A quick check under a Gaussian model gives 57.5%, so both roundings are defensible, but pick one.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the 57% vs 58% discrepancy for τ=1.0 sparsity between Sec. 1 and Sec. 3.2, which directly corresponds to the injected change from 57% to 58% in the Results section.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[numerical] τ = 1.0 sparsity quoted inconsistently.** Sec. 1 (page 2) says \"τ=1.0 → ~57%\"; Sec. 3.2 says \"the optimum is interior at τ = 1.0 (~58% sparsity).\" A quick check under a Gaussian model gives 57.5%, so both roundings are defensible, but pick one.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the repeated-constant inconsistency between the Introduction's 57% and Results' 58% for the same quantity at τ=1.0. That is an exact match to the injected numeric discrepancy.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 1 (page 2) says 'τ=1.0 → ~57%'; Sec. 3.2 says 'the optimum is interior at τ = 1.0 (~58% sparsity).'",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the inconsistency between the 57% sparsity mentioned in the introduction and the 58% sparsity mentioned in the results section for the same parameter.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The V-step regularization sign in Eq. (3) is inconsistent with the U-step and with standard ridge regression. Eq. (3) writes `(U^⊤U − εI)^{−1} U^⊤R` for the V-step and `(V^⊤V + εI)^{−1}` for the U-step. `−εI` moves eigenvalues in the *wrong* direction for conditioning; it can even make the matrix singular when `U^⊤U` has a small eigenvalue near ε. Almost certainly a typo for `+εI` (matching the U-step); if intentional, the paper needs to explain why. Fix: change sign or justify.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The V-step regularization sign in Eq. (3) is inconsistent with the U-step and with standard ridge regression. Eq. (3) writes `(U^⊤U − εI)^{−1} U^⊤R` for the V-step and `(V^⊤V + εI)^{−1}` for the U-step. `−εI` moves eigenvalues in the *wrong* direction for conditioning; it can even make the matrix singular when `U^⊤U` has a small eigenvalue near ε. Almost certainly a typo for `+εI` (matching the U-step); if intentional, the paper needs to explain why. Fix: change sign or justify.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the minus sign in the Tikhonov regularization term of the V-step as erroneous, noting it should be +εI, which directly corresponds to the injected change from + to - in the ALS normal equations.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[mathematical] The V-step regularization sign in Eq. (3) is inconsistent with the U-step and with standard ridge regression.** Eq. (3) writes `(U^⊤U − εI)^{−1} U^⊤R` for the V-step and `(V^⊤V + εI)^{−1}` for the U-step. `−εI` moves eigenvalues in the *wrong* direction for conditioning; it can even make the matrix singular when `U^⊤U` has a small eigenvalue near ε. Almost certainly a typo for `+εI` (matching the U-step); if intentional, the paper needs to explain why. Fix: change sign or justify.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the minus sign in the Tikhonov/ridge regularization term and states it should be plus. This is a precise detection of the mathematical injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (3) writes `(U^⊤U − εI)^{−1} U^⊤R` for the V-step and `(V^⊤V + εI)^{−1}` for the U-step. ... Almost certainly a typo for `+εI`",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the incorrect minus sign in the Tikhonov regularization term of the V-step update, correctly identifying it as a typo for a plus sign.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag any cross-reference mismatch related to the inner-rank multiplier μ pointing to the wrong section (sec:core instead of sec:cost). No comment in the review corresponds to this structural mismatch.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention the incorrect section cross-reference from the introduction's cost-model parenthetical to Sec. core instead of Sec. cost. No specific structural mismatch corresponding to that edited reference is flagged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer report does not mention any issues with cross-references or the section regarding the cost model/inner-rank multiplier.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags any cross-reference mismatch in the Introduction regarding the cost model. The injected error changed 'Sec. 2.1' (or the cost section reference) to point to the wrong section, but the reviewer's report contains no mention of this specific issue anywhere.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 60.628702,
+  "total_cost_usd": null,
+  "total_input_tokens": 30297,
+  "total_output_tokens": 8998,
+  "escalation_count": 2,
+  "notes": null
+}

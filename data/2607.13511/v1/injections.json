@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "But a single ternary plane carries at most 1.58 bits of information per weight, so \\emph{post-training} projection of a full-precision matrix onto one ternary plane loses too much: reasoning collapses \\cite{ptqtp}.",
+    "injected_text": "But a single ternary plane carries at most 1.58 bits of information per weight, so projection of a full-precision matrix onto one ternary plane loses too much: reasoning collapses \\cite{ptqtp}.",
+    "rationale": "Dropping the '\\emph{post-training}' qualifier overgeneralises the claim, incorrectly implying that any projection to a ternary plane (including QAT, which is known to work) causes reasoning to collapse.",
+    "ground_truth_description": "Removed the '\\emph{post-training}' condition from the claim about ternary projection causing model collapse.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "ptqtp",
+      "injected_cite_key": "ptqtp",
+      "claim_sentence_verbatim": "But a single ternary plane carries at most 1.58 bits of information per weight, so \\emph{post-training} projection of a full-precision matrix onto one ternary plane loses too much: reasoning collapses \\cite{ptqtp}.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "Under mask+sign packing (Eq.~\\ref{eq:bpw}), where zeros also cost a mask bit, the optimum is interior at $\\tau = 1.0$ ($\\sim$57\\% sparsity).",
+    "injected_text": "Under mask+sign packing (Eq.~\\ref{eq:bpw}), where zeros also cost a mask bit, the optimum is interior at $\\tau = 1.0$ ($\\sim$58\\% sparsity).",
+    "rationale": "Slightly perturbing the optimal sparsity for tau=1.0 from 57% to 58% introduces a repeated-constant discrepancy with the Introduction, reflecting a plausible failure to update all occurrences after a final experiment.",
+    "ground_truth_description": "Changed the reported sparsity percentage at tau=1.0 from 57% to 58% in the Results section, contradicting the 57% claimed in the Introduction.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "57",
+      "value_after_raw": "58",
+      "value_before_float": 57.0,
+      "value_after_float": 58.0,
+      "location_cue": "Under mask+sign packing (Eq.~\\ref{eq:bpw}), where zeros also cost a mask bit, the optimum is interior at $\\tau = 1.0$ ($\\sim$57\\% sparsity).",
+      "paired_location": "Section 1",
+      "quantity_label": "sparsity percentage at tau=1.0",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t3.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "V \\leftarrow T_\\tau\\!\\Big(\\big[(U^\\top U + \\epsilon I)^{-1} U^\\top R\\big]^\\top\\Big), \\qquad\nU \\leftarrow T_\\tau\\!\\Big(R\\,V\\,(V^\\top V + \\epsilon I)^{-1}\\Big),",
+    "injected_text": "V \\leftarrow T_\\tau\\!\\Big(\\big[(U^\\top U - \\epsilon I)^{-1} U^\\top R\\big]^\\top\\Big), \\qquad\nU \\leftarrow T_\\tau\\!\\Big(R\\,V\\,(V^\\top V + \\epsilon I)^{-1}\\Big),",
+    "rationale": "The Tikhonov regularisation term in the standard ALS/ridge-regression update is changed from + \\epsilon I to - \\epsilon I, a canonical-form error that breaks positive-definiteness but typesets normally.",
+    "ground_truth_description": "Changed the Tikhonov regularisation sign in the ALS normal equations from plus to minus.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2.4",
+      "original_fragment_latex": "(U^\\top U + \\epsilon I)^{-1}",
+      "injected_fragment_latex": "(U^\\top U - \\epsilon I)^{-1}",
+      "full_equation_latex_before": "V \\leftarrow T_\\tau\\!\\Big(\\big[(U^\\top U + \\epsilon I)^{-1} U^\\top R\\big]^\\top\\Big), \\qquad\nU \\leftarrow T_\\tau\\!\\Big(R\\,V\\,(V^\\top V + \\epsilon I)^{-1}\\Big),",
+      "full_equation_latex_after": "V \\leftarrow T_\\tau\\!\\Big(\\big[(U^\\top U - \\epsilon I)^{-1} U^\\top R\\big]^\\top\\Big), \\qquad\nU \\leftarrow T_\\tau\\!\\Big(R\\,V\\,(V^\\top V + \\epsilon I)^{-1}\\Big),",
+      "term_role": "Tikhonov regularization sign in the normal equations",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "the inner-rank multiplier $\\mu$ (storage and compute both scale linearly with it, Sec.~\\ref{sec:cost})",
+    "injected_text": "the inner-rank multiplier $\\mu$ (storage and compute both scale linearly with it, Sec.~\\ref{sec:core})",
+    "rationale": "Since the paper lacks multiple labeled equations or any referenced figures/tables, substituting a section cross-reference (sec:core instead of sec:cost) via a plausible autocomplete error produces an equivalent structural mismatch.",
+    "ground_truth_description": "Changed a cross-reference about the cost model to point to the core method section instead.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "cross_reference_mismatch",
+      "expected_bucket": "minor",
+      "section_location": "Introduction",
+      "affected_span_verbatim": "Because $k$ is a real-valued rank rather than a bit-width, ExTernD's accuracy/cost trade-off is instead continuous: the inner-rank multiplier $\\mu$ (storage and compute both scale linearly with it, Sec.~\\ref{sec:cost}) and a sparsity threshold $\\tau$ (which sets the fraction of zeros in $B$ and $C$, e.g.\\ $\\tau{=}0.7 \\to {\\sim}41\\%$ zeros, $\\tau{=}1.0 \\to {\\sim}57\\%$, $\\tau{=}2.0 \\to {\\sim}87\\%$) can each be set per matrix to any real value, letting a target accuracy be hit exactly rather than rounded up to the next bit-width."
+    },
+    "proposer_agent": "injector.general.S2.t1.v1"
+  }
+]

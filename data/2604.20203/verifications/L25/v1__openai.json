@@ -1,0 +1,198 @@
+{
+  "paper_id": "2604.20203",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text also says the detections are modeled \"using Poisson statistics,\" but Equation (2), with \\(a=n_{\\rm det}+1\\) and \\(b=n_{\\rm eff}-n_{\\rm det}+1\\), is a binomial/Beta posterior form, not a Poisson/Gamma posterior.",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text also says the detections are modeled \"using Poisson statistics,\" but Equation (2), with \\(a=n_{\\rm det}+1\\) and \\(b=n_{\\rm eff}-n_{\\rm det}+1\\), is a binomial/Beta posterior form, not a Poisson/Gamma posterior.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags that the paper claims 'Poisson statistics' but the actual equation is a binomial/Beta posterior, directly corresponding to the injection that swapped 'binomial' to 'Poisson'. This is a clear method-category challenge against the cited claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The text also says the detections are modeled “using Poisson statistics,” but Equation (2), with \\(a=n_{\\rm det}+1\\) and \\(b=n_{\\rm eff}-n_{\\rm det}+1\\), is a binomial/Beta posterior form, not a Poisson/Gamma posterior.\n\nConcrete fix: Replace \\((1-P)^{1-b}\\) with \\((1-P)^{b-1}\\). Also clarify whether the likelihood is binomial with completeness-corrected effective trials, or Poisson with a bounded frequency parameter. If the intended model is beta-binomial, remove or qualify “Poisson statistics.”",
+          "confidence": "high",
+          "reasoning": "This explicitly challenges the post-edit claim that the method uses Poisson statistics and states the cited/used formulation is binomial/Beta instead, which directly matches the method-category swap injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text also says the detections are modeled “using Poisson statistics,” but Equation (2), with \\(a=n_{\\rm det}+1\\) and \\(b=n_{\\rm eff}-n_{\\rm det}+1\\), is a binomial/Beta posterior form, not a Poisson/Gamma posterior. ... If the intended model is beta-binomial, remove or qualify “Poisson statistics.”",
+          "confidence": "low",
+          "reasoning": "The reviewer specifically identifies the incorrect term 'Poisson statistics' and correctly suggests it should be 'binomial', which is the exact category swap injected. Although the reviewer categorizes this as a mathematical error and explicitly states they found no citation errors, they have flagged the specific text changed in this injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text also says the detections are modeled \"using Poisson statistics,\" but Equation (2), with \\(a=n_{\\rm det}+1\\) and \\(b=n_{\\rm eff}-n_{\\rm det}+1\\), is a binomial/Beta posterior form, not a Poisson/Gamma posterior.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies that the paper claims to use 'Poisson statistics' but the actual equation (2) corresponds to a binomial/Beta posterior, directly flagging the method-category swap injection. This matches the BROADENED-CLAIM / method-category-swap detection rule.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text states: P(CJ|SN,[Fe/H]>0)=4.26^{+10.6}_{-9.9}%. Elsewhere, including the Abstract and Table 1, the value is 42.6^{+10.6}_{-9.9}%. The printed value in Section 3.2 is missing a factor of ten.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text states: P(CJ|SN,[Fe/H]>0)=4.26^{+10.6}_{-9.9}%. Elsewhere, including the Abstract and Table 1, the value is 42.6^{+10.6}_{-9.9}%. The printed value in Section 3.2 is missing a factor of ten.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 4.26% vs 42.6% discrepancy between Section 3.2 and the abstract/table, matching exactly the injected ÷10 error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] The main metal-rich sub-Neptune conditional frequency is mistyped as 4.26%.\n\nWhere: Section 3.2, paragraph beginning “Specifically...”\n\nWhat is wrong: The text states:\n\\[\nP({\\rm CJ}|{\\rm SN},[{\\rm Fe/H}]>0)=4.26^{+10.6}_{-9.9}\\%.\n\\]\nElsewhere, including the Abstract and Table 1, the value is \\(42.6^{+10.6}_{-9.9}\\%\\). The printed value in Section 3.2 is missing a factor of ten.\n\nWhy it matters: This is the central numerical result of the paper. The typo directly contradicts the Abstract, Table 1, Figure 2, and the stated interpretation.\n\nConcrete fix: Change 4.26% to 42.6%.",
+          "confidence": "high",
+          "reasoning": "The reviewer names the exact quantity, quotes both conflicting values, and notes contradiction with the abstract/body, exactly matching the injected 42.6%→4.26% error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The main metal-rich sub-Neptune conditional frequency is mistyped as 4.26%.\n\nWhere: Section 3.2, paragraph beginning “Specifically...”\n\nWhat is wrong: The text states:\n\\[\nP({\\rm CJ}|{\\rm SN},[{\\rm Fe/H}]>0)=4.26^{+10.6}_{-9.9}\\%.\n\\]\nElsewhere, including the Abstract and Table 1, the value is \\(42.6^{+10.6}_{-9.9}\\%\\).",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the exact numerical error (4.26% instead of 42.6%) in Section 3.2 and noted its inconsistency with the abstract.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The paper writes f(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{1-b}. For a beta distribution the second exponent should be b-1, not 1-b. As printed, the distribution diverges toward P=1 for the relevant cases with b>1.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The paper writes f(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{1-b}. For a beta distribution the second exponent should be b-1, not 1-b. As printed, the distribution diverges toward P=1 for the relevant cases with b>1.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies the wrong exponent (1-b instead of b-1) in the beta-distribution PDF and notes the divergence at P=1, exactly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] Equation (2) gives an incorrect beta-distribution posterior.\n\nWhat is wrong: The paper writes\n\\[\nf(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{1-b}.\n\\]\nFor a beta distribution the second exponent should be \\(b-1\\), not \\(1-b\\). As printed, the distribution diverges toward \\(P=1\\) for the relevant cases with \\(b>1\\), and it is not the posterior distribution apparently used to generate the plotted PDFs.\n\nConcrete fix: Replace \\((1-P)^{1-b}\\) with \\((1-P)^{b-1}\\).",
+          "confidence": "high",
+          "reasoning": "This precisely identifies the flipped exponent in Eq. (2) and the resulting wrong boundary behavior at P→1, directly matching the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The paper writes\n\\[\nf(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{1-b}.\n\\]\nFor a beta distribution the second exponent should be \\(b-1\\), not \\(1-b\\). As printed, the distribution diverges toward \\(P=1\\) for the relevant cases with \\(b>1\\)",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the exponent flip from b-1 to 1-b in Equation 2 and accurately described the resulting incorrect mathematical behavior (divergence at P=1).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag a cross-reference mismatch between metal-rich and metal-poor figures in Section 3.2; none of the general issues raised correspond to the swapped figure reference.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention a wrong figure cross-reference or any mismatch between the cited figure and the metal-rich excess claim. General comments about unsupported comparative claims are different from the injected figure-reference swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer identified several other issues with figure labels and sample counts (e.g., Figure 1 caption and Figure 5 notation), but did not catch the incorrect cross-reference in Section 3.2 where the metal-poor figure was cited instead of the metal-rich one.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags the cross-reference mismatch in Section 3.2 where Figure 3 (metal-poor) is cited instead of Figure 2 (metal-rich). The reviewer's general issues touch on figure/sample count inconsistencies and mathematical errors, but none specifically identify that the cited figure in the 'As can be seen in Figure...' sentence refers to the wrong (metal-poor) figure while discussing metal-rich results.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 57.364546,
+  "total_cost_usd": null,
+  "total_input_tokens": 34795,
+  "total_output_tokens": 8052,
+  "escalation_count": 2,
+  "notes": null
+}

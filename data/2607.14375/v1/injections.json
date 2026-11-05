@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "more than a $7/8+\\epsilon$ fraction of clauses \\citep{hastad2001optimal}.",
+    "injected_text": "more than a $15/16+\\epsilon$ fraction of clauses \\citep{hastad2001optimal}.",
+    "rationale": "Because this theoretical paper lacks experimental standard deviations, we perturb Håstad's famous 7/8 E3SAT threshold to 15/16 (the 4SAT threshold) as a surrogate for a minor quantitative mis-quote.",
+    "ground_truth_description": "Changes the inapproximability threshold for E3SAT cited from Hastad (2001) from 7/8 to 15/16.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "hastad2001optimal",
+      "injected_cite_key": "hastad2001optimal",
+      "claim_sentence_verbatim": "H\\aa stad's E3SAT theorem implies that for every fixed $\\epsilon>0$, it is NP-hard to distinguish a satisfiable E3SAT formula from one in which no assignment satisfies more than a $7/8+\\epsilon$ fraction of clauses \\citep{hastad2001optimal}.",
+      "section_location": "Appendix A.1",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "The bootstrap experiment used 300 exact block optima per family/noise cell and 50,000 products per product cell.",
+    "injected_text": "The bootstrap experiment used 300 exact block optima per family/noise cell and 5,000 products per product cell.",
+    "rationale": "Introduces a factor-of-10 discrepancy in the reported number of bootstrap products between Section 6.1 (50,000) and Appendix D.3 (5,000).",
+    "ground_truth_description": "Changes the number of bootstrap products in the appendix from 50,000 to 5,000, creating an integer-equal contradiction with the main text.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "integer_equal",
+      "value_before_raw": "50,000",
+      "value_after_raw": "5,000",
+      "value_before_float": 50000.0,
+      "value_after_float": 5000.0,
+      "location_cue": "The bootstrap experiment used 300 exact block optima per family/noise cell and 5,000 products per product cell.",
+      "paired_location": "Section 6.1",
+      "quantity_label": "number of bootstrap products",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t3.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,j}(x)",
+    "injected_text": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,i}(x)",
+    "rationale": "The summation variable is j, but the summand references an unbound index i, breaking structural conformability.",
+    "ground_truth_description": "Changed the bound summation index j in the network output equation to an unbound index i.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:network",
+      "equation_location": "Eq. (5)",
+      "original_fragment_latex": "h_{C,j}(x)",
+      "injected_fragment_latex": "h_{C,i}(x)",
+      "full_equation_latex_before": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,j}(x)\n-\\sum_{C\\in\\Phi}r_C(x).",
+      "full_equation_latex_after": "g_\\Phi(x)=\\frac23\\sum_{C\\in\\Phi}\\sum_{j=1}^3 h_{C,i}(x)\n-\\sum_{C\\in\\Phi}r_C(x).",
+      "term_role": "injected shape/index mismatch",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$.",
+    "injected_text": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$ (a preliminary scan showed large discretization artifacts for smaller $B$).",
+    "rationale": "The inserted parenthetical justifies the choice of B=16 by asserting a preliminary scan observation about discretization artifacts that the paper does not actually report or provide evidence for.",
+    "ground_truth_description": "Added an unsupported parenthetical claiming a preliminary scan showed large discretization artifacts for B < 16, which acts as phantom evidence for a methodological choice.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 6.1",
+      "affected_span_verbatim": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$.  Forty-four independently selected optima were cross-checked against a separate MILP model; the maximum discrepancy was $7.99\\times10^{-15}$."
+    },
+    "proposer_agent": "injector.general.S2.t3.v1"
+  }
+]

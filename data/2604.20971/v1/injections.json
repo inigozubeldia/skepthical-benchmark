@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-5}$",
+    "injected_text": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star exceeds $\\sim10^{-5}$",
+    "rationale": "Wu2024 explicitly concludes that turbulent torques dominate when the mass ratio falls below ~10^-5 (i.e. small companions); reversing 'falls below' to 'exceeds' contradicts the directional conclusion of the cited paper while leaving the cite key intact, so ref.py should return CONTRADICTED.",
+    "ground_truth_description": "The direction of the mass-ratio threshold in the Wu2024 claim was reversed from 'falls below ~10^-5' to 'exceeds ~10^-5', contradicting the cited paper's actual conclusion.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Wu2024",
+      "injected_cite_key": "Wu2024",
+      "claim_sentence_verbatim": "\\citet{Wu2024} found that the turbulent torques dominate the evolution of the orbit once the mass ratio between the planet and the star falls below $\\sim10^{-5}$, which corresponds to the EMRI regime in the case of AGN disks.",
+      "section_location": "Sec. 2 (Inspiration for our turbulent torque model)",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "symmetric mass ratio $q/(1+q)^2\\approx q$ because $q\\ll1$",
+    "injected_text": "symmetric mass ratio $q/(1+q)^2\\approx q/4$ because $q\\ll1$",
+    "rationale": "The symmetric mass ratio q/(1+q)^2 reduces to q for q<<1, but the injected text claims it equals q/4, making the ratio_eq predicate fail by a factor of 4 (>20% relative error) — a blatant arithmetic error on an explicitly stated numerator/denominator/ratio triple.",
+    "ground_truth_description": "Changed the leading-order approximation of the symmetric mass ratio from q to q/4, introducing a factor-of-4 arithmetic error in an explicitly stated ratio relationship.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "q",
+      "value_after_raw": "q/4",
+      "value_before_float": 1.0,
+      "value_after_float": 0.25,
+      "location_cue": "approximated the symmetric mass ratio q/(1+q)^2 approx q because q ll 1",
+      "paired_location": null,
+      "quantity_label": "leading-order approximation of the symmetric mass ratio q/(1+q)^2 for q<<1",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+    "injected_text": "    \\dot{a}_{\\rm GW}=-\\frac{32}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+    "rationale": "Replacing the canonical Peters (1964) GW energy-loss coefficient 64 with 32 produces a structurally identical but algebraically incorrect formula that Wolfram can refute against the standard result by direct numeric comparison.",
+    "ground_truth_description": "The leading coefficient in the GW-driven rate of change of semi-major axis was changed from 64/5 to 32/5, halving the canonical Peters formula result.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3 (Model), second displayed equation for da/dt_GW",
+      "original_fragment_latex": "\\frac{64}{5}",
+      "injected_fragment_latex": "\\frac{32}{5}",
+      "full_equation_latex_before": "    \\dot{a}_{\\rm GW}=-\\frac{64}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+      "full_equation_latex_after": "    \\dot{a}_{\\rm GW}=-\\frac{32}{5}\\frac{G^3}{c^5}\\frac{q M_z^3}{a^3},",
+      "term_role": "leading numerical coefficient in Peters (1964) orbital decay formula",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "ChaoticEMRIs.tex",
+    "original_text": "see Appendix~\\ref{App:A} for details",
+    "injected_text": "see Appendix~\\ref{App:B} for details",
+    "rationale": "Changing the \\ref target from App:A to App:B causes a cross-reference mismatch that renders as the correct number but points to the wrong appendix (the error appendix instead of the derivation appendix), a plausible typo an author might make, visible as a wrong section number in the PDF.",
+    "ground_truth_description": "The \\ref to Appendix A in the analytical estimates sentence was changed to point to Appendix B, producing a cross-reference mismatch visible in the rendered PDF.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "cross_reference_mismatch",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 3 (Model)",
+      "affected_span_verbatim": "see Appendix~\\ref{App:A} for details"
+    },
+    "proposer_agent": "injector.general.S1.t2.v1"
+  }
+]

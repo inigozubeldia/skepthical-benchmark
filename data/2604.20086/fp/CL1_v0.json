@@ -1,0 +1,385 @@
+{
+  "paper_id": "2604.20086",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-305ec9a752f6",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Re-reader found the location but could not read any numeric value there.",
+        "evidence": {
+          "rereader_status": "no_value_found"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.090396
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-63f8a8347ae7",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "mathematics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Maths interpreter: FAIL. The flux formula in Eq. (3.1) is dimensionally inconsistent as written. The left-hand side has dimensions of [flux per solid angle per energy] = 1/(cm² s sr GeV), while the right-hand side, with Γ_f interpreted as a branching ratio (dimensionless) and D dimensionless, yields units of kpc·(GeV/cm³)/GeV·(1/GeV) = kpc/(cm³·GeV), which is missing an inverse-time dimension. For a decaying dark matter flux formula, the decay rate (1/lifetime, in s⁻¹) must appear explicitly to supply the s⁻¹ dimension; merely labelling Γ_f as a 'branching ratio' rather than a partial decay width does not fix this. The transcription-fidelity check confirmed the formula was faithfully extracted, and the pint engine errored out, so the verdict rests on prose-level dimensional analysis — the formula as stated is dimensionally wrong without an explicit decay rate factor (typically 1/τ_DM). This is a critical issue in the core flux equation.",
+        "evidence": {
+          "maths_verdict": "FAIL",
+          "confidence": "high",
+          "impact": "critical",
+          "notes": "The flux formula in Eq. (3.1) is dimensionally inconsistent as written. The left-hand side has dimensions of [flux per solid angle per energy] = 1/(cm² s sr GeV), while the right-hand side, with Γ_f interpreted as a branching ratio (dimensionless) and D dimensionless, yields units of kpc·(GeV/cm³)/GeV·(1/GeV) = kpc/(cm³·GeV), which is missing an inverse-time dimension. For a decaying dark matter flux formula, the decay rate (1/lifetime, in s⁻¹) must appear explicitly to supply the s⁻¹ dimension; merely labelling Γ_f as a 'branching ratio' rather than a partial decay width does not fix this. The transcription-fidelity check confirmed the formula was faithfully extracted, and the pint engine errored out, so the verdict rests on prose-level dimensional analysis — the formula as stated is dimensionally wrong without an explicit decay rate factor (typically 1/τ_DM). This is a critical issue in the core flux equation.",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → confirmed (23.40s)",
+            "pint: Check dimensional consistency of the flux formula. We expect this to fail due to a missing inverse-time dimension (such as the dark matter decay rate or inverse lifetime). → error"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.03306099999999999
+      },
+      {
+        "flag_id": "fp-b986bbd3c20b",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The statement expresses the standard incoherent-sum formula for the total muon-neutrino flux at Earth: each source flavor's flux is multiplied by its transition probability P(ν_α → ν_μ) and summed over all source flavors (μ, e, τ). This is the textbook phenomenological treatment of neutrino oscillations for astrophysical sources and is physically correct under the assumption that flavor coherence at the source is lost. The transcription-fidelity check confirmed that the extractor reproduced the paper's equation faithfully. No knowledge-audit or mechanical-engine refutation was raised; the formula is consistent with the incoherent oscillation probability formalism.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "minor",
+          "notes": "The statement expresses the standard incoherent-sum formula for the total muon-neutrino flux at Earth: each source flavor's flux is multiplied by its transition probability P(ν_α → ν_μ) and summed over all source flavors (μ, e, τ). This is the textbook phenomenological treatment of neutrino oscillations for astrophysical sources and is physically correct under the assumption that flavor coherence at the source is lost. The transcription-fidelity check confirmed that the extractor reproduced the paper's equation faithfully. No knowledge-audit or mechanical-engine refutation was raised; the formula is consistent with the incoherent oscillation probability formalism.",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → confirmed (6.26s)"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.03306099999999999
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-4b5880719070",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'we summarize the main features of the model' and 'The detailed expression of the Feynman rules can be seen in the paper of O.Catà et. al. [17]', indicating the model and rules are taken wholesale from prior work. The paper does not explicitly articulate what is novel beyond applying these existing tools to dSphs, and Ref.[18] already provides observational constraints on the same model.",
+        "evidence": {
+          "claim": "The paper's main novelty is unclear and incremental, as the model and Feynman rules are taken from previous works; the new content relative to Refs. [16–18] and existing literature is not specified.",
+          "excerpt": "The authors should clearly state what is new with respect to Refs. [16–18] (which already include observational constraints) and with respect to existing dSph DM-decay literature. As written, the contribution looks incremental."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'we summarize the main features of the model' and 'The detailed expression of the Feynman rules can be seen in the paper of O.Catà et. al. [17]', indicating the model and rules are taken wholesale from prior work. The paper does not explicitly articulate what is novel beyond applying these existing tools to dSphs, and Ref.[18] already provides observational constraints on the same model.",
+            "cost_usd": 0.023428928571428576
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says it only applies an existing framework: “the photon and neutrino fluxes coming from dwarf spheroidal galaxies are analyzed in the context of a model with a gravity portal described in [16–18]” and that in Sec. 2 “the main features of the model... are reviewed,” but it never explicitly states what is new relative to Refs. [16–18] or prior dSph-decay studies.",
+            "cost_usd": 0.013159285714285715
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces its model by stating \"the photon and neutrino fluxes... are analyzed in the context of a model... described in [16–18]\" without clarifying its specific novel contributions relative to those works.",
+            "cost_usd": 0.004425142857142857
+          }
+        ],
+        "cost_usd": 0.04101335714285715
+      },
+      {
+        "flag_id": "fp-8785d65bcef1",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper never states the total decay width Γ_tot(m_φ,ξ) explicitly, and only notes in the Conclusions that 'Current bounds constrain the lifetime to be ≳ 10^24 s, and the scenario considered here is consistent with these limits' without demonstrating this consistency quantitatively or comparing benchmark parameters to CMB or existing indirect-detection limits.",
+        "evidence": {
+          "claim": "The manuscript claims a DM candidate lifetime exceeding the age of the Universe but fails to state the total decay width or to demonstrate consistency with cosmological/CMB and indirect-detection bounds; the benchmark parameter space may be excluded.",
+          "excerpt": "the total decay width $\\Gamma_{\\mathrm{tot}}(m_\\phi,\\xi)$ used in equation (3.1) is never stated. ... the consistency of the chosen $(m_\\phi,\\xi)$ benchmarks with cosmological lifetime bounds, CMB constraints (e.g. Planck), and existing dSph/MW indirect-detection limits must be demonstrated explicitly."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper never states the total decay width Γ_tot(m_φ,ξ) explicitly, and only notes in the Conclusions that 'Current bounds constrain the lifetime to be ≳ 10^24 s, and the scenario considered here is consistent with these limits' without demonstrating this consistency quantitatively or comparing benchmark parameters to CMB or existing indirect-detection limits.",
+            "cost_usd": 0.023428928571428576
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The manuscript claims consistency but does not show the needed quantities: “Results are presented for three benchmark masses and three coupling values consistent with cosmological constraints” and “Current bounds constrain the lifetime to be ≳ 10^24 s, and the scenario considered here is consistent with these limits.” Yet no explicit total width/lifetime values or comparison to CMB/indirect bounds for the benchmarks are given.",
+            "cost_usd": 0.013159285714285715
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims \"the scenario considered here is consistent with these limits\" but does not provide the computed decay widths or explicitly demonstrate this consistency for the chosen benchmarks.",
+            "cost_usd": 0.004425142857142857
+          }
+        ],
+        "cost_usd": 0.04101335714285715
+      },
+      {
+        "flag_id": "fp-0e138aba65fa",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'the BRs of the decaying channels, lifetime and mass of DM and energy for the differential flux' are input to CLUMPY, but no table of branching fractions for each benchmark mass is provided anywhere in the manuscript, leaving the reader unable to verify what was actually used.",
+        "evidence": {
+          "claim": "The branching fractions used are not given; for low $m_\\phi$ some channels are forbidden but still mentioned; a table of branching ratios for each benchmark is essential.",
+          "excerpt": "The branching fractions used as input to `CLUMPY` are not given. A table of $\\mathrm{BR}_f(m_\\phi)$ for each benchmark is essential."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'the BRs of the decaying channels, lifetime and mass of DM and energy for the differential flux' are input to CLUMPY, but no table of branching fractions for each benchmark mass is provided anywhere in the manuscript, leaving the reader unable to verify what was actually used.",
+            "cost_usd": 0.023428928571428576
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that “only these channels are taken into account” and that “CLUMPY was run, with the following information from the model: the BRs of the decaying channels, lifetime and mass of DM,” but it never provides the actual branching fractions or a benchmark table, including where thresholds would close channels.",
+            "cost_usd": 0.013159285714285715
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors state that \"CLUMPY was run, with the following information from the model: the BRs of the decaying channels\" but fail to list these branching ratios anywhere in the text.",
+            "cost_usd": 0.004425142857142857
+          }
+        ],
+        "cost_usd": 0.04101335714285715
+      },
+      {
+        "flag_id": "fp-0564d4a1220c",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 2 lists ρ_s, r_s, R_Δ with the caption noting 'ρ_s, r_s are parameters for the density profile [20,21]' but never specifies which profile form (NFW, Einasto, etc.) is assumed, and D-factor uncertainties—known to be significant for dSphs—are not propagated or discussed anywhere in the paper.",
+        "evidence": {
+          "claim": "The density profiles and related parameters for the dwarf galaxies are inadequately specified, with unusual values and no stated uncertainties or assumed profile type; $D$-factor uncertainties are not propagated.",
+          "excerpt": "Table 2 gives parameters $\\rho_s$, $r_s$, $R_\\Delta$ but does not specify the assumed profile (NFW? Einasto? Burkert?). ... Uncertainties on the $D$-factors — known to dominate dSph indirect-detection sensitivity — are not propagated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 2 lists ρ_s, r_s, R_Δ with the caption noting 'ρ_s, r_s are parameters for the density profile [20,21]' but never specifies which profile form (NFW, Einasto, etc.) is assumed, and D-factor uncertainties—known to be significant for dSphs—are not propagated or discussed anywhere in the paper.",
+            "cost_usd": 0.023428928571428576
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 2 gives only that “ρs, rs are parameters for the density profile [20, 21],” without naming the assumed profile form, and the text only says “We computed the D-factor, using CLUMPY.” No uncertainties on the halo parameters or propagated D-factor uncertainties are presented.",
+            "cost_usd": 0.013159285714285715
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides \"parameters for the density profile [20, 21]\" in Table 2 but does not explicitly name the profile used, nor does it compute or propagate uncertainties for the D-factors.",
+            "cost_usd": 0.004425142857142857
+          }
+        ],
+        "cost_usd": 0.04101335714285715
+      },
+      {
+        "flag_id": "fp-8a175977e990",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states 'we considered a detector with an effective area of one squared kilometer and a year of exposure' and acknowledges in the Conclusions that 'we considered an idealized detector with a large effective area and no dependence on the arrival direction', with no comparison to real IceCube or Fermi-LAT sensitivity curves or existing limits from dSph analyses.",
+        "evidence": {
+          "claim": "The detector model assumes unrealistic capabilities and does not account for effective areas, thresholds, resolution, or backgrounds; conclusions about detectability are unsupported without comparison to real experimental limits.",
+          "excerpt": "The \"idealized detector\" ... is unrealistic and bears no relation to IceCube/KM3NeT/Fermi-LAT capabilities. The conclusions about detectability ... cannot be supported without using realistic effective areas, energy thresholds, angular resolution, and atmospheric/astrophysical backgrounds. Existing IceCube and Fermi-LAT limits for dSph decay should be plotted alongside the predictions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'we considered a detector with an effective area of one squared kilometer and a year of exposure' and acknowledges in the Conclusions that 'we considered an idealized detector with a large effective area and no dependence on the arrival direction', with no comparison to real IceCube or Fermi-LAT sensitivity curves or existing limits from dSph analyses.",
+            "cost_usd": 0.023428928571428576
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The analysis uses a simplified detector assumption: “considering a detector with an effective area of one squared kilometer and a year of exposure,” and the conclusion admits “we considered an idealized detector with a large effective area and no dependence on the arrival direction.” The paper does not include realistic thresholds/backgrounds or direct comparison to experimental limits before making detectability claims.",
+            "cost_usd": 0.013159285714285715
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors admit to using \"an idealized detector with a large effective area and no dependence on the arrival direction,\" confirming the reviewer's concern that the detector model lacks realistic effective areas, resolutions, and backgrounds.",
+            "cost_usd": 0.004425142857142857
+          }
+        ],
+        "cost_usd": 0.04101335714285715
+      },
+      {
+        "flag_id": "fp-b98e4bddbac9",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=AMBIGUOUS, gemini=FP",
+        "evidence": {
+          "claim": "The method for obtaining $dN^f_X/dE$ is not properly justified; the citation used applies to annihilation not decay, and necessary electroweak corrections are missing at high mass.",
+          "excerpt": "PPPC4DMID [19] is cited, but PPPC4DMID is for *annihilation*; the decay equivalent is $dN/dE$ at $E_{\\mathrm{kin}}=m_\\phi/2$ per parent. Electroweak corrections (Ciafaloni et al.) at $m_\\phi=1$ TeV must be included; otherwise spectra below $\\sim$ a few GeV are wrong by orders of magnitude."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper cites PPPC4DMID [19] for spectra computation and notes CLUMPY is used; PPPC4DMID does provide decay spectra (not only annihilation), so the reviewer's claim that it 'is for annihilation' is not fully accurate. However, the paper does not address whether electroweak corrections are included at 1 TeV, making the second part of the concern unresolved.",
+            "cost_usd": 0.023428928571428576
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does give a method, stating “In the case of decaying DM, gamma-ray and neutrino fluxes can be computed as [19]” and that “the module g2 in CLUMPY was run,” so the claim that Ref. [19] is being used only for annihilation is not established by the manuscript. However, the text does not explicitly say whether electroweak corrections are included in the spectra, so that part cannot be verified from the paper alone.",
+            "cost_usd": 0.013159285714285715
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The reviewer's claim is factually incorrect; the cited PPPC4DMID tool explicitly includes electroweak corrections and handles decay spectra, which are properly processed by the authors' use of the \"CLUMPY [22–24]\" module.",
+            "cost_usd": 0.004425142857142857
+          }
+        ],
+        "cost_usd": 0.04101335714285715
+      },
+      {
+        "flag_id": "fp-cb960125b7f4",
+        "paper_id": "2604.20086",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only briefly notes in Section 4 that 'computational tools employed… are typically restricted to two-body decay channels. This constrains the accessible parameter space, particularly at higher masses where multi-body decays may become important,' without any quantification of the magnitude of this effect, consistent with rule R1.",
+        "evidence": {
+          "claim": "Relevant limitations (restriction to two-body decays and lack of electroweak radiation) are only briefly noted and without quantification; their impact must be discussed and quantified.",
+          "excerpt": "The remark in Sec. 4 that \"computational tools … are typically restricted to two-body decay channels\" is too brief; the authors should quantify the effect of ignoring 3- and 4-body decays and EW radiation."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only briefly notes in Section 4 that 'computational tools employed… are typically restricted to two-body decay channels. This constrains the accessible parameter space, particularly at higher masses where multi-body decays may become important,' without any quantification of the magnitude of this effect, consistent with rule R1.",
+            "cost_usd": 0.023428928571428576
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only acknowledges the limitation qualitatively: “computational tools employed... are typically restricted to two-body decay channels. This constrains the accessible parameter space, particularly at higher masses where multi-body decays may become important.” It does not quantify the impact of neglecting 3-/4-body decays or EW radiation.",
+            "cost_usd": 0.013159285714285715
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors merely acknowledge that \"A relevant limitation arises from the computational tools employed, which are typically restricted to two-body decay channels,\" but do not quantify this limitation, which violates rule R1.",
+            "cost_usd": 0.004425142857142857
+          }
+        ],
+        "cost_usd": 0.04101335714285715
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 1.0,
+    "mathematics": 0.5,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.090396,
+    "mathematics": 0.06612199999999999,
+    "general": 0.28709350000000006
+  },
+  "extractor_cost_usd": 0.019863999999999993,
+  "total_cost_usd": 0.46347550000000004
+}

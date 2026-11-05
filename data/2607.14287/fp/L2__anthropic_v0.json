@@ -1,0 +1,293 @@
+{
+  "paper_id": "2607.14287",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-9a305dc4105c",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.03782800000000003
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-468802ad5b3f",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: Table I shows SAM-Med2D achieves F1=0.9116 on NIST pores while XCT-SAM achieves F1=0.9051, yet the abstract claims XCT-SAM achieves 'the best overall IoU and Dice scores' and Section IV-E states 'XCT-SAM achieves the best IoU and Dice scores among all baselines' on NIST — the F1 qualification is implicit but the broader 'consistently outperforms' framing in the abstract is misleading since XCT-SAM does not achieve the best F1 on NIST.",
+        "evidence": {
+          "claim": "The claim that XCT-SAM achieves 'the best overall IoU and Dice scores' on the NIST benchmark is factually incorrect for F1: SAM-Med2D achieves a higher F1 score than XCT-SAM on NIST.",
+          "excerpt": "However, in Table I (Sec. IV-E), on NIST pores, SAM-Med2D obtains F1 = 0.9116 while XCT-SAM obtains F1 = 0.9051, i.e. XCT-SAM does not achieve the best F1 on NIST. ... The 'consistently outperforms' claim is thus overstated for NIST."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table I shows SAM-Med2D achieves F1=0.9116 on NIST pores while XCT-SAM achieves F1=0.9051, yet the abstract claims XCT-SAM achieves 'the best overall IoU and Dice scores' and Section IV-E states 'XCT-SAM achieves the best IoU and Dice scores among all baselines' on NIST — the F1 qualification is implicit but the broader 'consistently outperforms' framing in the abstract is misleading since XCT-SAM does not achieve the best F1 on NIST.",
+            "cost_usd": 0.0042586
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper’s claim is specifically about IoU and Dice: the Abstract says XCT-SAM achieves “the best overall IoU and Dice scores,” and Table I shows on NIST pores “SAM-Med2D [24] 0.5776 0.6978 0.9116” versus “XCT-SAM (ours) 0.5849 0.7288 0.9051,” so XCT-SAM is indeed best on IoU and Dice even if not on F1.",
+            "cost_usd": 0.012096999999999998
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The authors never claimed to achieve the best F1 score; the abstract explicitly limits its claim by stating the model \"consistently outperforms zero-shot SAM and other domain-adapted SAM baselines, achieving the best overall IoU and Dice scores.\" The reviewer is attacking a claim the paper did not make.",
+            "cost_usd": 0.0018818666666666666
+          }
+        ],
+        "cost_usd": 0.018237466666666667
+      },
+      {
+        "flag_id": "fp-2db0a5977a53",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states Stage-I uses 'an alloy-microstructure dataset [34]' with 'a learning rate of 2×10−4, a batch size of 8, and trained for up to 15 epochs' but never specifies the number of images used, the label/annotation type, whether it is single- or multi-class, or what prompts are used, making the Stage-I procedure incompletely described for reproducibility.",
+        "evidence": {
+          "claim": "Critical methodological details for Stage-I adaptation are missing, including dataset size, label type, class structure, prompts, and weight transfer, making the core methodological claim non-reproducible.",
+          "excerpt": "the paper never states (i) how many images are used for Stage-I, (ii) what the ground-truth labels are (defect masks? phase masks? microconstituent masks?), (iii) whether Stage-I is single-class or multi-class, (iv) what prompts are used at Stage-I, or (v) whether both pore- and inclusion-branch models share the Stage-I initialisation. Without this, the central methodological contribution — that Stage-I is what enables the improvement — cannot be reproduced or independently assessed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states Stage-I uses 'an alloy-microstructure dataset [34]' with 'a learning rate of 2×10−4, a batch size of 8, and trained for up to 15 epochs' but never specifies the number of images used, the label/annotation type, whether it is single- or multi-class, or what prompts are used, making the Stage-I procedure incompletely described for reproducibility.",
+            "cost_usd": 0.0042586
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states only that “For Stage-I adaptation, we use an alloy-microstructure dataset [34] as an intermediate domain” and “In Stage 1, we perform intermediate domain adaptation on the alloy dataset [34] using a learning rate of 2 × 10−4, a batch size of 8, and trained for up to 15 epochs.” It does not specify the Stage-I image count, label/mask type, class setup, prompt protocol, or whether the same Stage-I initialization is used for both binary Stage-II models.",
+            "cost_usd": 0.012096999999999998
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions using the alloy dataset in Section IV-D (\"In Stage 1, we perform intermediate domain adaptation on the alloy dataset [34]\") but omits key methodological details such as the dataset size, exact labels used, and the prompt protocol during this intermediate stage.",
+            "cost_usd": 0.0018818666666666666
+          }
+        ],
+        "cost_usd": 0.018237466666666667
+      },
+      {
+        "flag_id": "fp-bb64fa475160",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges 'we generate threshold-derived binary reference masks following the image-processing pipeline of [33]' for NIST evaluation, but presents NIST results alongside GAN results without quantifying potential bias introduced by threshold-derived pseudo-labels, and the abstract claims evaluation on 'real-world NIST XCT scans' without caveat about label quality.",
+        "evidence": {
+          "claim": "The NIST 'ground truth' is threshold-derived, yet results are presented as if they represent true quality on real XCT data, leading to potential artificial performance inflation and misinterpretation.",
+          "excerpt": "Sec. IV-A says NIST reference masks are 'threshold-derived' following [33] because manual annotations are unavailable, yet Sec. IV-E treats the resulting IoU/Dice/F1 as if they measured true segmentation quality on real XCT data. A method with a bias correlated with the threshold could artificially score high ... This is not a minor caveat; it affects how the 'real-world XCT' claim in the Abstract/Introduction should be interpreted."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges 'we generate threshold-derived binary reference masks following the image-processing pipeline of [33]' for NIST evaluation, but presents NIST results alongside GAN results without quantifying potential bias introduced by threshold-derived pseudo-labels, and the abstract claims evaluation on 'real-world NIST XCT scans' without caveat about label quality.",
+            "cost_usd": 0.0042586
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explicitly says, “Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33],” but later reports that “on the real NIST benchmark, XCT-SAM achieves the best IoU and Dice scores among all baselines.” The evaluation is therefore against threshold-derived references, and the paper does not quantify or otherwise resolve the resulting interpretation risk.",
+            "cost_usd": 0.012096999999999998
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the paper acknowledges generating \"threshold-derived binary reference masks\" (Section IV-A), it presents the resulting metrics as definitive real-world evaluation (\"on the real NIST benchmark, XCT-SAM achieves the best IoU and Dice scores\") without discussing the performance-inflation bias of treating thresholded pseudo-labels as ground truth.",
+            "cost_usd": 0.0018818666666666666
+          }
+        ],
+        "cost_usd": 0.018237466666666667
+      },
+      {
+        "flag_id": "fp-d8bc720828c9",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table I reports only point-estimate means across test sets without confidence intervals or statistical significance tests; Figure 5 shows error bars of ±1 std but no paired tests or bootstrap CIs are provided, and no statistical testing framework is described anywhere in the paper.",
+        "evidence": {
+          "claim": "Table I gives only point means across highly heterogeneous test sets, and there is no statistical testing or reporting of confidence intervals, undermining the statistical support for claimed superiority.",
+          "excerpt": "Without at least paired comparisons or bootstrap CIs, the claimed superiority is not statistically supported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table I reports only point-estimate means across test sets without confidence intervals or statistical significance tests; Figure 5 shows error bars of ±1 std but no paired tests or bootstrap CIs are provided, and no statistical testing framework is described anywhere in the paper.",
+            "cost_usd": 0.0042586
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table I is described as “Quantitative comparison of mean segmentation performance computed across all test sets,” and Fig. 5 says only that “the error bars indicate ±1 std.” The paper does not report confidence intervals or statistical significance tests to support the superiority claims.",
+            "cost_usd": 0.012096999999999998
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table I aggregates results with only point estimates (e.g., \"0.3245\" for IoU) and explicitly lacks statistical testing or reporting of confidence intervals for the overall mean performance across the highly heterogeneous datasets.",
+            "cost_usd": 0.0018818666666666666
+          }
+        ],
+        "cost_usd": 0.018237466666666667
+      },
+      {
+        "flag_id": "fp-ff62f032e7f6",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper argues the alloy dataset is an 'intermediate domain between natural images and AM defect data' and that microstructures 'share key properties with XCT images,' but the t-SNE in Fig. 4 does not include alloy-microstructure data points, and no ablation compares Stage-I alloy adaptation against Stage-I on an unrelated domain or simply more XCT training epochs.",
+        "evidence": {
+          "claim": "The justification for the 'material-to-XCT' curriculum via intermediate alloy-microstructure adaptation is asserted without ablation or evidence that this intermediate domain is in fact closer to XCT than unrelated domains.",
+          "excerpt": "no evidence is offered that Stage-I features are actually closer to XCT than SAM's SA-1B features. The t-SNE in Fig. 4 does not include the alloy-microstructure dataset. Without such evidence, ... one cannot distinguish 'curriculum helps' from 'any additional fine-tuning on ~1k more images helps'."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper argues the alloy dataset is an 'intermediate domain between natural images and AM defect data' and that microstructures 'share key properties with XCT images,' but the t-SNE in Fig. 4 does not include alloy-microstructure data points, and no ablation compares Stage-I alloy adaptation against Stage-I on an unrelated domain or simply more XCT training epochs.",
+            "cost_usd": 0.0042586
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does include a direct no-Stage-I comparison: “we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage used in XCT-SAM,” which is some ablation evidence. However, the closeness rationale itself is only asserted—“These microstructures share key properties with XCT images”—and Fig. 4 does not include the alloy dataset, so the specific claim that the intermediate domain is demonstrably closer to XCT is not shown.",
+            "cost_usd": 0.012096999999999998
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts that the alloy dataset \"share key properties with XCT images\" (Section II) to justify the curriculum, but does not provide t-SNE features for this dataset in Figure 4 nor ablate it against an unrelated domain to prove the gain is specific to the material characteristics.",
+            "cost_usd": 0.0018818666666666666
+          }
+        ],
+        "cost_usd": 0.018237466666666667
+      },
+      {
+        "flag_id": "fp-31140852a10e",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The parameter count '636M' is attributed inconsistently to the SAM ViT-H image encoder instead of the whole model, which is factually incorrect and affects the motivation for parameter efficiency.",
+          "excerpt": "Sec. I says the image encoder ViT-H 'alone comprises 636M parameters'; Sec. III-A repeats the '~636M parameters' figure for the ViT-H image encoder. SAM's official ViT-H image encoder has ≈632M parameters, and the full SAM ViT-H model has ≈636M parameters. The 636M figure being attributed specifically to the image encoder is not consistent with the standard figure and is used to justify why full fine-tuning is expensive."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states 'its image encoder (ViT-H), which alone comprises 636M parameters' in Section I and 'ViT-H image encoder (~636M parameters)' in Section III-A; the official SAM ViT-H image encoder is ~632M and the full model is ~636M, so the 636M figure is slightly misattributed to the encoder alone, but the discrepancy (~4M) is minor and does not materially affect the parameter-efficiency motivation.",
+            "cost_usd": 0.0042586
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "low",
+            "reason": "Within the PDF, the paper says “the image encoder (ViT-H), which alone comprises 636M parameters” and separately that XCT-SAM fine-tunes “4.15M parameters, or 0.647% of the full model.” The paper does not state that the full model is 636M, so the alleged inconsistency is not established from the paper itself.",
+            "cost_usd": 0.012096999999999998
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper inaccurately attributes the full model's parameter count exclusively to the image encoder, stating \"its image encoder (ViT-H), which alone comprises 636M parameters\" (Section II) and again in Section III-A.",
+            "cost_usd": 0.0018818666666666666
+          }
+        ],
+        "cost_usd": 0.018237466666666667
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.03782800000000003,
+    "general": 0.1094248
+  },
+  "extractor_cost_usd": 0.026859999999999995,
+  "total_cost_usd": 0.1741128
+}

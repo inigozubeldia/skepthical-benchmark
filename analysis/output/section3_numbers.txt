@@ -1,0 +1,149 @@
+
+################ astro ################
+(1) paired paper bootstrap, Delta = Skepthical - other (pp), Pr(Delta<=0)
+  vs structured GPT-5.5      : total +9.2 (Pr=0.004) | cit +27.3 (Pr=0.000) | num +2.3 (Pr=0.408) | math -2.4 (Pr=0.726) | gen +9.1 (Pr=0.142)
+  vs free-form GPT-5.5       : total +10.2 (Pr=0.000) | cit +24.4 (Pr=0.006) | num +0.0 (Pr=0.654) | math +0.0 (Pr=0.567) | gen +15.6 (Pr=0.017)
+  vs Claude Code structured  : total +9.6 (Pr=0.001) | cit +20.0 (Pr=0.031) | num -11.1 (Pr=0.986) | math +2.4 (Pr=0.442) | gen +26.7 (Pr=0.004)
+  vs structured Opus 4.7     : total +17.8 (Pr=0.001) | cit +25.6 (Pr=0.009) | num +2.3 (Pr=0.429) | math +20.0 (Pr=0.005) | gen +23.3 (Pr=0.029)
+(2) detection rate % at S1/S2/S3 per system and error type ('^' strictly increasing)
+  Claude Opus 4.7 (free-form)    cit 12/6/9   num 54/56/57^  mat 23/29/46^  gen 44/43/62 
+  GPT-5.5 (free-form)            cit 6/38/23   num 50/94/93   mat 62/67/93^  gen 62/53/86 
+  Gemini 3.1 Pro (free-form)     cit 6/6/0   num 14/12/13   mat 8/0/0   gen 31/7/43 
+  Claude Opus 4.7 (structured)   cit 21/19/23   num 85/80/73   mat 77/27/67   gen 53/47/77 
+  GPT-5.5 (structured)           cit 20/0/38   num 62/88/87   mat 62/73/92^  gen 87/47/86 
+  Gemini 3.1 Pro (structured)    cit 19/0/15   num 64/44/67   mat 31/47/57^  gen 25/33/50^
+  Skepthical                     cit 38/44/62^  num 57/94/87   mat 77/53/93   gen 81/73/93 
+  Claude Code (structured)       cit 31/6/46   num 93/81/100   mat 77/53/86   gen 56/53/57 
+  Claude Code (free-form)        cit 6/6/15   num 43/44/40   mat 8/13/36^  gen 44/33/57 
+  Stanford Agentic Reviewer      cit 6/12/8   num 36/56/67^  mat 54/40/57   gen 44/33/79 
+  OpenReviewer-8B                cit 0/0/0   num 0/0/0   mat 0/0/0   gen 0/0/14 
+  PaperAudit-Bench Deep          cit 0/0/0   num 14/0/7   mat 0/7/0   gen 0/0/0 
+  pooled non-floor systems, citations  : S1 18 S2 15 S3 27   S2<S1 in 5/9 systems
+  pooled non-floor systems, numerics   : S1 60 S2 71 S3 75   S2<S1 in 3/9 systems
+  pooled non-floor systems, mathematics: S1 52 S2 45 S3 70   S2<S1 in 4/9 systems
+  pooled non-floor systems, general    : S1 55 S2 46 S3 72   S2<S1 in 8/9 systems
+(3) clean-copy FP rate % [95% CI] (FP/flags; u = unadjudicated in denominator)
+  Claude Opus 4.7 (free-form)    cit 0.0 [0,0] (0/1;u1) | num 0.0 [0,0] (0/5;u4) | mat -- | gen 1.1 [0,4] (1/91;u0) | all 1.0 [0,3] (1/97;u5)
+  GPT-5.5 (free-form)            cit -- | num 0.0 [0,0] (0/11;u9) | mat 50.0 [24,79] (9/18;u9) | gen 2.0 [0,5] (2/98;u0) | all 8.7 [3,15] (11/127;u18)
+  Gemini 3.1 Pro (free-form)     cit -- | num 0.0 [0,0] (0/2;u2) | mat -- | gen 7.3 [0,19] (3/41;u0) | all 7.0 [0,18] (3/43;u2)
+  Claude Opus 4.7 (structured)   cit 0.0 [0,0] (0/3;u3) | num 0.0 [0,0] (0/7;u5) | mat 50.0 [0,100] (2/4;u2) | gen 3.2 [0,8] (2/63;u0) | all 5.2 [1,10] (4/77;u10)
+  GPT-5.5 (structured)           cit -- | num 0.0 [0,0] (0/6;u3) | mat 15.4 [0,29] (2/13;u10) | gen 0.0 [0,0] (0/40;u0) | all 3.4 [0,8] (2/59;u13)
+  Gemini 3.1 Pro (structured)    cit -- | num 0.0 [0,0] (0/2;u1) | mat 20.0 [0,43] (1/5;u3) | gen 3.4 [0,11] (1/29;u0) | all 5.6 [0,13] (2/36;u4)
+  Skepthical                     cit 0.0 [0,0] (0/5;u5) | num 0.0 [0,0] (0/1;u0) | mat 0.0 [0,0] (0/11;u11) | gen 3.4 [0,8] (3/89;u0) | all 2.8 [0,7] (3/106;u16)
+  Claude Code (structured)       cit 0.0 [0,0] (0/1;u1) | num 9.1 [0,27] (1/11;u6) | mat 0.0 [0,0] (0/5;u5) | gen 2.5 [0,8] (1/40;u0) | all 3.5 [0,9] (2/57;u12)
+  Claude Code (free-form)        cit 0.0 [0,0] (0/1;u1) | num 50.0 [0,100] (1/2;u1) | mat 50.0 [50,50] (2/4;u1) | gen 4.5 [1,9] (4/88;u0) | all 7.4 [2,14] (7/95;u3)
+  Stanford Agentic Reviewer      cit 0.0 [0,0] (0/3;u3) | num 12.5 [0,33] (1/8;u7) | mat 55.6 [30,88] (5/9;u4) | gen 0.0 [0,0] (0/72;u0) | all 6.5 [2,12] (6/92;u14)
+  OpenReviewer-8B                cit -- | num -- | mat -- | gen 40.6 [24,59] (13/32;u0) | all 40.6 [24,59] (13/32;u0)
+  PaperAudit-Bench Deep          cit 0.0 [0,0] (0/2;u2) | num 0.0 [0,0] (0/4;u3) | mat 0.0 [0,0] (0/1;u1) | gen 66.7 [25,100] (4/6;u0) | all 30.8 [8,47] (4/13;u6)
+  single-LLM mathematics FP, free-form: --, 50.0 (9/18), --; macro-average 50.0
+  single-LLM mathematics FP, structured: 50.0 (2/4), 15.4 (2/13), 20.0 (1/5); macro-average 28.5
+(4) Claude Code run metadata
+  Claude Code (structured): 60 runs, turns median 9.0, max 26, >=15 turns 11/60; per-paper mean wall-clock spread 2.8x
+  Claude Code (free-form): 60 runs, turns median 6.0, max 8, >=15 turns 0/60; per-paper mean wall-clock spread 1.8x
+(5) Section 3.1 comparisons: Delta = rate(a) - rate(b) in pp, p = Pr(sign reverses), paired paper bootstrap B=10,000 seed 20260506
+  Structured vs free-form, Claude Opus 4.7   tota +16.6 p=0.000 | cita +11.6 p=0.060 | nume +23.3 p=0.004 | math +22.5 p=0.000 | gene  +9.3 p=0.135
+  Structured vs free-form, GPT-5.5           tota  +0.8 p=0.388 | cita  -4.0 p=0.322 | nume  -0.5 p=0.464 | math  +1.8 p=0.410 | gene  +6.1 p=0.117
+  Structured vs free-form, Gemini 3.1 Pro    tota +25.4 p=0.000 | cita  +6.7 p=0.034 | nume +44.4 p=0.000 | math +42.9 p=0.000 | gene  +8.9 p=0.161
+  Structured vs free-form, Claude Code       tota +32.2 p=0.000 | cita +17.8 p=0.014 | nume +48.9 p=0.000 | math +52.4 p=0.000 | gene +11.1 p=0.171
+  Claude Code vs single call, free-form      tota  -7.9 p=0.016 | cita  -0.4 p=0.418 | nume -13.6 p=0.032 | math -13.5 p=0.082 | gene  -4.4 p=0.109
+  Claude Code vs single call, structured     tota  +7.8 p=0.031 | cita  +5.7 p=0.124 | nume +12.0 p=0.037 | math +16.4 p=0.041 | gene  -2.6 p=0.358
+  Skepthical vs Claude Code, structured      tota  +9.6 p=0.000 | cita +20.0 p=0.033 | nume -11.1 p=0.043 | math  +2.4 p=0.440 | gene +26.7 p=0.007
+  Skepthical vs GPT-5.5, structured          tota  +9.3 p=0.001 | cita +28.5 p=0.000 | nume  +0.5 p=0.475 | math  -1.8 p=0.436 | gene  +9.5 p=0.105
+  Skepthical 70.6 vs concise structured GPT-5.5 68.9: paired Delta +1.7 p=0.334 (n=177)
+(6) detection rate % by severity, pooled over error types (S1 / S2 / S3)
+  Claude Opus 4.7 (free-form)     32.8 /  33.3 /  45.1
+  GPT-5.5 (free-form)             44.1 /  62.9 /  75.0
+  Gemini 3.1 Pro (free-form)      15.3 /   6.5 /  14.3
+  Claude Opus 4.7 (structured)    58.2 /  42.6 /  60.4
+  GPT-5.5 (structured)            57.1 /  51.6 /  76.4
+  Gemini 3.1 Pro (structured)     33.9 /  30.6 /  48.2
+  Skepthical                      62.7 /  66.1 /  83.9
+  Claude Code (structured)        62.7 /  48.4 /  73.2
+  Claude Code (free-form)         25.4 /  24.2 /  37.5
+  Stanford Agentic Reviewer       33.9 /  35.5 /  53.6
+  OpenReviewer-8B                  0.0 /   0.0 /   3.6
+  PaperAudit-Bench Deep            3.4 /   1.6 /   1.8
+(7) Section 3.2 false-positive summaries
+  systems other than the open-weights reviewers with FP rate < 9%: 10/10; above: none
+  systems other than the open-weights reviewers with FP rate < 10%: 10/10; above: none
+  frontier-model systems pooled, citations  : 0/14 = 0.0% false; 0.0% of their 41 false positives
+  frontier-model systems pooled, numerics   : 3/55 = 5.5% false; 7.3% of their 41 false positives
+  frontier-model systems pooled, mathematics: 21/69 = 30.4% false; 51.2% of their 41 false positives
+  frontier-model systems pooled, general    : 17/651 = 2.6% false; 41.5% of their 41 false positives
+  Claude Opus 4.7 free-form -> structured: general-issue flags 91 -> 63 (x0.69); false positives 1 -> 4 on 97 -> 77 flags
+  GPT-5.5         free-form -> structured: general-issue flags 98 -> 40 (x0.41); false positives 11 -> 2 on 127 -> 59 flags
+  Gemini 3.1 Pro  free-form -> structured: general-issue flags 41 -> 29 (x0.71); false positives 3 -> 2 on 43 -> 36 flags
+  Claude Code     free-form -> structured: general-issue flags 88 -> 40 (x0.45); false positives 7 -> 2 on 95 -> 57 flags
+
+################ ml ################
+(1) paired paper bootstrap, Delta = Skepthical - other (pp), Pr(Delta<=0)
+  vs structured GPT-5.5      : total -4.4 (Pr=0.918) | cit -4.4 (Pr=0.783) | num +0.0 (Pr=0.653) | math -13.3 (Pr=0.979) | gen +0.0 (Pr=0.588)
+  vs free-form GPT-5.5       : total +12.8 (Pr=0.000) | cit +24.4 (Pr=0.005) | num +11.1 (Pr=0.022) | math +0.0 (Pr=0.578) | gen +15.6 (Pr=0.001)
+  vs Claude Code structured  : total +3.3 (Pr=0.288) | cit -6.7 (Pr=0.863) | num +4.4 (Pr=0.363) | math +6.7 (Pr=0.340) | gen +8.9 (Pr=0.147)
+  vs structured Opus 4.7     : total +4.4 (Pr=0.165) | cit -4.4 (Pr=0.792) | num +6.7 (Pr=0.234) | math +0.0 (Pr=0.552) | gen +15.6 (Pr=0.017)
+(2) detection rate % at S1/S2/S3 per system and error type ('^' strictly increasing)
+  Claude Opus 4.7 (free-form)    cit 0/20/20   num 40/53/73^  mat 40/27/53   gen 67/47/87 
+  GPT-5.5 (free-form)            cit 20/27/40^  num 47/93/100^  mat 73/80/80   gen 80/33/93 
+  Gemini 3.1 Pro (free-form)     cit 0/0/0   num 7/0/7   mat 0/7/27^  gen 40/7/40 
+  Claude Opus 4.7 (structured)   cit 27/67/80^  num 87/87/80   mat 60/87/87   gen 73/53/80 
+  GPT-5.5 (structured)           cit 47/40/87   num 80/100/93   mat 87/93/93   gen 80/73/100 
+  Gemini 3.1 Pro (structured)    cit 7/20/53^  num 67/60/47   mat 67/53/67   gen 67/33/73 
+  Skepthical                     cit 40/47/73^  num 73/100/100   mat 73/80/80   gen 93/60/100 
+  Claude Code (structured)       cit 47/47/87   num 87/93/80   mat 73/67/73   gen 73/73/80 
+  Claude Code (free-form)        cit 7/13/27^  num 27/40/60^  mat 20/33/20   gen 67/27/73 
+  OpenReviewer-8B                cit 0/0/0   num 7/0/0   mat 0/0/0   gen 7/0/7 
+  PaperAudit-Bench Deep          cit 0/0/0   num 13/0/0   mat 0/0/7   gen 0/0/13 
+  pooled non-floor systems, citations  : S1 24 S2 35 S3 58   S2<S1 in 1/8 systems
+  pooled non-floor systems, numerics   : S1 63 S2 78 S3 79   S2<S1 in 1/8 systems
+  pooled non-floor systems, mathematics: S1 62 S2 65 S3 69   S2<S1 in 3/8 systems
+  pooled non-floor systems, general    : S1 75 S2 50 S3 86   S2<S1 in 7/8 systems
+(3) clean-copy FP rate % [95% CI] (FP/flags; u = unadjudicated in denominator)
+  Claude Opus 4.7 (free-form)    cit 0.0 [0,0] (0/4;u4) | num 25.0 [0,43] (2/8;u5) | mat 50.0 [0,100] (1/2;u1) | gen 3.4 [0,9] (3/88;u0) | all 5.9 [2,11] (6/102;u10)
+  GPT-5.5 (free-form)            cit 0.0 [0,0] (0/1;u1) | num 14.3 [0,100] (1/7;u5) | mat 66.7 [17,93] (8/12;u4) | gen 2.7 [0,6] (3/111;u0) | all 9.2 [3,16] (12/131;u10)
+  Gemini 3.1 Pro (free-form)     cit -- | num 50.0 [0,100] (1/2;u1) | mat 50.0 [0,100] (1/2;u1) | gen 0.0 [0,0] (0/53;u0) | all 3.5 [0,9] (2/57;u2)
+  Claude Opus 4.7 (structured)   cit 0.0 [0,0] (0/3;u3) | num 12.5 [0,43] (1/8;u5) | mat 83.3 [0,100] (5/6;u0) | gen 6.3 [0,16] (5/79;u0) | all 11.5 [3,21] (11/96;u8)
+  GPT-5.5 (structured)           cit 0.0 [0,0] (0/2;u2) | num 60.0 [0,100] (3/5;u1) | mat 75.0 [20,100] (6/8;u1) | gen 0.0 [0,0] (0/54;u0) | all 13.0 [3,24] (9/69;u4)
+  Gemini 3.1 Pro (structured)    cit -- | num 20.0 [0,25] (1/5;u2) | mat 87.5 [67,100] (7/8;u0) | gen 6.5 [0,16] (2/31;u0) | all 22.7 [12,33] (10/44;u2)
+  Skepthical                     cit 0.0 [0,0] (0/2;u2) | num 0.0 [0,0] (0/8;u5) | mat 0.0 [0,0] (0/5;u5) | gen 4.8 [0,11] (4/84;u0) | all 4.0 [0,10] (4/99;u12)
+  Claude Code (structured)       cit 0.0 [0,0] (0/3;u3) | num 14.3 [0,38] (1/7;u4) | mat 75.0 [0,100] (3/4;u1) | gen 1.7 [0,5] (1/59;u0) | all 6.8 [1,13] (5/73;u8)
+  Claude Code (free-form)        cit 0.0 [0,0] (0/1;u1) | num 66.7 [0,100] (2/3;u1) | mat 80.0 [0,100] (4/5;u1) | gen 2.7 [0,9] (3/112;u0) | all 7.4 [2,15] (9/121;u3)
+  OpenReviewer-8B                cit -- | num -- | mat -- | gen 18.5 [4,36] (5/27;u0) | all 18.5 [4,36] (5/27;u0)
+  PaperAudit-Bench Deep          cit 0.0 [0,0] (0/2;u2) | num 0.0 [0,0] (0/2;u1) | mat -- | gen 72.2 [48,93] (13/18;u0) | all 59.1 [39,79] (13/22;u3)
+  single-LLM mathematics FP, free-form: 50.0 (1/2), 66.7 (8/12), 50.0 (1/2); macro-average 55.6
+  single-LLM mathematics FP, structured: 83.3 (5/6), 75.0 (6/8), 87.5 (7/8); macro-average 81.9
+(4) Claude Code run metadata
+  Claude Code (structured): 60 runs, turns median 5.0, max 21, >=15 turns 1/60; per-paper mean wall-clock spread 2.0x
+  Claude Code (free-form): 60 runs, turns median 4.0, max 8, >=15 turns 0/60; per-paper mean wall-clock spread 1.5x
+(5) Section 3.1 comparisons: Delta = rate(a) - rate(b) in pp, p = Pr(sign reverses), paired paper bootstrap B=10,000 seed 20260506
+  Structured vs free-form, Claude Opus 4.7   tota +28.3 p=0.000 | cita +44.4 p=0.000 | nume +28.9 p=0.000 | math +37.8 p=0.000 | gene  +2.2 p=0.425
+  Structured vs free-form, GPT-5.5           tota +17.2 p=0.000 | cita +28.9 p=0.014 | nume +11.1 p=0.026 | math +13.3 p=0.000 | gene +15.6 p=0.008
+  Structured vs free-form, Gemini 3.1 Pro    tota +40.0 p=0.000 | cita +26.7 p=0.000 | nume +53.3 p=0.000 | math +51.1 p=0.000 | gene +28.9 p=0.000
+  Structured vs free-form, Claude Code       tota +38.9 p=0.000 | cita +44.4 p=0.000 | nume +44.4 p=0.000 | math +46.7 p=0.000 | gene +20.0 p=0.002
+  Claude Code vs single call, free-form      tota  -9.4 p=0.010 | cita  +2.2 p=0.423 | nume -13.3 p=0.091 | math -15.6 p=0.082 | gene -11.1 p=0.026
+  Claude Code vs single call, structured     tota  +1.1 p=0.425 | cita  +2.2 p=0.436 | nume  +2.2 p=0.459 | math  -6.7 p=0.287 | gene  +6.7 p=0.243
+  Skepthical vs Claude Code, structured      tota  +3.3 p=0.268 | cita  -6.7 p=0.222 | nume  +4.4 p=0.363 | math  +6.7 p=0.312 | gene  +8.9 p=0.142
+  Skepthical vs GPT-5.5, structured          tota  -4.4 p=0.107 | cita  -4.4 p=0.317 | nume  +0.0 p=0.500 | math -13.3 p=0.053 | gene  +0.0 p=0.500
+  Skepthical 76.7 vs concise structured GPT-5.5 76.1: paired Delta +0.6 p=0.456 (n=180)
+(6) detection rate % by severity, pooled over error types (S1 / S2 / S3)
+  Claude Opus 4.7 (free-form)     36.7 /  36.7 /  58.3
+  GPT-5.5 (free-form)             55.0 /  58.3 /  78.3
+  Gemini 3.1 Pro (free-form)      11.7 /   3.3 /  18.3
+  Claude Opus 4.7 (structured)    61.7 /  73.3 /  81.7
+  GPT-5.5 (structured)            73.3 /  76.7 /  93.3
+  Gemini 3.1 Pro (structured)     51.7 /  41.7 /  60.0
+  Skepthical                      70.0 /  71.7 /  88.3
+  Claude Code (structured)        70.0 /  70.0 /  80.0
+  Claude Code (free-form)         30.0 /  28.3 /  45.0
+  OpenReviewer-8B                  3.3 /   0.0 /   1.7
+  PaperAudit-Bench Deep            3.3 /   0.0 /   5.0
+(7) Section 3.2 false-positive summaries
+  systems other than the open-weights reviewers with FP rate < 9%: 5/9; above: GPT-5.5 (free-form) 9.2, Claude Opus 4.7 (structured) 11.5, GPT-5.5 (structured) 13.0, Gemini 3.1 Pro (structured) 22.7
+  systems other than the open-weights reviewers with FP rate < 10%: 6/9; above: Claude Opus 4.7 (structured) 11.5, GPT-5.5 (structured) 13.0, Gemini 3.1 Pro (structured) 22.7
+  frontier-model systems pooled, citations  : 0/16 = 0.0% false; 0.0% of their 68 false positives
+  frontier-model systems pooled, numerics   : 12/53 = 22.6% false; 17.6% of their 68 false positives
+  frontier-model systems pooled, mathematics: 35/52 = 67.3% false; 51.5% of their 68 false positives
+  frontier-model systems pooled, general    : 21/671 = 3.1% false; 30.9% of their 68 false positives
+  Claude Opus 4.7 free-form -> structured: general-issue flags 88 -> 79 (x0.90); false positives 6 -> 11 on 102 -> 96 flags
+  GPT-5.5         free-form -> structured: general-issue flags 111 -> 54 (x0.49); false positives 12 -> 9 on 131 -> 69 flags
+  Gemini 3.1 Pro  free-form -> structured: general-issue flags 53 -> 31 (x0.58); false positives 2 -> 10 on 57 -> 44 flags
+  Claude Code     free-form -> structured: general-issue flags 112 -> 59 (x0.53); false positives 9 -> 5 on 121 -> 73 flags

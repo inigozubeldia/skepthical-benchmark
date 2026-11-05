@@ -1,0 +1,180 @@
+{
+  "paper_id": "2604.20975",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags the characterization of Van Haasteren & Vallisneri (2014) as 'frequentist' as contradicted or mischaracterized. No mention of a method-category mis-attribution for that citation appears anywhere in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review praises the use of realistic PTA noise models and ENTERPRISE but does not challenge the claim that van Haasteren & Vallisneri (2014) is a 'frequentist approach' or otherwise contest that citation-specific methodology characterization.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer praises the use of the noise covariance models but fails to notice or challenge the specific 'frequentist' mis-characterization of the Bayesian/Gaussian-process methodology in the cited van Haasteren paper.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's numerical audit checks the SKA pulsar count (130) and confirms it matches Table II, but never flags the IPTA DR3-like prose value of 1300 pulsars as inconsistent with the table value of 130. The injected discrepancy went undetected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag any inconsistency involving the IPTA DR3-like pulsar count of 1300 versus 130. The only pulsar-count check discussed is for the SKA array (124 + 6 = 130), which is unrelated to the injected IPTA prose/table mismatch.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer checks the pulsar count for the SKA-like PTA in Section VI and Table II, but fails to notice the 1300 vs 130 discrepancy in the prose regarding the IPTA DR3-like configuration.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Major issue 3: 'In Sec. III, Eq. 10 defines the expected number of detectable binaries... The denominator of the geometric volume element contains a factor of $(1+z)^3$. This is mathematically inconsistent with the parent formulation in Eq. 9, which correctly uses $(1+z)^2$.' And in the math audit: '[✖] Expected number of zombie binaries yielding an SNR above threshold... The denominator contains $(1+z)^3$. This contradicts the correctly derived $(1+z)^2$ in Eq. (7) and Eq. (9).'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Major issue 3: 'In Sec. III, Eq. 10 defines the expected number of detectable binaries... The denominator of the geometric volume element contains a factor of $(1+z)^3$. This is mathematically inconsistent with the parent formulation in Eq. 9, which correctly uses $(1+z)^2$.' And in the math audit: '[✖] Expected number of zombie binaries yielding an SNR above threshold... The denominator contains $(1+z)^3$. This contradicts the correctly derived $(1+z)^2$ in Eq. (7) and Eq. (9).'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the (1+z)^3 vs (1+z)^2 inconsistency in the SNR-thresholded zombie count equation, which is precisely the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Typographical error in the expected number integral scaling**\n    In Sec. III, Eq. 10 defines the expected number of detectable binaries $\\langle N_z \\rangle$. The denominator of the geometric volume element contains a factor of $(1+z)^3$. This is mathematically inconsistent with the parent formulation in Eq. 9, which correctly uses $(1+z)^2$ to account for the comoving volume derivative and time dilation.\n\nThe denominator contains $(1+z)^3$. This contradicts the correctly derived $(1+z)^2$ in Eq. (7) and Eq. (9).",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the edited exponent in Eq. (N-zombie-SNR), contrasts it with the $(1+z)^2$ factor elsewhere, and states the cross-equation inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "In Sec. III, Eq. 10 defines the expected number of detectable binaries <Nz>. The denominator of the geometric volume element contains a factor of (1+z)^3. This is mathematically inconsistent with the parent formulation in Eq. 9, which correctly uses (1+z)^2",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the typographical error in the exponent of the volume element in Equation 10 and notes its inconsistency with the earlier equations.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Major issue 1: 'The Abstract states: \"...the probability of detecting such systems remains low across all PTA datasets considered, including the upcoming Square Kilometer Array observatory, which is not expected to achieve sufficient sensitivity...\" However, Sec. VI explicitly reports that for the SKA-like PTA, the probability of detecting at least one zombie binary is ≥90% for all three population models...'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Major issue 1: 'The Abstract states: \"...the probability of detecting such systems remains low across all PTA datasets considered, including the upcoming Square Kilometer Array observatory, which is not expected to achieve sufficient sensitivity...\" However, Sec. VI explicitly reports that for the SKA-like PTA, the probability of detecting at least one zombie binary is ≥90% for all three population models...'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies and quotes the injected abstract sentence as directly contradicting the Results and Discussion sections, matching the injected internal contradiction perfectly.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Direct contradiction between the Abstract and the Results/Conclusion regarding SKA detectability**\n    The Abstract states: \"...the probability of detecting such systems remains low across all PTA datasets considered, including the upcoming Square Kilometer Array observatory, which is not expected to achieve sufficient sensitivity to host zombie binaries with a signal-to-noise ratio exceeding 3...\" However, Sec. VI explicitly reports that for the SKA-like PTA, the probability of detecting at least one zombie binary is $\\ge 90\\%$ for all three population models, and Sec. VII reiterates that \"a few bright zombie binaries are likely to be detected in future SKA datasets\".\n\nThe Abstract states the SKA is not expected to detect these sources, whereas Sec. VII concludes that for the SKA sensitivity considered, the probability is greater than 90% and \"a few bright zombie binaries are likely to be detected\". This is a direct qualitative contradiction.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the injected abstract sentence and contrasts it with the body’s SKA-positive results, matching the exact internal contradiction introduced.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract states: \"...the probability of detecting such systems remains low across all PTA datasets considered, including the upcoming Square Kilometer Array observatory, which is not expected to achieve sufficient sensitivity to host zombie binaries with a signal-to-noise ratio exceeding 3...\" However, Sec. VI explicitly reports that for the SKA-like PTA, the probability of detecting at least one zombie binary is >= 90%",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the direct qualitative contradiction between the Abstract's claim of insufficient sensitivity and the Results' projection of high detection probability for the SKA.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 33.069138,
+  "total_cost_usd": null,
+  "total_input_tokens": 16488,
+  "total_output_tokens": 3261,
+  "escalation_count": 0,
+  "notes": null
+}

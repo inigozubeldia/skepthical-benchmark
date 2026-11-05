@@ -1,0 +1,230 @@
+{
+  "paper_id": "2604.20975",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-c3f92da0238e",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The paper conflates an SNR>3 presence criterion with actual PTA detection thresholds, overstates SKA prospects, and does not present main results at correct SNR threshold.",
+          "excerpt": "but SNR>3 is far below standard PTA detection thresholds for continuous waves (typically SNR≳5–8 with a trials-factor penalty), and the paper only briefly notes that \"around 50% of bright systems reach SNR > 5\" (Sec. VI) without recomputing P(N_z>0) at that threshold. This conflates \"presence of signal in data\" with \"detectable individual source\" and likely overstates the SKA prospects in the Abstract (\"a few zombie binaries with a signal-to-noise ratio exceeding 3\"), which a reader will reasonably parse as detection prospects."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly sets SNRth=3 and acknowledges 'around 50% of bright systems to reach SNR > 5' but does not recompute P(Nz>0) at SNR>5. However, the paper frames SNR>3 as a 'presence' criterion rather than a formal detection claim, and the abstract says 'signal-to-noise ratio exceeding 3' without claiming formal detection, so the conflation concern is partially but not fully resolved by the paper's own framing.",
+            "cost_usd": 0.00484326
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does use an explicit presence threshold of 'In the following, we set SNRth = 3' and headlines that SKA could have 'a few zombie binaries with a signal-to-noise ratio exceeding 3 in its data.' But it also explicitly cautions that 'to confidently detect a zombie binary, it is not enough to have a high SNR' and that 'their confident identification might be challenging,' so the alleged conflation is only partly supported by the text.",
+            "cost_usd": 0.0121587
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses an SNR threshold of 3 for its main results and notes that \"around 50% of bright systems to reach SNR > 5\", but does not recompute or present the main probability P(Nz>0) results at this higher, more realistic detection threshold.",
+            "cost_usd": 0.0021836399999999997
+          }
+        ],
+        "cost_usd": 0.0191856
+      },
+      {
+        "flag_id": "fp-88591a211564",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section V states that the efficiencies 'neglect the presence of potential intrinsic red noise components ... and do not take into account the spatially-correlated nature of the GW background noise,' then only asserts that 'these assumptions should not have strong impact on our results.' The paper does not quantify this omission, even though Section VI says the bright zombies are 'generally found around 10 − 20 nanohertz,' near the band where red noise is discussed.",
+        "evidence": {
+          "claim": "The detection-efficiency and SNR grids neglect intrinsic red noise and GWB self-noise, which could be dominant at the frequencies considered; omission is unjustified and unquantified.",
+          "excerpt": "The detection-efficiency grids (Sec. V, Fig. 3) and SNR computation neglect intrinsic red noise (spin noise, DM variations) and the spatially correlated GWB component of the noise covariance, with the justification that these are \"sub-dominant... at the frequencies where zombie binaries are found\" (Sec. V). This justification is asserted, not demonstrated, and is in tension with the author's own finding that the distribution of bright pulsar-term frequencies peaks at ~10–14 nHz (Fig. 5), exactly the band where the GWB and at least some pulsars' intrinsic red noise are dominant."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper asserts 'these red noise components typically have a sub-dominant contribution to PTA sensitivities at the frequencies where zombie binaries are found (see Section VI) [53, 54]' but does not demonstrate this quantitatively for the 10-14 nHz band where zombie binaries peak per Figure 5. The justification is asserted via external references rather than shown explicitly, leaving the concern partially unresolved.",
+            "cost_usd": 0.00484326
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section V states that the efficiencies 'neglect the presence of potential intrinsic red noise components ... and do not take into account the spatially-correlated nature of the GW background noise,' then only asserts that 'these assumptions should not have strong impact on our results.' The paper does not quantify this omission, even though Section VI says the bright zombies are 'generally found around 10 − 20 nanohertz,' near the band where red noise is discussed.",
+            "cost_usd": 0.0121587
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly neglects intrinsic red noise and spatial correlations, merely asserting that \"these assumptions should not have strong impact on our results, since these red noise components typically have a sub-dominant contribution\" without quantifying the effect.",
+            "cost_usd": 0.0021836399999999997
+          }
+        ],
+        "cost_usd": 0.0191856
+      },
+      {
+        "flag_id": "fp-d55c8b66e2a3",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The normalization is fixed, not propagated: 'Using Phinney theorem [48], we set hc(f = 1/year) = 3 × 10−15.' Although the paper explores three merger-density models ('we follow [47] and consider three different sets of parameters'), it does not propagate uncertainty in the PTA-measured background amplitude into the headline zombie counts.",
+        "evidence": {
+          "claim": "Headline values for the number of predicted zombies do not properly propagate uncertainty in the PTA-measured GW background amplitude or sensitivity to high-mass population cutoff.",
+          "excerpt": "The headline numbers (2.3, 6.1, 5.7 zombies for SKA) therefore inherit an uncertainty that is never propagated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper fixes hc(f=1/year)=3×10^-15 for all models and acknowledges uncertainty via three population models, but does not propagate uncertainty in the measured GWB amplitude itself into the headline numbers. The three models capture population uncertainty but not observational amplitude uncertainty, which is a related but distinct quantity.",
+            "cost_usd": 0.00484326
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The normalization is fixed, not propagated: 'Using Phinney theorem [48], we set hc(f = 1/year) = 3 × 10−15.' Although the paper explores three merger-density models ('we follow [47] and consider three different sets of parameters'), it does not propagate uncertainty in the PTA-measured background amplitude into the headline zombie counts.",
+            "cost_usd": 0.0121587
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper fixes the population models to a single GWB amplitude, stating \"we set h_c(f = 1/year) = 3 \\times 10^{-15}\", and does not propagate the observational uncertainty of this amplitude into the final predicted number of zombie binaries.",
+            "cost_usd": 0.0021836399999999997
+          }
+        ],
+        "cost_usd": 0.0191856
+      },
+      {
+        "flag_id": "fp-5245799c84bb",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges 'the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic' but explicitly defers quantification: 'The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.' Per rule R1, mere acknowledgement without quantification of the magnitude of optimism is a confirmed issue.",
+        "evidence": {
+          "claim": "The analysis uses inconsistent and unrealistic pulsar-distance assignments, and SNR calculations optimistically assume phase coherence not justified by present uncertainties.",
+          "excerpt": "the SNR computation in Sec. V uses Eq. 12 with timing residuals R_z^(a) that depend on the pulsar-term phase, which is exquisitely sensitive to D_a (uncertainties ≫ wavelength scramble pulsar-term coherence). The Discussion concedes \"we do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic,\" but the magnitude of this optimism is never quantified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges 'the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic' but explicitly defers quantification: 'The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.' Per rule R1, mere acknowledgement without quantification of the magnitude of optimism is a confirmed issue.",
+            "cost_usd": 0.00484326
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The setup assigns ad hoc distances where missing: 'For pulsars whose distances to Earth could not be estimated, we randomly assign them a distance from 0.5 to 2.5 kiloparsecs using uniform weighting.' The paper also concedes that 'the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic,' and says 'The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work,' so the optimism is acknowledged but not quantified.",
+            "cost_usd": 0.0121587
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper admits that \"the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic,\" but defers the quantitative impact of this optimism to future work.",
+            "cost_usd": 0.0021836399999999997
+          }
+        ],
+        "cost_usd": 0.0191856
+      },
+      {
+        "flag_id": "fp-0037a9958ab7",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The approximation is asserted rather than quantified: 'it is straightforward to verify that for the range of binary intrinsic parameters considered in this study, 2T(max) − τ(min)c ≈ 2T(max).' The only further support is the footnote that 'for binaries with Mc ≪ 108M⊙, this approximation no longer holds,' but the paper does not show the size of the approximation error in the relevant mass range.",
+        "evidence": {
+          "claim": "Binary inclusion time window approximation is asserted but not quantitatively justified; for relevant masses the minimum coalescence time is not negligible compared to the full interval.",
+          "excerpt": "The text claims (Sec. III, footnote 2 and surrounding paragraph) that 2T^(max) − τ_c^(min) ≈ 2T^(max) for the relevant chirp mass range, but for M_c,r ≈ 10⁹ M_⊙ Eq. 8 with f_th=3×10⁻⁷ Hz and ISCO frequency well above f_th gives τ_c^(min) ~ a few × 10² yr, which is not negligible compared to 2T^(max) ~ 2×10⁴ yr at the few-percent level. The approximation is benign for the rate calculation but the paper does not show this."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper addresses this in footnote 2, noting the approximation fails only for Mc << 10^8 solar masses, 'such low-mass systems are associated with a zero detection efficiency for the PTAs considered in this work' and thus 'does not contribute to the evaluation of Eq. 10.' For Mc ~ 10^9 solar masses, τc^(min) of a few hundred years is indeed small (~1-2%) compared to 2T^(max) ~ 2×10^4 yr, making the approximation benign as the footnote implies.",
+            "cost_usd": 0.00484326
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The approximation is asserted rather than quantified: 'it is straightforward to verify that for the range of binary intrinsic parameters considered in this study, 2T(max) − τ(min)c ≈ 2T(max).' The only further support is the footnote that 'for binaries with Mc ≪ 108M⊙, this approximation no longer holds,' but the paper does not show the size of the approximation error in the relevant mass range.",
+            "cost_usd": 0.0121587
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper relies on the stated approximation, noting \"it is straightforward to verify that for the range of binary intrinsic parameters considered in this study, 2T^(max) - \\tau_c^(min) \\approx 2T^(max)\", but does not quantitatively demonstrate or justify the negligible impact of this approximation in the text.",
+            "cost_usd": 0.0021836399999999997
+          }
+        ],
+        "cost_usd": 0.0191856
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.095928
+  },
+  "extractor_cost_usd": 0.025953999999999935,
+  "total_cost_usd": 0.12188199999999993
+}

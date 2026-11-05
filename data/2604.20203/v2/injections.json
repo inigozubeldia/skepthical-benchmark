@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "sample701.tex",
+    "original_text": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using binomial statistics and adopt a flat prior on the conditional frequency.",
+    "injected_text": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using a maximum likelihood estimator and adopt a flat prior on the conditional frequency.",
+    "rationale": "The cited papers (Bryan & Lee 2024 and Zhu 2024) use binomial statistics with a flat (uniform) prior — a Bayesian posterior approach — not a maximum likelihood estimator; swapping 'binomial statistics' to 'a maximum likelihood estimator' mis-categorises the statistical methodology at the method-category level while keeping the topic (modelling detection rates) recognisably correct.",
+    "ground_truth_description": "The statistical method attributed to the two cited papers was changed from 'binomial statistics' (the correct Bayesian binomial posterior approach used in those works) to 'a maximum likelihood estimator', which is a different statistical methodology category.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "2024ApJ...968L..25B",
+      "injected_cite_key": "2024ApJ...968L..25B",
+      "claim_sentence_verbatim": "Referring to previous studies \\citep{2024ApJ...968L..25B,2024RAA....24d5013Z}, we model the detections using binomial statistics and adopt a flat prior on the conditional frequency.",
+      "section_location": "Sec. 3.1",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "sample701.tex",
+    "original_text": "inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.95\\%",
+    "injected_text": "inner sub-Neptunes and cold Jupiters exhibit a significant positive correlation for metal-rich systems with a confidence level of 99.59\\%",
+    "rationale": "Swapping adjacent digits 9↔5 in '99.95' to '99.59' in the abstract creates a mismatch with the correct value '99.95%' that appears in the Results section body, triggering the abstract_vs_body_match predicate at major severity.",
+    "ground_truth_description": "The confidence level for the sub-Neptune–cold Jupiter correlation in metal-rich systems is changed from 99.95% to 99.59% in the abstract only; the body still correctly reports 99.95%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "99.95",
+      "value_after_raw": "99.59",
+      "value_before_float": 99.95,
+      "value_after_float": 99.59,
+      "location_cue": "confidence level of 99.95\\%, whereas this correlation is absent for systems",
+      "paired_location": "Section 3.2 (sec.result.FCJ_rich): 'P rm (CJ|SN, [Fe/H]>0) is larger than P rm (CJ, [Fe/H]>0) for 9,995 times, corresponding to a positive sub-Neptune-cold Jupiter correlation in metal-rich systems with a confidence level of 99.95\\%'",
+      "quantity_label": "confidence level of sub-Neptune–cold Jupiter positive correlation in metal-rich systems",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "sample701.tex",
+    "original_text": "    f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+    "injected_text": "    f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b+1},",
+    "rationale": "Replacing the exponent `b-1` with `b+1` in the Beta distribution PDF produces a structurally similar but algebraically incorrect formula that Wolfram symbolic evaluation would refute against the canonical Beta distribution identity, as the correct kernel is P^(a-1)(1-P)^(b-1).",
+    "ground_truth_description": "The exponent of (1-P) in the Beta distribution PDF was changed from the correct `b-1` to the incorrect `b+1`, making the displayed posterior distribution formula wrong.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3.1 (Section sec.results.method), second displayed equation",
+      "original_fragment_latex": "(1-P)^{b-1}",
+      "injected_fragment_latex": "(1-P)^{b+1}",
+      "full_equation_latex_before": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b-1},",
+      "full_equation_latex_after": "f (P;a,b) = \\frac{1}{B(a,b)} P^{a-1} (1-P)^{b+1},",
+      "term_role": "identity replacement",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "sample701.tex",
+    "original_text": "Thus we used the completeness maps in Figure A1 of \\citep{2024ApJ...968L..25B} to determine the average completeness for the set of systems considered.",
+    "injected_text": "Thus we used the completeness maps in Figure A1 of \\citep{2024ApJ...968L..25B} to determine the average completeness for the set of systems considered (we verified that computing individual completeness per system rather than an average yields consistent conditional frequencies within 1\\%).",
+    "rationale": "The inserted parenthetical asserts an empirical verification — that per-system completeness and average completeness agree within 1% — that is nowhere reported in the paper's Results, Appendix, or any figure, constituting a phantom evidence sub-claim for a methodological choice.",
+    "ground_truth_description": "A parenthetical was added to the completeness-map sentence in Sec. 3.1 asserting that per-system vs. average completeness calculations were compared and agreed within 1%, but this comparison is not reported anywhere else in the paper.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 3.1",
+      "affected_span_verbatim": "Thus we used the completeness maps in Figure A1 of \\citep{2024ApJ...968L..25B} to determine the average completeness for the set of systems considered."
+    },
+    "proposer_agent": "injector.general.S2.t3.v2"
+  }
+]

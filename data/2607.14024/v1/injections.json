@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "text/01-Introduction.tex",
+    "original_text": "increasing by 16\\% in 2024~\\cite{PARASCHIV2023276}",
+    "injected_text": "increasing by 18\\% in 2024~\\cite{PARASCHIV2023276}",
+    "rationale": "Because the paper lacks quantitative claims with explicitly reported standard deviations, we perturb a cited growth rate by 2 percentage points (from 16% to 18%) to emulate a small, 1-2 sigma-equivalent quantitative mis-quote that a careful reader would flag as partially supported.",
+    "ground_truth_description": "Perturbed the cited growth rate for wind and solar power from 16% to 18%.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "PARASCHIV2023276",
+      "injected_cite_key": "PARASCHIV2023276",
+      "claim_sentence_verbatim": "Accordingly, global power production from renewable energies has more than doubled in the last ten years, from 1,851,114~MW to 4,448,051~MW in 2024 worldwide~\\cite{Irena25_Energy} with wind and solar being the fastest-growing areas increasing by 16\\% in 2024~\\cite{PARASCHIV2023276}.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "text/02-Related-Work.tex",
+    "original_text": "Only 4.4\\% of the reviewed papers provide the source code",
+    "injected_text": "Only 4 (14.4\\%) of the 90 reviewed papers provide the source code",
+    "rationale": "The paper does not explicitly state base-percent-result triplets, so I expanded an existing percentage to include the implicit base (90) and count (4), whilst introducing a typo in the percentage (14.4% instead of 4.4%) to create a major percent_of failure.",
+    "ground_truth_description": "Expanded a percentage to include its base and count, but injected a typo into the percentage (14.4% instead of 4.4%) so the arithmetic no longer balances.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "4.4\\%",
+      "value_after_raw": "14.4\\%",
+      "value_before_float": 4.4,
+      "value_after_float": 14.4,
+      "location_cue": "Only 4 (14.4\\%) of the 90 reviewed papers provide the source code",
+      "paired_location": null,
+      "quantity_label": "percentage of reviewed papers providing source code",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "text/04-Approach.tex",
+    "original_text": "    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+    "injected_text": "    \\mathcal{F}_{n}^{*}\n= \\arg\\max_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+    "rationale": "The paper contains only one displayed equation, so the outer argmin is swapped to argmax to structurally invalidate the bi-level optimization objective by searching for the worst instead of the best feature set.",
+    "ground_truth_description": "Changes the bi-level optimization problem to select the feature set that maximizes, rather than minimizes, the model loss.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:approach:problem_definition:optimization_problem",
+      "equation_location": "Sec. 3.1 Eq. (1)",
+      "original_fragment_latex": "\\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+      "injected_fragment_latex": "\\arg\\max_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+      "full_equation_latex_before": "    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}",
+      "full_equation_latex_after": "    \\mathcal{F}_{n}^{*}\n= \\arg\\max_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}",
+      "term_role": "identity replacement",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "text/02-Related-Work.tex",
+    "original_text": "The actual power produced by a wind turbine can be expressed as $P_{\\text{WT}} = 0.5 C_p A \\rho v^{3}$, where $A$ is the rotor swept area, $\\rho$ represents the air density, and $v$ is the wind speed.",
+    "injected_text": "The actual power produced by a wind turbine can be expressed as $P_{\\text{WT}} = 0.5 C_p A \\rho w^{3}$, where $A$ is the rotor swept area, $\\rho$ represents the air density, and $w$ is the wind speed.",
+    "rationale": "The wind speed variable is renamed from $v$ to $w$ in the power equation, but it remains $v$ in the subsequent paragraph, introducing a local notation inconsistency.",
+    "ground_truth_description": "Changed the variable for wind speed from $v$ to $w$ in the main equation, without updating the subsequent reference to $v$.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D3",
+      "change_kind": "notation_drift",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 2.1",
+      "affected_span_verbatim": "The actual power produced by a wind turbine can be expressed as $P_{\\text{WT}} = 0.5 C_p A \\rho v^{3}$, where $A$ is the rotor swept area, $\\rho$ represents the air density, and $v$ is the wind speed."
+    },
+    "proposer_agent": "injector.general.S1.t3.v1"
+  }
+]

@@ -1,0 +1,217 @@
+{
+  "paper_id": "2607.14024",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-7845c226d75e",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Mechanical predicate passed: 33408/96 = 348.0; claimed 348",
+        "evidence": {
+          "check_type": "ratio_eq",
+          "predicate": {
+            "verdict": "PASS",
+            "computed": 348.0,
+            "reported": 348.0,
+            "diff_abs": 0.0,
+            "diff_rel": 0.0,
+            "tolerance": {
+              "abs_tol": 0.5,
+              "rel_tol": 0.05
+            },
+            "notes": "33408/96 = 348.0; claimed 348"
+          },
+          "rereader": [
+            {
+              "label": "numerator",
+              "raw_observed": "33,408",
+              "value_observed": 33408.0,
+              "notes": "Printed as '33.408 samples.' in the passage for station 01 in Section 4.3."
+            },
+            {
+              "label": "denominator",
+              "raw_observed": "300",
+              "value_observed": 300.0,
+              "notes": "Printed as '300 days of data from 2018/07/01 to 2019/06/13 at a 15-minute periodicity.'"
+            },
+            {
+              "label": "ratio",
+              "raw_observed": "348",
+              "value_observed": 348.0,
+              "notes": "Printed as '348 calendar days' and also as '348 days exactly' in the given cue."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.051481
+      },
+      {
+        "flag_id": "fp-e7f778007c79",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: sum = 114.8; target = 100.0; additive half-ULP tolerance = 0.7",
+        "evidence": {
+          "check_type": "percent_to_100",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 114.8,
+            "reported": 100.0,
+            "diff_abs": 14.799999999999997,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 0.7,
+              "rel_tol": null
+            },
+            "notes": "sum = 114.8; target = 100.0; additive half-ULP tolerance = 0.7"
+          },
+          "rereader": [
+            {
+              "label": "percent_1",
+              "raw_observed": "19.4%",
+              "value_observed": 19.4,
+              "notes": "First of the percentages listed for runtime reduction in the cited sentence."
+            },
+            {
+              "label": "percent_2",
+              "raw_observed": "9.3%",
+              "value_observed": 9.3,
+              "notes": "Second percentage in the list for runtime reduction in the same sentence."
+            },
+            {
+              "label": "percent_3",
+              "raw_observed": "25.3%",
+              "value_observed": 25.3,
+              "notes": "Third percentage in the list for runtime reduction in the same sentence."
+            },
+            {
+              "label": "percent_4",
+              "raw_observed": "39.8%",
+              "value_observed": 39.8,
+              "notes": "Fourth percentage in the list for runtime reduction in the same sentence."
+            },
+            {
+              "label": "claimed_average",
+              "raw_observed": "21%",
+              "value_observed": 21.0,
+              "notes": "Printed as 'average reduction of 21%' in Section 1 Abstract and again in Section 5.2 conclusion."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.051481
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-ab462516958c",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges that 'the evaluations were complemented with test-set bootstrapping, and the final test evaluation was repeated ten times to obtain more robust performance estimates,' but it does not report formal statistical significance tests (e.g., paired t-tests or bootstrap confidence intervals) on the primary RMSE comparisons between CSFS and SFS. The conclusions—'wrapper-based methods overall yield better-performing selections' and 'CSFS performs on par with SFS'—are drawn from overlapping boxplots without statistical testing, leaving the empirical claims unsubstantiated by inferential statistics.",
+        "evidence": {
+          "claim": "The paper draws qualitative conclusions about CSFS and SFS predictive performance without reporting statistical significance statistics (e.g., bootstrap CIs, paired tests) on the main RMSE comparisons, undermining empirical claims.",
+          "excerpt": "Statistical significance of the primary RMSE comparisons is not established. Sec. 5.1 and Sec. 5.4 draw qualitative conclusions ('wrapper-based methods overall yield better-performing selections', 'CSFS performs on par with SFS') from boxplots (Figs. 3–4) that visibly overlap in most panels, and only a single WT and PV station were used."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that 'the evaluations were complemented with test-set bootstrapping, and the final test evaluation was repeated ten times to obtain more robust performance estimates,' but it does not report formal statistical significance tests (e.g., paired t-tests or bootstrap confidence intervals) on the primary RMSE comparisons between CSFS and SFS. The conclusions—'wrapper-based methods overall yield better-performing selections' and 'CSFS performs on par with SFS'—are drawn from overlapping boxplots without statistical testing, leaving the empirical claims unsubstantiated by inferential statistics.",
+            "cost_usd": 0.009841949999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes qualitative claims such as “wrapper-based methods SFS and CSFS show consistently better median results” and “overall CSFS performs on par with SFS,” but does not report a formal significance analysis for these main RMSE comparisons. Its only statistical-variability note is that “the evaluations were complemented with test-set bootstrapping, and the final test evaluation was repeated ten times to obtain more robust performance estimates,” which is not the same as reporting paired tests or confidence intervals for the headline comparisons.",
+            "cost_usd": 0.015882
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents visual comparisons of overlapping boxplots and draws conclusions based on medians (e.g., 'SFS and CSFS show consistently better median results'), but does not report formal statistical significance tests on the performance differences between the methods, confirming the reviewer's concern.",
+            "cost_usd": 0.0048382
+          }
+        ],
+        "cost_usd": 0.03056215
+      },
+      {
+        "flag_id": "fp-e1111d5d5dd2",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges in Section 5.4 that 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station,' but this is only a brief acknowledgement. The Introduction's claim that CSFS 'is applicable to a wide range of FS problems' is not empirically supported beyond the two single-site datasets, and the limitation is only noted in passing rather than substantively addressed.",
+        "evidence": {
+          "claim": "The paper claims CSFS is applicable to a wide range of FS problems and promises generalisation to other domains, but presents evidence from only a single wind turbine and a single PV station—this scope-vs-claim mismatch is only acknowledged in passing.",
+          "excerpt": "The Introduction (Sec. 1) states CSFS 'is applicable to a wide range of FS problems' and the Conclusion promises testing 'in additional domains, including those outside the renewable energy sector', yet the empirical evidence rests on a single wind turbine (T11 of the EDP dataset) and a single PV station (station 01 of PVOD)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges in Section 5.4 that 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station,' but this is only a brief acknowledgement. The Introduction's claim that CSFS 'is applicable to a wide range of FS problems' is not empirically supported beyond the two single-site datasets, and the limitation is only noted in passing rather than substantively addressed.",
+            "cost_usd": 0.009841949999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The empirical study indeed uses only one unit per domain—“For our study, we select wind turbine T11” and “For our study, we select station 01”—and the paper acknowledges this limitation: “Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station.” However, the broader applicability statement is qualified as “In principle, the proposed methodology is applicable to a wide range of FS problems,” so the extent of any scope-overclaim is not entirely clear.",
+            "cost_usd": 0.015882
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates its approach using only 'a single WT and PV station' (Sections 4.2 and 4.3) and explicitly acknowledges this limited scope as a 'threat to validity' in Section 5.4. However, merely acknowledging this limitation does not resolve the scope-vs-claim mismatch flagged by the reviewer.",
+            "cost_usd": 0.0048382
+          }
+        ],
+        "cost_usd": 0.03056215
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.5,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.102962,
+    "general": 0.0611243
+  },
+  "extractor_cost_usd": 0.023767999999999928,
+  "total_cost_usd": 0.18785429999999992
+}

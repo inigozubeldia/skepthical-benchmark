@@ -1,0 +1,235 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-87a9e961121d",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: rounded to 1 decimals (step 0.1); 36.5 vs 59.3",
+        "evidence": {
+          "check_type": "rounded_match",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 36.5,
+            "reported": 59.3,
+            "diff_abs": 22.799999999999997,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 0.05,
+              "rel_tol": null
+            },
+            "notes": "rounded to 1 decimals (step 0.1); 36.5 vs 59.3"
+          },
+          "rereader": [
+            {
+              "label": "Table 1_runtime",
+              "raw_observed": "36.5",
+              "value_observed": 36.5,
+              "notes": "Value is from Table 1 row 'Ours' under the 'Runtime' column."
+            },
+            {
+              "label": "Table 5_runtime",
+              "raw_observed": "59.3",
+              "value_observed": 59.3,
+              "notes": "Value is from Table 5 first row ('1 (depth = 1)') under the 'Generation (s)' column."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.15494600000000003
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-5dc52753e912",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 clearly shows HIVE-3D's IoU (0.7449) is substantially below TRELLIS (0.8603), and Table 6 shows HIVE-3D's SSIM (0.79) and LPIPS (0.33) are worse than TRELLIS (0.80, 0.31), yet the paper claims it 'significantly outperforms previous approaches, achieving state-of-the-art performance' and shows 'consistently strong performance across all metrics.'",
+        "evidence": {
+          "claim": "The paper claims state-of-the-art (SOTA) and 'consistently strong performance across all metrics' but Table 1 shows HIVE-3D's IoU is much worse than TRELLIS and image metrics are mixed, undermining the credibility of the main claim.",
+          "excerpt": "The paper's central claims of state-of-the-art performance are inconsistent with the quantitative results. The abstract, Sec. 5.2, and conclusion claim the method 'significantly outperforms previous approaches' and shows 'consistently strong performance across all metrics.' However, Table 1 shows HIVE-3D's IoU ( $0.7449$ ) is substantially worse than the TRELLIS baseline ( $0.8603$ ). Furthermore, image-based metrics in Appendix Table 6 are mixed, with HIVE-3D performing on par with or worse than TRELLIS/MIDI on SSIM and LPIPS. This discrepancy undermines the credibility of the claimed SOTA status."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 clearly shows HIVE-3D's IoU (0.7449) is substantially below TRELLIS (0.8603), and Table 6 shows HIVE-3D's SSIM (0.79) and LPIPS (0.33) are worse than TRELLIS (0.80, 0.31), yet the paper claims it 'significantly outperforms previous approaches, achieving state-of-the-art performance' and shows 'consistently strong performance across all metrics.'",
+            "cost_usd": 0.006587549999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims it \"significantly outperforms previous approaches, achieving state-of-the-art performance\" and that \"HIVE-3D demonstrates consistently strong performance across all metrics,\" but Table 1 reports \"TRELLIS ... IoU 0.8603\" versus \"Ours ... 0.7449,\" and Table 6 shows \"TRELLIS 0.80 ... 0.31\" versus \"Ours 0.79 ... 0.33\" on SSIM/LPIPS.",
+            "cost_usd": 0.0115625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims 'HIVE-3D demonstrates consistently strong performance across all metrics' in Section 5.2, but Table 1 explicitly shows its IoU (0.7449) is notably lower than that of the TRELLIS baseline (0.8603). Furthermore, Appendix Table 6 shows mixed results for image-based metrics (e.g., SSIM of 0.79 vs TRELLIS's 0.80).",
+            "cost_usd": 0.0029535
+          }
+        ],
+        "cost_usd": 0.02110355
+      },
+      {
+        "flag_id": "fp-f51f63deffcb",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section A.1 specifies using 'head 0, 4, and 12' and a 'predefined threshold' but provides no justification for these specific choices, no sensitivity analysis, and the stopping criteria and handling of overlapping masks are not described in either the main paper or the appendix.",
+        "evidence": {
+          "claim": "The 2D-to-3D scene tree construction, a core contribution, lacks justification, sensitivity analysis, and algorithmic detail, making its robustness and reproducibility questionable.",
+          "excerpt": "The 2D-to-3D scene tree construction, a core contribution, is insufficiently specified and validated. The lifting procedure in Sec. 4.1 relies on aggregating specific attention heads ( $0$, $4$, $12$ ) and applying a fixed threshold, but these choices lack justification or sensitivity analysis. Key details of the tree construction algorithm, such as stopping criteria, per-node expansion decisions, and handling of overlapping masks, are also unclear."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section A.1 specifies using 'head 0, 4, and 12' and a 'predefined threshold' but provides no justification for these specific choices, no sensitivity analysis, and the stopping criteria and handling of overlapping masks are not described in either the main paper or the appendix.",
+            "cost_usd": 0.006587549999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The method gives some implementation detail, but key choices are not justified or stress-tested: Appendix A.1 says they average attention from \"head 0, 4, and 12\" and \"select the set of voxels whose aggregated scores exceed a predefined threshold,\" while Sec. 4.3 only says recursion continues \"until the desired level of detail is reached.\" The paper provides no sensitivity analysis or explicit rules for these decisions.",
+            "cost_usd": 0.0115625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix A.1 states that the attention map is obtained from 'a specific subset of heads, namely head 0, 4, and 12' and utilizes a 'predefined threshold', yet provides no justification, sensitivity analysis, or exact value for this threshold. The stopping criterion is vaguely defined in Section 4.3 as applying recursively 'until the desired level of detail is reached'.",
+            "cost_usd": 0.0029535
+          }
+        ],
+        "cost_usd": 0.02110355
+      },
+      {
+        "flag_id": "fp-f8fc66b0a91c",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper describes the voxel SR model producing refined voxels and mentions the TRELLIS decoders (DNeRF, DMesh, DGS) in the Preliminary, but does not clearly specify how the refined sparse-structure voxels from GS are subsequently passed through GL and DGS to yield textured 3DGS components, and Amodal3R is only mentioned briefly with no ablation.",
+        "evidence": {
+          "claim": "Key methodological details of refinement and alignment, especially for converting refined voxels to textured 3D components and usage of external modules, are unclear, hindering reproducibility and understanding.",
+          "excerpt": "Key methodological details of the refinement and alignment pipeline are unclear, hindering reproducibility and understanding. Specifically, the process of converting refined voxels from the SR model back into textured 3D Gaussian Splatting components is underspecified. It's not clear how the TRELLIS decoder (GL and DGS) is used on the refined components and how texture improvements are achieved. Additionally, the usage of external modules like Amodal3R is mentioned but not detailed or ablated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper describes the voxel SR model producing refined voxels and mentions the TRELLIS decoders (DNeRF, DMesh, DGS) in the Preliminary, but does not clearly specify how the refined sparse-structure voxels from GS are subsequently passed through GL and DGS to yield textured 3DGS components, and Amodal3R is only mentioned briefly with no ablation.",
+            "cost_usd": 0.006587549999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explains that TRELLIS normally uses \"GL to generate a set of structural features\" and then \"DGS\" to produce the final asset, but the proposed module is only described as modifying \"the original generative model GS ... to generate a refined voxel\"; it never clearly specifies how refined voxels are converted back into textured 3D components. Likewise, Amodal3R is only briefly mentioned: \"we adopt the Amodal3R ... framework to generate complete amodal reconstructions free from occlusion,\" with no further procedural detail or ablation.",
+            "cost_usd": 0.0115625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 4.3 mentions that 'we adopt the Amodal3R framework to generate complete amodal reconstructions free from occlusion', but does not provide any further details, hyperparameters, or ablation studies for this external module's contribution to the pipeline.",
+            "cost_usd": 0.0029535
+          }
+        ],
+        "cost_usd": 0.02110355
+      },
+      {
+        "flag_id": "fp-75dca48b198b",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper does not specify the test set size, train/val/test splits for 3D-FRONT, or rendering configurations for image-based metrics, and several relevant methods (HiScene, CAST, SAM3D, PartPacker) are only compared qualitatively in appendices rather than in the main quantitative tables.",
+        "evidence": {
+          "claim": "The evaluation protocol is underspecified and the baseline comparisons are limited or incomplete, making it difficult to interpret, reproduce, and contextualize results.",
+          "excerpt": "The evaluation protocol is underspecified, and baseline comparisons are limited, making the results difficult to interpret, reproduce, and contextualize. The paper does not specify the test set size, train/val/test splits for 3D-FRONT, rendering configurations for image-based metrics, or the procedure for converting heterogeneous baseline outputs into a common representation for fair comparison. Moreover, several highly relevant methods discussed in Sec. 2.1 (e.g., HiScene, CAST, PartPacker, SAM3D) are omitted from the main quantitative comparison."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper does not specify the test set size, train/val/test splits for 3D-FRONT, or rendering configurations for image-based metrics, and several relevant methods (HiScene, CAST, SAM3D, PartPacker) are only compared qualitatively in appendices rather than in the main quantitative tables.",
+            "cost_usd": 0.006587549999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The evaluation section states only that they \"evaluated our method using rendered images from the 3D-FRONT dataset and a collection of real-world scene photographs\" and that they compare against \"TRELLIS, MIDI, SceneGen and ... Gen3DSR,\" but it does not specify the 3D-FRONT split/test size, rendering protocol for image metrics, or how heterogeneous outputs are normalized for fair comparison. The paper also relegates some relevant baselines to supplementary qualitative discussion only, e.g., \"a detailed comparison with PartPacker is provided in Section C.3.\"",
+            "cost_usd": 0.0115625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 5.2 mentions evaluating on the 3D-FRONT dataset but entirely omits the test set size, data splits, and standard rendering configurations used for the evaluation. Additionally, Table 1 omits several relevant methods (e.g., PartPacker, SAM3D) which are only relegated to qualitative comparisons in the appendix.",
+            "cost_usd": 0.0029535
+          }
+        ],
+        "cost_usd": 0.02110355
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.15494600000000003,
+    "general": 0.0844142
+  },
+  "extractor_cost_usd": 0.031137999999999777,
+  "total_cost_usd": 0.2704981999999998
+}

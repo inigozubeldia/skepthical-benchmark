@@ -1,0 +1,111 @@
+{
+  "paper_id": "2604.20971",
+  "reviewer_system": "CL25",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-288e70cbbc01",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Maths interpreter: PASS. The expression for g(a_j) was verified by substituting the standard Peters-formula GW inspiral rate and Keplerian orbital frequency, then expressing G·M_z through the Schwarzschild radius r_s = 2GM_z/c². The algebra yields exactly (16√2 π/5)·q·(r_s/a_j)^(5/2), matching the paper's Eq. (A4). Wolfram could not be invoked due to a technical error, so the verification rests on this direct hand calculation.  [recovered from truncated Stage-3 JSON; interpreter hit 128k-token output cap]",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "high",
+          "impact": "critical",
+          "notes": "The expression for g(a_j) was verified by substituting the standard Peters-formula GW inspiral rate and Keplerian orbital frequency, then expressing G·M_z through the Schwarzschild radius r_s = 2GM_z/c². The algebra yields exactly (16√2 π/5)·q·(r_s/a_j)^(5/2), matching the paper's Eq. (A4). Wolfram could not be invoked due to a technical error, so the verification rests on this direct hand calculation.  [recovered from truncated Stage-3 JSON; interpreter hit 128k-token output cap]",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0348585
+      },
+      {
+        "flag_id": "fp-431a4671bab5",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Maths interpreter: PASS. The consistency check between Eqs. (5) and (7) was verified by direct algebraic reasoning: since T_gas = ξ a⁴ Ω², the standard deviation of T_gas is σ_ξ · a⁴ · Ω². Substituting σ_ξ = C q γ Σ₀ yields σ_{T_turb} = C q γ Σ₀ a⁴ Ω², which matches Eq. (5) exactly. Wolfram could not be invoked due to a technical error, so the verdict rests on this direct algebraic check, which is straightforward and unambiguous.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "high",
+          "impact": "moderate",
+          "notes": "The consistency check between Eqs. (5) and (7) was verified by direct algebraic reasoning: since T_gas = ξ a⁴ Ω², the standard deviation of T_gas is σ_ξ · a⁴ · Ω². Substituting σ_ξ = C q γ Σ₀ yields σ_{T_turb} = C q γ Σ₀ a⁴ Ω², which matches Eq. (5) exactly. Wolfram could not be invoked due to a technical error, so the verdict rests on this direct algebraic check, which is straightforward and unambiguous.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0348585
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-5d69c98e4a85",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper repeatedly states that \"for fEdd ≳ 0.3, C ≳ 300, h0 ≳ 0.03, and α ≳ 0.1, the linear dephasing is unobservable\" (e.g. §4/Abstract), but its own criterion says \"a dephasing is observable if its more than 8/SNR\" and Eq. (16) gives \"Δψlin,golden = -6.24 (fEdd/1.0) (α/0.1)^(-1) (h0/0.03)^(-4) rad.\" At the stated lower bounds, |Δψlin| = 6.24×0.3 = 1.87 rad, which is far above 8/SNR0 = 0.16, so the AND-threshold statement is mischaracterized.",
+        "evidence": {
+          "claim": "The paper's explicit AND-statement specifying 'f_Edd ≳ 0.3, 𝒞 ≳ 300, h₀ ≳ 0.03, α ≳ 0.1' as the region where linear dephasing is unobservable is in fact contradicted by direct evaluation and the stated equations; the region is mischaracterized throughout the paper.",
+          "excerpt": "the abstract/§4/§6 claim 'for f_Edd ≳ 0.3, 𝒞 ≳ 300, h₀ ≳ 0.03, α ≳ 0.1, gas‑induced dephasings are unobservable if only considering T_lin' is not what the numbers show. Direct evaluation ... at exactly these lower‑bound values the linear dephasing is *observable*, not unobservable."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper's claim is specifically about the region where linear dephasing is unobservable BUT turbulent dephasing could be observable — i.e., where Λ<1 (linear unobservable) yet Λ>1 (turbulent observable). From Eq.(16), ∆ψ_lin,golden ∝ f_Edd α^{-1} h_0^{-4}, so at the lower bounds f_Edd=0.3, α=0.1, h_0=0.03, the linear dephasing magnitude is ≈6.24×0.3×1×1=1.87 rad, which is less than 8/SNR_0=8/50=0.16 rad only for specific combinations. The paper explicitly notes in §4 and Fig.2 that for 'f_Edd ≳ 0.3, C ≳ 300, h_0 ≳ 0.03, and α ≳ 0.1, the linear dephasing is unobservable (i.e. Λ<1) while the turbulent dephasing could be observable,' which refers to the AND-region where all four conditions simultaneously make the linear torque sub-threshold while turbulence pushes it above threshold — a nuanced region visible in Fig.2 between the purple and cyan lines, not a simple evaluation at the lower-bound values.",
+            "cost_usd": 0.1374885
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper repeatedly states that \"for fEdd ≳ 0.3, C ≳ 300, h0 ≳ 0.03, and α ≳ 0.1, the linear dephasing is unobservable\" (e.g. §4/Abstract), but its own criterion says \"a dephasing is observable if its more than 8/SNR\" and Eq. (16) gives \"Δψlin,golden = -6.24 (fEdd/1.0) (α/0.1)^(-1) (h0/0.03)^(-4) rad.\" At the stated lower bounds, |Δψlin| = 6.24×0.3 = 1.87 rad, which is far above 8/SNR0 = 0.16, so the AND-threshold statement is mischaracterized.",
+            "cost_usd": 0.06333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims in the abstract and Section 5 that 'for f_Edd ≳ 0.3, 𝒞 ≳ 300, h_0 ≳ 0.03, and α ≳ 0.1, the linear dephasing is unobservable'. However, evaluating Eq. (16) at the lower bounds f_Edd = 1.0 (which is ≳ 0.3), α = 0.1, and h_0 = 0.03 yields a linear dephasing of 6.24 rad, which is well above the threshold of 8/SNR_0 = 0.16 rad, making it highly observable and confirming the reviewer's finding.",
+            "cost_usd": 0.017202
+          }
+        ],
+        "cost_usd": 0.2180205
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.069717,
+    "general": 0.2180205
+  },
+  "extractor_cost_usd": 0.01513800000000004,
+  "total_cost_usd": 0.3028755
+}

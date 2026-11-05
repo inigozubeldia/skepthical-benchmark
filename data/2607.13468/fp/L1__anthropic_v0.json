@@ -1,0 +1,299 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L1",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-2b33a2f4262f",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: non-integer input for integer_equal: 0.7449",
+        "evidence": {
+          "check_type": "integer_equal",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "non-integer input for integer_equal: 0.7449"
+          },
+          "rereader": [
+            {
+              "label": "HIVE-3D_IoU",
+              "raw_observed": "0.7449",
+              "value_observed": 0.7449,
+              "notes": "IoU value for 'Ours' (HIVE-3D) found in Table 1."
+            },
+            {
+              "label": "TRELLIS_IoU",
+              "raw_observed": "0.8603",
+              "value_observed": 0.8603,
+              "notes": "IoU value for 'TRELLIS' found in Table 1."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.05408533333333334
+      },
+      {
+        "flag_id": "fp-a777440e7ed7",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.05408533333333334
+      },
+      {
+        "flag_id": "fp-8b9f148c600c",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Mechanical predicate passed: 36.5 - 6.3 = 30.2; claimed 30.2",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "PASS",
+            "computed": 30.2,
+            "reported": 30.2,
+            "diff_abs": 0.0,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 0.15000000000000002,
+              "rel_tol": null
+            },
+            "notes": "36.5 - 6.3 = 30.2; claimed 30.2"
+          },
+          "rereader": [
+            {
+              "label": "minuend",
+              "raw_observed": "36.5",
+              "value_observed": 36.5,
+              "notes": "Runtime (s) for 'Ours' found in Table 1."
+            },
+            {
+              "label": "subtrahend",
+              "raw_observed": "6.3",
+              "value_observed": 6.3,
+              "notes": "Runtime (s) for 'TRELLIS' found in Table 1."
+            },
+            {
+              "label": "difference",
+              "raw_observed": "30.2",
+              "value_observed": 30.2,
+              "notes": "Difference between 36.5s and 6.3s is given as 30.2s in the text."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.05408533333333334
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-5609a3124f74",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Appendix A.1 states 'We obtain the final attention map by averaging the voxel-to-token attention maps from a specific subset of heads, namely head 0, 4, and 12' but provides no rationale for why these specific heads were chosen, no ablation on alternative head selections, and no sensitivity analysis. The selection appears ad hoc with no supporting justification.",
+        "evidence": {
+          "claim": "The details for averaging attention from certain heads are underspecified and the selection rationale is unclear; no sensitivity analysis is provided.",
+          "excerpt": "The reliance on averaging attention from heads 0, 4, and 12 (Appendix A.1) appears ad hoc. How were these heads selected? Is the choice generalizable across scenes? A sensitivity analysis is needed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix A.1 states 'We obtain the final attention map by averaging the voxel-to-token attention maps from a specific subset of heads, namely head 0, 4, and 12' but provides no rationale for why these specific heads were chosen, no ablation on alternative head selections, and no sensitivity analysis. The selection appears ad hoc with no supporting justification.",
+            "cost_usd": 0.00610155
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix A.1 says only that \"We obtain the final attention map by averaging the voxel-to-token attention maps from a specific subset of heads, namely head 0, 4, and 12,\" but the paper gives no rationale for choosing these heads and provides no ablation or sensitivity analysis over head selection.",
+            "cost_usd": 0.00857125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Appendix A.1 that it averages attention from 'a specific subset of heads, namely head 0, 4, and 12', but offers no rationale or sensitivity analysis for this choice as requested by the reviewer.",
+            "cost_usd": 0.006791
+          }
+        ],
+        "cost_usd": 0.0214638
+      },
+      {
+        "flag_id": "fp-a0872e1b7140",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges in the Conclusion that 'our approach is based on TRELLIS, the resolution of each voxel generation is constrained and it struggles with large-scale scenes,' but provides no quantitative analysis of how registration errors compound with tree depth or how scalability degrades, merely labeling it as a limitation without addressing the reviewer's specific quantitative concerns.",
+        "evidence": {
+          "claim": "The method inherits a resolution constraint from TRELLIS, limiting scalability for large scenes and potentially compounding registration errors with hierarchy depth.",
+          "excerpt": "the method inherits TRELLIS's per-voxel resolution constraint and struggles with large-scale scenes. This is a significant limitation for a paper claiming \"high-quality 3D scene generation.\" How does the method scale beyond a few object components? Do the accumulated registration errors compound with tree depth?"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges in the Conclusion that 'our approach is based on TRELLIS, the resolution of each voxel generation is constrained and it struggles with large-scale scenes,' but provides no quantitative analysis of how registration errors compound with tree depth or how scalability degrades, merely labeling it as a limitation without addressing the reviewer's specific quantitative concerns.",
+            "cost_usd": 0.00610155
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation: \"our approach is based on TRELLIS, the resolution of each voxel generation is constrained and it struggles with large-scale scenes.\" It does not provide an analysis showing scalability beyond relatively small hierarchies or addressing error accumulation with increasing tree depth.",
+            "cost_usd": 0.00857125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges in the Conclusion that 'it struggles with large-scale scenes' due to TRELLIS constraints, and it provides no quantitative analysis of how registration errors might compound with tree depth.",
+            "cost_usd": 0.006791
+          }
+        ],
+        "cost_usd": 0.0214638
+      },
+      {
+        "flag_id": "fp-be311c10a747",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper presents only quantitative metrics (CD, F-Score, IoU, SSIM, PSNR, LPIPS, CLIP) and qualitative figures but contains no user study. The reviewer's concern about a perceptual evaluation via user study is not addressed anywhere in the paper.",
+        "evidence": {
+          "claim": "No user study is provided despite the perceptual nature of 3D scene generation quality.",
+          "excerpt": "a user study comparing perceived fidelity, layout coherence, and detail would substantially strengthen the evaluation."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents only quantitative metrics (CD, F-Score, IoU, SSIM, PSNR, LPIPS, CLIP) and qualitative figures but contains no user study. The reviewer's concern about a perceptual evaluation via user study is not addressed anywhere in the paper.",
+            "cost_usd": 0.00610155
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The evaluation is entirely metric-based—e.g., \"We evaluate our method... using CD, F-Score, and IoU\" and \"using SSIM, PSNR, LPIPS, and CLIP\"—and the paper nowhere reports a human/user study of perceived scene quality.",
+            "cost_usd": 0.00857125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates generation quality using only automated metrics (SSIM, PSNR, LPIPS, CLIP, CD, F-Score, IoU) and does not include a user study to assess perceived human fidelity.",
+            "cost_usd": 0.006791
+          }
+        ],
+        "cost_usd": 0.0214638
+      },
+      {
+        "flag_id": "fp-b5f8fe14e637",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section D 'Failure Analysis' discusses only one failure case (Figure 12) and attributes it solely to 'cases where the base model fails to generate certain objects or produces incomplete geometry,' with no discussion of failures arising from segmentation errors, attention-based lifting inaccuracies, or registration failures as independent sources of failure.",
+        "evidence": {
+          "claim": "Only one failure case is discussed and the analysis is thin; important sources of failure (segmentation, lifting, registration) are not documented.",
+          "excerpt": "Only one failure case is provided (Figure 12), and the analysis is limited to inheriting TRELLIS failures. Failures from segmentation errors, attention-based lifting inaccuracies, or registration failures should also be documented."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section D 'Failure Analysis' discusses only one failure case (Figure 12) and attributes it solely to 'cases where the base model fails to generate certain objects or produces incomplete geometry,' with no discussion of failures arising from segmentation errors, attention-based lifting inaccuracies, or registration failures as independent sources of failure.",
+            "cost_usd": 0.00610155
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The failure analysis is indeed minimal: Section D presents only \"Figure 12. Representative failure case of our pipeline\" and explains mainly that \"our pipeline depends on the scene generated by the TRELLIS\" and that this \"leads to failures in the registration stage.\" It does not document concrete failure cases for attention lifting or segmentation, despite noting elsewhere that segmentation models \"may introduce errors and lead to suboptimal results.\"",
+            "cost_usd": 0.00857125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section D (Failure Analysis) only presents a single failure case in Figure 12 based on TRELLIS initial output errors, without providing visual examples or detailed documentation of failures stemming from segmentation or lifting inaccuracies.",
+            "cost_usd": 0.006791
+          }
+        ],
+        "cost_usd": 0.0214638
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.162256,
+    "general": 0.0858552
+  },
+  "extractor_cost_usd": 0.009347999999999967,
+  "total_cost_usd": 0.2574592
+}

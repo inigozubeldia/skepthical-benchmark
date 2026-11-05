@@ -1,0 +1,215 @@
+{
+  "paper_id": "2604.20975",
+  "reviewer_system": "L25",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-951cfc10bc43",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The equation expressing the pulsar-term orbital frequency as a function of the ISCO frequency and the time delay to merger was checked for transcription fidelity (confirmed faithful) and is consistent with the standard 0-PN chirp formula for GW-driven inspiral, where f_orb evolves as (t_c - t)^{-3/8} near merger. The form f_orb^(P,a) = f_orb^(ISCO) [1 + (τ_a − τ_c)/T_c]^{−3/8} follows correctly from inverting the standard Peters-formula time-to-coalescence, with T_c evaluated at the ISCO frequency as the boundary condition. No errors were identified in the structure or exponent of the expression.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "critical",
+          "notes": "The equation expressing the pulsar-term orbital frequency as a function of the ISCO frequency and the time delay to merger was checked for transcription fidelity (confirmed faithful) and is consistent with the standard 0-PN chirp formula for GW-driven inspiral, where f_orb evolves as (t_c - t)^{-3/8} near merger. The form f_orb^(P,a) = f_orb^(ISCO) [1 + (τ_a − τ_c)/T_c]^{−3/8} follows correctly from inverting the standard Peters-formula time-to-coalescence, with T_c evaluated at the ISCO frequency as the boundary condition. No errors were identified in the structure or exponent of the expression.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0190482
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-8bcb667cdda7",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper bases its headline SKA result on \"we set SNRth = 3\" and reports a \"probability to have at least one zombie binary with a SNR greater than 3,\" but also admits that \"to confidently detect a zombie binary, it is not enough to have a high SNR\" and that \"The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.\" That means the stronger detection language is not actually demonstrated by the analysis shown.",
+        "evidence": {
+          "claim": "The paper's claim of robust 'detection' for SKA is not demonstrated, as SNR=3 is below conventional thresholds and there is no evidence that a zombie signal can be distinguished from noise or ordinary sources.",
+          "excerpt": "The abstract and Section VII state that SKA \"is expected to achieve sufficient sensitivity to have a few zombie binaries with a signal-to-noise ratio exceeding 3 in its data\" and that ≥90% probability applies \"for all three population models\". However, SNR = 3 is used as the detectability threshold throughout, which is well below any conventional detection threshold in PTA continuous-wave analyses (typically SNR ≳ 5–8 for confident detection). ... The strongly-worded claims in the abstract and conclusion therefore overstate what the SNR>3 estimate demonstrates. Fix: either soften \"detect\"/\"detection\" language ... or explicitly justify why SNR=3 is a meaningful detection threshold in this context"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper itself acknowledges the limitation: 'Although their confident identification might be challenging' and notes that 'around 50% of bright systems to reach SNR > 5'. The paper uses SNR=3 throughout without explicitly justifying it as a detection threshold compared to conventional PTA thresholds of SNR~5-8, but the language in the abstract ('sufficient sensitivity to have a few zombie binaries with a signal-to-noise ratio exceeding 3') is relatively measured and does not strongly overstate detection confidence.",
+            "cost_usd": 0.005400825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper bases its headline SKA result on \"we set SNRth = 3\" and reports a \"probability to have at least one zombie binary with a SNR greater than 3,\" but also admits that \"to confidently detect a zombie binary, it is not enough to have a high SNR\" and that \"The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.\" That means the stronger detection language is not actually demonstrated by the analysis shown.",
+            "cost_usd": 0.01211775
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the abstract briefly acknowledges that \"their confident identification might be challenging,\" the paper consistently uses \"SNR_{th} = 3\" to claim that \"the future SKA facility will be able to detect at least one past binary merger,\" without explicitly justifying how such a low network SNR constitutes a robust detection threshold for continuous waves.",
+            "cost_usd": 0.0024343999999999998
+          }
+        ],
+        "cost_usd": 0.019952974999999998
+      },
+      {
+        "flag_id": "fp-4b6ce27a816b",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "The paper explicitly addresses this: 'for highly massive binaries satisfying f_orb^(ISCO) ≤ f_th, this condition is replaced by τc ≥ 0, to ensure that the binary merges before t0.' This clarifies that τc is always non-negative in the integration, and Figure 5 correctly shows only positive τc values, consistent with the definition.",
+        "evidence": {
+          "claim": "There is an inconsistency between the definition of 'zombie binary' and the treatment of τc, with confusion about whether systems with τc < 0 are included in the zombie population.",
+          "excerpt": "In Section III, zombie binaries are defined as systems with f_orb^(E) ≥ f_th = 3×10⁻⁷ Hz at t₀. ... Eq. 10 uses τc ranging up to 2T^(max) but the lower limit is τc^(min), which via Eq. 8 can be either positive or, for high-mass binaries with f_orb^(ISCO) ≤ f_th, is replaced by 0. ... Figure 5 shows a distribution with τc restricted to positive values ... No mention is made of any contribution from τc < 0 ... clarify whether such systems are included in ⟨Nz⟩ and Figure 5, and if not, why not."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly addresses this: 'for highly massive binaries satisfying f_orb^(ISCO) ≤ f_th, this condition is replaced by τc ≥ 0, to ensure that the binary merges before t0.' This clarifies that τc is always non-negative in the integration, and Figure 5 correctly shows only positive τc values, consistent with the definition.",
+            "cost_usd": 0.005400825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper is explicit that the class includes both past and near-future mergers: \"we investigate the possibility to probe binaries that either merged before the PTA experiment began or which are on the verge of merging,\" and in Section III it defines zombies by \"f(E)_orb \\ge fth\" while noting this \"includes the case of binaries that merged before t0.\" It also explains why effectively few \\tau_c<0 systems matter: \"the number of binaries that merge during the PTA observation (or shortly thereafter) is negligible.\"",
+            "cost_usd": 0.01211775
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's claim that no mention is made of systems with τc < 0 is factually incorrect. The paper explicitly addresses this in Section III, stating that \"the number of binaries that merge during the PTA observation (or shortly thereafter) is negligible compared to the number of binaries that have merged in the past thousands of years.\"",
+            "cost_usd": 0.0024343999999999998
+          }
+        ],
+        "cost_usd": 0.019952974999999998
+      },
+      {
+        "flag_id": "fp-fb7ebbc8d2d3",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'the binary mass ratio only enters in the zombies waveforms via f_orb^(ISCO) and thus have only a negligible effect on the detection efficiency' without providing any quantitative demonstration or check of this assertion, relying only on a qualitative argument about the dynamical variable dependence.",
+        "evidence": {
+          "claim": "The paper claims negligible mass-ratio dependence in detection efficiency without quantitive demonstration, potentially overlooking parameter effects.",
+          "excerpt": "The claim of \"negligible\" mass-ratio dependence in the detection efficiency (Section III, last paragraph) is asserted without demonstration. ... This should be quantitatively checked, at least for one representative mass, before being asserted."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'the binary mass ratio only enters in the zombies waveforms via f_orb^(ISCO) and thus have only a negligible effect on the detection efficiency' without providing any quantitative demonstration or check of this assertion, relying only on a qualitative argument about the dynamical variable dependence.",
+            "cost_usd": 0.005400825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The mass-ratio simplification is asserted but not quantitatively checked: \"for comparable mass binaries... the binary mass ratio only enters in the zombies waveforms via f(ISCO)_orb and thus have only a negligible effect on the detection efficiency. We can therefore neglect the dependence over the binary mass ratio in Eq. 10.\" No supporting calculation, figure, or numerical comparison is provided.",
+            "cost_usd": 0.01211775
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts that the mass ratio has \"only a negligible effect on the detection efficiency. We can therefore neglect the dependence over the binary mass ratio in Eq. 10,\" but it provides no quantitative demonstration or check of this claim as requested by the reviewer.",
+            "cost_usd": 0.0024343999999999998
+          }
+        ],
+        "cost_usd": 0.019952974999999998
+      },
+      {
+        "flag_id": "fp-35aa67d4be41",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states that detection efficiency is estimated from \"12 000 binaries\" and acknowledges in Fig. 3 that \"our sensitivity is restricted to probabilities on the order of 10^-4,\" but it does not propagate any Monte-Carlo uncertainty to the reported means \"2.3, 6.1 and 5.7 zombie binaries\" or show that the integral is dominated by well-resolved regions. So the reviewer’s numerical-resolution concern is not addressed quantitatively.",
+        "evidence": {
+          "claim": "Detection efficiency estimation uses a Monte-Carlo sampling floor that may not resolve low-efficiency regions, casting doubt on the accuracy of reported ⟨Nz⟩ values.",
+          "excerpt": "Detection efficiency is estimated with 12 000 injections ... giving a floor of ~10⁻⁴ ... yet the integral in Eq. 10 extends to regions where the true efficiency may be well below this floor. ... it is not clear that Monte-Carlo noise near the sensitivity floor is negligible for the reported ⟨Nz⟩ values (2.3, 6.1, 5.7). Fix: report a numerical uncertainty on ⟨Nz⟩ from the Monte-Carlo sampling ... or demonstrate that the integrand is dominated by well-resolved parameter regions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states 'our sensitivity is restricted to probabilities on the order of 10^-4' acknowledging the Monte Carlo floor, and notes the integrand is dominated by massive systems (Mc,r > 10^9 solar masses) where efficiency is well-resolved, but no explicit numerical uncertainty on ⟨Nz⟩ values (2.3, 6.1, 5.7) is reported to demonstrate the floor contribution is negligible.",
+            "cost_usd": 0.005400825
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that detection efficiency is estimated from \"12 000 binaries\" and acknowledges in Fig. 3 that \"our sensitivity is restricted to probabilities on the order of 10^-4,\" but it does not propagate any Monte-Carlo uncertainty to the reported means \"2.3, 6.1 and 5.7 zombie binaries\" or show that the integral is dominated by well-resolved regions. So the reviewer’s numerical-resolution concern is not addressed quantitatively.",
+            "cost_usd": 0.01211775
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in Figure 3 that its \"estimate of the detection efficiency is based on 12 000 simulated binaries,\" but it does not report a numerical uncertainty on the resulting expected number of detections (⟨Nz⟩) or demonstrate that the integral is safe from Monte-Carlo noise in low-efficiency regions.",
+            "cost_usd": 0.0024343999999999998
+          }
+        ],
+        "cost_usd": 0.019952974999999998
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 1.0,
+    "general": 0.25
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.0190482,
+    "general": 0.07981189999999999
+  },
+  "extractor_cost_usd": 0.011055999999999996,
+  "total_cost_usd": 0.10991609999999999
+}

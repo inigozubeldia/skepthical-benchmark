@@ -1,0 +1,230 @@
+{
+  "paper_id": "2604.20262",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-374f03cc1cd0",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper validates separability only qualitatively: \"It is evident that the beam width remains largely invariant regardless of the Sun’s position. These profiles are very similar, with nearly identical width,\" and later concedes that \"the actual primary beam may deviate from our model predictions.\" It does not quantify how any failure of separability would propagate into the recovered beam model.",
+        "evidence": {
+          "claim": "The justification and validation of the assumption that the beam is separable into E-W and N-S components is insufficient and contradicted by notable FWHM scatter; impact of this assumption's failure is not quantified.",
+          "excerpt": "Fig. 6 shows a non-trivial scatter in FWHM (≈2.05° to ≈2.25°, roughly 10%), with one outlier around θ_z ≈ 45° well above the others. This is not consistent with the conclusion that \"the beam width remains largely invariant\". Either the trend is real (and separability is broken at the few-percent level), or systematic errors are not under control."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states 'the beam width remains largely invariant regardless of the Sun's position' and attributes scatter to random errors, but Fig. 6 does show ~10% scatter with one outlier, and the paper does not quantify the impact of this scatter on the separability assumption or provide a statistical test of invariance. The claim of invariance is asserted but not rigorously demonstrated.",
+            "cost_usd": 0.028099949999999995
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper validates separability only qualitatively: \"It is evident that the beam width remains largely invariant regardless of the Sun’s position. These profiles are very similar, with nearly identical width,\" and later concedes that \"the actual primary beam may deviate from our model predictions.\" It does not quantify how any failure of separability would propagate into the recovered beam model.",
+            "cost_usd": 0.016033000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims that \"the beam width remains largely invariant\" but merely averages the data to \"reduce random errors\" without quantifying the impact of the ~10% scatter observed in Figure 6 on the separability assumption.",
+            "cost_usd": 0.0051936
+          }
+        ],
+        "cost_usd": 0.04932655
+      },
+      {
+        "flag_id": "fp-160b12998a22",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=CONFIRMED_ISSUE, gemini=FP",
+        "evidence": {
+          "claim": "The analysis incorrectly neglects the Sun's intrinsic radio flux variability and its effect on the recovered beam, failing to properly control for or test activity correlation.",
+          "excerpt": "The Sun is not a stable flux calibrator...This implicitly assumes the *shape* of the beam-convolved solar signal is unchanged by solar activity, which is only true if the quiet-Sun emission dominates and active regions are unresolved. The angular size of the active region versus the resolution of the chosen baselines (1.88–3.38 m) deserves quantitative discussion."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper acknowledges 'solar radio bursts may induce fluctuations in received signal strength' and notes 'for our observation band at 700-800 MHz the steady emission from the quiet Sun is more common,' but does not quantitatively assess the impact of solar activity on the beam shape recovery or test for activity correlation in the data. The discussion is qualitative rather than quantitative.",
+            "cost_usd": 0.028099949999999995
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The treatment of solar variability is largely assumptive rather than tested: the paper says it measures E-W beams \"applying normalization to eliminate the effects of solar activity\" and argues that \"for our observation band at 700-800 MHz the steady emission from the quiet Sun is more common.\" It does not provide a quantitative check of activity-related shape changes or baseline-dependent resolution of active regions.",
+            "cost_usd": 0.016033000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly provides the requested quantitative discussion in Section 2.3.1, noting that the \"angular resolution of the baseline is θ = λ/L\" and selecting \"baselines with θ > 1°\", meaning the resolution \"would not be sufficient to resolve the Sun or its emitting regions\".",
+            "cost_usd": 0.0051936
+          }
+        ],
+        "cost_usd": 0.04932655
+      },
+      {
+        "flag_id": "fp-719a2ee7b375",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Fig. 9 shows residuals with tails well beyond ±5σ and a non-Gaussian distribution, yet the paper uses a Gaussian likelihood (Eq. 12) and reports tight formal uncertainties (α=0.116±0.002, β=1.45±0.002) without acknowledging that the non-Gaussian residuals indicate model misspecification that would cause these uncertainties to be understated.",
+        "evidence": {
+          "claim": "The residuals of the N-S fit are non-Gaussian, indicating model misspecification; the reported beam parameter uncertainties are understated as only statistical errors are quoted, not accounting for systematic misfit.",
+          "excerpt": "The histograms of residuals/σ are visibly non-Gaussian, broad, and centered slightly off zero, with tails well beyond ±5σ. Yet the likelihood (Eq. 12) assumes Gaussian thermal noise. The cited best-fit parameter uncertainties ... are consequently almost certainly underestimated, since they reflect only the formal statistical error of an inadequate model."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Fig. 9 shows residuals with tails well beyond ±5σ and a non-Gaussian distribution, yet the paper uses a Gaussian likelihood (Eq. 12) and reports tight formal uncertainties (α=0.116±0.002, β=1.45±0.002) without acknowledging that the non-Gaussian residuals indicate model misspecification that would cause these uncertainties to be understated.",
+            "cost_usd": 0.028099949999999995
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The likelihood assumes purely Gaussian thermal residuals: \"We can assume that the difference between V^{simu}_{ij} and V_{ij} is thermal noise and follows a Gaussian distribution,\" and the fit reports only formal errors, \"α = 0.116±0.002, β = 1.45±0.002.\" Although the paper later acknowledges additional systematics (\"The errors in our methodology may arise from several sources: 1) Modeling error... 2) Modeling error of the sky... 3) Measurement errors\"), these are not propagated into the quoted parameter uncertainties.",
+            "cost_usd": 0.016033000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper assumes the residuals \"follow a Gaussian distribution\" (Eq. 12), yet the distribution in Figure 9 clearly shows extreme non-Gaussian tails, and the reported parameter uncertainties (±0.002) are not adjusted to reflect this systematic misfit.",
+            "cost_usd": 0.0051936
+          }
+        ],
+        "cost_usd": 0.04932655
+      },
+      {
+        "flag_id": "fp-77232fc941f4",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges discrepancies in the N-S direction ('the drone measured beam can deviate significantly from the Gaussian shape') and that 'the actual beam shape intrinsically deviates from our model,' but does not test more flexible parametric forms or quantify the impact of fixing the single Gaussian form on downstream 21-cm science. Fig. 12 shows relative differences saturated at ~30% over wide angular ranges with no mitigation.",
+        "evidence": {
+          "claim": "There are substantial, unaddressed discrepancies between the beam shape recovered by this method and by the drone measurements; the possibility that the assumed Gaussian form is inadequate is not robustly tested.",
+          "excerpt": "The N-S comparison in Fig. 11 (left) shows substantial discrepancies between this work and the drone data ... The relative differences in Fig. 12 are saturated at 30% over wide angular ranges. ... Given that the assumed N-S form is a single Gaussian (Eq. 2), the authors should at minimum: (i) test whether a more flexible parametric form ... fits the data better; (ii) discuss the impact of fixing a single Gaussian form on downstream science."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges discrepancies in the N-S direction ('the drone measured beam can deviate significantly from the Gaussian shape') and that 'the actual beam shape intrinsically deviates from our model,' but does not test more flexible parametric forms or quantify the impact of fixing the single Gaussian form on downstream 21-cm science. Fig. 12 shows relative differences saturated at ~30% over wide angular ranges with no mitigation.",
+            "cost_usd": 0.028099949999999995
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The manuscript itself acknowledges the discrepancy and possible model inadequacy: \"Along the North-South direction (left panel), the drone measured beam can deviate significantly from the Gaussian shape\" and \"Alternatively, it is possible that the actual beam shape intrinsically deviates from our model, which only captures a general profile.\" It does not then test a more flexible N-S beam form or quantify the impact of imposing the single-Gaussian model.",
+            "cost_usd": 0.016033000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper merely acknowledges that \"it is possible that the actual beam shape intrinsically deviates from our model, which only captures a general profile,\" but does not rigorously test more flexible parametrizations or evaluate the downstream impact of this misspecification.",
+            "cost_usd": 0.0051936
+          }
+        ],
+        "cost_usd": 0.04932655
+      },
+      {
+        "flag_id": "fp-b94aa01db3bc",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper is motivated by 21-cm intensity mapping beam calibration needs but never specifies what beam accuracy is required for foreground subtraction or science goals. The discussion section only states 'the relative error of the measurement is within 10%' without connecting this to any science requirement.",
+        "evidence": {
+          "claim": "The manuscript does not quantitatively address whether the achieved beam model precision (~10% E-W, worse N-S) is sufficient for its science goals, and does not specify what precision is required for effective foreground subtraction in 21-cm mapping.",
+          "excerpt": "The paper is motivated by the need for accurate beam models for 21-cm intensity mapping, but never quantifies *how accurately* the beam needs to be known for the science goal. ... Some discussion of whether this precision is adequate for the Tianlai science case, or what improvements would be needed, is essential."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper is motivated by 21-cm intensity mapping beam calibration needs but never specifies what beam accuracy is required for foreground subtraction or science goals. The discussion section only states 'the relative error of the measurement is within 10%' without connecting this to any science requirement.",
+            "cost_usd": 0.028099949999999995
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper motivates beam calibration by 21-cm science (\"It aims to observe the redshifted 21 cm line... and utilize the intensity mapping technique\") and reports achieved error levels (\"within the primary beam range, the relative error of the measurement is within 10%\"), but nowhere states what beam accuracy is required for foreground subtraction or whether the achieved precision is sufficient for Tianlai's science goals.",
+            "cost_usd": 0.016033000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that the \"relative error of the measurement is within 10%, suggesting that the uncertainty of our results is relatively small,\" but never quantitatively assesses whether this level of precision is adequate for 21-cm intensity mapping.",
+            "cost_usd": 0.0051936
+          }
+        ],
+        "cost_usd": 0.04932655
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.24663274999999998
+  },
+  "extractor_cost_usd": 0.014310000000000017,
+  "total_cost_usd": 0.26094275
+}

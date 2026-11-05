@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14293",
+  "copy_id": "v3",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer notes the TCN description in the key statements section as 'WEAKLY_SUPPORTED' and describes TCNs as distinguished by 'causal convolutions and dilated convolutions' without flagging the missing residual connections as an omission from the cited Bai et al. paper. The reviewer's summary actually repeats the injected (incomplete) characterization without challenging it against the source, so the specific removal of residual connections from the TCN definition is not flagged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "✔ _WEAKLY_SUPPORTED_ **Temporal Convolutional Networks (TCNs) are a sub-type of CNNs designed for time-series data, distinguished by causal convolutions (no future-to-past information leakage) and dilated convolutions (wider receptive field without additional parameters).**\n- _Reference(s):_ [26]\n- _Justification:_ Bai, Kolter & Koltun 2018 (arXiv:1803.01271) is the standard TCN reference and the description matches; verification would confirm the exact wording of the causality/dilation properties.\n\n- Clear engineering motivation: the paper identifies a real gap (offline χ² detection is unsuitable for in-the-loop qubit control) and delivers a concrete FPGA-deployable solution.\n- Compact, well-scoped architecture (1,649 parameters) with quantization-aware training and a documented bit-width sweep supporting the ap_fixed⟨16,6⟩ choice.\n- Direct comparison against the established χ² baseline of Ref. [17] using matched false-positive-rate criteria and 75 independent simulated sets for uncertainty estimation.\n- Ablation of the residual connections (TCN vs. DCCNN) is presented and justifies architectural choices.\n\n7.  **Phantom-evidence flag: \"not statistically significant\" claim.** Sec. III B states: \"These findings indicate that the ablation of residual connections was successful, as they do not provide a statistically significant improvement in detection performance for this task.\"",
+          "confidence": "low",
+          "reasoning": "The review discusses residual connections and cites the same Bai et al. source in the TCN description, but it does not explicitly say the paper's TCN-defining claim is unsupported by Bai et al. This is only a weak, ambiguous match to the injected omission.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "While the reviewer identifies the post-edit claim in their audit, they explicitly state that 'the description matches' the cited source, failing to identify that the mention of residual connections was omitted.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer flags TCN characteristics in a 'WEAKLY_SUPPORTED' entry but only notes 'the description matches' Bai et al. 2018 without challenging the omission of residual connections from the TCN definition. The reviewer does not flag that the paper's description of TCN distinguishing characteristics is incomplete or inconsistent with the cited Bai et al. 2018 paper by omitting residual connections.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Data split arithmetic does not close. Sec. II C states: \"The data was split into training, validation, and test sets containing 70,000, 15,000, and 150,000 scans respectively\" from a dataset of 100,000 scans. 70,000 + 15,000 + 150,000 = 235,000 ≠ 100,000.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Data split arithmetic does not close. Sec. II C states: \"The data was split into training, validation, and test sets containing 70,000, 15,000, and 150,000 scans respectively\" from a dataset of 100,000 scans. 70,000 + 15,000 + 150,000 = 235,000 ≠ 100,000.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the injected 150,000 test-set figure, computes the sum 235,000 vs. stated total 100,000, and flags it as a major issue, directly matching the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "2.  **Data split arithmetic does not close.** Sec. II C states: \"The data was split into training, validation, and test sets containing 70,000, 15,000, and 150,000 scans respectively\" from a dataset of 100,000 scans. 70,000 + 15,000 + 150,000 = 235,000 ≠ 100,000. The test set size (150,000) exceeds the total dataset.\n\n1.  [✖] **Data-split totals do not sum to the stated dataset size.**\n    - _Location:_ Sec. II C\n    - _check_type:_ sum_eq_total\n    - _Reported:_ 70,000 + 15,000 + 150,000 (train+val+test), from a total of 100,000 / _Computed:_ 235,000\n    - _Expected severity bucket:_ major",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the incorrect 150,000 test-set value and identifies that the split no longer sums to the stated 100,000 total. This directly matches the numeric injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Data split arithmetic does not close. Sec. II C states: \"The data was split into training, validation, and test sets containing 70,000, 15,000, and 150,000 scans respectively\" from a dataset of 100,000 scans. 70,000 + 15,000 + 150,000 = 235,000 ≠ 100,000.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the incorrect numbers and correctly calculates the sum discrepancy against the stated total.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The index variable inconsistency (sum index is i, summand uses xⱼ) is a typo but does not affect correctness of the expression.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The index variable inconsistency (sum index is i, summand uses xⱼ) is a typo but does not affect correctness of the expression.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly notes the mismatch between the sum index i and the summand variable x_j in the chi-squared formula, which is exactly the injected index error, though they dismiss it as a mere typo.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "2.  [✔] **Reduced χ² over the first n samples of a scan: χ²_n(θ) = (1/n) Σᵢ (xⱼ − x̂(θ))² / σ̂²(θ).**\n    - _Location:_ Sec. I C\n    - _Verdict:_ PASS (confidence: high, impact: minor)\n    - _Notes:_ The rolling-χ² form is standard for a template-fit hypothesis test with a fixed noise envelope σ̂(θ). The index variable inconsistency (sum index is i, summand uses xⱼ) is a typo but does not affect correctness of the expression.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the same equation and notes the exact index inconsistency between the summation index i and the term x_j. That clearly corresponds to the injected unbound-index error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The index variable inconsistency (sum index is i, summand uses xⱼ) is a typo but does not affect correctness of the expression.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific index mismatch (i vs j) in the chi-squared formula located in Section I C.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Missing broken reference in Sec. II A. The text says \"Table ?? compares the two models in terms of trainable and non-trainable parameters.\" — the reference (presumably to Table I) is unresolved.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Missing broken reference in Sec. II A. The text says \"Table ?? compares the two models in terms of trainable and non-trainable parameters.\" — the reference (presumably to Table I) is unresolved.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the '??' broken reference in Sec. II A, which is precisely the LaTeX artefact introduced by the injection changing the cross-reference label to an undefined one.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "2.  **Missing broken reference in Sec. II A.** The text says \"Table ?? compares the two models in terms of trainable and non-trainable parameters.\" — the reference (presumably to Table I) is unresolved.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the broken cross-reference rendered as 'Table ??', which is the direct visible effect of the injected bad label. This is a specific match.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Missing broken reference in Sec. II A. The text says \"Table ?? compares the two models in terms of trainable and non-trainable parameters.\" — the reference (presumably to Table I) is unresolved.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the '??' LaTeX artifact resulting from the broken reference label in the specified section.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 46.054062,
+  "total_cost_usd": null,
+  "total_input_tokens": 46014,
+  "total_output_tokens": 5765,
+  "escalation_count": 1,
+  "notes": null
+}

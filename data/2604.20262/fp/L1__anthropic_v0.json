@@ -1,0 +1,398 @@
+{
+  "paper_id": "2604.20262",
+  "reviewer_system": "L1",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-90ae0b985b2c",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper's test of separability in Section 3.2 relies on FWHM stability across datasets (Fig. 6) and visual similarity of beam profiles (Fig. 5), stating 'the beam width remains largely invariant regardless of the Sun's position.' No test of sidelobes, asymmetries, or full functional form consistency is provided, leaving the separability validation limited to FWHM alone.",
+        "evidence": {
+          "claim": "The justification and validation for the beam separability assumption (A(n̂) = A_NS × A_EW) is insufficient; FWHM alone is inadequate to demonstrate separability.",
+          "excerpt": "the test in Section 3.2 / Fig. 6 is weak. The FWHM is shown to vary by only a few percent across solar zenith angles spanning 20°–66°, but FWHM alone is a very limited diagnostic — it does not test the full functional form, sidelobes, or asymmetries."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper's test of separability in Section 3.2 relies on FWHM stability across datasets (Fig. 6) and visual similarity of beam profiles (Fig. 5), stating 'the beam width remains largely invariant regardless of the Sun's position.' No test of sidelobes, asymmetries, or full functional form consistency is provided, leaving the separability validation limited to FWHM alone.",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does more than report FWHM: it states that \"The East-West primary beam profile measured with the different datasets ... is shown in Fig. 5\" and that \"These profiles are very similar, with nearly identical width, as predicted by the separable form we assumed.\" However, the validation remains mostly qualitative and does not quantitatively test sidelobes or asymmetries.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper attempts to validate the separability assumption simply by demonstrating that the FWHM and 1D slices are 'very similar, with nearly identical width' across different solar transits. It does not perform a comprehensive 2D test of sidelobes or asymmetries as requested.",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      },
+      {
+        "flag_id": "fp-5e8bdfa4ab91",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=CONFIRMED_ISSUE, openai=AMBIGUOUS, gemini=FP",
+        "evidence": {
+          "claim": "The use of a single-parameter Gaussian model for the N-S beam is overly restrictive and does not account for observed structure; a more flexible model or clear caveats are needed.",
+          "excerpt": "Fig. 11 (left panel) shows that the drone measurements clearly deviate from a Gaussian along the N-S direction, with significant structure that the Gaussian model cannot capture. The authors should either: - Adopt a more flexible parameterization ... or, - Explicitly state that they are fitting only the width of an assumed Gaussian, and discuss how realistic this is given existing evidence to the contrary."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in Section 3.4 and 4 that 'the drone measured beam can deviate significantly from the Gaussian shape' along the N-S direction, and that 'the actual beam shape intrinsically deviates from our model.' However, the authors do not adopt a more flexible parameterization nor provide a rigorous quantitative discussion of how well the Gaussian model captures the true beam given this evidence.",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The N-S beam is indeed fixed to a Gaussian in Eq. (2), but the paper also caveats this limitation: \"it is possible that the actual beam shape intrinsically deviates from our model, which only captures a general profile\" and \"the width of these beam profiles does approximate the ones we determine in this work.\" The concern is therefore partly acknowledged, but not fully resolved with a more flexible fit.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly does what the reviewer offers as an alternative option, stating that 'it is possible that the actual beam shape intrinsically deviates from our model, which only captures a general profile. However, the width of these beam profiles does approximate the ones we determine in this work.'",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      },
+      {
+        "flag_id": "fp-c0fc74240df8",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper mentions that 'solar radio bursts may induce fluctuations in received signal strength' and that 'for our observation band at 700-800 MHz the steady emission from the quiet Sun is more common,' but provides no quantitative analysis of day-to-day solar flux variation, no criteria for flagging active days, and no estimate of residual systematic error due to solar variability.",
+        "evidence": {
+          "claim": "The manuscript provides inadequate quantitative analysis of solar flux variability during calibration with the Sun, raising concerns about unaccounted systematic errors.",
+          "excerpt": "no quantitative analysis demonstrates that solar flux variability has been properly excluded. Please show: - The day-to-day variation of the inferred beam amplitude. - Criteria used to flag/reject days with solar activity. - An estimate of the residual systematic error due to solar variability."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper mentions that 'solar radio bursts may induce fluctuations in received signal strength' and that 'for our observation band at 700-800 MHz the steady emission from the quiet Sun is more common,' but provides no quantitative analysis of day-to-day solar flux variation, no criteria for flagging active days, and no estimate of residual systematic error due to solar variability.",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only gives qualitative statements about solar variability, e.g. \"while solar radio bursts may induce fluctuations in received signal strength ... the steady emission from the quiet Sun is more common\" and says it used \"applying normalization to eliminate the effects of solar activity.\" It does not provide the requested quantitative day-to-day variability analysis, rejection criteria, or residual systematic estimate.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors state that 'steady emission from the quiet Sun is more common' to justify their approach, but do not provide any quantitative analysis of day-to-day variations, criteria for rejecting active days, or systematic error estimates due to solar variability.",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      },
+      {
+        "flag_id": "fp-3691c0c6f88d",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The authors acknowledge unmodeled phase drift — \"there could be variation of the instrument phase during the solar transit time itself\" — and only conclude qualitatively that \"the amplitude is not much affected by this phase error.\" They do not quantify the residual phase error or propagate it into the beam uncertainty.",
+        "evidence": {
+          "claim": "Phase calibration using the Sun as a reference risks circularity and unaddressed phase errors, casting doubt on the beam measurement's validity.",
+          "excerpt": "The authors then perform an *ad hoc* calibration using the Sun itself as a point source. This raises concerns: - If the instrument phase drifts during the solar transit (as the authors acknowledge), how is this handled? - The approach is tautological if used to derive the same beam — please clarify what is being calibrated and what is being measured. - Quantify the residual phase error and propagate it into the final beam uncertainty."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper describes phase calibration using the Sun as a point source in Section 2.3.2/3.1, and notes the residual imaginary part after calibration, stating 'the amplitude is not much affected by this phase error.' However, no quantitative propagation of residual phase error into final beam uncertainty is provided, though the separation of phase calibration from beam amplitude measurement partially mitigates the circularity concern.",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The authors acknowledge unmodeled phase drift — \"there could be variation of the instrument phase during the solar transit time itself\" — and only conclude qualitatively that \"the amplitude is not much affected by this phase error.\" They do not quantify the residual phase error or propagate it into the beam uncertainty.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges the phase drift ('there could be variation of the instrument phase during the solar transit time itself') but merely claims that 'fortunately... the amplitude is not much affected by this phase error', without quantifying or propagating the residual phase error into the beam uncertainty.",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      },
+      {
+        "flag_id": "fp-c26fae52a0a0",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section 4 states 'The relative error of the observed flux is within or around 5%, which we expect will not significantly affect our results,' but this is a qualitative claim without formal error propagation into the beam posterior. No discussion of GDSM systematic errors (~10-20% at these frequencies) or detailed treatment of Cas A secular variation is provided.",
+        "evidence": {
+          "claim": "Uncertainties in the sky model (PyGDSM, Cyg A, Cas A) are not properly propagated into the beam parameter estimates, and the systematic errors of the model are inadequately discussed.",
+          "excerpt": "The error analysis (Section 4) merely *claims* a 5% flux uncertainty 'will not significantly affect' the results without demonstrating this. Please: - Propagate sky-model uncertainties into the posterior on the N-S beam. - Discuss the impact of GDSM systematic errors (the GDSM is known to have ~10–20% errors at these frequencies). - Discuss the secular variation of Cas A and the spectral indices used."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 4 states 'The relative error of the observed flux is within or around 5%, which we expect will not significantly affect our results,' but this is a qualitative claim without formal error propagation into the beam posterior. No discussion of GDSM systematic errors (~10-20% at these frequencies) or detailed treatment of Cas A secular variation is provided.",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 4 does not propagate sky-model uncertainties into the fitted beam parameters; it only states that \"The relative error of the observed flux is within or around 5%, which we expect will not significantly affect our results\" and mentions \"uncertainty in the Galactic plane emission.\" This is an acknowledgment, not a quantitative propagation into the posterior.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper merely asserts that a 5% flux uncertainty 'will not significantly affect our results' without actually propagating the sky-model uncertainties into the posteriors of the beam parameters, violating the reviewer's request for quantitative propagation.",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      },
+      {
+        "flag_id": "fp-f378a8874044",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Fig. 9 clearly shows structured residuals at the 5-10σ level, and the paper does not discuss this structure or provide goodness-of-fit metrics. The paper only states 'the fit is pretty good' without addressing the evident non-Gaussian, structured residuals or showing fits for multiple baselines.",
+        "evidence": {
+          "claim": "Structured residuals at the 5–10σ level indicate significant model misspecification not accounted for in the analysis, undermining the fit's credibility.",
+          "excerpt": "the residuals are clearly *not* Gaussian noise — there is structured residual at the 5–10σ level. This indicates significant model misspecification (likely from the assumed Gaussian N-S beam, sky model errors, or both). The authors should: - Discuss the structure visible in the residuals. - Show fits for multiple baselines, not just one. - Comment on χ² / d.o.f. and goodness-of-fit."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Fig. 9 clearly shows structured residuals at the 5-10σ level, and the paper does not discuss this structure or provide goodness-of-fit metrics. The paper only states 'the fit is pretty good' without addressing the evident non-Gaussian, structured residuals or showing fits for multiple baselines.",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The likelihood assumes \"the difference between V^simu_ij and V_ij is thermal noise and follows a Gaussian distribution,\" yet Fig. 9 shows residuals/σ reaching large structured excursions and the text merely says \"We see the fit is pretty good.\" The paper does not discuss the non-Gaussian/structured residuals, show goodness-of-fit, or present multiple-baseline fits.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 9 shows structured residuals between -10 and 10 sigma, but the manuscript does not discuss this visible structure, fails to show fits for multiple baselines, and omits any goodness-of-fit metrics like chi-squared.",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      },
+      {
+        "flag_id": "fp-4777caf151d6",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports 'best-fit parameters α = 0.116±0.002, β = 1.45±0.002' without showing corner plots or justifying these tight uncertainties given the clearly structured (non-Gaussian) residuals visible in Fig. 9, which violate the Gaussian noise assumption of Eq. (12).",
+        "evidence": {
+          "claim": "Reported parameter uncertainties from the MCMC analysis are unrealistically small given visible model-data discrepancies and violated noise assumptions.",
+          "excerpt": "Quoted parameter uncertainties (α = 0.116 ± 0.002, β = 1.45 ± 0.002) seem extraordinarily small given the structured residuals. Please: - Show posterior corner plots. - Justify that the quoted errors are realistic given that the noise model (Gaussian thermal noise) is clearly violated. - Consider error inflation or a covariance treatment."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports 'best-fit parameters α = 0.116±0.002, β = 1.45±0.002' without showing corner plots or justifying these tight uncertainties given the clearly structured (non-Gaussian) residuals visible in Fig. 9, which violate the Gaussian noise assumption of Eq. (12).",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports very tight errors, \"α = 0.116 ± 0.002, β = 1.45 ± 0.002,\" while also assuming a simple Gaussian-noise likelihood: \"the difference between V^simu_ij and V_ij is thermal noise and follows a Gaussian distribution.\" It does not justify these small uncertainties against the visibly structured residuals or provide posterior diagnostics.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors quote parameter uncertainties of exactly ±0.002 without providing posterior corner plots or addressing how the clearly violated thermal noise assumption (seen in Figure 9's structured residuals) impacts the realism of these small errors.",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      },
+      {
+        "flag_id": "fp-9d34aa79420c",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper notes discrepancies up to ~30% in Fig. 12 but the discussion is brief: 'Such discrepancies may arise from errors inherent in the drone-based methodology' without identifying which method is more reliable in regions of disagreement or whether differences are within combined systematic errors.",
+        "evidence": {
+          "claim": "The comparison between beam measurements and drone results is overly qualitative; major discrepancies up to 30% are not critically analyzed or explained.",
+          "excerpt": "Fig. 12 shows large relative errors between the two methods (up to 30%), but the discussion is brief. The authors should: - Identify which method is likely closer to truth in regions of disagreement. - Discuss whether the differences are within combined systematic errors. - Provide a more critical analysis rather than implying broad consistency."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper notes discrepancies up to ~30% in Fig. 12 but the discussion is brief: 'Such discrepancies may arise from errors inherent in the drone-based methodology' without identifying which method is more reliable in regions of disagreement or whether differences are within combined systematic errors.",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Although the paper notes that the relative differences \"become large at large angles\" and speculates about causes such as \"tilting due to wind influence\" and \"ground reflections,\" it stops at a qualitative discussion. It does not determine whether the discrepancies are within combined systematics or which measurement is likely more accurate in the disagreement regions.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While Figure 12 shows large relative errors (up to 80% on the N-S plot), the discussion merely notes that differences 'become large at large angles' without analyzing which method is closer to the truth or combining systematic errors.",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      },
+      {
+        "flag_id": "fp-4ed8b0010c69",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges in Section 2.3.3 that 'This averaged beamformed visibility is a measurement of the average primary beam, which is different with primary beam of each individual feed,' but does not assess the impact of feed-to-feed variation on downstream analyses for this non-redundant array configuration.",
+        "evidence": {
+          "claim": "The crucial difference between average and per-feed beam is mentioned but not adequately addressed, and potential impact on analyses for non-redundant arrays is not assessed.",
+          "excerpt": "How does feed-to-feed variation affect the claimed beam? For a non-redundant array, this matters considerably for downstream analyses."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges in Section 2.3.3 that 'This averaged beamformed visibility is a measurement of the average primary beam, which is different with primary beam of each individual feed,' but does not assess the impact of feed-to-feed variation on downstream analyses for this non-redundant array configuration.",
+            "cost_usd": 0.003514833333333333
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The manuscript explicitly states, \"This averaged beamformed visibility is a measurement of the average primary beam, which is different with primary beam of each individual feed,\" but does not subsequently analyze feed-to-feed variation or its downstream impact. The concern is mentioned but not addressed.",
+            "cost_usd": 0.009450555555555556
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors acknowledge that the 'averaged beamformed visibility is a measurement of the average primary beam, which is different with primary beam of each individual feed', but they fail to assess how this feed-to-feed variation impacts downstream analysis.",
+            "cost_usd": 0.0018939555555555557
+          }
+        ],
+        "cost_usd": 0.014859344444444445
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.1337341
+  },
+  "extractor_cost_usd": 0.013612000000000013,
+  "total_cost_usd": 0.1473461
+}

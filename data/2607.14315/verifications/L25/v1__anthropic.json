@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Minor issues 1: \"[citation] SHAP characterization. Section II-A states 'SHAP values are based on information theory.' SHAP values (Lundberg & Lee, ref. [9]) are based on cooperative game theory (Shapley values), not information theory. Fix: replace 'information theory' with 'cooperative game theory / Shapley values.'\"",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Minor issues 1: \"[citation] SHAP characterization. Section II-A states 'SHAP values are based on information theory.' SHAP values (Lundberg & Lee, ref. [9]) are based on cooperative game theory (Shapley values), not information theory. Fix: replace 'information theory' with 'cooperative game theory / Shapley values.'\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exact injected claim ('SHAP values are based on information theory'), names the cited paper (Lundberg & Lee, ref. [9]), and states it contradicts the cited source, which clearly corresponds to the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[citation] SHAP characterization.** Section II-A states \"SHAP values are based on information theory.\" SHAP values (Lundberg & Lee, ref. [9]) are based on cooperative game theory (Shapley values), not information theory. Fix: replace \"information theory\" with \"cooperative game theory / Shapley values.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the altered claim sentence and contradicts it against the cited SHAP source, which directly matches the methodology-drift citation injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section II-A states \"SHAP values are based on information theory.\" SHAP values (Lundberg & Lee, ref. [9]) are based on cooperative game theory (Shapley values), not information theory.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the incorrect theoretical basis (information theory) and points out the correct one (game theory).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "Eq. (1) defines fidelity as a *sum* over N of squared relative errors, with no 1/N factor, yet the text in Section V describes it as \"the normalized sum of squared differences … across all samples\" and interprets \"closer to 0\" as high fidelity. As written, fidelity grows with dataset size, which contradicts the cross-dataset comparison in Table I where the Breast Cancer dataset (largest, N=569) has fidelity 4.6730 versus 0.44 for the smaller datasets",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Major issue 2: \"...the Breast Cancer dataset (largest, N=569) has fidelity 4.6730 versus 0.44 for the smaller datasets — an effect that could be entirely a size artefact rather than a property of the explanation.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the value 4.6730 in the table as anomalous relative to the other datasets' fidelity values, which directly corresponds to the injected x10 error in the LIME fidelity score for dataset 3.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Eq. (1) defines fidelity as a *sum* over N of squared relative errors, with no 1/N factor, yet the text in Section V describes it as \"the normalized sum of squared differences … across all samples\" and interprets \"closer to 0\" as high fidelity. As written, fidelity grows with dataset size, which contradicts the cross-dataset comparison in Table I where the Breast Cancer dataset (largest, N=569) has fidelity 4.6730 versus 0.44 for the smaller datasets",
+          "confidence": "medium",
+          "reasoning": "The reviewer specifically names the anomalous value 4.6730 in Table I and flags it as problematic, though they attribute it partly to the missing normalization rather than explicitly noting contradiction with the prose value 0.4673 or the [0,1] range.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the Breast Cancer dataset (largest, N=569) has fidelity 4.6730 versus 0.44 for the smaller datasets — an effect that could be entirely a size artefact rather than a property of the explanation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the injected value 4.6730 from the table and discusses how it violates expectations, though they attribute it to the missing normalization factor.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Major issue 2: \"Eq. (1) defines fidelity as a *sum* over N of squared relative errors, with no 1/N factor\" and \"Fix: include a 1/N factor (or otherwise normalize), and state the normalization explicitly.\"",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Major issue 2: \"Eq. (1) defines fidelity as a *sum* over N of squared relative errors, with no 1/N factor\" and \"Fix: include a 1/N factor (or otherwise normalize), and state the normalization explicitly.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the missing 1/N normalisation factor in the Fidelity equation, which is precisely what was injected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[mathematical] Fidelity formula is not normalized by N and is inconsistent with its stated interpretation.** Eq. (1) defines fidelity as a *sum* over N of squared relative errors, with no 1/N factor... Fix: include a 1/N factor (or otherwise normalize), and state the normalization explicitly.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the dropped 1/N prefactor in the Fidelity equation and requests restoring normalization.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (1) defines fidelity as a *sum* over N of squared relative errors, with no 1/N factor, yet the text in Section V describes it as \"the normalized sum of squared differences … across all samples\"",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the 1/N normalization factor is missing from Equation 1.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Major issue 1: \"Section IV states 'we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.' Tables I and II report only single point values with no standard deviations...This matters because the reader cannot judge the stability of the reported scores nor verify the claim of ten repetitions.\"",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Major issue 1: \"Section IV states 'we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.' Tables I and II report only single point values with no standard deviations...This matters because the reader cannot judge the stability of the reported scores nor verify the claim of ten repetitions.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer directly identifies the contradiction between the injected methodology claim (ten independent runs, mean and standard deviation) and the actual tables that show only single scalar values.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[general] Mismatch between claimed methodology and reported experiments.** Section IV states \"we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.\" Tables I and II report only single point values with no standard deviations... the reader cannot judge the stability of the reported scores nor verify the claim of ten repetitions. Fix: either report mean ± std and include coverage, or remove the claim about ten initializations",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes and challenges the injected methodology claim about ten runs and reporting mean/std, matching the contradiction targeted by the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section IV states \"we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.\" Tables I and II report only single point values with no standard deviations",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific methodology claim about 10 runs and standard deviations and notes that the results tables fail to provide this data.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 24.298005,
+  "total_cost_usd": null,
+  "total_input_tokens": 15059,
+  "total_output_tokens": 2442,
+  "escalation_count": 0,
+  "notes": null
+}

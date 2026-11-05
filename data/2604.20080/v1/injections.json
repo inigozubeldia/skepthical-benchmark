@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "as observed in giant molecular clouds \\citep[e.g.,][]{Solomon1987}",
+    "injected_text": "as predicted by hydrodynamic simulations of giant molecular clouds \\citep[e.g.,][]{Solomon1987}",
+    "rationale": "Solomon et al. 1987 is a purely observational study deriving mass, luminosity, and linewidth relations from a CO survey of Galactic GMCs; rephrasing the citing claim as 'predicted by hydrodynamic simulations' mis-categorises the methodology of the cited paper while leaving the cite key intact, satisfying citations·S2·type 3.",
+    "ground_truth_description": "Rewrote the supporting clause to mis-attribute Solomon et al. 1987 as a hydrodynamic-simulation paper rather than the observational CO-survey work it actually is.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Solomon1987",
+      "injected_cite_key": "Solomon1987",
+      "claim_sentence_verbatim": "The measured velocity dispersions are consistent with turbulent gas in gravitationally bound or marginally bound molecular structures, as observed in giant molecular clouds \\citep[e.g.,][]{Solomon1987}.",
+      "section_location": "Sec. 3.6 (CO kinematics)",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "\\item The CO emission is distributed in compact, clumpy structures within $\\sim$800\\,pc of the nucleus, and is spatially offset from the SSC and the most highly ionized regions.",
+    "injected_text": "\\item The CO emission is distributed in compact, clumpy structures within $\\sim$80\\,pc of the nucleus, and is spatially offset from the SSC and the most highly ionized regions.",
+    "rationale": "Drops a zero on the Conclusions occurrence of the CO extent (800 -> 80 pc), creating a factor-10 integer disagreement with the Abstract (\"within ~800 pc of the starburst\") and Section 3.5 (\"located ~800 pc northwest of the SSC\"), which still report 800 pc. This is the kind of zero-typo a tired author can plausibly make when re-summarizing the result in the conclusions.",
+    "ground_truth_description": "Changed the spatial extent of detected CO emission in the first conclusion bullet from ~800 pc to ~80 pc, producing a factor-10 disagreement with the Abstract and Section 3.5, which still state ~800 pc.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "integer_equal",
+      "value_before_raw": "800",
+      "value_after_raw": "80",
+      "value_before_float": 800.0,
+      "value_after_float": 80.0,
+      "location_cue": "compact, clumpy structures within $\\sim$80\\,pc of the nucleus, and is spatially offset",
+      "paired_location": "Abstract: 'We detect compact CO clouds within ~800 pc of the starburst'; Section 3.5 (CO kinematics): 'located ~800 pc northwest of the SSC'",
+      "quantity_label": "spatial extent (in pc) of detected CO clouds from the SSC/nucleus",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t3.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "L'_{\\rm CO} = 3.25\\times10^{7}\\,\n\\left(\\frac{S_{\\rm line}\\Delta v}{\\rm Jy\\,km\\,s^{-1}}\\right)\n\\left(\\frac{D_L}{\\rm Mpc}\\right)^2\n\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-2}\n(1+z)^{-3},",
+    "injected_text": "L'_{\\rm CO} = 3.25\\times10^{7}\\,\n\\left(\\frac{S_{\\rm line}\\Delta v}{\\rm Jy\\,km\\,s^{-1}}\\right)\n\\left(\\frac{D_L}{\\rm Mpc}\\right)^2\n\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-2}\n(1+z)^{-1},",
+    "rationale": "Replaces the canonical (1+z)^{-3} factor in the Solomon CO luminosity formula (used with observed frequency) with the structurally similar (1+z)^{-1} factor that applies only to the rest-frequency convention; this is a classic error a tired author can plausibly make and it is symbolically refuted by Wolfram against the canonical Solomon (1997) identity.",
+    "ground_truth_description": "In the Solomon (1997) CO luminosity formula (Eq. 1), the cosmological redshift factor was changed from (1+z)^{-3} to the incorrect (1+z)^{-1}.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Eq. (1), Sect. 3.3 (Molecular gas estimations)",
+      "original_fragment_latex": "(1+z)^{-3}",
+      "injected_fragment_latex": "(1+z)^{-1}",
+      "full_equation_latex_before": "L'_{\\rm CO} = 3.25\\times10^{7}\\,\\left(\\frac{S_{\\rm line}\\Delta v}{\\rm Jy\\,km\\,s^{-1}}\\right)\\left(\\frac{D_L}{\\rm Mpc}\\right)^2\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-2}(1+z)^{-3}",
+      "full_equation_latex_after": "L'_{\\rm CO} = 3.25\\times10^{7}\\,\\left(\\frac{S_{\\rm line}\\Delta v}{\\rm Jy\\,km\\,s^{-1}}\\right)\\left(\\frac{D_L}{\\rm Mpc}\\right)^2\\left(\\frac{\\nu_{\\rm obs}}{\\rm GHz}\\right)^{-2}(1+z)^{-1}",
+      "term_role": "cosmological redshift dimming factor in the Solomon CO luminosity-to-flux relation (observed-frequency convention)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "The final datacubes adopt Briggs weighting with robust=0.5 and a Gaussian $uv$-taper, providing a good compromise between sensitivity and angular resolution.",
+    "injected_text": "The final datacubes adopt Briggs weighting with robust=0.5 and a Gaussian $uv$-taper, providing a good compromise between sensitivity and angular resolution. Both transitions were further imaged onto a matched synthesized beam, enabling direct pixel-by-pixel comparison of the CO(1--0) and CO(2--1) emission without the need for further smoothing or regridding.",
+    "rationale": "The inserted clause asserts a stronger imaging protocol (matched synthesized beams, no regridding needed for direct pixel-by-pixel comparison) that is contradicted (i) by the immediately following sentence reporting clearly different synthesized beams (0.87x0.80 for CO(1-0) vs 1.21x1.04 for CO(2-1)), (ii) by Appendix A.3, which explicitly describes regridding the CO(2-1) moment-0 map to the CO(1-0) pixel grid using imregrid and notes that this 'does not improve the angular resolution, which remains set by the synthesized beam', and (iii) by Table A.1, which lists distinct synthesized beams for the two transitions. A reviewer cross-checking Methods against Appendix A and Table A.1 will flag this as a methodology-vs-setup inconsistency (checklist B3 + A6).",
+    "ground_truth_description": "Inserted a sentence into the ALMA imaging Methods asserting that CO(1-0) and CO(2-1) cubes were imaged onto a matched synthesized beam allowing direct pixel-by-pixel comparison without regridding, which contradicts the explicitly different beams quoted in the same paragraph and the regridding procedure described in Appendix A.3 and Table A.1.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 2.1 (Observations / ALMA data)",
+      "affected_span_verbatim": "The final datacubes adopt Briggs weighting with robust=0.5 and a Gaussian $uv$-taper, providing a good compromise between sensitivity and angular resolution."
+    },
+    "proposer_agent": "injector.general.S3.t3.v1"
+  }
+]

@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.13749",
+  "arxiv_url": "https://arxiv.org/abs/2607.13749",
+  "rotation_seed": 20260730,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S3",
+      "type": 3
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "Nanda et al.\\ \\citeyear{nanda2023progress} used mechanistic\ninterpretability to trace the internal computation that emerges at the\ntransition, identifying a Fourier-based algorithm that networks discover when\nthey generalise on modular addition.",
+          "injected_text": "Nanda et al.\\ \\citeyear{nanda2023progress} used optimal\ntransport theory to trace the evolution of weight matrices during the\ntransition, identifying a Wasserstein-gradient flow that networks follow when\nthey generalise on modular addition.",
+          "rationale": "The edit completely rewrites the claim describing Nanda et al. (2023) to falsely attribute to it a result regarding optimal transport and Wasserstein-gradient flows, whereas the actual paper focuses entirely on mechanistic interpretability, ensuring an UNRELATED target verdict.",
+          "ground_truth_description": "Replaced a sentence accurately summarising Nanda et al.'s mechanistic interpretability findings with a fabricated claim that the paper uses optimal transport theory to identify a Wasserstein-gradient flow.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "nanda2023progress",
+            "injected_cite_key": "nanda2023progress",
+            "claim_sentence_verbatim": "Nanda et al.\\ \\citeyear{nanda2023progress} used mechanistic\ninterpretability to trace the internal computation that emerges at the\ntransition, identifying a Fourier-based algorithm that networks discover when\nthey generalise on modular addition.",
+            "section_location": "Sec. 5 (Related Work)",
+            "mutation_kind": "claim_topic_mis_attribution",
+            "detection_target_verdict": "UNRELATED"
+          },
+          "proposer_agent": "injector.citations.S3.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "the rate drops to $95\\%$ ($20/21$",
+          "injected_text": "the rate drops to $65\\%$ ($20/21$",
+          "rationale": "The paper reports a success rate as '95% (20/21 seeds)'. 20/21 is 95.2%, so the percentage and the fraction agree. Changing the percentage to 65% leaves the fraction untouched, making the stated ratio blatantly inconsistent with the count printed immediately beside it. Uses only the paper's own numbers.",
+          "ground_truth_description": "Success rate mis-stated as 65% while the accompanying fraction 20/21 implies 95%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "ratio_eq",
+            "value_before_raw": "95%",
+            "value_after_raw": "65%",
+            "value_before_float": 95.0,
+            "value_after_float": 65.0,
+            "location_cue": "At $k=6$ the rate drops to $95\\%$ ($20/21$ seeds)",
+            "paired_location": "same clause — the fraction 20/21 implies 95.2%",
+            "quantity_label": "fraction of seeds solved at k=6 (%)",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t3.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "  \\delta^2 \\;:=\\; \\|\\,\\omega^f - \\mathrm{Proj}_{\\mathcal{F}_k}\\,\\omega^f\\,\\|_G^2\n             \\;=\\; \\sum_{(u,v)\\notin S_k} |\\widehat{\\omega^f}(u,v)|^2 \\;>\\; 0,",
+          "injected_text": "  \\delta^2 \\;:=\\; \\|\\,\\omega^f - \\mathrm{Proj}_{\\mathcal{F}_k}\\,\\omega^f\\,\\|_G^2\n             \\;=\\; \\sum_{(u,v)\\notin S_k} |\\widehat{\\omega^f}(u,v)| \\;>\\; 0,",
+          "rationale": "Dropping the exponent 2 from the absolute value of the Fourier coefficient breaks the canonical Parseval's identity for the L2 norm, which a domain expert or frontier LLM will recognize on sight, while passing purely syntactic checks.",
+          "ground_truth_description": "Removed the squared exponent from the Fourier coefficient magnitudes in Parseval's identity for the spectral gap.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:delta",
+            "equation_location": "Eq. (6)",
+            "original_fragment_latex": "|\\widehat{\\omega^f}(u,v)|^2",
+            "injected_fragment_latex": "|\\widehat{\\omega^f}(u,v)|",
+            "full_equation_latex_before": "  \\delta^2 \\;:=\\; \\|\\,\\omega^f - \\mathrm{Proj}_{\\mathcal{F}_k}\\,\\omega^f\\,\\|_G^2\n             \\;=\\; \\sum_{(u,v)\\notin S_k} |\\widehat{\\omega^f}(u,v)|^2 \\;>\\; 0,",
+            "full_equation_latex_after": "  \\delta^2 \\;:=\\; \\|\\,\\omega^f - \\mathrm{Proj}_{\\mathcal{F}_k}\\,\\omega^f\\,\\|_G^2\n             \\;=\\; \\sum_{(u,v)\\notin S_k} |\\widehat{\\omega^f}(u,v)| \\;>\\; 0,",
+            "term_role": "exponent in Parseval's identity for the spectral gap",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t1.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "$10^{-3}$ and weight decay $10^{-2}$ on $40\\%$ of the $97^2 = 9409$ input\npairs.",
+          "injected_text": "$10^{-3}$ and weight decay $10^{-2}$ on $40\\%$ of the $97^2 = 9409$ input\npairs (we observed substantial convergence instability at fractions below $30\\%$).",
+          "rationale": "Inserts a parenthetical claim asserting an empirical finding about training data fractions that is not supported by any subsequent results or figures in the paper.",
+          "ground_truth_description": "Added an unsupported methodological claim stating that fractions below 30% lead to convergence instability.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 4.1",
+            "affected_span_verbatim": "The network has hidden width $H = 128$, weights initialised\ni.i.d.\\ complex Gaussian, and trains full-batch with AdamW at learning rate\n$10^{-3}$ and weight decay $10^{-2}$ on $40\\%$ of the $97^2 = 9409$ input\npairs."
+          },
+          "proposer_agent": "injector.general.S2.t3.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "Grokking was introduced by Power et al.\\ \\citeyear{power2022grokking}, who\nobserved that networks trained on small algorithmic datasets would memorise\nfirst and generalise much later, with the delay sensitive to weight decay and\ntraining fraction.",
+          "injected_text": "Grokking was introduced by Power et al.\\ \\citeyear{power2022grokking}, who\nobserved that networks would memorise\nfirst and generalise much later, with the delay sensitive to weight decay and\ntraining fraction.",
+          "rationale": "The cited paper originally demonstrated grokking specifically on small algorithmic datasets; dropping this condition over-generalises the finding to imply they observed it across networks and tasks unconditionally.",
+          "ground_truth_description": "Dropped the explicitly qualifying condition 'trained on small algorithmic datasets' from the summary of the Power et al. (2022) results.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "power2022grokking",
+            "injected_cite_key": "power2022grokking",
+            "claim_sentence_verbatim": "Grokking was introduced by Power et al.\\ \\citeyear{power2022grokking}, who\nobserved that networks trained on small algorithmic datasets would memorise\nfirst and generalise much later, with the delay sensitive to weight decay and\ntraining fraction.",
+            "section_location": "Sec. 5 (Related Work)",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "observed outcome with $99.8\\%$ accuracy",
+          "injected_text": "observed outcome with $99.9\\%$ accuracy",
+          "rationale": "The 99.8% agreement rate is reported in both the Abstract and Section 4.2; shifting the Abstract occurrence by 0.1% introduces a minimum-detectable drift in a repeated constant.",
+          "ground_truth_description": "Changed the accuracy percentage in the abstract from 99.8% to 99.9%, creating an inconsistency with the 99.8% agreement rate cited in Section 4.2.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "repeated_constant",
+            "value_before_raw": "99.8",
+            "value_after_raw": "99.9",
+            "value_before_float": 99.8,
+            "value_after_float": 99.9,
+            "location_cue": "observed outcome with $99.9\\%$ accuracy, with no memorisation regime",
+            "paired_location": "Section 4.2",
+            "quantity_label": "accuracy percentage",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t3.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "  c_l(W,v) \\;=\\; \\binom{k}{l}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+          "injected_text": "  c_l(W,v) \\;=\\; \\frac{k!}{l!}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+          "rationale": "Replacing the binomial coefficient with a permutation fraction omits the (k-l)! denominator, creating an algebraically incorrect but structurally plausible error in the network's polynomial expansion.",
+          "ground_truth_description": "The binomial coefficient in the polynomial expansion of the forward pass is incorrectly replaced with a permutation fraction missing the (k-l)! denominator.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:expand",
+            "equation_location": "Sec. 3.1",
+            "original_fragment_latex": "\\binom{k}{l}",
+            "injected_fragment_latex": "\\frac{k!}{l!}",
+            "full_equation_latex_before": "\\label{eq:expand}\n  \\hat{y}(x;\\,W,v)\n  \\;=\\; \\sum_{l=0}^{k} c_l(W,v)\\,x_1^{l}\\,x_2^{k-l},\n  \\qquad\n  c_l(W,v) \\;=\\; \\binom{k}{l}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+            "full_equation_latex_after": "\\label{eq:expand}\n  \\hat{y}(x;\\,W,v)\n  \\;=\\; \\sum_{l=0}^{k} c_l(W,v)\\,x_1^{l}\\,x_2^{k-l},\n  \\qquad\n  c_l(W,v) \\;=\\; \\frac{k!}{l!}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+            "term_role": "binomial expansion coefficient",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "The network has hidden width $H = 128$, weights initialised",
+          "injected_text": "The network has hidden width $M = 128$, weights initialised",
+          "rationale": "Renaming the hidden width variable from H to M in the experimental setup introduces a local notation inconsistency, as H is heavily anchored as the hidden width symbol throughout the preceding theoretical sections.",
+          "ground_truth_description": "Changes the symbol for hidden width from H to M in the Section 4.1 experimental setup, contradicting its established use.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D3",
+            "change_kind": "notation_drift",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 4.1",
+            "affected_span_verbatim": "The network has hidden width $H = 128$, weights initialised\ni.i.d.\\ complex Gaussian, and trains full-batch with AdamW at learning rate\n$10^{-3}$ and weight decay $10^{-2}$ on $40\\%$ of the $97^2 = 9409$ input\npairs."
+          },
+          "proposer_agent": "injector.general.S1.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "with weight decay 1.0, and 8000 training steps",
+          "injected_text": "with weight decay 1.2, and 8000 training steps",
+          "rationale": "Since the paper lacks a cited quantitative claim with an explicit standard deviation, I selected a numerical hyperparameter (weight decay 1.0) attributed to a cited methodology and perturbed it slightly to 1.2, which represents a plausible minor quantitative misquote of the referenced recipe.",
+          "ground_truth_description": "Changed the cited weight decay hyperparameter from 1.0 to 1.2, producing a mild quantitative misquote of the referenced experimental recipe.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "power2022grokking, nanda2023progress",
+            "injected_cite_key": "power2022grokking, nanda2023progress",
+            "claim_sentence_verbatim": "We run the same thirty-nine tasks on a standard two-layer ReLU network with $2p$-dimensional one-hot inputs, hidden width 256, cross-entropy loss, AdamW with weight decay 1.0, and 8000 training steps---the same recipe used in the grokking literature \\citep{power2022grokking, nanda2023progress}.",
+            "section_location": "Sec. 4.3",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "Across 585 experimental runs the algebraic prediction matches the",
+          "injected_text": "Across 5850 experimental runs the algebraic prediction matches the",
+          "rationale": "Changing the reported sample size '585' to '5850' in the abstract creates a clear integer discrepancy with the 585 runs detailed in the Protocol section.",
+          "ground_truth_description": "Shifted the number of experimental runs reported in the abstract from 585 to 5850, introducing a sample-size contradiction with the main text.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "integer_equal",
+            "value_before_raw": "585",
+            "value_after_raw": "5850",
+            "value_before_float": 585.0,
+            "value_after_float": 5850.0,
+            "location_cue": "Across 5850 experimental runs the algebraic prediction matches the",
+            "paired_location": "Section 4.1 (Protocol)",
+            "quantity_label": "experimental runs",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t3.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "c_l(W,v) \\;=\\; \\binom{k}{l}\n  \\sum_{j=1}^{H}",
+          "injected_text": "c_l(W,v) \\;=\\; \\sum_{j=1}^{H}",
+          "rationale": "Dropped the canonical binomial coefficient prefactor in the polynomial expansion identity, causing the algebraic substitution to mathematically fail in a way Wolfram will symbolically refute.",
+          "ground_truth_description": "Removed the binomial coefficient prefactor from the definition of the expansion coefficients c_l.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq:expand",
+            "equation_location": "Eq. (4)",
+            "original_fragment_latex": "c_l(W,v) \\;=\\; \\binom{k}{l}",
+            "injected_fragment_latex": "c_l(W,v) \\;=\\;",
+            "full_equation_latex_before": "\\hat{y}(x;\\,W,v)\n  \\;=\\; \\sum_{l=0}^{k} c_l(W,v)\\,x_1^{l}\\,x_2^{k-l},\n  \\qquad\n  c_l(W,v) \\;=\\; \\binom{k}{l}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+            "full_equation_latex_after": "\\hat{y}(x;\\,W,v)\n  \\;=\\; \\sum_{l=0}^{k} c_l(W,v)\\,x_1^{l}\\,x_2^{k-l},\n  \\qquad\n  c_l(W,v) \\;=\\; \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+            "term_role": "binomial expansion combinatorial prefactor",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t3.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "To explore this, we train a bottlenecked ReLU network---a standard two-layer\narchitecture with a linear bottleneck of width $d$ inserted after the input\nlayer---on modular addition with the same one-hot encoding and weight decay as\nthe ReLU baseline.",
+          "injected_text": "To explore this, we train a bottlenecked ReLU network---a standard two-layer\narchitecture with a linear bottleneck of width $d$ inserted after the input\nlayer---on both modular addition and modular multiplication with the same one-hot\nencoding and weight decay as the ReLU baseline.",
+          "rationale": "The methodology claims that the bottleneck experiment evaluates both modular addition and modular multiplication, but Table 3 explicitly reports only a single set of results without differentiating tasks, visibly contradicting the experimental setup.",
+          "ground_truth_description": "Added a claim to the methodology section that the bottleneck ablation evaluated modular multiplication in addition to modular addition, which is contradicted by Table 3 reporting only a single gap per dimension.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methodology_setup_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Sec. 4.4",
+            "affected_span_verbatim": "To explore this, we train a bottlenecked ReLU network---a standard two-layer\narchitecture with a linear bottleneck of width $d$ inserted after the input\nlayer---on modular addition with the same one-hot encoding and weight decay as\nthe ReLU baseline."
+          },
+          "proposer_agent": "injector.general.S3.t3.v3"
+        }
+      ]
+    }
+  ]
+}

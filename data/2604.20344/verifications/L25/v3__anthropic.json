@@ -1,0 +1,189 @@
+{
+  "paper_id": "2604.20344",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer mentions SpheCow's capabilities in minor issue 8 but only notes the description is 'a bit stronger than reality' regarding what profiles SpheCow can handle. No reviewer flag specifically challenges the description of SpheCow's integration strategy as merely 'numerical integration' versus 'high-order Gauss-Legendre numerical integration' in Sec. 3.1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[citation] \"SpheCow can generate dynamical models based on any density or surface density profile.\"** This is a paraphrase of Baes, Camps & Vandenbroucke (2021); it is a bit stronger than the reality (SpheCow requires that the surface density and its first three derivatives be implementable). The paper actually notes this qualification in the following sentence, so the sequencing just makes the first sentence read too strongly. Minor rephrase suggested.",
+          "confidence": "medium",
+          "reasoning": "The reviewer specifically challenges an overstrong paraphrase tied to the Baes et al. 2021/SpheCow citation, which matches the broadened-claim methodology-drift pattern. Although they do not name 'high-order Gauss-Legendre' explicitly, they do flag the post-edit claim as stronger than the cited source supports.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer points out a general issue with the description of SpheCow's capabilities in Minor Issue 8, but does not flag the removal of the specific 'high-order Gauss-Legendre' qualifier or challenge the integration strategy description against the source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's minor issue 8 mentions SpheCow capabilities in general terms but does not challenge the description of SpheCow's integration strategy or flag the absence of 'high-order Gauss-Legendre' as a mischaracterization of the cited Baes et al. 2021 paper. No reviewer comment specifically addresses the dropped 'high-order Gauss-Legendre' qualifier or challenges the post-edit claim against the cited source.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text (Sect. 3.3) states \"For γ = 0, we always find α_crit = 2.1\" — these two numbers should agree with each other... The text also gives α_crit(γ = 0) = 2.1 while the table gives 2.00; one of these needs correcting.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text (Sect. 3.3) states \"For γ = 0, we always find α_crit = 2.1\" — these two numbers should agree with each other... The text also gives α_crit(γ = 0) = 2.1 while the table gives 2.00; one of these needs correcting.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inconsistency between the prose value of 2.1 and Table A.1's value of 2.00 for α_crit at γ=0, directly matching the injected numerical discrepancy.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Table A.1 lists α_crit = 2.00 for γ = 0 (independent of Rₑ/R_b and m), and the text (Sect. 3.3) states \"For γ = 0, we always find α_crit = 2.1\" — these two numbers should agree with each other.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the injected inconsistency by quoting both conflicting values and locations. It is a direct detection of the prose-vs-table numerical mismatch.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text also gives ̑_crit(̓ = 0) = 2.1 while the table gives 2.00; one of these needs correcting.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inconsistency between the prose value of 2.1 and the table value of 2.00 for the specified parameter.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Equation (4) contains an erroneous second equality. The paper defines γ(r) = − d log ν(r)/d log r = lim_{r→∞} ν(r)/r. The rightmost expression is dimensionally and mathematically nonsensical: it does not equal the logarithmic slope, has units of a density per length rather than being dimensionless, and the limit as r → ∞ does not define a local slope at radius r.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Equation (4) contains an erroneous second equality. The paper defines γ(r) = − d log ν(r)/d log r = lim_{r→∞} ν(r)/r. The rightmost expression is dimensionally and mathematically nonsensical: it does not equal the logarithmic slope, has units of a density per length rather than being dimensionless, and the limit as r → ∞ does not define a local slope at radius r.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the injected false limit claim lim_{r→∞} ν(r)/r appended to the definition of γ(r), correctly identifying it as mathematically wrong and calling for its removal.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[mathematical] Equation (4) contains an erroneous second equality.** The paper defines\n   γ(r) = − d log ν(r)/d log r = lim_{r→∞} ν(r)/r.\n   The rightmost expression is dimensionally and mathematically nonsensical: it does not equal the logarithmic slope, has units of a density per length rather than being dimensionless, and the limit as r → ∞ does not define a local slope at radius r.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes and refutes the false appended limit equality in the relevant equation. This is a precise match to the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Equation (4) contains an erroneous second equality. The paper defines ̓(r) = − d log ̑(r)/d log r = lim_{r→∑} ̑(r)/r.",
+          "confidence": "high",
+          "reasoning": "Major issue 1 in the review report specifically quotes and refutes the mathematically incorrect limit expression that was appended to the equation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Broken cross-reference / missing figure label. In Sect. 3.3 the text reads \"Figure ?? also contains data from two representative observational studies\" — the reference has not been resolved.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Broken cross-reference / missing figure label. In Sect. 3.3 the text reads \"Figure ?? also contains data from two representative observational studies\" — the reference has not been resolved.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the broken cross-reference rendering as '??' in the Discussion section, which exactly corresponds to the injected misspelled \\ref{alphacrit.fgi} label.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[general] Broken cross-reference / missing figure label.** In Sect. 3.3 the text reads \"Figure ?? also contains data from two representative observational studies\" — the reference has not been resolved. From context this is Fig. 3. This should be fixed before publication.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the unresolved cross-reference rendered as 'Figure ??', which is the exact effect of the broken \\ref label injection. This is a clear and specific detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "In Sect. 3.3 the text reads \"Figure ?? also contains data from two representative observational studies\" — the reference has not been resolved.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the broken cross-reference '??' resulting from the deliberate typo in the LaTeX label, quoting the exact sentence from the injection.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 34.91949,
+  "total_cost_usd": null,
+  "total_input_tokens": 23255,
+  "total_output_tokens": 3704,
+  "escalation_count": 1,
+  "notes": null
+}

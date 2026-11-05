@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.14008",
+  "arxiv_url": "https://arxiv.org/abs/2607.14008",
+  "rotation_seed": 20260733,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S3",
+      "type": 1
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "template-A4.tex",
+          "original_text": "Soft Actor-Critic~(SAC)~\\cite{haarnoja2018soft} is an off-policy algorithm that optimizes both expected return and policy entropy for continuous control tasks.",
+          "injected_text": "Soft Actor-Critic~(SAC)~\\cite{haarnoja2018soft} is an on-policy algorithm that optimizes both expected return and policy entropy for continuous control tasks.",
+          "rationale": "Swapping 'off-policy' for 'on-policy' mis-categorises the SAC algorithm, contradicting the explicit methodological classification in the title and text of the cited paper.",
+          "ground_truth_description": "The claim citing haarnoja2018soft was modified to incorrectly categorize Soft Actor-Critic as an on-policy algorithm instead of off-policy.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "haarnoja2018soft",
+            "injected_cite_key": "haarnoja2018soft",
+            "claim_sentence_verbatim": "Soft Actor-Critic~(SAC)~\\cite{haarnoja2018soft} is an off-policy algorithm that optimizes both expected return and policy entropy for continuous control tasks.",
+            "section_location": "Sec. 2.3",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "template-A4.tex",
+          "original_text": "OpAmp: 6,000 training + 50 targets",
+          "injected_text": "OpAmp: 5,980 training + 50 targets",
+          "rationale": "The paper lacks a table with sums, so an explicit in-text sum relationship (training + targets*steps = total budget) is perturbed by slightly changing the training budget component, causing a sum_eq_total failure.",
+          "ground_truth_description": "Changed the stated training budget component in the total simulation budget calculation from 6,000 to 5,980, breaking the arithmetic sum (5,980 + 1,500 != 7,500).",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "sum_eq_total",
+            "value_before_raw": "6,000",
+            "value_after_raw": "5,980",
+            "value_before_float": 6000.0,
+            "value_after_float": 5980.0,
+            "location_cue": "for the two-stage OpAmp: 5,980 training + 50 targets",
+            "paired_location": null,
+            "quantity_label": "training simulations component",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t2.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "template-A4.tex",
+          "original_text": "\\big( Q_{\\theta_i}(s,a) - y \\big)^2",
+          "injected_text": "Q_{\\theta_i}(s,a)^2 - y^2",
+          "rationale": "Replaces the canonical squared error term (Q - y)^2 with the algebraically incorrect Q^2 - y^2, a classic transcription error that is structurally similar but mathematically refuted.",
+          "ground_truth_description": "Changed the Bellman error squared loss from (Q - y)^2 to Q^2 - y^2.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2.3 first align environment",
+            "original_fragment_latex": "\\big( Q_{\\theta_i}(s,a) - y \\big)^2",
+            "injected_fragment_latex": "Q_{\\theta_i}(s,a)^2 - y^2",
+            "full_equation_latex_before": "\\begin{align}\n    L_Q(\\theta_i) &= \\mathbb{E}_{(s,a,r,s') \\sim \\mathcal{D}} \\Big[ \\big( Q_{\\theta_i}(s,a) - y \\big)^2 \\Big] \\\\\n    y &= r + \\gamma(Q_{\\text{target}}(s',a') - \\alpha \\log \\pi_\\phi(a'|s'))\n\\end{align}",
+            "full_equation_latex_after": "\\begin{align}\n    L_Q(\\theta_i) &= \\mathbb{E}_{(s,a,r,s') \\sim \\mathcal{D}} \\Big[ Q_{\\theta_i}(s,a)^2 - y^2 \\Big] \\\\\n    y &= r + \\gamma(Q_{\\text{target}}(s',a') - \\alpha \\log \\pi_\\phi(a'|s'))\n\\end{align}",
+            "term_role": "identity replacement",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "template-A4.tex",
+          "original_text": "As shown in Table~\\ref{tab:comprehensive_comparison}, Lighthouse RL outperforms all other methods across every evaluation metric:",
+          "injected_text": "As shown in Table~\\ref{tab:rl_circuit_params}, Lighthouse RL outperforms all other methods across every evaluation metric:",
+          "rationale": "Swaps a table cross-reference so that the prose about evaluation metrics points to a table listing parameter counts instead, creating a mismatch between the claim and the referenced table's contents.",
+          "ground_truth_description": "Changes the cross-reference for the comprehensive results table to point to the parameter count table.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "cross_reference_mismatch",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 5.3",
+            "affected_span_verbatim": "Our first experiment tests whether each method can meet diverse target objectives within the training ranges~(Table~\\ref{tab:design_spec_ranges}), i.e., finding parameters that satisfy varying gain, bandwidth, phase margin, and gain margin requirements without retraining. As shown in Table~\\ref{tab:comprehensive_comparison}, Lighthouse RL outperforms all other methods across every evaluation metric:"
+          },
+          "proposer_agent": "injector.general.S2.t1.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "template-A4.tex",
+          "original_text": "that is provided as benchmark circuit in~\\cite{analog_gym} with 29 independent parameters.",
+          "injected_text": "that is provided as benchmark circuit in~\\cite{analog_gym} with 32 independent parameters.",
+          "rationale": "Since the source paper contains no cited quantities with explicit standard deviations, we apply a small, plausible integer offset (29 to 32) to the parameter count of a cited benchmark to emulate a 1-2 sigma quantitative mis-quote.",
+          "ground_truth_description": "Changed the number of independent parameters for the cited benchmark analog_gym from 29 to 32.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "analog_gym",
+            "injected_cite_key": "analog_gym",
+            "claim_sentence_verbatim": "The second circuit is a more complex multistage amplifier from~\\cite{qu2016design_big_opamp}~(Fig.~\\ref{fig:multi_stage_schematic})\nthat is provided as benchmark circuit in~\\cite{analog_gym} with 29 independent parameters.",
+            "section_location": "Analog Circuit Sizing: Experimental Setup",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "template-A4.tex",
+          "original_text": "showing significant improvements in sample efficiency~(up to 1.72× faster),",
+          "injected_text": "showing significant improvements in sample efficiency~(up to 17.2× faster),",
+          "rationale": "An order-of-magnitude typo (1.72 -> 17.2) is introduced in the abstract, conflicting directly with the 1.72× figure restated in Section 5.3 and Table 3, triggering a major abstract_vs_body_match failure.",
+          "ground_truth_description": "Changes the sample efficiency improvement factor in the abstract from 1.72× to 17.2×, creating a 10× contradiction with the body text.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "1.72",
+            "value_after_raw": "17.2",
+            "value_before_float": 1.72,
+            "value_after_float": 17.2,
+            "location_cue": "showing significant improvements in sample efficiency~(up to 17.2× faster),",
+            "paired_location": "Section 5.3 / Table 3",
+            "quantity_label": "sample efficiency improvement factor",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t2.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "template-A4.tex",
+          "original_text": "d(\\mathbf{o}_a, \\mathbf{o}_b) = \\sqrt{\\frac{1}{|\\mathcal{I}|} \\sum_{i \\in \\mathcal{I}} \\left(\\frac{\\min(0, o_{b,i} - o_{a,i})}{o_{i}^{\\text{norm}}}\\right)^2}",
+          "injected_text": "d(\\mathbf{o}_a, \\mathbf{o}_b) = \\sqrt{\\frac{1}{|\\mathcal{I}|} \\sum_{i=0}^{|\\mathcal{I}|} \\left(\\frac{\\min(0, o_{b,i} - o_{a,i})}{o_{i}^{\\text{norm}}}\\right)^2}",
+          "rationale": "The author inadvertently switched from set notation to explicit integer bounds but used a 0 to N range, creating an off-by-one sum bound that is inconsistent with the 1/|I| normalization prefactor.",
+          "ground_truth_description": "The summation bounds in the distance function were changed from a set membership to an explicit integer range from 0 to |I|, creating an off-by-one error.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 4.1",
+            "original_fragment_latex": "\\sum_{i \\in \\mathcal{I}}",
+            "injected_fragment_latex": "\\sum_{i=0}^{|\\mathcal{I}|}",
+            "full_equation_latex_before": "d(\\mathbf{o}_a, \\mathbf{o}_b) = \\sqrt{\\frac{1}{|\\mathcal{I}|} \\sum_{i \\in \\mathcal{I}} \\left(\\frac{\\min(0, o_{b,i} - o_{a,i})}{o_{i}^{\\text{norm}}}\\right)^2}",
+            "full_equation_latex_after": "d(\\mathbf{o}_a, \\mathbf{o}_b) = \\sqrt{\\frac{1}{|\\mathcal{I}|} \\sum_{i=0}^{|\\mathcal{I}|} \\left(\\frac{\\min(0, o_{b,i} - o_{a,i})}{o_{i}^{\\text{norm}}}\\right)^2}",
+            "term_role": "sum bounds",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t3.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "template-A4.tex",
+          "original_text": "The algorithm employs three key neural networks: a policy network $\\pi_\\phi(a|s)$ parameterized by $\\phi$, and two Q-networks $Q_{\\theta_1}(s,a)$ and $Q_{\\theta_2}(s,a)$ parameterized by $\\theta_1$ and $\\theta_2$.",
+          "injected_text": "The algorithm employs three key key neural networks: a policy network $\\pi_\\phi(a|s)$ parameterized by $\\phi$, and two Q-networks $Q_{\\theta_1}(s,a)$ and $Q_{\\theta_2}(s,a)$ parameterized by $\\theta_1$ and $\\theta_2$.",
+          "rationale": "Accidental repetition of the word 'key' introduces a realistic, cosmetic writing defect without altering the meaning of the sentence.",
+          "ground_truth_description": "Added an accidental repetition of the word 'key' in the description of the SAC architecture.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D8",
+            "change_kind": "word_repetition",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 2.3",
+            "affected_span_verbatim": "The algorithm employs three key neural networks: a policy network $\\pi_\\phi(a|s)$ parameterized by $\\phi$, and two Q-networks $Q_{\\theta_1}(s,a)$ and $Q_{\\theta_2}(s,a)$ parameterized by $\\theta_1$ and $\\theta_2$."
+          },
+          "proposer_agent": "injector.general.S1.t1.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "template-A4.tex",
+          "original_text": "while Wang et al.~\\cite{wang2020gcn_rl5} combined graph neural networks with RL for transferable transistor sizing.",
+          "injected_text": "while Wang et al.~\\cite{wang2020gcn_rl5} developed a reinforcement learning agent for macro placement in floorplanning.",
+          "rationale": "The edit alters the claim attached to Wang et al. 2020 from analog transistor sizing (its actual topic) to macro placement (a completely different EDA domain), resulting in an UNRELATED verdict while sounding plausible in an RL-for-EDA literature review.",
+          "ground_truth_description": "The claim associated with Wang et al. (2020) was changed from discussing transferable transistor sizing to macro placement in floorplanning.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "wang2020gcn_rl5",
+            "injected_cite_key": "wang2020gcn_rl5",
+            "claim_sentence_verbatim": "Recent RL approaches by Settaluri et al.~\\cite{settaluri2021automated_rl4} and Shi et al.~\\cite{shi2022robustanalog_rl2} have shown promise in adaptability, while Wang et al.~\\cite{wang2020gcn_rl5} combined graph neural networks with RL for transferable transistor sizing.",
+            "section_location": "Sec. 2.1",
+            "mutation_kind": "claim_topic_mis_attribution",
+            "detection_target_verdict": "UNRELATED"
+          },
+          "proposer_agent": "injector.citations.S3.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "template-A4.tex",
+          "original_text": "improvements in sample efficiency~(up to 1.72× faster),",
+          "injected_text": "improvements in sample efficiency~(up to 1.27× faster),",
+          "rationale": "Swaps two adjacent digits in the abstract's headline sample efficiency improvement factor (1.72 to 1.27), creating a major contradiction with the body text in Section 5.3 which still reports the correct 1.72x value.",
+          "ground_truth_description": "Swapped the digits of the sample efficiency improvement factor in the abstract from 1.72 to 1.27, introducing an inconsistency with the body text.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "1.72",
+            "value_after_raw": "1.27",
+            "value_before_float": 1.72,
+            "value_after_float": 1.27,
+            "location_cue": "improvements in sample efficiency~(up to 1.72× faster), optimization performance",
+            "paired_location": "Section 5.3",
+            "quantity_label": "sample efficiency improvement factor",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "template-A4.tex",
+          "original_text": "y &= r + \\gamma(Q_{\\text{target}}(s',a') - \\alpha \\log \\pi_\\phi(a'|s'))",
+          "injected_text": "y &= r + \\gamma(Q_{\\text{target}}(s',a'))",
+          "rationale": "Deleting the entropy bonus from the Soft Actor-Critic target Q-value equation invalidates the theoretical foundation of the maximum-entropy algorithm, erroneously converting it to standard Q-learning.",
+          "ground_truth_description": "Deleted the entropy term '- \\alpha \\log \\pi_\\phi(a'|s')' from the SAC target Q-value calculation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Soft Actor-Critic section, SAC target Q-value equation",
+            "original_fragment_latex": "- \\alpha \\log \\pi_\\phi(a'|s')",
+            "injected_fragment_latex": "",
+            "full_equation_latex_before": "\\begin{align}\n    L_Q(\\theta_i) &= \\mathbb{E}_{(s,a,r,s') \\sim \\mathcal{D}} \\Big[ \\big( Q_{\\theta_i}(s,a) - y \\big)^2 \\Big] \\\\\n    y &= r + \\gamma(Q_{\\text{target}}(s',a') - \\alpha \\log \\pi_\\phi(a'|s'))\n\\end{align}",
+            "full_equation_latex_after": "\\begin{align}\n    L_Q(\\theta_i) &= \\mathbb{E}_{(s,a,r,s') \\sim \\mathcal{D}} \\Big[ \\big( Q_{\\theta_i}(s,a) - y \\big)^2 \\Big] \\\\\n    y &= r + \\gamma(Q_{\\text{target}}(s',a'))\n\\end{align}",
+            "term_role": "entropy maximization bonus in SAC target Q-value",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t1.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "template-A4.tex",
+          "original_text": "By maintaining a collection of high-performing parameter configurations discovered during training, our method significantly improves sample efficiency and generalization capabilities compared to conventional approaches. We demonstrated the effectiveness of our approach on a benchmark optimization problem and practical circuit sizing tasks, showing substantial improvements in success rates, inference efficiency, and objective maximization.",
+          "injected_text": "By maintaining a collection of high-performing parameter configurations discovered during training, our method significantly improves sample efficiency compared to conventional approaches, though we observe reduced generalization capabilities on out-of-distribution targets. We demonstrated the effectiveness of our approach on a benchmark optimization problem and practical circuit sizing tasks, showing substantial improvements in success rates and inference efficiency, while noting that objective maximization remains an open challenge.",
+          "rationale": "Rewrites the conclusion to claim reduced generalization and challenges with objective maximization, directly contradicting the Results section which demonstrates strong extrapolation success and superior objective maximization compared to baselines.",
+          "ground_truth_description": "The conclusion was altered to state the proposed method has reduced generalization capabilities and struggles with objective maximization, directly contradicting the experimental results.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B4",
+            "change_kind": "internal_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Conclusion",
+            "affected_span_verbatim": "By maintaining a collection of high-performing parameter configurations discovered during training, our method significantly improves sample efficiency and generalization capabilities compared to conventional approaches. We demonstrated the effectiveness of our approach on a benchmark optimization problem and practical circuit sizing tasks, showing substantial improvements in success rates, inference efficiency, and objective maximization."
+          },
+          "proposer_agent": "injector.general.S3.t1.v3"
+        }
+      ]
+    }
+  ]
+}

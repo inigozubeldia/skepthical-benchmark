@@ -1,0 +1,146 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L2",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-c5b71b41bfa4",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: The paper motivates its method by stating current methods \"struggle with complex layouts,\" but later acknowledges in the Conclusion that \"our approach is based on TRELLIS, the resolution of each voxel generation is constrained and it struggles with large-scale scenes,\" confirming the reviewer's point.",
+        "evidence": {
+          "claim": "The paper claims to resolve complex layout challenges, but later admits that the approach struggles with large-scale scenes and layout capability is limited by the TRELLIS base model, making the generalization unsupported.",
+          "excerpt": "the paper claims the method resolves challenges with \"complex layouts\". However, the conclusion (Sec. 6) and failure analysis (Appendix D) explicitly admit that the approach \"struggles with large-scale scenes\" and that its layout capability is strictly bounded by the coarse initial output of the TRELLIS base model. Asserting the framework solves layout complexity while relying entirely on an off-the-shelf model that struggles with scale constitutes an unsupported generalization."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper's introduction claims to address 'complex layouts' through hierarchical refinement, not to fully solve all layout challenges. The limitation acknowledged in Sec. 6 ('struggles with large-scale scenes') is a specific scope limitation (scale), not a contradiction of the claim about complex layouts. The paper states 'our approach bridges this gap by first generating the scene holistically to establish a coherent layout, and then hierarchically refining each instance while preserving this overall structure,' which is a narrower and consistent claim about layout coherence, not a blanket claim to resolve all complex layout problems.",
+            "cost_usd": 0.008536400000000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does not claim to have fully solved layout complexity; it explicitly says the method \"first generat[es] the scene holistically to establish a coherent layout, and then hierarchically refin[es] each instance while preserving this overall structure\" and that it aims to \"preserve this plausible spatial arrangement while refining the geometry and texture of each individual component.\" The later limitation that it \"is based on TRELLIS\" and \"struggles with large-scale scenes\" is therefore not a contradiction of a stronger claim the paper never makes.",
+            "cost_usd": 0.010769166666666668
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper motivates its method by stating current methods \"struggle with complex layouts,\" but later acknowledges in the Conclusion that \"our approach is based on TRELLIS, the resolution of each voxel generation is constrained and it struggles with large-scale scenes,\" confirming the reviewer's point.",
+            "cost_usd": 0.0031118666666666663
+          }
+        ],
+        "cost_usd": 0.022417433333333337
+      },
+      {
+        "flag_id": "fp-92341560625c",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper does not explicitly describe the normalization procedure or common spatial resolution used to compute CD, F-Score, and IoU across methods with fundamentally different output formats (e.g., TRELLIS sparse voxels at 64^3, compositional meshes from Gen3DSR, etc.). The methods section and experiment section state only that evaluation uses 'CD (Fan et al., 2017), F-Score (Tatarchenko et al., 2019), and IoU (Choy et al., 2016)' without clarifying how outputs from differently formatted baselines are normalized to a common space for fair comparison.",
+        "evidence": {
+          "claim": "The methodology for comparing geometric metrics across baselines with different native resolutions is ambiguous, risking skewed results due to mismatched coordinate spaces or grid resolutions.",
+          "excerpt": "the paper compares geometric metrics (Chamfer Distance, F-Score, IoU) against baselines that have different native coordinate spaces and resolutions (e.g., TRELLIS at $64^3$ vs. compositional meshes). It is not stated what spatial resolution or voxel grid was used to compute the IoU and CD for these disparately formatted outputs. If HIVE-3D outputs at a higher resolution, discretizing baselines to a coarse grid or evaluating at mismatched resolutions severely skews comparative metrics."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper does not explicitly describe the normalization procedure or common spatial resolution used to compute CD, F-Score, and IoU across methods with fundamentally different output formats (e.g., TRELLIS sparse voxels at 64^3, compositional meshes from Gen3DSR, etc.). The methods section and experiment section state only that evaluation uses 'CD (Fan et al., 2017), F-Score (Tatarchenko et al., 2019), and IoU (Choy et al., 2016)' without clarifying how outputs from differently formatted baselines are normalized to a common space for fair comparison.",
+            "cost_usd": 0.008536400000000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "For geometry evaluation, the paper only says, \"We evaluate our method and all baselines on the 3D-FRONT dataset using CD, F-Score, and IoU\" and Table 1 reports the numbers, but no passage specifies a common coordinate normalization, voxelization procedure, or evaluation resolution across methods with different output formats. This leaves the comparison protocol for IoU/CD/F-Score ambiguous.",
+            "cost_usd": 0.010769166666666668
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper presents quantitative metrics like CD, F-Score, and IoU in Section 5.2 and Table 1 but fails to disclose the spatial resolution or voxel grids used to normalize or evaluate outputs across baselines with disparate native coordinate spaces.",
+            "cost_usd": 0.0031118666666666663
+          }
+        ],
+        "cost_usd": 0.022417433333333337
+      },
+      {
+        "flag_id": "fp-67444819615f",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The shape-based scale estimation method is vulnerable to sampling bias due to non-uniform point density in the Gaussian splatting representation, which could corrupt the scale estimation.",
+          "excerpt": "the scale factor $s$ is estimated by sampling points from the Gaussian splatting representation and computing the mean distance to the centroid. This assumes a uniform point density on the surface. Because 3DGS often concentrates primitives in high-frequency texture areas and leaves smooth areas sparse, a simple unweighted mean distance will heavily bias the centroid and the scale proxy $d'$..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper acknowledges in Appendix A.2 that scale is estimated by 'uniformly sampling a point cloud from the generated object's surface, computing the centroid of this point cloud, and then calculating the mean distance from all points to this centroid,' explicitly stating this uses uniform surface sampling. However, the reviewer's concern is that 3DGS primitives are non-uniformly distributed, making 'uniform sampling from the surface' non-trivial; the paper does not clarify whether sampling is from the Gaussian primitive centers or from the actual reconstructed surface, leaving the bias concern unresolved but also not clearly confirmed.",
+            "cost_usd": 0.008536400000000001
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's concern is based on non-uniform Gaussian primitive density, but the paper states that scale is estimated by \"uniformly sampl[ing] points from the surface of the Gaussian splatting representation\" and then computing the mean distance to the centroid. Because the method samples uniformly from the surface rather than averaging over raw 3DGS primitives, the specific bias described in the flag is not supported by the paper text.",
+            "cost_usd": 0.010769166666666668
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "While Section 4.3 claims to \"uniformly sample points from the surface of the Gaussian splatting representation,\" the paper lacks details on how a spatially uniform sample is extracted from a non-uniform 3DGS primitive distribution, leaving the scale estimation vulnerable to the density biases described by the reviewer.",
+            "cost_usd": 0.0031118666666666663
+          }
+        ],
+        "cost_usd": 0.022417433333333337
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.06725230000000001
+  },
+  "extractor_cost_usd": 0.013058000000000042,
+  "total_cost_usd": 0.08031030000000006
+}

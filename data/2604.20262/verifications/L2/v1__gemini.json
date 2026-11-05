@@ -1,0 +1,180 @@
+{
+  "paper_id": "2604.20262",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer supported the CHIME citation as describing 'beamforming and calibrating using solar transits' and did not flag the word 'holographic' as a mis-categorization of the chimebeam reference. No reviewer flag challenges the post-edit claim that the method is 'holographic' against the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review discusses CHIME as using solar transits/beamforming, but it never flags the specific claim that the paper adopts a 'holographic method' from the CHIME citation or says that this mischaracterises cite key chimebeam. Under the broadened-claim rule, the reviewer needed to challenge the post-edit claim against the cited source; they did not.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not identify the mis-categorization of the CHIME method as 'holographic'. Instead, they explicitly mark the relevant citation as 'SUPPORTED' in their checklist.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's Minor Issue 1 mentions '45.8 m' but treats it as the paper's stated value and critiques the logical relationship with the L<4m constraint, not the arithmetic inconsistency that 45.8 m is double the correct value of 22.9 m. The reviewer does not identify that 45.8 m contradicts the lambda/L=theta calculation; they appear to accept 45.8 m as the paper's own figure.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer mentions '45.8 m' and calls the justification confusing, but does not identify the explicit arithmetic inconsistency that with λ = 0.4 m and θ > 1° the baseline should be about 22.9 m rather than 45.8 m. This is not a specific detection of the injected factor-of-two numerical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "While the reviewer quotes the injected value of 45.8 m, they do not flag the arithmetic inconsistency (ratio_eq failure) between the baseline, wavelength, and angular resolution. They instead critique the relevance of the calculation compared to a different constraint.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "In Sec. 2.2, Eq. (2) defines the North-South beam factor as $A_{NS}(\\theta) = \\exp(-\\theta^2 / \\theta_{NS}^2)$. However, in Sec. 2.4, Eq. (11) redefines the exact same function as $A_{NS}(\\theta) = \\exp(-\\theta^2 / 2\\theta_{NS}^2)$. The introduction of the factor of 2 in the denominator fundamentally changes the definition of the parameter $\\theta_{NS}$",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "In Sec. 2.2, Eq. (2) defines the North-South beam factor as $A_{NS}(\\theta) = \\exp(-\\theta^2 / \\theta_{NS}^2)$. However, in Sec. 2.4, Eq. (11) redefines the exact same function as $A_{NS}(\\theta) = \\exp(-\\theta^2 / 2\\theta_{NS}^2)$. The introduction of the factor of 2 in the denominator fundamentally changes the definition of the parameter $\\theta_{NS}$",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the contradictory factor-of-2 discrepancy between Eq. (2) and Eq. (11) for the Gaussian definition of A_NS(theta), which is exactly the injected inconsistency between Eq. (eq2:beamNS) and Eq. (eq2:beamalpha).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "In Sec. 2.2, Eq. (2) defines the North-South beam factor as $A_{NS}(\\theta) = \\exp(-\\theta^2 / \\theta_{NS}^2)$. However, in Sec. 2.4, Eq. (11) redefines the exact same function as $A_{NS}(\\theta) = \\exp(-\\theta^2 / 2\\theta_{NS}^2)$. The introduction of the factor of 2 in the denominator fundamentally changes the definition of the parameter $\\theta_{NS}$...\n\nThe explicit form $A_{NS}(\\theta) = \\exp(-\\theta^2 / 2\\theta_{NS}^2)$ contradicts the definition established in Eq. (2) which lacks the factor of 2 in the denominator.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the cross-equation inconsistency caused by the added factor of 2 in Eq. (11), exactly matching the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "In Sec. 2.2, Eq. (2) defines the North-South beam factor as $A_{NS}(\\theta) = \\exp(-\\theta^2 / \\theta_{NS}^2)$. However, in Sec. 2.4, Eq. (11) redefines the exact same function as $A_{NS}(\\theta) = \\exp(-\\theta^2 / 2\\theta_{NS}^2)$.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the cross-equation inconsistency regarding the factor of 2 in the Gaussian exponent between the two specified sections.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer flags alpha as overloaded notation (used for both Cas A spectral index and the MCMC fitting parameter) but does not flag the beta/gamma notation drift in the simulated visibility equation. The injection swapped beta to gamma in Eq. (eq2:simulation) while the text still uses beta, but the reviewer does not mention this specific inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer flags overloaded notation for α and even suggests renaming a fitting parameter to γ, but nowhere notes that the simulated-visibility equation uses γ while nearby text/results still use β for the same parameter. That symbol-drift injection was not specifically identified.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies notation issues with the parameter alpha, but fails to detect the notation drift between beta and gamma in the visibility simulation equation and subsequent text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 38.810437,
+  "total_cost_usd": null,
+  "total_input_tokens": 20383,
+  "total_output_tokens": 4539,
+  "escalation_count": 0,
+  "notes": null
+}

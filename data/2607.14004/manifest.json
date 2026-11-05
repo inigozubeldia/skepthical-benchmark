@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.14004",
+  "arxiv_url": "https://arxiv.org/abs/2607.14004",
+  "rotation_seed": 20260732,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S1",
+      "type": 3
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "MIPROv2 similarly searches over instructions and few-shot demonstrations for multi-stage LM programs using a surrogate-guided (Bayesian-optimization-style) procedure~\\citep{miprov2}",
+          "injected_text": "MIPROv2 similarly searches over instructions and few-shot demonstrations for multi-stage LM programs using a reinforcement-learning (PPO-style) procedure~\\citep{miprov2}",
+          "rationale": "Swaps the stated methodology of MIPROv2 from Bayesian optimization to reinforcement learning, triggering a CONTRADICTED verdict without modifying the cite key.",
+          "ground_truth_description": "Changes the description of MIPROv2's methodology from surrogate-guided (Bayesian optimization) to reinforcement learning (PPO).",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "miprov2",
+            "injected_cite_key": "miprov2",
+            "claim_sentence_verbatim": "MIPROv2 similarly searches over instructions and few-shot demonstrations for multi-stage LM programs using a surrogate-guided (Bayesian-optimization-style) procedure~\\citep{miprov2}, and both build on DSPy, which compiles declarative LM pipelines into optimizable programs~\\citep{dspy2023}.",
+            "section_location": "Sec. 2.1",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "the baseline pass rate is 62.5\\%, GEPA reaches",
+          "injected_text": "the baseline pass rate is 82.5\\% (15 out of 24 trials), GEPA reaches",
+          "rationale": "Replaces the correct 62.5% baseline pass rate with 82.5% while explicitly injecting the raw trial counts (15 out of 24), creating a blatant ratio_eq arithmetic failure (15/24 = 62.5% != 82.5%).",
+          "ground_truth_description": "The baseline pass rate is incorrectly inflated to 82.5% alongside its explicitly stated fraction (15 out of 24 trials) which calculates to 62.5%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "ratio_eq",
+            "value_before_raw": "62.5",
+            "value_after_raw": "82.5",
+            "value_before_float": 62.5,
+            "value_after_float": 82.5,
+            "location_cue": "the baseline pass rate is 82.5\\% (15 out of 24 trials), GEPA reaches",
+            "paired_location": null,
+            "quantity_label": "baseline Phase 1 pass rate",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t3.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r],",
+          "injected_text": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\prod_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r],",
+          "rationale": "Swaps the outer summation for a product in the PassRate definition, breaking the arithmetic mean structure and invalidating the metric.",
+          "ground_truth_description": "Changed the outer summation over tasks in the PassRate definition to a product.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.3",
+            "original_fragment_latex": "\\sum_{t \\in \\mathcal{T}}",
+            "injected_fragment_latex": "\\prod_{t \\in \\mathcal{T}}",
+            "full_equation_latex_before": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r],",
+            "full_equation_latex_after": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\prod_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r],",
+            "term_role": "outer operator swap",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t2.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "Its two accepted candidates were both general-purpose harness robustness fixes rather than task-specific changes: the Phase 1 candidate hardens command-completion detection and malformed tool-call handling, and the Phase 2 candidate adds a pass that compacts long, repetitive terminal output (package-manager logs, build/download progress, test-runner boilerplate) into short summaries; Appendix~C gives further detail.",
+          "injected_text": "Its two accepted candidates were heavily overfitted task-specific shortcuts rather than general-purpose robustness fixes: the Phase 1 candidate hardcodes expected paths for the git webserver task, and the Phase 2 candidate introduces regex matching to artificially pass the output format checks for the MIPS tasks; Appendix~C gives further detail.",
+          "rationale": "Modifying the Methods section to describe Meta Harness's updates as 'heavily overfitted task-specific shortcuts' directly contradicts the Results (Sections 6.1 and 6.2), which analyzes those exact same updates as 'generic, conservative' and explicitly states they generalized well to unseen tasks.",
+          "ground_truth_description": "Altered the Methods description of Meta Harness's updates to state they were task-specific shortcuts, directly contradicting the Results section which analyzes them as generic and conservative.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methods_results_inconsistency",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 4.3",
+            "affected_span_verbatim": "Its two accepted candidates were both general-purpose harness robustness fixes rather than task-specific changes: the Phase 1 candidate hardens command-completion detection and malformed tool-call handling, and the Phase 2 candidate adds a pass that compacts long, repetitive terminal output (package-manager logs, build/download progress, test-runner boilerplate) into short summaries; Appendix~C gives further detail."
+          },
+          "proposer_agent": "injector.general.S2.t2.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "is reported to outperform prompt-only optimizers",
+          "injected_text": "is reported to underperform prompt-only optimizers",
+          "rationale": "Reversing 'outperform' to 'underperform' directly contradicts the cited paper's core finding that Maestro beats prompt-only baselines even when its search space is similarly restricted.",
+          "ground_truth_description": "Changed the claim about Maestro's relative performance to incorrectly state it underperforms prompt-only optimizers instead of outperforming them.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "maestro2025",
+            "injected_cite_key": "maestro2025",
+            "claim_sentence_verbatim": "Maestro targets this same gap with a richer topology space, jointly searching non-sequential DAGs, persistent/global state, and context gating alongside node-level configuration, and is reported to outperform prompt-only optimizers such as GEPA and MIPROv2 even when restricted to prompt-only search, with further gains once graph search is enabled~\\citep{maestro2025}.",
+            "section_location": "Sec. 2.1",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "overall (76.4\\% vs.\\ 66.0\\% for GEPA",
+          "injected_text": "overall (76.5\\% vs.\\ 66.0\\% for GEPA",
+          "rationale": "Perturbs the abstract's report of RELAI-VCL's lifelong average pass rate by 0.1, creating a mismatch with the body (Table 1 and Section 6.4) which still correctly states 76.4%.",
+          "ground_truth_description": "Changes the RELAI-VCL lifelong average pass rate in the abstract from 76.4% to 76.5%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "76.4\\%",
+            "value_after_raw": "76.5\\%",
+            "value_before_float": 76.4,
+            "value_after_float": 76.5,
+            "location_cue": "highest lifelong average pass rate overall (76.4\\% vs.\\ 66.0\\% for GEPA",
+            "paired_location": "Table 1 and Section 6.4",
+            "quantity_label": "RELAI-VCL lifelong average pass rate %",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r],",
+          "injected_text": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } s],",
+          "rationale": "The summation over trials binds the index 'r', but the indicator function inside the sum references an unquantified index 's', creating an unbound free index on the RHS.",
+          "ground_truth_description": "Altered the bound index 'r' to an unbound index 's' in the summand of the PassRate equation, leaving it unquantified.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.3 first display",
+            "original_fragment_latex": "\\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r]",
+            "injected_fragment_latex": "\\mathbbm{1}[A \\text{ solves } t \\text{ on trial } s]",
+            "full_equation_latex_before": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } r],",
+            "full_equation_latex_after": "\\text{PassRate}(A, \\mathcal{T}) = \\frac{1}{R\\,|\\mathcal{T}|}\\sum_{t \\in \\mathcal{T}} \\sum_{r=1}^{R} \\mathbbm{1}[A \\text{ solves } t \\text{ on trial } s],",
+            "term_role": "injected shape/index mismatch",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "measuring transfer to the newly introduced Phase 2 tasks (the Transfer metric). After Phase 2 optimization, the final agent is evaluated on the full task union (the Final metric).",
+          "injected_text": "measuring transfer to the newly introduced Phase 2 tasks (the Transfer metric). To ensure only robust methods proceed, any optimizer that scores below the unoptimized baseline during transfer is automatically disqualified from Phase 2. After Phase 2 optimization, the final agent is evaluated on the full task union (the Final metric).",
+          "rationale": "The inserted methodology rule claims that any optimizer performing below baseline during transfer is disqualified from Phase 2, but the Results section explicitly reports that GEPA falls below the baseline in transfer yet is still evaluated in Phase 2.",
+          "ground_truth_description": "Added a methodology claim that optimizers performing worse than the unoptimized baseline during transfer are disqualified from Phase 2, which contradicts the results showing GEPA proceeding to Phase 2 despite poor transfer.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methodology_setup_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Sec. 5.3",
+            "affected_span_verbatim": "We then evaluate the same Phase 1-optimized agent on the combined 22-task union without additional optimization, measuring transfer to the newly introduced Phase 2 tasks (the Transfer metric). After Phase 2 optimization, the final agent is evaluated on the full task union (the Final metric)."
+          },
+          "proposer_agent": "injector.general.S3.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "group-relative policy-gradient fine-tuning of model weights~\\citep{grpo}",
+          "injected_text": "policy-gradient fine-tuning of model weights~\\citep{grpo}",
+          "rationale": "Dropping the 'group-relative' modifier makes the claim describe generic policy-gradient fine-tuning rather than the specific group-relative formulation introduced by the cited paper.",
+          "ground_truth_description": "Removed the 'group-relative' methodological qualifier from the description of the GRPO method.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "grpo",
+            "injected_cite_key": "grpo",
+            "claim_sentence_verbatim": "GRPO represents a different mechanism entirely: group-relative policy-gradient fine-tuning of model weights~\\citep{grpo}, which changes the underlying model rather than the harness wrapped around it.",
+            "section_location": "Sec. 2.1",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "its pass rate on the unseen Phase 2 tasks alone is 65.0\\%, about",
+          "injected_text": "its pass rate on the unseen Phase 2 tasks alone is 85.0\\% (13 of 20 trials), about",
+          "rationale": "The edit shifts the reported percentage from 65.0% to 85.0% while inserting the true fractional counts (13 of 20 trials), creating a clear percent_of arithmetic inconsistency (>10% relative error) typical of an author updating a percentage but forgetting to update the raw numbers in parentheses.",
+          "ground_truth_description": "The pass rate on Phase 2 tasks was changed from 65.0% to 85.0% and the raw fraction (13 of 20 trials) was explicitly added, creating a mathematical inconsistency since 13/20 is 65%, not 85%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_of",
+            "value_before_raw": "65.0\\%",
+            "value_after_raw": "85.0\\%",
+            "value_before_float": 65.0,
+            "value_after_float": 85.0,
+            "location_cue": "its pass rate on the unseen Phase 2 tasks alone is 85.0\\% (13 of 20 trials), about",
+            "paired_location": null,
+            "quantity_label": "pass rate on unseen Phase 2 tasks",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t2.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "\\text{Transfer} &= \\text{PassRate}(A_1, \\mathcal{T}_1 \\cup \\mathcal{T}_2)",
+          "injected_text": "\\text{Transfer} &= \\text{PassRate}(A_1, \\mathcal{T}_1 \\cap \\mathcal{T}_2)",
+          "rationale": "The union operator is swapped to an intersection in the Transfer equation, making it mathematically inconsistent with the Final equation which correctly evaluates on the union as described in the prose.",
+          "ground_truth_description": "Changed \\cup to \\cap in the Transfer pass rate equation, contradicting the evaluation set used in the Final equation and the surrounding text.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.3",
+            "original_fragment_latex": "\\mathcal{T}_1 \\cup \\mathcal{T}_2",
+            "injected_fragment_latex": "\\mathcal{T}_1 \\cap \\mathcal{T}_2",
+            "full_equation_latex_before": "\\begin{align*}\n\\text{Phase-1} &= \\text{PassRate}(A_1, \\mathcal{T}_1) \\\\\n\\text{Transfer} &= \\text{PassRate}(A_1, \\mathcal{T}_1 \\cup \\mathcal{T}_2) \\\\\n\\text{Final} &= \\text{PassRate}(A_2, \\mathcal{T}_1 \\cup \\mathcal{T}_2) \\\\\n\\text{LifelongAvg} &= \\tfrac{1}{3}\\left(\\text{Phase-1} + \\text{Transfer} + \\text{Final}\\right)\n\\end{align*}",
+            "full_equation_latex_after": "\\begin{align*}\n\\text{Phase-1} &= \\text{PassRate}(A_1, \\mathcal{T}_1) \\\\\n\\text{Transfer} &= \\text{PassRate}(A_1, \\mathcal{T}_1 \\cap \\mathcal{T}_2) \\\\\n\\text{Final} &= \\text{PassRate}(A_2, \\mathcal{T}_1 \\cup \\mathcal{T}_2) \\\\\n\\text{LifelongAvg} &= \\tfrac{1}{3}\\left(\\text{Phase-1} + \\text{Transfer} + \\text{Final}\\right)\n\\end{align*}",
+            "term_role": "cross-equation inconsistency: evaluation task set in Transfer vs Final equations",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t2.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "Let $A_0$ denote the fixed baseline agent before optimization.",
+          "injected_text": "Let $B_0$ denote the fixed baseline agent before optimization.",
+          "rationale": "Renames the baseline agent to $B_0$ in Section 3.1, creating a local notation inconsistency with Section 3.2 and 4.1 which continue to refer to it as $A_0$.",
+          "ground_truth_description": "Renames the baseline agent notation from A_0 to B_0 in Section 3.1 without updating subsequent usages.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D3",
+            "change_kind": "notation_drift",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 3.1",
+            "affected_span_verbatim": "We evaluate agent optimizers in a phased setting intended to capture a minimal form of continual learning. Let $\\mathcal{T}_1$ denote an initial set of tasks and $\\mathcal{T}_2$ denote a later set of newly introduced tasks. The task stream therefore expands from $\\mathcal{T}_1$ to $\\mathcal{T}_1 \\cup \\mathcal{T}_2$. Let $A_0$ denote the fixed baseline agent before optimization."
+          },
+          "proposer_agent": "injector.general.S1.t3.v3"
+        }
+      ]
+    }
+  ]
+}

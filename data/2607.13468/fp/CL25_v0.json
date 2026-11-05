@@ -1,0 +1,205 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "CL25",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-936308a29358",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 4 occurrences; min sigfigs = 2; range = [0.75, 17.0]",
+        "evidence": {
+          "check_type": "repeated_constant",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 17.0,
+            "reported": 0.75,
+            "diff_abs": 16.25,
+            "diff_rel": 0.9558823529411765,
+            "tolerance": {
+              "abs_tol": 0.005,
+              "rel_tol": 0.05
+            },
+            "notes": "4 occurrences; min sigfigs = 2; range = [0.75, 17.0]"
+          },
+          "rereader": [
+            {
+              "label": "SSIM_table2_depth3",
+              "raw_observed": "0.75",
+              "value_observed": 0.75,
+              "notes": "Table 2, Depth=3 row, SSIM column"
+            },
+            {
+              "label": "PSNR_table2_depth3",
+              "raw_observed": "11.89",
+              "value_observed": 11.89,
+              "notes": "Table 2, Depth=3 row, PSNR column"
+            },
+            {
+              "label": "SSIM_table4_fullmodel",
+              "raw_observed": "0.89",
+              "value_observed": 0.89,
+              "notes": "Table 4, Full Model row, SSIM column"
+            },
+            {
+              "label": "PSNR_table4_fullmodel",
+              "raw_observed": "17.00",
+              "value_observed": 17.0,
+              "notes": "Table 4, Full Model row, PSNR column"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.15794599999999948
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-c2330dde762b",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 explicitly shows TRELLIS achieving IoU of 0.8603 (bolded) versus HIVE-3D's 0.7449, a gap of over 14 percentage points. The paper claims \"consistently strong performance across all metrics\" and that HIVE-3D \"significantly outperforms previous approaches,\" which is directly contradicted by this result.",
+        "evidence": {
+          "claim": "The paper claims HIVE-3D significantly outperforms previous approaches and shows consistently strong performance across all metrics, but Table 1 shows TRELLIS outperforms HIVE-3D on IoU with a ≈14% gap.",
+          "excerpt": "The abstract, introduction and §5.2 claim that HIVE-3D \"significantly outperforms previous approaches\" and shows \"consistently strong performance across all metrics\", but Table 1 explicitly shows TRELLIS outperforming HIVE-3D on IoU (0.8603 vs. 0.7449 — a ≈14% relative gap that the paper itself bolds in TRELLIS's favour). The same overclaim recurs in the conclusion (\"outperforms existing methods in terms of 3D scene generation quality\"). Why it matters: IoU is one of only three geometry metrics reported in Table 1, so a >14 point deficit is not compatible with \"consistently strong across all metrics\"."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 explicitly shows TRELLIS achieving IoU of 0.8603 (bolded) versus HIVE-3D's 0.7449, a gap of over 14 percentage points. The paper claims \"consistently strong performance across all metrics\" and that HIVE-3D \"significantly outperforms previous approaches,\" which is directly contradicted by this result.",
+            "cost_usd": 0.0079954
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does broadly claim that it 'significantly outperforms previous approaches' and that 'HIVE-3D demonstrates consistently strong performance across all metrics,' but Table 1 is mixed: 'TRELLIS ... IoU 0.8603' versus 'Ours ... 0.7449,' while HIVE-3D is better on CD and F-Score. This suggests some overstatement, but it does not strictly falsify a qualitative overall-performance claim.",
+            "cost_usd": 0.0205325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims 'HIVE-3D demonstrates consistently strong performance across all metrics' in Section 5.2, but Table 1 clearly shows TRELLIS achieving a significantly higher IoU (0.8603) compared to HIVE-3D (0.7449).",
+            "cost_usd": 0.0032460666666666665
+          }
+        ],
+        "cost_usd": 0.03177396666666667
+      },
+      {
+        "flag_id": "fp-6fa4e908cc80",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 6 shows HIVE-3D with SSIM 0.79 and LPIPS 0.33, worse than MIDI (0.80/0.25), and the appendix (B.1) still asserts \"HIVE-3D demonstrates consistently strong performance across all metrics,\" which is factually inconsistent with the table data.",
+        "evidence": {
+          "claim": "Table 6 contradicts the claim of 'consistently strong' performance: HIVE-3D is worse than MIDI, SceneGen, and TRELLIS on SSIM/LPIPS and only ties or narrowly leads on other metrics.",
+          "excerpt": "Table 6 (3D-FRONT + real data) contradicts the same \"consistently strong\" claim more severely. Ours: SSIM 0.79, LPIPS 0.33 — worse than MIDI (0.80 / 0.25), SceneGen (0.79 / 0.31) and TRELLIS (0.80 / 0.31) on both metrics; HIVE-3D leads only on PSNR (13.39 vs. TRELLIS 13.31, a 0.08 dB gap) and CLIP (0.97 vs. SceneGen 0.96). Yet Appendix B.1 asserts \"HIVE-3D demonstrates consistently strong performance across all metrics.\""
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 6 shows HIVE-3D with SSIM 0.79 and LPIPS 0.33, worse than MIDI (0.80/0.25), and the appendix (B.1) still asserts \"HIVE-3D demonstrates consistently strong performance across all metrics,\" which is factually inconsistent with the table data.",
+            "cost_usd": 0.0079954
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Appendix B.1 says 'As shown in Table 6, HIVE-3D demonstrates consistently strong performance across all metrics,' and Table 6 indeed shows mixed rather than dominant results: 'Ours 0.79 13.39 0.33 0.97' versus stronger SSIM/LPIPS for some baselines. Because 'consistently strong' is qualitative rather than a claim of best-on-every-metric, this is not a clear-cut factual contradiction.",
+            "cost_usd": 0.0205325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendix B.1 asserts that 'HIVE-3D demonstrates consistently strong performance across all metrics' based on Table 6. However, Table 6 shows HIVE-3D trailing MIDI, SceneGen, and TRELLIS on LPIPS, and failing to outperform MIDI and TRELLIS on SSIM.",
+            "cost_usd": 0.0032460666666666665
+          }
+        ],
+        "cost_usd": 0.03177396666666667
+      },
+      {
+        "flag_id": "fp-ed5b2b13a568",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 2 shows LPIPS of 0.38 at Depth=1 (best, bolded) and 0.41 at both Depth=2 and Depth=3, directly contradicting the claim that \"the quality and level of detail in the generated scenes progressively improve as the recursion depth increases.\"",
+        "evidence": {
+          "claim": "The depth-ablation claim of progressive improvement is contradicted by Table 2, where deeper recursion does not result in better LPIPS and CLIP metrics.",
+          "excerpt": "The depth-ablation text contradicts the depth-ablation table. Page 7 (§5.3, \"Depth of the hierarchical generation\") states that \"the quality and level of detail in the generated scenes progressively improve as the recursion depth increases\", but Table 2 shows LPIPS↓ = 0.38 at depth 1, 0.41 at depth 2 and 0.41 at depth 3 — i.e. depth 1 has the best (bolded) LPIPS, and depth 3 is strictly worse on the one perceptual metric where \"progressive improvement\" would be most meaningful."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 2 shows LPIPS of 0.38 at Depth=1 (best, bolded) and 0.41 at both Depth=2 and Depth=3, directly contradicting the claim that \"the quality and level of detail in the generated scenes progressively improve as the recursion depth increases.\"",
+            "cost_usd": 0.0079954
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The flag is factually wrong about CLIP: Table 2 reports 'CLIP↑' values of '0.94' (Depth=1), '0.95' (Depth=2), and '0.96' (Depth=3), so deeper recursion does improve CLIP. While LPIPS worsens ('0.38, 0.41, 0.41'), the specific claim that both LPIPS and CLIP fail to improve is incorrect.",
+            "cost_usd": 0.0205325
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 5.3 claims that 'quality and level of detail in the generated scenes progressively improve as the recursion depth increases' and cites Table 2, but Table 2 shows that LPIPS worsens from 0.38 at depth 1 to 0.41 at depth 3.",
+            "cost_usd": 0.0032460666666666665
+          }
+        ],
+        "cost_usd": 0.03177396666666667
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.15794599999999948,
+    "general": 0.0953219
+  },
+  "extractor_cost_usd": 0.016594000000000053,
+  "total_cost_usd": 0.26986189999999954
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "the conclusion reached previously for the Nuker model \\citep{Baes2020a}",
+    "injected_text": "the convergence criterion established for numerical Abel-transform inversions in triaxial stellar systems \\citep{Baes2020a}",
+    "rationale": "Replacing the accurate claim that Baes2020a concerns the Nuker model with a claim that it establishes convergence criteria for Abel-transform inversions in triaxial geometries — a topic entirely absent from that paper — while keeping the cite key intact, producing a UNRELATED verdict.",
+    "ground_truth_description": "The claim about what Baes2020a showed was changed from 'conclusion reached previously for the Nuker model' to a fabricated result about triaxial Abel-transform convergence, a topic Baes2020a does not discuss.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Baes2020a",
+      "injected_cite_key": "Baes2020a",
+      "claim_sentence_verbatim": "This result parallels, but is not identical to, the conclusion reached previously for the Nuker model \\citep{Baes2020a}, reinforcing that broken power-law transitions, even when embedded in a global S\\'ersic structure, must remain sufficiently gradual to preserve realistic intrinsic behaviour.",
+      "section_location": "Sec. 4 (Discussion)",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "in the bottom row the inner slope is fixed to $\\gamma = 0.25$ and the S\\'ersic index $m$ is varied.",
+    "injected_text": "in the bottom row the inner slope is fixed to $\\gamma = 0.24$ and the S\\'ersic index $m$ is varied.",
+    "rationale": "The abstract of this paper contains no numerical values at all, making a strict abstract-vs-body injection impossible; the best available repeated headline value is the reference-model inner slope γ=0.25, which appears in the Figure 1 caption (edit site) and again unchanged in the Section 3.2 and 3.3 body text, so changing the caption value by ±1 in the last decimal (0.25→0.24) creates a plausible author mistype that a reviewer can detect by comparing the caption to the description in the body.",
+    "ground_truth_description": "Inner power-law slope γ in the Figure 1 caption was changed from 0.25 to 0.24; the body text in Sections 3.2 and 3.3 retains the original value 0.25.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "0.25",
+      "value_after_raw": "0.24",
+      "value_before_float": 0.25,
+      "value_after_float": 0.24,
+      "location_cue": "in the bottom row the inner slope is fixed to $\\gamma = 0.25$ and the S\\'ersic index $m$ is varied",
+      "paired_location": "Section 3.2 body text: 'in the bottom row we fixed $\\gamma=0.25$ and we varied the S\\'ersic index, $m$'",
+      "quantity_label": "inner power-law slope gamma of the reference core-Sersic model",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "\\Ib \\exp\\left[-b\\left(\\frac{R}{\\Re}\\right)^{\\frac{1}{m}} + b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}\\right]",
+    "injected_text": "\\Ib \\exp\\left[-b\\left(\\frac{R}{\\Re}\\right)^{\\frac{1}{m}} - b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}\\right]",
+    "rationale": "The sharp-transition limit equation derives directly from Eq. (coreSersic): taking α→∞ for R≥Rb gives I(R)=Ib·exp[−b(R/Re)^{1/m}+b(Rb/Re)^{1/m}] (with a '+' sign) because I'→Ib·exp[+b(Rb/Re)^{1/m}] in that limit; flipping the sign to '−' makes the sharp-transition equation inconsistent with the general defining equation and also breaks continuity at R=Rb (the R≥Rb piece no longer evaluates to Ib at R=Rb, contradicting the R≤Rb piece).",
+    "ground_truth_description": "In the sharp-transition core–Sérsic equation (R≥Rb branch), the normalization term '+b(Rb/Re)^{1/m}' in the exponent was changed to '−b(Rb/Re)^{1/m}', making this equation inconsistent with the general Eq. (coreSersic) from which it is derived as the α→∞ limit.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sharp-transition limit equation (unnumbered cases equation), Section 2 (The core–Sérsic model)",
+      "original_fragment_latex": "+ b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}",
+      "injected_fragment_latex": "- b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}",
+      "full_equation_latex_before": "I(R) \n= \n\\begin{cases}\n\\;\\displaystyle\n\\Ib \\left(\\frac{R}{\\Rb}\\right)^{-\\gamma}\n&\n\\quad R\\leqslant\\Rb,\n\\\\[1em]\n\\;\\displaystyle\n\\Ib \\exp\\left[-b\\left(\\frac{R}{\\Re}\\right)^{\\frac{1}{m}} + b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}\\right]\n&\n\\quad R\\geqslant\\Rb.\n\\end{cases}",
+      "full_equation_latex_after": "I(R) \n= \n\\begin{cases}\n\\;\\displaystyle\n\\Ib \\left(\\frac{R}{\\Rb}\\right)^{-\\gamma}\n&\n\\quad R\\leqslant\\Rb,\n\\\\[1em]\n\\;\\displaystyle\n\\Ib \\exp\\left[-b\\left(\\frac{R}{\\Re}\\right)^{\\frac{1}{m}} - b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}\\right]\n&\n\\quad R\\geqslant\\Rb.\n\\end{cases}",
+      "term_role": "cross-equation inconsistency: normalization exponent +b(Rb/Re)^{1/m} in the sharp-transition R≥Rb branch vs. the α→∞ limit of Eq. (coreSersic) (label: coreSersic) which mandates a '+' sign via the I' definition",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t2.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "By placing the core--S\\'ersic model on a firmer physical footing, our results provide a more reliable basis for interpreting the central structure of massive galaxies and for connecting observed cores to the merger-driven evolution of their SMBHs.",
+    "injected_text": "By placing the core--S\\'ersic model on a firmer physical footing, our results provide a more reliable basis for interpreting the central structure of massive galaxies and for connecting observed cores to the merger-driven evolution of their SMBHs, and more broadly demonstrate that analogous physical admissibility constraints govern any parametric photometric model applied across the full spectrum of galaxy types and environments.",
+    "rationale": "The added clause 'analogous physical admissibility constraints govern any parametric photometric model applied across the full spectrum of galaxy types and environments' is an unsupported sweeping generalisation: the paper derives constraints solely for the core--S\\'ersic model via spherical deprojection of massive early-type galaxies, and presents no analysis of other photometric models or of galaxy types beyond luminous ellipticals with depleted cores.",
+    "ground_truth_description": "The closing sentence of the Conclusions was extended with a clause claiming that the paper's admissibility constraints generalise to all parametric photometric models across all galaxy types, a scope far beyond what the Results demonstrate.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B7",
+      "change_kind": "overstated_conclusion",
+      "expected_bucket": "major",
+      "section_location": "Conclusion",
+      "affected_span_verbatim": "By placing the core--S\\'ersic model on a firmer physical footing, our results provide a more reliable basis for interpreting the central structure of massive galaxies and for connecting observed cores to the merger-driven evolution of their SMBHs."
+    },
+    "proposer_agent": "injector.general.S3.t2.v2"
+  }
+]

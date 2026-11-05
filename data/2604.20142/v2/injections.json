@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "Manuscript.tex",
+    "original_text": "We solved Equation \\ref{eq4} using a fully implicit finite-difference scheme \\citep{CHANG19701}",
+    "injected_text": "We solved Equation \\ref{eq4} using an explicit finite-difference scheme \\citep{CHANG19701}",
+    "rationale": "Chang & Cooper (1970) introduce an implicit (weighted) finite-difference scheme for Fokker-Planck equations; recasting it as 'explicit' swaps the numerical-method category (implicit vs explicit) while keeping the same general topic and the cite key intact, so a careful reader of the cited paper would return CONTRADICTED.",
+    "ground_truth_description": "Changed the description of the Chang & Cooper (1970) numerical scheme from 'fully implicit finite-difference' to 'explicit finite-difference', mis-categorising the method while preserving the citation.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "CHANG19701",
+      "injected_cite_key": "CHANG19701",
+      "claim_sentence_verbatim": "We solved Equation \\ref{eq4} using a fully implicit finite-difference scheme \\citep{CHANG19701} and implemented the numerical code in Python to compute the electron spectrum and the corresponding radiation spectrum.",
+      "section_location": "Sec. 2 (GRB Jet Model and Numerical Method)",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "Manuscript.tex",
+    "original_text": "In all simulations, the electron injection index is fixed at $p=2.8$ to reproduce the commonly observed high-energy index $\\beta \\approx -2.4$ of the Band function.",
+    "injected_text": "In all simulations, the electron injection index is fixed at $p=2.8$ to reproduce the commonly observed high-energy index $\\beta \\approx -3.4$ of the Band function.",
+    "rationale": "The fast-cooling synchrotron relation \\beta = -(p+2)/2 ties the explicitly named operands p=2.8 and \\beta to the Band high-energy index: with p=2.8 one obtains -(2.8+2)/2 = -2.4, exactly as the paper originally claims. Replacing -2.4 by -3.4 makes the (p+2)/2 = -\\beta arithmetic blatantly fail (would require p=4.8), a ~42% relative error well above the 20% threshold. Note: this paper has no textbook 'numerator/denominator/ratio' prose triple, so this is the closest realistic ratio_eq target — flagged here as a constraint tension consistent with the realism-first directive.",
+    "ground_truth_description": "Changed the stated target Band high-energy photon index from beta ~ -2.4 to beta ~ -3.4 while keeping p=2.8, breaking the standard fast-cooling synchrotron arithmetic relation -(p+2)/2 = beta.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "-2.4",
+      "value_after_raw": "-3.4",
+      "value_before_float": -2.4,
+      "value_after_float": -3.4,
+      "location_cue": "the electron injection index is fixed at $p=2.8$ to reproduce the commonly observed high-energy index $\\beta \\approx -3.4$ of the Band function",
+      "paired_location": null,
+      "quantity_label": "Band high-energy photon index beta corresponding to electron injection index p=2.8 via fast-cooling synchrotron relation beta = -(p+2)/2",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "Manuscript.tex",
+    "original_text": "\\dot{\\gamma}'_{e,\\rm tot} = \\dot{\\gamma}'_{e,\\rm syn}\n + \\dot{\\gamma}'_{e,\\rm adi}\n + \\dot{\\gamma}'_{e,\\rm SSC}",
+    "injected_text": "\\dot{\\gamma}'_{e,\\rm tot} = \\dot{\\gamma}'_{e,\\rm syn}\n + \\dot{\\gamma}'_{e,\\rm SSC}",
+    "rationale": "Drops the adiabatic cooling term from the total electron cooling rate sum, a single-term deletion at an operator boundary in a key displayed equation that the paper's electron continuity equation depends on; symbolic equality against the intact three-term sum will refute.",
+    "ground_truth_description": "Removed the adiabatic cooling rate term from the displayed equation defining the total electron cooling rate as the sum of synchrotron, adiabatic, and SSC cooling rates.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2 (GRB Jet Model and Numerical Method), total cooling rate equation immediately following the electron continuity equation (Eq. 4)",
+      "original_fragment_latex": " + \\dot{\\gamma}'_{e,\\rm adi}\n",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\dot{\\gamma}'_{e,\\rm tot} = \\dot{\\gamma}'_{e,\\rm syn}\n + \\dot{\\gamma}'_{e,\\rm adi}\n + \\dot{\\gamma}'_{e,\\rm SSC}",
+      "full_equation_latex_after": "\\dot{\\gamma}'_{e,\\rm tot} = \\dot{\\gamma}'_{e,\\rm syn}\n + \\dot{\\gamma}'_{e,\\rm SSC}",
+      "term_role": "adiabatic cooling rate term in the total electron cooling rate sum",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "Manuscript.tex",
+    "original_text": "A more realistic picture likely requires magnetic-field decay to operate in concert with non-stationary injection, sustained acceleration, and geometric effects, with their relative contributions quantified through the same forward-folding and uniform-fitting pipeline.",
+    "injected_text": "A more realistic picture likely requires magnetic-field decay to operate in concert with non-stationary injection, sustained acceleration, and geometric effects, with their relative contributions quantified through the same forward-folding and uniform-fitting pipeline. More broadly, the catalog-consistent framework developed here provides a generally applicable template for diagnosing the prompt-emission radiation mechanism of essentially any high-energy transient source whose spectra are characterized by empirical broken power-law functions.",
+    "rationale": "Adds a sweeping generalisation to the closing of the Conclusion that extrapolates a methodology demonstrated only on GRB Fermi-GBM Band fits with synchrotron models to 'essentially any high-energy transient source' — a scope vastly broader than what the Results actually establish.",
+    "ground_truth_description": "Inserted a closing sentence claiming the catalog-consistent forward-folding framework is a generally applicable template for diagnosing the prompt radiation mechanism of essentially any high-energy transient source, an unsupported generalisation beyond the GRB-specific scope of the paper's Results.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B7",
+      "change_kind": "overstated_conclusion",
+      "expected_bucket": "major",
+      "section_location": "Sec. 5 (Summary and Discussion), final paragraph",
+      "affected_span_verbatim": "Overall, within a catalog-consistent forward-folding and Band-recovery framework, we find that magnetic-field decay and SSC can harden the low-energy slope of fast-cooling synchrotron emission in some regimes, but they do not by themselves reproduce the peak and width of the GBM $\\alpha$ distribution statistically. A more realistic picture likely requires magnetic-field decay to operate in concert with non-stationary injection, sustained acceleration, and geometric effects, with their relative contributions quantified through the same forward-folding and uniform-fitting pipeline."
+    },
+    "proposer_agent": "injector.general.S3.t2.v2"
+  }
+]

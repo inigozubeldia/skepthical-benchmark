@@ -1,0 +1,341 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-3939e52541c9",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for '[13]'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "[13]"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-bda4dc244b38",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {base, percent, result}",
+        "evidence": {
+          "check_type": "percent_of",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {base, percent, result}"
+          },
+          "rereader": [
+            {
+              "label": "oracle_single_step",
+              "raw_observed": "0.0989",
+              "value_observed": 0.0989,
+              "notes": "Found in single-step retraction comparison."
+            },
+            {
+              "label": "oracle_multi_step",
+              "raw_observed": "0.0958",
+              "value_observed": 0.0958,
+              "notes": "Found for oracle after two steps."
+            },
+            {
+              "label": "learned_single_step",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": "Learned estimator mean exposure improvement for single-step."
+            },
+            {
+              "label": "learned_multi_step",
+              "raw_observed": "0.0941",
+              "value_observed": 0.0941,
+              "notes": "Learned estimator after two-step mean improvement."
+            },
+            {
+              "label": "claimed_oracle_improvement",
+              "raw_observed": "7.3%",
+              "value_observed": 7.3,
+              "notes": "Improvement percent for oracle multi-step over step-one."
+            },
+            {
+              "label": "claimed_learned_improvement",
+              "raw_observed": "15.5%",
+              "value_observed": 15.5,
+              "notes": "Improvement percent for learned estimator multi-step over step-one."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.02541300000000002
+      },
+      {
+        "flag_id": "fp-98b7e5210893",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 5 occurrences; min sigfigs = 2; range = [44.5, 200.0]",
+        "evidence": {
+          "check_type": "repeated_constant",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 200.0,
+            "reported": 44.5,
+            "diff_abs": 155.5,
+            "diff_rel": 0.7775,
+            "tolerance": {
+              "abs_tol": 50.0,
+              "rel_tol": 0.05
+            },
+            "notes": "5 occurrences; min sigfigs = 2; range = [44.5, 200.0]"
+          },
+          "rereader": [
+            {
+              "label": "oracle_success_rate_Sec_III_A",
+              "raw_observed": "47.0%",
+              "value_observed": 47.0,
+              "notes": "Oracle single-step success rate."
+            },
+            {
+              "label": "oracle_success_rate_Sec_III_B",
+              "raw_observed": "45.0%",
+              "value_observed": 45.0,
+              "notes": "Oracle two-step success rate."
+            },
+            {
+              "label": "oracle_success_rate_Sec_III_C",
+              "raw_observed": "44.5%",
+              "value_observed": 44.5,
+              "notes": "Constant success rate discussed in oracle analysis."
+            },
+            {
+              "label": "oracle_success_numerator",
+              "raw_observed": "89",
+              "value_observed": 89.0,
+              "notes": "Oracle succeeded on 89 episodes."
+            },
+            {
+              "label": "oracle_success_denominator",
+              "raw_observed": "200",
+              "value_observed": 200.0,
+              "notes": "Reported success rate computed over all 200 episodes."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.02541300000000002
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-40944e03d3aa",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports in Sec. III.A that 'the learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate, compared to 0.0989 and 47.0% for the oracle,' and provides no explanation for why a noisy, sparse-observation estimator outperforms the full-state oracle. This is a genuine anomaly that is never addressed or explained in the paper.",
+        "evidence": {
+          "claim": "The learned estimator outperforms the oracle in single-step evaluation (0.1055 vs. 0.0989), which is implausible, never explained, and suggests either an experimental error or a flawed oracle definition.",
+          "excerpt": "Learned estimator implausibly beats the oracle in single-step evaluation (Sec. III.A). Learned = 0.1055 vs. oracle = 0.0989, i.e., learned exceeds the full-state planner by 6.7% in mean improvement and by 3 pp in success rate. Since the 'oracle' is described as having full state access, a well-tuned oracle should upper-bound any estimator built on noisy sparse observations. The paper never addresses this inversion..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports in Sec. III.A that 'the learned estimator achieves a mean exposure improvement of 0.1055 with a 50.0% success rate, compared to 0.0989 and 47.0% for the oracle,' and provides no explanation for why a noisy, sparse-observation estimator outperforms the full-state oracle. This is a genuine anomaly that is never addressed or explained in the paper.",
+            "cost_usd": 0.003692475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports that \"the learned estimator achieves a mean exposure improvement of 0.1055 ... compared to 0.0989 ... for the oracle,\" and later states that \"the oracle is effectively near-optimal even at low compute,\" but it never explains why the learned method exceeds the full-state oracle in single-step evaluation.",
+            "cost_usd": 0.009490375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III.A explicitly states that 'the learned estimator achieves a mean exposure improvement of 0.1055... compared to 0.0989... for the oracle.' The paper provides no explanation for how the learned estimator based on partial observations outperforms the full-state oracle.",
+            "cost_usd": 0.0029094999999999998
+          }
+        ],
+        "cost_usd": 0.016092350000000002
+      },
+      {
+        "flag_id": "fp-baaa85388149",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper compares only against 'a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference' (Sec. III.A) and provides no ablation of the PCA dimensionality, MLP architecture, or regularization weights, nor any comparison to prior estimators cited in the introduction. The central architectural claims are therefore unsupported by comparative evidence.",
+        "evidence": {
+          "claim": "The only competing estimator is a naive baseline; no comparison to cited prior estimators or ablation of PCA, MLP, or regularizers. This leaves the central architectural choices unsupported.",
+          "excerpt": "Comparison baselines are inadequate to support the paper's headline claim (Sec. III.A, Sec. III.B). The paper's contribution is a *state estimator*, yet the only competing estimator evaluated is a 'naive baseline' ... None of the estimators from Refs. [7], [8], [9], [10] cited in the Introduction are compared against, nor is an ablation of the PCA prior, the MLP, or the geometry regularizers ($\\lambda_s$, $\\lambda_e$) provided. Consequently the paper cannot claim its architectural choices are load-bearing."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares only against 'a naive baseline that fills observed vertex positions and leaves unobserved vertices at the undeformed reference' (Sec. III.A) and provides no ablation of the PCA dimensionality, MLP architecture, or regularization weights, nor any comparison to prior estimators cited in the introduction. The central architectural claims are therefore unsupported by comparative evidence.",
+            "cost_usd": 0.003692475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "In experiments, the paper says, \"We compare the learned estimator against an oracle (full state access) and a naive baseline,\" and there is no reported comparison to prior estimators or any ablation of the \"PCA,\" \"three-layer multilayer perceptron,\" or \"geometry-aware regularization\" introduced in Sec. II.",
+            "cost_usd": 0.009490375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III.A confirms that the method is only compared against 'an oracle (full state access) and a naive baseline'. There are no comparisons to prior work or ablation studies of the PCA, MLP, or regularization terms within the text.",
+            "cost_usd": 0.0029094999999999998
+          }
+        ],
+        "cost_usd": 0.016092350000000002
+      },
+      {
+        "flag_id": "fp-3b8bcb53ecdb",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'A three-layer multilayer perceptron maps the noisy, partial observations to the latent space' but omits layer widths, activations, optimizer, learning rate, batch size, training iterations, target region geometry, and exact action parameterization. These omissions block reproducibility as the reviewer describes.",
+        "evidence": {
+          "claim": "Major methodological details are missing, blocking reproducibility: MLP structure, input encoding, optimization details, region spec, action space, training data, and evaluation procedures.",
+          "excerpt": "Methodology under-specified in ways that block reproduction (Sec. II.A–II.B, Sec. III). Missing details include: MLP layer widths and activations; how observed vertex indices are encoded as input to the MLP; optimizer, learning rate, batch size, number of training iterations; how the 'target region' (its geometry, location, area) is specified; the exact action parameterization ('grasp point + pull displacement'); the algorithm for measuring 'fraction of the target area not covered by the sheet'; the source of the 5,000 mesh states used to fit PCA..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'A three-layer multilayer perceptron maps the noisy, partial observations to the latent space' but omits layer widths, activations, optimizer, learning rate, batch size, training iterations, target region geometry, and exact action parameterization. These omissions block reproducibility as the reviewer describes.",
+            "cost_usd": 0.003692475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The methods remain high-level: \"A three-layer multilayer perceptron maps the noisy, partial observations,\" \"The network takes as input the observed vertex coordinates and their indices,\" and \"Actions correspond to patch-based pulling operations parameterized by a grasp point on the sheet and a pull displacement,\" but the paper does not specify layer widths/activations, index encoding, optimizer/training settings, or exact target/action/exposure computation details.",
+            "cost_usd": 0.009490375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "A review of the paper confirms missing methodological details. For example, Section II.A mentions 'A three-layer multilayer perceptron' but omits layer widths, activations, and optimization details, and Section II.B mentions generating data by 'sampling random mesh configurations' without detailing the generation process.",
+            "cost_usd": 0.0029094999999999998
+          }
+        ],
+        "cost_usd": 0.016092350000000002
+      },
+      {
+        "flag_id": "fp-74594252d1bc",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The conclusion states 'planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints,' yet the paper's evidence is limited to 'a randomized 2D deformable sheet model' with one observation density, one noise level, and a two-step horizon, and the authors themselves acknowledge in the conclusion that 'we plan to validate on real tissue data and investigate robustness under varying observation density and noise levels,' confirming the claim exceeds the demonstrated scope.",
+        "evidence": {
+          "claim": "The conclusion claims the method can replace physics simulation for deformable manipulation under realistic constraints, despite only demonstrating results on a single 2-D simulated sheet and lacking supporting evidence for such generality.",
+          "excerpt": "The Conclusion asserts that 'planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints.' The evidence base is a *single 2-D* simulated sheet, one target geometry, one observation density (40/900), one noise level ($\\sigma=0.02$), a two-step planning horizon, and no comparison to any physics-based planner. The claim as written far exceeds the demonstrated scope."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion states 'planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints,' yet the paper's evidence is limited to 'a randomized 2D deformable sheet model' with one observation density, one noise level, and a two-step horizon, and the authors themselves acknowledge in the conclusion that 'we plan to validate on real tissue data and investigate robustness under varying observation density and noise levels,' confirming the claim exceeds the demonstrated scope.",
+            "cost_usd": 0.003692475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims that \"planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints,\" yet the evidence is limited to \"All experiments are conducted in simulation using a randomized 2D deformable sheet model,\" with future real-data validation deferred to \"ongoing and future work.\"",
+            "cost_usd": 0.009490375
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims that 'learned representations can replace expensive physical simulation for deformable manipulation under realistic perception constraints', yet Section III explicitly states 'All experiments are conducted in simulation using a randomized 2D deformable sheet model', confirming the reviewer's concern about overclaiming.",
+            "cost_usd": 0.0029094999999999998
+          }
+        ],
+        "cost_usd": 0.016092350000000002
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "numerics": 0.05082600000000004,
+    "general": 0.06436940000000001
+  },
+  "extractor_cost_usd": 0.027399999999999994,
+  "total_cost_usd": 0.14259540000000004
+}

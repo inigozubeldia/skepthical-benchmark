@@ -1,0 +1,311 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L25",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-e9c80b086cb9",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'IP-Adapter citation (Sec. 2.2)'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "IP-Adapter citation (Sec. 2.2)"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-ce883f6e2a61",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 4 occurrences; min sigfigs = 2; range = [6.3, 59.3]",
+        "evidence": {
+          "check_type": "repeated_constant",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 59.3,
+            "reported": 6.3,
+            "diff_abs": 53.0,
+            "diff_rel": 0.8937605396290051,
+            "tolerance": {
+              "abs_tol": 0.05,
+              "rel_tol": 0.05
+            },
+            "notes": "4 occurrences; min sigfigs = 2; range = [6.3, 59.3]"
+          },
+          "rereader": [
+            {
+              "label": "HIVE-3D_Table1",
+              "raw_observed": "0.0035",
+              "value_observed": 0.0035,
+              "notes": "From Table 1 on page 7, Ours row, CD column."
+            },
+            {
+              "label": "HIVE-3D_Table5",
+              "raw_observed": "59.3",
+              "value_observed": 59.3,
+              "notes": "From Table 5 on page 15, row with '1 (depth = 1)', Generation (s) column."
+            },
+            {
+              "label": "TRELLIS_Table1",
+              "raw_observed": "0.0038",
+              "value_observed": 0.0038,
+              "notes": "From Table 1 on page 7, TRELLIS row, CD column."
+            },
+            {
+              "label": "TRELLIS_Table5",
+              "raw_observed": "59.3",
+              "value_observed": 59.3,
+              "notes": "From Table 5 on page 15, row with '1 (depth = 1)', Generation (s) column. Value for both HIVE-3D and TRELLIS at depth 1, as figures match and are labeled only by depth, not method."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.1590879999999999
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-4f3fe23eed16",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 clearly shows HIVE-3D IoU of 0.7449 vs. TRELLIS 0.8603 (a ~13-point gap), yet the paper states \"HIVE-3D demonstrates consistently strong performance across all metrics\" with no acknowledgment of this IoU regression. The paper does not explain the IoU degradation or soften the claim.",
+        "evidence": {
+          "claim": "The paper claims HIVE-3D demonstrates consistently strong/state-of-the-art performance over TRELLIS and other baselines, but the own results show HIVE-3D is significantly worse than TRELLIS on IoU (by ~13 points) and several other metrics—it does not consistently outperform SOTA.",
+          "excerpt": "Table 1 reports Ours vs. TRELLIS as CD 0.0035 vs. 0.0038, F-Score 84.34 vs. 81.29, but IoU 0.7449 vs. 0.8603, i.e., HIVE-3D is *worse* than TRELLIS on IoU by a large margin (~13 points)...The text says \"HIVE-3D demonstrates consistently strong performance across all metrics\" (Sec. 5.2), which is not consistent with this IoU drop. In Table 6, HIVE-3D also loses to TRELLIS on SSIM (0.79 vs. 0.80) and ties/loses on LPIPS (0.33 vs. 0.31) and to MIDI on LPIPS (0.25). The paper should (i) acknowledge these losses, (ii) explain the IoU degradation (plausibly caused by pose/scale misalignment of refined components inflating false negatives at the voxel level), and (iii) soften the \"state-of-the-art\" / \"consistently strong\" claims accordingly."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 clearly shows HIVE-3D IoU of 0.7449 vs. TRELLIS 0.8603 (a ~13-point gap), yet the paper states \"HIVE-3D demonstrates consistently strong performance across all metrics\" with no acknowledgment of this IoU regression. The paper does not explain the IoU degradation or soften the claim.",
+            "cost_usd": 0.00619644
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly claims \"Extensive experiments demonstrate that our method significantly outperforms previous approaches, achieving state-of-the-art performance\" and later says \"HIVE-3D demonstrates consistently strong performance across all metrics,\" but Table 1 lists \"TRELLIS ... IoU 0.8603\" versus \"Ours 0.7449,\" which contradicts the \"across all metrics\" wording.",
+            "cost_usd": 0.012398999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims in Section 5.2 that \"HIVE-3D demonstrates consistently strong performance across all metrics,\" but Table 1 clearly shows HIVE-3D achieving a lower IoU (0.7449) than TRELLIS (0.8603), and Table 6 shows it trailing TRELLIS in SSIM (0.79 vs 0.80).",
+            "cost_usd": 0.00276244
+          }
+        ],
+        "cost_usd": 0.02135788
+      },
+      {
+        "flag_id": "fp-5714ce34d6e0",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The abstract claims HIVE-3D \"significantly outperforms previous approaches, achieving state-of-the-art performance,\" but Tables 1 and 6 show losses to TRELLIS on IoU (0.7449 vs. 0.8603), SSIM (0.79 vs. 0.80), and LPIPS (0.33 vs. 0.31), and the paper never qualifies or explains these shortfalls.",
+        "evidence": {
+          "claim": "The abstract and introduction claim HIVE-3D significantly outperforms previous approaches and achieves state-of-the-art performance, but the results in the paper do not uniformly support this claim—HIVE-3D is worse than prior work on key metrics.",
+          "excerpt": "The abstract and introduction claim HIVE-3D \"significantly outperforms previous approaches, achieving state-of-the-art performance,\" but the reported numerical evidence is mixed: HIVE-3D is behind TRELLIS on IoU (Table 1), behind TRELLIS on SSIM and LPIPS on the combined 3D-FRONT + real set (Table 6), and behind MIDI on LPIPS. The strongest gains are on CLIP (a coarse semantic metric) and small deltas in CD/F-Score/PSNR. The current claim overreaches the evidence and should be softened, or additional evidence should be given."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The abstract claims HIVE-3D \"significantly outperforms previous approaches, achieving state-of-the-art performance,\" but Tables 1 and 6 show losses to TRELLIS on IoU (0.7449 vs. 0.8603), SSIM (0.79 vs. 0.80), and LPIPS (0.33 vs. 0.31), and the paper never qualifies or explains these shortfalls.",
+            "cost_usd": 0.00619644
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The abstract says the method \"significantly outperforms previous approaches, achieving state-of-the-art performance,\" yet the reported metrics are mixed: Table 1 shows \"TRELLIS ... IoU 0.8603\" vs. \"Ours 0.7449,\" and Table 6 shows \"TRELLIS 0.80 13.31 0.31 0.95\" vs. \"Ours 0.79 13.39 0.33 0.97,\" so the blanket superiority claim is not uniformly supported by the paper's own numbers.",
+            "cost_usd": 0.012398999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The abstract claims the method \"significantly outperforms previous approaches, achieving state-of-the-art performance,\" which is an overreach given that it underperforms TRELLIS on key metrics like IoU (Table 1) and SSIM (Table 6).",
+            "cost_usd": 0.00276244
+          }
+        ],
+        "cost_usd": 0.02135788
+      },
+      {
+        "flag_id": "fp-58ae6c46ceac",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states depth=1 represents applying TRELLIS to produce the initial scene, yet depth=1 in Table 2 gives SSIM=0.70, PSNR=10.13, CLIP=0.94, while Table 6 reports TRELLIS as SSIM=0.80, PSNR=13.31, CLIP=0.95—substantial differences with no explanation of what differs at depth=1 vs. the TRELLIS baseline or whether the evaluation protocols differ.",
+        "evidence": {
+          "claim": "The depth-1 ablation results in Table 2 do not match expected TRELLIS baseline performance as described in the text. This calls into question the experiment's configuration or comparability between tables. Requires clarification.",
+          "excerpt": "Sec. 4.3 and the pipeline description state that at depth 1 the scene is exactly the TRELLIS initial scene (no super-resolution or refinement is applied yet). If so, the depth = 1 row in Table 2 should correspond to TRELLIS's numbers. But Table 2 gives depth = 1 CLIP = 0.94, SSIM = 0.70, PSNR = 10.13, while Table 6 reports TRELLIS as CLIP = 0.95, SSIM = 0.80, PSNR = 13.31. Either depth = 1 is not simply TRELLIS (in which case the paper needs to describe what is applied at depth 1) or the evaluation protocols differ between tables (in which case the tables are not comparable). This should be clarified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states depth=1 represents applying TRELLIS to produce the initial scene, yet depth=1 in Table 2 gives SSIM=0.70, PSNR=10.13, CLIP=0.94, while Table 6 reports TRELLIS as SSIM=0.80, PSNR=13.31, CLIP=0.95—substantial differences with no explanation of what differs at depth=1 vs. the TRELLIS baseline or whether the evaluation protocols differ.",
+            "cost_usd": 0.00619644
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper says \"the root node of the scene tree represents the entire initial scene\" and separately reports depth ablations \"with depths of 1, 2, and 3,\" but it never explicitly states whether \"Depth=1\" in Table 2 is the unmodified TRELLIS output. At the same time, Table 5 gives \"1 (depth = 1) ... Generation (s) 59.3,\" suggesting depth-1 may include additional generation, so the reviewer's assumption is not clearly established from the paper.",
+            "cost_usd": 0.012398999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper initializes the scene tree \"by generating the root node from the input RGB image I_input using TRELLIS\" (Sec 4.1), yet the Depth=1 results in Table 2 (e.g., PSNR 10.13) differ substantially from the TRELLIS results in Table 6 (e.g., PSNR 13.31) without explaining the discrepancy.",
+            "cost_usd": 0.00276244
+          }
+        ],
+        "cost_usd": 0.02135788
+      },
+      {
+        "flag_id": "fp-e203e5cb9efa",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Tables 2, 3, 4, and 6 all report SSIM/PSNR/LPIPS/CLIP for the full model or closely related configurations, with PSNR ranging from ~11.6 to 17.0 and LPIPS from 0.20 to 0.41, but the paper never explains which dataset, viewpoints, or configuration each table uses, making the results inconsistent and unreliable.",
+        "evidence": {
+          "claim": "The same method (Full Model) shows widely differing results in different tables for the same metrics (e.g., PSNR, LPIPS, SSIM, CLIP), indicating unclear or inconsistent evaluation protocols/configurations. This undercuts the reliability of the reported results.",
+          "excerpt": "Table 4's Full Model row gives SSIM 0.89, PSNR 17.00, LPIPS 0.20, CLIP 0.97; Table 3's w/ voxel SR gives SSIM 0.76, PSNR 11.61, LPIPS 0.35, CLIP 0.96; Table 2's depth = 3 gives SSIM 0.75, PSNR 11.89, LPIPS 0.41, CLIP 0.96; Table 6's Ours gives SSIM 0.79, PSNR 13.39, LPIPS 0.33, CLIP 0.97. These are ostensibly the same method evaluated with the same four metrics, yet the numbers vary by up to 5+ PSNR points and 0.2 LPIPS. The paper needs to state, per table, which dataset, which viewpoints, and which configuration are used, and to explain why the \"full model\" performance differs so much between tables."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Tables 2, 3, 4, and 6 all report SSIM/PSNR/LPIPS/CLIP for the full model or closely related configurations, with PSNR ranging from ~11.6 to 17.0 and LPIPS from 0.20 to 0.41, but the paper never explains which dataset, viewpoints, or configuration each table uses, making the results inconsistent and unreliable.",
+            "cost_usd": 0.00619644
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation setup is under-specified across tables: Table 6 is explicitly captioned \"Quantitative Comparisons on 3D-FRONT and real data,\" but for the ablations the paper only says \"We present the quantitative results of our ablation study, evaluated with the SSIM, PSNR, LPIPS, CLIP\" without stating the dataset/viewpoints/configuration for Tables 2–4. Given the large metric shifts across these tables, the paper does not clearly explain why the same metrics for the method differ so much.",
+            "cost_usd": 0.012398999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The proposed method is evaluated on the same metrics across different tables but yields drastically different numbers (e.g., Table 4 \"Full Model\" PSNR 17.00 vs Table 6 \"Ours\" PSNR 13.39 vs Table 2 \"Depth=3\" PSNR 11.89) without specifying the differences in evaluation setups.",
+            "cost_usd": 0.00276244
+          }
+        ],
+        "cost_usd": 0.02135788
+      },
+      {
+        "flag_id": "fp-2d2c0de0e3c4",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=AMBIGUOUS: Appendix A.3 provides a first-principles justification of the minimal sample size of 3 for the Kabsch/SVD-based rigid transformation, stating \"Given three non-collinear point correspondences, a rigid transformation can be estimated by solving for the rotation and translation, e.g., via the Kabsch algorithm.\" Whether this is misleading or merely non-standard is a matter of presentation preference rather than a clear factual error.",
+        "evidence": {
+          "claim": "Explanation of minimal sample size and Kabsch algorithm is potentially misleading and does not anchor the design choice (default of 3) to Open3D's standard, which is a more transparent justification. The current argument may confuse readers.",
+          "excerpt": "The RANSAC minimal sample size explanation in Appendix A.3 contains a subtle but confusing statement...this defence is added in response to what appears to be an internal concern, and the reader should be told that Open3D's default is 3 in exactly this sense—please cite the relevant Open3D behaviour rather than argue it from first principles."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "low",
+            "reason": "Appendix A.3 provides a first-principles justification of the minimal sample size of 3 for the Kabsch/SVD-based rigid transformation, stating \"Given three non-collinear point correspondences, a rigid transformation can be estimated by solving for the rotation and translation, e.g., via the Kabsch algorithm.\" Whether this is misleading or merely non-standard is a matter of presentation preference rather than a clear factual error.",
+            "cost_usd": 0.00619644
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The appendix already anchors the implementation to Open3D and explains the sample size: \"we use the registration ransac based on feature matching function in Open3D\" and \"The RANSAC procedure is configured with a minimal sample size of 3... Given three non-collinear point correspondences, a rigid transformation can be estimated.\" The reviewer’s complaint is about a preferred style of justification, not a factual defect unresolved by the paper.",
+            "cost_usd": 0.012398999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper provides a mathematically correct explanation for the minimal sample size of 3, noting that \"Given three non-collinear point correspondences, a rigid transformation can be estimated by solving for the rotation and translation.\" The reviewer's request to cite Open3D's defaults instead is a subjective preference.",
+            "cost_usd": 0.00276244
+          }
+        ],
+        "cost_usd": 0.02135788
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "numerics": 0.1590879999999999,
+    "general": 0.10678939999999999
+  },
+  "extractor_cost_usd": 0.024720000000000353,
+  "total_cost_usd": 0.2905974000000002
+}

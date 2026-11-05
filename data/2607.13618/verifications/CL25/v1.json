@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13618",
+  "copy_id": "v1",
+  "reviewer_system": "CL25",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag anything about the InvAgent citation or the description of baselines as 'supervised and imitation-learning' versus 'heuristic and reinforcement-learning'. The citation-related comment in the review concerns reference [5] (Schmied et al.) and the knowing-doing gap framing, which is unrelated to this injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review discusses a different citation issue about the 'knowing-doing gap' references, but does not challenge the InvAgent claim about 'supervised and imitation-learning baselines' against the cited source. No specific flag corresponds to the injected methodology-category swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses the Schmied et al. reference and the term 'knowing-doing gap' but does not challenge or mention the InvAgent citation or the description of its baselines.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section 3.3 states group sizes \"ISOLATED (12 seeds), PERSISTENT (24 seeds), COMPOUND (23 seeds)\", which sum to 59 and contradict the \"fifty seeds\" repeatedly stated in the abstract... Table 2's caption (\"11/15/23 scoreable per group after the seed with negative headroom is excluded\"; total n=49) and Section 6's statement that \"group means pool 11–23 seeds\" both imply the true PERSISTENT count is 15, not 24 (12+15+23 = 50, minus one excluded seed = 49). **Fix:** correct \"PERSISTENT (24 seeds)\" to \"PERSISTENT (15 seeds)\"",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section 3.3 states group sizes \"ISOLATED (12 seeds), PERSISTENT (24 seeds), COMPOUND (23 seeds)\", which sum to 59 and contradict the \"fifty seeds\" repeatedly stated in the abstract... Table 2's caption (\"11/15/23 scoreable per group after the seed with negative headroom is excluded\"; total n=49) and Section 6's statement that \"group means pool 11–23 seeds\" both imply the true PERSISTENT count is 15, not 24 (12+15+23 = 50, minus one excluded seed = 49). **Fix:** correct \"PERSISTENT (24 seeds)\" to \"PERSISTENT (15 seeds)\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies that PERSISTENT shows 24 seeds when it should be 15, that the group counts sum to 59 instead of 50, and even provides the correct original value — a precise match to the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Section 3.3 states group sizes \"ISOLATED (12 seeds), PERSISTENT (24 seeds), COMPOUND (23 seeds)\", which sum to 59 and contradict the \"fifty seeds\" repeatedly stated in the abstract, Section 1, Section 3.3 itself (\"fifty seeds chosen this way from a 200-seed pool\")... **Fix:** correct \"PERSISTENT (24 seeds)\" to \"PERSISTENT (15 seeds)\" in Section 3.3",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the injected numeric change from 15 to 24 and explains the resulting sum inconsistency with the stated total of 50 seeds.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 3.3 states group sizes 'ISOLATED (12 seeds), PERSISTENT (24 seeds), COMPOUND (23 seeds)', which sum to 59 and contradict the 'fifty seeds' repeatedly stated in the abstract, Section 1, Section 3.3 itself... Fix: correct 'PERSISTENT (24 seeds)' to 'PERSISTENT (15 seeds)' in Section 3.3",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific numerical inconsistency created by the seed count change and even identifies the original correct value (15).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. 1: as rendered (\"skill = C_base − C_agent\") the numerator alone appears — the intended ratio (C_base − C_agent)/(C_base − C_orc) is inferable from the surrounding text and the worked example (page 7: (9101−8539)/(9101−6932)=0.26, which I confirm arithmetically). This may be a layout/typesetting artifact of the display equation. Please verify the fraction bar and denominator render correctly in the compiled PDF.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. 1: as rendered (\"skill = C_base − C_agent\") the numerator alone appears — the intended ratio (C_base − C_agent)/(C_base − C_orc) is inferable from the surrounding text and the worked example (page 7: (9101−8539)/(9101−6932)=0.26, which I confirm arithmetically). This may be a layout/typesetting artifact of the display equation. Please verify the fraction bar and denominator render correctly in the compiled PDF.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly identifies that the equation shows only 'C_base − C_agent' without the normalisation denominator, matching exactly what was injected, and even infers the correct formula from surrounding context.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Eq. 1: as rendered (\"skill = C_base − C_agent\") the numerator alone appears — the intended ratio (C_base − C_agent)/(C_base − C_orc) is inferable from the surrounding text and the worked example (page 7: (9101−8539)/(9101−6932)=0.26, which I confirm arithmetically). This may be a layout/typesetting artifact of the display equation. Please verify the fraction bar and denominator render correctly in the compiled PDF.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags that Eq. 1 shows only the numerator and names the missing denominator, which directly matches the injected removal of the normalization denominator.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. 1: as rendered (\"skill = C_base − C_agent\") the numerator alone appears — the intended ratio (C_base − C_agent)/(C_base − C_orc) is inferable from the surrounding text",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that Equation 1 is missing its denominator, which is exactly the edit made in the injection.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t2",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions buy_briefing and buy_audit only in a very minor comment about cost table labeling in Appendix A, without flagging any inconsistency between 'noisy readings' in Methods and 'true state'/'near-deterministic ground truth' in the Discussion. The methods-results inconsistency introduced by the injection was not caught.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review mentions Section 3.1 only for a cost-table labeling issue and does not note any inconsistency about briefing/audit returning noisy readings versus true state. There is no flag corresponding to the injected methods-discussion contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer notes the cost of the briefing and audit tools in Section 3.1 but fails to flag the contradiction between the tools being described as 'noisy' in Methods versus being ground truth elsewhere.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 27.922013,
+  "total_cost_usd": null,
+  "total_input_tokens": 13741,
+  "total_output_tokens": 2977,
+  "escalation_count": 0,
+  "notes": null
+}

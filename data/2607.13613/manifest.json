@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.13613",
+  "arxiv_url": "https://arxiv.org/abs/2607.13613",
+  "rotation_seed": 20260728,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S3",
+      "type": 1
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "updated online through winner-loser dynamics",
+          "injected_text": "updated online through winner-take-all dynamics",
+          "rationale": "Drifts the methodological qualifier on the CentNN citation from 'winner-loser dynamics' to 'winner-take-all dynamics'. CentNN updates both the winning and the losing centroid — this paper's own method section states 'The loser update is applied only when $N_p>1$' — whereas winner-take-all updates only the winner. The drift therefore mis-describes the cited algorithm AND contradicts the citing paper's own description. Cite key untouched; one existing phrase perturbed.\n",
+          "ground_truth_description": "CentNN citation: update rule described as 'winner-take-all' instead of the cited method's 'winner-loser dynamics'.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "park2000centroid",
+            "injected_cite_key": "park2000centroid",
+            "claim_sentence_verbatim": "Among modern clustering approaches, centroid neural network (CentNN) \\cite{park2000centroid} is a prototype-based algorithm that follows a competitive-learning paradigm, where centroid vectors are updated online through winner-loser dynamics.",
+            "section_location": "Sec. 1 (Introduction / Related background)",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "On MNIST, the runtime is improved from 8.344\\,s to 7.924\\,s, corresponding to a speed-up of 5.03\\%, while the number of training epochs is decreased from 141 to 132.",
+          "injected_text": "On MNIST, the runtime is improved from 8.344\\,s to 7.924\\,s, corresponding to a speed-up of 6.25\\%, while the number of training epochs is decreased from 141 to 132.",
+          "rationale": "Since the paper lacks dataset subpopulation splits, the edit targets a runtime speed-up calculation acting as a base-percent-result triple, shifting the stated percentage from 5.03% to 6.25% (a ~24% relative error) to realistically trigger a percent_of arithmetic failure.",
+          "ground_truth_description": "Changes the reported MNIST speed-up percentage from 5.03% to 6.25%, breaking the arithmetic relationship with the provided before and after runtimes.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_of",
+            "value_before_raw": "5.03",
+            "value_after_raw": "6.25",
+            "value_before_float": 5.03,
+            "value_after_float": 6.25,
+            "location_cue": "On MNIST, the runtime is improved from 8.344\\,s to 7.924\\,s, corresponding to a speed-up of 5.03\\%",
+            "paired_location": null,
+            "quantity_label": "runtime speed-up %",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t2.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "w_1=\\bar{x}+\\epsilon,\\quad w_2=\\bar{x}-\\epsilon,\\quad\n\\bar{x}=\\frac{1}{n}\\sum_{i=1}^n x_i,",
+          "injected_text": "w_1=\\bar{x}+\\epsilon,\\quad w_2=\\bar{x}-\\epsilon,\\quad\n\\bar{x}=\\sum_{i=1}^n x_i,",
+          "rationale": "The 1/n normalisation prefactor is dropped from the canonical empirical mean formula, breaking the fundamental definition of the sample mean and allowing the symbolic engine to refute the identity.",
+          "ground_truth_description": "Dropped the 1/n normalisation prefactor from the global mean formula for initializing centroids.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Section II.C first display",
+            "original_fragment_latex": "\\frac{1}{n}",
+            "injected_fragment_latex": "",
+            "full_equation_latex_before": "w_1=\\bar{x}+\\epsilon,\\quad w_2=\\bar{x}-\\epsilon,\\quad\n\\bar{x}=\\frac{1}{n}\\sum_{i=1}^n x_i,",
+            "full_equation_latex_after": "w_1=\\bar{x}+\\epsilon,\\quad w_2=\\bar{x}-\\epsilon,\\quad\n\\bar{x}=\\sum_{i=1}^n x_i,",
+            "term_role": "normalisation prefactor",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t3.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "placing CentNN within the broader family of competitive",
+          "injected_text": "placing CentNN within the broader family of of competitive",
+          "rationale": "Accidental repetition of the preposition 'of' simulates a common, purely cosmetic typing error.",
+          "ground_truth_description": "Added an accidental word repetition ('of of') in the Introduction.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D8",
+            "change_kind": "word_repetition",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 1 (Introduction)",
+            "affected_span_verbatim": "This design is well suited to incremental data processing, memory-constrained environments, and adaptive model growth, placing CentNN within the broader family of competitive and self-organizing neural models \\cite{kohonen1990self,martinetz1993neural}."
+          },
+          "proposer_agent": "injector.general.S1.t1.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "FastCentNN was evaluated against the original CentNN on six widely used synthetic clustering benchmark datasets: A1, A2, S1, S2, R15, and Aggregation \\cite{ClusteringDatasets}.",
+          "injected_text": "FastCentNN was evaluated against the original CentNN on six widely used synthetic clustering benchmark datasets originally designed for evaluating graph neural networks: A1, A2, S1, S2, R15, and Aggregation \\cite{ClusteringDatasets}.",
+          "rationale": "The claim is modified to state the datasets were designed for evaluating graph neural networks, a topic entirely absent from the cited paper on K-means properties, resulting in an UNRELATED verdict while looking like a plausible author copy-paste error.",
+          "ground_truth_description": "Modified the claim sentence to falsely state that the cited datasets were designed for evaluating graph neural networks, causing a topic misattribution.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "ClusteringDatasets",
+            "injected_cite_key": "ClusteringDatasets",
+            "claim_sentence_verbatim": "FastCentNN was evaluated against the original CentNN on six widely used synthetic clustering benchmark datasets: A1, A2, S1, S2, R15, and Aggregation \\cite{ClusteringDatasets}.",
+            "section_location": "Sec. 3.2",
+            "mutation_kind": "claim_topic_mis_attribution",
+            "detection_target_verdict": "UNRELATED"
+          },
+          "proposer_agent": "injector.citations.S3.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "(5.41\\% speed-up)",
+          "injected_text": "(15.41\\% speed-up)",
+          "rationale": "The paper states the Fashion-MNIST runtime drops from 8.220 s to 7.775 s and labels this a 5.41% speed-up, which is arithmetically correct (0.445/8.220 = 5.41%). Changing the label to 15.41% makes the stated ratio blatantly inconsistent with the two runtimes printed in the same sentence — a self-contained, checkable violation using only the paper's own numbers.",
+          "ground_truth_description": "Fashion-MNIST speed-up mis-stated as 15.41% while the runtimes 8.220 s -> 7.775 s in the same sentence imply 5.41%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "ratio_eq",
+            "value_before_raw": "5.41%",
+            "value_after_raw": "15.41%",
+            "value_before_float": 5.41,
+            "value_after_float": 15.41,
+            "location_cue": "Fashion-MNIST, FastCentNN reduces the runtime from 8.220\\,s to 7.775\\,s (5.41\\% speed-up)",
+            "paired_location": "same sentence — runtimes 8.220 s and 7.775 s imply 5.41%",
+            "quantity_label": "runtime speed-up on Fashion-MNIST (%)",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t3.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "M_t=\\sum_{j=1}^{k_t}\\|w_j^{(t)}-w_j^{(t-1)}\\|_2,",
+          "injected_text": "M_t=\\sum_{j=1}^{k_t}\\|w_i^{(t)}-w_j^{(t-1)}\\|_2,",
+          "rationale": "The index i is not bound by the summation over j, introducing an index mismatch where the movement is calculated against an unquantified centroid.",
+          "ground_truth_description": "An index in the centroid movement sum was changed to an unbound variable, breaking the index conformability of the equation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2.4",
+            "original_fragment_latex": "w_j^{(t)}",
+            "injected_fragment_latex": "w_i^{(t)}",
+            "full_equation_latex_before": "M_t=\\sum_{j=1}^{k_t}\\|w_j^{(t)}-w_j^{(t-1)}\\|_2,",
+            "full_equation_latex_after": "M_t=\\sum_{j=1}^{k_t}\\|w_i^{(t)}-w_j^{(t-1)}\\|_2,",
+            "term_role": "injected shape/index mismatch",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "Since the primary objective is to improve computational efficiency while preserving clustering quality, the relative difference in mean squared error (MSE) is reported as:",
+          "injected_text": "Since the primary objective is to improve computational efficiency while preserving clustering quality, the relative difference in mean absolute error (MAE) is reported as:",
+          "rationale": "The experimental setup claims the evaluation metric is mean absolute error (MAE), but the equation immediately following and the results tables report mean squared error (MSE), creating an internal contradiction between the stated setup and the results.",
+          "ground_truth_description": "Substituted mean squared error with mean absolute error in the text of the experimental setup, conflicting with the MSE metric actually reported in the results.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B4",
+            "change_kind": "methods_results_inconsistency",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 3.1",
+            "affected_span_verbatim": "Since the primary objective is to improve computational efficiency while preserving clustering quality, the relative difference in mean squared error (MSE) is reported as:"
+          },
+          "proposer_agent": "injector.general.S2.t2.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "Among modern clustering approaches, centroid neural network (CentNN) \\cite{park2000centroid} is a prototype-based algorithm that follows a competitive-learning paradigm, where centroid vectors are updated online through winner-loser dynamics.",
+          "injected_text": "Among modern clustering approaches, centroid neural network (CentNN) \\cite{park2000centroid} is a density-based algorithm that follows a competitive-learning paradigm, where centroid vectors are updated online through winner-loser dynamics.",
+          "rationale": "Swapping 'prototype-based' to 'density-based' miscategorises the fundamental methodology of the cited algorithm (CentNN), presenting a realistic within-domain author error that directly contradicts the cited paper.",
+          "ground_truth_description": "The methodology of the cited paper (park2000centroid) was incorrectly changed from a 'prototype-based' algorithm to a 'density-based' algorithm.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "park2000centroid",
+            "injected_cite_key": "park2000centroid",
+            "claim_sentence_verbatim": "Among modern clustering approaches, centroid neural network (CentNN) \\cite{park2000centroid} is a prototype-based algorithm that follows a competitive-learning paradigm, where centroid vectors are updated online through winner-loser dynamics.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "On MNIST, the runtime is improved from 8.344\\,s to 7.924\\,s, corresponding to a speed-up of 5.03\\%,",
+          "injected_text": "On MNIST, the runtime is improved from 8.345\\,s to 7.924\\,s, corresponding to a speed-up of 5.03\\%,",
+          "rationale": "Slightly perturbs the baseline runtime for MNIST in the body text to 8.345s, creating a minimum-detectable repeated-constant drift against the 8.344s value still printed in Table 2.",
+          "ground_truth_description": "Changes the baseline MNIST runtime in the Section 3.3 text from 8.344 to 8.345, introducing a slight mismatch with Table 2.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "repeated_constant",
+            "value_before_raw": "8.344",
+            "value_after_raw": "8.345",
+            "value_before_float": 8.344,
+            "value_after_float": 8.345,
+            "location_cue": "On MNIST, the runtime is improved from 8.345\\,s to 7.924\\,s, corresponding to a speed-up",
+            "paired_location": "Table 2",
+            "quantity_label": "baseline MNIST runtime in seconds",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t3.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "s=\\arg\\max_j E_j,\\quad\nE_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_2.",
+          "injected_text": "s=\\arg\\max_j E_j,\\quad\nE_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_1.",
+          "rationale": "Replaces the L2 distance norm with an L1 norm in the within-cluster error equation, creating a subtle cross-equation inconsistency with the L2 norm used for winner selection earlier in the text.",
+          "ground_truth_description": "Alters the distance metric from L2 to L1 in the within-cluster error definition, contradicting the L2 metric used for cluster assignments.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2.3 first equation",
+            "original_fragment_latex": "E_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_2",
+            "injected_fragment_latex": "E_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_1",
+            "full_equation_latex_before": "s=\\arg\\max_j E_j,\\quad\nE_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_2.",
+            "full_equation_latex_after": "s=\\arg\\max_j E_j,\\quad\nE_j=\\sum_{x_i:a_i=j}\\|x_i-w_j\\|_1.",
+            "term_role": "cross-equation inconsistency: distance metric in assignment vs error evaluation",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t2.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "Experiments on some benchmark datasets show that FastCentNN consistently achieves clustering quality comparable to CentNN while reducing runtime by up to 16\\% on synthetic 2D datasets and about 5\\% on high-dimensional datasets.",
+          "injected_text": "Experiments on some benchmark datasets show that FastCentNN consistently achieves clustering quality comparable to CentNN while reducing runtime by up to 16\\% on synthetic 2D datasets but increasing it by about 5\\% on high-dimensional datasets.",
+          "rationale": "The abstract is modified to claim a runtime increase on high-dimensional datasets, directly contradicting Section 3.3 and the Conclusion which report a consistent ~5% speed-up on MNIST and Fashion-MNIST.",
+          "ground_truth_description": "The abstract was modified to state that FastCentNN increases runtime on high-dimensional datasets, creating a clear internal contradiction with the speed-ups reported in the Results.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "A",
+            "checklist_item_id": "A2",
+            "change_kind": "internal_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Abstract",
+            "affected_span_verbatim": "Experiments on some benchmark datasets show that FastCentNN consistently achieves clustering quality comparable to CentNN while reducing runtime by up to 16\\% on synthetic 2D datasets and about 5\\% on high-dimensional datasets."
+          },
+          "proposer_agent": "injector.general.S3.t1.v3"
+        }
+      ]
+    }
+  ]
+}

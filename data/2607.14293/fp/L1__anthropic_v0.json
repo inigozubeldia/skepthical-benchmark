@@ -1,0 +1,272 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "L1",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-b859397029c6",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states in the Conclusions: 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans and demonstrating in-loop integration with the QICK control firmware.' All performance results are on synthetic data and HLS synthesis estimates, confirming this gap.",
+        "evidence": {
+          "claim": "The DCCNN is trained and evaluated exclusively on synthetic data with no demonstration of performance on real experimental data, representing a substantial gap for a 'Real-Time Detection' paper.",
+          "excerpt": "The most significant limitation is that the DCCNN is trained and evaluated **exclusively on synthetic data**, and the FPGA deployment is characterized only via HLS synthesis estimates."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in the Conclusions: 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans and demonstrating in-loop integration with the QICK control firmware.' All performance results are on synthetic data and HLS synthesis estimates, confirming this gap.",
+            "cost_usd": 0.019533250000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that training used \"the same fully simulated dataset of 100,000 scans\" and concludes with \"Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans,\" confirming there is no demonstrated performance on real experimental data in this work.",
+            "cost_usd": 0.011311666666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation, stating in the conclusions that \"Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans...\", confirming it relies entirely on synthetic data.",
+            "cost_usd": 0.003475666666666667
+          }
+        ],
+        "cost_usd": 0.034320583333333335
+      },
+      {
+        "flag_id": "fp-072128f8026c",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section II.B states 'Each scan consists of N = 80 samples' while Fig. 1 shows 'Input (128, 2)' for both architectures. The paper provides no explanation for this discrepancy between 80 samples and 128 input size.",
+        "evidence": {
+          "claim": "There is a discrepancy between the described input shape and sample count, which casts doubt on reproducibility and clarity.",
+          "excerpt": "The architecture diagram (Fig. 1) shows an input shape of **(128, 2)**, but Section II.B states scans consist of **N = 80 samples**. This inconsistency should be resolved and clarified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section II.B states 'Each scan consists of N = 80 samples' while Fig. 1 shows 'Input (128, 2)' for both architectures. The paper provides no explanation for this discrepancy between 80 samples and 128 input size.",
+            "cost_usd": 0.019533250000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 labels the model input as \"Input (128, 2),\" but Sec. II.B says \"Each scan consists of N = 80 samples\" and only says each scan is converted to a two-channel input; the paper never explains how 80-sample scans become length 128 inputs.",
+            "cost_usd": 0.011311666666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 illustrates an input shape of \"(128, 2)\", but Section II.B explicitly states that \"Each scan consists of N = 80 samples\". The text does not explain this discrepancy, such as any zero-padding applied before the network.",
+            "cost_usd": 0.003475666666666667
+          }
+        ],
+        "cost_usd": 0.034320583333333335
+      },
+      {
+        "flag_id": "fp-8a8a5dd4134b",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges the Q4 (SO) discrepancy only implicitly through the numbers in Table VII (0.810 vs 0.883) without discussion, and does not provide a binned efficiency-vs-jump-position analysis or address why the DCCNN performs notably worse on Q4 (SO). The claim about fairness of comparison regarding per-qubit tuning is partially addressed: 'the χ² algorithm parameters were tuned on the training dataset... to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%.'",
+        "evidence": {
+          "claim": "The comparison between DCCNN and χ² algorithm is incomplete and potentially unfair in terms of jump timing, magnitude, and hyperparameter tuning.",
+          "excerpt": "The comparison with χ² is not entirely fair or complete... A binned efficiency-vs-jump-position plot would be highly informative... The DCCNN performs notably worse than χ² on Q4 (SO): 0.810 ± 0.019 vs. 0.883 ± 0.018 — a ~4σ discrepancy. This should be discussed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges the Q4 (SO) discrepancy only implicitly through the numbers in Table VII (0.810 vs 0.883) without discussion, and does not provide a binned efficiency-vs-jump-position analysis or address why the DCCNN performs notably worse on Q4 (SO). The claim about fairness of comparison regarding per-qubit tuning is partially addressed: 'the χ² algorithm parameters were tuned on the training dataset... to maximize jump-tagging efficiency subject to a false-positive-rate (FPR) constraint of 5%.'",
+            "cost_usd": 0.019533250000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly states that \"Both the quantized DCCNN and the χ2 algorithm are evaluated on simulated datasets of 1,600 scans per qubit... Jumps are injected at random scan positions with sizes drawn uniformly from [0.01, 0.5] e\" and that \"the χ2 algorithm parameters were tuned... subject to a false-positive-rate (FPR) constraint of 5%,\" which directly addresses the fairness concerns about timing, magnitude, and tuning.",
+            "cost_usd": 0.011311666666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table VII shows the DCCNN underperforms the chi^2 algorithm on Q4 (SO) (0.810 ± 0.019 vs. 0.883 ± 0.018), yet the text claims the DCCNN achieves \"comparable efficiency... across all five qubit templates\" without addressing this specific and significant drop in performance.",
+            "cost_usd": 0.003475666666666667
+          }
+        ],
+        "cost_usd": 0.034320583333333335
+      },
+      {
+        "flag_id": "fp-382158a8c0e5",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper does not contextualize the 6.19 µs latency against actual scan acquisition times or prior FPGA neural network work (e.g., the 32 ns cited for qubit state discrimination [20]). The paper mentions '100 ps timing resolution' for QICK but never defines what 'real-time' means in the context of a scan that takes some acquisition time.",
+        "evidence": {
+          "claim": "The reported 6.19 μs latency lacks context against actual scan acquisition times and prior work; definition of 'real-time' is unclear and throughput data appears inconsistent.",
+          "excerpt": "The abstract emphasizes real-time capability, but the 6.19 μs latency should be contextualized:... the 6.19 μs here is ~200× slower. While this is expected given the different task..., the paper should more clearly frame what 'real-time' means in this specific context."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper does not contextualize the 6.19 µs latency against actual scan acquisition times or prior FPGA neural network work (e.g., the 32 ns cited for qubit state discrimination [20]). The paper mentions '100 ps timing resolution' for QICK but never defines what 'real-time' means in the context of a scan that takes some acquisition time.",
+            "cost_usd": 0.019533250000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper reports only that the FPGA implementation has \"a per-inference latency of 1,860 cycles (6.19 µs)\" and claims such tools are \"well suited to applications requiring real-time feedback,\" but it does not quantify this against actual scan-acquisition or control-loop times, so the practical meaning of \"real-time\" is not fully contextualized.",
+            "cost_usd": 0.011311666666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports \"a per-inference latency of 1,860 cycles (6.19 μs)\" but fails to provide the typical duration of an 80-sample scan acquisition, making it impossible to evaluate whether this latency is sufficiently \"real-time\" for in-loop execution.",
+            "cost_usd": 0.003475666666666667
+          }
+        ],
+        "cost_usd": 0.034320583333333335
+      },
+      {
+        "flag_id": "fp-70a378f9f7e7",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'The data was split into training, validation, and test sets containing 70,000, 15,000, and 15,000 scans respectively, with the jump/no-jump proportion preserved across splits via stratified sampling,' but does not specify whether splits were by contiguous time blocks or random, leaving open the possibility of temporal leakage given that 'Scans for each qubit are generated as a phase-continuous time-ordered sequence.'",
+        "evidence": {
+          "claim": "If the train/val/test split is random rather than by contiguous time blocks, there is a risk of temporal information leakage, undermining performance claims.",
+          "excerpt": "If the training/validation/test split is done randomly rather than by contiguous time blocks, there could be information leakage between the sets."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'The data was split into training, validation, and test sets containing 70,000, 15,000, and 15,000 scans respectively, with the jump/no-jump proportion preserved across splits via stratified sampling,' but does not specify whether splits were by contiguous time blocks or random, leaving open the possibility of temporal leakage given that 'Scans for each qubit are generated as a phase-continuous time-ordered sequence.'",
+            "cost_usd": 0.019533250000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The synthetic scans are generated as \"a phase-continuous time-ordered sequence so that the post-event phase of scan k becomes the pre-event phase of scan k + 1,\" yet the dataset was then split by \"stratified sampling.\" Because the paper does not use contiguous time-block splits or discuss leakage, the temporal-leakage concern is genuine.",
+            "cost_usd": 0.011311666666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section II.B states scans are generated \"as a phase-continuous time-ordered sequence\", but Section II.C states the dataset was split \"via stratified sampling\". Randomly splitting a continuous time series introduces temporal leakage, validating the reviewer's concern.",
+            "cost_usd": 0.003475666666666667
+          }
+        ],
+        "cost_usd": 0.034320583333333335
+      },
+      {
+        "flag_id": "fp-19359508529f",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'a bit-width sweep was performed across three configurations: ap_fixed<6,1>, ap_fixed<8,3>, and ap_fixed<16,6>' and that 'ap_fixed<16,6> was chosen, as it achieved the highest accuracy without compromising any of the constraints,' but provides no quantitative accuracy or resource results for the other two configurations.",
+        "evidence": {
+          "claim": "Results of the precision (bit-width) sweep are not shown, limiting reproducibility and understanding of the model’s hardware-resource vs. accuracy tradeoffs.",
+          "excerpt": "The authors state that a bit-width sweep across ap_fixed<6,1>, ap_fixed<8,3>, and ap_fixed<16,6> was performed, and that all three met constraints. However, no quantitative results are provided."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'a bit-width sweep was performed across three configurations: ap_fixed<6,1>, ap_fixed<8,3>, and ap_fixed<16,6>' and that 'ap_fixed<16,6> was chosen, as it achieved the highest accuracy without compromising any of the constraints,' but provides no quantitative accuracy or resource results for the other two configurations.",
+            "cost_usd": 0.019533250000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says \"a bit-width sweep was performed across three configurations: ap fixed<6,1>, ap fixed<8,3>, and ap fixed<16,6>\" and that \"ap fixed<16,6> was chosen,\" but it provides no quantitative sweep results for accuracy or resource usage, limiting reproducibility of the stated tradeoff.",
+            "cost_usd": 0.011311666666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states \"a bit-width sweep was performed across three configurations...\" but does not provide any tables or quantitative results documenting the performance/resource tradeoffs for the <6,1> and <8,3> precisions.",
+            "cost_usd": 0.003475666666666667
+          }
+        ],
+        "cost_usd": 0.034320583333333335
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.2059235
+  },
+  "extractor_cost_usd": 0.011330000000000007,
+  "total_cost_usd": 0.21725350000000002
+}

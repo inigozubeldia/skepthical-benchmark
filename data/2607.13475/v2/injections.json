@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "paper.tex",
+    "original_text": "diffusion-based generative state estimation for cloth manipulation [9]",
+    "injected_text": "diffusion-based generative state estimation for generic deformable materials [9]",
+    "rationale": "The edit replaces the specific condition 'for cloth manipulation' with 'for generic deformable materials', over-generalizing the cited paper's claim beyond its actual scope.",
+    "ground_truth_description": "Over-generalized the scope of citation [9] from 'cloth manipulation' to 'generic deformable materials'.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "9",
+      "injected_cite_key": "9",
+      "claim_sentence_verbatim": "Recent advances in learned dynamics and representation learning for deformable objects include diffusion-based generative state estimation for cloth manipulation [9].",
+      "section_location": "INTRODUCTION",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "paper.tex",
+    "original_text": "corresponding to $98.1\\%$ oracle recovery",
+    "injected_text": "corresponding to $9.81\\%$ oracle recovery",
+    "rationale": "Shifting the decimal point reduces the recovery metric in the multi-step results section by a factor of 10, creating a blatant contradiction with the correctly stated 98.1% figure in the Abstract.",
+    "ground_truth_description": "Changed the multi-step oracle recovery percentage in Section III.B from 98.1% to 9.81%, introducing an order-of-magnitude mismatch with the Abstract.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "98.1",
+      "value_after_raw": "9.81",
+      "value_before_float": 98.1,
+      "value_after_float": 9.81,
+      "location_cue": "with the same success rate, corresponding to $98.1\\%$ oracle recovery",
+      "paired_location": "Abstract",
+      "quantity_label": "oracle recovery percentage",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "paper.tex",
+    "original_text": "= \\frac{1}{HW} \\sum_{i,j}",
+    "injected_text": "= \\sum_{i,j}",
+    "rationale": "Dropping the 1/(HW) prefactor from the reconstruction loss equation breaks its definition as a 'mean squared error' (converting it to a sum of squared errors), which Wolfram can refute by comparing the mathematical definition of MSE to the formula provided.",
+    "ground_truth_description": "Dropped the 1/(HW) normalisation prefactor from the mean squared error reconstruction loss equation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2.2 second display",
+      "original_fragment_latex": "\\frac{1}{HW}",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\mathcal{L}_{\\text{recon}} \n= \\frac{1}{HW} \\sum_{i,j} \n\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2.",
+      "full_equation_latex_after": "\\mathcal{L}_{\\text{recon}} \n= \\sum_{i,j} \n\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2.",
+      "term_role": "normalisation prefactor",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "paper.tex",
+    "original_text": "The overall system pipeline is illustrated in Fig.~\\ref{fig:workflow}.",
+    "injected_text": "The overall system pipeline is illustrated in Fig.~\\ref{fig:worklfow}.",
+    "rationale": "Misspelling the figure label inside a \\ref command breaks the cross-reference, resulting in an unrendered '??' artefact in the PDF.",
+    "ground_truth_description": "Introduced a typo in a figure cross-reference key, causing it to render as '??' in the text.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "latex_artefact",
+      "expected_bucket": "very_minor",
+      "section_location": "I. INTRODUCTION",
+      "affected_span_verbatim": "The overall system pipeline is illustrated in Fig.~\\ref{fig:workflow}."
+    },
+    "proposer_agent": "injector.general.S1.t2.v2"
+  }
+]

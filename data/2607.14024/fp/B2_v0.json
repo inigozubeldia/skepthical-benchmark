@@ -1,0 +1,146 @@
+{
+  "paper_id": "2607.14024",
+  "reviewer_system": "B2",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-827368aa9389",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper gives a complexity formula for SFS — \"the number of models that need to be trained to select n out of N features can become considerably high, namely 0.5(N − n)(1 + N + n)\" — and only an empirical runtime comparison for CSFS — \"the median runtime of all CSFS variants is consistently lower, leading to an overall runtime reduction of 19.4%, 9.3%, 25.3%, and 39.8%\". It does not present a formal or detailed computational-complexity analysis of CSFS itself.",
+        "evidence": {
+          "claim": "The paper lacks a detailed analysis of the computational complexity of their CSFS method.",
+          "excerpt": "The paper does not provide a detailed analysis of the computational complexity of CSFS. While the authors mention that CSFS reduces computational cost by 21% compared to SFS, a more in-depth analysis of the computational requirements of CSFS would be beneficial."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does provide runtime measurements and reduction percentages (\"leading to an overall runtime reduction of 19.4%, 9.3%, 25.3%, and 39.8% in comparison to SFS\") and notes the SFS formula \"0.5(N − n)(1 + N + n)\", but does not provide a formal algorithmic complexity analysis (e.g., Big-O) of CSFS. Whether empirical runtime comparison counts as 'detailed computational complexity analysis' is debatable.",
+            "cost_usd": 0.0067943
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives a complexity formula for SFS — \"the number of models that need to be trained to select n out of N features can become considerably high, namely 0.5(N − n)(1 + N + n)\" — and only an empirical runtime comparison for CSFS — \"the median runtime of all CSFS variants is consistently lower, leading to an overall runtime reduction of 19.4%, 9.3%, 25.3%, and 39.8%\". It does not present a formal or detailed computational-complexity analysis of CSFS itself.",
+            "cost_usd": 0.007763
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While the authors state the number of models trained for SFS in Section 3.2 and provide an empirical 'Runtime Comparison' in Section 5.2, the paper lacks a rigorous theoretical or detailed mathematical analysis of the computational complexity of the proposed CSFS method.",
+            "cost_usd": 0.0036008
+          }
+        ],
+        "cost_usd": 0.0181581
+      },
+      {
+        "flag_id": "fp-48ab88b0fd28",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only lists the top ten selected features in Table 1 and briefly notes which domain-specific variables improve performance, but does not provide an in-depth analysis of how individual features contribute to prediction accuracy or their interpretability beyond surface-level description of \"system-state variables like the blade pitch angle, generator RPM\" etc.",
+        "evidence": {
+          "claim": "The paper does not provide a detailed analysis of the interpretability of the features selected by CSFS.",
+          "excerpt": "The paper does not provide a detailed analysis of the interpretability of the selected features. While the authors provide a list of the top ten features selected by CSFS for each dataset, a more in-depth analysis of the interpretability of these features and how they contribute to the accuracy of the predictions would be beneficial."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only lists the top ten selected features in Table 1 and briefly notes which domain-specific variables improve performance, but does not provide an in-depth analysis of how individual features contribute to prediction accuracy or their interpretability beyond surface-level description of \"system-state variables like the blade pitch angle, generator RPM\" etc.",
+            "cost_usd": 0.0067943
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides only a brief domain-level summary: \"Tab. 1 presents the ten most important features per dataset\" and then notes that \"the models can clearly benefit from system-level and local measurement data\". It does not offer a detailed interpretability analysis of how CSFS-selected features individually contribute to prediction accuracy.",
+            "cost_usd": 0.007763
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although Section 5.3 ('Domain-Level Analysis') lists the top selected features and briefly notes that certain variables 'allows for more accurate modeling', the paper does not provide an in-depth quantitative interpretability analysis of how these specific features contribute to the models' predictions.",
+            "cost_usd": 0.0036008
+          }
+        ],
+        "cost_usd": 0.0181581
+      },
+      {
+        "flag_id": "fp-3573044cd6c8",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper mentions that \"repeating the FS experiments with different random seeds may alter the decisions\" as a threat to validity, but does not conduct an analysis of CSFS robustness to different hyperparameter settings of the FS method itself; hyperparameter optimization is applied to the ML models, not to CSFS's own parameters.",
+        "evidence": {
+          "claim": "The paper does not analyze the robustness of CSFS to different hyperparameter settings.",
+          "excerpt": "The paper does not provide a detailed analysis of the robustness of CSFS to different hyperparameter settings. While the authors mention that they optimize the hyperparameters of the machine learning models used in the experiments, a more in-depth analysis of the robustness of CSFS to different hyperparameter settings would be beneficial."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions that \"repeating the FS experiments with different random seeds may alter the decisions\" as a threat to validity, but does not conduct an analysis of CSFS robustness to different hyperparameter settings of the FS method itself; hyperparameter optimization is applied to the ML models, not to CSFS's own parameters.",
+            "cost_usd": 0.0067943
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states only that \"We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration\" and acknowledges in threats to validity that \"adopting alternative hyperparameter search spaces, could lead to different outcomes\". That is not a robustness analysis of CSFS under different hyperparameter settings.",
+            "cost_usd": 0.007763
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors perform hyperparameter optimization but do not analyze robustness to different settings. Instead, they merely acknowledge in Section 5.4 that 'adopting alternative hyperparameter search spaces, could lead to different outcomes,' which confirms the lack of such an analysis.",
+            "cost_usd": 0.0036008
+          }
+        ],
+        "cost_usd": 0.0181581
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0544743
+  },
+  "extractor_cost_usd": 0.0065840000000000065,
+  "total_cost_usd": 0.06105830000000001
+}

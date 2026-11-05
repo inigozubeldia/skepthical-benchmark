@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14024",
+  "copy_id": "v2",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[citation][general] The paper overclaims that wrapper methods \"provide the optimal feature set.\" ... Section 3.2: \"Wrapper-based methods provide the optimal feature set [4].\" ... This statement is too strong ... claiming that wrapper-based methods provide \"the optimal feature set\" contradicts the paper's own formulation.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[citation][general] The paper overclaims that wrapper methods \"provide the optimal feature set.\" ... Section 3.2: \"Wrapper-based methods provide the optimal feature set [4].\" ... This statement is too strong ... claiming that wrapper-based methods provide \"the optimal feature set\" contradicts the paper's own formulation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the post-edit claim sentence in Section 3.2 as an overclaim/overgeneralisation against what the cited source and the paper's own formulation support, matching the BROADENED-CLAIM detection rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "3. [citation][general] The paper overclaims that wrapper methods “provide the optimal feature set.”\n\n**Where:** Section 3.2: “Wrapper-based methods provide the optimal feature set [4].”\n\n**What is wrong:** This statement is too strong... The cited survey [4] may support the general claim that wrapper methods often yield better-performing subsets than filter methods, but the paper does not establish that [4] supports the stronger claim of guaranteed optimality.",
+          "confidence": "high",
+          "reasoning": "This directly challenges the exact post-edit claim sentence in Section 3.2 against its cited source and labels it as too strong/unsupported, satisfying the broadened-claim detection rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Major issue 3: [citation][general] The paper overclaims that wrapper methods “provide the optimal feature set.” ... “Wrapper-based methods provide the optimal feature set [4].”",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the post-edit claim as an overclaim and explicitly challenges it against the cited source, meeting the detection criteria for broadened claims.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t1",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's minor issue 3 references WT-S1 RMSE of 32.49 from Table 1 and flags an arithmetic inconsistency in the improvement figure, but does not flag a mismatch between the Introduction value (32.48) and Table 1 (32.49); the reviewer appears to use 32.49 consistently and does not notice the introduction discrepancy.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's only WT-S1 RMSE remark concerns a Section 5.3/Table 1 difference of 49.95 vs 49.91, not the Introduction's 32.48 vs Table 1's 32.49 mismatch. No flag specifically identifies the injected value inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer flags a different numerical inconsistency involving WT RMSE values in Section 5.3 and Table 1, but fails to identify the mismatch between the Introduction (32.48) and Table 1 (32.49).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[mathematical] Equation (1) uses `min` where `argmin` is required. ... The paper defines F_n* as an 'optimal size-n feature set,' but writes F*_n = min_{F'∈S_n}[...]. The right-hand side returns the minimum loss value, not the feature set attaining that value. Therefore the equation is dimensionally and semantically inconsistent ... Replace `min` over feature subsets by `argmin`",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[mathematical] Equation (1) uses `min` where `argmin` is required. ... The paper defines F_n* as an 'optimal size-n feature set,' but writes F*_n = min_{F'∈S_n}[...]. The right-hand side returns the minimum loss value, not the feature set attaining that value. Therefore the equation is dimensionally and semantically inconsistent ... Replace `min` over feature subsets by `argmin`",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies the injected error: 'min' is used where 'argmin' is required in Equation (1), explaining exactly why the LHS (a feature set) is inconsistent with the RHS (a scalar loss value).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "2. [mathematical] Equation (1) uses `min` where `argmin` is required.\n\n**Where:** Section 3.1, Equation (1).\n\n**What is wrong:** The paper defines \\(F_n^*\\) as an “optimal size-\\(n\\) feature set,” but writes\n\n\\[\nF^{*}_{n} = \\min_{F'\\in S_n}\n\\left[\n\\min_{\\theta\\in\\Theta,\\lambda\\in\\Lambda}\nL(f(X_{F'};\\theta,\\lambda),Y)\n\\right].\n\\]\n\nThe right-hand side returns the minimum loss value, not the feature set attaining that value.\n\n**Concrete fix:** Replace `min` over feature subsets by `argmin`",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies Equation (1) as using min instead of argmin and explains the semantic mismatch, exactly matching the injected mathematical edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Major issue 2: [mathematical] Equation (1) uses `min` where `argmin` is required.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the 'arg' operator was missing from the optimization problem in Equation (1), noting the dimensional inconsistency.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[general] Contradictory conclusion about CSFS predictive performance. ... the conclusion says the opposite: Section 6: 'However, our proposed approach CSFS suffers a significant drop in predictive performance compared to SFS, despite reducing computational cost by an average of 21%.' Section 6 also says CSFS gives 'inferior results.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[general] Contradictory conclusion about CSFS predictive performance. ... the conclusion says the opposite: Section 6: 'However, our proposed approach CSFS suffers a significant drop in predictive performance compared to SFS, despite reducing computational cost by an average of 21%.' Section 6 also says CSFS gives 'inferior results.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the internal contradiction introduced by the injection, quoting the injected conclusion text and contrasting it with consistent claims elsewhere in the paper that CSFS is 'comparable' to SFS.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "1. [general] Contradictory conclusion about CSFS predictive performance.\n\n**Where:** Abstract; Section 1, contribution 3; Section 5.4; Section 6.\n\n**What is wrong:** The paper states in several places that CSFS achieves performance comparable to SFS...\n\nBut the conclusion says the opposite:\n\n- Section 6: “However, our proposed approach CSFS suffers a significant drop in predictive performance compared to SFS, despite reducing computational cost by an average of 21%.”\n- Section 6 also says CSFS gives “inferior results.”",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the injected conclusion rewrite as contradicting the rest of the paper, quoting the altered conclusion language verbatim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Major issue 1: [general] Contradictory conclusion about CSFS predictive performance. ... Section 6: “However, our proposed approach CSFS suffers a significant drop in predictive performance compared to SFS...”",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the internal contradiction between the body of the paper and the conclusion regarding the performance of CSFS.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 28.013056,
+  "total_cost_usd": null,
+  "total_input_tokens": 19681,
+  "total_output_tokens": 2739,
+  "escalation_count": 0,
+  "notes": null
+}

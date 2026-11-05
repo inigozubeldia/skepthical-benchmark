@@ -1,0 +1,155 @@
+{
+  "paper_id": "2604.20971",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-9bded10e17f6",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. The transcription-fidelity check confirmed the expressions were faithfully copied from the paper, so mechanical results (had they been available) could have been trusted. However, the Wolfram engine was unavailable and no other mechanical engine produced a result, leaving the core algebraic sign-consistency check for the a^7 dependence unverified. No knowledge-audit (cross-family LLM) was applied to assess whether the asserted starting equations match canonical literature forms for gas-induced dephasing in EMRIs. The expressions themselves are bespoke (paper-specific derivations building on TF2 phase and gas-drag corrections), so without either a successful mechanical check or a knowledge audit, the verdict cannot be determined from the available evidence alone. A prose-level inspection shows the sign chain is plausible (double negative from −ψ^(0)_TF2 and A containing a negative prefactor yields positive dephasing), but this is insufficient for a confident PASS.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "critical",
+          "notes": "The transcription-fidelity check confirmed the expressions were faithfully copied from the paper, so mechanical results (had they been available) could have been trusted. However, the Wolfram engine was unavailable and no other mechanical engine produced a result, leaving the core algebraic sign-consistency check for the a^7 dependence unverified. No knowledge-audit (cross-family LLM) was applied to assess whether the asserted starting equations match canonical literature forms for gas-induced dephasing in EMRIs. The expressions themselves are bespoke (paper-specific derivations building on TF2 phase and gas-drag corrections), so without either a successful mechanical check or a knowledge audit, the verdict cannot be determined from the available evidence alone. A prose-level inspection shows the sign chain is plausible (double negative from −ψ^(0)_TF2 and A containing a negative prefactor yields positive dephasing), but this is insufficient for a confident PASS.",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → confirmed (10.41s)",
+            "wolfram: Check if substituting the definitions into Eq. 9 and forming the difference in Eq. 12 yields the correct sign for the a^7 dependence. (legacy sympy → wolfram raw-LaTeX fallback) → unavailable"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.027373800000000004
+      },
+      {
+        "flag_id": "fp-173bc916e6d3",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. Interpreter call failed: JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "minor",
+          "notes": "Interpreter call failed: JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → confirmed (12.62s)",
+            "pint: Verify the dimensional consistency of the frequency equation (1). → error"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.027373800000000004
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-537fe08c6460",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly bases its model on an extrapolation: \"The turbulent torque (Tturb) prescription we employ is based on the model developed by Wu et al. (2024), which studied the chaotic migration of low-mass planets in turbulent protoplanetary disks,\" and later concedes that \"our description of the turbulent torque is based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks... in the future, a realistic spectrum tailored to specific turbulence drivers will need to be considered to further assess our quantitative predictions.\" Despite this, it still presents a specific observability region, e.g. \"We find that this happens for fEdd ≳ 0.3, C ≳ 300, h0 ≳ 0.03, and α ≳ 0.1.\"",
+        "evidence": {
+          "claim": "The central turbulent-torque model is extrapolated from GI-driven protoplanetary-disk simulations to MRI-dominated AGN disks without direct validation, affecting key parameters and leading to potentially overconfident astrophysical conclusions.",
+          "excerpt": "The central turbulent-torque model is extrapolated from GI-driven protoplanetary-disk simulations to MRI-dominated AGN disks without direct validation, yet the main conclusions depend quantitatively on this extrapolation. This affects the torque Gaussianity, normalization C, correlation time N_max, and the assumed independence of torque draws in Sec. 2, Sec. 3, Sec. 4, Sec. 5, and Sec. 6. The caveats in Sec. 5.1 acknowledge this, but the abstract and conclusion still present the resulting observability region as a concrete astrophysical finding."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly acknowledges this limitation in Sec. 5.1: 'Even though MRI is presumably the main driver of turbulence in the inner highly ionized part of the AGN disk where EMRIs reside during in-spiral, our description of the turbulent torque is based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks.' However, the paper frames itself as a 'proof-of-concept' throughout (abstract, conclusion), and the caveats are detailed. Whether the headline conclusions are 'overconfident' given this framing is genuinely ambiguous — the paper does not claim direct validation but acknowledges it as a limitation without quantifying the resulting uncertainty.",
+            "cost_usd": 0.0098958
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly bases its model on an extrapolation: \"The turbulent torque (Tturb) prescription we employ is based on the model developed by Wu et al. (2024), which studied the chaotic migration of low-mass planets in turbulent protoplanetary disks,\" and later concedes that \"our description of the turbulent torque is based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks... in the future, a realistic spectrum tailored to specific turbulence drivers will need to be considered to further assess our quantitative predictions.\" Despite this, it still presents a specific observability region, e.g. \"We find that this happens for fEdd ≳ 0.3, C ≳ 300, h0 ≳ 0.03, and α ≳ 0.1.\"",
+            "cost_usd": 0.015598250000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this lack of validation in Section 5.1, noting that the model is \"inspired by turbulence due to GI\" and stating that \"Whether or not such an anisotropic turbulent velocity field results in a turbulent torque that can be characterized by a single gaussian... cannot be captured by a simple analytical model.\" Under the guidelines, acknowledging a limitation without mitigating its impact on the quantitative results confirms the issue.",
+            "cost_usd": 0.0030518000000000003
+          }
+        ],
+        "cost_usd": 0.02854585
+      },
+      {
+        "flag_id": "fp-bb89e21065f5",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The analysis adopts the heuristic threshold \"At the first order, a dephasing is observable if its more than 8/SNR\" and uses it in headline claims such as the abstract's \"could become detectable (∆ψgas > 8/SNR).\" The paper itself acknowledges this is insufficient: \"Lastly, we use a simple criterion of 8/SNR0 to determine whether a given dephasing is observable. In principle, one has to do Bayesian inference to conclude that by varying all parameters of interest... since small changes in other parameters can mimic ∆ψgas as a number.\"",
+        "evidence": {
+          "claim": "The detectability claim uses an overly simplistic scalar dephasing condition (\u0001Δψ_gas > 8/SNR\u0001) as if it directly implies LISA observability, when in reality this is only a heuristic and does not account for degeneracies or stochastic effects.",
+          "excerpt": "The detectability claim uses the scalar condition Δψ_{rm gas}>8/\\mathrm{SNR} as though it directly implies LISA observability of a stochastic turbulent environment. This appears in the Abstract, Sec. 3, Sec. 4, Sec. 5, and Sec. 6. For turbulent torques, however, the waveform perturbation is realization-dependent and may be partially degenerate with intrinsic EMRI parameters, disk parameters, and beyond-GR effects; the paper itself notes this in Sec. 5 but does not incorporate it into the headline conclusions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper acknowledges in Sec. 5: 'Lastly, we use a simple criterion of 8/SNR_0 to determine whether a given dephasing is observable. In principle, one has to do Bayesian inference to conclude that by varying all parameters of interest...since small changes in other parameters can mimic Δψ_gas as a number.' This acknowledges the limitation but does not incorporate it into the conclusions, consistent with the reviewer's concern; however, the paper uses this criterion consistently and transparently throughout as an order-of-magnitude heuristic, making this a known and stated simplification rather than an uncorrected error.",
+            "cost_usd": 0.0098958
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The analysis adopts the heuristic threshold \"At the first order, a dephasing is observable if its more than 8/SNR\" and uses it in headline claims such as the abstract's \"could become detectable (∆ψgas > 8/SNR).\" The paper itself acknowledges this is insufficient: \"Lastly, we use a simple criterion of 8/SNR0 to determine whether a given dephasing is observable. In principle, one has to do Bayesian inference to conclude that by varying all parameters of interest... since small changes in other parameters can mimic ∆ψgas as a number.\"",
+            "cost_usd": 0.015598250000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper relies heavily on the scalar 8/SNR threshold for its results and explicitly acknowledges the limitation: \"we use a simple criterion of 8/SNR_0 to determine whether a given dephasing is observable. In principle, one has to do Bayesian inference... since small changes in other parameters can mimic \\Delta\\psi_{gas} as a number.\" Since the authors acknowledge but do not actually resolve this degeneracy limitation via the mentioned parameter estimation, the issue remains.",
+            "cost_usd": 0.0030518000000000003
+          }
+        ],
+        "cost_usd": 0.02854585
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.05474760000000001,
+    "general": 0.0570917
+  },
+  "extractor_cost_usd": 0.02396799999999974,
+  "total_cost_usd": 0.13580729999999974
+}

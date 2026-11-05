@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "Veli\\v{c}kovi\\'{c}~et~al.~\\cite{velivckovic2018gat} proposed Graph Attention Networks (GATs), enabling adaptive neighbour weighting through attention mechanisms.",
+    "injected_text": "Veli\\v{c}kovi\\'{c}~et~al.~\\cite{velivckovic2018gat} proposed Graph Attention Networks (GATs), demonstrating that they achieve near-optimal max-min fairness for resource block allocation in cellular networks.",
+    "rationale": "The edit simulates a tired author confusing a foundational machine learning methods paper with a domain-specific wireless networking application by replacing the accurate description of GATs with a claim about cellular network resource allocation.",
+    "ground_truth_description": "The claim attached to the Velickovic et al. citation was rewritten to assert that the paper evaluates cellular network resource allocation, a topic entirely absent from the original paper.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "velivckovic2018gat",
+      "injected_cite_key": "velivckovic2018gat",
+      "claim_sentence_verbatim": "Veli\\v{c}kovi\\'{c}~et~al.~\\cite{velivckovic2018gat} proposed Graph Attention Networks (GATs), enabling adaptive neighbour weighting through attention mechanisms.",
+      "section_location": "Section 2",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "70\\%/20\\%/10\\%",
+    "injected_text": "70\\%/20\\%/25\\%",
+    "rationale": "The paper lacks any explicit 'base × percent = result' triples to perturb for a percent_of error. I injected a percent_to_100 error instead (changing the test split to 25% so the splits sum to 115%, ensuring >10% deviation for the major/S2 severity target) as the closest realistic alternative.",
+    "ground_truth_description": "Changed the dataset test split from 10% to 25%, causing the train/validation/test splits to incorrectly sum to 115%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_to_100",
+      "value_before_raw": "10\\%",
+      "value_after_raw": "25\\%",
+      "value_before_float": 10.0,
+      "value_after_float": 25.0,
+      "location_cue": "Data are split into 70\\%/20\\%/10\\% train/validation/test (seed=42).",
+      "paired_location": null,
+      "quantity_label": "test split percentage",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "f_{ij} \\leq C_{ij} x_{ij},",
+    "injected_text": "f_{ij} \\leq C_{ij} + x_{ij},",
+    "rationale": "The link capacity constraint gates flow on the binary selection variable via the product C_ij * x_ij, so an unselected link (x_ij=0) forces zero flow. Replacing the product with a sum C_ij + x_ij is structurally similar but destroys the gating: an unselected link would still admit flow up to its full capacity, contradicting the relay-selection model the text describes. Perturbs the existing constraint in place rather than appending anything.",
+    "ground_truth_description": "Capacity constraint changed from f_ij <= C_ij * x_ij to f_ij <= C_ij + x_ij, removing the binary gating of link flow.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Problem formulation — link capacity constraint",
+      "original_fragment_latex": "C_{ij} x_{ij}",
+      "injected_fragment_latex": "C_{ij} + x_{ij}",
+      "full_equation_latex_before": "f_{ij} \\leq C_{ij} x_{ij}, \\quad \\forall (i,j)\\in E,",
+      "full_equation_latex_after": "f_{ij} \\leq C_{ij} + x_{ij}, \\quad \\forall (i,j)\\in E,",
+      "term_role": "capacity gating term (product of capacity and binary selector)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "\\subsection{Greedy SNR Baseline}\n\nAs a reference method, a greedy SNR-based strategy is considered.\nEach CAV selects the feasible outgoing link with the highest SNR,\nsubject to capacity and hop constraints.",
+    "injected_text": "\\subsection{Greedy Distance Baseline}\n\nAs a reference method, a greedy distance-based strategy is considered.\nEach CAV selects the feasible outgoing link with the shortest geographical distance,\nsubject to capacity and hop constraints.",
+    "rationale": "The Methods section now defines the baseline as a distance-based heuristic, directly contradicting the Results section which explicitly evaluates and discusses a greedy SNR-based baseline.",
+    "ground_truth_description": "Changed the description of the baseline method in Section IV from SNR-based to distance-based, creating a contradiction with the Results section.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methods_results_inconsistency",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 4.4",
+      "affected_span_verbatim": "\\subsection{Greedy SNR Baseline}\n\nAs a reference method, a greedy SNR-based strategy is considered.\nEach CAV selects the feasible outgoing link with the highest SNR,\nsubject to capacity and hop constraints."
+    },
+    "proposer_agent": "injector.general.S2.t2.v2"
+  }
+]

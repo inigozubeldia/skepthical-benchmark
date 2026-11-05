@@ -1,0 +1,369 @@
+{
+  "paper_id": "2604.20344",
+  "arxiv_url": "https://arxiv.org/abs/2604.20344",
+  "rotation_seed": 2041527746,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S1",
+      "type": 2
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "For models with an isotropic orbital structure, monotonicity of the density profile is a necessary, though not by itself sufficient, condition for consistency \\citep{Binney2008, Ciotti2021}.",
+          "injected_text": "Monotonicity of the density profile is a necessary, though not by itself sufficient, condition for consistency \\citep{Binney2008, Ciotti2021}.",
+          "rationale": "Binney2008 (and Ciotti2021) prove the monotonicity-necessity condition specifically for isotropic orbital structures; dropping the scope qualifier 'For models with an isotropic orbital structure' over-generalises the result to all dynamical models, directly contradicting both the cited sources and the very next sentence's caveat that for general anisotropic structures the problem is notoriously difficult.",
+          "ground_truth_description": "Removed the explicit scope qualifier 'For models with an isotropic orbital structure,' so the necessity-of-monotonicity claim appears to apply to all orbital structures rather than only the isotropic case supported by the cited papers.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Binney2008",
+            "injected_cite_key": "Binney2008",
+            "claim_sentence_verbatim": "For models with an isotropic orbital structure, monotonicity of the density profile is a necessary, though not by itself sufficient, condition for consistency \\citep{Binney2008, Ciotti2021}.",
+            "section_location": "Sec. 4 (Discussion)",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "A substantial fraction of the formal core--S\\'ersic parameter space is therefore physically inadmissible.",
+          "injected_text": "A substantial fraction (approximately 40\\%) of the formal core--S\\'ersic parameter space is therefore physically inadmissible, while the remaining 75\\% corresponds to physically acceptable models.",
+          "rationale": "This paper is a weak target for percent_to_100 (no pre-existing percentage breakdown exists); the best viable site is the conclusion item 3 where 'substantial fraction' is quantified by injecting two complementary percentages that sum to 115% (40+75) instead of 100%, triggering a blatant percent_to_100 failure consistent with a tired author's arithmetic slip when adding specific values to a previously qualitative statement.",
+          "ground_truth_description": "Changed 'A substantial fraction' to 'approximately 40%... while the remaining 75%', introducing percentages that sum to 115% instead of 100%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_to_100",
+            "value_before_raw": "100",
+            "value_after_raw": "115",
+            "value_before_float": 100.0,
+            "value_after_float": 115.0,
+            "location_cue": "approximately 40% of the formal core--Sérsic parameter space is therefore physically inadmissible, while the remaining 75% corresponds to physically acceptable models",
+            "paired_location": "Conclusions, item 3",
+            "quantity_label": "sum of percentage breakdown of inadmissible and admissible core-Sérsic parameter space",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t1.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "\\nu(r) = -\\frac{1}{\\pi} \\int_r^\\infty \\frac{\\txd I(R)}{\\txd R}\\,\\frac{\\txd R}{\\sqrt{R^2-r^2}}.",
+          "injected_text": "\\nu(r) = -\\frac{1}{\\pi} \\sum_r^\\infty \\frac{\\txd I(R)}{\\txd R}\\,\\frac{\\txd R}{\\sqrt{R^2-r^2}}.",
+          "rationale": "Swapping the integral operator \\int to \\sum in the inverse Abel transform replaces a continuous convolution identity with a meaningless discrete sum, which Wolfram refutes against the known Abel inversion formula while leaving the integrand/summand syntactically intact.",
+          "ground_truth_description": "The integral sign in the inverse Abel transform (Sec. 3.1) was changed from \\int to \\sum, replacing the correct continuous deprojection formula with an incorrect discrete-sum form.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.1",
+            "original_fragment_latex": "\\int_r^\\infty",
+            "injected_fragment_latex": "\\sum_r^\\infty",
+            "full_equation_latex_before": "\\nu(r) = -\\frac{1}{\\pi} \\int_r^\\infty \\frac{\\txd I(R)}{\\txd R}\\,\\frac{\\txd R}{\\sqrt{R^2-r^2}}.",
+            "full_equation_latex_after": "\\nu(r) = -\\frac{1}{\\pi} \\sum_r^\\infty \\frac{\\txd I(R)}{\\txd R}\\,\\frac{\\txd R}{\\sqrt{R^2-r^2}}.",
+            "term_role": "outer operator swap",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t2.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "They considered three discrete values for $\\alpha$: 10, 5, and 2, representing sharp, moderate, and broad transition regions, respectively",
+          "injected_text": "They considered three discreet values for $\\alpha$: 10, 5, and 2, representing sharp, moderate, and broad transition regions, respectively",
+          "rationale": "Classic homophone swap of 'discrete' (distinct/separate) to 'discreet' (cautious/unobtrusive) — a cosmetic writing error a tired author might plausibly make, leaving meaning intact but introducing a clear editorial defect.",
+          "ground_truth_description": "The word 'discrete' was changed to the homophone 'discreet' in the description of Dullo2013's fitting choices in Section 3.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D2",
+            "change_kind": "homophone_swap",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 3 (Luminosity density)",
+            "affected_span_verbatim": "They considered three discrete values for $\\alpha$: 10, 5, and 2, representing sharp, moderate, and broad transition regions, respectively"
+          },
+          "proposer_agent": "injector.general.S1.t1.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "the conclusion reached previously for the Nuker model \\citep{Baes2020a}",
+          "injected_text": "the convergence criterion established for numerical Abel-transform inversions in triaxial stellar systems \\citep{Baes2020a}",
+          "rationale": "Replacing the accurate claim that Baes2020a concerns the Nuker model with a claim that it establishes convergence criteria for Abel-transform inversions in triaxial geometries — a topic entirely absent from that paper — while keeping the cite key intact, producing a UNRELATED verdict.",
+          "ground_truth_description": "The claim about what Baes2020a showed was changed from 'conclusion reached previously for the Nuker model' to a fabricated result about triaxial Abel-transform convergence, a topic Baes2020a does not discuss.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Baes2020a",
+            "injected_cite_key": "Baes2020a",
+            "claim_sentence_verbatim": "This result parallels, but is not identical to, the conclusion reached previously for the Nuker model \\citep{Baes2020a}, reinforcing that broken power-law transitions, even when embedded in a global S\\'ersic structure, must remain sufficiently gradual to preserve realistic intrinsic behaviour.",
+            "section_location": "Sec. 4 (Discussion)",
+            "mutation_kind": "claim_topic_mis_attribution",
+            "detection_target_verdict": "UNRELATED"
+          },
+          "proposer_agent": "injector.citations.S3.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "in the bottom row the inner slope is fixed to $\\gamma = 0.25$ and the S\\'ersic index $m$ is varied.",
+          "injected_text": "in the bottom row the inner slope is fixed to $\\gamma = 0.24$ and the S\\'ersic index $m$ is varied.",
+          "rationale": "The abstract of this paper contains no numerical values at all, making a strict abstract-vs-body injection impossible; the best available repeated headline value is the reference-model inner slope γ=0.25, which appears in the Figure 1 caption (edit site) and again unchanged in the Section 3.2 and 3.3 body text, so changing the caption value by ±1 in the last decimal (0.25→0.24) creates a plausible author mistype that a reviewer can detect by comparing the caption to the description in the body.",
+          "ground_truth_description": "Inner power-law slope γ in the Figure 1 caption was changed from 0.25 to 0.24; the body text in Sections 3.2 and 3.3 retains the original value 0.25.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "0.25",
+            "value_after_raw": "0.24",
+            "value_before_float": 0.25,
+            "value_after_float": 0.24,
+            "location_cue": "in the bottom row the inner slope is fixed to $\\gamma = 0.25$ and the S\\'ersic index $m$ is varied",
+            "paired_location": "Section 3.2 body text: 'in the bottom row we fixed $\\gamma=0.25$ and we varied the S\\'ersic index, $m$'",
+            "quantity_label": "inner power-law slope gamma of the reference core-Sersic model",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "\\Ib \\exp\\left[-b\\left(\\frac{R}{\\Re}\\right)^{\\frac{1}{m}} + b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}\\right]",
+          "injected_text": "\\Ib \\exp\\left[-b\\left(\\frac{R}{\\Re}\\right)^{\\frac{1}{m}} - b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}\\right]",
+          "rationale": "The sharp-transition limit equation derives directly from Eq. (coreSersic): taking α→∞ for R≥Rb gives I(R)=Ib·exp[−b(R/Re)^{1/m}+b(Rb/Re)^{1/m}] (with a '+' sign) because I'→Ib·exp[+b(Rb/Re)^{1/m}] in that limit; flipping the sign to '−' makes the sharp-transition equation inconsistent with the general defining equation and also breaks continuity at R=Rb (the R≥Rb piece no longer evaluates to Ib at R=Rb, contradicting the R≤Rb piece).",
+          "ground_truth_description": "In the sharp-transition core–Sérsic equation (R≥Rb branch), the normalization term '+b(Rb/Re)^{1/m}' in the exponent was changed to '−b(Rb/Re)^{1/m}', making this equation inconsistent with the general Eq. (coreSersic) from which it is derived as the α→∞ limit.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sharp-transition limit equation (unnumbered cases equation), Section 2 (The core–Sérsic model)",
+            "original_fragment_latex": "+ b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}",
+            "injected_fragment_latex": "- b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}",
+            "full_equation_latex_before": "I(R) \n= \n\\begin{cases}\n\\;\\displaystyle\n\\Ib \\left(\\frac{R}{\\Rb}\\right)^{-\\gamma}\n&\n\\quad R\\leqslant\\Rb,\n\\\\[1em]\n\\;\\displaystyle\n\\Ib \\exp\\left[-b\\left(\\frac{R}{\\Re}\\right)^{\\frac{1}{m}} + b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}\\right]\n&\n\\quad R\\geqslant\\Rb.\n\\end{cases}",
+            "full_equation_latex_after": "I(R) \n= \n\\begin{cases}\n\\;\\displaystyle\n\\Ib \\left(\\frac{R}{\\Rb}\\right)^{-\\gamma}\n&\n\\quad R\\leqslant\\Rb,\n\\\\[1em]\n\\;\\displaystyle\n\\Ib \\exp\\left[-b\\left(\\frac{R}{\\Re}\\right)^{\\frac{1}{m}} - b\\left(\\frac{\\Rb}{\\Re}\\right)^{\\frac{1}{m}}\\right]\n&\n\\quad R\\geqslant\\Rb.\n\\end{cases}",
+            "term_role": "cross-equation inconsistency: normalization exponent +b(Rb/Re)^{1/m} in the sharp-transition R≥Rb branch vs. the α→∞ limit of Eq. (coreSersic) (label: coreSersic) which mandates a '+' sign via the I' definition",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t2.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "By placing the core--S\\'ersic model on a firmer physical footing, our results provide a more reliable basis for interpreting the central structure of massive galaxies and for connecting observed cores to the merger-driven evolution of their SMBHs.",
+          "injected_text": "By placing the core--S\\'ersic model on a firmer physical footing, our results provide a more reliable basis for interpreting the central structure of massive galaxies and for connecting observed cores to the merger-driven evolution of their SMBHs, and more broadly demonstrate that analogous physical admissibility constraints govern any parametric photometric model applied across the full spectrum of galaxy types and environments.",
+          "rationale": "The added clause 'analogous physical admissibility constraints govern any parametric photometric model applied across the full spectrum of galaxy types and environments' is an unsupported sweeping generalisation: the paper derives constraints solely for the core--S\\'ersic model via spherical deprojection of massive early-type galaxies, and presents no analysis of other photometric models or of galaxy types beyond luminous ellipticals with depleted cores.",
+          "ground_truth_description": "The closing sentence of the Conclusions was extended with a clause claiming that the paper's admissibility constraints generalise to all parametric photometric models across all galaxy types, a scope far beyond what the Results demonstrate.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B7",
+            "change_kind": "overstated_conclusion",
+            "expected_bucket": "major",
+            "section_location": "Conclusion",
+            "affected_span_verbatim": "By placing the core--S\\'ersic model on a firmer physical footing, our results provide a more reliable basis for interpreting the central structure of massive galaxies and for connecting observed cores to the merger-driven evolution of their SMBHs."
+          },
+          "proposer_agent": "injector.general.S3.t2.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "The code uses an efficient high-order Gauss-Legendre numerical integration strategy.",
+          "injected_text": "The code uses an efficient numerical integration strategy.",
+          "rationale": "Baes2021b (SpheCow) explicitly advertises its high-order Gauss-Legendre quadrature as a defining methodological qualifier; dropping 'high-order Gauss-Legendre' reduces the description to a generic claim that is almost-but-not-quite faithful to what the cited paper states, yielding a PARTIALLY_SUPPORTED verdict.",
+          "ground_truth_description": "The specific 'high-order Gauss-Legendre' qualifier describing SpheCow's integration strategy was removed, leaving only the generic phrase 'numerical integration strategy'.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Baes2021b",
+            "injected_cite_key": "Baes2021b",
+            "claim_sentence_verbatim": "The code uses an efficient high-order Gauss-Legendre numerical integration strategy.",
+            "section_location": "Sec. 3.1",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "For $\\gamma=0$, we always find $\\alpha_{\\text{crit}} = 2$",
+          "injected_text": "For $\\gamma=0$, we always find $\\alpha_{\\text{crit}} = 2.1$",
+          "rationale": "The prose statement 'α_crit = 2' for γ=0 is changed to '2.1' while Table 1 (Appendix A) still lists 2.00 for all γ=0 entries, creating an abstract_vs_body_match-style inconsistency between two body locations that the numerics predicate fires on as repeated_constant / integer_equal mismatch; the closest available abstract_vs_body_match anchor in this paper is this prose-vs-table repetition of the same constant, which is the strongest repeated-value pair present.",
+          "ground_truth_description": "The prose value for α_crit at γ=0 was changed from 2 to 2.1 in the results section, while the table in the appendix still shows 2.00 for all γ=0 rows, creating a detectable numerical inconsistency between two locations.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "2",
+            "value_after_raw": "2.1",
+            "value_before_float": 2.0,
+            "value_after_float": 2.1,
+            "location_cue": "For $\\gamma=0$, we always find $\\alpha_{\\text{crit}} = 2$",
+            "paired_location": "Table 1 (Appendix A), γ=0 row, all m columns showing 2.00",
+            "quantity_label": "critical transition parameter α_crit at γ=0",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r}.",
+          "injected_text": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}.",
+          "rationale": "Appending the patently false limit claim `lim_{r→∞} ν(r)/r` as an alleged equivalent of the logarithmic slope definition inside the displayed equation — for any physical stellar system ν(r)→0 faster than 1/r at large r, so the limit equals 0 not −dlog ν/dlog r, which Wolfram Limit[] immediately refutes.",
+          "ground_truth_description": "A false limit claim `= lim_{r→∞} ν(r)/r` was appended to the definition of the logarithmic density slope γ(r) inside the displayed equation, asserting an incorrect equivalence that Wolfram refutes.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 3.2, definition of logarithmic slope",
+            "original_fragment_latex": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r}.",
+            "injected_fragment_latex": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}.",
+            "full_equation_latex_before": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r}.",
+            "full_equation_latex_after": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}.",
+            "term_role": "limit value",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t3.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "aa58321-25corr.tex",
+          "original_text": "Figure~{\\ref{alphacrit.fig}} also contains data from two representative observational studies.",
+          "injected_text": "Figure~{\\ref{alphacrit.fgi}} also contains data from two representative observational studies.",
+          "rationale": "Misspelling the label key in \\ref{alphacrit.fgi} causes LaTeX to produce an unresolved cross-reference that renders as '??' in the PDF, a classic LaTeX artefact targeting checklist item D7 (broken/incorrect cross-reference).",
+          "ground_truth_description": "The \\ref label for the alphacrit figure in the Discussion section was changed from 'alphacrit.fig' to 'alphacrit.fgi', causing a broken cross-reference that renders as '??' in the compiled PDF.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "latex_artefact",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 4 (Discussion)",
+            "affected_span_verbatim": "Figure~{\\ref{alphacrit.fig}} also contains data from two representative observational studies."
+          },
+          "proposer_agent": "injector.general.S1.t2.v3"
+        }
+      ]
+    }
+  ]
+}

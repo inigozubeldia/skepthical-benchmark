@@ -1,0 +1,189 @@
+{
+  "paper_id": "2604.20203",
+  "copy_id": "v2",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer's minor issue #9 mentions 'maximum-likelihood / beta-posterior' but this appears to be the reviewer's own terminology describing the beta posterior equation, not a flag that the paper incorrectly attributed a maximum likelihood estimator to the cited papers (Bryan & Lee 2024 and Zhu 2024). No reviewer comment challenges the post-edit claim sentence about using 'a maximum likelihood estimator' as contradicted or mischaracterising the cited sources.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review flags an issue with a 'maximum-likelihood / beta-posterior' expression in Eq. (2), but it does not specifically challenge the Sec. 3.1 claim that Bryan & Lee (2024) and Zhu (2024) used a maximum likelihood estimator rather than binomial statistics. Under the broadened-claim rule, the cited-source methodology attribution itself must be challenged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "While the reviewer notes the use of 'maximum-likelihood' in their mathematical audit of Equation 2, they do not challenge the attribution of this methodology to the cited papers (Bryan & Lee 2024 and Zhu 2024) as being contradictory or mischaracterized.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer's Minor Issue 9 and Maths item 2 flag the exponent in Eq. (2) as incorrect ('b+1' vs 'b-1'), and note the equation may be a non-standard parametrisation, but this concerns the formula's algebraic form, not the mis-categorisation of the statistical method (binomial statistics vs. maximum likelihood estimator). No part of the review challenges the claim that the method used is 'a maximum likelihood estimator' versus the correct 'binomial statistics with a flat prior' as attributed to Bryan & Lee 2024 and Zhu 2024.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Inconsistent reporting of the headline significance for the sub-Neptune correlation. The Abstract states the SN–CJ correlation is \"significant... for metal-rich systems with a confidence level of 99.59%\", whereas §3.2 reports the same comparison gives a confidence level of 99.95% (\"9,995 times\" out of 10,000 resamples). These cannot both be correct for the same test, and the abstract figure is not reproduced in the body or Table 1.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Inconsistent reporting of the headline significance for the sub-Neptune correlation. The Abstract states the SN–CJ correlation is \"significant... for metal-rich systems with a confidence level of 99.59%\", whereas §3.2 reports the same comparison gives a confidence level of 99.95% (\"9,995 times\" out of 10,000 resamples). These cannot both be correct for the same test, and the abstract figure is not reproduced in the body or Table 1.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the mismatch between 99.59% in the abstract and 99.95% in §3.2 as a major issue, directly corresponding to the injected change of 99.95% to 99.59% in the abstract only.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "the abstract and conclusion mix two different significance levels (99.59% vs. 99.95%) for the same headline result.\n\nInconsistent reporting of the headline significance for the sub-Neptune correlation. The Abstract states the SN–CJ correlation is \"significant... for metal-rich systems with a confidence level of 99.59%\", whereas §3.2 reports the same comparison gives a confidence level of 99.95% (\"9,995 times\" out of 10,000 resamples).",
+          "confidence": "high",
+          "reasoning": "This directly names the two conflicting values, identifies the abstract/body mismatch, and clearly corresponds to the injected change from 99.95% to 99.59% in the abstract.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract states the SN–CJ correlation is \"significant... for metal-rich systems with a confidence level of 99.59%\", whereas \u00133.2 reports the same comparison gives a confidence level of 99.95%",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the mismatch between the confidence level reported in the abstract (99.59%) and the body (99.95%) as a major inconsistency.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Beta posterior for conditional frequency: f(P; a, b) = (1/B(a,b)) · P^(a-1) · (1-P)^(b+1), with a = n_det + 1, b = n_eff - n_det + 1. Verdict: FAIL ... The paper's expression has (1-P)^(b+1), not (1-P)^(b-1). This is either a typo or an unconventional parametrisation. As written, it is not the Beta(a,b) PDF for the stated a, b.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Beta posterior for conditional frequency: f(P; a, b) = (1/B(a,b)) · P^(a-1) · (1-P)^(b+1), with a = n_det + 1, b = n_eff - n_det + 1. Verdict: FAIL ... The paper's expression has (1-P)^(b+1), not (1-P)^(b-1). This is either a typo or an unconventional parametrisation. As written, it is not the Beta(a,b) PDF for the stated a, b.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the incorrect exponent (b+1) vs the correct (b-1) in the Beta distribution PDF in Eq. (2), directly matching the injected error of changing b-1 to b+1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Sec. 1 and Sec. 4 cite a number of theoretical works ...\n\n9.  The maximum-likelihood / beta-posterior in Eq. (2) has parameters a = n_det + 1 and b = n_eff − n_det + 1, which is not the standard Beta(α, β) posterior under a flat prior — under a Beta(1,1) prior and binomial likelihood, the standard posterior is Beta(n+1, N−n+1). The \"+1\" structure is correct for the second parameter but the formula as written has \"b + 1\" in the exponent of (1−P), not \"b−1\". This is either a typo in Eq. (2) or an unconventional parametrisation.\n\n2.  [⚠] **Beta posterior for conditional frequency: f(P; a, b) = (1/B(a,b)) · P^(a-1) · (1-P)^(b+1), with a = n_det + 1, b = n_eff - n_det + 1.**\n    - _Verdict:_ FAIL\n    - _Notes:_ ... The paper's expression has (1-P)^(b+1), not (1-P)^(b-1). ... As written, it is not the Beta(a,b) PDF for the stated a, b. This affects nothing downstream if the actual numerics use the standard form, but the printed equation is incorrect.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exact erroneous exponent change from b−1 to b+1 in Eq. (2), which is a direct match to the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the formula as written has 'b + 1' in the exponent of (1−P), not 'b−1'. This is either a typo in Eq. (2) or an unconventional parametrisation.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the exponent in the Beta distribution kernel was changed from the standard b-1 to b+1 in Equation 2.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "The text in Sec. 3.1 says \"we verified... within 1%\" — show this calculation, or propagate it as a systematic.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text in Sec. 3.1 says \"we verified... within 1%\" — show this calculation, or propagate it as a systematic.",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags the '1%' claim in Sec. 3.1 as unsubstantiated, recommending it be shown or propagated, which corresponds to the injected phantom evidence subclaim about per-system vs average completeness agreeing within 1%.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The text in Sec. 3.1 says \"we verified... within 1%\" — show this calculation, or propagate it as a systematic.",
+          "confidence": "high",
+          "reasoning": "This directly flags the inserted parenthetical claim that an unreported per-system vs average completeness comparison agreed within 1%, matching the phantom-evidence sub-claim injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text in Sec. 3.1 says 'we verified... within 1%' — show this calculation, or propagate it as a systematic.",
+          "confidence": "high",
+          "reasoning": "The reviewer flags the specific parenthetical claim regarding 1% consistency as phantom evidence, noting the lack of reporting for this calculation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 56.854784,
+  "total_cost_usd": null,
+  "total_input_tokens": 50815,
+  "total_output_tokens": 5282,
+  "escalation_count": 1,
+  "notes": null
+}

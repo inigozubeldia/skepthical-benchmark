@@ -1,0 +1,189 @@
+{
+  "paper_id": "2604.20914",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer explicitly states 'I did not identify a confirmed citation error from the information available in the manuscript.' No reviewer flag challenges the post-edit claim about needing to include indirectly-detectable modes against the cited sources Shi:2024ttu or Capuano:2025kkl, nor does any flag mention over-generalization of a regime-bounded result in the introduction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states, “I did not identify a confirmed citation error,” and nowhere challenges the over-generalised Introduction claim against Shi:2024ttu or Capuano:2025kkl. Under the broadened-claim rule, this injection is not detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly stated in the summary that they did not identify any confirmed citation errors after making explicit passes.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states 'I did not identify a confirmed citation error from the information available in the manuscript.' None of the reviewer's flagged issues correspond to the dropped qualifier 'in the high-precision regime' from the claim about including non-directly-detectable modes to avoid systematic biases (citing Shi:2024ttu, Capuano:2025kkl). The reviewer never challenges this sentence or suggests it over-generalizes a regime-bounded result.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text says that FIREFLY gives an approximately 200-fold speedup, 'reducing the computation from about 13 hours to 6 minutes.' But 13 hr=780 min, 780/6=130. Thus 13 hours to 6 minutes is a 130× speedup, not a 200× speedup. Conversely, a 197.9× speedup, as labelled in Fig. 2 for N=6, would imply either about 3.9 minutes for a 13-hour full run...",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text says that FIREFLY gives an approximately 200-fold speedup, 'reducing the computation from about 13 hours to 6 minutes.' But 13 hr=780 min, 780/6=130. Thus 13 hours to 6 minutes is a 130× speedup, not a 200× speedup. Conversely, a 197.9× speedup, as labelled in Fig. 2 for N=6, would imply either about 3.9 minutes for a 13-hour full run...",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inconsistency between the 200× speedup claim, the 13-hour baseline, and the 6-minute result, and even computes the correct value of ~3.9 minutes, directly corresponding to the injected change from 4 to 6 minutes.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The text says that FIREFLY gives an approximately 200-fold speedup, “reducing the computation from about 13 hours to 6 minutes.” But\n13 hr=780 min, 780/6=130.\nThus 13 hours to 6 minutes is a 130× speedup, not a 200× speedup. ... either revise the text to “13 hours to about 4 minutes” if the 197.9× ratio is correct, or revise the quoted speedup to about 130× if the 13-hour and 6-minute runtimes are correct.",
+          "confidence": "high",
+          "reasoning": "This exactly flags the injected inconsistency between the stated 200× speedup and the changed runtime of 6 minutes from a 13-hour baseline, even naming the correct alternative of about 4 minutes.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text says that FIREFLY gives an approximately 200-fold speedup, “reducing the computation from about 13 hours to 6 minutes.” But 13 hr=780 min, 780/6=130. Thus 13 hours to 6 minutes is a 130x speedup, not a 200x speedup.",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the specific arithmetic inconsistency between the 13-hour baseline, the 6-minute result, and the stated 200-fold speedup.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[mathematical] Missing factor of c in the time delay in Supplementary Eq. (A.10) ... Eq. (A.10) contains H^l(t-L_l-\\hat k\\cdot r_s/c) rather than H^l(t-L_l/c-\\hat k\\cdot r_s/c). Unless units with c=1 are introduced only for this line, the dimensions do not balance.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[mathematical] Missing factor of c in the time delay in Supplementary Eq. (A.10) ... Eq. (A.10) contains H^l(t-L_l-\\hat k\\cdot r_s/c) rather than H^l(t-L_l/c-\\hat k\\cdot r_s/c). Unless units with c=1 are introduced only for this line, the dimensions do not balance.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the missing /c division on L_l in the retarded-time argument of H^l in Eq. (A.10), exactly matching the injected dimensional mismatch in eq:single link response.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Missing factor of c in the time delay in Supplementary Eq. (A.10)\n\nWhere it occurs: Supplementary Material, Sec. A.2, Eq. (A.10).\n\nWhat is wrong: Eq. (A.8) uses the delay L_l/c, and Eq. (A.11) also uses L_l/c. But Eq. (A.10) contains\nH^l(t-L_l-\\hat k\\cdot r_s/c)\nrather than\nH^l(t-L_l/c-\\hat k\\cdot r_s/c).\nUnless units with c=1 are introduced only for this line, the dimensions do not balance.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the exact equation, quotes the erroneous term, supplies the corrected L_l/c form, and notes the dimensional inconsistency. This is a direct detection of the injected unit mismatch.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (A.10) contains H^l(t-L_l-\\hat k\\cdot r_s/c) rather than H^l(t-L_l/c-\\hat k\\cdot r_s/c). Unless units with c=1 are introduced only for this line, the dimensions do not balance.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the missing division by c in the arm-length term in the single-link response equation, explicitly noting the dimensional imbalance.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[general] Unresolved figure reference ... Main text, paragraph after Fig. 1 discussion: 'Figure ?? further shows the time scaling…' The reference should point to Fig. 2.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[general] Unresolved figure reference ... Main text, paragraph after Fig. 1 discussion: 'Figure ?? further shows the time scaling…' The reference should point to Fig. 2.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the unresolved cross-reference rendering as 'Figure ??' in the paragraph about time scaling, which directly corresponds to the injected \\ref{fig:2} typo producing an unresolved LaTeX reference.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] Unresolved figure reference\n\nWhere it occurs: Main text, paragraph after Fig. 1 discussion: “Figure ?? further shows the time scaling…”\n\nWhat is wrong: The reference should point to Fig. 2.\n\nConcrete fix: Replace “Figure ??” with “Figure 2”.",
+          "confidence": "high",
+          "reasoning": "This directly matches the injected broken \\ref that renders as “Figure ??” in the paragraph introducing Fig. 2. The reviewer clearly flags the specific unresolved figure reference.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Main text, paragraph after Fig. 1 discussion: “Figure ?? further shows the time scaling...” ... Replace “Figure ??” with “Figure 2”.",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the unresolved cross-reference rendered as 'Figure ??' in the text introducing the figure.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 35.717619,
+  "total_cost_usd": null,
+  "total_input_tokens": 22682,
+  "total_output_tokens": 3012,
+  "escalation_count": 1,
+  "notes": null
+}

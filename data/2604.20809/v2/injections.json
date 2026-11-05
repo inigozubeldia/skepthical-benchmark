@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "morion2026.tex",
+    "original_text": "It has been known since work by Tolman in the 1930s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+    "injected_text": "It has been known since work by Tolman in the 1920s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+    "rationale": "This paper is a weak target for a 1-2 sigma quantitative-qualifier mis-quote: it is a theoretical proceedings with no numerical measurements attributed to any cited paper, so no explicit +/- sigma value exists to perturb in the [1 sigma, 2 sigma] band. The closest available quantitative qualifier attributed to a citation is the decade qualifier on Tolman; shifting '1930s' to '1920s' creates a mild numerical mis-quote (the cited Tolman paper is from 1931) that a casual reader does not catch but a careful reader comparing the sentence to the cited paper flags. Cell-fit tension: this is a discrete decade label, not a continuous mean +/- sigma; mutation_kind is the closest enum match.",
+    "ground_truth_description": "Changed the decade attributed to Tolman from '1930s' to '1920s' in the sentence introducing the entropy-growth problem in cyclic cosmology, while leaving the cite key Tolman:1931fei intact.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Tolman:1931fei",
+      "injected_cite_key": "Tolman:1931fei",
+      "claim_sentence_verbatim": "It has been known since work by Tolman in the 1930s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+      "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete)",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "morion2026.tex",
+    "original_text": "A simplified example is an expanding phase dominated by a cosmological constant $w_+ = -1$, so that $H_+ = \\mathrm{const.}$, and $a_+\\left(t\\right) = e^{H t}$.",
+    "injected_text": "A simplified example is an expanding phase dominated by a cosmological constant $w_+ = -1$, so that $H_+ = \\mathrm{const.}$, and $a_+\\left(t\\right) = e^{H t}$. In typical realizations of this scenario, the expanding phase accounts for roughly 70\\% of the total cycle duration, the contracting phase about 25\\%, and the bounce transition the remaining 15\\%.",
+    "rationale": "Cell requires a percent_to_100 failure, but this theoretical proceedings has zero native percentage breakdowns; per the operating instructions for weak-target papers, I picked the most plausible insertion site (the ekpyrotic cycle decomposition) and added a three-part breakdown of cycle duration (70+25+15=110%), so percent_to_100 FAILs blatantly with >10% relative excess on the sum (triggering the major upgrade). Constraint tension: the inserted sentence is somewhat artefactual because no realistic equivalent statistic exists in this paper.",
+    "ground_truth_description": "Inserted a fabricated three-way percentage breakdown of cycle duration (70%/25%/15%) into the ekpyrotic example discussion; the parts sum to 110% rather than 100%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_to_100",
+      "value_before_raw": "(no percentages present)",
+      "value_after_raw": "70% + 25% + 15% = 110%",
+      "value_before_float": 100.0,
+      "value_after_float": 110.0,
+      "location_cue": "the expanding phase accounts for roughly 70\\% of the total cycle duration, the contracting phase about 25\\%, and the bounce transition the remaining 15\\%",
+      "paired_location": null,
+      "quantity_label": "Fractional decomposition of total cycle duration into expanding, contracting, and bounce phases",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "morion2026.tex",
+    "original_text": "    \\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu} + u^\\mu u^\\nu",
+    "injected_text": "    \\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu}",
+    "rationale": "Deletes the +u^mu u^nu term at the '+' operator boundary in the load-bearing definition of the spatial projection tensor used throughout the general BGV proof; Wolfram refutes against the required projection property lambda_{mu nu} u^nu = 0.",
+    "ground_truth_description": "Removed the +u^mu u^nu term from the definition of the spatial projection tensor lambda^{mu nu}, so it is now equated to g^{mu nu} alone instead of g^{mu nu} + u^mu u^nu.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3 (BGV Theorem: General Case), definition of the spatial projection tensor",
+      "original_fragment_latex": "\\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu} + u^\\mu u^\\nu",
+      "injected_fragment_latex": "\\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu}",
+      "full_equation_latex_before": "\\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu} + u^\\mu u^\\nu",
+      "full_equation_latex_after": "\\lambda^{\\mu \\nu} \\equiv g^{\\mu \\nu}",
+      "term_role": "timelike-projector subtraction term (u^mu u^nu) that turns the inverse metric g^{mu nu} into the spatial projection tensor orthogonal to u^mu",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "morion2026.tex",
+    "original_text": "The second law of thermodynamics operates identically whether the universe is expanding or contracting",
+    "injected_text": "The second law of thermodynamics operates identically whether the the universe is expanding or contracting",
+    "rationale": "Introduces an accidental duplication of the article 'the' — a classic typo/word-repetition cosmetic defect that does not change meaning, plausibly missed in proofreading.",
+    "ground_truth_description": "Duplicated the word 'the' in the sentence about the second law of thermodynamics in Section 2 (Ijjas-Steinhardt Cyclic Model), creating a 'the the' repetition typo.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D2",
+      "change_kind": "word_repetition",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete)",
+      "affected_span_verbatim": "The second law of thermodynamics operates identically whether the universe is expanding or contracting, and the growth of entropy with time prevents cyclic behavior."
+    },
+    "proposer_agent": "injector.general.S1.t1.v2"
+  }
+]

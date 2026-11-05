@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "apssamp.tex",
+    "original_text": "We evaluate the noise covariance matrices of pulsars following \\cite{2014PhRvD..90j4012V} and using the \\textsc{enterprise} Python software \\cite{enterprise}.",
+    "injected_text": "We evaluate the noise covariance matrices of pulsars following the frequentist approach of \\cite{2014PhRvD..90j4012V} and using the \\textsc{enterprise} Python software \\cite{enterprise}.",
+    "rationale": "Van Haasteren & Vallisneri 2014 explicitly develops a Gaussian-process (Bayesian) framework for pulsar-timing data analysis; describing it as a 'frequentist approach' is a method-category mis-attribution that a careful reader of the cited paper would flag as CONTRADICTED.",
+    "ground_truth_description": "Inserted the qualifier 'the frequentist approach of' before the citation to van Haasteren & Vallisneri (2014), mis-categorising their Gaussian-process/Bayesian methodology as frequentist while leaving the cite key intact.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "2014PhRvD..90j4012V",
+      "injected_cite_key": "2014PhRvD..90j4012V",
+      "claim_sentence_verbatim": "We evaluate the noise covariance matrices of pulsars following \\cite{2014PhRvD..90j4012V} and using the \\textsc{enterprise} Python software \\cite{enterprise}.",
+      "section_location": "Sec. IV (The zombie detection efficiency)",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "apssamp.tex",
+    "original_text": "For the IPTA DR3-like sensitivity, we consider $130$ pulsars present in the previously published collaboration datasets, fixing their observing time to $10$ years, with an observing cadence of $5$ days.",
+    "injected_text": "For the IPTA DR3-like sensitivity, we consider $1300$ pulsars present in the previously published collaboration datasets, fixing their observing time to $10$ years, with an observing cadence of $5$ days.",
+    "rationale": "The number of pulsars used in the IPTA DR3-like configuration is reported as 130 in Table~\\ref{tab:PTA-configs} (and again in the SKA row), but the prose introducing the configuration is shifted by a factor of 10 to 1300, producing an integer_equal disagreement between Methods prose and the configuration table.",
+    "ground_truth_description": "Changed the IPTA DR3-like pulsar count quoted in the prose from 130 to 1300, while Table~\\ref{tab:PTA-configs} still lists 130 pulsars for IPTA, creating an internal sample-size inconsistency.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "integer_equal",
+      "value_before_raw": "130",
+      "value_after_raw": "1300",
+      "value_before_float": 130.0,
+      "value_after_float": 1300.0,
+      "location_cue": "we consider $1300$ pulsars present in the previously published collaboration datasets",
+      "paired_location": "Table~\\ref{tab:PTA-configs}, IPTA row, N_psr column (value 130)",
+      "quantity_label": "Number of pulsars in the IPTA DR3-like PTA configuration",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t3.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "apssamp.tex",
+    "original_text": "&\\frac{4 \\pi c \\dL^2}{(1+z)^2} \\left(2\\Tmax - \\taucmin \\right) \\\\",
+    "injected_text": "&\\frac{4 \\pi c \\dL^2}{(1+z)^3} \\left(2\\Tmax - \\taucmin \\right) \\\\",
+    "rationale": "Eq. (dNdtc-general-2) and Eq. (avg-N-zombie) both define/use the integrand factor 4 pi c d_L^2 / (1+z)^2; perturbing the exponent to (1+z)^3 in only the Eq. (N-zombie-SNR) occurrence creates a within-paper inconsistency detectable by cross-equation reading without external knowledge.",
+    "ground_truth_description": "Changed (1+z)^2 to (1+z)^3 in the cosmological volume-element factor of the SNR-thresholded zombie-binary count integral (Eq. N-zombie-SNR), creating a contradiction with the same factor in Eqs. (dNdtc-general-2) and (avg-N-zombie).",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:N-zombie-SNR",
+      "equation_location": "Eq. (N-zombie-SNR), Section: Occurrence of zombie binaries",
+      "original_fragment_latex": "\\frac{4 \\pi c \\dL^2}{(1+z)^2}",
+      "injected_fragment_latex": "\\frac{4 \\pi c \\dL^2}{(1+z)^3}",
+      "full_equation_latex_before": "\\Nzbar \\equiv \\int \\dd \\xiI \\frac{\\dd^3 n}{\\dd \\xiI} \\frac{4 \\pi c \\dL^2}{(1+z)^2} \\left(2\\Tmax - \\taucmin \\right) \\times \\:\\mathrm{P} \\left( \\SNR \\geq \\SNRthresh \\left| \\xiI \\right.\\right),",
+      "full_equation_latex_after": "\\Nzbar \\equiv \\int \\dd \\xiI \\frac{\\dd^3 n}{\\dd \\xiI} \\frac{4 \\pi c \\dL^2}{(1+z)^3} \\left(2\\Tmax - \\taucmin \\right) \\times \\:\\mathrm{P} \\left( \\SNR \\geq \\SNRthresh \\left| \\xiI \\right.\\right),",
+      "term_role": "cross-equation inconsistency: cosmological volume factor 4 pi c d_L^2 / (1+z)^n in Eq. (dNdtc-general-2)/(avg-N-zombie) vs Eq. (N-zombie-SNR)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "apssamp.tex",
+    "original_text": "Using SMBHB population models consistent with current PTA constraints, we find that while the probability of detecting such systems in existing PTA datasets remains low, the Square Kilometer Array observatory is expected to achieve sufficient sensitivity to have a few zombie binaries with a signal-to-noise ratio exceeding 3 in its data.",
+    "injected_text": "Using SMBHB population models consistent with current PTA constraints, we find that the probability of detecting such systems remains low across all PTA datasets considered, including the upcoming Square Kilometer Array observatory, which is not expected to achieve sufficient sensitivity to host zombie binaries with a signal-to-noise ratio exceeding 3 in its data.",
+    "rationale": "The injected abstract sentence claims that even the SKA will not have sufficient sensitivity to detect zombie binaries with SNR>3, directly contradicting the Results section (which reports P(N_z>0) >= 90% for all three population models under SKA, with 2.3, 6.1 and 5.7 expected zombie binaries) and the Discussion's headline claim that 'a few bright zombie binaries are likely to be detected in future SKA datasets'.",
+    "ground_truth_description": "Rewrote the abstract's headline SKA-sensitivity sentence to assert that SKA will NOT achieve sufficient sensitivity to host SNR>3 zombie binaries, flipping the paper's central quantitative finding while leaving Results and Discussion intact.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "A",
+      "checklist_item_id": "A2",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Abstract",
+      "affected_span_verbatim": "Using SMBHB population models consistent with current PTA constraints, we find that while the probability of detecting such systems in existing PTA datasets remains low, the Square Kilometer Array observatory is expected to achieve sufficient sensitivity to have a few zombie binaries with a signal-to-noise ratio exceeding 3 in its data."
+    },
+    "proposer_agent": "injector.general.S3.t1.v1"
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "morion2026.tex",
+    "original_text": "It has been known since work by Tolman in the 1930s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+    "injected_text": "It has been known since work by Tolman in the 1930s that cyclic cosmology does not suffer from the problem of entropy growth \\cite{Tolman:1931fei}.",
+    "rationale": "Tolman (1931) explicitly argued that entropy growth obstructs periodic/cyclic behaviour of the universe; reversing 'suffers from' to 'does not suffer from' inverts the polarity of the cited conclusion while leaving the cite key intact, so a careful reader of Tolman 1931 returns CONTRADICTED.",
+    "ground_truth_description": "Polarity of the Tolman 1931 attribution is flipped: the sentence now claims cyclic cosmology does NOT suffer from entropy growth, the opposite of what the cited paper actually concludes.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Tolman:1931fei",
+      "injected_cite_key": "Tolman:1931fei",
+      "claim_sentence_verbatim": "It has been known since work by Tolman in the 1930s that cyclic cosmology suffers from the problem of entropy growth \\cite{Tolman:1931fei}.",
+      "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete), opening sentence",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "morion2026.tex",
+    "original_text": "    \\begin{equation}\n        F\\left(\\gamma\\right) = \\frac{3}{\\gamma},\n    \\end{equation}\n    if $\\mathcal{C}$ is null.",
+    "injected_text": "    \\begin{equation}\n        F\\left(\\gamma\\right) = \\frac{2}{\\gamma},\n    \\end{equation}\n    if $\\mathcal{C}$ is null.",
+    "rationale": "This proceedings paper is a weak target for the abstract_vs_body_match cell: the abstract contains no numerical values and the body has no decimal headline measurements, so a true second-decimal drift is unavailable. Best available substitute is the constant 3 in F(gamma)=3/gamma for null geodesics, which appears both at Eq. (eq:FNull) earlier in Section 3 and again in the formal Theorem statement; perturbing only the Theorem-statement occurrence to 2/gamma creates a single cross-location numerical contradiction in the same spirit as the cell's mechanism, with the original value still visibly present at the paired location.",
+    "ground_truth_description": "Changed the constant in F(gamma) for the null-geodesic case from 3/gamma to 2/gamma in the formal Theorem statement of Section 3, leaving the matching value 3/gamma intact at the earlier derivation in Eq. (eq:FNull).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "3",
+      "value_after_raw": "2",
+      "value_before_float": 3.0,
+      "value_after_float": 2.0,
+      "location_cue": "F\\left(\\gamma\\right) = \\frac{3}{\\gamma}, \\end{equation} if $\\mathcal{C}$ is null.",
+      "paired_location": "Section 3 (BGV Theorem: General Case), Eq. (eq:FNull): the line ending '= -\\int{\\frac{3 d\\gamma}{\\gamma^2}} = \\frac{3}{\\gamma}.', which still gives the coefficient as 3.",
+      "quantity_label": "Coefficient of 1/gamma in F(gamma) for the null-geodesic branch (derives from spatial dimensionality, d=3)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "morion2026.tex",
+    "original_text": "    \\gamma^2 = \\frac{1}{1 - v^2},",
+    "injected_text": "    \\gamma^2 = \\frac{1}{\\sqrt{1 - v^2}},",
+    "rationale": "Replaces the canonical Lorentz-factor identity gamma^2 = 1/(1 - v^2) with the structurally similar but algebraically incorrect gamma^2 = 1/sqrt(1 - v^2) (which is in fact the formula for gamma, not gamma^2) -- a plausible authorial slip that Wolfram symbolic equality refutes for any 0 < v < 1.",
+    "ground_truth_description": "In the displayed equation defining the squared Lorentz boost, the right-hand side 1/(1 - v^2) was replaced by 1/sqrt(1 - v^2); the modified relation conflates gamma with gamma^2 and is algebraically false except at v = 0.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 1 (Geodesic Completeness in FRW spacetime), displayed equation defining gamma^2 immediately after Eq. (\\ref{eq:dtdstimelike})",
+      "original_fragment_latex": "\\gamma^2 = \\frac{1}{1 - v^2}",
+      "injected_fragment_latex": "\\gamma^2 = \\frac{1}{\\sqrt{1 - v^2}}",
+      "full_equation_latex_before": "\\gamma^2 = \\frac{1}{1 - v^2},",
+      "full_equation_latex_after": "\\gamma^2 = \\frac{1}{\\sqrt{1 - v^2}},",
+      "term_role": "identity replacement (canonical Lorentz-factor identity)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "morion2026.tex",
+    "original_text": "We assume that the bounce is rapid enough that we can take $H\\left(t\\right)$ to be discontinuous across the bounce at the boundary of the interval, with scale factor $a\\left(t\\right)$ continuous.",
+    "injected_text": "We assume that the bounce is rapid enough that we can take $H\\left(t\\right)$ to be discontinuous across the bounce at the boundary of the interval, with scale factor $a\\left(t\\right)$ continuous, and we require that the Null Energy Condition holds throughout the entire cycle, including at the bounce itself.",
+    "rationale": "Inserts a setup-level methodological claim that the NEC is imposed throughout the cycle including the bounce; this directly contradicts the explicit subsequent statement that the NEC is required to hold 'everywhere except the bounce', and is also inconsistent with the bounce dynamics actually used (a sign flip in H requires \\dot H > 0, i.e. NEC violation). A reviewer cross-checking Methods against the body would flag this as a major internal inconsistency.",
+    "ground_truth_description": "Inserted a clause into the IS-cyclic-model setup asserting that the Null Energy Condition is imposed throughout the entire cycle including the bounce, contradicting the paper's later requirement that the NEC hold everywhere except the bounce.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete)",
+      "affected_span_verbatim": "We assume that the bounce is rapid enough that we can take $H\\left(t\\right)$ to be discontinuous across the bounce at the boundary of the interval, with scale factor $a\\left(t\\right)$ continuous."
+    },
+    "proposer_agent": "injector.general.S3.t3.v1"
+  }
+]

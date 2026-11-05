@@ -1,0 +1,188 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-05813aee0693",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=CONFIRMED_ISSUE, gemini=FP",
+        "evidence": {
+          "claim": "The paper overstates its main theoretical claim by asserting ExTernD 'provably reaches any target accuracy' at practical settings, when the proved geometric bound only holds in the limit with much larger k than used in experiments.",
+          "excerpt": "the paper's headline theoretical claim is that ExTernD \"provably reaches any target accuracy\" and \"approaches bf16 accuracy arbitrarily closely\". This is technically true, but Prop. 2's geometric rate is $(1-1/mn)^k$, so pushing the residual below any nontrivial $\\varepsilon$ needs $k = \\Theta(mn\\log\\|A\\|/\\varepsilon)$ — many orders of magnitude beyond the $k\\sim 2.5\\text{–}3\\min(m,n)$ regime the paper actually uses ($k/mn$ of order $10^{-3}$–$10^{-4}$ for typical LLM matrices). The theoretical result therefore cannot support the practical framing that \"any accuracy target is hit exactly\"..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does acknowledge in Appendix A that the geometric bound is loose ('empirical convergence is much faster than geometric in mn (99% energy at µ ≈ 2.5–3)'), but the headline claim that ExTernD 'provably reaches any target accuracy' rests on Prop. 2's single-entry safeguard, which theoretically requires k = Θ(mn log‖A‖/ε) steps—far beyond practical µ values. The paper does not quantify how the practical regime relates to the theoretical guarantee, leaving the strong framing partially unsupported, though the paper is transparent that the safeguard 'never activates in practice.'",
+            "cost_usd": 0.0050679
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper uses strong practical-sounding language — e.g. the Abstract says the error \"can be driven below any ε > 0\" and the Introduction says \"a target accuracy be hit exactly rather than rounded up to the next bit-width\" — but Appendix A only proves the asymptotic existence claim: \"For every ε > 0 there is a finite inner rank k with ∥A − B diag(D)C∥F < ε.\" It does not quantify what k is needed in the practical µ≈2–3 regime used in experiments.",
+            "cost_usd": 0.0127975
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer incorrectly conflates two separate claims. The paper does not use the theoretical bound to claim that an accuracy target is hit \"exactly\"; rather, it attributes this exactness to the continuity of its parameters: \"multiplier µ ... and a sparsity threshold τ ... can each be set per matrix to any real value, letting a target accuracy be hit exactly rather than rounded up.\" Furthermore, the paper explicitly acknowledges the gap between the theoretical bound and practical settings in Appendix A: \"empirical convergence is much faster than geometric in mn (99% energy at µ ≈ 2.5–3).\"",
+            "cost_usd": 0.0025878
+          }
+        ],
+        "cost_usd": 0.0204532
+      },
+      {
+        "flag_id": "fp-af518d834164",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Several method-section claims—e.g. 'naive batching collapses (99.5% → 50% energy at b=256)', '≈+0.4 points on hard matrices after 10 sweeps', '4–8% reduction in the multiplier needed for fixed energy', and joint deflation 'fails completely (0–50% energy in our ablation, vs. 96–100% with deflation)'—are asserted in prose with no dedicated table, figure, or ablation section backing them up, making them unauditable by the reader.",
+        "evidence": {
+          "claim": "Multiple load-bearing empirical claims in the Method section are asserted in prose with no supporting table, figure, or ablation.",
+          "excerpt": "Multiple load-bearing empirical claims in the Method section are asserted in prose with no supporting table, figure or ablation (phantom evidence): ... These are exactly the ablations that would justify the paper's methodological choices; asserting them in prose leaves the reader unable to audit."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Several method-section claims—e.g. 'naive batching collapses (99.5% → 50% energy at b=256)', '≈+0.4 points on hard matrices after 10 sweeps', '4–8% reduction in the multiplier needed for fixed energy', and joint deflation 'fails completely (0–50% energy in our ablation, vs. 96–100% with deflation)'—are asserted in prose with no dedicated table, figure, or ablation section backing them up, making them unauditable by the reader.",
+            "cost_usd": 0.0050679
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Several methodological claims are given only in prose, such as \"solving for all k > min(m, n) components jointly is underdetermined and fails completely (0–50% energy in our ablation, vs. 96–100% with deflation),\" \"The optimal ternary projection ... empirically ties T0.7,\" and \"The naive batching ... collapses (99.5% → 50% energy at b=256).\" The paper provides tables for some end results, but no table/figure/ablation directly documenting these specific claims.",
+            "cost_usd": 0.0127975
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer is correct. Section 2 contains several load-bearing empirical claims stated purely in-line without supporting tables or figures, such as the ablation on deflation in Sec 2.1 (\"0–50% energy in our ablation, vs. 96–100% with deflation\") and the performance of the V-step in Sec 2.5 (\"solving it against W loses 0.3–1.8 points of weighted energy\").",
+            "cost_usd": 0.0025878
+          }
+        ],
+        "cost_usd": 0.0204532
+      },
+      {
+        "flag_id": "fp-067bcebd0b15",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section 3.6 and Tables 4–5 present numerical comparisons against PT2-LLM and PTQTP with no statement of whether baselines are re-implemented or taken from the cited papers, no code or model version pointers, and no hyperparameter details beyond 'group size G=128,' leaving the comparison's credibility unverifiable.",
+        "evidence": {
+          "claim": "Sec. 3.6 presents numbers against PT2-LLM and PTQTP but gives no reproduction detail: it is not stated whether baselines are re-implemented or taken from cited papers, and configuration/hyperparameters are missing, undermining credibility of the main comparison.",
+          "excerpt": "Sec. 3.6 and Tables 4–5 present head-to-head numbers against PT2-LLM [6] and PTQTP [5] but give no reproduction detail: no statement of whether the baselines are re-implemented or read off the cited papers, no code / model version pointer, no hyperparameters."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.6 and Tables 4–5 present numerical comparisons against PT2-LLM and PTQTP with no statement of whether baselines are re-implemented or taken from the cited papers, no code or model version pointers, and no hyperparameter details beyond 'group size G=128,' leaving the comparison's credibility unverifiable.",
+            "cost_usd": 0.0050679
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.6 introduces the comparison only as: \"we compare its weight-reconstruction energy against two recent post-training ternarization methods: PT2-LLM [6] ... and ... PTQTP [5]\" and adds only \"we evaluate PTQTP at group size G = 128.\" The paper nowhere states whether those baselines were reimplemented or copied from prior work, and gives no baseline-specific reproduction details or hyperparameters beyond that.",
+            "cost_usd": 0.0127975
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.6 and Tables 4-5 provide direct empirical comparisons against PT2-LLM and PTQTP, but the text omits necessary reproduction details such as whether the baseline methods were re-implemented locally, what codebases were used, and the full hyperparameters beyond G=128 for PTQTP.",
+            "cost_usd": 0.0025878
+          }
+        ],
+        "cost_usd": 0.0204532
+      },
+      {
+        "flag_id": "fp-451790772db5",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The Abstract claims importance-weighted results 'on Gemma-4-E2B and Qwen3.5-4B,' but Section 3.4 reports weighted energy improvements only for Granite-4.0-h-tiny and Qwen3.5-4B; Gemma-4-E2B importance-weighting results are never presented in the paper.",
+        "evidence": {
+          "claim": "The Abstract states weighted accuracy numbers for Gemma-4-E2B and Qwen3.5-4B but Gemma-4-E2B is not reported in relevant tables/sections, so the reported range is not supported for all claimed models.",
+          "excerpt": "The Abstract states ExTernD \"matches Q4_K's per-matrix accuracy at 5.2–5.5 effective bpw (5.1–5.5 with importance weighting) **on Gemma-4-E2B and Qwen3.5-4B**\". The weighted numbers in Sec. 3.4 are reported only for Qwen3.5-4B and Granite-4.0-h-tiny; Gemma-4-E2B is not shown under importance weighting..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The Abstract claims importance-weighted results 'on Gemma-4-E2B and Qwen3.5-4B,' but Section 3.4 reports weighted energy improvements only for Granite-4.0-h-tiny and Qwen3.5-4B; Gemma-4-E2B importance-weighting results are never presented in the paper.",
+            "cost_usd": 0.0050679
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The Abstract claims weighted matched-accuracy numbers \"(5.1–5.5 with importance weighting) on Gemma-4-E2B and Qwen3.5-4B,\" but Section 3.4 discusses weighting only for \"Granite-4.0-h-tiny\" and \"On Qwen3.5-4B,\" including \"mean bpweff 5.49 → 5.26.\" No Gemma-4-E2B importance-weighted results are reported in the body.",
+            "cost_usd": 0.0127975
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The Abstract claims that with importance weighting, the method reaches 5.1-5.5 effective bpw \"on Gemma-4-E2B and Qwen3.5-4B\". However, Section 3.4 only discusses importance weighting results for Qwen3.5-4B and Granite-4.0-h-tiny, leaving the Gemma-4-E2B claim unsupported in the main text.",
+            "cost_usd": 0.0025878
+          }
+        ],
+        "cost_usd": 0.0204532
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0818128
+  },
+  "extractor_cost_usd": 0.025172000000000208,
+  "total_cost_usd": 0.10698480000000021
+}

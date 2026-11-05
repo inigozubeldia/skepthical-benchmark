@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14375",
+  "copy_id": "v3",
+  "reviewer_system": "C",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's Key Statements section checks a claim about 'SMT-based methods, MILP formulations, and branch-and-bound solvers' (citing Katz, Tjeng, Bunel) and marks it WEAKLY_SUPPORTED without challenging the SAT vs MILP categorization. The separate check on 'MILP-based verification models exploit interval-tight preactivation bounds' (Tjeng 2019, Anderson 2020) confirms MILP framing, but the reviewer never flags the injected 'SAT formulations' text as contradicted or mischaracterized against those citations. No flag corresponds to the specific claim_method_category_swap injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[✔] _WEAKLY_SUPPORTED_ **Complete neural-network verification is tackled by SMT-based methods, MILP formulations, and branch-and-bound solvers exploiting piecewise-linear structure.**\n  - _Reference(s):_ Katz et al., 2017; Tjeng et al., 2019; Bunel et al., 2020\n  - _Justification:_ Reluplex (Katz et al.), MILP verification (Tjeng et al.), and branch-and-bound for piecewise-linear networks (Bunel et al.) are the canonical entries for those three families.\n\n[✔] _WEAKLY_SUPPORTED_ **MILP-based verification models exploit interval-tight preactivation bounds and standard big-M constraints for stable and unstable ReLU neurons.**\n  - _Reference(s):_ Tjeng et al., 2019; Anderson et al., 2020\n  - _Justification:_ Both papers describe the exact big-M / stable-unit MILP formulations invoked in Appendix D.1.",
+          "confidence": "high",
+          "reasoning": "The injected claim changed Tjeng/Anderson from MILP to SAT. The reviewer explicitly states Tjeng et al. and Anderson et al. are MILP-based, directly contradicting the post-edit citation claim and satisfying the broadened-claim detection rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the cited works as MILP-based in their assessment, but they fail to flag the paper's incorrect categorization of these works as 'SAT formulations'.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's mathematical and numerical audits treat Gamma=m/60 as correct throughout (e.g., Checked item 5 and 8 in the maths audit both use Gamma=m/60 without noting any inconsistency), and the summary also states 'Gamma=m/60'. The reviewer never flags the injected Gamma=m/600 discrepancy in the numerical summary section.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer repeatedly endorses Γ = m/60 and does not flag any inconsistency involving a denominator of 600 or an abstract/body mismatch for this value. No specific challenge to the altered numeric summary appears.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer consistently identifies and validates the correct margin value (m/60) throughout their report and fails to notice the contradictory value (m/600) injected into the numerical summary.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t3",
+      "module": "mathematics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags the sum lower bound j=0 vs j=1 issue anywhere in the report; the mathematical audit checks Eq.(7), Eq.(8), and related sums without mentioning an index starting at j=0 or an undefined h_{C,0} term.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The report does not mention a lower summation index change from j=1 to j=0, undefined h_{C,0}, or any issue in Eq. network corresponding to that edit. Its mathematical audit instead says the relevant derivations checked out.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer report and mathematical audit do not mention the summation index or the specific equation where the error was injected.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Abstract, first paragraph: \"their is no sound and complete verifier\" — typo for \"there is\". This is the most prominent grammatical slip in the paper. Recommendation: Correct \"their\" → \"there\".",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Abstract, first paragraph: \"their is no sound and complete verifier\" — typo for \"there is\". This is the most prominent grammatical slip in the paper. Recommendation: Correct \"their\" → \"there\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified and quoted the homophone swap ('their' instead of 'there') in the Abstract under Very Minor Issues item 1, exactly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "1.  Abstract, first paragraph: \"their is no sound and complete verifier\" — typo for \"there is\". This is the most prominent grammatical slip in the paper.\n\n    *Recommendation:* Correct \"their\" → \"there\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exact homophone typo in the abstract and recommends the precise correction. This is a direct match to the injected writing defect.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Abstract, first paragraph: 'their is no sound and complete verifier' — typo for 'there is'.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the homophone error in the abstract and correctly identifies it as a typo for 'there'.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 41.500288,
+  "total_cost_usd": null,
+  "total_input_tokens": 39673,
+  "total_output_tokens": 5432,
+  "escalation_count": 0,
+  "notes": null
+}

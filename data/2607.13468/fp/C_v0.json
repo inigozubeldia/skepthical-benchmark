@@ -1,0 +1,230 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-7810aa351054",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 shows HIVE-3D IoU (0.7449) is lower than TRELLIS (0.8603), and Table 6 shows HIVE-3D SSIM (0.79) and LPIPS (0.33) are worse than several baselines, yet the abstract claims it 'significantly outperforms previous approaches, achieving state-of-the-art performance' and Section B.1 states 'HIVE-3D demonstrates consistently strong performance across all metrics,' which is directly contradicted by these numbers.",
+        "evidence": {
+          "claim": "Claims of 'significantly outperforms previous approaches, achieving state-of-the-art performance' and 'consistently strong performance across all metrics' are contradicted by tables showing HIVE-3D does not outperform on several key metrics (IoU, SSIM, LPIPS, runtime).",
+          "excerpt": "The Abstract asserts HIVE-3D \"significantly outperforms previous approaches, achieving state-of-the-art performance\" and Sec. B.1 asserts \"consistently strong performance across all metrics.\" Table 1 shows TRELLIS wins IoU (0.8603 vs 0.7449; HIVE-3D is 13 % lower), and Table 6 shows HIVE-3D is not best on SSIM (0.79 vs TRELLIS/MIDI 0.80) and is 32 % worse on LPIPS than MIDI (0.33 vs 0.25). Runtime is ~5.8× slower than TRELLIS (Table 1, 36.5 s vs 6.3 s). These qualitative claims must be softened."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 shows HIVE-3D IoU (0.7449) is lower than TRELLIS (0.8603), and Table 6 shows HIVE-3D SSIM (0.79) and LPIPS (0.33) are worse than several baselines, yet the abstract claims it 'significantly outperforms previous approaches, achieving state-of-the-art performance' and Section B.1 states 'HIVE-3D demonstrates consistently strong performance across all metrics,' which is directly contradicted by these numbers.",
+            "cost_usd": 0.00594324
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes broad superiority claims — e.g., the abstract says it 'significantly outperforms previous approaches, achieving state-of-the-art performance' — but its own tables show mixed results: Table 1 reports 'TRELLIS 0.8603' vs 'Ours 0.7449' for IoU, and Table 6 reports 'MIDI 0.25' vs 'Ours 0.33' for LPIPS and 'TRELLIS 0.80' vs 'Ours 0.79' for SSIM.",
+            "cost_usd": 0.0088515
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims that \"HIVE-3D demonstrates consistently strong performance across all metrics\" and \"significantly outperforms previous approaches\", but Table 1 shows TRELLIS has a much higher IoU (0.8603 vs 0.7449) and Table 6 shows MIDI achieves a better LPIPS score (0.25 vs 0.33).",
+            "cost_usd": 0.0025818800000000004
+          }
+        ],
+        "cost_usd": 0.01737662
+      },
+      {
+        "flag_id": "fp-1bc6fa3ecfea",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The supplementary gives partial details — 'we obtain the final attention map by averaging ... head 0, 4, and 12' and 'select the set of voxels whose aggregated scores exceed a predefined threshold' — but it never states the threshold value, how it is chosen, or how overlapping voxel assignments are handled.",
+        "evidence": {
+          "claim": "The methodology for 2D→3D attention matching is under-specified; critical parameters such as thresholds, layer indices, and averaging protocol are omitted, making reproduction and validation impossible.",
+          "excerpt": "The threshold value, its sensitivity, the criterion for choosing those three heads, whether the threshold is per-instance or global, and how conflicts (voxels assigned to multiple instances) are resolved are not stated. This is the primary novelty behind \"hierarchical 2D-to-3D matching\" and cannot be reproduced from the text."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "Appendix A.1 states 'We obtain the final attention map by averaging the voxel-to-token attention maps from a specific subset of heads, namely head 0, 4, and 12' and 'we select the set of voxels whose aggregated scores exceed a predefined threshold,' providing the head indices and thresholding protocol; while threshold values and conflict resolution are not fully specified, enough detail is given for a reasonable reproduction attempt, and the core mechanism is described.",
+            "cost_usd": 0.00594324
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The supplementary gives partial details — 'we obtain the final attention map by averaging ... head 0, 4, and 12' and 'select the set of voxels whose aggregated scores exceed a predefined threshold' — but it never states the threshold value, how it is chosen, or how overlapping voxel assignments are handled.",
+            "cost_usd": 0.0088515
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While Appendix A.1 provides some details on the attention heads, it states that \"we select the set of voxels whose aggregated scores exceed a predefined threshold,\" but it never specifies the exact numerical value of this threshold or how conflicts are resolved.",
+            "cost_usd": 0.0025818800000000004
+          }
+        ],
+        "cost_usd": 0.01737662
+      },
+      {
+        "flag_id": "fp-ae622d660446",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Sections C.3–C.5 compare with PartPacker, SAM3D, VIAFormer, and ULTRA3D using only qualitative figures (Fig. 10, 11) and prose descriptions, with no numerical metrics reported for these baselines, despite the paper providing quantitative metrics (CD, F-Score, IoU, SSIM, PSNR, LPIPS, CLIP) for other comparisons.",
+        "evidence": {
+          "claim": "The paper lacks quantitative comparisons with key relevant baselines (PartPacker, ULTRA3D, VIAFormer, SAM3D), relying solely on qualitative/cherry-picked evidence rather than the metrics reported elsewhere.",
+          "excerpt": "Sec. C.3–C.5 argue at length that HIVE-3D is superior to PartPacker ... but no numerical evidence is provided — only cherry-picked figures (Fig. 10, 11) and prose. Given that the main claim is quality-first, purely qualitative comparison against directly-relevant baselines is insufficient."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sections C.3–C.5 compare with PartPacker, SAM3D, VIAFormer, and ULTRA3D using only qualitative figures (Fig. 10, 11) and prose descriptions, with no numerical metrics reported for these baselines, despite the paper providing quantitative metrics (CD, F-Score, IoU, SSIM, PSNR, LPIPS, CLIP) for other comparisons.",
+            "cost_usd": 0.00594324
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explicitly limits these comparisons to qualitative discussion: 'We conduct qualitative comparisons between our method and PartPacker' and 'We conduct qualitative comparisons between SAM3D ...', while Sec. C.5 on VIAFormer/ULTRA3D contains only prose and no quantitative table.",
+            "cost_usd": 0.0088515
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Appendices C.3, C.4, and C.5 explicitly perform only \"qualitative comparisons\" with PartPacker, SAM3D, VIAFormer, and ULTRA3D, relying entirely on visual examples (Figures 10 and 11) and textual argumentation without providing any quantitative metrics.",
+            "cost_usd": 0.0025818800000000004
+          }
+        ],
+        "cost_usd": 0.01737662
+      },
+      {
+        "flag_id": "fp-194ea55a0dfb",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states evaluation was conducted on '3D-FRONT dataset' and 'real-world scene photographs' but never specifies the number of test scenes used, how ground-truth geometry was obtained, how the metrics were computed, or provides any error bars or variance estimates across the reported results.",
+        "evidence": {
+          "claim": "The evaluation protocol is not described with sufficient statistical rigor: dataset sizes, splits, ground-truth annotation, metric calculation protocols, and error bars/variance are unreported.",
+          "excerpt": "The paper never states the size of the evaluation set, how many scenes were used from 3D-FRONT vs \"real photographs\", how ground-truth geometry was obtained for computing CD/F-Score/IoU on 3D-FRONT ... or whether error bars or per-scene variance are reported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states evaluation was conducted on '3D-FRONT dataset' and 'real-world scene photographs' but never specifies the number of test scenes used, how ground-truth geometry was obtained, how the metrics were computed, or provides any error bars or variance estimates across the reported results.",
+            "cost_usd": 0.00594324
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation section names datasets and metrics — e.g., 'We evaluate our method and all baselines on the 3D-FRONT dataset using CD, F-Score, and IoU' and 'a collection of real-world scene photographs' — but the paper does not report evaluation-set sizes/splits, ground-truth construction for the geometry metrics, or any error bars/variance estimates.",
+            "cost_usd": 0.0088515
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experimental setup in Section 5 simply states \"We evaluate our method and all baselines on the 3D-FRONT dataset\" without detailing the evaluation dataset size, test split, or how ground-truth geometry was obtained. Furthermore, no error bars or variances are reported in the tables.",
+            "cost_usd": 0.0025818800000000004
+          }
+        ],
+        "cost_usd": 0.01737662
+      },
+      {
+        "flag_id": "fp-70d4f6d765b6",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=AMBIGUOUS: Table 1 evaluates geometry metrics (CD/F-Score/IoU) and the paper states it is 'on the 3D-FRONT dataset,' while Table 6 evaluates rendering metrics (SSIM/PSNR/LPIPS/CLIP) and is described as 'on 3D-FRONT and real data'; the paper does provide some justification by noting complementary evaluation types ('we conduct complementary evaluations on both synthetic datasets and real-world images using SSIM, PSNR, LPIPS...'), but does not explicitly justify why the metric sets are disjoint or clarify which dataset each table draws from exclusively.",
+        "evidence": {
+          "claim": "There is an inconsistency between Table 1 and Table 6 in terms of datasets and reported metrics, with no justification for why the evaluations differ or which is authoritative.",
+          "excerpt": "Both tables purport to evaluate \"our method\", but Table 1 uses CD/F-Score/IoU/Runtime, Table 6 uses SSIM/PSNR/LPIPS/CLIP, without any table or subsection stating why the metric sets are disjoint or which dataset is authoritative for which claim."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Table 1 evaluates geometry metrics (CD/F-Score/IoU) and the paper states it is 'on the 3D-FRONT dataset,' while Table 6 evaluates rendering metrics (SSIM/PSNR/LPIPS/CLIP) and is described as 'on 3D-FRONT and real data'; the paper does provide some justification by noting complementary evaluation types ('we conduct complementary evaluations on both synthetic datasets and real-world images using SSIM, PSNR, LPIPS...'), but does not explicitly justify why the metric sets are disjoint or clarify which dataset each table draws from exclusively.",
+            "cost_usd": 0.00594324
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does explain why Table 1 and Table 6 use different metrics: 'We evaluate ... on the 3D-FRONT dataset using CD, F-Score, and IoU to assess the geometric fidelity' and 'In addition, we conduct complementary evaluations on both synthetic datasets and real-world images using SSIM, PSNR, LPIPS, and CLIP to further assess the visual quality and text-image consistency'.",
+            "cost_usd": 0.0088515
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's claim that there is no justification for the disjoint metrics is factually incorrect. Section 5.2 explicitly explains that CD, F-Score, and IoU are used \"to assess the geometric fidelity\" (Table 1), whereas SSIM, PSNR, LPIPS, and CLIP are used \"to further assess the visual quality and text-image consistency\" (Table 6).",
+            "cost_usd": 0.0025818800000000004
+          }
+        ],
+        "cost_usd": 0.01737662
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.08688309999999999
+  },
+  "extractor_cost_usd": 0.025442000000000076,
+  "total_cost_usd": 0.11232510000000007
+}

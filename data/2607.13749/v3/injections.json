@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "with weight decay 1.0, and 8000 training steps",
+    "injected_text": "with weight decay 1.2, and 8000 training steps",
+    "rationale": "Since the paper lacks a cited quantitative claim with an explicit standard deviation, I selected a numerical hyperparameter (weight decay 1.0) attributed to a cited methodology and perturbed it slightly to 1.2, which represents a plausible minor quantitative misquote of the referenced recipe.",
+    "ground_truth_description": "Changed the cited weight decay hyperparameter from 1.0 to 1.2, producing a mild quantitative misquote of the referenced experimental recipe.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "power2022grokking, nanda2023progress",
+      "injected_cite_key": "power2022grokking, nanda2023progress",
+      "claim_sentence_verbatim": "We run the same thirty-nine tasks on a standard two-layer ReLU network with $2p$-dimensional one-hot inputs, hidden width 256, cross-entropy loss, AdamW with weight decay 1.0, and 8000 training steps---the same recipe used in the grokking literature \\citep{power2022grokking, nanda2023progress}.",
+      "section_location": "Sec. 4.3",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "Across 585 experimental runs the algebraic prediction matches the",
+    "injected_text": "Across 5850 experimental runs the algebraic prediction matches the",
+    "rationale": "Changing the reported sample size '585' to '5850' in the abstract creates a clear integer discrepancy with the 585 runs detailed in the Protocol section.",
+    "ground_truth_description": "Shifted the number of experimental runs reported in the abstract from 585 to 5850, introducing a sample-size contradiction with the main text.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "integer_equal",
+      "value_before_raw": "585",
+      "value_after_raw": "5850",
+      "value_before_float": 585.0,
+      "value_after_float": 5850.0,
+      "location_cue": "Across 5850 experimental runs the algebraic prediction matches the",
+      "paired_location": "Section 4.1 (Protocol)",
+      "quantity_label": "experimental runs",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t3.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "c_l(W,v) \\;=\\; \\binom{k}{l}\n  \\sum_{j=1}^{H}",
+    "injected_text": "c_l(W,v) \\;=\\; \\sum_{j=1}^{H}",
+    "rationale": "Dropped the canonical binomial coefficient prefactor in the polynomial expansion identity, causing the algebraic substitution to mathematically fail in a way Wolfram will symbolically refute.",
+    "ground_truth_description": "Removed the binomial coefficient prefactor from the definition of the expansion coefficients c_l.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:expand",
+      "equation_location": "Eq. (4)",
+      "original_fragment_latex": "c_l(W,v) \\;=\\; \\binom{k}{l}",
+      "injected_fragment_latex": "c_l(W,v) \\;=\\;",
+      "full_equation_latex_before": "\\hat{y}(x;\\,W,v)\n  \\;=\\; \\sum_{l=0}^{k} c_l(W,v)\\,x_1^{l}\\,x_2^{k-l},\n  \\qquad\n  c_l(W,v) \\;=\\; \\binom{k}{l}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+      "full_equation_latex_after": "\\hat{y}(x;\\,W,v)\n  \\;=\\; \\sum_{l=0}^{k} c_l(W,v)\\,x_1^{l}\\,x_2^{k-l},\n  \\qquad\n  c_l(W,v) \\;=\\; \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+      "term_role": "binomial expansion combinatorial prefactor",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "To explore this, we train a bottlenecked ReLU network---a standard two-layer\narchitecture with a linear bottleneck of width $d$ inserted after the input\nlayer---on modular addition with the same one-hot encoding and weight decay as\nthe ReLU baseline.",
+    "injected_text": "To explore this, we train a bottlenecked ReLU network---a standard two-layer\narchitecture with a linear bottleneck of width $d$ inserted after the input\nlayer---on both modular addition and modular multiplication with the same one-hot\nencoding and weight decay as the ReLU baseline.",
+    "rationale": "The methodology claims that the bottleneck experiment evaluates both modular addition and modular multiplication, but Table 3 explicitly reports only a single set of results without differentiating tasks, visibly contradicting the experimental setup.",
+    "ground_truth_description": "Added a claim to the methodology section that the bottleneck ablation evaluated modular multiplication in addition to modular addition, which is contradicted by Table 3 reporting only a single gap per dimension.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 4.4",
+      "affected_span_verbatim": "To explore this, we train a bottlenecked ReLU network---a standard two-layer\narchitecture with a linear bottleneck of width $d$ inserted after the input\nlayer---on modular addition with the same one-hot encoding and weight decay as\nthe ReLU baseline."
+    },
+    "proposer_agent": "injector.general.S3.t3.v3"
+  }
+]

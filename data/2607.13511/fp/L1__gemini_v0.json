@@ -1,0 +1,230 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "L1",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-43bae1e61f25",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states in Section 5: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\" The paper acknowledges this limitation but does not address it, confirming the reviewer's concern.",
+        "evidence": {
+          "claim": "The empirical evaluation relies solely on Wikitext-2 perplexity and lacks zero-shot and few-shot evaluations on standard downstream benchmarks, which are necessary to demonstrate end-to-end viability.",
+          "excerpt": "The current evaluation relies solely on Wikitext-2 perplexity. It is well-documented in the LLM quantization literature that perplexity alone does not fully capture the degradation of emergent abilities or reasoning. The author must include zero-shot and few-shot evaluations on standard benchmarks (e.g., PIQA, HellaSwag, WinoGrande, ARC, and MMLU) to prove the end-to-end viability of the decomposed models."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Section 5: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\" The paper acknowledges this limitation but does not address it, confirming the reviewer's concern.",
+            "cost_usd": 0.00396372
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this gap rather than addressing it: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\" Its only end-to-end metric is Table 3, labeled \"First full end-to-end validation (llama-perplexity, 580 chunks...).\"",
+            "cost_usd": 0.009593500000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation, stating in Section 5: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\"",
+            "cost_usd": 0.0019772400000000003
+          }
+        ],
+        "cost_usd": 0.015534460000000002
+      },
+      {
+        "flag_id": "fp-10e1753e92f2",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states in Section 5: \"We have not tested above 4B or on matrices larger than ~9216×2560, so the behaviour of µ at 30B–70B+ is unknown.\" This confirms the reviewer's concern that scalability to larger models is undemonstrated.",
+        "evidence": {
+          "claim": "The experiments only cover sub-5B parameter models and do not test the proposed method's scalability on larger, standard models such as Llama-3 8B or Llama-3 70B.",
+          "excerpt": "The experiments are restricted to sub-5B parameter models (Gemma-4-E2B, Qwen3.5-4B, Granite-4B). A core claim of the paper is the scalability and continuous nature of the formulation. To be competitive with contemporary PTQ literature, the author should evaluate on larger, standard models, most notably the Llama-3 8B and ideally a larger variant (e.g., Llama-2 70B or Llama-3 70B), to demonstrate that the rank expansion behavior (\u0003bc$) scales predictably across different architecture sizes and depth."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Section 5: \"We have not tested above 4B or on matrices larger than ~9216×2560, so the behaviour of µ at 30B–70B+ is unknown.\" This confirms the reviewer's concern that scalability to larger models is undemonstrated.",
+            "cost_usd": 0.00396372
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluated models are all small: \"Setup: matrices from google/gemma-4-E2B, Qwen/Qwen3.5-4B, and IBM Granite-4.0-h-tiny.\" The limitation is explicitly stated: \"We have not tested above 4B or on matrices larger than ∼9216 × 2560, so the behaviour of µ at 30B–70B+ is unknown.\"",
+            "cost_usd": 0.009593500000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms the lack of scaling experiments in Section 5, stating, \"We have not tested above 4B or on matrices larger than ~9216 \u0002 2560, so the behaviour of \u0003bc at 30B–70B+ is unknown.\"",
+            "cost_usd": 0.0019772400000000003
+          }
+        ],
+        "cost_usd": 0.015534460000000002
+      },
+      {
+        "flag_id": "fp-9f0deed7fc29",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 3 compares only against bf16 and llama.cpp Q4_K/Q5_K variants. The paper does not include GPTQ, AWQ, or QuIP# baselines at similar effective bit-widths in end-to-end evaluation, confirming the reviewer's specific concern about missing standard PTQ baselines.",
+        "evidence": {
+          "claim": "The end-to-end evaluation does not compare ExTernD against standard PTQ baselines like GPTQ, AWQ, or QuIP# at similar effective bit-widths.",
+          "excerpt": "In Table 3, ExTernD is only compared to baseline floating-point and llama.cpp's Q4_K/Q5_K. While the structural comparisons in Tables 4 and 5 against PTQTP and PT2-LLM are good, the end-to-end evaluation would be significantly strengthened by including standard PTQ baselines like GPTQ, AWQ, or QuIP# at similar effective bit-widths (~5.5 bpw)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 3 compares only against bf16 and llama.cpp Q4_K/Q5_K variants. The paper does not include GPTQ, AWQ, or QuIP# baselines at similar effective bit-widths in end-to-end evaluation, confirming the reviewer's specific concern about missing standard PTQ baselines.",
+            "cost_usd": 0.00396372
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 3 compares only against \"bf16,\" \"Q5 K M,\" \"Q4 K M,\" \"Q5 K pure + imatrix,\" and \"Q4 K pure + imatrix\" plus the proposed method; it does not include GPTQ, AWQ, or QuIP#. Although the introduction cites \"Mainstream post-training quantization (GPTQ [7], AWQ [8], llama.cpp k-quants),\" no end-to-end results for GPTQ/AWQ are reported.",
+            "cost_usd": 0.009593500000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 3 compares the end-to-end model conversion solely to bf16 and llama.cpp's Q4_K/Q5_K formats, entirely omitting comparisons to GPTQ, AWQ, or QuIP# in its end-to-end evaluation.",
+            "cost_usd": 0.0019772400000000003
+          }
+        ],
+        "cost_usd": 0.015534460000000002
+      },
+      {
+        "flag_id": "fp-9b07168b9fdd",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges in Section 3.5: \"None of the known levers were applied to this conversion: refinement sweeps, per-matrix µ allocation (iso-quality µ spreads 2.3–3.0 across tensors while this run used a flat µ = 3), or τ/λ tuned on PPL.\" The central advantage of continuous allocation is not demonstrated in the end-to-end experiment.",
+        "evidence": {
+          "claim": "ExTernD trails Q5_K in accuracy and omits sensitivity-based budget allocation, undermining the main thesis of the continuous bit allocation advantage.",
+          "excerpt": "In Table 3, ExTernD trails Q5_K by ~1.5% relative PPL. The author states that known levers (like per-matrix \u0003bc$ allocation) were not used. Because ExTernD's main advantage is the continuous nature of its budget, omitting a basic sensitivity-based budget allocation across layers undermines the paper's core thesis."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in Section 3.5: \"None of the known levers were applied to this conversion: refinement sweeps, per-matrix µ allocation (iso-quality µ spreads 2.3–3.0 across tensors while this run used a flat µ = 3), or τ/λ tuned on PPL.\" The central advantage of continuous allocation is not demonstrated in the end-to-end experiment.",
+            "cost_usd": 0.00396372
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper's own end-to-end table shows the method behind Q5_K: \"Q5 K pure + imatrix 5.51 9.948\" versus \"ternary decomposition, µ=3 ∼5.7 eff. 10.099 (+3.2%).\" It also admits the continuous allocation lever was not used: \"None of the known levers were applied to this conversion: refinement sweeps, per-matrix µ allocation... while this run used a flat µ = 3.\"",
+            "cost_usd": 0.009593500000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms this omission in Section 3.5, stating: \"None of the known levers were applied to this conversion... per-matrix \u0003bc allocation... while this run used a flat \u0003bc = 3\".",
+            "cost_usd": 0.0019772400000000003
+          }
+        ],
+        "cost_usd": 0.015534460000000002
+      },
+      {
+        "flag_id": "fp-e902782a303b",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states in Section 5: \"no fused kernels exist,\" and Section 4 only notes deployment compatibility with existing formats speculatively. No actual latency benchmarks or kernel implementations are provided to substantiate the hardware efficiency claims.",
+        "evidence": {
+          "claim": "The claimed hardware speedups are speculative and not substantiated by fused kernel implementations or simulated latency benchmarks, making practical usability hard to verify.",
+          "excerpt": "Section 4 (\"Deployment notes\") is highly speculative. The paper claims that the 3.4 to 6x op-count growth is offset by the multiplication-free nature of the ternary adds. However, without a custom fused kernel (e.g., extending BitNet/llama.cpp LUT kernels) or even simulated latency benchmarks, it is difficult to verify if this format is practically usable on current GPUs or CPUs."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Section 5: \"no fused kernels exist,\" and Section 4 only notes deployment compatibility with existing formats speculatively. No actual latency benchmarks or kernel implementations are provided to substantiate the hardware efficiency claims.",
+            "cost_usd": 0.00396372
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 4 is only a deployment note (e.g., \"bitnet.cpp-style LUT kernels [9] apply directly to both\"), but the paper reports no latency or fused-kernel measurements. The limitation is explicit: \"The known levers ... are unstacked, and no fused kernels exist.\"",
+            "cost_usd": 0.009593500000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper admits in Section 5 that \"no fused kernels exist\" and Section 4 only discusses theoretical deployment considerations, providing no simulated or real latency benchmarks to substantiate speedups.",
+            "cost_usd": 0.0019772400000000003
+          }
+        ],
+        "cost_usd": 0.015534460000000002
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.07767230000000001
+  },
+  "extractor_cost_usd": 0.012729999999999977,
+  "total_cost_usd": 0.09040229999999999
+}

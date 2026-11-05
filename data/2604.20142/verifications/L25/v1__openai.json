@@ -1,0 +1,180 @@
+{
+  "paper_id": "2604.20142",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states 'I found no definite citation error that can be established from the manuscript text alone without independently checking the cited papers.' No flag appears anywhere in the report challenging the Wang & Dai (2021) claim about electron injection rate rising vs. dropping with time.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states they found no definite citation error and nowhere challenges the Wang & Dai (2021) claim about injection rate evolution against its cited source. Under the broadened-claim rule, no source-specific contradiction was flagged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states in the Summary section that they found no definite citation errors that could be established from the manuscript text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t2",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never mentions the cosmological parameters Omega_M or Omega_Lambda, nor the inconsistency that 0.317 + 0.685 ≠ 1. The minor numerical issue flagged in item 8 concerns the Monte Carlo alpha range in the abstract vs. Figure 13, not the cosmology parameters.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The report contains no mention of the cosmology line, Planck 2018 values, or the inconsistency that Ω_M=0.317 and Ω_Λ=0.685 sum to 1.002 instead of 1. A different numerical ambiguity about Monte Carlo α ranges does not correspond to this injected numeric edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention the cosmological parameters (Omega_M or Omega_Lambda) or the fact that their sum fails to equal unity in the flat LCDM model.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The expression contains \\frac{1}{E}\\sum_{n=0}^{\\infty}\\frac{(1+4E)^{-n}}{n^2}. The n=0 term is undefined because it contains 1/0^2. If read literally, the SSC kernel diverges... Correct the summation limit, presumably to n=1",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The expression contains \\frac{1}{E}\\sum_{n=0}^{\\infty}\\frac{(1+4E)^{-n}}{n^2}. The n=0 term is undefined because it contains 1/0^2. If read literally, the SSC kernel diverges... Correct the summation limit, presumably to n=1",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the n=0 lower bound in the sum as introducing a 1/0^2 divergence and suggests correcting it to n=1, directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "1. [mathematical] Divergent term in the SSC cooling kernel  \n   **Where:** Equation (9), first branch for \\(E>1/4\\).  \n   **What is wrong:** The expression contains  \n   \\[\n   \\frac{1}{E}\\sum_{n=0}^{\\infty}\\frac{(1+4E)^{-n}}{n^2}.\n   \\]  \n   The \\(n=0\\) term is undefined because it contains \\(1/0^2\\). If read literally, the SSC kernel diverges.\n...\n   **Concrete fix:** Correct the summation limit, presumably to \\(n=1\\), or explicitly define the \\(n=0\\) term as omitted.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the altered lower bound of the series, explains the resulting divergence at n=0, and proposes restoring the lower limit to n=1. It is a direct match to the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Major issue 1: [mathematical] Divergent term in the SSC cooling kernel ... The expression contains \\frac{1}{E}\\sum_{n=0}^{\\infty}\\frac{(1+4E)^{-n}}{n^2}. The n=0 term is undefined because it contains 1/0^2.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identified the injected error where the summation index was changed from n=1 to n=0, correctly noting the resulting division-by-zero singularity.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "\"principle features\" should be \"principal features\" — Where: Introduction, first page: \"While the Band function captures the principle features…\" — \"Principle\" is the wrong word; the intended adjective is \"principal.\"",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "\"principle features\" should be \"principal features\" — Where: Introduction, first page: \"While the Band function captures the principle features…\" — \"Principle\" is the wrong word; the intended adjective is \"principal.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the homophone swap of 'principle' for 'principal' in the Introduction, exactly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "4. [very minor/general] “principle features” should be “principal features”  \n   **Where:** Introduction, first page: “While the Band function captures the principle features…”  \n   **What is wrong:** “Principle” is the wrong word; the intended adjective is “principal.”",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the exact sentence and identifies the homophone swap from 'principal' to 'principle'. This is a precise detection of the injected general writing error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Very minor issue 4: [very minor/general] ‘principle features’ should be ‘principal features’ ... ‘Principle’ is the wrong word; the intended adjective is ‘principal.’",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the homophone swap of 'principal' with 'principle' in the Introduction.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 23.2598,
+  "total_cost_usd": null,
+  "total_input_tokens": 22514,
+  "total_output_tokens": 2382,
+  "escalation_count": 0,
+  "notes": null
+}

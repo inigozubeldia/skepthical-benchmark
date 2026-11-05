@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v2",
+  "reviewer_system": "L2",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer confirms PTQTP uses 'a superposition of two ternary matrices (trit-planes)' and marks this SUPPORTED, without flagging the missing 'row-wise' qualifier. No challenge is made to the post-edit claim sentence regarding the cited source's methodology.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review discusses missing PTQTP baselines and separately states PTQTP uses two trit-planes, but it does not challenge the specific post-edit claim about PTQTP's use of scales versus row-wise scales or mark that citation claim as partially supported/contradicted.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not challenge the claim against the source; instead, they explicitly marked the claim as supported in the Key statements and references section without mentioning the missing qualifier.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Abstract claims a +2.3% difference for 10.10 vs 9.78. However, Table 3 correctly computes Δ as +3.2% based on the exact numbers 10.099 vs 9.782.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Abstract claims a +2.3% difference for 10.10 vs 9.78. However, Table 3 correctly computes Δ as +3.2% based on the exact numbers 10.099 vs 9.782.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the +2.3% figure in the Abstract as inconsistent with the +3.2% value in Table 3, directly matching the injected digit swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The Abstract claims that a full Qwen3.5-4B conversion reaches \"10.10 wikitext-2 perplexity against 9.78 for bf16 (+2.3%)\". However, Table 3 reports the ExTernD μ=3 perplexity as 10.099 and bf16 as 9.782. The relative degradation is $(10.099 - 9.782) / 9.782 = 3.24\\%$. Table 3 correctly lists the $\\Delta$ as $+3.2\\%$, meaning the Abstract underreports the perplexity degradation by nearly a full percentage point.",
+          "confidence": "high",
+          "reasoning": "This explicitly quotes the incorrect abstract value, recomputes the percentage from the cited numbers, and says it should be +3.2%, directly matching the digit-swap injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract claims that a full Qwen3.5-4B conversion reaches \"10.10 wikitext-2 perplexity against 9.78 for bf16 (+2.3%)\". However, Table 3 reports the ExTernD μ=3 perplexity as 10.099 and bf16 as 9.782. The relative degradation is (10.099 - 9.782) / 9.782 = 3.24%.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the discrepancy between the abstract's +2.3% figure and the +3.2% figure found in Table 3, identifying it as a quantitative contradiction.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The equality chain physically printed reads: ‖R_{i+1}‖_F^2 = ‖R_i − d_i u v^⊤‖_F^2 = ‖R_i‖_F^2 ≤ ‖R_i‖_F^2. The middle equality equates the post-subtraction residual directly to the pre-subtraction residual, which implies the update step did nothing and makes the subsequent strict inequality impossible.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The equality chain physically printed reads: ‖R_{i+1}‖_F^2 = ‖R_i − d_i u v^⊤‖_F^2 = ‖R_i‖_F^2 ≤ ‖R_i‖_F^2. The middle equality equates the post-subtraction residual directly to the pre-subtraction residual, which implies the update step did nothing and makes the subsequent strict inequality impossible.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies and describes the deleted subtracted term as an algebraic error in Proposition 1, matching the injected deletion precisely.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The equality chain physically printed reads: $\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 \\le \\|R_i\\|_F^2$. The middle equality equates the post-subtraction residual directly to the pre-subtraction residual, which implies the update step did nothing and makes the subsequent strict inequality impossible.\n*Recommendation:* Correct the equality chain in Proposition 1 to properly reflect the subtracted energy, e.g., $\\|R_{i+1}\\|_F^2 = \\|R_i\\|_F^2 - \\frac{(u^\\top R_i v)^2}{\\|u\\|^2 \\|v\\|^2} \\le \\|R_i\\|_F^2$.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the exact broken equality in Appendix A and restores the missing squared projection reduction term, which is precisely the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the equality chain physically printed reads: \\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 \\le \\|R_i\\|_F^2. The middle equality equates the post-subtraction residual directly to the pre-subtraction residual, which implies the update step did nothing",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the specific algebraic error in Appendix A where the subtraction term was deleted, making the equality chain false.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Conclusion states that ExTernD 'strictly outperforms Q4_K's bit efficiency at matched accuracy.' This is an unsupported generalization that contradicts the paper's own end-to-end results.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Conclusion states that ExTernD 'strictly outperforms Q4_K's bit efficiency at matched accuracy.' This is an unsupported generalization that contradicts the paper's own end-to-end results.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the injected claim in the Conclusion as contradicting the Results section, which aligns exactly with the injected internal contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The Conclusion states that ExTernD \"strictly outperforms Q4_K's bit efficiency at matched accuracy.\" This is an unsupported generalization that contradicts the paper's own end-to-end results.",
+          "confidence": "high",
+          "reasoning": "This directly flags the altered conclusion sentence and says it contradicts the paper's own results, exactly matching the injected internal contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Conclusion states that ExTernD \"strictly outperforms Q4_K's bit efficiency at matched accuracy.\" This is an unsupported generalization that contradicts the paper's own end-to-end results.",
+          "confidence": "high",
+          "reasoning": "The reviewer flagged the contradiction between the conclusion's claim of superior bit efficiency and the actual performance data presented in the results sections.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 30.519524,
+  "total_cost_usd": null,
+  "total_input_tokens": 19087,
+  "total_output_tokens": 4606,
+  "escalation_count": 0,
+  "notes": null
+}

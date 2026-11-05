@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14375",
+  "copy_id": "v2",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "✔ _SUPPORTED_ **Convex relaxations provide scalable bounds for robustness verification but face intrinsic tightness barriers without branching or additional structure.** Reference(s): Salman et al., 2019. Justification: Salman et al. study convex relaxation barriers in neural network robustness verification.",
+          "confidence": "medium",
+          "reasoning": "The reviewer marked the post-injection claim (which says convex relaxations 'overcome' tightness barriers) as SUPPORTED rather than CONTRADICTED, meaning they did not detect the direction reversal. The reviewer's justification even paraphrases the correct (pre-injection) version of the claim ('face intrinsic tightness barriers'), suggesting they may have read the original intent, but they explicitly marked it SUPPORTED rather than flagging a contradiction with the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "✔ _SUPPORTED_ **Convex relaxations provide scalable bounds for robustness verification but face intrinsic tightness barriers without branching or additional structure.**\n  - _Reference(s):_ Salman et al., 2019\n  - _Justification:_ Salman et al. study convex relaxation barriers in neural network robustness verification.",
+          "confidence": "high",
+          "reasoning": "The injection reversed the claim about Salman et al. to say convex relaxations overcome tightness barriers. The reviewer explicitly checks the Salman citation and endorses the opposite, correct claim, which under the broadened-claim rule counts as detection of the contradicted post-edit claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer failed to flag the reversal of the claim; although they mention the correct claim in their audit list, they do not mark the injected 'overcome' claim as contradicted or incorrect.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[✖] **The Appendix B.1 per-clause squared-influence sum is printed consistently.** ... _Reported:_ \\(99/4 + 145/9 = 1483/36\\) / _Computed:_ \\(99/4+145/9=1471/36\\) ... The printed \\(145/9\\) is a clear arithmetic/transcription error. Also: 'Appendix B.1 contains an arithmetic transcription error in the semantic per-clause \\(D^2\\) total: it writes \\(99/4+145/9=1483/36\\), but \\(99/4+145/9=1471/36\\). The preceding overflow contribution is \\(148/9\\), and \\(99/4+148/9=1483/36\\), so the final constant appears correct but the displayed summand is wrong.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[✖] **The Appendix B.1 per-clause squared-influence sum is printed consistently.** ... _Reported:_ \\(99/4 + 145/9 = 1483/36\\) / _Computed:_ \\(99/4+145/9=1471/36\\) ... The printed \\(145/9\\) is a clear arithmetic/transcription error. Also: 'Appendix B.1 contains an arithmetic transcription error in the semantic per-clause \\(D^2\\) total: it writes \\(99/4+145/9=1483/36\\), but \\(99/4+145/9=1471/36\\). The preceding overflow contribution is \\(148/9\\), and \\(99/4+148/9=1483/36\\), so the final constant appears correct but the displayed summand is wrong.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the exact arithmetic error — the wrong numerator 145 vs 148 in the fraction — and correctly computed the discrepancy, directly matching the injected change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Appendix B.1 contains an arithmetic transcription error in the semantic per-clause \\(D^2\\) total: it writes \\(99/4+145/9=1483/36\\), but \\(99/4+145/9=1471/36\\). The preceding overflow contribution is \\(148/9\\), and \\(99/4+148/9=1483/36\\), so the final constant appears correct but the displayed summand is wrong.",
+          "confidence": "high",
+          "reasoning": "The reviewer names the exact displayed equality and the incorrect numerator 145 versus 148, directly matching the injected arithmetic perturbation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Appendix B.1 contains an arithmetic transcription error in the semantic per-clause D^2 total: it writes 99/4+145/9=1483/36, but 99/4+145/9=1471/36.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the incorrect summand and correctly computes the discrepancy.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[✖] **The definition \\(\\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}\\) for \\(Z\\sim N(0,1)\\) is correct.** ... FAIL (confidence: high, impact: critical) ... The correct folded-normal mean is \\(\\mathbb E|Z|=\\sqrt{2/\\pi}\\), not \\(\\sqrt{1/\\pi}\\). Also listed as Major Issue 1: 'Eq. (12) states \\(\\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}\\), but for \\(Z\\sim N(0,1)\\), \\(\\mathbb E|Z|=\\sqrt{2/\\pi}\\).'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[✖] **The definition \\(\\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}\\) for \\(Z\\sim N(0,1)\\) is correct.** ... FAIL (confidence: high, impact: critical) ... The correct folded-normal mean is \\(\\mathbb E|Z|=\\sqrt{2/\\pi}\\), not \\(\\sqrt{1/\\pi}\\). Also listed as Major Issue 1: 'Eq. (12) states \\(\\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}\\), but for \\(Z\\sim N(0,1)\\), \\(\\mathbb E|Z|=\\sqrt{2/\\pi}\\).'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the incorrect folded-normal mean in Eq. (12) as a critical mathematical error, correctly identifying the injected change from sqrt(2/pi) to sqrt(1/pi).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The folded-normal mean is defined incorrectly in Sec. 4.2: Eq. (12) states \\(\\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}\\), but for \\(Z\\sim N(0,1)\\), \\(\\mathbb E|Z|=\\sqrt{2/\\pi}\\).",
+          "confidence": "high",
+          "reasoning": "This exactly identifies Eq. (12) and the incorrect change from \\(\\sqrt{2/\\pi}\\) to \\(\\sqrt{1/\\pi}\\), so it is a direct detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The folded-normal mean is defined incorrectly in Sec. 4.2: Eq. (12) states \\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}, but for Z\\sim N(0,1), \\mathbb E|Z|=\\sqrt{2/\\pi}.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific equation and the exact mathematical error regarding the expectation of the folded normal distribution.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "Minor issue 4: 'Sec. 6.1 says the highest noise level \\(\\sigma=0.063\\) is excluded from bootstrap products \"due to excessive variance,\" but no quantitative exclusion criterion is reported. This is a methodological choice justified by an empirical observation, yet the supporting diagnostic is not printed.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Minor issue 4: 'Sec. 6.1 says the highest noise level \\(\\sigma=0.063\\) is excluded from bootstrap products \"due to excessive variance,\" but no quantitative exclusion criterion is reported. This is a methodological choice justified by an empirical observation, yet the supporting diagnostic is not printed.'",
+          "confidence": "medium",
+          "reasoning": "The reviewer flagged the claim about excluding sigma=0.063 from bootstrap products as lacking justification/criterion, which corresponds directly to the injected false methodology claim. However, the reviewer framed it as a missing quantitative criterion rather than an outright contradiction with the rest of the paper, so confidence is medium rather than high.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Sec. 6.1 says the highest noise level \\(\\sigma=0.063\\) is excluded from bootstrap products “due to excessive variance,” but no quantitative exclusion criterion is reported. This is a methodological choice justified by an empirical observation, yet the supporting diagnostic is not printed.",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly flags the claim that the highest noise level \\(\\sigma=0.063\\) was excluded from bootstrap products, which is the injected methodology statement. Although they criticize missing justification rather than stating it contradicts later text, the match to the inserted claim is specific enough to count.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 6.1 says the highest noise level \\sigma=0.063 is excluded from bootstrap products “due to excessive variance,” but no quantitative exclusion criterion is reported.",
+          "confidence": "high",
+          "reasoning": "The reviewer flags the specific injected methodology claim, though they focus on the lack of justification/criteria rather than the contradiction with the results.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 45.622188,
+  "total_cost_usd": null,
+  "total_input_tokens": 25446,
+  "total_output_tokens": 5163,
+  "escalation_count": 0,
+  "notes": null
+}

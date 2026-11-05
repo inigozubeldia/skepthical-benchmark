@@ -1,0 +1,211 @@
+{
+  "paper_id": "2604.20203",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-b023f3f661f6",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: expected exactly one value labelled 'total'",
+        "evidence": {
+          "check_type": "sum_eq_total",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "expected exactly one value labelled 'total'"
+          },
+          "rereader": [
+            {
+              "label": "part_1",
+              "raw_observed": "23",
+              "value_observed": 23.0,
+              "notes": "Found in Section 3.2, first paragraph: 'The transiting metal rich subsample consists of 23 sub-Neptune systems (9 systems hosting cold Jupiters)'"
+            },
+            {
+              "label": "part_2",
+              "raw_observed": "15",
+              "value_observed": 15.0,
+              "notes": "Found in Section 3.2, first paragraph: '15 super-Earth systems (2 systems hosting cold Jupiters)'"
+            },
+            {
+              "label": "part_3",
+              "raw_observed": "18",
+              "value_observed": 18.0,
+              "notes": "Found in Section 3.2, first paragraph: '18 mixed systems (3 systems hosting cold Jupiters)'"
+            },
+            {
+              "label": "sum",
+              "raw_observed": "56",
+              "value_observed": 56.0,
+              "notes": "Sum of 23 + 15 + 18 as stated in the text, matching Section 3.2: '...23 sub-Neptune, 15 super-Earth, and 18 mixed systems, totaling 56...'"
+            },
+            {
+              "label": "stated_total",
+              "raw_observed": "59",
+              "value_observed": 59.0,
+              "notes": "Found in Figure 1 caption: 'Orbital architectures of the 59 metal-rich (Left) and 53 metal-poor (Right) transiting planetary systems.'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.05860399999999999
+      },
+      {
+        "flag_id": "fp-9fcfcf8186f5",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 2 occurrences; min sigfigs = 5; range = [10000.0, 100000.0]",
+        "evidence": {
+          "check_type": "repeated_constant",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 100000.0,
+            "reported": 10000.0,
+            "diff_abs": 90000.0,
+            "diff_rel": 0.9,
+            "tolerance": {
+              "abs_tol": 50000.0,
+              "rel_tol": 5e-05
+            },
+            "notes": "2 occurrences; min sigfigs = 5; range = [10000.0, 100000.0]"
+          },
+          "rereader": [
+            {
+              "label": "value_1",
+              "raw_observed": "100,000",
+              "value_observed": 100000.0,
+              "notes": "Section 3.2, paragraph below Figure 2: 'generate 100,000 random realizations from each.'"
+            },
+            {
+              "label": "value_2",
+              "raw_observed": "9,995",
+              "value_observed": 9995.0,
+              "notes": "Section 3.2, paragraph below Figure 2: 'Out of 10,000 resampled data, P(CJ|SN, [Fe/H] > 0) is larger than P(CJ, [Fe/H] > 0) for 9,995 times'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.05860399999999999
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-d832b4a2c8c0",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'we used the completeness maps in Figure A1 of (M. L. Bryan & E. J. Lee 2024) to determine the average completeness for the set of systems considered' but never reports the actual completeness values, n_eff values, or weighting scheme for any subsample. The KS test comparison in Appendix A addresses whether the three system types have similar detection properties, but does not substitute for reporting the actual completeness corrections applied to derive the conditional frequencies.",
+        "evidence": {
+          "claim": "The completeness correction method is not reproducible because actual completeness values, n_eff, the weighting scheme, and treatment of uncertainties are not reported, affecting main quantitative results.",
+          "excerpt": "The completeness correction is not reproducible as described. Sec. 3.1 states that the authors use completeness maps from Bryan & Lee to determine an average completeness and define an effective total number n_{\\rm eff}, but the actual completeness values, n_{\\rm eff} values, weighting scheme, and uncertainty treatment are not reported for any subsample."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'we used the completeness maps in Figure A1 of (M. L. Bryan & E. J. Lee 2024) to determine the average completeness for the set of systems considered' but never reports the actual completeness values, n_eff values, or weighting scheme for any subsample. The KS test comparison in Appendix A addresses whether the three system types have similar detection properties, but does not substitute for reporting the actual completeness corrections applied to derive the conditional frequencies.",
+            "cost_usd": 0.0081171
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.1 says only that \"neff is the effective total number after correcting for detection completeness to gas giants\" and that \"we used the completeness maps in Figure A1 of (M. L. Bryan & E. J. Lee 2024) to determine the average completeness for the set of systems considered,\" but the paper does not report the actual average completeness values, any subsample-specific n_eff values, or how those averages/uncertainties were computed.",
+            "cost_usd": 0.010408500000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.1 states that 'neff is the effective total number after correcting for detection completeness' and that the authors 'used the completeness maps... to determine the average completeness', but Table 1 only reports N_total and N_det without providing the calculated n_eff values or detailing the exact completeness factors used.",
+            "cost_usd": 0.003273
+          }
+        ],
+        "cost_usd": 0.0217986
+      },
+      {
+        "flag_id": "fp-7d7698bf2cbc",
+        "paper_id": "2604.20203",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section 2 adopts the radius-valley relation with stated uncertainties in h and g ('adopted as 0.21+0.06−0.07 and −0.09+0.02−0.03') but then assigns planets deterministically to sub-Neptune or super-Earth categories without propagating these uncertainties or the measurement uncertainties on Rp, M*, and P into the classification, which could affect system-type assignments and derived conditional frequencies.",
+        "evidence": {
+          "claim": "The classification of planets across the radius valley does not propagate uncertainties in planet and stellar properties or the radius-valley parameters, potentially altering class membership and frequencies.",
+          "excerpt": "The radius-valley classification appears to ignore measurement and model uncertainties. Sec. 2 adopts a radius-valley relation with uncertainties in R^0_{\\rm valley}, h, and g, but then assigns planets and systems to sub-Neptune, super-Earth, or mixed categories deterministically."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 2 adopts the radius-valley relation with stated uncertainties in h and g ('adopted as 0.21+0.06−0.07 and −0.09+0.02−0.03') but then assigns planets deterministically to sub-Neptune or super-Earth categories without propagating these uncertainties or the measurement uncertainties on Rp, M*, and P into the classification, which could affect system-type assignments and derived conditional frequencies.",
+            "cost_usd": 0.0081171
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives an uncertain radius-valley relation, \"Rvalley = R0valley (M*/M☉)^h (P/10days)^g, where h and g are ... adopted as 0.21+0.06−0.07 and −0.09+0.02−0.03,\" but then states simply, \"We then classify planets into two categories based on whether their radii lie above or below the planetary radius valley,\" with no described propagation of uncertainties in planet radii, stellar properties, or the valley parameters into class membership.",
+            "cost_usd": 0.010408500000000001
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 2 provides the radius-valley relation with uncertainties (e.g., R^0_valley ~ 1.9 ± 0.2 R⊕), but then deterministically states, 'We then classify planets into two categories based on whether their radii lie above or below the planetary radius valley,' without mentioning any propagation of these uncertainties.",
+            "cost_usd": 0.003273
+          }
+        ],
+        "cost_usd": 0.0217986
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.11720799999999998,
+    "general": 0.0435972
+  },
+  "extractor_cost_usd": 0.021116000000000024,
+  "total_cost_usd": 0.1819212
+}

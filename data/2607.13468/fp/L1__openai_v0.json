@@ -1,0 +1,419 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-726d7870fe98",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: non-integer input for integer_equal: 0.7449",
+        "evidence": {
+          "check_type": "integer_equal",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "non-integer input for integer_equal: 0.7449"
+          },
+          "rereader": [
+            {
+              "label": "HIVE-3D_IoU",
+              "raw_observed": "0.7449",
+              "value_observed": 0.7449,
+              "notes": "Value appears in Table 1, page 7, under Ours in the IoU column."
+            },
+            {
+              "label": "TRELLIS_IoU",
+              "raw_observed": "0.8603",
+              "value_observed": 0.8603,
+              "notes": "Value appears in Table 1, page 7, under TRELLIS in the IoU column."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.053692666666666666
+      },
+      {
+        "flag_id": "fp-95d71e419f54",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.053692666666666666
+      },
+      {
+        "flag_id": "fp-d529a6cabd8b",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: non-integer input for integer_equal: 36.5",
+        "evidence": {
+          "check_type": "integer_equal",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "non-integer input for integer_equal: 36.5"
+          },
+          "rereader": [
+            {
+              "label": "Table_1_runtime_per_scene",
+              "raw_observed": "36.5",
+              "value_observed": 36.5,
+              "notes": "Value appears in Table 1, page 7, under Ours in the Runtime column, formatted as '36.5s'."
+            },
+            {
+              "label": "Appendix_Table_5_generation_time_depth_1",
+              "raw_observed": "59.3",
+              "value_observed": 59.3,
+              "notes": "Value appears in Table 5, page 15, for '1 (depth = 1)' in the Generation (s) column."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.053692666666666666
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-d81e56fbf46a",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states evaluations are done on '3D-FRONT dataset' and 'real-world scene photographs' but does not specify the number of test scenes, train/test split, fixed viewpoints, or whether metrics are computed on rendered images, point clouds, or voxels. The supplementary only adds Table 6 and Table 7 without resolving these protocol details.",
+        "evidence": {
+          "claim": "Essential details of the evaluation protocol are missing, preventing assessment of the validity of results.",
+          "excerpt": "Important details are missing: - How many test scenes are used? - What is the exact train/test split? - Are the 3D-FRONT scenes rendered from fixed viewpoints? - Are metrics computed on full scenes, object crops, point clouds, voxels, rendered images, or 3DGS outputs? [...] Without these details, it is difficult to assess the validity of the reported numbers."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states evaluations are done on '3D-FRONT dataset' and 'real-world scene photographs' but does not specify the number of test scenes, train/test split, fixed viewpoints, or whether metrics are computed on rendered images, point clouds, or voxels. The supplementary only adds Table 6 and Table 7 without resolving these protocol details.",
+            "cost_usd": 0.004846457142857143
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says only that it evaluates \"on the 3D-FRONT dataset using CD (Fan et al., 2017), F-Score (Tatarchenko et al., 2019), and IoU\" and also uses \"rendered images from the 3D-FRONT (Fu et al., 2021) dataset and a collection of real-world scene photographs.\" It never states the number of test scenes, exact train/test split, viewpoint protocol, or the precise representation on which each metric is computed.",
+            "cost_usd": 0.010800357142857143
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states, 'We evaluate our method and all baselines on the 3D-FRONT dataset,' but it does not specify the number of test scenes, the exact train/test split, or the viewpoint generation protocol for the evaluation.",
+            "cost_usd": 0.0022222571428571433
+          }
+        ],
+        "cost_usd": 0.01786907142857143
+      },
+      {
+        "flag_id": "fp-9d8dc0d3c5c1",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=AMBIGUOUS",
+        "evidence": {
+          "claim": "The manuscript does not sufficiently clarify the novelty relative to TRELLIS and adapter-based methods, making intellectual contribution unclear.",
+          "excerpt": "The paper should clarify the novelty beyond applying an IP-Adapter-style conditioning mechanism to TRELLIS. The authors should more clearly distinguish their contribution from: - TRELLIS itself, - Fuse3D-style use of attention maps, - ControlNet/IP-Adapter-style conditioning, - compositional image-to-3D pipelines, - recent part-aware or hierarchical 3D generation methods."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does distinguish contributions in Section C.5 ('Comparison with VIAFormer and ULTRA3D') and in Section 2, but the novelty beyond IP-Adapter-style conditioning on TRELLIS is described more qualitatively than technically. The paper claims 'our proposed Voxel-SR module performs generative voxel super-resolution...within a hierarchical coarse-to-fine generation framework' as distinct, but the reviewer's concern about insufficient technical differentiation has some merit.",
+            "cost_usd": 0.004846457142857143
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly states its claimed novelties: \"We propose HIVE-3D, a novel hierarchical pipeline,\" \"We introduce a 2D-to-3D matching strategy,\" and \"We propose a voxel super-resolution model.\" It also distinguishes itself from prior pipelines: \"Our approach bridges this gap by first generating the scene holistically to establish a coherent layout, and then hierarchically refining each instance while preserving this overall structure.\"",
+            "cost_usd": 0.010800357142857143
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The authors explicitly acknowledge their conceptual borrowings (e.g., 'inspired by Fuse3D', 'Inspired by IP-Adapter... we aim to train an adapter network', 'using TRELLIS'). Whether these disclosures sufficiently distinguish their intellectual contribution from prior work is a subjective judgment.",
+            "cost_usd": 0.0022222571428571433
+          }
+        ],
+        "cost_usd": 0.01786907142857143
+      },
+      {
+        "flag_id": "fp-1ef4fd8855cc",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section A.4 states voxels are 'voxelized into a grid with a resolution of 64^3' as targets and coarse voxels are 'downsampled' versions, but the paper does not specify exact coarse resolution, whether target voxels come from original meshes or TRELLIS, or how the model handles scene components vs. isolated objects. The reviewer's specific reproducibility concerns are not fully resolved.",
+        "evidence": {
+          "claim": "Key aspects of the voxel super-resolution model's training procedure and data setup are not specified, hampering reproducibility.",
+          "excerpt": "Several details are missing: - What is the high-resolution target voxel representation? - How exactly are coarse voxels generated? - Are the target voxels produced from original meshes or from TRELLIS reconstructions? - Is the model trained to map low-resolution voxel + image to high-resolution voxel? - What resolutions are used for coarse and fine voxels? - Are coarse voxels degraded versions of the same target, or are they generated by TRELLIS? - How is the method trained to handle scene components rather than isolated Objaverse objects? - Does the model refine only geometry, or does it also influence texture/appearance? - If only the sparse structure flow transformer \\(G_S\\) is adapted, how are finer textures obtained? These details are crucial for reproducibility and for understanding what the model actually learns."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section A.4 states voxels are 'voxelized into a grid with a resolution of 64^3' as targets and coarse voxels are 'downsampled' versions, but the paper does not specify exact coarse resolution, whether target voxels come from original meshes or TRELLIS, or how the model handles scene components vs. isolated objects. The reviewer's specific reproducibility concerns are not fully resolved.",
+            "cost_usd": 0.004846457142857143
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives some setup details — e.g., \"For each asset, we first rendered 24 multi-view images and then downsampled them to generate corresponding coarse voxels\" and \"the obtained meshes are voxelized into a grid with a resolution of 64^3.\" But it still does not specify the exact coarse-voxel resolution/downsampling procedure, whether training targets are mesh voxels versus TRELLIS reconstructions, or clearly explain how training on isolated Objaverse objects covers scene components and appearance refinement.",
+            "cost_usd": 0.010800357142857143
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although Appendix A.4 states that meshes are 'voxelized into a grid with a resolution of 64^3' and encoded into a 'feature volume of size 16 x 16 x 16 x 8' to serve 'as the coarse voxel condition', the exact nature and resolution of the high-resolution target voxels during training are not specified.",
+            "cost_usd": 0.0022222571428571433
+          }
+        ],
+        "cost_usd": 0.01786907142857143
+      },
+      {
+        "flag_id": "fp-75b5187b9a0c",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges in limitations that 'constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors,' and mentions Amodal3R only briefly ('we adopt the Amodal3R framework to generate complete amodal reconstructions free from occlusion') without systematic evaluation of 2D-to-3D matching quality or analysis of the listed failure modes.",
+        "evidence": {
+          "claim": "The 2D-to-3D lifting step is likely brittle and may suffer from detection/segmentation failures, and the impact of failure modes is not thoroughly analyzed.",
+          "excerpt": "The method depends on Florence-2 and SAM2 for detection and segmentation, then uses attention maps to lift 2D regions into 3D voxel components. This is practical, but several failure modes are likely: - missed detections, - over-segmentation or under-segmentation, - incorrect hierarchical segmentation, - occluded objects, - overlapping masks, - attention leakage between nearby objects, - ambiguous correspondences for small objects, - transparent or reflective objects, - objects with similar appearance. The paper mentions Amodal3R for occluded components, but its integration is not described in detail. It is unclear when Amodal3R is applied, how it affects consistency with the input image, and whether it introduces hallucinated geometry. The authors should provide a more systematic evaluation of the 2D-to-3D matching quality, e.g., segmentation IoU in 3D or qualitative failure cases for attention-based voxel assignment."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in limitations that 'constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors,' and mentions Amodal3R only briefly ('we adopt the Amodal3R framework to generate complete amodal reconstructions free from occlusion') without systematic evaluation of 2D-to-3D matching quality or analysis of the listed failure modes.",
+            "cost_usd": 0.004846457142857143
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges the brittleness: \"constructing the initial 2D hierarchical semantics relies on detection and segmentation models, which may introduce errors and lead to suboptimal results,\" and notes only that \"we adopt the Amodal3R framework to generate complete amodal reconstructions free from occlusion.\" It does not provide a systematic evaluation of the 2D-to-3D lifting quality or a detailed failure analysis for segmentation/attention-assignment errors.",
+            "cost_usd": 0.010800357142857143
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section D (Failure Analysis) acknowledges that 'downstream components of the pipeline may struggle to function correctly' if the base model fails, but the paper does not systematically quantify the 2D-to-3D matching accuracy (e.g., via 3D segmentation IoU).",
+            "cost_usd": 0.0022222571428571433
+          }
+        ],
+        "cost_usd": 0.01786907142857143
+      },
+      {
+        "flag_id": "fp-5d1b73f8d696",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper provides qualitative and quantitative comparison between RANSAC and ICP (Table 4, Figure 7) but does not address failure cases for symmetric/textureless objects, does not enforce physical plausibility or non-interpenetration, and does not discuss how conflicts between refined child components and parent geometry are resolved.",
+        "evidence": {
+          "claim": "RANSAC-based registration is potentially unreliable for certain scenarios, and unresolved registration and plausibility issues may limit real-world utility.",
+          "excerpt": "The refined components are reconstructed in canonical pose and then aligned back to the initial scene using scale estimation and RANSAC-based point cloud registration. This is a reasonable engineering solution, but it raises several issues: - RANSAC with FPFH can fail for symmetric objects, textureless shapes, small objects, or partial geometry. - The scale proxy based on mean distance to centroid may be sensitive to missing parts and elongated structures. - The method does not seem to enforce physical plausibility, contact constraints, or non-interpenetration after assembly. - The final scene may contain small registration errors that are visually apparent but not captured by global metrics. - It is unclear how conflicts between refined child components and their parent geometry are resolved."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper provides qualitative and quantitative comparison between RANSAC and ICP (Table 4, Figure 7) but does not address failure cases for symmetric/textureless objects, does not enforce physical plausibility or non-interpenetration, and does not discuss how conflicts between refined child components and parent geometry are resolved.",
+            "cost_usd": 0.004846457142857143
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explains that it \"employ[s] RANSAC ..., which is resilient to spurious correspondences\" and provides an ablation against ICP, but it does not describe any physical plausibility, contact, or non-interpenetration constraints after assembly. It also does not explain how conflicts between refined child components and parent geometry are resolved beyond registration.",
+            "cost_usd": 0.010800357142857143
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The method relies on point cloud registration to reassemble components (Section 4.3 and Appendix A.3), but the paper does not mention any mechanisms to enforce physical plausibility, contact constraints, or resolve interpenetration after the alignment.",
+            "cost_usd": 0.0022222571428571433
+          }
+        ],
+        "cost_usd": 0.01786907142857143
+      },
+      {
+        "flag_id": "fp-e6aeffd66984",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section D acknowledges 'our pipeline depends on the scene generated by TRELLIS...its performance is inherently bounded by the quality of the initial output' and shows one failure case (Figure 12), but does not quantify how often TRELLIS fails, how often HIVE-3D improves vs. degrades TRELLIS outputs, or how sensitive performance is to initial scene quality.",
+        "evidence": {
+          "claim": "The method's performance is fundamentally limited by failures in TRELLIS, and the extent and frequency of such failures are not quantified.",
+          "excerpt": "The failure analysis correctly notes that if TRELLIS misses an object or produces incomplete geometry, HIVE-3D struggles. This is a significant limitation because the method is explicitly designed around refining a coarse initial scene. The paper would be stronger if it quantified this dependence, for example: - How often does TRELLIS fail to produce a usable initial scene? - How often does HIVE-3D improve versus degrade TRELLIS outputs? - Are there cases where refinement harms global consistency? - How sensitive is performance to the quality of the initial scene?"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section D acknowledges 'our pipeline depends on the scene generated by TRELLIS...its performance is inherently bounded by the quality of the initial output' and shows one failure case (Figure 12), but does not quantify how often TRELLIS fails, how often HIVE-3D improves vs. degrades TRELLIS outputs, or how sensitive performance is to initial scene quality.",
+            "cost_usd": 0.004846457142857143
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The limitation is only acknowledged qualitatively: \"Since our pipeline depends on the scene generated by the TRELLIS, its performance is inherently bounded by the quality of the initial output.\" The paper shows a \"Representative failure case\" but does not quantify how often TRELLIS failures occur or how sensitive HIVE-3D is to initial-scene quality.",
+            "cost_usd": 0.010800357142857143
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The Failure Analysis section states that the pipeline's performance is 'inherently bounded by the quality of the initial output' from TRELLIS, but it does not quantitatively measure the frequency or severity of these initial failures.",
+            "cost_usd": 0.0022222571428571433
+          }
+        ],
+        "cost_usd": 0.01786907142857143
+      },
+      {
+        "flag_id": "fp-16a607de9a2f",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The comparisons to baseline methods are insufficiently rigorous and may not support the claimed advantages.",
+          "excerpt": "The paper compares against TRELLIS, MIDI, SceneGen, Gen3DSR, PartPacker, and SAM3D. However, the comparison is not fully convincing. Concerns: - Some baselines may target different output formats, e.g., meshes, 3DGS, voxels, or untextured geometry. - It is unclear whether all baselines are evaluated under comparable rendering and normalization settings. - PartPacker is primarily object/part-level and untextured, so comparing it directly to a textured scene generator may be unfair unless carefully contextualized. - The qualitative comparison figures are helpful but could be cherry-picked. - No user study or perceptual evaluation is provided, despite the method’s main advantage being visual fidelity. A stronger experimental section should include more test scenes, clearer protocols, and perhaps human preference studies or component-level metrics."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper compares against multiple baselines with quantitative metrics (Tables 1, 6) and qualitative figures, and explicitly notes 'PartPacker primarily focuses on geometric synthesis and generates only untextured meshes.' However, no user study is provided, the number of test scenes is unspecified, and whether baselines are evaluated under comparable rendering settings is unclear, making this partially but not fully resolved.",
+            "cost_usd": 0.004846457142857143
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does include multiple baselines and some contextualization — e.g., \"We compare our method with ... TRELLIS, MIDI, SceneGen and Gen3DSR\" and \"PartPacker primarily focuses on geometric synthesis and generates only untextured meshes.\" However, it does not fully spell out comparable rendering/normalization protocols or include human studies, so the fairness/rigor concern is only partially resolved from the PDF alone.",
+            "cost_usd": 0.010800357142857143
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper relies strictly on automated metrics (SSIM, PSNR, LPIPS, CLIP, CD, F-Score, IoU) for its evaluation in Section 5.2 and Appendices B-C, entirely omitting user studies or human perceptual evaluations.",
+            "cost_usd": 0.0022222571428571433
+          }
+        ],
+        "cost_usd": 0.01786907142857143
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 3,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.161078,
+    "general": 0.12508350000000001
+  },
+  "extractor_cost_usd": 0.023991999999999958,
+  "total_cost_usd": 0.31015349999999997
+}

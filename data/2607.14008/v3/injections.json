@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "template-A4.tex",
+    "original_text": "while Wang et al.~\\cite{wang2020gcn_rl5} combined graph neural networks with RL for transferable transistor sizing.",
+    "injected_text": "while Wang et al.~\\cite{wang2020gcn_rl5} developed a reinforcement learning agent for macro placement in floorplanning.",
+    "rationale": "The edit alters the claim attached to Wang et al. 2020 from analog transistor sizing (its actual topic) to macro placement (a completely different EDA domain), resulting in an UNRELATED verdict while sounding plausible in an RL-for-EDA literature review.",
+    "ground_truth_description": "The claim associated with Wang et al. (2020) was changed from discussing transferable transistor sizing to macro placement in floorplanning.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "wang2020gcn_rl5",
+      "injected_cite_key": "wang2020gcn_rl5",
+      "claim_sentence_verbatim": "Recent RL approaches by Settaluri et al.~\\cite{settaluri2021automated_rl4} and Shi et al.~\\cite{shi2022robustanalog_rl2} have shown promise in adaptability, while Wang et al.~\\cite{wang2020gcn_rl5} combined graph neural networks with RL for transferable transistor sizing.",
+      "section_location": "Sec. 2.1",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "template-A4.tex",
+    "original_text": "improvements in sample efficiency~(up to 1.72× faster),",
+    "injected_text": "improvements in sample efficiency~(up to 1.27× faster),",
+    "rationale": "Swaps two adjacent digits in the abstract's headline sample efficiency improvement factor (1.72 to 1.27), creating a major contradiction with the body text in Section 5.3 which still reports the correct 1.72x value.",
+    "ground_truth_description": "Swapped the digits of the sample efficiency improvement factor in the abstract from 1.72 to 1.27, introducing an inconsistency with the body text.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "1.72",
+      "value_after_raw": "1.27",
+      "value_before_float": 1.72,
+      "value_after_float": 1.27,
+      "location_cue": "improvements in sample efficiency~(up to 1.72× faster), optimization performance",
+      "paired_location": "Section 5.3",
+      "quantity_label": "sample efficiency improvement factor",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "template-A4.tex",
+    "original_text": "y &= r + \\gamma(Q_{\\text{target}}(s',a') - \\alpha \\log \\pi_\\phi(a'|s'))",
+    "injected_text": "y &= r + \\gamma(Q_{\\text{target}}(s',a'))",
+    "rationale": "Deleting the entropy bonus from the Soft Actor-Critic target Q-value equation invalidates the theoretical foundation of the maximum-entropy algorithm, erroneously converting it to standard Q-learning.",
+    "ground_truth_description": "Deleted the entropy term '- \\alpha \\log \\pi_\\phi(a'|s')' from the SAC target Q-value calculation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Soft Actor-Critic section, SAC target Q-value equation",
+      "original_fragment_latex": "- \\alpha \\log \\pi_\\phi(a'|s')",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\begin{align}\n    L_Q(\\theta_i) &= \\mathbb{E}_{(s,a,r,s') \\sim \\mathcal{D}} \\Big[ \\big( Q_{\\theta_i}(s,a) - y \\big)^2 \\Big] \\\\\n    y &= r + \\gamma(Q_{\\text{target}}(s',a') - \\alpha \\log \\pi_\\phi(a'|s'))\n\\end{align}",
+      "full_equation_latex_after": "\\begin{align}\n    L_Q(\\theta_i) &= \\mathbb{E}_{(s,a,r,s') \\sim \\mathcal{D}} \\Big[ \\big( Q_{\\theta_i}(s,a) - y \\big)^2 \\Big] \\\\\n    y &= r + \\gamma(Q_{\\text{target}}(s',a'))\n\\end{align}",
+      "term_role": "entropy maximization bonus in SAC target Q-value",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "template-A4.tex",
+    "original_text": "By maintaining a collection of high-performing parameter configurations discovered during training, our method significantly improves sample efficiency and generalization capabilities compared to conventional approaches. We demonstrated the effectiveness of our approach on a benchmark optimization problem and practical circuit sizing tasks, showing substantial improvements in success rates, inference efficiency, and objective maximization.",
+    "injected_text": "By maintaining a collection of high-performing parameter configurations discovered during training, our method significantly improves sample efficiency compared to conventional approaches, though we observe reduced generalization capabilities on out-of-distribution targets. We demonstrated the effectiveness of our approach on a benchmark optimization problem and practical circuit sizing tasks, showing substantial improvements in success rates and inference efficiency, while noting that objective maximization remains an open challenge.",
+    "rationale": "Rewrites the conclusion to claim reduced generalization and challenges with objective maximization, directly contradicting the Results section which demonstrates strong extrapolation success and superior objective maximization compared to baselines.",
+    "ground_truth_description": "The conclusion was altered to state the proposed method has reduced generalization capabilities and struggles with objective maximization, directly contradicting the experimental results.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B4",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Conclusion",
+      "affected_span_verbatim": "By maintaining a collection of high-performing parameter configurations discovered during training, our method significantly improves sample efficiency and generalization capabilities compared to conventional approaches. We demonstrated the effectiveness of our approach on a benchmark optimization problem and practical circuit sizing tasks, showing substantial improvements in success rates, inference efficiency, and objective maximization."
+    },
+    "proposer_agent": "injector.general.S3.t1.v3"
+  }
+]

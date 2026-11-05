@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v1",
+  "reviewer_system": "CL1",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not challenge the claim that 'SHAP values are based on information theory' against the Lundberg 2017 citation. While the reviewer discusses SHAP results and the citation, they do not flag the mis-description of SHAP's theoretical basis as information theory instead of game theory.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review discusses SHAP fidelity values but does not challenge the background claim that SHAP is based on information theory versus game theory, nor does it reference the cited Lundberg paper's methodological foundation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer comments that the related work section reads like an enumerated bibliography but does not challenge the specific claim that SHAP is based on information theory or mention the cited source in relation to its theoretical foundation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer never challenges the claim that SHAP is 'based on information theory' nor flags that SHAP is actually grounded in game theory (Shapley values). The review does not mention this specific methodological mis-attribution in the SHAP description.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "Table I values (0.44, 0.44, 4.67) are then compared directly across datasets.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Table I values (0.44, 0.44, 4.67) are then compared directly across datasets.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly calls out the value 4.67 in Table I as anomalous, noting it is on a different scale from the other fidelity values (0.44, 0.44), which corresponds directly to the injected LIME fidelity value of 4.6730 that replaced 0.4673.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "- Eq. (1) defines Fidelity as a *sum* of squared normalized residuals rather than a mean, so its scale grows linearly with N and cannot be compared across datasets of different sizes. Yet Table I values (0.44, 0.44, 4.67) are then compared directly across datasets.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the anomalous table value '4.67' for fidelity, which corresponds to the injected 4.6730 and identifies it as problematic in the results table.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table I values (0.44, 0.44, 4.67) are then compared directly across datasets.",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly cites the injected value (4.67) from the table as problematic, although they attribute the scale issue to the mathematical definition rather than the contradiction with the prose or the valid range.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. (1) defines Fidelity as a *sum* of squared normalized residuals rather than a mean, so its scale grows linearly with N and cannot be compared across datasets of different sizes.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. (1) defines Fidelity as a *sum* of squared normalized residuals rather than a mean, so its scale grows linearly with N and cannot be compared across datasets of different sizes.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies that Fidelity is defined as a sum rather than a mean (i.e., missing the 1/N normalisation factor), which is exactly the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "- Eq. (1) defines Fidelity as a *sum* of squared normalized residuals rather than a mean, so its scale grows linearly with N and cannot be compared across datasets of different sizes.",
+          "confidence": "high",
+          "reasoning": "This directly identifies that the Fidelity equation is written as a sum instead of a mean, which matches the dropped 1/N normalization prefactor.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (1) defines Fidelity as a *sum* of squared normalized residuals rather than a mean, so its scale grows linearly with N",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the equation is a sum instead of a mean, which directly corresponds to the removal of the 1/N normalization factor.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section IV states that each metric is computed over 'ten independent random initializations' and that both mean and standard deviation are reported. Tables I and II report only single numbers with no standard deviations",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section IV states that each metric is computed over 'ten independent random initializations' and that both mean and standard deviation are reported. Tables I and II report only single numbers with no standard deviations",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the contradiction between the methodology claim about ten independent runs with mean and standard deviation reporting and the actual tables showing only single scalar values, which is precisely the injected inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**4. Missing uncertainty quantification.**\nSection IV states that each metric is computed over \"ten independent random initializations\" and that both mean and standard deviation are reported. Tables I and II report only single numbers with no standard deviations",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly contrasts the claimed ten random initializations with mean and standard deviation reporting against the actual tables lacking standard deviations, matching the injected methodology contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Tables I and II report only single numbers with no standard deviations",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific contradiction between the methodology's claim that standard deviations would be reported and the actual results presented in the tables.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 37.264005,
+  "total_cost_usd": null,
+  "total_input_tokens": 16194,
+  "total_output_tokens": 5410,
+  "escalation_count": 1,
+  "notes": null
+}

@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14024",
+  "copy_id": "v1",
+  "reviewer_system": "C",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Reference [16] (Paraschiv, Energy Reports, 2023) is used in the Introduction to support the claim that wind and solar are \"the fastest-growing areas increasing by 18% in 2024\". A 2023 paper cannot report a 2024 growth figure... and verify the \"18%\" against the IRENA 2025 report",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Reference [16] (Paraschiv, Energy Reports, 2023) is used in the Introduction to support the claim that wind and solar are \"the fastest-growing areas increasing by 18% in 2024\". A 2023 paper cannot report a 2024 growth figure... and verify the \"18%\" against the IRENA 2025 report",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the '18%' figure attributed to [16] and recommends verifying it against IRENA 2025, directly naming both the cited paper and the specific value, satisfying the VALUE-OR-NUMERIC detection rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer flags a citation/source problem for the 2024 growth claim and mentions verifying '18%', but does not name the correct value '16%' from the cited source or otherwise challenge the numeric value against PARASCHIV2023276 as required for a value-misquote detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Reference [16] (Paraschiv, Energy Reports, 2023) is used in the Introduction to support the claim that wind and solar are 'the fastest-growing areas increasing by 18% in 2024'. A 2023 paper cannot report a 2024 growth figure. Reference [12] (IRENA 2025) is the correct source for the 2024 number",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly names the cited paper [16], identifies the specific value (18%), and correctly identifies it as inconsistent (temporally impossible).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "\"Only 4 (14.4%) of the 90 reviewed papers provide the source code\" — 4 and 14.4% are mutually inconsistent... Either the count \"4\" or the percentage \"14.4%\" is wrong; the two cannot be reconciled at 90 papers.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "\"Only 4 (14.4%) of the 90 reviewed papers provide the source code\" — 4 and 14.4% are mutually inconsistent... Either the count \"4\" or the percentage \"14.4%\" is wrong; the two cannot be reconciled at 90 papers.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inconsistency between the count (4), the percentage (14.4%), and the base (90), which directly corresponds to the injected typo changing 4.4% to 14.4%.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Sec. 2.1 says \"Only 4 (14.4%) of the 90 reviewed papers provide the source code\". Both figures cannot be correct — 14.4% of 90 is ~13 papers, and 4/90 is 4.4%.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the injected arithmetic inconsistency, quoting the exact sentence and computing the correct percentage/count relationship.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 2.1 says 'Only 4 (14.4%) of the 90 reviewed papers provide the source code'. Both figures cannot be correct — 14.4% of 90 is ~13 papers, and 4/90 is 4.4%.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific injected sentence, points out the inconsistency between the count and the percentage, and performs the arithmetic check.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer audited Eq. (1) and marked it PASS, explicitly noting that 'arg max here presumes L is a utility (e.g., −RMSE)' and treated the argmax as potentially valid under a utility interpretation, rather than flagging the argmax as an error that should be argmin.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Bi-level optimisation Eq. (1): F*_n = arg max_{F'∈S_n} [ min_{θ,λ} L(f(X_{F'}; θ, λ), Y) ].\n\nNotes: Standard bi-level FS formulation; inner solve returns the best-trained model for a given feature subset, outer maximises over subsets w.r.t. the (negated) error — usage of arg max here presumes L is a utility (e.g., −RMSE). If L is an error metric, the outer should be arg min; small notation ambiguity but not a mathematical error given free interpretation of L.",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly notices the argmax/argmin issue in Eq. (1), which corresponds to the injected outer-operator swap. However, they soften it as ambiguity rather than a definite error, so confidence is medium.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "While the reviewer parses the equation in the 'Mathematical consistency audit', they mark it as a 'PASS' and explicitly state that the use of argmax is 'not a mathematical error', failing to recognize the structural invalidation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's math audit item 1 checks the wind-turbine power equation and marks it PASS with symbol w for wind speed, without flagging any inconsistency between w in the equation and v in subsequent text, indicating the notation drift was not detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer notes the wind-power equation with 'w' and says the symbols are correctly identified, but nowhere flags a notation drift or inconsistency between the equation and subsequent prose.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer notes the wind power equation in the mathematical audit and correctly identifies 'w' as the wind speed, but fails to notice the inconsistency/drift with the use of 'v' in the subsequent text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 28.158053,
+  "total_cost_usd": null,
+  "total_input_tokens": 32426,
+  "total_output_tokens": 2829,
+  "escalation_count": 0,
+  "notes": null
+}

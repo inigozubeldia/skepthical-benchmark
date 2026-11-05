@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "template-A4.tex",
+    "original_text": "that is provided as benchmark circuit in~\\cite{analog_gym} with 29 independent parameters.",
+    "injected_text": "that is provided as benchmark circuit in~\\cite{analog_gym} with 32 independent parameters.",
+    "rationale": "Since the source paper contains no cited quantities with explicit standard deviations, we apply a small, plausible integer offset (29 to 32) to the parameter count of a cited benchmark to emulate a 1-2 sigma quantitative mis-quote.",
+    "ground_truth_description": "Changed the number of independent parameters for the cited benchmark analog_gym from 29 to 32.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "analog_gym",
+      "injected_cite_key": "analog_gym",
+      "claim_sentence_verbatim": "The second circuit is a more complex multistage amplifier from~\\cite{qu2016design_big_opamp}~(Fig.~\\ref{fig:multi_stage_schematic})\nthat is provided as benchmark circuit in~\\cite{analog_gym} with 29 independent parameters.",
+      "section_location": "Analog Circuit Sizing: Experimental Setup",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "template-A4.tex",
+    "original_text": "showing significant improvements in sample efficiency~(up to 1.72× faster),",
+    "injected_text": "showing significant improvements in sample efficiency~(up to 17.2× faster),",
+    "rationale": "An order-of-magnitude typo (1.72 -> 17.2) is introduced in the abstract, conflicting directly with the 1.72× figure restated in Section 5.3 and Table 3, triggering a major abstract_vs_body_match failure.",
+    "ground_truth_description": "Changes the sample efficiency improvement factor in the abstract from 1.72× to 17.2×, creating a 10× contradiction with the body text.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "1.72",
+      "value_after_raw": "17.2",
+      "value_before_float": 1.72,
+      "value_after_float": 17.2,
+      "location_cue": "showing significant improvements in sample efficiency~(up to 17.2× faster),",
+      "paired_location": "Section 5.3 / Table 3",
+      "quantity_label": "sample efficiency improvement factor",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "template-A4.tex",
+    "original_text": "d(\\mathbf{o}_a, \\mathbf{o}_b) = \\sqrt{\\frac{1}{|\\mathcal{I}|} \\sum_{i \\in \\mathcal{I}} \\left(\\frac{\\min(0, o_{b,i} - o_{a,i})}{o_{i}^{\\text{norm}}}\\right)^2}",
+    "injected_text": "d(\\mathbf{o}_a, \\mathbf{o}_b) = \\sqrt{\\frac{1}{|\\mathcal{I}|} \\sum_{i=0}^{|\\mathcal{I}|} \\left(\\frac{\\min(0, o_{b,i} - o_{a,i})}{o_{i}^{\\text{norm}}}\\right)^2}",
+    "rationale": "The author inadvertently switched from set notation to explicit integer bounds but used a 0 to N range, creating an off-by-one sum bound that is inconsistent with the 1/|I| normalization prefactor.",
+    "ground_truth_description": "The summation bounds in the distance function were changed from a set membership to an explicit integer range from 0 to |I|, creating an off-by-one error.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 4.1",
+      "original_fragment_latex": "\\sum_{i \\in \\mathcal{I}}",
+      "injected_fragment_latex": "\\sum_{i=0}^{|\\mathcal{I}|}",
+      "full_equation_latex_before": "d(\\mathbf{o}_a, \\mathbf{o}_b) = \\sqrt{\\frac{1}{|\\mathcal{I}|} \\sum_{i \\in \\mathcal{I}} \\left(\\frac{\\min(0, o_{b,i} - o_{a,i})}{o_{i}^{\\text{norm}}}\\right)^2}",
+      "full_equation_latex_after": "d(\\mathbf{o}_a, \\mathbf{o}_b) = \\sqrt{\\frac{1}{|\\mathcal{I}|} \\sum_{i=0}^{|\\mathcal{I}|} \\left(\\frac{\\min(0, o_{b,i} - o_{a,i})}{o_{i}^{\\text{norm}}}\\right)^2}",
+      "term_role": "sum bounds",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "template-A4.tex",
+    "original_text": "The algorithm employs three key neural networks: a policy network $\\pi_\\phi(a|s)$ parameterized by $\\phi$, and two Q-networks $Q_{\\theta_1}(s,a)$ and $Q_{\\theta_2}(s,a)$ parameterized by $\\theta_1$ and $\\theta_2$.",
+    "injected_text": "The algorithm employs three key key neural networks: a policy network $\\pi_\\phi(a|s)$ parameterized by $\\phi$, and two Q-networks $Q_{\\theta_1}(s,a)$ and $Q_{\\theta_2}(s,a)$ parameterized by $\\theta_1$ and $\\theta_2$.",
+    "rationale": "Accidental repetition of the word 'key' introduces a realistic, cosmetic writing defect without altering the meaning of the sentence.",
+    "ground_truth_description": "Added an accidental repetition of the word 'key' in the description of the SAC architecture.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D8",
+      "change_kind": "word_repetition",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 2.3",
+      "affected_span_verbatim": "The algorithm employs three key neural networks: a policy network $\\pi_\\phi(a|s)$ parameterized by $\\phi$, and two Q-networks $Q_{\\theta_1}(s,a)$ and $Q_{\\theta_2}(s,a)$ parameterized by $\\theta_1$ and $\\theta_2$."
+    },
+    "proposer_agent": "injector.general.S1.t1.v2"
+  }
+]

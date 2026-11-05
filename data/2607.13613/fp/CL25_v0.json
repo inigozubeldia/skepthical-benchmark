@@ -1,0 +1,205 @@
+{
+  "paper_id": "2607.13613",
+  "reviewer_system": "CL25",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-9a498894690b",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {minuend, subtrahend, difference}",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {minuend, subtrahend, difference}"
+          },
+          "rereader": [
+            {
+              "label": "minuend",
+              "raw_observed": "2655883130.8893",
+              "value_observed": 2655883130.8893,
+              "notes": "Extracted from S2/FastCentNN: Epochs=102, MSE=2655883130.8893"
+            },
+            {
+              "label": "subtrahend",
+              "raw_observed": "2655883130.8721",
+              "value_observed": 2655883130.8721,
+              "notes": "Extracted from S2/CentNN: Epochs=110, MSE=2655883130.8721"
+            },
+            {
+              "label": "denominator",
+              "raw_observed": "2655883130.8721",
+              "value_observed": 2655883130.8721,
+              "notes": "This is the CentNN value, matching denominator cue."
+            },
+            {
+              "label": "difference_percent",
+              "raw_observed": "6.90%",
+              "value_observed": 6.9,
+              "notes": "S2, difference_percent value taken from Table 1 Speed Up column."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.02973899999999996
+      },
+      {
+        "flag_id": "fp-e2888aa3777b",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {base, percent, result}",
+        "evidence": {
+          "check_type": "percent_of",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {base, percent, result}"
+          },
+          "rereader": [
+            {
+              "label": "base_1",
+              "raw_observed": "0.077",
+              "value_observed": 0.077,
+              "notes": "Base (CentNN) runtime for R15."
+            },
+            {
+              "label": "result_1",
+              "raw_observed": "0.073",
+              "value_observed": 0.073,
+              "notes": "Result (FastCentNN) runtime for R15."
+            },
+            {
+              "label": "percent_1",
+              "raw_observed": "4.18%",
+              "value_observed": 4.18,
+              "notes": "Speed Up for R15."
+            },
+            {
+              "label": "base_2",
+              "raw_observed": "0.113",
+              "value_observed": 0.113,
+              "notes": "Base (CentNN) runtime for Aggregation."
+            },
+            {
+              "label": "result_2",
+              "raw_observed": "0.096",
+              "value_observed": 0.096,
+              "notes": "Result (FastCentNN) runtime for Aggregation."
+            },
+            {
+              "label": "percent_2",
+              "raw_observed": "14.80%",
+              "value_observed": 14.8,
+              "notes": "Speed Up for Aggregation."
+            },
+            {
+              "label": "base_3",
+              "raw_observed": "1.575",
+              "value_observed": 1.575,
+              "notes": "Base (CentNN) runtime for A1."
+            },
+            {
+              "label": "result_3",
+              "raw_observed": "1.312",
+              "value_observed": 1.312,
+              "notes": "Result (FastCentNN) runtime for A1."
+            },
+            {
+              "label": "percent_3",
+              "raw_observed": "16.72%",
+              "value_observed": 16.72,
+              "notes": "Speed Up for A1."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.02973899999999996
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-8717e0d92356",
+        "paper_id": "2607.13613",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper describes M_t as 'the global centroid movement (entropy proxy) at epoch t' but provides no information-theoretic derivation or experiment connecting M_t to any entropy measure. The term is used purely as a label for a sum of L2 centroid displacement norms, and the paper itself acknowledges it is simply 'a straightforward stability-based early-stop heuristic' in all but name — 'A split is triggered when M_t remains below a threshold for a predefined patience window,' with no justification of the entropy analogy beyond the name.",
+        "evidence": {
+          "claim": "The use of 'entropy proxy' for M_t is not justified; the paper offers no information-theoretic derivation or experiment connecting M_t to entropy. This mischaracterization overstates the novelty of the method's early-stop criterion.",
+          "excerpt": "M_t (Eq. 7) is a sum of L2 norms of per-epoch centroid displacements — a total-movement quantity. No information-theoretic derivation is given, no relationship to any cluster-membership entropy is shown, and no experiment ties M_t to any entropy quantity. Calling it an entropy proxy oversells what is a straightforward stability-based early-stop heuristic."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper describes M_t as 'the global centroid movement (entropy proxy) at epoch t' but provides no information-theoretic derivation or experiment connecting M_t to any entropy measure. The term is used purely as a label for a sum of L2 centroid displacement norms, and the paper itself acknowledges it is simply 'a straightforward stability-based early-stop heuristic' in all but name — 'A split is triggered when M_t remains below a threshold for a predefined patience window,' with no justification of the entropy analogy beyond the name.",
+            "cost_usd": 0.0086208
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly labels movement as entropy-related — e.g., \"total centroid movement per epoch, which serves as a training entropy proxy\" and \"where Mt is the global centroid movement (entropy proxy)\" — but it provides no derivation or validation of that claim. The experiments only evaluate \"the relative difference in mean squared error (MSE)\" and that \"efficiency is assessed using the total runtime and the number of training epochs required for convergence,\" with no entropy-based analysis.",
+            "cost_usd": 0.011731000000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces M_t in Equation 7 as the \"global centroid movement (entropy proxy) at epoch t\" but provides no information-theoretic derivation or experiments linking this sum of L2 norms to actual entropy.",
+            "cost_usd": 0.00745
+          }
+        ],
+        "cost_usd": 0.0278018
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.05947799999999992,
+    "general": 0.0278018
+  },
+  "extractor_cost_usd": 0.012423999999999977,
+  "total_cost_usd": 0.0997037999999999
+}

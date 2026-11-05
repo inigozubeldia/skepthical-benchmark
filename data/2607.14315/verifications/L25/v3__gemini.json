@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the Anchors claim about 'all instances in the dataset' vs 'a local region'. The citation issues flagged concern Saliency Maps (Simonyan & Zisserman) and Pruthi et al., neither of which corresponds to the ribeiro2018anchors injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review contains citation issues about CNN Saliency Maps and Information Theory, but it does not mention Anchors, Ribeiro et al. (2018), or challenge the broadened local-vs-dataset guarantee claim against that source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer identifies several citation issues (Simonyan and Pruthi) but does not mention the Anchors/Ribeiro citation or the broadened validity claim in Section 2.1.1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the Anchors description's over-generalization from 'local region' to 'all instances in the dataset.' The reviewer's citation flags concern the CNN saliency maps citation and the Information Theory claim, neither of which corresponds to the Anchors injection.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Table I reports a Simplicity score of 35 for LIME on Dataset 3, which exceeds the maximum number of available features. Fix: Check the LIME output for Dataset 3 and correct the arithmetic or logging error that produced a value of 35.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Table I reports a Simplicity score of 35 for LIME on Dataset 3, which exceeds the maximum number of available features. Fix: Check the LIME output for Dataset 3 and correct the arithmetic or logging error that produced a value of 35.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the value 35 in Table I for Dataset 3 (the injected value) as impossible given the 30-feature Breast Cancer dataset, directly corresponding to the injected change from 30 to 35.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] Impossible simplicity scores for the Breast Cancer dataset\nIn Section IV.A, the Breast Cancer Wisconsin dataset (Dataset 3) is correctly described as having 30 features. Section V states that simplicity is bounded by N, the total number of features. However, Table I reports a Simplicity score of 35 for LIME on Dataset 3, which exceeds the maximum number of available features.\n\n[general] Contradiction between text and tables regarding Simplicity ranges\nIn Section V, paragraph three states: \"simplicity scores for both LIME and SHAP are equal, with values ranging from 4 to 30\". This contradicts Table I (which shows 35 for LIME) and Table II (which shows 28.31 for SHAP).",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the exact injected value 35 in Table I and contrasts it with the paper's stated range of 4 to 30, directly matching the self-contradiction introduced by the edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table I reports a Simplicity score of 35 for LIME on Dataset 3, which exceeds the maximum number of available features. ... Section V, paragraph three states: 'simplicity scores for both LIME and SHAP are equal, with values ranging from 4 to 30'. This contradicts Table I (which shows 35 for LIME)",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies that the value of 35 in Table I contradicts the prose range of 4 to 30, which matches the injected error exactly.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "In Section III.A.1, Equation 1 places the error term $\\|f(x_i) - g(x_i)\\|^2$ in the denominator. If the explanation model perfectly mimics the underlying model, the denominator approaches 0, causing the fidelity score to approach infinity... The formula directly contradicts the intended scale and mathematically explodes on perfect fits. Fix: Invert the fraction to compute the error ratio correctly, for example: $\\frac{\\|f(x_i) - g(x_i)\\|^2}{\\|f(x_i)\\|^2}$.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "In Section III.A.1, Equation 1 places the error term $\\|f(x_i) - g(x_i)\\|^2$ in the denominator. If the explanation model perfectly mimics the underlying model, the denominator approaches 0, causing the fidelity score to approach infinity... The formula directly contradicts the intended scale and mathematically explodes on perfect fits. Fix: Invert the fraction to compute the error ratio correctly, for example: $\\frac{\\|f(x_i) - g(x_i)\\|^2}{\\|f(x_i)\\|^2}$.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies the inverted Fidelity formula and explains that the denominator goes to zero under perfect agreement, which exactly matches the injected inversion of the ratio.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] Inverse formulation of Fidelity (Equation 1)\nIn Section III.A.1, Equation 1 places the error term $\\|f(x_i) - g(x_i)\\|^2$ in the denominator. If the explanation model perfectly mimics the underlying model, the denominator approaches 0, causing the fidelity score to approach infinity. However, Section V explicitly states: \"A lower fidelity score (closer to 0) indicates that the explanation model accurately represents the predictions of the original model\". The formula directly contradicts the intended scale and mathematically explodes on perfect fits.\n*Fix:* Invert the fraction to compute the error ratio correctly, for example: $\\frac{\\|f(x_i) - g(x_i)\\|^2}{\\|f(x_i)\\|^2}$.",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies the fidelity fraction as inverted and gives the corrected form, exactly corresponding to the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Equation 1 places the error term $||f(x_i) - g(x_i)||^2$ in the denominator. ... The formula directly contradicts the intended scale and mathematically explodes on perfect fits.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the fidelity ratio was inverted, placing the residual norm in the denominator instead of the numerator.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention any cross-reference mismatch between figures (Fig. 1 vs Fig. 2) in Section 4.1. The general issues flagged concern the RandomForestClassifier introduction and equation typography, not a figure cross-reference swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review's general comments concern RandomForestClassifier introduction and equation typography, but there is no mention of an incorrect figure reference or mismatch between Section 4.1 benchmarking steps text and the cited figure.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer notes several issues in Section IV and V, but does not flag the incorrect figure cross-reference (Fig 1 vs Fig 2) in Section 4.1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention any cross-reference mismatch between figures (Fig. 1 vs Fig. 2) in the benchmarking steps description. None of the reviewer's flagged issues correspond to a wrong figure reference in Section 4.1.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 35.217387,
+  "total_cost_usd": null,
+  "total_input_tokens": 18505,
+  "total_output_tokens": 3075,
+  "escalation_count": 2,
+  "notes": null
+}

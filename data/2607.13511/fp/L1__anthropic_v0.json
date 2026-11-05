@@ -1,0 +1,314 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "L1",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-e592ef61ea1c",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper itself acknowledges: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks\" and the only end-to-end result is a single wikitext-2 perplexity on Qwen3.5-4B at µ=3. The limitations section confirms this is inadequate but frames it as future work, not resolving the reviewer's concern.",
+        "evidence": {
+          "claim": "The empirical evidence, especially end-to-end evaluation and downstream benchmarking, is too thin to support the major claims of the paper.",
+          "excerpt": "The abstract and conclusion position ExTernD as approaching Q4_K/Q5_K accuracy, but the *only* end-to-end evidence is a single wikitext-2 perplexity number on Qwen3.5-4B. This is inadequate for a PTQ paper in 2025/2026."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself acknowledges: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks\" and the only end-to-end result is a single wikitext-2 perplexity on Qwen3.5-4B at µ=3. The limitations section confirms this is inadequate but frames it as future work, not resolving the reviewer's concern.",
+            "cost_usd": 0.0035825142857142853
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself says the evaluation is limited: \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks,\" and Table 3 is labeled \"First full end-to-end validation\" with only a single \"wikitext-2 PPL\" result for Qwen3.5-4B.",
+            "cost_usd": 0.011201785714285716
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges this limitation directly in Section 5: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.'",
+            "cost_usd": 0.0030442857142857147
+          }
+        ],
+        "cost_usd": 0.017828585714285715
+      },
+      {
+        "flag_id": "fp-f71c7eda63bc",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper presents PTQTP and PT2-LLM numbers in Tables 4 and 5 without explicitly stating whether these are reproduced by the authors or taken from the original papers. The setup section only says \"matrices from google/gemma-4-E2B, Qwen/Qwen3.5-4B\" with no clarification of how baseline numbers were obtained, leaving the fairness of comparison unclear.",
+        "evidence": {
+          "claim": "The comparisons to PTQTP and PT2-LLM are not like-for-like and lack clarity on implementation details and fairness.",
+          "excerpt": "The PTQTP and PT2-LLM numbers appear to be **re-implementations or reproductions by the author** — the source of these numbers is not explicitly stated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper presents PTQTP and PT2-LLM numbers in Tables 4 and 5 without explicitly stating whether these are reproduced by the authors or taken from the original papers. The setup section only says \"matrices from google/gemma-4-E2B, Qwen/Qwen3.5-4B\" with no clarification of how baseline numbers were obtained, leaving the fairness of comparison unclear.",
+            "cost_usd": 0.0035825142857142853
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper gives some fairness rationale — \"To isolate the structural capacity of ExTernD, we compare its weight-reconstruction energy\" and \"To match bit budgets precisely, we evaluate PTQTP at group size G = 128\" — but it does not explicitly state whether PTQTP/PT2-LLM numbers come from the original papers or from the author's own reimplementation, nor provide implementation details.",
+            "cost_usd": 0.011201785714285716
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.6 and Tables 4 and 5 present comparative numbers for PT2-LLM and PTQTP without specifying whether these were taken from the original papers or reproduced by the author.",
+            "cost_usd": 0.0030442857142857147
+          }
+        ],
+        "cost_usd": 0.017828585714285715
+      },
+      {
+        "flag_id": "fp-f5581b059dff",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The method of comparison to Q4_K is insufficiently detailed and may not be reproducible or fair.",
+          "excerpt": "The claim that Q4_K achieves \"a strikingly uniform 99.4–99.5% energy on every matrix\" is surprising and worth a small figure or extra table, since Q4_K's block-wise scaling should produce visible variation across matrices with different singular-value distributions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states \"Q4_K achieves a strikingly uniform 99.4–99.5% energy on every matrix of both models\" and describes their baseline as \"a faithful torch port of llama.cpp's quantize_row_q4_K_ref (4.5 bpw)\", but provides no table or figure showing the per-matrix Q4_K energy distribution to verify this uniformity claim. The reviewer's concern about reproducibility is partly valid, though the claim could be accurate given Q4_K's block-wise design.",
+            "cost_usd": 0.0035825142857142853
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper does specify the baseline at a high level — \"The Q4 K baseline is a faithful torch port of llama.cpp’s quantize row q4 K ref (4.5 bpw)\" — but the striking claim that \"Q4 K achieves a strikingly uniform 99.4–99.5% energy on every matrix of both models\" is not backed by a per-matrix figure/table in the paper.",
+            "cost_usd": 0.011201785714285716
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.3 makes the textual claim that Q4_K achieves a 'strikingly uniform 99.4-99.5% energy on every matrix of both models,' but provides no table or figure to empirically substantiate this uniformity.",
+            "cost_usd": 0.0030442857142857147
+          }
+        ],
+        "cost_usd": 0.017828585714285715
+      },
+      {
+        "flag_id": "fp-c18d3dd65a1f",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges \"no fused kernels exist\" and notes the \"3.4–6× op-count growth reads as slowdown only on multiplier-based datapaths,\" but provides no actual inference latency measurements or realized memory footprint numbers. The deployment section is entirely qualitative.",
+        "evidence": {
+          "claim": "The paper fails to report wall-clock inference latency or memory footprint on actual hardware, undermining claims of deployment relevance.",
+          "excerpt": "But there is no measurement of: Inference latency of an ExTernD-quantized layer versus bf16 or Q4_K on any real hardware. Realized memory footprint of the packed representation."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges \"no fused kernels exist\" and notes the \"3.4–6× op-count growth reads as slowdown only on multiplier-based datapaths,\" but provides no actual inference latency measurements or realized memory footprint numbers. The deployment section is entirely qualitative.",
+            "cost_usd": 0.0035825142857142853
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Deployment claims are supported only by an analytical model: \"Inference computes ... a ratio ... linear (hence continuous) in µ\" and a storage formula in Eq. (5), while the limitations admit \"no fused kernels exist.\" The paper reports no actual inference latency or realized memory-footprint measurements on hardware.",
+            "cost_usd": 0.011201785714285716
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper discusses hardware considerations theoretically in Section 2.6 and Section 4 but provides no empirical measurements of on-hardware inference latency or realized memory footprints.",
+            "cost_usd": 0.0030442857142857147
+          }
+        ],
+        "cost_usd": 0.017828585714285715
+      },
+      {
+        "flag_id": "fp-f42a3faf1252",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states in Appendix A: \"In practice the safeguard never activates, since the ALS decrease is far larger than the single-entry bound\" — explicitly confirming that the augmented algorithm with the convergence guarantee (Proposition 2) is not the one run in experiments. The actual algorithm only has monotone decrease (Proposition 1) with no guaranteed rate.",
+        "evidence": {
+          "claim": "The convergence guarantee is overstated; the proof applies only to an augmented algorithm not actually used in experiments, with a rate too slow to be practical.",
+          "excerpt": "the convergence guarantee applies to a hypothetical algorithm that is not the one actually run in the experiments. This should be stated more precisely: the algorithm as implemented has monotone decrease (Prop. 1) but no guaranteed rate; only the augmented variant has the (1 - 1/(mn))^k bound."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Appendix A: \"In practice the safeguard never activates, since the ALS decrease is far larger than the single-entry bound\" — explicitly confirming that the augmented algorithm with the convergence guarantee (Proposition 2) is not the one run in experiments. The actual algorithm only has monotone decrease (Proposition 1) with no guaranteed rate.",
+            "cost_usd": 0.0035825142857142853
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The strong convergence result is proved only for a modified procedure: Proposition 2 begins, \"Augment each step to take whichever of (a) the ALS solution and (b) the best single-entry pair ...\" Yet the main text states more broadly that \"any target accuracy is reachable by construction\" and the abstract says the residual \"can be driven below any ε > 0,\" without equally prominent qualification that this uses the augmented safeguard rather than the experimental ALS alone.",
+            "cost_usd": 0.011201785714285716
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper already structures its proofs exactly as the reviewer asks: Proposition 1 gives the monotone decrease for the base algorithm, and Proposition 2 explicitly defines the 'augmented' step for the bound. It also clarifies the practical relationship by stating, 'In practice the safeguard never activates, since the ALS decrease is far larger than the single-entry bound'.",
+            "cost_usd": 0.0030442857142857147
+          }
+        ],
+        "cost_usd": 0.017828585714285715
+      },
+      {
+        "flag_id": "fp-43ded264017e",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper claims \"τ controls factor sparsity continuously and almost matrix-independently\" and gives specific τ→sparsity mappings (e.g., \"τ=1.0 → ∼57%\"), but never plots or tables the distribution of actual sparsities across matrices at a fixed τ, nor provides the promised comparison table between the threshold form and optimal projection (only stating they \"empirically tie\").",
+        "evidence": {
+          "claim": "The choice and properties of the ternarization operator are under-justified and not adequately empirically analyzed.",
+          "excerpt": "This claim deserves a short table. Also, the mean-threshold rule with a per-vector adaptive threshold means the effective sparsity is not exactly determined by  τ ; the mapping  τ→ sparsity in Sec. 1 (e.g.,  τ = 1.0 → ∼ 57% ) is presented as near-universal, but the actual distribution of sparsities across matrices at a fixed  τ  is never plotted."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper claims \"τ controls factor sparsity continuously and almost matrix-independently\" and gives specific τ→sparsity mappings (e.g., \"τ=1.0 → ∼57%\"), but never plots or tables the distribution of actual sparsities across matrices at a fixed τ, nor provides the promised comparison table between the threshold form and optimal projection (only stating they \"empirically tie\").",
+            "cost_usd": 0.0035825142857142853
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper makes broad claims that \"τ controls factor sparsity continuously and almost matrix-independently\" and that the optimal projection \"empirically ties T0.7,\" but it does not provide the requested distributional analysis across matrices; the only quantitative τ analysis shown is the brief summary \"Sweeping τ at a fixed 99%-energy target: sparsity rises continuously...\".",
+            "cost_usd": 0.011201785714285716
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 2.2 claims the optimal ternary projection 'empirically ties T_{0.7}' without supporting data, and the paper never provides a plot or table showing the actual distribution of matrix sparsities at fixed τ.",
+            "cost_usd": 0.0030442857142857147
+          }
+        ],
+        "cost_usd": 0.017828585714285715
+      },
+      {
+        "flag_id": "fp-248b608fd011",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The paper uses a future-dated or placeholder arXiv identifier without verification, which is inappropriate for submission.",
+          "excerpt": "The manuscript is dated \"July 2026 (early preprint)\" and carries the arXiv identifier `arXiv:2607.13511v1`. This appears to be either a placeholder or a future-dated preprint. If this is a legitimate preprint the identifier should be verified; if not, it should be removed prior to submission."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper is dated \"July 2026 (early preprint)\" and carries arXiv ID \"arXiv:2607.13511v1 [cs.LG] 15 Jul 2026\" which is internally consistent (2607 = July 2026). This appears to be a legitimate future-dated preprint rather than a placeholder, though the reviewer's concern about verifiability before the date cannot be resolved from the paper alone.",
+            "cost_usd": 0.0035825142857142853
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper’s dating is internally consistent, not obviously placeholder or future-dated: the title page says \"July 2026 (early preprint)\" and the header says \"arXiv:2607.13511v1 [cs.LG] 15 Jul 2026.\" On the PDF alone, there is no evidence that the identifier is invalid or a placeholder.",
+            "cost_usd": 0.011201785714285716
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's title page clearly displays 'July 2026 (early preprint)' and 'arXiv:2607.13511v1', which are future-dated placeholders.",
+            "cost_usd": 0.0030442857142857147
+          }
+        ],
+        "cost_usd": 0.017828585714285715
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.1248001
+  },
+  "extractor_cost_usd": 0.010442000000000007,
+  "total_cost_usd": 0.1352421
+}

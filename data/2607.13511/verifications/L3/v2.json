@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v2",
+  "reviewer_system": "L3",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's key statements section includes a [SUPPORTED] verdict for the PTQTP claim, explicitly noting that the method uses 'scales' (without flagging the missing 'row-wise' qualifier). The reviewer did not challenge the post-edit claim as PARTIALLY_SUPPORTED or contradicted relative to the cited PTQTP source — they actually marked it as supported.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review discusses PTQTP only in the key-statements section and actually marks the edited claim as supported, repeating 'a superposition of two ternary matrices with scales' rather than challenging the missing 'row-wise' qualifier against the cited source. Under the broadened-claim rule, there is no flag that the PTQTP claim is partially supported or mischaracterized.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer marked the relevant statement regarding PTQTP as [SUPPORTED] in the reference audit, failing to notice that the methodological qualifier 'row-wise' was omitted in the paper's description.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The perplexity change reported in the Abstract ($+2.3\\%$) does not match the value calculated from the numbers in Table 3 ($+3.2\\%$). Recommend: Correct the perplexity delta in the Abstract to be consistent with the data in Table 3 ($10.099$ vs $9.782$ is a $+3.2\\%$ change). Also: c03 FAIL: 'The abstract states ternary PPL $10.10$ vs bf16 $9.78$ is a $+2.3\\%$ degradation.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The perplexity change reported in the Abstract ($+2.3\\%$) does not match the value calculated from the numbers in Table 3 ($+3.2\\%$). Recommend: Correct the perplexity delta in the Abstract to be consistent with the data in Table 3 ($10.099$ vs $9.782$ is a $+3.2\\%$ change). Also: c03 FAIL: 'The abstract states ternary PPL $10.10$ vs bf16 $9.78$ is a $+2.3\\%$ degradation.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the +2.3% figure in the abstract as inconsistent with the computed +3.2% from Table 3 values, directly matching the injected digit swap from 3.2% to 2.3%.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The perplexity change reported in the Abstract ($+2.3\\%$) does not match the value calculated from the numbers in Table 3 ($+3.2\\%$).\n\nA single issue was detected: the abstract's claim of a $+2.3\\%$ PPL degradation for ternary decomposition actually computes to $+3.27\\%$ (c03), which exceeds the accepted error margin and warrants revision.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the abstract's +2.3% as inconsistent with Table 3 and gives the corrected value near +3.2%, which directly matches the injected digit swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The perplexity change reported in the Abstract (+2.3%) does not match the value calculated from the numbers in Table 3 (+3.2%).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the digit swap in the abstract (+2.3%) by comparing it to the values provided in Table 3 (+3.2%) in both the numerical audit and the minor issues section.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "There is a typographical error in Appendix A, Proposition 1. The displayed equation $\\|R_{i+1}\\|_F^2 = \\ldots = \\|R_i\\|_F^2$ incorrectly implies the norm does not decrease. Recommend: Correct the equation in Proposition 1 to show the strict decrease in residual norm, e.g., $\\|R_{i+1}\\|_F^2 = \\|R_i\\|_F^2 - d_i^2 \\|u\\|^2 \\|v\\|^2 \\leq \\|R_i\\|_F^2$. Also from maths audit item 6: 'the verbatim text in Proposition 1 contains a typo: it writes $= \\|R_i\\|_F^2 \\leq \\|R_i\\|_F^2$, where the first $=$ should be $\\leq$ (or the middle term should be the reduced expression).'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "There is a typographical error in Appendix A, Proposition 1. The displayed equation $\\|R_{i+1}\\|_F^2 = \\ldots = \\|R_i\\|_F^2$ incorrectly implies the norm does not decrease. Recommend: Correct the equation in Proposition 1 to show the strict decrease in residual norm, e.g., $\\|R_{i+1}\\|_F^2 = \\|R_i\\|_F^2 - d_i^2 \\|u\\|^2 \\|v\\|^2 \\leq \\|R_i\\|_F^2$. Also from maths audit item 6: 'the verbatim text in Proposition 1 contains a typo: it writes $= \\|R_i\\|_F^2 \\leq \\|R_i\\|_F^2$, where the first $=$ should be $\\leq$ (or the middle term should be the reduced expression).'",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the equation in Appendix A Proposition 1 is missing the subtracted reduction term, noting it incorrectly implies the norm does not decrease — directly corresponding to the deleted -(u^T R_i v)^2/(||u||^2||v||^2) term.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "There is a typographical error in Appendix A, Proposition 1. The displayed equation $\\|R_{i+1}\\|_F^2 = \\ldots = \\|R_i\\|_F^2$ incorrectly implies the norm does not decrease.\n\nThe mathematical claim is correct: substituting the optimal scale $d_i = (u^T R_i v)/(\\|u\\|^2 \\|v\\|^2)$ into $\\|R_i - d_i u v^T\\|_F^2$ yields $\\|R_i\\|_F^2 - (u^T R_i v)^2/(\\|u\\|^2 \\|v\\|^2)$, which is $\\leq \\|R_i\\|_F^2$ with strict inequality when $u^T R_i v \\neq 0$. However, the verbatim text in Proposition 1 contains a typo: it writes '$= \\|R_i\\|_F^2 \\leq \\|R_i\\|_F^2$', where the first '$=$' should be '$\\leq$' (or the middle term should be the reduced expression).",
+          "confidence": "high",
+          "reasoning": "This directly targets the altered Appendix A display and notes the missing reduction term/equality error, clearly corresponding to the injected deletion.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "There is a typographical error in Appendix A, Proposition 1. The displayed equation \\|R_{i+1}\\|_F^2 = \\ldots = \\|R_i\\|_F^2 incorrectly implies the norm does not decrease. Recommendation: Correct the equation in Proposition 1 to show the strict decrease in residual norm, e.g., \\|R_{i+1}\\|_F^2 = \\|R_i\\|_F^2 - d_i^2 \\|u\\|^2 \\|v\\|^2 \\leq \\|R_i\\|_F^2.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the missing projection-reduction term in the Frobenius norm expansion in Appendix A and provided the correct formula in their recommendation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The paper's central claims about bit-efficiency are overstated and directly contradicted by its own results. The Abstract and Conclusion (Sec. 6) claim that ExTernD 'strictly outperforms Q4_K's bit efficiency at matched accuracy'. However, Table 2 shows ExTernD requires $5.22$–$5.53$ effective bpw to match Q4_K's reconstruction energy at $4.5$ bpw, and Table 3 shows the full-model ExTernD at $\\sim 5.7$ effective bpw has worse perplexity ($10.099$) than tuned Q4_K_M at $4.51$ bpw ($9.888$).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The paper's central claims about bit-efficiency are overstated and directly contradicted by its own results. The Abstract and Conclusion (Sec. 6) claim that ExTernD 'strictly outperforms Q4_K's bit efficiency at matched accuracy'. However, Table 2 shows ExTernD requires $5.22$–$5.53$ effective bpw to match Q4_K's reconstruction energy at $4.5$ bpw, and Table 3 shows the full-model ExTernD at $\\sim 5.7$ effective bpw has worse perplexity ($10.099$) than tuned Q4_K_M at $4.51$ bpw ($9.888$).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the conclusion's claim that ExTernD 'strictly outperforms Q4_K's bit efficiency' as directly contradicted by Tables 2 and 3, which is exactly the injected internal contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The paper's central claims about bit-efficiency are overstated and directly contradicted by its own results. The Abstract and Conclusion (Sec. 6) claim that ExTernD \"strictly outperforms Q4_K's bit efficiency at matched accuracy\". However, Table 2 shows ExTernD requires $5.22$–$5.53$ effective bpw to match Q4_K's reconstruction energy at $4.5$ bpw, and Table 3 shows the full-model ExTernD at $\\sim 5.7$ effective bpw has worse perplexity ($10.099$) than tuned Q4_K_M at $4.51$ bpw ($9.888$).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the exact injected conclusion/abstract claim that ExTernD 'strictly outperforms Q4_K's bit efficiency' as contradicted by Tables 2 and 3, matching the internal-contradiction injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The paper's central claims about bit-efficiency are overstated and directly contradicted by its own results. The Abstract and Conclusion (Sec. 6) claim that ExTernD 'strictly outperforms Q4_K's bit efficiency at matched accuracy'. However, Table 2 shows ExTernD requires 5.22–5.53 effective bpw to match Q4_K's reconstruction energy at 4.5 bpw",
+          "confidence": "high",
+          "reasoning": "The reviewer flagged the contradiction between the conclusion's claim of superior bit efficiency and the actual data in Table 2 as their first Major Issue.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 51.900943,
+  "total_cost_usd": null,
+  "total_input_tokens": 42601,
+  "total_output_tokens": 6426,
+  "escalation_count": 0,
+  "notes": null
+}

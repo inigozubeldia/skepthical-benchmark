@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14375",
+  "copy_id": "v3",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "[✔] _WEAKLY_SUPPORTED_ **Reluplex and related SMT methods (Katz et al., 2017; Ehlers, 2017), SAT formulations (Tjeng et al., 2019), and branch-and-bound methods (Bunel et al., 2020; Wang et al., 2021) exploit the piecewise-linear structure of ReLU networks while retaining completeness.**",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[✔] _WEAKLY_SUPPORTED_ **Reluplex and related SMT methods (Katz et al., 2017; Ehlers, 2017), SAT formulations (Tjeng et al., 2019), and branch-and-bound methods (Bunel et al., 2020; Wang et al., 2021) exploit the piecewise-linear structure of ReLU networks while retaining completeness.**",
+          "confidence": "medium",
+          "reasoning": "The reviewer quotes the post-edit sentence containing 'SAT formulations (Tjeng et al., 2019)' and marks it WEAKLY_SUPPORTED, indicating they did not flag it as contradicted. However, under the BROADENED-CLAIM rule, the operative check is whether the reviewer challenged the post-edit claim against the cited source. The reviewer lists Tjeng et al. as a reference for SAT formulations without noting that Tjeng 2019 and Anderson 2020 actually propose MILP formulations, giving it a passing verdict. The reviewer separately flags Anderson et al. 2020 as a correct reference for 'Strong mixed-integer programming formulations' in the Key Statements section, which implicitly contradicts the SAT categorization in the related work claim, but does not explicitly call out the mis-categorization as an error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[✔] _WEAKLY_SUPPORTED_ **Strong mixed-integer programming formulations for trained neural networks provide alternative encodings for verification.**\n  - _Reference(s):_ Anderson et al., 2020\n  - _Justification:_ Anderson–Huchette–Ma–Tjandraatmadja–Vielma's \"Strong mixed-integer programming formulations for trained neural networks\" (Math. Prog. 2020) is canonical. Consistent.\n\nA precision guard neuron with weight 2⁻²⁰ ensures B ≥ 20 so σ⋆ is admissible. Numerical diagnostics test the exact identity against MILP and illustrate the extensive-gap vs. constant-gap scaling in a low-dimensional laboratory.\n\n- [✔] _WEAKLY_SUPPORTED_ **Reluplex and related SMT methods (Katz et al., 2017; Ehlers, 2017), SAT formulations (Tjeng et al., 2019), and branch-and-bound methods (Bunel et al., 2020; Wang et al., 2021) exploit the piecewise-linear structure of ReLU networks while retaining completeness.**",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly reproduces the post-edit claim tying Tjeng et al. to \"SAT formulations\" while elsewhere correctly identifying Anderson 2020 as mixed-integer programming and repeatedly discussing MILP. This is a specific challenge to the same cited-source claim, satisfying the broadened-claim/method-category-swap rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly validates the incorrect methodology categorization ('SAT formulations' for Tjeng and Anderson) as being 'consistent with my recollection' in the key statements audit.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The paper claims (Sec. 2, immediately after Theorem 1) that... 'the source assumption is ε = 1/40 giving η = 1/10, which yields Γ = m/60, not m/6·(anything to do with 64).' and in the numerical audit: '[✔] **T = m/3, τ = 19m/60, Γ = m/60.**'",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly states Γ = m/60 in multiple places (Minor Issue 1 and the numerical audit item 7), which directly contradicts the injected text that changed the denominator to 600. The reviewer's numerical audit checks Γ = m/60 as correct, implying awareness that the paper contains m/600 somewhere inconsistently, though the reviewer does not explicitly call out the m/600 vs m/60 discrepancy as an error in a dedicated flag.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer repeatedly uses and checks Γ = m/60, but does not specifically flag an internal inconsistency where another location states Γ = m/600. There is no explicit mention of the erroneous 600 denominator or a contradiction between paired locations.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer fails to detect the '600' typo, instead performing a numerical audit where they list the value as 'm/60' and mark it as 'Correct', indicating they misread or overlooked the injected error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t3",
+      "module": "mathematics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer's mathematical consistency audit does not flag the sum lower bound change from j=1 to j=0 in the literal-unit sum, and no other section of the report mentions this specific issue with the summation index in eq:network.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review contains several mathematical comments on Sec. 3 and related equations, but none mention a sum starting at j=0, an undefined h_{C,0}, or an incorrect lower bound in eq:network. No specific flag corresponds to this index-shift injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer audits the mathematical identities and summation logic in Section 3 but does not notice or flag the shift in the summation lower bound from j=1 to j=0.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's mathematical audit checks the network output formula and the decomposition identity but does not flag the sum index j=0 vs j=1 in the literal-unit sum (Eq. 5). The reviewer passes all checks on the Theorem 2 decomposition and the gadget construction without noting that the sum starts from j=0 rather than j=1, which would introduce an undefined term h_{C,0}.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The abstract contains a substantive typo — \"their is no sound and complete verifier\" should be \"there is no sound and complete verifier\" (Abstract, first paragraph). Because the abstract is what most readers and search indexers will parse, this rises above cosmetic. *Recommendation:* Correct to \"there is\". Proofread the abstract in full.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The abstract contains a substantive typo — \"their is no sound and complete verifier\" should be \"there is no sound and complete verifier\" (Abstract, first paragraph). Because the abstract is what most readers and search indexers will parse, this rises above cosmetic. *Recommendation:* Correct to \"there is\". Proofread the abstract in full.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the homophone swap of 'their' for 'there' in the abstract, quoting the exact injected text, and flags it as a Major issue as well as a Very Minor issue reminder.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The abstract contains a substantive typo — \"their is no sound and complete verifier\" should be \"there is no sound and complete verifier\" (Abstract, first paragraph).\n\nAbstract: \"their is no sound and complete verifier\" — should be \"there is\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the exact homophone error in the abstract and provides the correct replacement. This is a direct, specific detection of the injected writing defect.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The abstract contains a substantive typo — 'their is no sound and complete verifier' should be 'there is no sound and complete verifier' (Abstract, first paragraph).",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the specific homophone swap 'their' for 'there' in the abstract and designates it a major issue.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 68.691088,
+  "total_cost_usd": null,
+  "total_input_tokens": 54601,
+  "total_output_tokens": 8835,
+  "escalation_count": 1,
+  "notes": null
+}

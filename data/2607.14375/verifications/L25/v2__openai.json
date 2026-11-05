@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14375",
+  "copy_id": "v2",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer flagged a citation issue about SciPy/MILP in Appendix D.1, but did not flag the claim about convex relaxations overcoming tightness barriers (salman2019convex) in the Related Work section. The direction-reversal injection was not detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly says they did not find a citation error affecting the main theorem and only flags an unrelated SciPy MILP citation-support issue. They do not challenge the Salman et al. claim about convex relaxations overcoming tightness barriers.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions a minor citation issue regarding SciPy MILP, but does not identify the claim reversal regarding convex relaxations and the Salman et al. reference.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The term \\frac{145}{9} is inconsistent with the preceding calculation and does not yield \\frac{1483}{36}. The correct sum is \\frac{99}{4}+\\frac{148}{9}=\\frac{891}{36}+\\frac{592}{36}=\\frac{1483}{36}. ... Replace \\frac{145}{9} by \\frac{148}{9} in Appendix B.1.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The term \\frac{145}{9} is inconsistent with the preceding calculation and does not yield \\frac{1483}{36}. The correct sum is \\frac{99}{4}+\\frac{148}{9}=\\frac{891}{36}+\\frac{592}{36}=\\frac{1483}{36}. ... Replace \\frac{145}{9} by \\frac{148}{9} in Appendix B.1.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the injected value 145/9 as incorrect, named the correct value 148/9, and verified the arithmetic, directly matching the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "But the next displayed sentence says:\n\\[\n\\frac{99}{4}+\\frac{145}{9}=\\frac{1483}{36}.\n\\]\nThe term \\(\\frac{145}{9}\\) is inconsistent with the preceding calculation and does not yield \\(\\frac{1483}{36}\\). The correct sum is\n\\[\n\\frac{99}{4}+\\frac{148}{9}\n=\\frac{891}{36}+\\frac{592}{36}\n=\\frac{1483}{36}.\n\\]\n\n**Concrete fix:** Replace \\(\\frac{145}{9}\\) by \\(\\frac{148}{9}\\) in Appendix B.1.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the altered numerator and the broken equality in the same expression, satisfying the numeric-specific matching requirement.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The term 145/9 is inconsistent with the preceding calculation and does not yield 1483/36. The correct sum is 99/4 + 148/9 = 1483/36.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the arithmetic mismatch in the Appendix and provides the correct value of 148/9.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The paper defines \\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}. For a standard normal random variable Z\\sim N(0,1), \\mathbb E|Z|=\\sqrt{2/\\pi}, not \\sqrt{1/\\pi}.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The paper defines \\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}. For a standard normal random variable Z\\sim N(0,1), \\mathbb E|Z|=\\sqrt{2/\\pi}, not \\sqrt{1/\\pi}.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the wrong normalisation prefactor sqrt(1/pi) and stated the correct value sqrt(2/pi), directly matching the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**What is wrong:** The paper defines\n\\[\n\\mu=\\mathbb E|Z|=\\sqrt{1/\\pi}.\n\\]\nFor a standard normal random variable \\(Z\\sim N(0,1)\\),\n\\[\n\\mathbb E|Z|=\\sqrt{2/\\pi},\n\\]\nnot \\(\\sqrt{1/\\pi}\\).\n\n**Concrete fix:** Replace every main-text occurrence defining \\(\\mu\\) as \\(\\sqrt{1/\\pi}\\) by\n\\[\n\\mu=\\mathbb E|Z|=\\sqrt{2/\\pi}.\n\\]\nIn particular:\n- correct equation (12);",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags Eq. (12) and states the exact corrected identity for the expectation of |Z|, which is a precise match to the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The paper defines mu=E|Z|=sqrt(1/pi). For a standard normal random variable Z~N(0,1), E|Z|=sqrt(2/pi), not sqrt(1/pi).",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the mathematical error in the expected value of the absolute normal distribution and notes the inconsistency with the appendix.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section 6.1 states: 'We generated 300 globally optimized blocks of each family at each of ten noise levels from 0.0015 through 0.063, with B=16, although we exclude the highest noise level σ=0.063 from the bootstrap products due to excessive variance.' But Figure 1(b) plots a curve for σ=0.063 ... and the caption discusses product behavior at σ=0.063 ... This appears to contradict the claim that σ=0.063 was excluded from the bootstrap products.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section 6.1 states: 'We generated 300 globally optimized blocks of each family at each of ten noise levels from 0.0015 through 0.063, with B=16, although we exclude the highest noise level σ=0.063 from the bootstrap products due to excessive variance.' But Figure 1(b) plots a curve for σ=0.063 ... and the caption discusses product behavior at σ=0.063 ... This appears to contradict the claim that σ=0.063 was excluded from the bootstrap products.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identified the injected exclusion sentence and noted it contradicts Figure 1, which is exactly the contradiction introduced by the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**What is wrong:** Section 6.1 states:\n\n> “We generated 300 globally optimized blocks of each family at each of ten noise levels from 0.0015 through 0.063, with \\(B=16\\), although we exclude the highest noise level \\(\\sigma=0.063\\) from the bootstrap products due to excessive variance.”\n\nBut Figure 1(b) plots a curve for \\(\\sigma=0.063\\) over increasing product/network size, and the caption discusses product behavior at \\(\\sigma=0.063\\):\n\n> “At \\(\\sigma=0.063\\), systematic side bias prevents convergence to one.”\n\nThis appears to contradict the claim that \\(\\sigma=0.063\\) was excluded from the bootstrap products.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the inserted exclusion claim and its contradiction with Figure 1/caption discussion at sigma=0.063, which directly matches the injected general inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 6.1 states: ... although we exclude the highest noise level sigma=0.063 from the bootstrap products ... But Figure 1(b) plots a curve for sigma=0.063 over increasing product/network size, and the caption discusses product behavior at sigma=0.063.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the contradiction between the methodology description (excluding noise 0.063) and the evidence in Figure 1.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 26.232985,
+  "total_cost_usd": null,
+  "total_input_tokens": 13590,
+  "total_output_tokens": 3137,
+  "escalation_count": 0,
+  "notes": null
+}

@@ -1,0 +1,205 @@
+{
+  "paper_id": "2604.20971",
+  "reviewer_system": "L25",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-b81663d3d927",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Maths interpreter: FAIL. The GW frequency for a circular Newtonian orbit is f = (1/π)√(GM/a³), which is twice the orbital frequency Ω/2π = (1/2π)√(GM/a³). The equation as written in the paper omits the square root, making it dimensionally inconsistent: (GM/a³) has units of s⁻², so without the square root the right-hand side has dimensions of s⁻² rather than s⁻¹. A units check was attempted but encountered a technical error; however, the dimensional error is straightforward to verify by hand and the transcription fidelity check confirmed the paper is written exactly as extracted — confirming the square root is genuinely absent from the paper's Eq. (1), not a transcription artefact.",
+        "evidence": {
+          "maths_verdict": "FAIL",
+          "confidence": "high",
+          "impact": "critical",
+          "notes": "The GW frequency for a circular Newtonian orbit is f = (1/π)√(GM/a³), which is twice the orbital frequency Ω/2π = (1/2π)√(GM/a³). The equation as written in the paper omits the square root, making it dimensionally inconsistent: (GM/a³) has units of s⁻², so without the square root the right-hand side has dimensions of s⁻² rather than s⁻¹. A units check was attempted but encountered a technical error; however, the dimensional error is straightforward to verify by hand and the transcription fidelity check confirmed the paper is written exactly as extracted — confirming the square root is genuinely absent from the paper's Eq. (1), not a transcription artefact.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01876449999999999
+      },
+      {
+        "flag_id": "fp-962e3f96ad5b",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Transcription-fidelity check: equation in paper does not match reviewer's description.",
+        "evidence": {
+          "fidelity": {
+            "status": "refuted",
+            "detail": "overall_fidelity=drifted; check#0:drifted — The check plan introduces expressions for A and psi_TF2_0 that are absent from the verbatim snippet, and oversimplifies the summation in Delta_psi_turb to a simple difference between initial and final states.",
+            "seconds": 6.506,
+            "overall": "drifted",
+            "knowledge_status": "skipped",
+            "knowledge_overall": "not_applicable",
+            "knowledge_detail": "knowledge_audit=not_applicable",
+            "knowledge_findings": [],
+            "per_check": [
+              {
+                "index": 0,
+                "fidelity": "drifted",
+                "notes_fidelity": "The check plan introduces expressions for A and psi_TF2_0 that are absent from the verbatim snippet, and oversimplifies the summation in Delta_psi_turb to a simple difference between initial and final states."
+              }
+            ]
+          }
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01876449999999999
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-fdec780599e0",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper itself acknowledges this is an extrapolation: it applies a model \"based on the model developed by Wu et al. (2024), which studied the chaotic migration of low-mass planets in turbulent protoplanetary disks\" and later admits \"Even though MRI is presumably the main driver of turbulence... our description of the turbulent torque is based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks.\" Yet it also states \"The same results should apply to EMRIs, as they also have q ≲ 10−4,\" which is stronger than the paper’s direct evidence.",
+        "evidence": {
+          "claim": "The paper's central extrapolation from hydrodynamical simulations of protoplanetary disks to EMRIs in AGN disks is not fully justified; the claim is stronger than the evidence supports.",
+          "excerpt": "several statements go beyond the demonstrated evidence by implying that similarity in mass ratio is enough for the same torque statistics to apply... the result is a phenomenological extrapolation awaiting MHD calibration, rather than a demonstrated property"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly acknowledges this limitation: 'Even though MRI is presumably the main driver of turbulence in the inner highly ionized part of the AGN disk where EMRIs reside during in-spiral, our description of the turbulent torque is based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks.' However, the paper also frames itself as a 'proof-of-concept' throughout, and notes the mass-ratio similarity (q ≲ 10^-5) as justification. The reviewer's concern about the extrapolation being stronger than the evidence is partially, but not fully, resolved by these caveats.",
+            "cost_usd": 0.006969199999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper itself acknowledges this is an extrapolation: it applies a model \"based on the model developed by Wu et al. (2024), which studied the chaotic migration of low-mass planets in turbulent protoplanetary disks\" and later admits \"Even though MRI is presumably the main driver of turbulence... our description of the turbulent torque is based on Wu et al. (2024), which was inspired by turbulence due to GI in protoplanetary disks.\" Yet it also states \"The same results should apply to EMRIs, as they also have q ≲ 10−4,\" which is stronger than the paper’s direct evidence.",
+            "cost_usd": 0.015120333333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly makes the criticized extrapolation by stating, \"The same results should apply to EMRIs, as they also have q ≲ 10^-4\" (Section 5), acknowledging the need for MHD simulations but nonetheless asserting the general applicability based on mass ratio alone.",
+            "cost_usd": 0.0031814666666666667
+          }
+        ],
+        "cost_usd": 0.025271
+      },
+      {
+        "flag_id": "fp-177df551f595",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: The paper defines detectability using the parameter Λ in Eq. 17 as \"(|Δψ_{lin}| + 2σ_{turb}) / (8/SNR_0)\", which represents a two-sigma tail. The abstract states that dephasings \"could become detectable\" without clarifying that this corresponds only to a statistical outlier rather than typical systems.",
+        "evidence": {
+          "claim": "The detectability claim is based on a two-sigma tail of the turbulent-dephasing distribution, not a typical value, but the presentation may mislead readers about what is typically detectable.",
+          "excerpt": "Thus the “turbulent detectable but linear undetectable” region corresponds to a two-standard-deviation tail... the Abstract and Conclusion could be read as identifying parameter regions where turbulent dephasing is generically detectable."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly defines Λ = (|Δψ_lin| + 2σ̂_turb)/(8/SNR_0) and states 'We indicate three regions: where Λ < 1... Λ > 1 and Λ̄ < 1...' making clear that the turbulent-detectable region corresponds to a two-sigma tail, and Fig. 2's caption and §5 repeat this explicitly. The paper does not claim typical detectability but rather uses the 2σ tail as the criterion throughout.",
+            "cost_usd": 0.006969199999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly defines the detectability region using a tail criterion, not a typical value: \"we define two new quantities Λ = (|∆ψlin| + 2ˆσturb)/(8/SNR0)\" and Fig. 2 is said to \"signify where the tail of the turbulent dephasing distribution (set to |∆ψlin| + 2ˆσturb) becomes observable.\" The Abstract also uses cautious language: turbulent dephasings \"could become detectable,\" not that they are generically detectable.",
+            "cost_usd": 0.015120333333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper defines detectability using the parameter Λ in Eq. 17 as \"(|Δψ_{lin}| + 2σ_{turb}) / (8/SNR_0)\", which represents a two-sigma tail. The abstract states that dephasings \"could become detectable\" without clarifying that this corresponds only to a statistical outlier rather than typical systems.",
+            "cost_usd": 0.0031814666666666667
+          }
+        ],
+        "cost_usd": 0.025271
+      },
+      {
+        "flag_id": "fp-b5b0e833df16",
+        "paper_id": "2604.20971",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "There is a possible ambiguity or inconsistency about whether disk quantities (e.g. mass, surface density) are defined in the source frame or the redshifted frame.",
+          "excerpt": "The disk is a source-frame physical environment, while the observed GW waveform uses redshifted masses and frequencies. ...I cannot determine from the paper whether the authors have intentionally absorbed all redshift effects into M_z, or whether source-frame and detector-frame quantities have been mixed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper uses M_z as the redshifted mass in GW equations (Eq. 1-2) but uses it also in disk quantities like Σ_0 (Eq. 4) and r_s without clearly distinguishing source-frame disk physics from detector-frame GW quantities. The paper does not explicitly address whether source-frame vs. redshifted-frame quantities have been consistently handled for disk parameters.",
+            "cost_usd": 0.006969199999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper defines the system with a \"total redshifted mass Mz\" and then uses that same quantity in disk/environment formulas, e.g. \"rs ≡ 2GMz/c2\" in the surface-density expression and \"M˙Edd = Mz/50 Myr\" in the footnote. Because the paper never explicitly explains whether all disk quantities are intentionally written in the redshifted frame, the source-frame vs detector-frame treatment is unclear from the text alone.",
+            "cost_usd": 0.015120333333333333
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly mixes frames by plugging the redshifted mass into physical disk equations, for instance defining the source-frame scale as \"r_s ≡ 2GM_z/c^2\" (Eq. 4) and stating they consider an EMRI with \"total redshifted mass M_z ... embedded in a thin accretion disk\" (Section 3).",
+            "cost_usd": 0.0031814666666666667
+          }
+        ],
+        "cost_usd": 0.025271
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 0.5,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.03752899999999998,
+    "general": 0.07581299999999999
+  },
+  "extractor_cost_usd": 0.01768,
+  "total_cost_usd": 0.13102199999999997
+}

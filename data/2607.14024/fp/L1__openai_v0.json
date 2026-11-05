@@ -1,0 +1,440 @@
+{
+  "paper_id": "2607.14024",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-7ae3f691b3da",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper describes CSFS only at a high level in Section 3.2 and Figure 2, listing four bullet points about clustering, non-inferiority testing, fine-grained fallback, and force-remove, but provides no formal algorithm, pseudocode, or parameter specifications sufficient for reproduction. The paper itself acknowledges the open-source implementation on GitHub as the primary reproducibility mechanism, implying the paper text alone is insufficient.",
+        "evidence": {
+          "claim": "The CSFS algorithm is not specified in sufficient detail for reproduction; important steps and parameters like clustering method, non-inferiority test, and safe-removal definition are missing.",
+          "excerpt": "The central contribution of the paper is CSFS, but the method is currently described only at a high level. Figure 2 gives a process sketch, but a reader cannot fully reproduce the algorithm from the paper alone."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper describes CSFS only at a high level in Section 3.2 and Figure 2, listing four bullet points about clustering, non-inferiority testing, fine-grained fallback, and force-remove, but provides no formal algorithm, pseudocode, or parameter specifications sufficient for reproduction. The paper itself acknowledges the open-source implementation on GitHub as the primary reproducibility mechanism, implying the paper text alone is insufficient.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives only a high-level description: “Clustering can be performed based on feature correlations, RF FI as an initial best guess, or randomly” and “the FS algorithm is enhanced by a non-inferiority test,” but it does not specify the exact clustering procedure, test, thresholds, or full algorithm needed to reproduce CSFS from the paper alone.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions that CSFS is 'enhanced by a non-inferiority test' in Section 3.2 but fails to provide the mathematical definition, test statistic, or exact parameters used for this test.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-ca3a7208c046",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper repeatedly mentions 'a non-inferiority test that allows for safe and early discarding of feature clusters if the removal does not negatively impact the predictive performance with a high certainty' but never formally defines the statistical test, its null hypothesis, significance level, or any other parameters needed to understand or reproduce it.",
+        "evidence": {
+          "claim": "The non-inferiority test used by CSFS is not formally described, leaving the evidence for the claim of 'safe' feature removal insufficient.",
+          "excerpt": "The paper repeatedly refers to a non-inferiority test, but the statistical test is not described in the provided text. This is a major issue because the reliability of CSFS depends on this test."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper repeatedly mentions 'a non-inferiority test that allows for safe and early discarding of feature clusters if the removal does not negatively impact the predictive performance with a high certainty' but never formally defines the statistical test, its null hypothesis, significance level, or any other parameters needed to understand or reproduce it.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "CSFS relies on “a non-inferiority test that allows for safe and early discarding of feature clusters,” yet no formal definition of the test, null/alternative, margin, or decision rule is provided anywhere in the paper text.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Section 3.2 that CSFS uses 'a non-inferiority test that allows for safe and early discarding', but it does not formally describe the test or quantify the threshold for 'high certainty'.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-659cf65607a5",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper explicitly states, “for a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut,” and later notes this makes runtime gains “conservative.” However, there is no ablation against standard unmodified SFS, so the CSFS-vs-SFS comparison is not fully clean.",
+        "evidence": {
+          "claim": "The comparison between CSFS and SFS is ambiguous because the SFS baseline is modified with a 'safe-removal' shortcut, and a proper ablation study is missing.",
+          "excerpt": "The paper compares CSFS to SFS, but later states that the SFS baseline is enhanced with the same feature-level safe-remove shortcut as CSFS. This makes the comparison conservative in terms of runtime, but it also means the baseline is not standard SFS."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges and discloses this: 'For a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut at the feature level whenever non-inferiority is provided' and further notes 'the reported runtime improvements are conservative,' making the modification transparent rather than a hidden confound.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explicitly states, “for a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut,” and later notes this makes runtime gains “conservative.” However, there is no ablation against standard unmodified SFS, so the CSFS-vs-SFS comparison is not fully clean.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper admits in Section 5.2 that 'the SFS baseline includes the same safe-remove shortcut at the feature level as used in CSFS', confirming that the baseline is not standard SFS and lacking an ablation study to separate the effects of clustering from the shortcut.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-ba66c0569ae3",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=CONFIRMED_ISSUE, gemini=FP",
+        "evidence": {
+          "claim": "The evaluation of runtime reduction is unclear as it is not evident for which target feature sizes and models the 21% reduction holds, and reporting is insufficiently detailed.",
+          "excerpt": "It is therefore unclear whether the reported 21% reduction is averaged over all target sizes, all models, all datasets, or only the |F'|=2 case."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The abstract and Section 5.4 state '21%' or '20.8%' reduction 'across all experiments,' while Figure 5 and Section 5.2 explicitly note values are 'aggregated over all used models for the target set feature size |F'|=2,' creating ambiguity about whether the headline figure applies to all target sizes or only |F'|=2.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The headline claim is “reducing computational cost by an average of 21%,” but the runtime figure is reported only for “the target set feature size |F′| = 2” and is “aggregated over all used models.” The paper does not clearly show for which feature sizes/settings the quoted 21% average holds.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly clarifies the scope of the 21% runtime reduction, stating in Section 5.4 that CSFS is 'running substantially faster, on average by 20.8% across all experiments,' confirming it is an aggregate over all evaluated conditions.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-6116523c6064",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The experiments indeed use just one unit per domain: “we select wind turbine T11” and “we select station 01.” The paper itself acknowledges this as a limitation: “Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station.”",
+        "evidence": {
+          "claim": "The empirical evaluation is limited to only one wind turbine and one PV station, which undermines generalizability, especially as more units are available in the datasets.",
+          "excerpt": "The empirical study uses one wind turbine, T11, and one PV station, station 01. While both are selected based on high data availability, this severely limits the generalizability of the conclusions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation in Section 5.4: 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station.' The concern is recognized, and the selection rationale ('highest data availability') is provided.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experiments indeed use just one unit per domain: “we select wind turbine T11” and “we select station 01.” The paper itself acknowledges this as a limitation: “Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station.”",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges in Section 5.4 that 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station,' which confirms the limitation without mitigating it.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-71d47cff3af2",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper uses multiple framings (digital twin in S1, forecasting in S2) and conflates 'power curve modeling' with 'power prediction' and 'forecasting' without clearly distinguishing the feature availability assumptions per scenario, which creates genuine ambiguity for readers about which features are practically usable in which setting.",
+        "evidence": {
+          "claim": "The distinction between the forecasting, power curve modeling, and digital twin scenarios is unclear, potentially confusing what feature sets are practically available.",
+          "excerpt": "The paper uses terms such as “prediction,” “forecasting,” “power curve modeling,” and “digital twin” somewhat interchangeably. However, the scenarios differ substantially:"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper uses multiple framings (digital twin in S1, forecasting in S2) and conflates 'power curve modeling' with 'power prediction' and 'forecasting' without clearly distinguishing the feature availability assumptions per scenario, which creates genuine ambiguity for readers about which features are practically usable in which setting.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper distinguishes the scenarios explicitly: “In the first scenario (S1), we use all available legitimate variables... The goal is to obtain an accurate digital twin model,” whereas “In scenario S2, we only consider features... that would realistically be available at forecast time.” This directly clarifies practical feature availability for modeling vs forecasting.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly distinguishes the practical scenarios in Section 4.2, stating scenario S1 uses all variables to 'obtain an accurate digital twin model', while S2 only considers features 'that would realistically be available at forecast time'.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-17bbce9ba3ed",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set,' meaning both feature selection and hyperparameter tuning repeatedly use the validation set, but the paper does not quantify or formally address the resulting selection bias beyond noting test-set bootstrapping for the final evaluation.",
+        "evidence": {
+          "claim": "Hyperparameter optimization inside feature selection may introduce selection bias due to repeated validation set usage, and the risk is not adequately addressed.",
+          "excerpt": "Since feature selection also uses the validation set repeatedly, this may lead to overfitting to the validation set. The final test evaluation mitigates this to some extent, but the selected feature sets and hyperparameters have both been influenced by repeated validation-set evaluations."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set,' meaning both feature selection and hyperparameter tuning repeatedly use the validation set, but the paper does not quantify or formally address the resulting selection bias beyond noting test-set bootstrapping for the final evaluation.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The methodology repeatedly uses the validation set inside feature selection and tuning: “We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set.” The paper discusses leakage-aware temporal splits, but it does not address the selection-bias risk from repeated validation-set reuse during FS/HPO.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 5.1 confirms that the authors 'optimize the hyperparameters once at the beginning of each SFS or CSFS iteration on the validation set,' introducing an unquantified risk of overfitting to the validation data.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-706875ddfdd4",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=FP, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The set of feature selection baselines is incomplete; the paper omits comparison with widely-used methods such as permutation importance and RFE.",
+          "excerpt": "The selected baselines are reasonable but incomplete. The comparison includes MI, F-value, RF feature importance, and SFS. However, feature selection literature contains several commonly used alternatives that would be relevant here, for example:\n\n- Recursive Feature Elimination,\n- permutation importance,"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly addresses RFE in Section 3.2, explaining why it was not chosen as a baseline: 'Compared to Recursive Feature Elimination (RFE), it does not rely on a Feature Importance (FI) function, which would introduce greater complexity and dependence on the FI method selection.' Permutation importance is not discussed, but the flag conflates two separate methods.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The empirical baselines are limited to “SFS, MI, F-value, and RF FI,” and although RFE is discussed conceptually (“Compared to Recursive Feature Elimination (RFE), it does not rely on a Feature Importance function”), it is not evaluated. Whether omission of additional baselines like RFE or permutation importance is a genuine flaw is a judgment call not settled by the paper text alone.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The baselines evaluated in Section 5.1 are limited to 'CSFS, SFS, and filter-based and embedded baseline methods' (MI, F-value, and RF FI), confirming that standard alternatives like Recursive Feature Elimination (mentioned only in Section 3.2) are omitted.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-4cf5d2bc174a",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=FP, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "Aggregated experimental results obscure important behavior by model, feature set size, and clustering strategy.",
+          "excerpt": "Several figures aggregate over models, feature set sizes, and CSFS clustering variants. This gives a useful overview but also hides important interactions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper provides both aggregated results (Figure 3) and disaggregated results by feature set size (Figure 4), and also breaks down CSFS clustering variants separately in Figure 3, showing the authors did attempt to show key interactions rather than only aggregate-level summaries.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Several results are clearly aggregated — e.g., “Fig. 3 shows the aggregated RMSE for all datasets” and “For CSFS, the values are additionally aggregated across the different clustering methods” — which can hide interactions. But the paper also partially disaggregates by feature size in Fig. 4 and discusses some clustering-specific behavior, so the severity of the concern is not clear-cut.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 5.1 confirms that the main experimental results in Figure 4 are 'aggregated across the three models used. For CSFS, the values are additionally aggregated across the different clustering methods,' which obscures specific interactions.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      },
+      {
+        "flag_id": "fp-5368a3ec723e",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "The paper explicitly acknowledges the PV-S2 exception: 'For PV-S2, the baseline methods MI, F-value, and RF FI perform surprisingly well with an RMSE of about 2.7 MW. Only the CSFS method based on random grouping performs slightly better.' The conclusion 'overall' qualifier is thus empirically supported and the exceptions are disclosed.",
+        "evidence": {
+          "claim": "Claims about wrapper methods outperforming filter-based and embedded methods are overbroad and not always supported by the empirical results.",
+          "excerpt": "The paper concludes that wrapper-based methods overall provide better-performing feature sets than filter-based and embedded methods. This is plausible and supported in several experiments, but the results also show cases where simple baselines perform competitively or better, especially PV-S2."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges the PV-S2 exception: 'For PV-S2, the baseline methods MI, F-value, and RF FI perform surprisingly well with an RMSE of about 2.7 MW. Only the CSFS method based on random grouping performs slightly better.' The conclusion 'overall' qualifier is thus empirically supported and the exceptions are disclosed.",
+            "cost_usd": 0.00333549
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper’s claim is qualified as an overall tendency, not a universal rule: “Overall, the results suggest that wrapper-based methods tend to provide an advantage primarily for the larger dataset variants.” It also explicitly notes the exception that “For PV-S2, the baseline methods MI, F-value, and RF FI perform surprisingly well,” so the conclusion is not overstated beyond the presented evidence.",
+            "cost_usd": 0.00536265
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The authors explicitly acknowledge the edge case raised by the reviewer in Section 5.1, noting that 'For PV-S2, the baseline methods MI, F-value, and RF FI perform surprisingly well.' Consequently, their claim that wrapper methods 'overall' perform better is suitably qualified.",
+            "cost_usd": 0.0016819400000000003
+          }
+        ],
+        "cost_usd": 0.01038008
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.1
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.1038008
+  },
+  "extractor_cost_usd": 0.01941000000000001,
+  "total_cost_usd": 0.12321080000000001
+}

@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v2",
+  "reviewer_system": "L25",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the characterization of DINOv2 as 'supervised' in Sec. 4.1. The citation-related comments in the review concern Fuse3D (Major issue 5), LoRA (Minor issue 4), and TRELLIS decoders (Very minor issue 7), none of which address the supervised/self-supervised misclassification of DINOv2.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review includes citation concerns, but none specifically flag the statement that DINOv2 is incorrectly described as supervised in Sec. 4.1 or challenge that claim against the DINOv2 source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer report does not mention DINOv2 or the mischaracterization of its training methodology as supervised.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags the characterization of DINOv2 as 'supervised' or challenges it against the DINOv2 citation. No part of the review mentions DINOv2's training methodology or the self-supervised vs. supervised distinction.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "IoU in Table 1 is inconsistent with the ablation in Table 7. Table 1 reports the \"Ours\" IoU as 0.7449; the ablation \"Full Model\" in Table 7 reports 0.7459. If these are the same experiment on the same synthetic split, the numbers should match",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "IoU in Table 1 is inconsistent with the ablation in Table 7. Table 1 reports the \"Ours\" IoU as 0.7449; the ablation \"Full Model\" in Table 7 reports 0.7459. If these are the same experiment on the same synthetic split, the numbers should match",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the IoU discrepancy between Table 1 (0.7449) and the ablation table (0.7459), naming both values and their locations, which directly matches the injected inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] IoU in Table 1 is inconsistent with the ablation in Table 7. Table 1 reports the \"Ours\" IoU as 0.7449; the ablation \"Full Model\" in Table 7 reports 0.7459.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the injected numeric inconsistency, naming both conflicting values and the two table locations for the same full-model IoU.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table 1 reports the \"Ours\" IoU as 0.7449; the ablation \"Full Model\" in Table 7 reports 0.7459.",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the exact numeric contradiction between the main paper and the appendix ablation table, quoting both the before and after values.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "The training objective in Eq. (2) is written as L_CFM(θ) = E_{t,x0,ϵ} ‖v_θ(x, t) − (x0 − ϵ)‖², but x is never defined on the right-hand side ... and the target (x_0 − ϵ) is the standard rectified-flow target only when x_t = (1−t) x_0 + t ϵ or an analogous convention — a convention the paper does not state.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The training objective in Eq. (2) is written as L_CFM(θ) = E_{t,x0,ϵ} ‖v_θ(x, t) − (x0 − ϵ)‖², but x is never defined on the right-hand side ... and the target (x_0 − ϵ) is the standard rectified-flow target only when x_t = (1−t) x_0 + t ϵ or an analogous convention — a convention the paper does not state.",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags the target term (x_0 − ϵ) in Eq. (2) and questions whether this is correct under the stated convention, which corresponds to the injected sign reversal; however, the reviewer frames it as a missing convention rather than an explicit sign error, so confidence is medium.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] The training objective in Eq. (2) is written as\n L_CFM(θ) = E_{t,x0,ϵ} ‖v_θ(x, t) − (x0 − ϵ)‖²,\nbut x is never defined on the right-hand side (x_t is the natural argument for a flow/velocity model), and the target (x_0 − ϵ) is the standard rectified-flow target only when x_t = (1−t) x_0 + t ϵ or an analogous convention — a convention the paper does not state.",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly quotes the altered target term and questions its correctness relative to the standard rectified-flow formulation. Although they hedge on convention rather than directly saying the sign is wrong, this corresponds to the injected target reversal.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the target (x_0 − ϵ) is the standard rectified-flow target only when x_t = (1−t) x_0 + t ϵ or an analogous convention — a convention the paper does not state.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the injected sign-reversed term in Equation 2, noting it deviates from the standard rectified-flow formulation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The abstract says \"our method achieves performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity,\" yet Table 1 reports HIVE-3D as best on CD (0.0035) and F-Score (84.34) versus TRELLIS's 0.0038/81.29, and Sec. 6 concludes that \"HIVE-3D outperforms existing methods in terms of 3D scene generation quality.\" These are directly incompatible framings of the same results",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The abstract says \"our method achieves performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity,\" yet Table 1 reports HIVE-3D as best on CD (0.0035) and F-Score (84.34) versus TRELLIS's 0.0038/81.29, and Sec. 6 concludes that \"HIVE-3D outperforms existing methods in terms of 3D scene generation quality.\" These are directly incompatible framings of the same results",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes the injected abstract sentence and identifies it as contradicting the results tables and conclusion section, precisely matching the injected internal contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] The abstract undermines the paper's own claims. The abstract says \"our method achieves performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity,\" yet Table 1 reports HIVE-3D as best on CD (0.0035) and F-Score (84.34) versus TRELLIS's 0.0038/81.29, and Sec. 6 concludes that \"HIVE-3D outperforms existing methods in terms of 3D scene generation quality.\" These are directly incompatible framings of the same results and need to be reconciled",
+          "confidence": "high",
+          "reasoning": "This directly flags the abstract sentence introduced by the injection and states it contradicts the results and conclusion, which is exactly the internal-contradiction edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The abstract says \"our method achieves performance comparable to previous approaches, though it does not yet surpass state-of-the-art methods in geometric fidelity,\"",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific injected sentence in the abstract and highlights its internal contradiction with the results presented in Table 1.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 39.232361,
+  "total_cost_usd": null,
+  "total_input_tokens": 22438,
+  "total_output_tokens": 3608,
+  "escalation_count": 1,
+  "notes": null
+}

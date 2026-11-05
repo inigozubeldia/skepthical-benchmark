@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13475",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer's Key Statements section flags [8] as WEAKLY_SUPPORTED with 'Bayesian nonparametric cloth models have been used for real-time state estimation,' which actually confirms the nonparametric qualifier rather than challenging the post-edit claim that drops it. No reviewer flag challenges the post-edit 'Bayesian cloth models' phrasing as overgeneralised or partially supported relative to the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "- [✔] _WEAKLY_SUPPORTED_ **Bayesian nonparametric cloth models have been used for real-time state estimation.**\n  - _Reference(s):_ [8]\n  - _Justification:_ Koganti et al. (IEEE T-RO 2017) is a known reference for this line of work; framing matches.",
+          "confidence": "medium",
+          "reasoning": "The injected paper text dropped the qualifier 'nonparametric' from the claim about citation [8]. The reviewer explicitly restates the cited claim with 'Bayesian nonparametric cloth models' tied to [8], which corresponds to challenging/restoring the methodological specificity of the same source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer failed to notice the missing 'nonparametric' qualifier. In their checklist, they even included the missing word themselves and marked the claim as matching the reference, rather than flagging it as overgeneralized or drifted.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's report checks the claim about reference [8] and marks it as WEAKLY_SUPPORTED with the note 'Bayesian nonparametric cloth models have been used for real-time state estimation', actually restoring the 'nonparametric' qualifier that was injected-out. The reviewer does not flag the injected text (which reads 'Bayesian cloth models') as missing the 'nonparametric' qualifier or as mischaracterizing the cited paper's methodology. No flag in the report clearly corresponds to this specific methodological drift injection.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "'On the remaining 89 improvable episodes, the oracle succeeds in 85% of cases (89/89).' 89/89 = 100%, not 85%; and if the oracle succeeds in 89/89 improvable episodes, the overall success rate should be 89/200 = 44.5%, which matches, but then the 85% figure is unjustified and the '(89/89)' parenthetical contradicts the 85%.' and '[✖] \"On the remaining 89 improvable episodes, the oracle succeeds in 85% of cases (89/89)\". Reported: 85% (with parenthetical 89/89) / Computed: 89/89 = 100.0%'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "'On the remaining 89 improvable episodes, the oracle succeeds in 85% of cases (89/89).' 89/89 = 100%, not 85%; and if the oracle succeeds in 89/89 improvable episodes, the overall success rate should be 89/200 = 44.5%, which matches, but then the 85% figure is unjustified and the '(89/89)' parenthetical contradicts the 85%.' and '[✖] \"On the remaining 89 improvable episodes, the oracle succeeds in 85% of cases (89/89)\". Reported: 85% (with parenthetical 89/89) / Computed: 89/89 = 100.0%'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the contradiction between the stated 85% and the parenthetical 89/89 (which equals 100%), directly corresponding to the injected numeric inconsistency where 100% was changed to 85% while the fraction was left unchanged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "3.  The success-rate analysis in Sec. III-C contains a numeric contradiction that undermines the improvable-episode interpretation: \"on the remaining 89 improvable episodes, the oracle succeeds in 85% of cases (89/89).\" 89/89 = 100%, not 85%...\n\n1.  [✖] **\"On the remaining 89 improvable episodes, the oracle succeeds in 85% of cases (89/89)\".**\n    - _Location:_ Sec. III-C\n    - _check_type:_ ratio_eq\n    - _Reported:_ 85% (with parenthetical 89/89) / _Computed:_ 89/89 = 100.0%\n    - _Expected severity bucket:_ major",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes the altered sentence and points out that 89/89 equals 100%, not 85%. This is a specific detection of the injected arithmetic inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "89/89 = 100%, not 85%; and if the oracle succeeds in 89/89 improvable episodes, the overall success rate should be 89/200 = 44.5%, which matches, but then the 85% figure is unjustified and the \"(89/89)\" parenthetical contradicts the 85%.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the arithmetic contradiction between the 85% percentage and the 89/89 ratio in the Major Issues section and the numerical audit.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "'Notation typo in the reconstruction loss (Sec. II-B, Eq. 2): the RHS uses `X_{i,k}` where the LHS uses `X_{i,j}`. The `k` index is undefined.' and '[✖] Reconstruction loss is a mean squared error over all vertices (Eq. 2)... the index `k` is undefined and inconsistent with the summation.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "'Notation typo in the reconstruction loss (Sec. II-B, Eq. 2): the RHS uses `X_{i,k}` where the LHS uses `X_{i,j}`. The `k` index is undefined.' and '[✖] Reconstruction loss is a mean squared error over all vertices (Eq. 2)... the index `k` is undefined and inconsistent with the summation.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the unbound index 'k' in X_{i,k} on the RHS of the reconstruction loss equation where X_{i,j} is expected, directly matching the injected index mismatch.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "10. Notation typo in the reconstruction loss (Sec. II-B, Eq. 2): the RHS uses `X_{i,k}` where the LHS uses `X_{i,j}`. The `k` index is undefined.\n\n2.  [✖] **Reconstruction loss is a mean squared error over all vertices (Eq. 2).**\n    - _Location:_ Eq. (2), Sec. II-B\n    - _Verdict:_ FAIL (confidence: high, impact: minor)\n    - _Notes:_ The equation as printed reads `(1/HW) Σ_{i,j} ‖X̂_{i,j} − X_{i,k}‖²`, but the LHS index pair is `(i,j)` while the RHS uses `X_{i,k}` — the index `k` is undefined and inconsistent with the summation. This is almost certainly a transcription typo for `X_{i,j}`, and the prose describes the intended MSE correctly. Fix by replacing `X_{i,k}` with `X_{i,j}`.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies the undefined free index k in Eq. 2 and recommends replacing X_{i,k} with X_{i,j}. This exactly matches the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Notation typo in the reconstruction loss (Sec. II-B, Eq. 2): the RHS uses X_{i,k} where the LHS uses X_{i,j}. The k index is undefined.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly flagged the index mismatch in Eq. 2, noting that the index 'k' is undefined and inconsistent with the summation over 'j'.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "'The regularization-weight choice (\"we observed substantial degradation in reconstruction accuracy at higher weights\", Sec. II-B) is a phantom-evidence sub-claim: no ablation table, curve, or numeric is shown to substantiate this observation. This is a Module A (H) finding.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "'The regularization-weight choice (\"we observed substantial degradation in reconstruction accuracy at higher weights\", Sec. II-B) is a phantom-evidence sub-claim: no ablation table, curve, or numeric is shown to substantiate this observation. This is a Module A (H) finding.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the parenthetical claim about degradation at higher regularization weights as a 'phantom-evidence sub-claim' with no supporting data, directly corresponding to the injected unsupported parenthetical.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "1.  The regularization-weight choice (\"we observed substantial degradation in reconstruction accuracy at higher weights\", Sec. II-B) is a phantom-evidence sub-claim: no ablation table, curve, or numeric is shown to substantiate this observation. This is a Module A (H) finding.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the added parenthetical claim about degradation at higher weights as unsupported phantom evidence in Sec. II-B. This is a direct match to the injected unsupported methodological justification.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The regularization-weight choice ('we observed substantial degradation in reconstruction accuracy at higher weights', Sec. II-B) is a phantom-evidence sub-claim: no ablation table, curve, or numeric is shown to substantiate this observation.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quoted the injected text and identified it as a 'phantom-evidence sub-claim' lacking empirical support in the paper.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 59.678858,
+  "total_cost_usd": null,
+  "total_input_tokens": 34911,
+  "total_output_tokens": 8361,
+  "escalation_count": 1,
+  "notes": null
+}

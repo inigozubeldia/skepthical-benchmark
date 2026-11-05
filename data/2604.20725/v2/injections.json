@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "These parameters are chosen to reproduce the neutron pairing gap in neutron matter obtained in BCS calculations with a bare nuclear force in the ${}^1S_0$ channel.",
+    "injected_text": "These parameters are chosen to reproduce the neutron pairing gap in neutron matter obtained in BCS calculations with a bare nuclear force.",
+    "rationale": "The cited paper (Matsuo:2005vf) derives the pairing gap specifically in the ${}^1S_0$ partial-wave channel, an explicit scope qualifier; dropping '${}^1S_0$ channel' over-generalises the calibration claim to all partial-wave channels, which the cited paper does not support.",
+    "ground_truth_description": "Removed the '${}^1S_0$ channel' qualifier from the sentence describing the pairing parameter calibration target, over-generalising a result that holds only for the singlet S-wave channel.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Matsuo:2005vf",
+      "injected_cite_key": "Matsuo:2005vf",
+      "claim_sentence_verbatim": "These parameters are chosen to reproduce the neutron pairing gap in neutron matter obtained in BCS calculations with a bare nuclear force in the ${}^1S_0$ channel.",
+      "section_location": "Sec. 3 (Determination of the effective potential), DFT setup paragraph",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "The resulting coupling strength is smaller than the estimate based on the hydrodynamical model of Ref.~\\cite{Kobyakov:2013eta} by roughly a factor of five when the entrainment effect is neglected.",
+    "injected_text": "The resulting coupling strength is smaller than the estimate based on the hydrodynamical model of Ref.~\\cite{Kobyakov:2013eta} by roughly a factor of three when the entrainment effect is neglected.",
+    "rationale": "Changing 'five' to 'three' in the Conclusion creates a percent_of inconsistency: the body (Discussion) reports the hydrodynamical value as 3.4×10⁴ MeV fm³ versus the microscopic result 7.1×10³ MeV fm³, a ratio of ~4.8 (factor of five), while the Conclusion now claims a factor of three (~33%), a relative discrepancy of >50% triggering a MAJOR upgrade.",
+    "ground_truth_description": "The suppression factor in the Conclusion was changed from 'five' to 'three', inconsistent with the values 3.4×10⁴ and 7.1×10³ MeV fm³ reported in the Discussion (true ratio ≈ 4.8).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "five",
+      "value_after_raw": "three",
+      "value_before_float": 5.0,
+      "value_after_float": 3.0,
+      "location_cue": "coupling strength is smaller than the estimate based on the hydrodynamical model by roughly a factor of",
+      "paired_location": "Discussion section: 'This value is larger than our result ... by roughly a factor of five'",
+      "quantity_label": "suppression factor of microscopic coupling strength relative to hydrodynamical model estimate",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "c_{nL}\n=\n(x_{nL})^{3/2}\n\\left(\n\\int_0^{x_{nL}}\nx^2\nj_L^2(x)\ndx\n\\right)^{-1/2}",
+    "injected_text": "c_{nL}\n=\n(x_{nL})^{3/2}\n\\left(\n\\int_1^{x_{nL}}\nx^2\nj_L^2(x)\ndx\n\\right)^{-1/2}",
+    "rationale": "Shifting the lower integration bound from 0 to 1 in the normalization integral for the spherical-box phonon amplitude subtly corrupts the normalization constant c_{nL}, which feeds directly into the transition density formula and hence the coupling matrix element — an S1 index/bound shift in a load-bearing integral.",
+    "ground_truth_description": "The lower limit of the normalization integral for the spherical Bessel function amplitude c_{nL} was changed from 0 to 1, incorrectly excluding the contribution of the integrand over [0,1).",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Appendix (Sec. note), normalization constant c_{nL} definition",
+      "original_fragment_latex": "\\int_0^{x_{nL}}",
+      "injected_fragment_latex": "\\int_1^{x_{nL}}",
+      "full_equation_latex_before": "c_{nL}\n=\n(x_{nL})^{3/2}\n\\left(\n\\int_0^{x_{nL}}\nx^2\nj_L^2(x)\ndx\n\\right)^{-1/2}",
+      "full_equation_latex_after": "c_{nL}\n=\n(x_{nL})^{3/2}\n\\left(\n\\int_1^{x_{nL}}\nx^2\nj_L^2(x)\ndx\n\\right)^{-1/2}",
+      "term_role": "integral lower bound",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "These approaches are appropriate for describing the low-energy and long-wavelength limit of phonon dynamics~\\cite{Aguilera:2008ed,Pethick:2010zf,Cirigliano:2011tj,PageReddy2012,Kobyakov:2013eta,Kobyakov:2013pza,Chamel:2012ix,Chamel:2013cva}. \nThe parameters of these models are typically treated phenomenologically and determined from macroscopic quantities such as bulk thermodynamic properties.",
+    "injected_text": "These approaches are appropriate for describing the low-energy and long-wavelength limit of phonon dynamics~\\cite{Aguilera:2008ed,Pethick:2010zf,Cirigliano:2011tj,PageReddy2012,Kobyakov:2013eta,Kobyakov:2013pza,Chamel:2012ix,Chamel:2013cva}. \nThe parameters of these models are typically treated phenomenologically and determined from macroscopic quantities such as bulk bulk thermodynamic properties.",
+    "rationale": "Accidentally repeating the word 'bulk' in a sentence in the Introduction is a cosmetic writing defect consistent with S1/type-1 (word repetition), targeting checklist item D2 (clarity of writing) at the very_minor severity bucket.",
+    "ground_truth_description": "The word 'bulk' is accidentally repeated ('bulk bulk thermodynamic properties') in the Introduction paragraph describing macroscopic approaches.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D2",
+      "change_kind": "word_repetition",
+      "expected_bucket": "very_minor",
+      "section_location": "Introduction",
+      "affected_span_verbatim": "The parameters of these models are typically treated phenomenologically and determined from macroscopic quantities such as bulk thermodynamic properties."
+    },
+    "proposer_agent": "injector.general.S1.t1.v2"
+  }
+]

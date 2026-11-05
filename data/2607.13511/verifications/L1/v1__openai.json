@@ -1,0 +1,207 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v1",
+  "reviewer_system": "L1",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not challenge the claim about ternary projection causing reasoning collapse (with or without the 'post-training' qualifier) against the cited source ptqtp. No flag corresponds to this overgeneralisation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The paper should include stronger and more varied baselines, such as:\n\n- GPTQ;\n- AWQ;\n- SpQR/QuIP-like methods if relevant;\n- existing ternary PTQ schemes, especially PTQTP;\n- BitNet-style ternary models where applicable;\n- low-rank quantization or additive residual quantization baselines.\n\nThe paper explicitly says it does not compare head-to-head against established ternary schemes. That is a serious omission because the central claim is about ternary quantization.",
+          "confidence": "low",
+          "reasoning": "This mentions PTQTP and lack of comparison to existing ternary PTQ schemes, which may weakly correspond to challenging the broad claim around ternary projection. However, it does not specifically contest the cited sentence that projection onto one ternary plane causes collapse, so the match is ambiguous.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions PTQTP in the context of suggesting additional baselines but does not challenge or comment on the specific claim regarding ternary projection, model collapse, or the bit-information limit of ternary planes.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not specifically flag the missing 'post-training' qualifier in the claim about ternary projection causing reasoning collapse, nor do they challenge the claim against the PTQTP citation on those grounds. Their critiques of overstated claims are about the convergence proof and 'multiplication-free' framing, not about this specific overgeneralization.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not mention any discrepancy in the sparsity percentage (57% vs 58%) between the Introduction and Results sections.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention the 57% versus 58% sparsity discrepancy at tau=1.0 or any repeated-constant inconsistency between sections.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses effective bits-per-weight (bpw) values but never mentions or quotes the 57% or 58% sparsity values, nor does the report identify an internal contradiction between the Introduction and Results regarding this percentage.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never mentions the specific sparsity percentage values (57% or 58%) at tau=1.0, nor any inconsistency between the Introduction and Results section regarding sparsity figures. The review does not flag any numerical discrepancy related to sparsity at tau=1.0.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "In Eq. 3, the first inverse uses \\[(U^\\top U - \\epsilon I)^{-1},\\] whereas the second uses \\[(V^\\top V + \\epsilon I)^{-1}.\\] The negative regularization is surprising and likely unstable unless carefully justified. Normally one would expect \\(+\\epsilon I\\).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "In Eq. 3, the first inverse uses \\[(U^\\top U - \\epsilon I)^{-1},\\] whereas the second uses \\[(V^\\top V + \\epsilon I)^{-1}.\\] The negative regularization is surprising and likely unstable unless carefully justified. Normally one would expect \\(+\\epsilon I\\).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the minus sign in the Tikhonov regularisation term of the first ALS update equation, noting it contradicts the expected plus sign and is likely unstable, which directly corresponds to the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The block-ALS equations also need more derivation. In Eq. 3, the first inverse uses\n\n\\[\n(U^\\top U - \\epsilon I)^{-1},\n\\]\n\nwhereas the second uses\n\n\\[\n(V^\\top V + \\epsilon I)^{-1}.\n\\]\n\nThe negative regularization is surprising and likely unstable unless carefully justified. Normally one would expect \\(+\\epsilon I\\).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the minus sign in the Tikhonov regularization term and states that plus epsilon is normally expected, directly matching the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "In Eq. 3, the first inverse uses (U^\\top U - \\epsilon I)^{-1}, whereas the second uses (V^\\top V + \\epsilon I)^{-1}. The negative regularization is surprising and likely unstable unless carefully justified. Normally one would expect +\\epsilon I.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the sign change from plus to minus in the ALS normal equations (Equation 3) and notes it is surprising/incorrect.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not mention any cross-reference mismatch related to the cost model section or the inner-rank multiplier mu description.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not flag any incorrect section cross-reference involving the cost model or the reference to Sec. core versus Sec. cost.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer report does not mention any issues with cross-references, section pointers, or structural mismatches related to the cost model versus the core method sections.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never mentions any cross-reference mismatch or an incorrect section pointer (e.g., noting that the cost-model reference in the Introduction points to the wrong section). The review raises many other issues but says nothing about a mispointed Sec. reference.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 38.990439,
+  "total_cost_usd": null,
+  "total_input_tokens": 33748,
+  "total_output_tokens": 2660,
+  "escalation_count": 3,
+  "notes": null
+}

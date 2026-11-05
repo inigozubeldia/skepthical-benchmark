@@ -1,0 +1,284 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "L25",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-2679b8805621",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {minuend, subtrahend, difference}",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {minuend, subtrahend, difference}"
+          },
+          "rereader": [
+            {
+              "label": "minuend_oracle",
+              "raw_observed": "0.0958",
+              "value_observed": 0.0958,
+              "notes": "Value from 'After two steps, the oracle achieves a mean improvement of 0.0958...'"
+            },
+            {
+              "label": "subtrahend_oracle",
+              "raw_observed": "0.0989",
+              "value_observed": 0.0989,
+              "notes": "Value from '...compared to 0.0989 and 47.0% for the oracle...'"
+            },
+            {
+              "label": "minuend_learned",
+              "raw_observed": "0.0941",
+              "value_observed": 0.0941,
+              "notes": "Value from '...the learned estimator achieves 0.0941 with the same success rate...'"
+            },
+            {
+              "label": "subtrahend_learned",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": "Value from '...the learned estimator achieves a mean exposure improvement of 0.1055...'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.038482000000000016
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-7e19622756e7",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Transcription-fidelity check: equation in paper does not match reviewer's description.",
+        "evidence": {
+          "fidelity": {
+            "status": "refuted",
+            "detail": "overall_fidelity=drifted; check#0:drifted — The extractor simplified the full equation, omitting the summation, normalization factor (1/N_nbr), 2D indices, and the L2 vector norm in favor of a scalar squared difference.",
+            "seconds": 6.685,
+            "overall": "drifted",
+            "knowledge_status": "confirmed",
+            "knowledge_overall": "matches",
+            "knowledge_detail": "knowledge_audit=matches",
+            "knowledge_findings": [],
+            "per_check": [
+              {
+                "index": 0,
+                "fidelity": "drifted",
+                "notes_fidelity": "The extractor simplified the full equation, omitting the summation, normalization factor (1/N_nbr), 2D indices, and the L2 vector norm in favor of a scalar squared difference."
+              }
+            ]
+          }
+        },
+        "judge_panel": [],
+        "cost_usd": 0.013166000000000011
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-11f23b3bc4ce",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper claims in Section IV that 'the estimator achieves multi-step performance statistically equivalent to a full-state oracle,' but the only statistical test reported (p=0.835) compares oracle action budgets, not learned-estimator vs. oracle performance. No p-value or equivalence test between the learned estimator and oracle is presented.",
+        "evidence": {
+          "claim": "The claim of statistically equivalent learned and oracle performance is unsupported by reported statistical tests; no relevant p-value or equivalence analysis is presented.",
+          "excerpt": "The abstract says the learned estimator achieves 98.1% of oracle performance, and Section IV says it achieves 'multi-step performance statistically equivalent to a full-state oracle.' However, the paper does not report a statistical test comparing learned-estimator performance to oracle performance. The only printed p-value is in Section III-C, where an independent t-test compares oracle action budgets ... That test does not establish equivalence between the learned estimator and the oracle."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims in Section IV that 'the estimator achieves multi-step performance statistically equivalent to a full-state oracle,' but the only statistical test reported (p=0.835) compares oracle action budgets, not learned-estimator vs. oracle performance. No p-value or equivalence test between the learned estimator and oracle is presented.",
+            "cost_usd": 0.003218475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims the estimator achieves 'multi-step performance statistically equivalent to a full-state oracle,' but the only explicit hypothesis test reported is 'An independent t-test between nsamples = 200 and 2000 yields p = 0.835,' which compares oracle action-sampling budgets, not learned-vs-oracle performance or an equivalence test.",
+            "cost_usd": 0.01261725
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion claims the estimator achieves \"multi-step performance statistically equivalent to a full-state oracle,\" but the paper fails to report the results of any statistical test (e.g., p-value) verifying this specific equivalence.",
+            "cost_usd": 0.0027455
+          }
+        ],
+        "cost_usd": 0.018581225
+      },
+      {
+        "flag_id": "fp-ffef5652086d",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The conclusion states 'planning-sufficient learned representations can replace expensive physical simulation,' yet Section II explicitly states 'Deformation in response to actions is modeled using a diffusion-based relaxation process,' meaning physical simulation is still used during planning and is not replaced.",
+        "evidence": {
+          "claim": "The conclusion that learned representations can 'replace expensive physical simulation' is unsupported and inconsistent with the method; physical simulation remains in planning.",
+          "excerpt": "The conclusion states that 'planning-sufficient learned representations can replace expensive physical simulation for deformable manipulation.' But the method still appears to use a deformation model during planning: Section II says the planner samples 200 candidate pulls and chooses the one maximizing predicted exposure under the estimated state, while deformation in response to actions is modeled using a diffusion-based relaxation process."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion states 'planning-sufficient learned representations can replace expensive physical simulation,' yet Section II explicitly states 'Deformation in response to actions is modeled using a diffusion-based relaxation process,' meaning physical simulation is still used during planning and is not replaced.",
+            "cost_usd": 0.003218475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion says 'planning-sufficient learned representations can replace expensive physical simulation,' yet the method still uses a deformation model: 'Actions are selected by sampling 200 candidate pulls and choosing the one that maximizes predicted exposure under the estimated state' and 'Deformation in response to actions is modeled using a diffusion-based relaxation process [11].'",
+            "cost_usd": 0.01261725
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The conclusion states that the learned representations \"can replace expensive physical simulation for deformable manipulation.\" However, during planning, \"Deformation in response to actions is modeled using a diffusion-based relaxation process,\" meaning physical simulation is still actively used.",
+            "cost_usd": 0.0027455
+          }
+        ],
+        "cost_usd": 0.018581225
+      },
+      {
+        "flag_id": "fp-9627ba3821b2",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section III-A reports the learned estimator achieves a mean exposure improvement of 0.1055 versus 0.0989 for the oracle in single-step retraction, with the oracle having full state access. The paper provides no explanation for why the oracle is outperformed by the learned estimator in this setting.",
+        "evidence": {
+          "claim": "The single-step learned estimator outperforms the full-state oracle, which is not explained, undermining the role of the oracle as a baseline.",
+          "excerpt": "The learned estimator achieves a single-step mean exposure improvement of 0.1055, while the full-state oracle achieves 0.0989. Since the oracle has full state access, this result is surprising. ... But the paper does not explain this."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III-A reports the learned estimator achieves a mean exposure improvement of 0.1055 versus 0.0989 for the oracle in single-step retraction, with the oracle having full state access. The paper provides no explanation for why the oracle is outperformed by the learned estimator in this setting.",
+            "cost_usd": 0.003218475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper reports that 'In single-step retraction, the learned estimator achieves a mean exposure improvement of 0.1055 ... compared to 0.0989 ... for the oracle,' but it does not explain this reversal. The later oracle analysis only checks action-budget sensitivity ('We vary the number of sampled actions nsamples ∈ {200, 500, 1000, 2000}') and does not resolve why the learned method exceeds the full-state oracle in single-step.",
+            "cost_usd": 0.01261725
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III-A reports that \"the learned estimator achieves a mean exposure improvement of 0.1055 [...] compared to 0.0989 [...] for the oracle.\" The text does not elaborate on or explain why the partial-observation estimator outperforms the full-state oracle.",
+            "cost_usd": 0.0027455
+          }
+        ],
+        "cost_usd": 0.018581225
+      },
+      {
+        "flag_id": "fp-6cc51c1b6c8b",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section III-B states 'Multi-step planning yields significant gains for both oracle and learned estimators,' but no p-value, confidence interval, or test statistic is reported to support this claim of significance; the only detailed test (p=0.835) concerns oracle action budgets, not multi-step improvement.",
+        "evidence": {
+          "claim": "The paper claims 'significant gains' for multi-step planning without providing statistical evidence, such as p-values or confidence intervals.",
+          "excerpt": "Section III-B says multi-step planning yields 'significant gains,' but no p-value, confidence interval, variance, or test result is reported for the multi-step improvement claim. Section III says statistical significance is measured using paired and independent t-tests, but the only detailed test result is the oracle action-budget comparison in Section III-C."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III-B states 'Multi-step planning yields significant gains for both oracle and learned estimators,' but no p-value, confidence interval, or test statistic is reported to support this claim of significance; the only detailed test (p=0.835) concerns oracle action budgets, not multi-step improvement.",
+            "cost_usd": 0.003218475
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III states that 'statistical significance [is] measured using paired and independent t-tests,' and Section III-B claims 'Multi-step planning yields significant gains for both oracle and learned estimators,' but no p-value, confidence interval, or test result is reported for that multi-step gain claim. The only printed p-value is elsewhere: 'An independent t-test between nsamples = 200 and 2000 yields p = 0.835.'",
+            "cost_usd": 0.01261725
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III-B claims that \"Multi-step planning yields significant gains for both oracle and learned estimators,\" but provides no p-values, confidence intervals, or other statistical evidence to substantiate the significance of these gains.",
+            "cost_usd": 0.0027455
+          }
+        ],
+        "cost_usd": 0.018581225
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 1,
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.038482000000000016,
+    "mathematics": 0.013166000000000011,
+    "general": 0.0743249
+  },
+  "extractor_cost_usd": 0.01897600000000002,
+  "total_cost_usd": 0.14494890000000005
+}

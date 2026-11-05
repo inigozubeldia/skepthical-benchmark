@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13749",
+  "copy_id": "v3",
+  "reviewer_system": "CL1",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never challenges the weight decay value (1.0 vs 1.2) or the cited grokking-recipe hyperparameters. No mention of any numerical discrepancy in Sec. 4.3 related to weight decay or the Power/Nanda citations.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention the cited grokking recipe, the weight decay value, or any mismatch with the cited sources Power/Nanda. Under the value-or-numeric rule for citations, this is not specifically detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer makes no mention of the weight decay hyperparameter or the specific values cited in Section 4.3, failing the VALUE-OR-NUMERIC detection rule.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer consistently references '585 runs' (the correct pre-injection value) throughout the report, suggesting they either read the body text or did not notice the '5850' in the abstract. No flag is raised about a discrepancy between 585 and 5850.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Experiments across 585 runs match the algebraic prediction with 99.8% accuracy.",
+          "confidence": "high",
+          "reasoning": "The injected error is the abstract's changed count from 585 to 5850, and the reviewer explicitly states the run count as 585. This specifically corresponds to the inconsistent experimental-runs number.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the count of 585 runs from the main text but does not flag the contradiction with the value of 5850 injected into the abstract.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer praises Lemmas 1-3 and Theorems 1-2 as 'correct' and does not flag any issue with Eq. (4) or the missing binomial coefficient prefactor in the expansion coefficients c_l.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer says the mathematical results are correct and does not flag Eq. (4), the expansion coefficients, or a missing binomial coefficient prefactor. There is no corresponding mathematical-error flag.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states that Lemmas 1-3 and Theorems 1-2 are correct and well-written, indicating they missed the mathematical error in Equation 4.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses the bottleneck ablation favorably in Strength 4 and Major Comment about optimisation, but never flags a contradiction between the methodology claiming both modular addition and multiplication were tested versus Table 3 reporting only a single gap per dimension.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Section 4.4 does important work: it prevents the paper from being read as a curiosity about an exotic architecture, and traces the continuous FAIL → MEM → GROK path in a standard ReLU network as bottleneck width grows.",
+          "confidence": "medium",
+          "reasoning": "The reviewer describes Section 4.4 as a bottleneck ReLU experiment tracing a single path, consistent with only modular addition results rather than separate addition and multiplication evaluations. This aligns with the injected methodology claim about evaluating both tasks being contradicted by the reported table, though the reviewer does not state the contradiction explicitly.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer highlights Section 4.4 as a strength but fails to notice the methodology claim regarding modular multiplication or the fact that Table 3 does not support it.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 28.804119,
+  "total_cost_usd": null,
+  "total_input_tokens": 13420,
+  "total_output_tokens": 4111,
+  "escalation_count": 0,
+  "notes": null
+}

@@ -1,0 +1,314 @@
+{
+  "paper_id": "2604.20975",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-69bd3fbe4894",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper bases forecasts on an idealized threshold: “we set SNRth = 3,” while also admitting this is not a full detection standard: “to confidently detect a zombie binary, it is not enough to have a high SNR: the signal must also be observed in the data of multiple pulsars,” and “The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.”",
+        "evidence": {
+          "claim": "The detection criterion used (network SNR > 3) is highly idealized, lacking multi-pulsar coherence requirements or proper statistical thresholds, rendering the forecasts optimistic and not representative of actual PTA detectability.",
+          "excerpt": "The detection criterion is an idealized network SNR threshold (${\rm SNR} > 3$) that does not reflect the requirements for a confident detection in a real PTA search. It lacks any multi-pulsar coherence requirement, statistical significance threshold (e.g., Bayes factor or false-alarm probability), or accounting for trials factors from a large parameter space."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper acknowledges multi-pulsar coherence as a requirement ('to confidently detect a zombie binary, it is not enough to have a high SNR: the signal must also be observed in the data of multiple pulsars') but does not implement this as a formal statistical threshold. The SNR>3 criterion is used as a proxy, and the paper defers realistic detectability to 'future work,' so the concern is partially acknowledged but not fully addressed.",
+            "cost_usd": 0.004005042857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper bases forecasts on an idealized threshold: “we set SNRth = 3,” while also admitting this is not a full detection standard: “to confidently detect a zombie binary, it is not enough to have a high SNR: the signal must also be observed in the data of multiple pulsars,” and “The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work.”",
+            "cost_usd": 0.0096205
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper relies strictly on an idealized SNR threshold, stating, \"In the following, we set SNR_th = 3,\" and only acknowledges that \"to confidently detect a zombie binary, it is not enough to have a high SNR\" without implementing multi-pulsar coherence or statistical significance thresholds in their methodology.",
+            "cost_usd": 0.0021108
+          }
+        ],
+        "cost_usd": 0.015736342857142857
+      },
+      {
+        "flag_id": "fp-0d9cf98f4daa",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Figure 5 systems are drawn from “the distribution, p(⃗ξI), proportional to the integrand of Eq. 10,” and Eq. 10 already includes the factor “P(SNR ≥ SNRth|⃗ξI).” The paper then applies a second cut — “We then select only systems with a SNR higher than 3” — which does imply an extra detection-probability weighting not discussed or corrected.",
+        "evidence": {
+          "claim": "The procedure for generating distributions of detectable system parameters in Fig. 5 is biased, weighting by detection efficiency squared, which skews the reported distributions and summary statistics.",
+          "excerpt": "The procedure described for generating the parameter distributions of detectable systems in Fig. 5 appears to be biased. The text suggests sampling intrinsic parameters from a distribution proportional to the detection efficiency, and then applying a second ${\rm SNR} > 3$ cut after sampling extrinsic parameters. This would incorrectly weight the final sample by the detection efficiency squared ($P_{\rm det}^2$) rather than $P_{\rm det}$, likely biasing the reported distributions towards higher-mass, lower-redshift systems..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states it samples from 'p(ξ_I), proportional to the integrand of Eq. 10' and then selects systems with SNR>3, which could introduce a P_det^2 weighting as the reviewer claims. However, the exact sampling procedure is not described in enough detail to confirm or refute this definitively.",
+            "cost_usd": 0.004005042857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Figure 5 systems are drawn from “the distribution, p(⃗ξI), proportional to the integrand of Eq. 10,” and Eq. 10 already includes the factor “P(SNR ≥ SNRth|⃗ξI).” The paper then applies a second cut — “We then select only systems with a SNR higher than 3” — which does imply an extra detection-probability weighting not discussed or corrected.",
+            "cost_usd": 0.0096205
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper describes a flawed sampling procedure where they first sample intrinsic parameters \"proportional to the integrand of Eq. 10\" (which already includes the detection efficiency) and then assign extrinsic parameters and \"select only systems with a SNR higher than 3\". This effectively applies the detection efficiency twice, confirming the reviewer's concern.",
+            "cost_usd": 0.0021108
+          }
+        ],
+        "cost_usd": 0.015736342857142857
+      },
+      {
+        "flag_id": "fp-76bede22ae44",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The omission is explicit: “the PTA detection efficiencies that we derive neglect the presence of potential intrinsic red noise components … and do not take into account the spatially-correlated nature of the GW background noise.” The paper only adds a qualitative reassurance — “these assumptions should not have strong impact on our results” — without quantifying that impact.",
+        "evidence": {
+          "claim": "The noise model omits intrinsic red noise and Hellings–Downs correlations, likely yielding overly optimistic detection efficiencies especially for sensitive arrays.",
+          "excerpt": "The noise model is oversimplified, neglecting two key features of real PTA data. It omits intrinsic, per-pulsar red noise (e.g., from spin noise) and ignores the spatial (Hellings–Downs) correlations of the GW background, treating it as an uncorrelated red-noise process in each pulsar. These omissions are likely to yield optimistic detection efficiencies, especially for the high-sensitivity EPTA/IPTA and SKA-like arrays."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges these omissions: 'the PTA detection efficiencies that we derive neglect the presence of potential intrinsic red noise components...and do not take into account the spatially-correlated nature of the GW background noise. However, these assumptions should not have strong impact on our results, since these red noise components typically have a sub-dominant contribution to PTA sensitivities at the frequencies where zombie binaries are found.' The reviewer's factual description is correct but the paper addresses why this is expected to be a minor effect.",
+            "cost_usd": 0.004005042857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The omission is explicit: “the PTA detection efficiencies that we derive neglect the presence of potential intrinsic red noise components … and do not take into account the spatially-correlated nature of the GW background noise.” The paper only adds a qualitative reassurance — “these assumptions should not have strong impact on our results” — without quantifying that impact.",
+            "cost_usd": 0.0096205
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors explicitly acknowledge that they \"neglect the presence of potential intrinsic red noise components... and do not take into account the spatially-correlated nature of the GW background noise.\" However, they do not quantify the impact of these omissions on their detection efficiencies, merely claiming they \"should not have strong impact.\"",
+            "cost_usd": 0.0021108
+          }
+        ],
+        "cost_usd": 0.015736342857142857
+      },
+      {
+        "flag_id": "fp-8d3764b353fd",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper uses ad hoc distances for some pulsars — “we randomly assign them a distance from 0.5 to 2.5 kiloparsecs using uniform weighting” — and later concedes that “The SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic.” This uncertainty is not propagated into the main forecasts.",
+        "evidence": {
+          "claim": "The paper makes an insufficiently justified simplification for pulsar distances and fails to propagate distance uncertainties, impacting the core prediction since the zombie concept depends on light-travel time delay.",
+          "excerpt": "The treatment of pulsar distances is a critical and insufficiently justified simplification. Distances for some pulsars are assigned from an ad hoc uniform prior, and more importantly, distance uncertainties (which can be large) are not propagated into the analysis. Since the entire 'zombie' concept depends on the light-travel time delay, the forecasts are conditional on a single, optimistic realization of pulsar distances."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly acknowledges distance uncertainty: 'the SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic.' For pulsars without distance estimates, it 'randomly assign them a distance from 0.5 to 2.5 kiloparsecs using uniform weighting,' which is acknowledged as a limitation, and defers precise treatment to future work alongside SKA distance measurement capabilities.",
+            "cost_usd": 0.004005042857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses ad hoc distances for some pulsars — “we randomly assign them a distance from 0.5 to 2.5 kiloparsecs using uniform weighting” — and later concedes that “The SNR calculations used in this work do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic.” This uncertainty is not propagated into the main forecasts.",
+            "cost_usd": 0.0096205
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms this limitation, stating that they \"randomly assign them a distance from 0.5 to 2.5 kiloparsecs using uniform weighting\" and later acknowledging that their SNR calculations \"do not account for our current uncertainty about the pulsar distances and therefore could be considered optimistic.\"",
+            "cost_usd": 0.0021108
+          }
+        ],
+        "cost_usd": 0.015736342857142857
+      },
+      {
+        "flag_id": "fp-d090bcd890a5",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states mass ratio 'only enters in the zombies waveforms via f^(ISCO)_orb and thus have only a negligible effect on the detection efficiency' but does not quantitatively demonstrate this. The assumed q distribution in the population models is also not specified in the text.",
+        "evidence": {
+          "claim": "The assumption of equal-mass binaries (q=1) is not quantitatively validated, and the mass-ratio distribution for the population is not specified, which may affect detection probability estimates.",
+          "excerpt": "The assumption of equal-mass binaries (mass ratio $q = 1$) is not quantitatively validated. While the text argues its impact is negligible at $0$-PN order, this is not demonstrated. Since $f_{\rm orb}^{\rm ISCO}$ (and thus the available parameter space for zombies) depends on $q$, this simplification could affect the results. The assumed $q$ distribution in the underlying population models is also not specified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states mass ratio 'only enters in the zombies waveforms via f^(ISCO)_orb and thus have only a negligible effect on the detection efficiency' but does not quantitatively demonstrate this. The assumed q distribution in the population models is also not specified in the text.",
+            "cost_usd": 0.004005042857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The efficiency is computed “fixing q = 1,” and the paper just states, without quantitative demonstration, that “for comparable mass binaries … the binary mass ratio only enters in the zombies waveforms via f(ISCO)orb and thus have only a negligible effect on the detection efficiency.” No mass-ratio distribution is specified in the adopted merger-density model.",
+            "cost_usd": 0.0096205
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors state they \"neglect the influence of the binary mass ratio... fixing q = 1\" and argue it has a \"negligible effect on the detection efficiency\" but do not provide a quantitative demonstration of this. The comoving merger density models introduced in Eq. 11 also do not specify a mass-ratio distribution.",
+            "cost_usd": 0.0021108
+          }
+        ],
+        "cost_usd": 0.015736342857142857
+      },
+      {
+        "flag_id": "fp-8d407e2fdd0d",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states that “for a given pair of intrinsic parameters, we generate 12 000 binaries” and notes in Fig. 3 that “our sensitivity is restricted to probabilities on the order of 10−4.” But it does not quantify Monte Carlo error bars on the efficiencies or propagate them to the final values of ⟨Nz⟩ and P(Nz>0).",
+        "evidence": {
+          "claim": "The Monte Carlo simulations for detection efficiency have finite statistical uncertainty which is not quantified or propagated into the quoted final results, potentially underestimating the total uncertainty.",
+          "excerpt": "The Monte Carlo simulation used to compute detection efficiencies (12,000 binaries per grid cell) has a finite statistical uncertainty that is not quantified or propagated to the final results ($\\langle N_{\\rm z} \\rangle$). Low-efficiency cells at high redshift can contribute significantly to the total integrated number of sources, and Monte Carlo noise in these cells could introduce non-negligible uncertainty in the final predictions."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper notes 'our sensitivity is restricted to probabilities on the order of 10^-4' due to 12,000 simulated binaries, and for the main results notes that low-mass systems with Mc,r<10^8 solar masses contribute zero detection efficiency, limiting the relevant integration region. The paper does not formally propagate Monte Carlo uncertainty but the statement about sensitivity floor provides implicit bounds on the error.",
+            "cost_usd": 0.004005042857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states that “for a given pair of intrinsic parameters, we generate 12 000 binaries” and notes in Fig. 3 that “our sensitivity is restricted to probabilities on the order of 10−4.” But it does not quantify Monte Carlo error bars on the efficiencies or propagate them to the final values of ⟨Nz⟩ and P(Nz>0).",
+            "cost_usd": 0.0096205
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper notes that the \"estimate of the detection efficiency is based on 12 000 simulated binaries,\" but it does not report any statistical uncertainties or error bars on the final integrated values (e.g., reporting expected counts like 2.3, 6.1, and 5.7 as precise values), meaning Monte Carlo noise is neither quantified nor propagated.",
+            "cost_usd": 0.0021108
+          }
+        ],
+        "cost_usd": 0.015736342857142857
+      },
+      {
+        "flag_id": "fp-f74b336426d3",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: The paper admits that the \"true IPTA DR3 dataset will be much more heterogeneous\" with better observing times, cadence, and timing precision than the modeled parameters, stating \"we therefore regard our IPTA sensitivity as a conservative baseline.\" Since they only acknowledge the simplification without modeling the actual realistic IPTA sensitivity, the issue is confirmed.",
+        "evidence": {
+          "claim": "The IPTA DR3-like configuration is not modeled realistically and likely underestimates IPTA's sensitivity, which can misrepresent current detection prospects.",
+          "excerpt": "The IPTA DR3-like configuration is described as a ‘conservative baseline’ but is modeled with parameters ($T_{\\rm obs}=10~{\\rm yr}$, $\\sigma_{\\rm MN}=1~\\mu{\\rm s}$) identical to the EPTA-like array. This likely underestimates the sensitivity of the real IPTA, which includes longer-baseline and better-timed pulsars from NANOGrav and MeerKAT. This may misrepresent realistic detection prospects for the current generation of PTAs."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly states: 'we therefore regard our IPTA sensitivity as a conservative baseline' and notes 'the true IPTA DR3 dataset will be much more heterogeneous with some pulsars having an observing time longer than 10 years with a better cadence, as well as lower timing precision.' The reviewer's concern that it underestimates IPTA sensitivity is acknowledged and intended by the authors as a conservative choice.",
+            "cost_usd": 0.004005042857142857
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly warns that its IPTA setup is not meant to be a realistic full forecast: “the true IPTA DR3 dataset will be much more heterogeneous … This could significantly enhanced the detection efficiency of this dataset and we therefore regard our IPTA sensitivity as a conservative baseline.” So the alleged underestimation is already disclosed rather than being an unacknowledged flaw.",
+            "cost_usd": 0.0096205
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper admits that the \"true IPTA DR3 dataset will be much more heterogeneous\" with better observing times, cadence, and timing precision than the modeled parameters, stating \"we therefore regard our IPTA sensitivity as a conservative baseline.\" Since they only acknowledge the simplification without modeling the actual realistic IPTA sensitivity, the issue is confirmed.",
+            "cost_usd": 0.0021108
+          }
+        ],
+        "cost_usd": 0.015736342857142857
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.1101544
+  },
+  "extractor_cost_usd": 0.02950399999999996,
+  "total_cost_usd": 0.13965839999999996
+}

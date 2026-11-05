@@ -1,0 +1,217 @@
+{
+  "paper_id": "2607.13749",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-04d5de9c8ce8",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Mechanical predicate passed: sum of 5 parts = 190.0; reported total = 190; worst-case additive half-ULP tolerance = 7.5",
+        "evidence": {
+          "check_type": "sum_eq_total",
+          "predicate": {
+            "verdict": "PASS",
+            "computed": 190.0,
+            "reported": 190.0,
+            "diff_abs": 0.0,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 7.5,
+              "rel_tol": null
+            },
+            "notes": "sum of 5 parts = 190.0; reported total = 190; worst-case additive half-ULP tolerance = 7.5"
+          },
+          "rereader": [
+            {
+              "label": "part_1",
+              "raw_observed": "38",
+              "value_observed": 38.0,
+              "notes": "Table 4, 'learned (INST/39)' for k=2"
+            },
+            {
+              "label": "part_2",
+              "raw_observed": "38",
+              "value_observed": 38.0,
+              "notes": "Table 4, 'learned (INST/39)' for k=3"
+            },
+            {
+              "label": "part_3",
+              "raw_observed": "38",
+              "value_observed": 38.0,
+              "notes": "Table 4, 'learned (INST/39)' for k=4"
+            },
+            {
+              "label": "part_4",
+              "raw_observed": "38",
+              "value_observed": 38.0,
+              "notes": "Table 4, 'learned (INST/39)' for k=5"
+            },
+            {
+              "label": "part_5",
+              "raw_observed": "38",
+              "value_observed": 38.0,
+              "notes": "Table 4, 'learned (INST/39)' for k=6"
+            },
+            {
+              "label": "total",
+              "raw_observed": "190",
+              "value_observed": 190.0,
+              "notes": "Table 4, 'of the 190 solved cells per initialisation (38 tasks × 5 degrees)'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.13441800000000004
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-b5a1a62f1979",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only gives a proof sketch: “For any fixed g ∈ Fk the summands ... concentrate ... Since Fk is (k + 1)-dimensional ... a uniform bound over g ∈ Fk costs only a dimension-dependent constant,” but it does not actually derive the claimed uniform high-probability bound, probability rate, or constants for the empirical minimum over all network outputs. Because Theorem 3 is then used to argue “there is no memorisation,” this gap is not resolved in the attached paper.",
+        "evidence": {
+          "claim": "The high-probability empirical training-loss lower bound in Theorem 3 is not rigorously established; uniform concentration over F_k is not justified, so the stated probability and constants are not proven, which affects the central 'no memorisation' claim.",
+          "excerpt": "The high-probability training-loss lower bound is not rigorously established as stated. In Sec. 3.5, Theorem 3 claims that the empirical minimum over F_k is at least the population spectral gap up to O(N^{-1/2}), with probability 1-O(1/N), uniformly over all network outputs and independently of hidden width. The proof sketches pointwise Hoeffding–Serfling concentration for fixed g∈F_k, then invokes injectivity of the restriction map, but injectivity does not provide a uniform empirical-process bound over an unbounded coefficient space, nor does it justify the stated probability or constants. This matters because the theorem is used to support the central “no memorisation” claim."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The proof of Theorem 3 sketches pointwise Hoeffding–Serfling concentration and appeals to injectivity via a 'Schwartz–Zippel-type argument over Zp, detailed in the appendix,' but no appendix is present in the paper. The reviewer's concern that injectivity does not supply a uniform empirical-process bound over an unbounded coefficient space is technically valid, but the paper defers to an appendix that cannot be evaluated, making the issue neither fully confirmable nor dismissible.",
+            "cost_usd": 0.0080447
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only gives a proof sketch: “For any fixed g ∈ Fk the summands ... concentrate ... Since Fk is (k + 1)-dimensional ... a uniform bound over g ∈ Fk costs only a dimension-dependent constant,” but it does not actually derive the claimed uniform high-probability bound, probability rate, or constants for the empirical minimum over all network outputs. Because Theorem 3 is then used to argue “there is no memorisation,” this gap is not resolved in the attached paper.",
+            "cost_usd": 0.012347166666666668
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer correctly notes that the proof of Theorem 3 asserts that 'a uniform bound over g \\in F_k costs only a dimension-dependent constant' without justifying how this holds for an unbounded coefficient space. The cited injectivity argument alone does not yield a uniform empirical-process bound for such a non-compact space.",
+            "cost_usd": 0.0034029999999999998
+          }
+        ],
+        "cost_usd": 0.023794866666666668
+      },
+      {
+        "flag_id": "fp-18b08e792630",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states in Sec. 3.6 that 'The lower bound of Theorem 3 carries over with this substitution, since its only input is that every network output lies in a family of dimension—here, rank—at most k+1,' but the set of rank-(k+1) matrices is a nonlinear variety of dimension O(pk), not a (k+1)-dimensional linear subspace, so the Hoeffding–Serfling concentration argument used in Theorem 3's proof does not transfer as claimed.",
+        "evidence": {
+          "claim": "The learned-embedding extension of the loss lower bound is mathematically unjustified because rank at most k+1 is not a (k+1)-dimensional linear family, so the proof mechanism from the fixed-encoding case does not transfer.",
+          "excerpt": "The learned-embedding extension of the loss lower bound is mathematically unjustified. In Sec. 3.6, the paper says Theorem 3 “carries over” by replacing Fourier tail energy with singular-value tail energy because “every network output lies in a family of dimension—here, rank—at most k+1.” Rank at most k+1 is not a (k+1)-dimensional linear family; the set of rank-r matrices is nonlinear and has dimension O(pr). Therefore the stated proof mechanism from Sec. 3.5 does not transfer."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states in Sec. 3.6 that 'The lower bound of Theorem 3 carries over with this substitution, since its only input is that every network output lies in a family of dimension—here, rank—at most k+1,' but the set of rank-(k+1) matrices is a nonlinear variety of dimension O(pk), not a (k+1)-dimensional linear subspace, so the Hoeffding–Serfling concentration argument used in Theorem 3's proof does not transfer as claimed.",
+            "cost_usd": 0.0080447
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.6 states: “The lower bound of Theorem 3 carries over with this substitution, since its only input is that every network output lies in a family of dimension—here, rank—at most k + 1.” But rank ≤ k+1 is not a linear family of dimension k+1, and the paper provides no new argument showing the fixed-encoding proof extends to this nonlinear rank-constrained set.",
+            "cost_usd": 0.012347166666666668
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper wrongly conflates matrix rank with the dimension of a linear subspace, claiming the lower bound carries over 'since its only input is that every network output lies in a family of dimension—here, rank—at most k + 1'. The reviewer correctly points out that the set of rank-(k+1) matrices is a non-linear variety of dimension O(pk), meaning the uniform concentration mechanism from Theorem 3 does not trivially transfer.",
+            "cost_usd": 0.0034029999999999998
+          }
+        ],
+        "cost_usd": 0.023794866666666668
+      },
+      {
+        "flag_id": "fp-8a96bede4591",
+        "paper_id": "2607.13749",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The protocol gives only partial details — e.g. “The network has hidden width H = 128, weights initialised i.i.d. complex Gaussian, and trains full-batch with AdamW at learning rate 10−3 and weight decay 10−2...” and then classifies runs by whether “train and test accuracy exceed 99%,” but nowhere in the attached paper is the decoding rule from complex outputs to 97 classes specified. The default holomorphic training budget and several other implementation details flagged by the reviewer are likewise not stated explicitly in the paper.",
+        "evidence": {
+          "claim": "The experimental protocol omits critical details needed to reproduce reported accuracies: decoding rule, optimizer hyperparameters, training budgets, split policy, initialization, and architecture details.",
+          "excerpt": "The experimental protocol lacks several details needed to reproduce and interpret the reported accuracies. Sec. 4.1 specifies the loss and optimizer at a high level, but does not define how complex-valued outputs are decoded into one of 97 classes for train/test accuracy, the default training budget for the holomorphic runs, AdamW betas/epsilon, initialization scale, split-generation procedure, or whether train/test splits are fixed across seeds and models. Secs. 4.3–4.5 also give only partial architectural details for ReLU, bottleneck, and learned-embedding experiments. This matters because the central empirical claims are categorical classifications into INST/GROK/MEM/FAIL."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Section 4.1 specifies loss (MSE), optimizer (AdamW, lr=1e-3, wd=1e-2), width (H=128), training fraction (40% of 9409 pairs), and seeds (3 per cell), and the classification thresholds (INST/GROK/MEM/FAIL) are defined; however, the default training-step budget for holomorphic runs, the decoding rule from complex output to class accuracy, and AdamW betas/epsilon are not stated, leaving partial but not complete reproducibility information.",
+            "cost_usd": 0.0080447
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The protocol gives only partial details — e.g. “The network has hidden width H = 128, weights initialised i.i.d. complex Gaussian, and trains full-batch with AdamW at learning rate 10−3 and weight decay 10−2...” and then classifies runs by whether “train and test accuracy exceed 99%,” but nowhere in the attached paper is the decoding rule from complex outputs to 97 classes specified. The default holomorphic training budget and several other implementation details flagged by the reviewer are likewise not stated explicitly in the paper.",
+            "cost_usd": 0.012347166666666668
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The reviewer correctly identifies several missing experimental details. While Section 4.1 mentions that the network 'trains full-batch with AdamW at learning rate 10^-3 and weight decay 10^-2', it fails to specify the decoding rule for computing accuracy from complex outputs, the AdamW betas, the initialization variance, or the default training budget for the holomorphic runs.",
+            "cost_usd": 0.0034029999999999998
+          }
+        ],
+        "cost_usd": 0.023794866666666668
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.13441800000000004,
+    "general": 0.0713846
+  },
+  "extractor_cost_usd": 0.022749999999999937,
+  "total_cost_usd": 0.2285526
+}

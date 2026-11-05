@@ -1,0 +1,146 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "L1",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-66479a70b947",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges this limitation in the Conclusions: 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.' No real-world experimental validation is performed in the paper itself; all results are based on synthetic data.",
+        "evidence": {
+          "claim": "The manuscript lacks a validation test using real-world data and relies solely on synthetic data, weakening the strength of the results.",
+          "excerpt": "the manuscript lacks a validation test on historical, real-world data. ... it would be highly beneficial to apply the trained DCCNN to a small dataset of existing, experimentally measured scans (from Ref [17]) to demonstrate that the simulation accurately captures the noise and jump dynamics of the real physical system."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation in the Conclusions: 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.' No real-world experimental validation is performed in the paper itself; all results are based on synthetic data.",
+            "cost_usd": 0.0054992
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states the model is trained and evaluated only on simulations: \"Both models were trained on the same fully simulated dataset of 100,000 scans\" and in the conclusion says, \"Future work will focus on ... validating the simulation-trained model on measured scans,\" confirming no real-data validation is included.",
+            "cost_usd": 0.010662166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation, stating that \"Future work will focus on... validating the simulation-trained model on measured scans,\" confirming that the current results rely solely on synthetic data.",
+            "cost_usd": 0.0027916666666666667
+          }
+        ],
+        "cost_usd": 0.018953033333333334
+      },
+      {
+        "flag_id": "fp-36e86d3452bf",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper discusses FPGA implementation only for the DCCNN and does not address the feasibility, resource cost, or latency of implementing the chi-squared algorithm on FPGA. The comparison is limited to detection efficiency metrics, with no hardware-level comparison for the chi-squared approach.",
+        "evidence": {
+          "claim": "The manuscript does not discuss the feasibility or expected resource/latency penalty of implementing the chi-squared algorithm on FPGA compared to DCCNN, leaving the hardware comparison incomplete.",
+          "excerpt": "could the authors comment on the feasibility of implementing the cumulative chi-squared algorithm on an FPGA? What would be the expected hardware resource or latency penalty compared to the DCCNN? Providing this context would further justify the shift to a neural network approach."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper discusses FPGA implementation only for the DCCNN and does not address the feasibility, resource cost, or latency of implementing the chi-squared algorithm on FPGA. The comparison is limited to detection efficiency metrics, with no hardware-level comparison for the chi-squared approach.",
+            "cost_usd": 0.0054992
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The manuscript discusses the baseline only as offline — \"While effective for offline analysis...\" — and gives hardware numbers only for the neural net: \"Table VIII reports the FPGA resource utilization of the quantized DCCNN...\" with \"a per-inference latency of 1,860 cycles (6.19 µs).\" It does not provide any FPGA feasibility/resource/latency estimate for the χ² algorithm.",
+            "cost_usd": 0.010662166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While the manuscript states that the chi-squared method \"operates as a stateful per-scan procedure unsuited for real-time inference,\" it does not quantify or discuss the expected hardware resource or latency penalty of an FPGA implementation compared to the DCCNN.",
+            "cost_usd": 0.0027916666666666667
+          }
+        ],
+        "cost_usd": 0.018953033333333334
+      },
+      {
+        "flag_id": "fp-89dd283fcac2",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The study is built from known templates: \"For each of the five qubit configurations considered in Ref. [17] ... a per-qubit template x̂(θ) and noise envelope σ̂(θ) are obtained,\" and the conclusion only claims, \"A single trained model serves all five qubit templates.\" There is no explicit evaluation on a completely unseen qubit or discussion of whether a newly fabricated qubit would need retraining versus fine-tuning.",
+        "evidence": {
+          "claim": "The manuscript lacks discussion of how well the DCCNN generalizes to unseen qubits with different characteristics, raising concerns about the robustness of the approach.",
+          "excerpt": "how well does the authors' methodology generalize to a completely unseen qubit with a different charge dispersion or noise profile? A brief discussion on whether a newly fabricated qubit would require retraining the network or simply fine-tuning would be appreciated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper claims 'A single trained model serves all five qubit templates, eliminating the per-qubit tuning,' demonstrating some cross-qubit generalization within the five NEXUS qubits used for training. However, it does not explicitly discuss generalization to completely unseen qubits with different charge dispersions or noise profiles, nor whether retraining would be needed, making this concern partially but not fully addressed.",
+            "cost_usd": 0.0054992
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The study is built from known templates: \"For each of the five qubit configurations considered in Ref. [17] ... a per-qubit template x̂(θ) and noise envelope σ̂(θ) are obtained,\" and the conclusion only claims, \"A single trained model serves all five qubit templates.\" There is no explicit evaluation on a completely unseen qubit or discussion of whether a newly fabricated qubit would need retraining versus fine-tuning.",
+            "cost_usd": 0.010662166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The training set contains simulated scans for all five considered qubits. Although the authors state the approach \"requires no hyperparameter tuning when applied to a new qubit,\" they do not test the model on a completely unseen qubit or discuss how performance scales with different noise profiles.",
+            "cost_usd": 0.0027916666666666667
+          }
+        ],
+        "cost_usd": 0.018953033333333334
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0568591
+  },
+  "extractor_cost_usd": 0.007665999999999999,
+  "total_cost_usd": 0.0645251
+}

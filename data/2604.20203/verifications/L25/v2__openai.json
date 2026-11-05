@@ -1,0 +1,180 @@
+{
+  "paper_id": "2604.20203",
+  "copy_id": "v2",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states in the 'Citation check' minor issue: 'I did not find a confirmed case, from the manuscript text alone, where a cited work is clearly used for a claim it cannot support.' The reviewer never flags the statistical methodology attribution (binomial statistics vs. maximum likelihood estimator) in the cited papers Bryan & Lee 2024 and Zhu 2024.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states they found no confirmed citation error and does not challenge the claim about Bryan & Lee 2024 / Zhu 2024 using a maximum likelihood estimator versus binomial/Bayesian statistics.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states in Minor Issue 5 that they found no confirmed citation errors and does not challenge the attribution of the 'maximum likelihood estimator' methodology to the cited sources.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The abstract states that the positive sub-Neptune/cold-Jupiter correlation in metal-rich systems has a confidence level of 99.59%. Section 3.2 states 99.95%, and Section 4 also states 99.95%. These cannot both be correct.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The abstract states that the positive sub-Neptune/cold-Jupiter correlation in metal-rich systems has a confidence level of 99.59%. Section 3.2 states 99.95%, and Section 4 also states 99.95%. These cannot both be correct.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the discrepancy between 99.59% in the abstract and 99.95% in Sections 3.2 and 4, which directly corresponds to the injected change from 99.95% to 99.59% in the abstract only.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "3. [numerical] Inconsistent confidence level for the main metal-rich sub-Neptune result\n\n   **Where:** Abstract; Section 3.2; Section 4.\n\n   **What is wrong:** The abstract states that the positive sub-Neptune/cold-Jupiter correlation in metal-rich systems has a confidence level of 99.59%. Section 3.2 states 99.95%, and Section 4 also states 99.95%. These cannot both be correct.",
+          "confidence": "high",
+          "reasoning": "This specifically identifies the abstract's 99.59% value as inconsistent with the 99.95% value elsewhere for the same quantity, directly matching the injected abstract-only numerical change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The abstract states that the positive sub-Neptune/cold-Jupiter correlation in metal-rich systems has a confidence level of 99.59%. Section 3.2 states 99.95%, and Section 4 also states 99.95%. These cannot both be correct.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the exact discrepancy between the abstract value (99.59%) and the body value (99.95%) for the specified correlation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The posterior is written as f(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{b+1}, with a=n_{\\rm det}+1 and b=n_{\\rm eff}-n_{\\rm det}+1. This is not the beta distribution with parameters a,b. The beta density should have exponent b-1, not b+1.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The posterior is written as f(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{b+1}, with a=n_{\\rm det}+1 and b=n_{\\rm eff}-n_{\\rm det}+1. This is not the beta distribution with parameters a,b. The beta density should have exponent b-1, not b+1.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies the incorrect exponent b+1 in the Beta distribution formula and states the correct form should use b-1, directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "1. [mathematical] Incorrect beta-distribution formula in Equation (2)\n\n   **Where:** Section 3.1, Equation (2).\n\n   **What is wrong:** The posterior is written as\n   \\[\n   f(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{b+1},\n   \\]\n   with \\(a=n_{\\rm det}+1\\) and \\(b=n_{\\rm eff}-n_{\\rm det}+1\\). This is not the beta distribution with parameters \\(a,b\\). The beta density should have exponent \\(b-1\\), not \\(b+1\\):\n   \\[\n   f(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{b-1}.\n   \\]",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely flags the incorrect exponent in the beta PDF, naming the exact erroneous term b+1 and the correct replacement b-1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The beta density should have exponent b-1, not b+1:\nf(P;a,b)=\\frac{1}{B(a,b)}P^{a-1}(1-P)^{b-1}.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that Equation 2 uses the incorrect exponent (b+1) for the Beta distribution and provides the correct formula (b-1).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text states that computing individual completeness per system rather than an average changes conditional frequencies by less than 1%, but the individual-completeness calculation is not shown... Add a short table or appendix note giving the individual-completeness result for at least the main metal-rich sub-Neptune and super-Earth cases, or remove the quantitative 'within 1%' claim if it is not documented.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text states that computing individual completeness per system rather than an average changes conditional frequencies by less than 1%, but the individual-completeness calculation is not shown... Add a short table or appendix note giving the individual-completeness result for at least the main metal-rich sub-Neptune and super-Earth cases, or remove the quantitative 'within 1%' claim if it is not documented.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the phantom evidence subclaim in Section 3.1 about individual vs. average completeness agreeing within 1%, noting this calculation is not documented anywhere in the paper, which directly corresponds to the injected parenthetical.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "7. [general] “Average completeness” versus “individual completeness” is asserted but not documented\n\n   **Where:** Section 3.1.\n\n   **What is wrong:** The text states that computing individual completeness per system rather than an average changes conditional frequencies by less than 1%, but the individual-completeness calculation is not shown.\n\n   **Why it matters:** This statement is used to justify the completeness treatment, and the sample sizes are small enough that completeness assumptions could matter.\n\n   **Concrete fix:** Add a short table or appendix note giving the individual-completeness result for at least the main metal-rich sub-Neptune and super-Earth cases, or remove the quantitative “within 1%” claim if it is not documented.",
+          "confidence": "high",
+          "reasoning": "This directly targets the injected parenthetical claim that individual completeness versus average completeness agrees within 1%, noting that the comparison is asserted but undocumented.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text states that computing individual completeness per system rather than an average changes conditional frequencies by less than 1%, but the individual-completeness calculation is not shown.",
+          "confidence": "high",
+          "reasoning": "The reviewer flags the specific parenthetical claim about the 1% agreement as being an undocumented assertion without presented evidence.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 30.522435,
+  "total_cost_usd": null,
+  "total_input_tokens": 22569,
+  "total_output_tokens": 3569,
+  "escalation_count": 0,
+  "notes": null
+}

@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v3",
+  "reviewer_system": "L1",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the Anchors/Ribeiro et al. claim about 'all instances in the dataset' vs. 'local region.' The literature review critique is vague and does not challenge this specific over-generalisation against the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review discusses local versus global explanations as a general taxonomy issue, but it does not specifically challenge the Anchors claim or cite Ribeiro et al. in connection with the overgeneralized guarantee.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention the Anchors method, Ribeiro et al. (2018), or the specific claim regarding local versus dataset-wide guarantees.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer did not flag the over-generalisation of the Anchors claim from 'a local region' to 'all instances in the dataset.' The review's literature comments focus on the Molnar citation year error and the Simonyan saliency-map citation, without challenging the post-edit Anchors claim against its source.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "Equation (3) suggests a normalized decision-tree-based simplicity score, but the experiments report raw values such as 4, 13, 35, and 28.31. It is unclear how these values are obtained for LIME and SHAP.",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer mentions raw simplicity values such as '4, 13, 35, and 28.31' but does not flag a contradiction between a table entry of 35 and the prose statement that feature counts range from 4 to 30. The mention of '35' is in a different context (discussing the simplicity metric definition) and does not identify the internal inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Equation (3) suggests a normalized decision-tree-based simplicity score, but the experiments report raw values such as 4, 13, 35, and 28.31. It is unclear how these values are obtained for LIME and SHAP.",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly flags the suspicious table value '35' in the simplicity results, which corresponds to the injected table entry. Although they do not mention the prose range '4 to 30', the quoted anomalous value clearly matches the specific edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the experiments report raw values such as 4, 13, 35, and 28.31. It is unclear how these values are obtained for LIME and SHAP.",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly quotes the injected value '35' from the results table and flags the derivation of these values as unclear, effectively highlighting the erroneous data point even if the contradiction with the prose range (4-30) is not explicitly described.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Equation (1) defines fidelity as: \\frac{1}{N}\\sum_i \\frac{\\|f(x_i)\\|^2}{\\|f(x_i)-g(x_i)\\|^2} This expression becomes larger when the explanation model is closer to the original model, and it can become unbounded or undefined when the denominator approaches zero. However, in the results section, the authors interpret lower fidelity scores as better, stating that values close to zero indicate high fidelity. This is a serious inconsistency. Either the formula or the interpretation must be corrected.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Equation (1) defines fidelity as: \\frac{1}{N}\\sum_i \\frac{\\|f(x_i)\\|^2}{\\|f(x_i)-g(x_i)\\|^2} This expression becomes larger when the explanation model is closer to the original model, and it can become unbounded or undefined when the denominator approaches zero. However, in the results section, the authors interpret lower fidelity scores as better, stating that values close to zero indicate high fidelity. This is a serious inconsistency. Either the formula or the interpretation must be corrected.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the inverted fidelity formula (the injected form) and identifies that it diverges as the surrogate approaches the model, directly flagging the mathematical error introduced by the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Equation (1) defines fidelity as:\n\n\\[\n\\frac{1}{N}\\sum_i \\frac{\\|f(x_i)\\|^2}{\\|f(x_i)-g(x_i)\\|^2}\n\\]\n\nThis expression becomes larger when the explanation model is closer to the original model, and it can become unbounded or undefined when the denominator approaches zero. However, in the results section, the authors interpret lower fidelity scores as better, stating that values close to zero indicate high fidelity.\n\nThis is a serious inconsistency. Either the formula or the interpretation must be corrected.",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the inverted fidelity ratio exactly and explains why it behaves incorrectly, directly identifying the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Equation (1) defines fidelity as: \\frac{1}{N}\\sum_i \\frac{\\|f(x_i)\\|^2}{\\|f(x_i)-g(x_i)\\|^2} ... This is a serious inconsistency. Either the formula or the interpretation must be corrected.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the inverted fidelity formula and explains that it leads to a mathematical inconsistency with the paper's interpretation of the results.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not mention a cross-reference mismatch between figures in Section 4.1. The only figure comment is a minor note about Figure 2's schematic quality, which does not correspond to the injected figure-reference swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions that 'Figure 2 in particular appears schematic' but does not identify any cross-reference mismatch between the benchmarking steps text and the wrong figure reference, so this specific injection is not detected.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer provides general feedback on improving the clarity of Figure 2 but does not notice the specific cross-reference mismatch in Section 4.1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer did not flag any cross-reference mismatch between the figure referenced in Section 4.1 and the actual content of that figure. The reviewer mentioned figures in passing (e.g., commenting on Figure 2 being schematic) but did not identify the specific wrong figure reference (Fig. 1 vs Fig. 2) in the benchmarking steps description.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 48.851419,
+  "total_cost_usd": null,
+  "total_input_tokens": 26557,
+  "total_output_tokens": 6295,
+  "escalation_count": 2,
+  "notes": null
+}

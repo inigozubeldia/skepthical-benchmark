@@ -1,0 +1,190 @@
+{
+  "paper_id": "2607.14375",
+  "reviewer_system": "L25",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-374fc64c5322",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'Ko (1991): polynomial-time computation of normal CDF'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "Ko (1991): polynomial-time computation of normal CDF"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-fe87279a3679",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01719299999999996
+      },
+      {
+        "flag_id": "fp-496b1f829e6d",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01719299999999996
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-14b4cbef55c1",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. This lemma asserts that the sup-norm difference between two networks with perturbed coefficients is bounded by a weighted L1 deviation of the parameters, with deterministic influence coefficients c_q. The transcription was confirmed faithful to the paper. However, no mechanical engine was able to evaluate this inequality, and no LLM knowledge check was run against a canonical reference. The result is plausible for piecewise-linear or smooth network architectures where each parameter's influence on the output can be bounded by a Lipschitz-type argument, but the validity depends critically on how the coefficients c_q are defined and whether the bound holds uniformly over all activation patterns (including boundary cases where preactivations equal zero). Without a machine-verified proof or a literature match for this specific form, the claim cannot be confirmed or refuted from the available evidence alone.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "critical",
+          "notes": "This lemma asserts that the sup-norm difference between two networks with perturbed coefficients is bounded by a weighted L1 deviation of the parameters, with deterministic influence coefficients c_q. The transcription was confirmed faithful to the paper. However, no mechanical engine was able to evaluate this inequality, and no LLM knowledge check was run against a canonical reference. The result is plausible for piecewise-linear or smooth network architectures where each parameter's influence on the output can be bounded by a Lipschitz-type argument, but the validity depends critically on how the coefficients c_q are defined and whether the bound holds uniformly over all activation patterns (including boundary cases where preactivations equal zero). Without a machine-verified proof or a literature match for this specific form, the claim cannot be confirmed or refuted from the available evidence alone.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.03212700000000002
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-e2d01b5bd4db",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "The paper states in Appendix A.1 that the 64 copies use 'disjoint variable-renamed copies,' making them independently optimizable by construction. Section D.3 also explicitly states 'If blocks use disjoint inputs and their outputs are added, then max...= sum of max,' confirming the subtlety is handled, even if not elaborated in the main padding sentence.",
+        "evidence": {
+          "claim": "The padding argument multiplying the number of clauses by 64 preserves the no-case gap fraction but only if each copy is independently optimized; this subtlety is not fully presented.",
+          "excerpt": "the sentence \"has the same maximum satisfiable fraction in the no case\" is only true if every disjoint copy is independently optimized, which it is. Fine, but state this explicitly."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper states in Appendix A.1 that the 64 copies use 'disjoint variable-renamed copies,' making them independently optimizable by construction. Section D.3 also explicitly states 'If blocks use disjoint inputs and their outputs are added, then max...= sum of max,' confirming the subtlety is handled, even if not elaborated in the main padding sentence.",
+            "cost_usd": 0.00934155
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "Appendix A.1 already states: \"If the resulting formula has m0 clauses, make 64 disjoint variable-renamed copies. The new formula has m = 64m0 ≥ 64 clauses ... and has the same maximum satisfiable fraction in the no case.\" The paper explicitly gives the disjoint-copy construction; that is exactly the condition under which each copy can be optimized independently.",
+            "cost_usd": 0.01105875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly specifies in Appendix A.1 that the padding uses \"64 disjoint variable-renamed copies.\" Because the variables in each copy are completely disjoint, they are mathematically decoupled, making the preservation of the satisfiable fraction a direct and obvious consequence rather than an omitted subtlety.",
+            "cost_usd": 0.0032356
+          }
+        ],
+        "cost_usd": 0.0236359
+      },
+      {
+        "flag_id": "fp-389f65ae2ebb",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "The paper explicitly clarifies this in Appendix A.3: 'A parameter slot is counted even when its base value is zero. The instance-size definition counts only nonzero coefficients, so this table is an upper bound for that contribution.' The phrase 'at most 14m+4' already conveys an upper bound, and the distinction between slot count and nonzero coefficient count is explicitly addressed.",
+        "evidence": {
+          "claim": "The claim 'at most $14m+4$ perturbed parameter slots' should clarify the slot count versus actual nonzero coefficients, as degenerate clause structure may yield less than $14m+4$.",
+          "excerpt": "it should say \"up to $14m+4$\" rather than \"at most\", or clarify that slot count is used, not nonzero coefficient count."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly clarifies this in Appendix A.3: 'A parameter slot is counted even when its base value is zero. The instance-size definition counts only nonzero coefficients, so this table is an upper bound for that contribution.' The phrase 'at most 14m+4' already conveys an upper bound, and the distinction between slot count and nonzero coefficient count is explicitly addressed.",
+            "cost_usd": 0.00934155
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly distinguishes slots from nonzero coefficients: \"A parameter slot is counted even when its base value is zero. The instance-size definition counts only nonzero coefficients, so this table is an upper bound for that contribution.\" It also says \"at most 14m + 4 perturbed slots,\" so the reviewer’s requested clarification is already present.",
+            "cost_usd": 0.01105875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper already explicitly clarifies the difference between parameter slots and nonzero coefficients in Appendix A.3, stating: \"A parameter slot is counted even when its base value is zero. The instance-size definition counts only nonzero coefficients, so this table is an upper bound for that contribution.\"",
+            "cost_usd": 0.0032356
+          }
+        ],
+        "cost_usd": 0.0236359
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "mathematics": 0.0,
+    "general": 1.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 2,
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "numerics": 0.03438599999999992,
+    "mathematics": 0.03212700000000002,
+    "general": 0.0472718
+  },
+  "extractor_cost_usd": 0.021213999999999983,
+  "total_cost_usd": 0.13499879999999992
+}

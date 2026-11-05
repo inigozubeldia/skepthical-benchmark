@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the SHAP citation as describing an incorrect theoretical basis (information theory vs. game theory). The minor citation issues noted concern saliency maps [17] and reference [11], not the SHAP foundation claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review flags a different citation problem about saliency maps and Reference [17], but does not mention SHAP's theoretical basis or challenge the Lundberg 2017 citation claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions SHAP several times in the context of numerical results and methodology but never challenges the claim that SHAP is based on information theory or the citation itself.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's report does not flag the claim that 'SHAP values are based on information theory' as incorrect or contradicted by the cited source. No reviewer comment challenges the theoretical basis of SHAP (game theory vs. information theory) or identifies this specific methodological drift in the description of SHAP.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Table I reports LIME fidelity for Dataset 3 as **4.6730**. The text then states: \"The fidelity scores for LIME range from 0.4397 to 0.4673…\" This appears to treat 4.6730 as 0.4673.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Table I reports LIME fidelity for Dataset 3 as **4.6730**. The text then states: \"The fidelity scores for LIME range from 0.4397 to 0.4673…\" This appears to treat 4.6730 as 0.4673.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the discrepancy between the table value 4.6730 and the prose value 0.4673 for LIME fidelity on Dataset 3, directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] **The reported LIME fidelity value for Dataset 3 is inconsistent with the text.**\n\n- **Where:** Table I; Section V, first paragraph after the tables; Section V, later discussion of fidelity across datasets.\n- **What is wrong:** Table I reports LIME fidelity for Dataset 3 as **4.6730**. The text then states:\n  > “The fidelity scores for LIME range from 0.4397 to 0.4673…”\n  This appears to treat 4.6730 as 0.4673.",
+          "confidence": "high",
+          "reasoning": "This directly identifies the injected numeric discrepancy, quotes both conflicting values, and ties them to the LIME fidelity score for Dataset 3.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Table I reports LIME fidelity for Dataset 3 as 4.6730. The text then states: 'The fidelity scores for LIME range from 0.4397 to 0.4673…' This appears to treat 4.6730 as 0.4673.",
+          "confidence": "high",
+          "reasoning": "Major issue 5 explicitly identifies the discrepancy between the 4.6730 value in the table and the 0.4673 value in the prose.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Equation (1) defines: Fidelity = \\sum_{i=1}^N \\frac{\\|f(x_i)-g(x_i)\\|^2}{\\|f(x_i)\\|^2}. Unlike the stability and simplicity equations, this expression has no 1/N factor. Therefore, the value scales with the number of samples.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Equation (1) defines: Fidelity = \\sum_{i=1}^N \\frac{\\|f(x_i)-g(x_i)\\|^2}{\\|f(x_i)\\|^2}. Unlike the stability and simplicity equations, this expression has no 1/N factor. Therefore, the value scales with the number of samples.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the missing 1/N normalisation factor in the Fidelity equation and explains its impact, directly matching the injected removal of the prefactor.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] **The fidelity equation is not averaged over samples, making cross-dataset comparisons invalid.**\n\n- **Where:** Section III.A.1, Equation (1); Section V, discussion comparing fidelity across the three datasets.\n- **What is wrong:** Equation (1) defines:\n  \\[\n  Fidelity =\n  \\sum_{i=1}^N\n  \\frac{\\|f(x_i)-g(x_i)\\|^2}{\\|f(x_i)\\|^2}.\n  \\]\n  Unlike the stability and simplicity equations, this expression has no \\(1/N\\) factor.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the missing 1/N normalization factor in the fidelity equation, which exactly matches the injected mathematical edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Equation (1) defines: Fidelity = \\sum_{i=1}^N \\frac{\\|f(x_i)-g(x_i)\\|^2}{\\|f(x_i)\\|^2}. Unlike the stability and simplicity equations, this expression has no 1/N factor.",
+          "confidence": "high",
+          "reasoning": "Major issue 2 identifies the missing 1/N normalization factor in the Fidelity equation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section IV states: \"we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.\" Tables I and II report only a single value per metric and no standard deviation.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section IV states: \"we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.\" Tables I and II report only a single value per metric and no standard deviation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies that the methodology claims ten independent runs with mean and standard deviation reported, but the tables contain only single scalar values, directly matching the injected contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] **The paper promises mean and standard deviation over ten random initializations but reports no standard deviations.**\n\n- **Where:** Section IV, paragraph beginning “In each benchmarking experiment…”; Tables I and II.\n- **What is wrong:** Section IV states:\n  > “we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.”\n  \n  Tables I and II report only a single value per metric and no standard deviation.",
+          "confidence": "high",
+          "reasoning": "This specifically matches the inserted methodology claim about ten runs with mean and standard deviation being reported, and notes that the results tables do not actually report standard deviations.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section IV states: 'we compute all explainability metrics across ten independent random initializations and report both the mean and standard deviation.' Tables I and II report only a single value per metric and no standard deviation.",
+          "confidence": "high",
+          "reasoning": "Major issue 7 explicitly flags the contradiction between the methodology claim regarding standard deviations and their absence in the results tables.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 28.31575,
+  "total_cost_usd": null,
+  "total_input_tokens": 28583,
+  "total_output_tokens": 2672,
+  "escalation_count": 1,
+  "notes": null
+}

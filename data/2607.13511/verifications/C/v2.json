@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v2",
+  "reviewer_system": "C",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's comment on PTQTP (in the Key statements section) notes the two-plane framing but does not challenge the missing 'row-wise' qualifier or flag the description as a methodology drift relative to the cited paper. The reviewer marks it WEAKLY_SUPPORTED due to inability to verify against the source, not because of the missing 'row-wise' qualifier specifically.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review mentions PTQTP using 'two trit-planes, a superposition of two ternary matrices with scales' but does not challenge this claim against the cited PTQTP source or note that 'row-wise' scales are missing. Under the broadened-claim rule, no specific contradiction or partial-support flag about the cited source is made.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions PTQTP as a baseline for comparison but never critiques the specific sentence in the Introduction where the methodology was described or notes the missing qualifier.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's flag on PTQTP [5] only notes the claim is 'WEAKLY_SUPPORTED' because they cannot verify specifics of the two-plane framing from memory, not because the 'row-wise' qualifier was removed. The reviewer never challenges the scaling description ('with scales' vs 'with row-wise scales') or flags it as a methodological misrepresentation relative to the cited source.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Abstract reports \"+2.3%\" PPL over bf16 for the full-model conversion, while Table 3 reports \"+3.2%\" for the same run (bf16 9.782 → decomposition 10.099). Direct computation gives $(10.099-9.782)/9.782 = 3.24\\%$, matching Table 3, not the Abstract.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Abstract reports \"+2.3%\" PPL over bf16 for the full-model conversion, while Table 3 reports \"+3.2%\" for the same run (bf16 9.782 → decomposition 10.099). Direct computation gives $(10.099-9.782)/9.782 = 3.24\\%$, matching Table 3, not the Abstract.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the +2.3% vs +3.2% discrepancy between the abstract and Table 3, computes the correct value, and flags it as a major issue — directly matching the injected digit swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "the abstract's headline PPL delta (\"+2.3%\") contradicts Table 3's own value (\"+3.2%\") — the arithmetic gives 3.24%;\n\n**Abstract–Table 3 PPL contradiction.** The Abstract reports \"+2.3%\" PPL over bf16 for the full-model conversion, while Table 3 reports \"+3.2%\" for the same run (bf16 9.782 → decomposition 10.099). Direct computation gives $(10.099-9.782)/9.782 = 3.24\\%$, matching Table 3, not the Abstract.\n\n[✖] **The abstract's \"+2.3%\" PPL delta over bf16 vs. Table 3's \"+3.2%\" for the same $\\mu=3$ run.**",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the abstract's '+2.3%' as inconsistent with Table 3 and computes the correct 3.24%, directly matching the injected digit swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the abstract's headline PPL delta (\"+2.3%\") contradicts Table 3's own value (\"+3.2%\") — the arithmetic gives 3.24%",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the digit swap in the abstract and correctly identifies the contradiction with the data reported in the tables.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The middle equality is manifestly wrong; the correct display should be $\\lVert R_i\\rVert_F^2 - (u^\\top R_i v)^2/(\\lVert u\\rVert^2 \\lVert v\\rVert^2)$. The proof text right below derives the correct expression, so this is a display/transcription error... Insert the missing subtractive term in the equation chain of Proposition 1.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The middle equality is manifestly wrong; the correct display should be $\\lVert R_i\\rVert_F^2 - (u^\\top R_i v)^2/(\\lVert u\\rVert^2 \\lVert v\\rVert^2)$. The proof text right below derives the correct expression, so this is a display/transcription error... Insert the missing subtractive term in the equation chain of Proposition 1.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the dropped subtracted term in the Proposition 1 equation chain and provides the correct form, directly matching the injected deletion of -(u^T R_i v)^2/(||u||^2 ||v||^2).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "the Proposition 1 equation chain contains a visible typographical error where a term is dropped.\n\n**Proposition 1 proof (Appendix A) has a dropped term in the equation chain.** The statement reads $\\lVert R_{i+1}\\rVert_F^2 = \\lVert R_i - d_i uv^\\top\\rVert_F^2 = \\lVert R_i\\rVert_F^2 \\le \\lVert R_i\\rVert_F^2$. The middle equality is manifestly wrong; the correct display should be $\\lVert R_i\\rVert_F^2 - (u^\\top R_i v)^2/(\\lVert u\\rVert^2 \\lVert v\\rVert^2)$.\n\n[⚠] **Proposition 1 (monotone residual decrease): $\\lVert R_{i+1}\\rVert_F^2 = \\lVert R_i - d_iuv^\\top\\rVert_F^2 = \\lVert R_i\\rVert_F^2 \\le \\lVert R_i\\rVert_F^2$.**\n    - _Verdict:_ FAIL (confidence: high, impact: minor)\n    - _Notes:_ The middle equality is manifestly wrong: substituting the optimal $d=u^\\top R_i v/(\\lVert u\\rVert^2\\lVert v\\rVert^2)$ into the expansion yields $\\lVert R_i\\rVert_F^2 - (u^\\top R_i v)^2/(\\lVert u\\rVert^2\\lVert v\\rVert^2)$, not $\\lVert R_i\\rVert_F^2$.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely flags the deleted subtractive projection term in the appendix equation chain and supplies the correct missing expression.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Proposition 1 proof (Appendix A) has a dropped term in the equation chain. The statement reads \\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 \\;\\le\\; \\|R_i\\|_F^2. The middle equality is manifestly wrong",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the exact equation where the subtraction term was deleted and notes that the equality no longer holds.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "the strength of the Conclusion (\"A simple greedy ALS already strictly outperforms Q4_K's bit efficiency at matched accuracy, demonstrating that expanded rank provides superior compression\") is not commensurate with what a single wikitext-2 PPL run at one $\\mu$, one calibration, one seed, on one 4B model can support.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "the strength of the Conclusion (\"A simple greedy ALS already strictly outperforms Q4_K's bit efficiency at matched accuracy, demonstrating that expanded rank provides superior compression\") is not commensurate with what a single wikitext-2 PPL run at one $\\mu$, one calibration, one seed, on one 4B model can support.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes the injected conclusion text claiming strict outperformance of Q4_K and flags it as contradicted by the single-run evidence, corresponding to the internal contradiction with Section 3.3 and Table 2 showing a 17-20% deficit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "the strength of the Conclusion (\"A simple greedy ALS already strictly outperforms Q4_K's bit efficiency at matched accuracy, demonstrating that expanded rank provides superior compression\") is not commensurate with what a single wikitext-2 PPL run at one $\\mu$, one calibration, one seed, on one 4B model can support.\n\n*Recommendation:* Add at least (a) a head-to-head against PTQTP at matched effective bpw on the same matrices, (b) a second evaluation metric (KLD, downstream task accuracy, or long-context PPL), and (c) either soften the Conclusion's \"strictly outperforms … demonstrating superior compression\" to something matching the single-run evidence, or supply the extra runs.\n\nThe Conclusion (\"A simple greedy ALS already strictly outperforms Q4_K's bit efficiency at matched accuracy, demonstrating that expanded rank provides superior compression\") is not commensurate with what a single wikitext-2 PPL run at one $\\mu$, one calibration, one seed, on one 4B model can support.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes and challenges the injected conclusion claim that ExTernD 'strictly outperforms Q4_K's bit efficiency,' stating it is not supported by the paper's evidence and should be softened.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the strength of the Conclusion (\"A simple greedy ALS already strictly outperforms Q4_K's bit efficiency at matched accuracy, demonstrating that expanded rank provides superior compression\") is not commensurate with what a single wikitext-2 PPL run... can support.",
+          "confidence": "high",
+          "reasoning": "The reviewer flags the exact falsified sentence in the conclusion and identifies the claim as being unsupported by the evidence, which showed ExTernD trailing Q4_K.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 65.038311,
+  "total_cost_usd": null,
+  "total_input_tokens": 47860,
+  "total_output_tokens": 8558,
+  "escalation_count": 1,
+  "notes": null
+}

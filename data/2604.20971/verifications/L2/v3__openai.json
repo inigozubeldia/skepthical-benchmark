@@ -1,0 +1,189 @@
+{
+  "paper_id": "2604.20971",
+  "copy_id": "v3",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "✔ _WEAKLY_SUPPORTED_ **Wu et al. found turbulent torques to dominate low-mass-planet orbital evolution below mass ratios of order \\(10^{-4}\\).**",
+          "confidence": "low",
+          "reasoning": "The reviewer notes the ~10^{-4} threshold as 'weakly supported' rather than flagging it as inconsistent with Wu2024's reported value of ~10^{-5}. Under rule (B), detection requires the reviewer to name the cited paper AND challenge the specific value as inconsistent with the source; the reviewer instead accepts it as plausible, so this does not constitute detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review mentions Wu et al. and says the threshold is 'of order 10^-4' and 'not independently checked here,' but it does not challenge Wu2024's specific threshold value or identify a mismatch with the cited source as required for a numeric citation misquote.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the claim referencing Wu et al. (2024) but labeled it 'SUPPORTED', failing to identify that the threshold value (10^-4) had been misquoted from the original source (10^-5).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer's check on Wu et al. 2024 only rates the threshold mass ratio claim as WEAKLY_SUPPORTED without naming or challenging the specific value 10^{-4} versus 10^{-5}. No reviewer flag specifically names or challenges the quantitative threshold value as inconsistent with Wu et al. 2024, so the VALUE-OR-NUMERIC detection rule is not satisfied.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The abstract states \\(z=0.267\\), while Sec. 4 and Sec. 6 use \\(z=0.276\\). This affects the redshifted mass \\(M_z\\), the waveform timescale, and all numerical dephasing estimates for the \"golden\" EMRI. ... [✖] **The fiducial redshift quoted in the abstract matches the redshift used in the body.** ... _Reported:_ `z = 0.267` vs `z = 0.276`",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The abstract states \\(z=0.267\\), while Sec. 4 and Sec. 6 use \\(z=0.276\\). This affects the redshifted mass \\(M_z\\), the waveform timescale, and all numerical dephasing estimates for the \"golden\" EMRI. ... [✖] **The fiducial redshift quoted in the abstract matches the redshift used in the body.** ... _Reported:_ `z = 0.267` vs `z = 0.276`",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the abstract value z=0.267 versus the body value z=0.276 as a clear printed inconsistency, matching the injected digit-swap exactly.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The fiducial redshift is inconsistent: the abstract states \\(z=0.267\\), while Sec. 4 and Sec. 6 use \\(z=0.276\\).",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies the abstract/body redshift mismatch and quotes both conflicting values, directly matching the injected numeric inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The fiducial redshift is inconsistent: the abstract states $z=0.267$, while Sec. 4 and Sec. 6 use $z=0.276$.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the discrepancy between the redshift value in the abstract (0.267) and the body (0.276) in both the Major issues and the Numerical results audit.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[✖] **The leading-order Peters circular-orbit semimajor-axis decay used in the paper is \\(\\dot a_{\\rm GW}=-(64/5)G^3qM_z^3/(c^5a^4)\\).** ... Peters' circular binary formula scales as \\(a^{-3}\\), not \\(a^{-4}\\). ... The leading-order GW-driven semimajor-axis decay is printed with an \\(a^{-4}\\) dependence in Sec. 3, whereas the Peters circular-orbit result is proportional to \\(a^{-3}\\).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[✖] **The leading-order Peters circular-orbit semimajor-axis decay used in the paper is \\(\\dot a_{\\rm GW}=-(64/5)G^3qM_z^3/(c^5a^4)\\).** ... Peters' circular binary formula scales as \\(a^{-3}\\), not \\(a^{-4}\\). ... The leading-order GW-driven semimajor-axis decay is printed with an \\(a^{-4}\\) dependence in Sec. 3, whereas the Peters circular-orbit result is proportional to \\(a^{-3}\\).",
+          "confidence": "high",
+          "reasoning": "The reviewer directly identifies the a^{-4} exponent in Eq. (2) as incorrect versus the Peters formula's a^{-3}, exactly corresponding to the injected change from a^3 to a^4 in the denominator.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The leading-order GW-driven semimajor-axis decay is printed with an \\(a^{-4}\\) dependence in Sec. 3, whereas the Peters circular-orbit result is proportional to \\(a^{-3}\\).",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the wrong exponent in the GW inspiral equation and states the correct Peters dependence, precisely matching the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The leading-order GW-driven semimajor-axis decay is printed with an $a^{-4}$ dependence in Sec. 3, whereas the Peters circular-orbit result is proportional to $a^{-3}$. This is dimensionally inconsistent",
+          "confidence": "high",
+          "reasoning": "The reviewer caught the incorrect exponent in the Peters formula (a^4 instead of a^3), noting it was dimensionally and physically incorrect.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The conclusion overgeneralizes beyond the demonstrated calculation. Sec. 6 states that \"turbulence-driven stochastic torques will generically dominate orbital evolution across all classes of compact binary inspirals embedded in any astrophysical accretion disk, regardless of the mass ratio or turbulence source,\" but the results cover one circular EMRI mass ratio, one disk family, and an assumed torque prescription.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The conclusion overgeneralizes beyond the demonstrated calculation. Sec. 6 states that \"turbulence-driven stochastic torques will generically dominate orbital evolution across all classes of compact binary inspirals embedded in any astrophysical accretion disk, regardless of the mass ratio or turbulence source,\" but the results cover one circular EMRI mass ratio, one disk family, and an assumed torque prescription.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes the injected sweeping generalization clause verbatim and flags it as overgeneralizing beyond the paper's single-system results, matching the injection precisely.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The conclusion contains a sweeping generalization far beyond the demonstrated single-system calculation.\n\nSec. 6 states that “turbulence-driven stochastic torques will generically dominate orbital evolution across all classes of compact binary inspirals embedded in any astrophysical accretion disk, regardless of the mass ratio or turbulence source,” but the results cover one circular EMRI mass ratio, one disk family, and an assumed torque prescription; Sec. 2 also notes that sufficiently massive companions are less susceptible to chaotic effects.",
+          "confidence": "high",
+          "reasoning": "This explicitly quotes and criticizes the overgeneralized concluding claim, which is exactly the injected overstated conclusion.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The conclusion overgeneralizes beyond the demonstrated calculation. Sec. 6 states that “turbulence-driven stochastic torques will generically dominate orbital evolution across all classes of compact binary inspirals embedded in any astrophysical accretion disk, regardless of the mass ratio or turbulence source,” but the results cover one circular EMRI mass ratio, one disk family, and an assumed torque prescription",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the overstated conclusion, quoting the injected text and explaining why it was not supported by the paper's specific results.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 42.091591,
+  "total_cost_usd": null,
+  "total_input_tokens": 41730,
+  "total_output_tokens": 3213,
+  "escalation_count": 1,
+  "notes": null
+}

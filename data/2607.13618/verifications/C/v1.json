@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13618",
+  "copy_id": "v1",
+  "reviewer_system": "C",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's report marks the InvAgent claim as WEAKLY_SUPPORTED and accepts 'supervised and imitation-learning baselines' as a 'plausible characterisation' rather than flagging it as contradicted or inconsistent with the cited source. Under the BROADENED-CLAIM rule, the reviewer must have challenged the post-edit claim against the cited source; instead the reviewer found it plausible, so no detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The review quotes the altered InvAgent claim in the key statements section, but labels it only as WEAKLY_SUPPORTED and even calls it a plausible characterisation. It does not specifically challenge the claim against InvAgent or say the baseline methodology is contradicted/mischaracterised.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly evaluated the claim containing the injected error but marked it as weakly supported and a 'plausible characterisation', failing to detect the mis-categorization of the baselines.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t1",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The numerical audit checks many sum_eq_total predicates but none of them involve the persistent seed count (15 vs 24) or the 12+24+23=59 vs stated 50-seed total discrepancy. The reviewer never flags the seed profile breakdown as inconsistent.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses the 50 fixed seeds stratification but does not flag any inconsistency in the profile counts summing to 50 seeds, nor mention the persistent count of 24 or the 12+24+23 mismatch.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions the total of 50 seeds several times but never identifies the internal inconsistency where the individual profile counts (12, 24, and 23) sum to 59.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. (1) as displayed in Sec. 4 reads 'skill = C_base − C_agent', but the surrounding prose ('0 at the symptom-blind floor and 1 at the oracle mean') and the worked example on the same page ('(9101 − 8539)/(9101 − 6932) = 0.26') both require the ratio form skill = (C_base − C_agent)/(C_base − C_orc). As printed, Eq. (1) is dimensionally a dollar amount, cannot equal 1 at the oracle in general, and contradicts the paper's own worked example.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. (1) as displayed in Sec. 4 reads 'skill = C_base − C_agent', but the surrounding prose ('0 at the symptom-blind floor and 1 at the oracle mean') and the worked example on the same page ('(9101 − 8539)/(9101 − 6932) = 0.26') both require the ratio form skill = (C_base − C_agent)/(C_base − C_orc). As printed, Eq. (1) is dimensionally a dollar amount, cannot equal 1 at the oracle in general, and contradicts the paper's own worked example.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the missing normalisation denominator in Eq. (1), correctly diagnosing that the printed equation lacks the (C_base − C_orc) denominator, which is exactly the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Eq. (1) as displayed in Sec. 4 reads \"skill = C_base − C_agent\", but the surrounding prose (\"0 at the symptom-blind floor and 1 at the oracle mean\") and the worked example on the same page (\"(9101 − 8539)/(9101 − 6932) = 0.26\") both require the ratio form skill = (C_base − C_agent)/(C_base − C_orc). As printed, Eq. (1) is dimensionally a dollar amount, cannot equal 1 at the oracle in general, and contradicts the paper's own worked example.\n\n*Recommendation:* Correct Eq. (1) to skill = (C_base − C_agent)/(C_base − C_orc); ensure the denominator is present in the final typeset copy.",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies that Eq. (1) is missing its denominator and states the corrected normalized ratio, directly matching the injected removal of the normalization denominator.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (1) as displayed in Sec. 4 reads \"skill = C_base − C_agent\", but the surrounding prose ... and the worked example ... both require the ratio form skill = (C_base − C_agent)/(C_base − C_orc).",
+          "confidence": "high",
+          "reasoning": "The reviewer identified that the equation was missing its denominator, noting it was dimensionally inconsistent and contradicted the worked example.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t2",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags a contradiction between the Methods description of buy_briefing/buy_audit (noisy readings vs. true state reveal) and the Discussion. No mention of this inconsistency appears anywhere in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention any inconsistency between Methods and Discussion about buy_briefing/buy_audit returning noisy readings versus true state/near-deterministic information.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer report does not mention the audit or briefing tools or the discrepancy between the Methods and Discussion regarding whether they provide noisy or deterministic readings.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 31.044881,
+  "total_cost_usd": null,
+  "total_input_tokens": 26787,
+  "total_output_tokens": 3481,
+  "escalation_count": 0,
+  "notes": null
+}

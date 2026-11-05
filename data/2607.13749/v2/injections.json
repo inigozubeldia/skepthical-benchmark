@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "Grokking was introduced by Power et al.\\ \\citeyear{power2022grokking}, who\nobserved that networks trained on small algorithmic datasets would memorise\nfirst and generalise much later, with the delay sensitive to weight decay and\ntraining fraction.",
+    "injected_text": "Grokking was introduced by Power et al.\\ \\citeyear{power2022grokking}, who\nobserved that networks would memorise\nfirst and generalise much later, with the delay sensitive to weight decay and\ntraining fraction.",
+    "rationale": "The cited paper originally demonstrated grokking specifically on small algorithmic datasets; dropping this condition over-generalises the finding to imply they observed it across networks and tasks unconditionally.",
+    "ground_truth_description": "Dropped the explicitly qualifying condition 'trained on small algorithmic datasets' from the summary of the Power et al. (2022) results.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "power2022grokking",
+      "injected_cite_key": "power2022grokking",
+      "claim_sentence_verbatim": "Grokking was introduced by Power et al.\\ \\citeyear{power2022grokking}, who\nobserved that networks trained on small algorithmic datasets would memorise\nfirst and generalise much later, with the delay sensitive to weight decay and\ntraining fraction.",
+      "section_location": "Sec. 5 (Related Work)",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "observed outcome with $99.8\\%$ accuracy",
+    "injected_text": "observed outcome with $99.9\\%$ accuracy",
+    "rationale": "The 99.8% agreement rate is reported in both the Abstract and Section 4.2; shifting the Abstract occurrence by 0.1% introduces a minimum-detectable drift in a repeated constant.",
+    "ground_truth_description": "Changed the accuracy percentage in the abstract from 99.8% to 99.9%, creating an inconsistency with the 99.8% agreement rate cited in Section 4.2.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "99.8",
+      "value_after_raw": "99.9",
+      "value_before_float": 99.8,
+      "value_after_float": 99.9,
+      "location_cue": "observed outcome with $99.9\\%$ accuracy, with no memorisation regime",
+      "paired_location": "Section 4.2",
+      "quantity_label": "accuracy percentage",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t3.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "  c_l(W,v) \\;=\\; \\binom{k}{l}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+    "injected_text": "  c_l(W,v) \\;=\\; \\frac{k!}{l!}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+    "rationale": "Replacing the binomial coefficient with a permutation fraction omits the (k-l)! denominator, creating an algebraically incorrect but structurally plausible error in the network's polynomial expansion.",
+    "ground_truth_description": "The binomial coefficient in the polynomial expansion of the forward pass is incorrectly replaced with a permutation fraction missing the (k-l)! denominator.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:expand",
+      "equation_location": "Sec. 3.1",
+      "original_fragment_latex": "\\binom{k}{l}",
+      "injected_fragment_latex": "\\frac{k!}{l!}",
+      "full_equation_latex_before": "\\label{eq:expand}\n  \\hat{y}(x;\\,W,v)\n  \\;=\\; \\sum_{l=0}^{k} c_l(W,v)\\,x_1^{l}\\,x_2^{k-l},\n  \\qquad\n  c_l(W,v) \\;=\\; \\binom{k}{l}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+      "full_equation_latex_after": "\\label{eq:expand}\n  \\hat{y}(x;\\,W,v)\n  \\;=\\; \\sum_{l=0}^{k} c_l(W,v)\\,x_1^{l}\\,x_2^{k-l},\n  \\qquad\n  c_l(W,v) \\;=\\; \\frac{k!}{l!}\n  \\sum_{j=1}^{H} v_j\\,W_{1j}^{l}\\,W_{2j}^{k-l}.",
+      "term_role": "binomial expansion coefficient",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "The network has hidden width $H = 128$, weights initialised",
+    "injected_text": "The network has hidden width $M = 128$, weights initialised",
+    "rationale": "Renaming the hidden width variable from H to M in the experimental setup introduces a local notation inconsistency, as H is heavily anchored as the hidden width symbol throughout the preceding theoretical sections.",
+    "ground_truth_description": "Changes the symbol for hidden width from H to M in the Section 4.1 experimental setup, contradicting its established use.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D3",
+      "change_kind": "notation_drift",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 4.1",
+      "affected_span_verbatim": "The network has hidden width $H = 128$, weights initialised\ni.i.d.\\ complex Gaussian, and trains full-batch with AdamW at learning rate\n$10^{-3}$ and weight decay $10^{-2}$ on $40\\%$ of the $97^2 = 9409$ input\npairs."
+    },
+    "proposer_agent": "injector.general.S1.t3.v2"
+  }
+]

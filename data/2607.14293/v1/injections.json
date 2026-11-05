@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "Recent implementations have extended this utility to the autonomous calibration of\nspin-based semiconductor qubits, where CNNs act as online charge-state tuners by\nidentifying electron regimes within 2D charge stability\ndiagrams \\cite{Yon_2025,samaha2026automaticchargestatetuning}.",
+    "injected_text": "Recent implementations have extended this utility to the autonomous generation of\nquantum circuits, where CNNs act as sequence-to-sequence transducers to compile\nhigh-level algorithms into hardware-native gate\nsequences \\cite{Yon_2025,samaha2026automaticchargestatetuning}.",
+    "rationale": "Replaces a claim about charge-state tuning with one about quantum circuit compilation, attributing it to papers that strictly discuss the former, resulting in a topic mis-attribution that a reviewer should flag as completely unrelated.",
+    "ground_truth_description": "The claim associated with the citations to Yon_2025 and samaha2026 was changed from autonomous calibration of semiconductor qubits to the autonomous compilation of quantum circuits, an entirely unrelated topic.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Yon_2025,samaha2026automaticchargestatetuning",
+      "injected_cite_key": "Yon_2025,samaha2026automaticchargestatetuning",
+      "claim_sentence_verbatim": "Recent implementations have extended this utility to the autonomous generation of\nquantum circuits, where CNNs act as sequence-to-sequence transducers to compile\nhigh-level algorithms into hardware-native gate\nsequences \\cite{Yon_2025,samaha2026automaticchargestatetuning}.",
+      "section_location": "Sec. II.A",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "309 (28.61\\%)",
+    "injected_text": "309 (38.61\\%)",
+    "rationale": "The paper lacks a prose base*percent=result triple, so the edit targets a table cell containing a raw value and its percentage of the total capacity (1080 * 28.61% = 309), which breaks the arithmetic relationship to trigger a percent_of major failure.",
+    "ground_truth_description": "Changes the BRAM utilization percentage for QICK from 28.61% to 38.61%, making it mathematically inconsistent with the reported hardware capacity (1,080) and raw utilization (309).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "28.61",
+      "value_after_raw": "38.61",
+      "value_before_float": 28.61,
+      "value_after_float": 38.61,
+      "location_cue": "QICK         & 89,783 (10.56\\%) & 309 (28.61\\%) & 60,057 (14.12\\%) & 481 (11.26\\%)",
+      "paired_location": null,
+      "quantity_label": "BRAM utilization percentage",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "\\chi^2_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^{n}\n  \\frac{(x_i - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)} \\,.",
+    "injected_text": "\\chi^2_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^{n}\n  \\frac{(x_i - \\hat{x}(\\theta))^2}{2\\hat{\\sigma}^2(\\theta)} \\,.",
+    "rationale": "A canonical reduced chi-squared definition is perturbed by adding a factor of 2 to the denominator, mimicking a common author confusion with the exponent of a Gaussian log-likelihood.",
+    "ground_truth_description": "Added a spurious factor of 2 to the variance denominator in the definition of the reduced chi-squared statistic.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 1.3",
+      "original_fragment_latex": "\\frac{(x_i - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)}",
+      "injected_fragment_latex": "\\frac{(x_i - \\hat{x}(\\theta))^2}{2\\hat{\\sigma}^2(\\theta)}",
+      "full_equation_latex_before": "\\chi^2_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^{n}\n  \\frac{(x_i - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)} \\,.",
+      "full_equation_latex_after": "\\chi^2_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^{n}\n  \\frac{(x_i - \\hat{x}(\\theta))^2}{2\\hat{\\sigma}^2(\\theta)} \\,.",
+      "term_role": "variance denominator / standard canonical form",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "Training used the binary cross-entropy loss (BCE)\nwith the Adam optimizer on a single NVIDIA A100 GPU.",
+    "injected_text": "Training used the binary cross-entropy loss (BCE)\nwith the Adam optimizer on a single NVIDIA A100 GPU (we observed unstable convergence when using SGD with momentum).",
+    "rationale": "The edit inserts a methodological justification claiming empirical observation (unstable convergence with SGD) that the paper does not actually provide evidence for.",
+    "ground_truth_description": "Added a parenthetical claiming that SGD with momentum led to unstable convergence, which is an unsupported sub-claim with no corresponding ablation in the paper.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 2.3",
+      "affected_span_verbatim": "Training used the binary cross-entropy loss (BCE)\nwith the Adam optimizer on a single NVIDIA A100 GPU."
+    },
+    "proposer_agent": "injector.general.S2.t3.v1"
+  }
+]

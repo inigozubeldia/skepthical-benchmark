@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.13511",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the post-training qualifier being dropped from the ternary projection/collapse claim attributed to PTQTP. The major issue #1 about PTQTP concerns the plane-count framing, not an overgeneralisation of the collapse claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review discusses PTQTP's plane count and novelty framing, but does not specifically challenge the edited claim that projection onto one ternary plane causes reasoning collapse as unsupported by PTQTP. There is no clear flag about the dropped post-training qualifier or that exact cited claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "PTQTP is described in a way not clearly supported by its title/abstract as cited. Sec. 1 attributes to PTQTP [5] a \"superposition of two ternary matrices with row-wise scales\" as the method, and Sec. 5 lists PTQTP among \"established ternary schemes\" whose accuracy the paper claims (formally) to beat.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly challenges the attribution of the claim (regarding the limitations of the ternary projection method in the cited source) as being unsupported by the source itself, which fits the Broadened-Claim rule for this mutation kind.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never challenges the claim that 'projection of a full-precision matrix onto one ternary plane loses too much: reasoning collapses' as being overgeneralised or not supported by PTQTP [5]. The reviewer's Major Issue 1 about PTQTP concerns whether PTQTP is fixed at two planes (a different concern), not whether the 'post-training' qualifier was removed from the collapse claim. No reviewer flag corresponds to the dropped 'post-training' condition.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Sec. 2.6 says the optimum under mask+sign packing is ",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Sec. 2.6 says the optimum under mask+sign packing is ",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the 57% vs 58% discrepancy between the Introduction and Sec. 2.6, which is exactly the injected numeric inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[numerical] Sparsity/τ correspondences quoted in Sec. 1 don't match those quoted in Sec. 3.2.** Sec. 1: \"τ=0.7 → ~41% zeros, τ=1.0 → ~57%, τ=2.0 → ~87%.\" Sec. 3.2: \"sparsity rises continuously (41% at τ=0.7 to 87% at τ=2.0)\" — consistent. But Sec. 2.6 says the optimum under mask+sign packing is \"interior at τ = 1.0 (~58% sparsity)\" — 57% vs 58% is trivial, but pick one. Fix: pick 57% or 58% and use it everywhere.",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies the exact 57% versus 58% inconsistency for τ=1.0 sparsity across sections, which directly matches the injected repeated-constant numeric discrepancy.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 1: \"τ=0.7 → ~41% zeros, τ=1.0 → ~57%, τ=2.0 → ~87%.\" ... But Sec. 2.6 says the optimum under mask+sign packing is \"interior at τ = 1.0 (~58% sparsity)\" — 57% vs 58% is trivial, but pick one.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the numerical inconsistency between the 57% value in the Introduction and the 58% value in the technical section.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[very minor / typo] Eq. 3's transpose placement: V ← T_τ([(U⊤U − εI)⁻¹ U⊤R]⊤). The main-text description says the block Gram is (U⊤U + εI); Eq. 3 as printed uses (U⊤U − εI) for V's step and (V⊤V + εI) for U's. If ε is a Tikhonov regulariser both should be +εI. Fix: change the − to +.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[very minor / typo] Eq. 3's transpose placement: V ← T_τ([(U⊤U − εI)⁻¹ U⊤R]⊤). The main-text description says the block Gram is (U⊤U + εI); Eq. 3 as printed uses (U⊤U − εI) for V's step and (V⊤V + εI) for U's. If ε is a Tikhonov regulariser both should be +εI. Fix: change the − to +.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the sign error in the Tikhonov regularisation term for the V-step, noting it should be +εI not −εI, which matches the injection exactly.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[very minor / typo] Eq. 3's transpose placement: V ← T_τ([(U⊤U − εI)⁻¹ U⊤R]⊤). The main-text description says the block Gram is (U⊤U + εI); Eq. 3 as printed uses (U⊤U − εI) for V's step and (V⊤V + εI) for U's. If ε is a Tikhonov regulariser both should be +εI. Fix: change the − to +.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the sign error in the Tikhonov regularization term, exactly corresponding to the injected change from +εI to −εI in the ALS update equation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. 3 as printed uses (U⊤U − εI) for V's step and (V⊤V + εI) for U's. If ε is a Tikhonov regulariser both should be +εI.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies the incorrect minus sign in the regularization term of the normal equations and provides the correct formula.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag a cross-reference mismatch where the cost model section reference was changed to point to the core method section instead.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention any incorrect section cross-reference about the cost model or a mismatch between Sec. cost and Sec. core. No specific flag corresponds to this cross-reference injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions several sections and tables but does not identify the incorrect cross-reference in the Introduction where the cost model points to the core section.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags a cross-reference mismatch in the Introduction where the cost model is referenced. None of the reviewer's comments address a wrong section pointer (Sec. 2.1 vs Sec. 2.6 or any mislinked reference in the introductory paragraph about the inner-rank multiplier).",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 38.401037,
+  "total_cost_usd": null,
+  "total_input_tokens": 33323,
+  "total_output_tokens": 3192,
+  "escalation_count": 2,
+  "notes": null
+}

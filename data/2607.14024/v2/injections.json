@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "text/04-Approach.tex",
+    "original_text": "In general, wrapper-based methods are capable of providing a good approximation of the optimal feature set~\\cite{DBLP:journals/apin/DhalA22}.",
+    "injected_text": "Wrapper-based methods provide the optimal feature set~\\cite{DBLP:journals/apin/DhalA22}.",
+    "rationale": "Dropping the qualifiers 'In general' and 'are capable of providing a good approximation' over-generalises the claim, asserting that wrapper methods unconditionally find the exact optimal feature set rather than just providing a good heuristic approximation.",
+    "ground_truth_description": "Over-generalised a conditional claim about wrapper-based methods approximating the optimal feature set into an absolute claim that they provide the exact optimal set.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "DBLP:journals/apin/DhalA22",
+      "injected_cite_key": "DBLP:journals/apin/DhalA22",
+      "claim_sentence_verbatim": "Wrapper-based methods provide the optimal feature set~\\cite{DBLP:journals/apin/DhalA22}.",
+      "section_location": "Sec. 3.2",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "text/01-Introduction.tex",
+    "original_text": "with \\ac{RMSE} values of $(32.49 \\pm 0.30)$~kW for a 2~MW \\ac{WT}",
+    "injected_text": "with \\ac{RMSE} values of $(32.48 \\pm 0.30)$~kW for a 2~MW \\ac{WT}",
+    "rationale": "Perturbs the WT-S1 RMSE value in the introduction summary by -0.01, creating a second-decimal mismatch with the corresponding value in Table 1.",
+    "ground_truth_description": "Changes the WT-S1 RMSE value in the Introduction from 32.49 to 32.48, creating a mismatch with the true value recorded in Table 1.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "32.49",
+      "value_after_raw": "32.48",
+      "value_before_float": 32.49,
+      "value_after_float": 32.48,
+      "location_cue": "with \\ac{RMSE} values of $(32.49 \\pm 0.30)$~kW for a 2~MW \\ac{WT}",
+      "paired_location": "Table 1 (RMSE row)",
+      "quantity_label": "RMSE for WT-S1",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "text/04-Approach.tex",
+    "original_text": "= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+    "injected_text": "= \\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+    "rationale": "As there is no displayed normalisation prefactor in the text, dropped the '\\arg' operator from '\\argmin'; this changes the objective's RHS from a feature set to a scalar loss value, which Wolfram refutes against the LHS feature set.",
+    "ground_truth_description": "Dropped the arg operator from the argmin function in the feature selection objective equation, changing it to a simple minimum.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:approach:problem_definition:optimization_problem",
+      "equation_location": "Eq. (1)",
+      "original_fragment_latex": "= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+      "injected_fragment_latex": "= \\min_{\\mathcal{F'} \\in \\mathcal{S}_n}",
+      "full_equation_latex_before": "\\begin{equation}\n    \\mathcal{F}_{n}^{*}\n= \\arg\\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}\n\\end{equation}",
+      "full_equation_latex_after": "\\begin{equation}\n    \\mathcal{F}_{n}^{*}\n= \\min_{\\mathcal{F'} \\in \\mathcal{S}_n}\n\\left[\n\\min_{\\theta \\in \\Theta,\\; \\lambda \\in \\Lambda}\n\\mathcal{L}\\!\\left(\nf(\\bm{X}_{\\mathcal{F'}};\\theta,\\lambda),\n\\bm{Y}\n\\right)\n\\right],\n\\label{eq:approach:problem_definition:optimization_problem}\n\\end{equation}",
+      "term_role": "argmin operator",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "text/07-Conclusion.tex",
+    "original_text": "Thereby, our proposed approach CSFS achieves a predictive performance comparable to SFS while reducing computational cost by an average of 21\\%.\nHence, we consider the presented approach a reasonable alternative, providing faster time-to-result while delivering reasonable results.",
+    "injected_text": "However, our proposed approach CSFS suffers a significant drop in predictive performance compared to SFS, despite reducing computational cost by an average of 21\\%.\nHence, we consider the presented approach a reasonable alternative for constrained environments, providing faster time-to-result albeit with inferior results.",
+    "rationale": "Rewrites the conclusion to claim a significant performance penalty for the proposed method, which directly contradicts the Results section's explicit statement that the method performs 'on par' with the baseline.",
+    "ground_truth_description": "Rewrote the conclusion to claim a significant predictive performance drop compared to SFS, contradicting the main body's claim of comparable performance.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "A",
+      "checklist_item_id": "A2",
+      "change_kind": "internal_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Conclusion",
+      "affected_span_verbatim": "In our evaluation, we show that the wrapper-based techniques overall provide better-performing selections of features than simpler filter-based or embedded baseline methods. Thereby, our proposed approach CSFS achieves a predictive performance comparable to SFS while reducing computational cost by an average of 21\\%.\nHence, we consider the presented approach a reasonable alternative, providing faster time-to-result while delivering reasonable results."
+    },
+    "proposer_agent": "injector.general.S3.t1.v2"
+  }
+]

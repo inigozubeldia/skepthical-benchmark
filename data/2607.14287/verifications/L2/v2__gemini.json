@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.14287",
+  "copy_id": "v2",
+  "reviewer_system": "L2",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not flag any issue with the Era et al. citation or challenge the claim about the prompt-generation framework being described without the 'unsupervised' qualifier. The review makes no mention of this citation or the related claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review does not mention Era et al. or challenge the specific claim about an unsupervised prompt-generation framework. No citation-specific contradiction or partial-support finding corresponds to the dropped 'unsupervised' qualifier.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies issues with bibliography dates and missing methodological details for Stage-I, but does not flag the description of Era et al.'s work as being incomplete or missing the 'unsupervised' qualifier.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags or challenges the description of Era et al.'s framework as missing the 'unsupervised' qualifier. No part of the review addresses this specific claim or contrasts it against the cited source [17].",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Abstract claims that the framework works by 'keeping over 88% of the model frozen.' However, Sec. III.A explicitly states the r=2 configuration fine-tunes 'only 4.15M parameters, or 0.647% of the full model,' which mathematically leaves ~99.35% of the model frozen. The Conclusion correctly aligns with the body text, stating the framework keeps 'over 99% of SAM parameters frozen.' The abstract significantly understates the framework's parameter efficiency.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Abstract claims that the framework works by 'keeping over 88% of the model frozen.' However, Sec. III.A explicitly states the r=2 configuration fine-tunes 'only 4.15M parameters, or 0.647% of the full model,' which mathematically leaves ~99.35% of the model frozen. The Conclusion correctly aligns with the body text, stating the framework keeps 'over 99% of SAM parameters frozen.' The abstract significantly understates the framework's parameter efficiency.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the 88% vs 99% contradiction between the abstract and the method/conclusion sections, directly corresponding to the injected change from 99% to 88% in the abstract.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The Abstract claims that the framework works by \"keeping over 88% of the model frozen.\" However, Sec. III.A explicitly states the r=2 configuration fine-tunes \"only 4.15M parameters, or 0.647% of the full model,\" which mathematically leaves ~99.35% of the model frozen. The Conclusion correctly aligns with the body text, stating the framework keeps \"over 99% of SAM parameters frozen.\"",
+          "confidence": "high",
+          "reasoning": "This directly identifies the altered 88% figure, contrasts it with the trainable-share math and the 99% restatement, and recommends correcting the abstract.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract claims that the framework works by \"keeping over 88% of the model frozen.\" However, Sec. III.A explicitly states the r=2 configuration fine-tunes \"only 4.15M parameters, or 0.647% of the full model,\" which mathematically leaves ~99.35% of the model frozen.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the contradiction between the 88% value in the abstract and the parameter counts/percentages reported in the method and conclusion.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The equation incorrectly positions the activation variable $x$ outside the argument of the convolutional expert $E_i$. It is written as $E_i(W_E) x$, which mathematically implies the expert function is evaluated on the low-rank projection weights $W_E$ directly, and the result is multiplied by $x$. Based on standard Conv-LoRA operations and the paper's own Figure 2(c), the expert should be applied to the intermediate projected activation, written correctly as $E_i(W_E x)$.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The equation incorrectly positions the activation variable $x$ outside the argument of the convolutional expert $E_i$. It is written as $E_i(W_E) x$, which mathematically implies the expert function is evaluated on the low-rank projection weights $W_E$ directly, and the result is multiplied by $x$. Based on standard Conv-LoRA operations and the paper's own Figure 2(c), the expert should be applied to the intermediate projected activation, written correctly as $E_i(W_E x)$.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identified the injected error, noting that E_i(W_E) x should be E_i(W_E x), which exactly matches the ground-truth injection changing E_i(W_E x) to E_i(W_E) x.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The equation incorrectly positions the activation variable $x$ outside the argument of the convolutional expert $E_i$. It is written as $E_i(W_E) x$, which mathematically implies the expert function is evaluated on the low-rank projection weights $W_E$ directly, and the result is multiplied by $x$. Based on standard Conv-LoRA operations and the paper's own Figure 2(c), the expert should be applied to the intermediate projected activation, written correctly as $E_i(W_E x)$.",
+          "confidence": "high",
+          "reasoning": "This is an exact match to the injected mathematical change from E_i(W_E x) to E_i(W_E) x, with the reviewer explicitly stating the corrected form.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The equation incorrectly positions the activation variable x outside the argument of the convolutional expert E_i. It is written as E_i(W_E) x, which mathematically implies the expert function is evaluated on the low-rank projection weights W_E directly... the expert should be applied to the intermediate projected activation, written correctly as E_i(W_E x).",
+          "confidence": "high",
+          "reasoning": "The reviewer's mathematical audit specifically identifies the swapped position of the activation variable x relative to the expert function E_i in the update equation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not flag the unsupported parenthetical claim about larger batch sizes degrading inclusion segmentation performance in Sec. 4.4. No mention of this phantom evidence sub-claim appears anywhere in the review.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer raises an unrelated overgeneralization about inclusion performance on real data, but does not mention the Stage 2 parenthetical claim that larger batch sizes degraded inclusion segmentation performance or note that this ablation finding is unsupported.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer notes issues regarding inclusion segmentation in the NIST benchmark, but does not mention the unsupported parenthetical claim regarding batch size degradation in Section 4.4.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the unsupported parenthetical claim that 'larger batch sizes degraded inclusion segmentation performance.' The reviewer's minor and very minor issues sections do not address this specific unsupported sub-claim in the implementation details section.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 33.453657,
+  "total_cost_usd": null,
+  "total_input_tokens": 24197,
+  "total_output_tokens": 3026,
+  "escalation_count": 2,
+  "notes": null
+}

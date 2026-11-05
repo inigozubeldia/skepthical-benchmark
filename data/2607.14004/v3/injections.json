@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "group-relative policy-gradient fine-tuning of model weights~\\citep{grpo}",
+    "injected_text": "policy-gradient fine-tuning of model weights~\\citep{grpo}",
+    "rationale": "Dropping the 'group-relative' modifier makes the claim describe generic policy-gradient fine-tuning rather than the specific group-relative formulation introduced by the cited paper.",
+    "ground_truth_description": "Removed the 'group-relative' methodological qualifier from the description of the GRPO method.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "grpo",
+      "injected_cite_key": "grpo",
+      "claim_sentence_verbatim": "GRPO represents a different mechanism entirely: group-relative policy-gradient fine-tuning of model weights~\\citep{grpo}, which changes the underlying model rather than the harness wrapped around it.",
+      "section_location": "Sec. 2.1",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "its pass rate on the unseen Phase 2 tasks alone is 65.0\\%, about",
+    "injected_text": "its pass rate on the unseen Phase 2 tasks alone is 85.0\\% (13 of 20 trials), about",
+    "rationale": "The edit shifts the reported percentage from 65.0% to 85.0% while inserting the true fractional counts (13 of 20 trials), creating a clear percent_of arithmetic inconsistency (>10% relative error) typical of an author updating a percentage but forgetting to update the raw numbers in parentheses.",
+    "ground_truth_description": "The pass rate on Phase 2 tasks was changed from 65.0% to 85.0% and the raw fraction (13 of 20 trials) was explicitly added, creating a mathematical inconsistency since 13/20 is 65%, not 85%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "65.0\\%",
+      "value_after_raw": "85.0\\%",
+      "value_before_float": 65.0,
+      "value_after_float": 85.0,
+      "location_cue": "its pass rate on the unseen Phase 2 tasks alone is 85.0\\% (13 of 20 trials), about",
+      "paired_location": null,
+      "quantity_label": "pass rate on unseen Phase 2 tasks",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "\\text{Transfer} &= \\text{PassRate}(A_1, \\mathcal{T}_1 \\cup \\mathcal{T}_2)",
+    "injected_text": "\\text{Transfer} &= \\text{PassRate}(A_1, \\mathcal{T}_1 \\cap \\mathcal{T}_2)",
+    "rationale": "The union operator is swapped to an intersection in the Transfer equation, making it mathematically inconsistent with the Final equation which correctly evaluates on the union as described in the prose.",
+    "ground_truth_description": "Changed \\cup to \\cap in the Transfer pass rate equation, contradicting the evaluation set used in the Final equation and the surrounding text.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3.3",
+      "original_fragment_latex": "\\mathcal{T}_1 \\cup \\mathcal{T}_2",
+      "injected_fragment_latex": "\\mathcal{T}_1 \\cap \\mathcal{T}_2",
+      "full_equation_latex_before": "\\begin{align*}\n\\text{Phase-1} &= \\text{PassRate}(A_1, \\mathcal{T}_1) \\\\\n\\text{Transfer} &= \\text{PassRate}(A_1, \\mathcal{T}_1 \\cup \\mathcal{T}_2) \\\\\n\\text{Final} &= \\text{PassRate}(A_2, \\mathcal{T}_1 \\cup \\mathcal{T}_2) \\\\\n\\text{LifelongAvg} &= \\tfrac{1}{3}\\left(\\text{Phase-1} + \\text{Transfer} + \\text{Final}\\right)\n\\end{align*}",
+      "full_equation_latex_after": "\\begin{align*}\n\\text{Phase-1} &= \\text{PassRate}(A_1, \\mathcal{T}_1) \\\\\n\\text{Transfer} &= \\text{PassRate}(A_1, \\mathcal{T}_1 \\cap \\mathcal{T}_2) \\\\\n\\text{Final} &= \\text{PassRate}(A_2, \\mathcal{T}_1 \\cup \\mathcal{T}_2) \\\\\n\\text{LifelongAvg} &= \\tfrac{1}{3}\\left(\\text{Phase-1} + \\text{Transfer} + \\text{Final}\\right)\n\\end{align*}",
+      "term_role": "cross-equation inconsistency: evaluation task set in Transfer vs Final equations",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t2.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "main.tex",
+    "original_text": "Let $A_0$ denote the fixed baseline agent before optimization.",
+    "injected_text": "Let $B_0$ denote the fixed baseline agent before optimization.",
+    "rationale": "Renames the baseline agent to $B_0$ in Section 3.1, creating a local notation inconsistency with Section 3.2 and 4.1 which continue to refer to it as $A_0$.",
+    "ground_truth_description": "Renames the baseline agent notation from A_0 to B_0 in Section 3.1 without updating subsequent usages.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D3",
+      "change_kind": "notation_drift",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 3.1",
+      "affected_span_verbatim": "We evaluate agent optimizers in a phased setting intended to capture a minimal form of continual learning. Let $\\mathcal{T}_1$ denote an initial set of tasks and $\\mathcal{T}_2$ denote a later set of newly introduced tasks. The task stream therefore expands from $\\mathcal{T}_1$ to $\\mathcal{T}_1 \\cup \\mathcal{T}_2$. Let $A_0$ denote the fixed baseline agent before optimization."
+    },
+    "proposer_agent": "injector.general.S1.t3.v3"
+  }
+]

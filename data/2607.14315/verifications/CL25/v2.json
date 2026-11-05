@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14315",
+  "copy_id": "v2",
+  "reviewer_system": "CL25",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the counterfactual explanation definition (Arrieta et al.) as contradicted or mischaracterising the cited source. The citation comments focus on saliency maps (Ref 17), feature importance (Ref 18), and other references, but not the counterfactual explanation claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review flags several citation problems, but none specifically challenge the counterfactual-explanations sentence or cite Arrieta et al. as contradicting the claim about achieving the same vs different prediction outcome.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention counterfactual explanations, the Arrieta et al. citation, or Section 2.1, and thus completely missed the reversed definition.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the definition of counterfactual explanations or challenge the claim that minimal changes achieve the 'same' prediction outcome against Arrieta et al. (2020). The minor citation issues noted concern refs [17], [18], [8]/[9], and [11], but not the counterfactual explanation sentence.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section V paragraph 3 says \"The fidelity scores for LIME range from 0.4397 to 0.4673.\" Table I shows the maximum LIME fidelity as **0.4663**, not 0.4673. Either the table entry or the text is a transcription error.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section V paragraph 3 says \"The fidelity scores for LIME range from 0.4397 to 0.4673.\" Table I shows the maximum LIME fidelity as **0.4663**, not 0.4673. Either the table entry or the text is a transcription error.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the discrepancy between the text value 0.4673 and the table value 0.4663, which is exactly the injected change (0.4673 → 0.4663 in the table).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[numerical] Quoted LIME fidelity range does not match Table I.** Section V paragraph 3 says \"The fidelity scores for LIME range from 0.4397 to 0.4673.\" Table I shows the maximum LIME fidelity as **0.4663**, not 0.4673. Either the table entry or the text is a transcription error.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the injected repeated-constant mismatch, quoting both conflicting values and the relevant quantity/location.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section V paragraph 3 says \"The fidelity scores for LIME range from 0.4397 to 0.4673.\" Table I shows the maximum LIME fidelity as 0.4663, not 0.4673. Either the table entry or the text is a transcription error.",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the exact numerical discrepancy between the injected value in Table 1 (0.4663) and the original value remaining in the text (0.4673).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[mathematical] Sum-index inconsistency in Eq. (1). Eq. (1) sums i = 0 to N (giving N+1 terms) while normalising by N; Eq. (2) sums i = 1 to N. The Eq. (1) bounds should be i = 1 to N to be consistent and to match the \"N is the number of samples\" description.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "[mathematical] Sum-index inconsistency in Eq. (1). Eq. (1) sums i = 0 to N (giving N+1 terms) while normalising by N; Eq. (2) sums i = 1 to N. The Eq. (1) bounds should be i = 1 to N to be consistent and to match the \"N is the number of samples\" description.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically identifies that the Fidelity equation (Eq. 1) sums from i=0 to N instead of i=1 to N, which is exactly the injected off-by-one boundary error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[mathematical] Sum-index inconsistency in Eq. (1).** Eq. (1) sums i = 0 to N (giving N+1 terms) while normalising by N; Eq. (2) sums i = 1 to N. The Eq. (1) bounds should be i = 1 to N to be consistent and to match the \"N is the number of samples\" description.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the altered lower summation bound from 0 to 1 in Eq. (1), matching the injected boundary error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (1) sums i = 0 to N (giving N+1 terms) while normalising by N; Eq. (2) sums i = 1 to N. The Eq. (1) bounds should be i = 1 to N to be consistent",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the incorrect lower bound (i=0) in Equation 1 and correctly noted that it should be i=1.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section III paragraph 1: \"as depicted in Fig.??\". This should be Fig. 1. The missing reference makes the sentence unreadable and suggests the LaTeX was not recompiled after adding the figure label.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section III paragraph 1: \"as depicted in Fig.??\". This should be Fig. 1. The missing reference makes the sentence unreadable and suggests the LaTeX was not recompiled after adding the figure label.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the broken cross-reference rendering as 'Fig.??' in Section III, which directly corresponds to the injected misspelled label 'fig:modlxgb' causing an unresolved LaTeX reference.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**[general] Broken cross-reference to the architecture figure.** Section III paragraph 1: \"as depicted in Fig.??\". This should be Fig. 1. The missing reference makes the sentence unreadable and suggests the LaTeX was not recompiled after adding the figure label.",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies the unresolved figure reference artifact ('Fig.??') caused by the misspelled label.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section III paragraph 1: \"as depicted in Fig.??\". This should be Fig. 1. The missing reference makes the sentence unreadable and suggests the LaTeX was not recompiled after adding the figure label.",
+          "confidence": "high",
+          "reasoning": "The reviewer clearly identified the '??' LaTeX artefact caused by the broken figure reference in Section 3.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 30.450776,
+  "total_cost_usd": null,
+  "total_input_tokens": 20714,
+  "total_output_tokens": 3260,
+  "escalation_count": 1,
+  "notes": null
+}

@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.13475",
+  "copy_id": "v2",
+  "reviewer_system": "C",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "[✔] _WEAKLY_SUPPORTED_ **Recent work uses diffusion-based generative state estimation for generic deformable materials, including cloth.**\n- _Reference(s):_ [9]\n- _Justification:_ Tian et al. (CoRL 2025) is titled \"Diffusion dynamics models with generative state estimation for cloth manipulation,\" matching the citing paraphrase; publication year 2025 is plausible but cannot be independently verified here.",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer's key-statements section notes the post-edit claim about 'generic deformable materials' but marks it WEAKLY_SUPPORTED with a justification that accepts it as matching the cited paper's title about cloth manipulation. The reviewer does not flag it as over-generalised or PARTIALLY_SUPPORTED against citation [9]; instead they treat it as broadly accurate. Under the BROADENED-CLAIM rule, detection requires the reviewer to challenge the post-edit claim against the cited source, which did not happen here.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[✔] _WEAKLY_SUPPORTED_ **Recent work uses diffusion-based generative state estimation for generic deformable materials, including cloth.**\n- _Reference(s):_ [9]\n- _Justification:_ Tian et al. (CoRL 2025) is titled \"Diffusion dynamics models with generative state estimation for cloth manipulation,\" matching the citing paraphrase; publication year 2025 is plausible but cannot be independently verified here.",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit broadened claim against the same cited source [9], noting the source is specifically about cloth manipulation rather than generic deformable materials. Under the broadened-claim rule, this counts as detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Tian et al. (CoRL 2025) is titled \"Diffusion dynamics models with generative state estimation for cloth manipulation,\" matching the citing paraphrase",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the title of the cited source [9] specifies 'cloth manipulation' rather than the over-generalized 'generic deformable materials' mentioned in the text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Direct Abstract↔body contradiction on the headline result: the Abstract states the learned estimator 'achieves 98.1% of oracle performance in multi-step retraction,' but Sec. 3.2 reports the *same ratio* (0.0941 / 0.0958) as '9.81% oracle recovery.' Recomputing gives 98.23%. One of the two is a decimal-placement typo; because this is the paper's main claim and the same ratio appears in both places, this is a MAJOR Abstract↔body inconsistency.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Direct Abstract↔body contradiction on the headline result: the Abstract states the learned estimator 'achieves 98.1% of oracle performance in multi-step retraction,' but Sec. 3.2 reports the *same ratio* (0.0941 / 0.0958) as '9.81% oracle recovery.' Recomputing gives 98.23%. One of the two is a decimal-placement typo; because this is the paper's main claim and the same ratio appears in both places, this is a MAJOR Abstract↔body inconsistency.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 9.81% vs 98.1% discrepancy between the body and abstract, naming both values and identifying it as a decimal-placement typo — a precise match to the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "the body's \"9.81% oracle recovery\" contradicts the abstract's \"98.1%\" (they should refer to the same ratio 0.0941/0.0958 ≈ 98.2%)\n\n1.  Direct Abstract↔body contradiction on the headline result: the Abstract states the learned estimator \"achieves 98.1% of oracle performance in multi-step retraction,\" but Sec. 3.2 reports the *same ratio* (0.0941 / 0.0958) as \"9.81% oracle recovery.\" Recomputing gives 98.23%. One of the two is a decimal-placement typo\n\n1.  [✖] **Learned estimator achieves 98.1% of oracle multi-step performance (abstract) vs. \"9.81% oracle recovery\" (body).**",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exact mismatched value 9.81% versus 98.1% and recomputes the ratio, which is a specific detection of the injected decimal-point error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the body's \"9.81% oracle recovery\" contradicts the abstract's \"98.1%\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the decimal shift error and the contradiction between the abstract and the body text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. (2) is described as 'mean squared error over all vertices' but is written as a bare sum without the 1/(HW) or 1/N normalization (contrast with Eq. (3), which explicitly divides by N_nbr). Either the equation is missing the normalizer or the description should say 'sum of squared errors.' ... Add the 1/(HW) prefactor to Eq. (2) or change the text to 'sum of squared errors'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. (2) is described as 'mean squared error over all vertices' but is written as a bare sum without the 1/(HW) or 1/N normalization (contrast with Eq. (3), which explicitly divides by N_nbr). Either the equation is missing the normalizer or the description should say 'sum of squared errors.' ... Add the 1/(HW) prefactor to Eq. (2) or change the text to 'sum of squared errors'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the missing 1/(HW) normalisation prefactor in Eq. (2) and recommends adding it back, directly corresponding to the injected removal of that prefactor.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Eq. (2) is called \"mean\" but is written as an un-normalized sum\n\n2.  Eq. (2) is described as \"mean squared error over all vertices\" but is written as a bare sum without the 1/(HW) or 1/N normalization\n\n*Recommendation:* Add the 1/(HW) prefactor to Eq. (2)\n\n2.  [✖] **Reconstruction loss L_recon equals the sum of squared per-vertex errors (called \"mean squared error\" in prose).**\n- _Notes:_ The prose says \"mean squared error over all vertices\" but Eq. (2) is written as a bare sum Σ_{i,j} ‖X̂_ij − X_ij‖². For an H×W = 30×30 grid this differs from a true MSE by a factor of 900",
+          "confidence": "high",
+          "reasoning": "The reviewer clearly flags the missing 1/(HW) normalization in Eq. (2), exactly matching the dropped prefactor injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (2) is described as \"mean squared error over all vertices\" but is written as a bare sum without the 1/(HW) or 1/N normalization",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific mathematical error regarding the missing normalization prefactor in the MSE equation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Introduction claims the pipeline is 'illustrated in Fig. ??' — a broken LaTeX cross-reference to Fig. 1. Occurs once in the Introduction (Sec. 1). Recommendation: Fix the `\\ref` label.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Introduction claims the pipeline is 'illustrated in Fig. ??' — a broken LaTeX cross-reference to Fig. 1. Occurs once in the Introduction (Sec. 1). Recommendation: Fix the `\\ref` label.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the broken '??' cross-reference in the Introduction, directly matching the injected typo in the \\ref command.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "the pipeline-figure reference \"Fig. ??\" is broken\n\n1.  The Introduction claims the pipeline is \"illustrated in Fig. ??\" — a broken LaTeX cross-reference to Fig. 1. Occurs once in the Introduction (Sec. 1).\n\n*Recommendation:* Fix the `\\ref` label.",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies the broken cross-reference rendering as 'Fig. ??' in the Introduction, which directly corresponds to the typo injected into the figure ref key.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Introduction claims the pipeline is \"illustrated in Fig. ??\" — a broken LaTeX cross-reference to Fig. 1.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the broken cross-reference 'Fig. ??' resulting from the typo in the LaTeX label.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 26.744654,
+  "total_cost_usd": null,
+  "total_input_tokens": 24069,
+  "total_output_tokens": 2293,
+  "escalation_count": 0,
+  "notes": null
+}

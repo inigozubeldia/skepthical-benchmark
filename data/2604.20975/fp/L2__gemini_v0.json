@@ -1,0 +1,104 @@
+{
+  "paper_id": "2604.20975",
+  "reviewer_system": "L2",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-03069a2f620c",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly adopts a low proxy threshold — \"In the following, we set SNRth = 3\" — but does not justify it with a false-alarm/look-elsewhere calculation. It also concedes that \"to confidently detect a zombie binary, it is not enough to have a high SNR\" and that \"The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work,\" so the reviewer’s statistical-threshold concern is not resolved.",
+        "evidence": {
+          "claim": "The paper uses an unjustifiably low network SNR threshold (SNR=3) for zombie binary detection, making the reported detection probabilities overly optimistic and statistically unsupported for a high-dimensional, multi-pulsar search.",
+          "excerpt": "Detecting a signal with a network SNR of 3 in a 130-dimensional search space is statistically impossible due to the enormous look-elsewhere effect; the background noise for a $\u001c^2$ distribution with 130 degrees of freedom will completely overwhelm such a weak signal."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The reviewer's claim that SNR=3 is 'statistically impossible' due to look-elsewhere effect in a 130-dimensional search is factually incorrect about how the SNR is computed here. The paper computes a network SNR by summing quadrature contributions from each pulsar (Eq. 12), which is a matched-filter statistic, not a chi-squared statistic with 130 degrees of freedom. The paper also explicitly notes 'to confidently detect a zombie binary, it is not enough to have a high SNR: the signal must also be observed in the data of multiple pulsars,' acknowledging detection challenges, and SNR=3 is used as a threshold for assessing sensitivity/occurrence rates, not as a standalone detection claim.",
+            "cost_usd": 0.00906465
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly adopts a low proxy threshold — \"In the following, we set SNRth = 3\" — but does not justify it with a false-alarm/look-elsewhere calculation. It also concedes that \"to confidently detect a zombie binary, it is not enough to have a high SNR\" and that \"The actual detectability of these systems in realistic simulated PTA datasets is deferred to future work,\" so the reviewer’s statistical-threshold concern is not resolved.",
+            "cost_usd": 0.01488925
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper simply states \"In the following, we set SNR_th = 3\" without justifying how such a low network SNR threshold could survive the look-elsewhere effect or false alarm rates in a multi-pulsar search.",
+            "cost_usd": 0.0031174
+          }
+        ],
+        "cost_usd": 0.0270713
+      },
+      {
+        "flag_id": "fp-3f1ea6f9be10",
+        "paper_id": "2604.20975",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The quantitative results are explicitly conditional on a simplified model: \"we assume the binaries have been on circular orbits for the last few thousand years preceding their merger, with dynamics driven solely by GW emission\" and \"The effect of eccentricity ... as well as the impact of higher PN order dynamics will be explored in future work.\" The discussion further admits that \"these findings rely on the assumption that SMBHBs are on circular orbits\" and that eccentric binaries could behave differently, but this is not quantified.",
+        "evidence": {
+          "claim": "The results critically depend on assuming purely circular 0-PN binary orbits; not modeling orbital eccentricity could significantly alter or even suppress the predicted zombie binary population, invalidating the quantitative conclusions.",
+          "excerpt": "Because the existence of zombie binaries depends on the delicate balance between the pulsar-Earth light travel time ($\\tau_a$) and the time to merger ($T_c$), unmodeled eccentricity could significantly shift the pulsar-term frequencies or completely suppress the predicted zombie binary population."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper explicitly assumes circular orbits and acknowledges this limitation: 'We emphasize that we assume the binaries have been on circular orbits for the last few thousand years preceding their merger' and 'The effect of eccentricity...will be explored in future work.' The reviewer's claim that eccentricity could 'significantly shift pulsar-term frequencies or completely suppress the predicted zombie binary population' is plausible but not quantified in the paper, making this a real but acknowledged limitation per rule R1. However, the paper does note that eccentric binaries evolve faster, so zombie binaries would be at lower frequencies—suggesting the effect modifies rather than suppresses the population.",
+            "cost_usd": 0.00906465
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The quantitative results are explicitly conditional on a simplified model: \"we assume the binaries have been on circular orbits for the last few thousand years preceding their merger, with dynamics driven solely by GW emission\" and \"The effect of eccentricity ... as well as the impact of higher PN order dynamics will be explored in future work.\" The discussion further admits that \"these findings rely on the assumption that SMBHBs are on circular orbits\" and that eccentric binaries could behave differently, but this is not quantified.",
+            "cost_usd": 0.01488925
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges the limitation by stating \"these findings rely on the assumption that SMBHBs are on circular orbits\" and that the effect of eccentricity \"should be explored in future work,\" which confirms the issue under the rule that mere acknowledgment does not address the reviewer's concern.",
+            "cost_usd": 0.0031174
+          }
+        ],
+        "cost_usd": 0.0270713
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0541426
+  },
+  "extractor_cost_usd": 0.007483999999999977,
+  "total_cost_usd": 0.061626599999999976
+}

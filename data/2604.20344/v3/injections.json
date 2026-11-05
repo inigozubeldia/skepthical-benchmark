@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "The code uses an efficient high-order Gauss-Legendre numerical integration strategy.",
+    "injected_text": "The code uses an efficient numerical integration strategy.",
+    "rationale": "Baes2021b (SpheCow) explicitly advertises its high-order Gauss-Legendre quadrature as a defining methodological qualifier; dropping 'high-order Gauss-Legendre' reduces the description to a generic claim that is almost-but-not-quite faithful to what the cited paper states, yielding a PARTIALLY_SUPPORTED verdict.",
+    "ground_truth_description": "The specific 'high-order Gauss-Legendre' qualifier describing SpheCow's integration strategy was removed, leaving only the generic phrase 'numerical integration strategy'.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Baes2021b",
+      "injected_cite_key": "Baes2021b",
+      "claim_sentence_verbatim": "The code uses an efficient high-order Gauss-Legendre numerical integration strategy.",
+      "section_location": "Sec. 3.1",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "For $\\gamma=0$, we always find $\\alpha_{\\text{crit}} = 2$",
+    "injected_text": "For $\\gamma=0$, we always find $\\alpha_{\\text{crit}} = 2.1$",
+    "rationale": "The prose statement 'α_crit = 2' for γ=0 is changed to '2.1' while Table 1 (Appendix A) still lists 2.00 for all γ=0 entries, creating an abstract_vs_body_match-style inconsistency between two body locations that the numerics predicate fires on as repeated_constant / integer_equal mismatch; the closest available abstract_vs_body_match anchor in this paper is this prose-vs-table repetition of the same constant, which is the strongest repeated-value pair present.",
+    "ground_truth_description": "The prose value for α_crit at γ=0 was changed from 2 to 2.1 in the results section, while the table in the appendix still shows 2.00 for all γ=0 rows, creating a detectable numerical inconsistency between two locations.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "2",
+      "value_after_raw": "2.1",
+      "value_before_float": 2.0,
+      "value_after_float": 2.1,
+      "location_cue": "For $\\gamma=0$, we always find $\\alpha_{\\text{crit}} = 2$",
+      "paired_location": "Table 1 (Appendix A), γ=0 row, all m columns showing 2.00",
+      "quantity_label": "critical transition parameter α_crit at γ=0",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r}.",
+    "injected_text": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}.",
+    "rationale": "Appending the patently false limit claim `lim_{r→∞} ν(r)/r` as an alleged equivalent of the logarithmic slope definition inside the displayed equation — for any physical stellar system ν(r)→0 faster than 1/r at large r, so the limit equals 0 not −dlog ν/dlog r, which Wolfram Limit[] immediately refutes.",
+    "ground_truth_description": "A false limit claim `= lim_{r→∞} ν(r)/r` was appended to the definition of the logarithmic density slope γ(r) inside the displayed equation, asserting an incorrect equivalence that Wolfram refutes.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 3.2, definition of logarithmic slope",
+      "original_fragment_latex": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r}.",
+      "injected_fragment_latex": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}.",
+      "full_equation_latex_before": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r}.",
+      "full_equation_latex_after": "\\upgamma(r) = -\\frac{\\txd \\log \\nu(r)}{\\txd \\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}.",
+      "term_role": "limit value",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t3.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "aa58321-25corr.tex",
+    "original_text": "Figure~{\\ref{alphacrit.fig}} also contains data from two representative observational studies.",
+    "injected_text": "Figure~{\\ref{alphacrit.fgi}} also contains data from two representative observational studies.",
+    "rationale": "Misspelling the label key in \\ref{alphacrit.fgi} causes LaTeX to produce an unresolved cross-reference that renders as '??' in the PDF, a classic LaTeX artefact targeting checklist item D7 (broken/incorrect cross-reference).",
+    "ground_truth_description": "The \\ref label for the alphacrit figure in the Discussion section was changed from 'alphacrit.fig' to 'alphacrit.fgi', causing a broken cross-reference that renders as '??' in the compiled PDF.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "latex_artefact",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 4 (Discussion)",
+      "affected_span_verbatim": "Figure~{\\ref{alphacrit.fig}} also contains data from two representative observational studies."
+    },
+    "proposer_agent": "injector.general.S1.t2.v3"
+  }
+]

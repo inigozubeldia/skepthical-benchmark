@@ -1,0 +1,147 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "L25",
+  "provider_tag": "gemini",
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-8a510857a884",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'bibliography'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "bibliography"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-0e4853e5380b",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 2 occurrences; min sigfigs = 3; range = [36.5, 59.3]",
+        "evidence": {
+          "check_type": "abstract_vs_body_match",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 59.3,
+            "reported": 36.5,
+            "diff_abs": 22.799999999999997,
+            "diff_rel": 0.3844856661045531,
+            "tolerance": {
+              "abs_tol": 0.05,
+              "rel_tol": 0.005
+            },
+            "notes": "2 occurrences; min sigfigs = 3; range = [36.5, 59.3]"
+          },
+          "rereader": [
+            {
+              "label": "main_text_runtime",
+              "raw_observed": "36.5",
+              "value_observed": 36.5,
+              "notes": "Numeric value in 'Ours' row, Table 1 for Runtime."
+            },
+            {
+              "label": "appendix_min_runtime",
+              "raw_observed": "59.3",
+              "value_observed": 59.3,
+              "notes": "Numeric value for Generation (s) with 'Nodes 1 (depth = 1)' in Table 5."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.07793300000000003
+      },
+      {
+        "flag_id": "fp-162e50c6a454",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.07793300000000003
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-75056fd787d1",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1 shows HIVE-3D IoU=0.7449 versus TRELLIS IoU=0.8603, an 11-point drop, yet the paper states \"HIVE-3D demonstrates consistently strong performance across all metrics\" without acknowledging this specific regression. The claim of consistent strength across *all* metrics is directly contradicted by the IoU degradation relative to the baseline.",
+        "evidence": {
+          "claim": "The paper claims strong performance across all metrics, but the new method has a substantially lower IoU than the baseline, contradicting the claim.",
+          "excerpt": "In Section 5.2, the paper claims: \"As shown in Table 1, HIVE-3D demonstrates consistently strong performance across all metrics.\" This claim contradicts the data in Table 1. The IoU for the baseline TRELLIS is **0.8603**, whereas HIVE-3D achieves only **0.7449**. Claiming strong performance across *all* metrics is misleading when the method experiences an 11-point degradation in volumetric overlap compared to its own baseline."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 shows HIVE-3D IoU=0.7449 versus TRELLIS IoU=0.8603, an 11-point drop, yet the paper states \"HIVE-3D demonstrates consistently strong performance across all metrics\" without acknowledging this specific regression. The claim of consistent strength across *all* metrics is directly contradicted by the IoU degradation relative to the baseline.",
+            "cost_usd": 0.0191172
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The quoted sentence is only that HIVE-3D shows 'consistently strong performance across all metrics,' not that it is best on every metric. Table 1 does show lower IoU than TRELLIS ('TRELLIS ... IoU 0.8603' vs. 'Ours ... IoU 0.7449'), but HIVE-3D is still strong on IoU relative to the other baselines ('MIDI 0.5329', 'SceneGen 0.0587', 'Gen3DSR 0.033'), so the reviewer’s claimed contradiction is not factually compelled by the paper text.",
+            "cost_usd": 0.02892
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1 explicitly shows that the baseline TRELLIS achieves an IoU of 0.8603, while HIVE-3D only achieves 0.7449, which validates the reviewer's concern that the claim 'HIVE-3D demonstrates consistently strong performance across all metrics' is misleading regarding volumetric overlap compared to the baseline.",
+            "cost_usd": 0.0064896
+          }
+        ],
+        "cost_usd": 0.0545268
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "numerics": 0.15586600000000006,
+    "general": 0.0545268
+  },
+  "extractor_cost_usd": 0.012540000000000107,
+  "total_cost_usd": 0.22293280000000015
+}

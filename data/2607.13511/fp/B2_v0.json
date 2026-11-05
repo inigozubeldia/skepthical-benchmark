@@ -1,0 +1,146 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "B2",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-cd3c6c988293",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper evaluates on Gemma-4-E2B, Qwen3.5-4B, and Granite-4.0-h-tiny (not LLaMA/Mixtral), and uses only wikitext-2 perplexity with no downstream benchmarks. The Limitations section explicitly states: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.'",
+        "evidence": {
+          "claim": "The evaluation is not comprehensive since the proposed method is only tested on two open-source LLMs and not on mainstream LLMs or common benchmarks.",
+          "excerpt": "The evaluation is not comprehensive. The authors only evaluate their method on two open-source LLMs, and do not provide any results on mainstream LLMs such as LLaMA and Mixtral. The authors also do not provide any results on common benchmarks such as MMLU and GSM8K."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates on Gemma-4-E2B, Qwen3.5-4B, and Granite-4.0-h-tiny (not LLaMA/Mixtral), and uses only wikitext-2 perplexity with no downstream benchmarks. The Limitations section explicitly states: 'Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.'",
+            "cost_usd": 0.0053472
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The reviewer’s \"only two open-source LLMs\" detail is factually wrong: the paper states \"Setup: matrices from google/gemma-4-E2B, Qwen/Qwen3.5-4B, and IBM Granite-4.0-h-tiny.\" However, the broader benchmark-breadth concern is valid because the paper also admits \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks.\"",
+            "cost_usd": 0.016750833333333336
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly confirms this limitation in Section 5, stating, \"Evaluation is perplexity-only: no downstream benchmarks, no KLD, no long-context checks,\" and does not evaluate LLaMA or Mixtral.",
+            "cost_usd": 0.003322733333333333
+          }
+        ],
+        "cost_usd": 0.02542076666666667
+      },
+      {
+        "flag_id": "fp-6246d3965c42",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper provides no wall-clock inference speed measurements for the quantized models. Section 2.6 gives a theoretical cost model ('k(m+n) ternary add/subtracts plus k multiplies, versus mn multiply-adds') and Section 5 notes 'no fused kernels exist,' but no empirical inference latency results are provided.",
+        "evidence": {
+          "claim": "The authors do not provide any results on the inference speed of their quantized models, raising concerns about practical applicability due to possible overhead.",
+          "excerpt": "The authors do not provide any results on the inference speed of their quantized models. The low-rank factorization and ternary factors may introduce some overheads in inference, which may limit the practicality of the proposed method."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides no wall-clock inference speed measurements for the quantized models. Section 2.6 gives a theoretical cost model ('k(m+n) ternary add/subtracts plus k multiplies, versus mn multiply-adds') and Section 5 notes 'no fused kernels exist,' but no empirical inference latency results are provided.",
+            "cost_usd": 0.0053472
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides only an analytical cost model — \"Inference computes y = B(diag(D)(Cx)): k(m + n) ternary add/subtracts plus k multiplies\" — and even notes \"no fused kernels exist,\" but it reports no measured inference latency or throughput for the quantized models.",
+            "cost_usd": 0.016750833333333336
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper discusses operation counts theoretically but provides no empirical inference speed results, acknowledging in Section 5 that \"no fused kernels exist\" and in Section 4 that there is a \"3.4-6x op-count growth [which] reads as slowdown only on multiplier-based datapaths\".",
+            "cost_usd": 0.003322733333333333
+          }
+        ],
+        "cost_usd": 0.02542076666666667
+      },
+      {
+        "flag_id": "fp-35466ee1399f",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "The paper provides a detailed memory cost model in Section 2.6, giving the formula 'bpweff = µ · (m+n)/max(m,n) · (2 − sparsity)' and explicit bpw numbers (5.2–5.7 effective bpw at various µ values) in Tables 2–5, directly quantifying storage overhead as a function of inner rank k and sparsity.",
+        "evidence": {
+          "claim": "The authors do not provide a detailed analysis of the memory overhead introduced by their method, especially for large inner rank k.",
+          "excerpt": "The authors do not provide a detailed analysis of the memory overhead of their method. The low-rank factorization may introduce some overheads in memory usage, especially when the inner rank k is large."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper provides a detailed memory cost model in Section 2.6, giving the formula 'bpweff = µ · (m+n)/max(m,n) · (2 − sparsity)' and explicit bpw numbers (5.2–5.7 effective bpw at various µ values) in Tables 2–5, directly quantifying storage overhead as a function of inner rank k and sparsity.",
+            "cost_usd": 0.0053472
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly analyzes storage overhead in Sec. 2.6: \"With sparse mask+sign packing ... storage per original weight is bpweff = µ · (m + n)/max(m, n) · (2 − sparsity),\" and says this is \"again linear in µ.\" It also reports effective bpw in Tables 2–3, so the claim that memory overhead is not analyzed is incorrect.",
+            "cost_usd": 0.016750833333333336
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper provides an exact formula for memory usage in Section 2.6, stating \"storage per original weight is bpweff = \\mu \\cdot \\frac{m + n}{\\max(m, n)} \\cdot (2 - \\text{sparsity}),\" where \\mu is the inner rank multiplier, directly analyzing the memory overhead for any inner rank.",
+            "cost_usd": 0.003322733333333333
+          }
+        ],
+        "cost_usd": 0.02542076666666667
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.3333333333333333
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0762623
+  },
+  "extractor_cost_usd": 0.006544000000000105,
+  "total_cost_usd": 0.08280630000000011
+}

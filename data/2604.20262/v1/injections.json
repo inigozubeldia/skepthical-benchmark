@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "2026-0218.tex",
+    "original_text": "We adopt the method described in \\cite{chimebeam} to measure the primary beam in the E-W direction.",
+    "injected_text": "We adopt the holographic method described in \\cite{chimebeam} to measure the primary beam in the E-W direction.",
+    "rationale": "The cited CHIME paper presents a Sun-tracking beamforming technique to measure the primary beam, not a holographic technique (which uses a reference antenna). Inserting 'holographic' mis-categorizes the method while keeping the cite key intact, so a verifier reading chimebeam would return CONTRADICTED.",
+    "ground_truth_description": "Inserted 'holographic' before 'method' in the sentence adopting the CHIME beam-measurement technique, mis-categorizing CHIME's beamforming/Sun-tracking method as a holographic one.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "chimebeam",
+      "injected_cite_key": "chimebeam",
+      "claim_sentence_verbatim": "We adopt the method described in \\cite{chimebeam} to measure the primary beam in the E-W direction.",
+      "section_location": "Sec. 2.3 (East-West Beam Measurement)",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "2026-0218.tex",
+    "original_text": "The center frequency of the TCPA is 750 MHz, corresponding to a wavelength $\\lambda$ of 0.4 m, the baseline length $L$ should ideally not exceed 22.9 m to satisfy this requirement.",
+    "injected_text": "The center frequency of the TCPA is 750 MHz, corresponding to a wavelength $\\lambda$ of 0.4 m, the baseline length $L$ should ideally not exceed 45.8 m to satisfy this requirement.",
+    "rationale": "All three operands of the angular-resolution ratio (lambda=0.4 m, L_max, theta=1 deg) are stated explicitly in adjacent prose; doubling L_max to 45.8 m makes lambda/L = 0.5 deg, contradicting the theta>1 deg cut by a factor of two -- a blatant ratio_eq failure (~50% relative error) that upgrades to MAJOR.",
+    "ground_truth_description": "Replaced the maximum baseline length consistent with theta > 1 deg from 22.9 m to 45.8 m, breaking the explicit lambda/L = theta arithmetic by a factor of 2.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "22.9 m",
+      "value_after_raw": "45.8 m",
+      "value_before_float": 22.9,
+      "value_after_float": 45.8,
+      "location_cue": "wavelength $\\lambda$ of 0.4 m, the baseline length $L$ should ideally not exceed 45.8 m to satisfy this requirement",
+      "paired_location": null,
+      "quantity_label": "Maximum baseline length L for angular resolution theta = lambda/L > 1 deg at lambda = 0.4 m",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "2026-0218.tex",
+    "original_text": "    A_{\\rm NS}(\\theta) = e^{-\\frac{\\theta^2}{\\theta_{\\rm NS}^2}} = (A_{\\rm NS}^{\\rm simu})^{\\frac{1+\\alpha}{2}}",
+    "injected_text": "    A_{\\rm NS}(\\theta) = e^{-\\frac{\\theta^2}{2\\theta_{\\rm NS}^2}} = (A_{\\rm NS}^{\\rm simu})^{\\frac{1+\\alpha}{2}}",
+    "rationale": "A_NS is defined as exp(-theta^2/theta_NS^2) in Eq. (eq2:beamNS) and re-stated in Eq. (eq2:beamalpha); inserting an extra factor of 2 in the denominator of the exponent in the latter occurrence makes the two displayed definitions disagree, realising a within-paper cross-equation consistency break (M.S1.t2).",
+    "ground_truth_description": "Changed the exponent in the re-statement of A_NS(theta) in Eq. (eq2:beamalpha) from -theta^2/theta_NS^2 to -theta^2/(2 theta_NS^2), so it no longer matches the original definition in Eq. (eq2:beamNS).",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq2:beamalpha",
+      "equation_location": "Eq. (eq2:beamalpha) in Sect. 2.4 (North-South Beam Measurement); anchor: Eq. (eq2:beamNS) in Sect. 2.2",
+      "original_fragment_latex": "e^{-\\frac{\\theta^2}{\\theta_{\\rm NS}^2}}",
+      "injected_fragment_latex": "e^{-\\frac{\\theta^2}{2\\theta_{\\rm NS}^2}}",
+      "full_equation_latex_before": "A_{\\rm NS}(\\theta) = e^{-\\frac{\\theta^2}{\\theta_{\\rm NS}^2}} = (A_{\\rm NS}^{\\rm simu})^{\\frac{1+\\alpha}{2}}",
+      "full_equation_latex_after": "A_{\\rm NS}(\\theta) = e^{-\\frac{\\theta^2}{2\\theta_{\\rm NS}^2}} = (A_{\\rm NS}^{\\rm simu})^{\\frac{1+\\alpha}{2}}",
+      "term_role": "cross-equation inconsistency: Gaussian form of A_NS(theta) in Eq. (eq2:beamNS) vs. its re-statement in Eq. (eq2:beamalpha)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t2.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "2026-0218.tex",
+    "original_text": "    V_{ij}^{\\rm simu} = \\beta\\int \\dif^2 \\vec{n}\\ \\ A^2_{NS}(\\vec{n})A^{2}_{EW}(\\vec{n}) I_{\\rm sky}(\\vec{n})",
+    "injected_text": "    V_{ij}^{\\rm simu} = \\gamma\\int \\dif^2 \\vec{n}\\ \\ A^2_{NS}(\\vec{n})A^{2}_{EW}(\\vec{n}) I_{\\rm sky}(\\vec{n})",
+    "rationale": "Renames the sky-model normalization parameter from beta to gamma in Eq. (eq2:simulation); the surrounding paragraph immediately afterwards still discusses 'the parameter $\\beta$' and the likelihood $\\log L(\\alpha,\\beta)$, and the Results section quotes the best-fit '$\\beta = 1.45 \\pm 0.002$', so the local symbol swap creates a visible notation drift (D3) without altering numerics.",
+    "ground_truth_description": "In the simulated-visibility equation in Methods, the prefactor symbol $\\beta$ was changed to $\\gamma$, while the explanatory text and the Results best-fit value still use $\\beta$ for the same quantity.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D3",
+      "change_kind": "notation_drift",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 2 (Methods), North-South Beam Measurement, Eq. (eq2:simulation)",
+      "affected_span_verbatim": "    V_{ij}^{\\rm simu} = \\beta\\int \\dif^2 \\vec{n}\\ \\ A^2_{NS}(\\vec{n})A^{2}_{EW}(\\vec{n}) I_{\\rm sky}(\\vec{n})"
+    },
+    "proposer_agent": "injector.general.S1.t3.v1"
+  }
+]

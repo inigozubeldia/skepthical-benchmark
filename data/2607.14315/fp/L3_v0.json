@@ -1,0 +1,296 @@
+{
+  "paper_id": "2607.14315",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-4aeacdfb49b6",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: non-integer input for integer_equal: 28.31",
+        "evidence": {
+          "check_type": "integer_equal",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "non-integer input for integer_equal: 28.31"
+          },
+          "rereader": [
+            {
+              "label": "LIME_simplicity",
+              "raw_observed": "30",
+              "value_observed": 30.0,
+              "notes": "Value taken from TABLE I, Simplicity column, Dataset 3 row."
+            },
+            {
+              "label": "SHAP_simplicity",
+              "raw_observed": "28.31",
+              "value_observed": 28.31,
+              "notes": "Value taken from TABLE II, Simplicity column, Dataset 3 row."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.07081000000000026
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-e7f47d39f3b0",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "L3 maths flags require manual review (automated adjudication would be circular).",
+        "evidence": {},
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-0f99f71261b5",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states 'At the beginning of the benchmarking process, no specific domain is considered, so the weights will not be defined. These weights will be defined via surveys and questionnaires and will be applied in future work.' The experiments only report fidelity, simplicity, and stability—omitting coverage and all three user-centric metrics—and no unified score is ever computed or the knowledge base built/evaluated.",
+        "evidence": {
+          "claim": "The paper's central contributions—a unified explainability metric and a predictive knowledge base—are not yet realized: the unified XAI_score is never instantiated, aggregation weights are undefined, several metrics are not measured, and the knowledge base is not built or evaluated.",
+          "excerpt": "The central contributions—a 'unified multidimensional explainability metric' and a predictive knowledge base—are not yet realized. The paper promises an aggregate $ \\text{XAI\\_score} $ combining seven components (Eq. 5, Fig. 1), but this score is never instantiated. The aggregation weights are left undefined, three user-centric metrics and coverage are not measured, and the knowledge base (Fig. 2) is described conceptually but is not built, populated, or evaluated. This creates a significant mismatch between the claims in the title, abstract, and introduction and the actual implementation."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'At the beginning of the benchmarking process, no specific domain is considered, so the weights will not be defined. These weights will be defined via surveys and questionnaires and will be applied in future work.' The experiments only report fidelity, simplicity, and stability—omitting coverage and all three user-centric metrics—and no unified score is ever computed or the knowledge base built/evaluated.",
+            "cost_usd": 0.0041998800000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly leaves the aggregate score unfinished: “the weights will not be defined… These weights will be defined via surveys and questionnaires and will be applied in future work,” and the reported results use only part of the framework: “The explainability scores for LIME and SHAP were computed based on fidelity, simplicity, and stability.” The knowledge-base contribution is also described prospectively (“Based on these insights, we create a knowledge base…”) without any concrete construction or evaluation results.",
+            "cost_usd": 0.0070277000000000004
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that the XAI score's aggregation weights are not defined and defers them to future work: \"These weights will be defined via surveys and questionnaires and will be applied in future work.\" Furthermore, the XAI score itself is never fully instantiated or evaluated.",
+            "cost_usd": 0.0019598799999999998
+          }
+        ],
+        "cost_usd": 0.013187460000000002
+      },
+      {
+        "flag_id": "fp-8563e4425804",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section IV provides no hyperparameters for the RandomForestClassifier, no train/test split details, no specification of which SHAP variant was used, no LIME configuration parameters, and no perturbation method details for stability. The paper only states 'we applied the XAI techniques to AI/ML models trained on a specific dataset' without any of the required experimental details.",
+        "evidence": {
+          "claim": "The experimental protocol is severely under-specified—critical details about model configurations, data splitting, LIME/SHAP parameters, perturbation method, and result averaging are missing, undermining reproducibility and interpretability.",
+          "excerpt": "The experimental protocol is under-specified, which severely undermines reproducibility and interpretability (Sec. IV–V). Critical details are missing, including: the hyperparameters of the RandomForestClassifier; the train/test split strategy and evaluation protocol; which specific SHAP variant was used (e.g., TreeSHAP, KernelSHAP); all LIME configuration parameters (kernel width, number of samples, etc.); the perturbation method used for the stability metric; and whether results are averaged over multiple runs or random seeds."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section IV provides no hyperparameters for the RandomForestClassifier, no train/test split details, no specification of which SHAP variant was used, no LIME configuration parameters, and no perturbation method details for stability. The paper only states 'we applied the XAI techniques to AI/ML models trained on a specific dataset' without any of the required experimental details.",
+            "cost_usd": 0.0041998800000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experimental section gives only datasets and a generic procedure — “we employed the following datasets” and “we applied the XAI techniques to AI/ML models trained on a specific dataset” — but does not specify train/test splits, RandomForest hyperparameters, SHAP variant, LIME settings, or run averaging. Even the stability definition only says “x′i is a perturbed version of sample i,” without stating how perturbations were generated.",
+            "cost_usd": 0.0070277000000000004
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper lacks critical experimental details; for example, when defining the stability metric, it relies on a perturbed sample, but never defines how the perturbation is performed (\"where x'_i is a perturbed version of sample i\"), and no model hyperparameters or data split strategies are provided.",
+            "cost_usd": 0.0019598799999999998
+          }
+        ],
+        "cost_usd": 0.013187460000000002
+      },
+      {
+        "flag_id": "fp-bb59dedb0b91",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges this limitation: 'it is crucial to extend the experiments to other datasets with varying complexities, feature spaces, and class distributions,' and the experiments are indeed limited to three small classical tabular datasets (Iris, Wine, Breast Cancer), one model (RandomForestClassifier), and two XAI methods (LIME, SHAP), despite claiming broad applicability including to image data.",
+        "evidence": {
+          "claim": "The empirical evidence (only three small tabular datasets, one model family, two XAI methods) is too narrow to support the general claims about broad applicability to various models, modalities, and safety-critical domains.",
+          "excerpt": "The empirical evidence is too narrow to support the paper's general claims about applicability to 'various datasets and machine learning models' and safety-critical domains. The evaluation is limited to three small, classical tabular datasets, a single model family (RandomForestClassifier), and two XAI methods. No image data, text data, deep learning models, or larger-scale, real-world datasets are included."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges this limitation: 'it is crucial to extend the experiments to other datasets with varying complexities, feature spaces, and class distributions,' and the experiments are indeed limited to three small classical tabular datasets (Iris, Wine, Breast Cancer), one model (RandomForestClassifier), and two XAI methods (LIME, SHAP), despite claiming broad applicability including to image data.",
+            "cost_usd": 0.0041998800000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The claims are broad — e.g., the abstract promises evaluation “across multiple datasets and machine learning models” and the methodology mentions “various data types, including tabular and image data” — but the actual experiments use only “Iris,” “Wine,” and “Breast Cancer Wisconsin” datasets. The reported results also cover only “two popular XAI techniques, LIME and SHAP,” and later refer specifically to “the RandomForestClassifier model.”",
+            "cost_usd": 0.0070277000000000004
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims to apply its score to \"various data types, including tabular and image data,\" but the actual experimental setup is limited to three small tabular datasets (Iris, Wine, Breast Cancer Wisconsin), two XAI methods, and a single model (RandomForestClassifier).",
+            "cost_usd": 0.0019598799999999998
+          }
+        ],
+        "cost_usd": 0.013187460000000002
+      },
+      {
+        "flag_id": "fp-bde3cdaae51d",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper's title and abstract promise 'Evaluating Trustworthiness in AI Models' but the framework only measures explainability properties (fidelity, simplicity, stability). The paper does not address robustness, fairness, calibration, or other trustworthiness dimensions, though the conflation is partially acknowledged as the paper treats explainability as a proxy for trustworthiness without justification.",
+        "evidence": {
+          "claim": "The framework claims to evaluate trustworthiness in AI models but only measures explainability properties; trustworthiness includes broader dimensions that are not addressed, causing conceptual overreach.",
+          "excerpt": "The paper conflates explainability with the much broader concept of trustworthiness. The title promises a metric for 'Evaluating Trustworthiness in AI Models,' but the framework exclusively measures properties of explanations (fidelity, simplicity, etc.). Trustworthiness also involves robustness, fairness, calibration, privacy, security, and governance, none of which are addressed. Explainability is a means to assess trustworthiness, not a synonym for it."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper's title and abstract promise 'Evaluating Trustworthiness in AI Models' but the framework only measures explainability properties (fidelity, simplicity, stability). The paper does not address robustness, fairness, calibration, or other trustworthiness dimensions, though the conflation is partially acknowledged as the paper treats explainability as a proxy for trustworthiness without justification.",
+            "cost_usd": 0.0041998800000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The title promises “Evaluating Trustworthiness in AI Models,” yet the proposed measurements are explainability-focused: “fidelity, stability, simplicity, and coverage,” plus “user satisfaction, user trust, and user task performance.” The paper itself frames this as “quantify the explainability of XAI techniques for grading the level of their trustworthiness,” which supports the reviewer’s concern that trustworthiness is being treated as explainability.",
+            "cost_usd": 0.0070277000000000004
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses the term \"trustworthiness\" in the title and abstract, claiming the metric will \"holistically capture the quality and efficiency of an AI model's trustworthiness,\" but the actual evaluated metrics (fidelity, stability, simplicity) only measure properties of the explanations.",
+            "cost_usd": 0.0019598799999999998
+          }
+        ],
+        "cost_usd": 0.013187460000000002
+      },
+      {
+        "flag_id": "fp-e5cc9df20c3d",
+        "paper_id": "2607.14315",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper claims the metric will 'reduce the impact of domain expertise and cognitive biases on the evaluation of XAI methods' while simultaneously incorporating subjective components (user satisfaction, user trust, user task performance) in the XAI_score formula and stating that weights 'can be adjusted based on the context and domain of the AI application,' creating a genuine conceptual inconsistency between objectivity claims and the proposed method.",
+        "evidence": {
+          "claim": "The paper claims 'objective' evaluation reducing cognitive bias, but the proposed formalism relies on subjective user-centric metrics and context-dependent weights; this is a conceptual inconsistency.",
+          "excerpt": "The paper claims the framework provides an 'objective' evaluation that reduces cognitive bias (Sec. I-B, Sec. III), but the formalism itself relies on subjective components. The aggregate $ \\text{XAI\\_score} $ (Eq. 5) incorporates user satisfaction, trust, and task performance, and the weights for all components are context-dependent and presumably set by a user. This creates a conceptual inconsistency between the objectivity framing and the proposed method."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims the metric will 'reduce the impact of domain expertise and cognitive biases on the evaluation of XAI methods' while simultaneously incorporating subjective components (user satisfaction, user trust, user task performance) in the XAI_score formula and stating that weights 'can be adjusted based on the context and domain of the AI application,' creating a genuine conceptual inconsistency between objectivity claims and the proposed method.",
+            "cost_usd": 0.0041998800000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims “By providing an objective and holistic measure of explainability, our metric will reduce the impact of domain expertise and cognitive biases,” but the formalism includes subjective terms: “User satisfaction, user trust, and user task performance… can only be assessed through surveys, questionnaires.” It also makes the aggregation subjective/contextual: “The weights can be adjusted based on the context and domain… These weights will be defined via surveys and questionnaires.”",
+            "cost_usd": 0.0070277000000000004
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims to provide \"an objective and holistic measure of explainability\" to reduce cognitive biases, yet later admits its score relies on components that \"can only be assessed through surveys, questionnaires, or other methods of gathering subjective opinions.\"",
+            "cost_usd": 0.0019598799999999998
+          }
+        ],
+        "cost_usd": 0.013187460000000002
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 1,
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.07081000000000026,
+    "mathematics": 0.0,
+    "general": 0.0659373
+  },
+  "extractor_cost_usd": 0.03211999999999979,
+  "total_cost_usd": 0.16886730000000005
+}

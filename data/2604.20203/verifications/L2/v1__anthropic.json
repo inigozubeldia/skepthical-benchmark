@@ -1,0 +1,189 @@
+{
+  "paper_id": "2604.20203",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Minor issues item 3: 'The text states \"we model the detections using Poisson statistics and adopt a flat prior\" but the explicit posterior (Eq. 2) is a Beta distribution with shape parameters (n_det+1, n_eff−n_det+1). The mapping is correct (a flat Beta(1,1) prior with binomial likelihood) but the Poisson framing is misleading; the likelihood here is binomial on completeness-corrected trials. Recommendation: Replace \"Poisson statistics\" with \"binomial likelihood with completeness-corrected number of trials\"' and Maths audit item 3: 'A Poisson-likelihood derivation with a flat prior on the rate yields a Gamma posterior, not a Beta. The framing as \"Poisson statistics\" in Sec. 3.1 is therefore inconsistent with the Beta form in Eq. (2); the math is conventionally derived from a binomial.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Minor issues item 3: 'The text states \"we model the detections using Poisson statistics and adopt a flat prior\" but the explicit posterior (Eq. 2) is a Beta distribution with shape parameters (n_det+1, n_eff−n_det+1). The mapping is correct (a flat Beta(1,1) prior with binomial likelihood) but the Poisson framing is misleading; the likelihood here is binomial on completeness-corrected trials. Recommendation: Replace \"Poisson statistics\" with \"binomial likelihood with completeness-corrected number of trials\"' and Maths audit item 3: 'A Poisson-likelihood derivation with a flat prior on the rate yields a Gamma posterior, not a Beta. The framing as \"Poisson statistics\" in Sec. 3.1 is therefore inconsistent with the Beta form in Eq. (2); the math is conventionally derived from a binomial.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags that the paper's use of 'Poisson statistics' is inconsistent with the Beta-posterior derived from a binomial likelihood, directly corresponding to the injection that swapped 'binomial' to 'Poisson' in Sec. 3.1. This is a clear match under the BROADENED-CLAIM / method-category-swap rule.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Prior on the conditional rate (Sec. 3.1).** The text states \"we model the detections using Poisson statistics and adopt a flat prior\" but the explicit posterior (Eq. 2) is a Beta distribution with shape parameters (n_det+1, n_eff−n_det+1). The mapping is correct (a flat Beta(1,1) prior with binomial likelihood) but the Poisson framing is misleading; the likelihood here is binomial on completeness-corrected trials.\n\n**Implicit claim: a \"Poisson statistics\" model with a flat prior yields a Beta(n_det+1, n_eff−n_det+1) posterior.**\n... The Beta(n_det+1, n_eff−n_det+1) posterior is the standard result for a binomial likelihood with a uniform Beta(1,1) prior on the success probability... A Poisson-likelihood derivation with a flat prior on the rate yields a Gamma posterior, not a Beta.",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit claim that the cited prior work/method uses Poisson statistics, and states the appropriate model is binomial with a Beta posterior. Under the broadened-claim rule for method-category swap, this is a specific detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text states \"we model the detections using Poisson statistics and adopt a flat prior\" but the explicit posterior (Eq. 2) is a Beta distribution ... the Poisson framing is misleading; the likelihood here is binomial on completeness-corrected trials.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the incorrect substitution of 'Poisson statistics' for 'binomial' and explained why the mathematical context (Beta distribution) implies a binomial likelihood.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Major Issue 1: 'The Abstract reports \"P(CJ|SN, [Fe/H] > 0) and P(CJ|SE, [Fe/H] > 0) are 42.6⁺¹⁰·⁶₋₉.₉ % and 14.5⁺¹²·⁷₋₆.₉ %\", but Sec. 3.2 writes the same sub-Neptune value as \"4.26⁺¹⁰·⁶₋₉.₉ %\" — an apparent decimal-point typo' and Numerical audit item 1: 'Abstract \"42.6⁺¹⁰·⁶₋₉.₉ %\"; Sec. 3.2 \"4.26⁺¹⁰·⁶₋₉.₉ %\"; Table 1 \"42.6⁺¹⁰·⁶₋₉.₉ %\"'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Major Issue 1: 'The Abstract reports \"P(CJ|SN, [Fe/H] > 0) and P(CJ|SE, [Fe/H] > 0) are 42.6⁺¹⁰·⁶₋₉.₉ % and 14.5⁺¹²·⁷₋₆.₉ %\", but Sec. 3.2 writes the same sub-Neptune value as \"4.26⁺¹⁰·⁶₋₉.₉ %\" — an apparent decimal-point typo' and Numerical audit item 1: 'Abstract \"42.6⁺¹⁰·⁶₋₉.₉ %\"; Sec. 3.2 \"4.26⁺¹⁰·⁶₋₉.₉ %\"; Table 1 \"42.6⁺¹⁰·⁶₋₉.₉ %\"'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 42.6% vs 4.26% discrepancy between the abstract and Sec. 3.2 body, naming the exact values and location, which precisely matches the injected numeric change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Abstract↔body inconsistency in a headline number (cross-section consistency, F.1 / G.2).** The Abstract reports \"P(CJ|SN, [Fe/H] > 0) and P(CJ|SE, [Fe/H] > 0) are 42.6⁺¹⁰·⁶₋₉.₉ % and 14.5⁺¹²·⁷₋₆.₉ %\", but Sec. 3.2 writes the same sub-Neptune value as \"4.26⁺¹⁰·⁶₋₉.₉ %\" — an apparent decimal-point typo...\n\n**Sub-Neptune cold-Jupiter conditional rate: Abstract vs Sec. 3.2 vs Table 1.**\n- _Reported:_ Abstract \"42.6⁺¹⁰·⁶₋₉.₉ %\"; Sec. 3.2 \"4.26⁺¹⁰·⁶₋₉.₉ %\"; Table 1 \"42.6⁺¹⁰·⁶₋₉.₉ %\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly names both conflicting values, locations, and the quantity P(CJ|SN,[Fe/H]>0). This is a precise match to the injected abstract-vs-body decimal error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract reports \"P(CJ|SN, [Fe/H] > 0) and P(CJ|SE, [Fe/H] > 0) are 42.6⁺¹⁰·⁶₋₉.₉ %\", but Sec. 3.2 writes the same sub-Neptune value as \"4.26⁺¹⁰·⁶₋₉.₉ %\" — an apparent decimal-point typo",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the specific 10x reduction (4.26% vs 42.6%) in the body text compared to the abstract and correctly labeled it a typo.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Minor Issue 4: 'Eq. (2) typo. As printed, the second factor reads \"(1 − P)^{1−b}\" rather than the correct \"(1 − P)^{b−1}\" for a Beta density. With b = n_eff − n_det + 1, the printed exponent (1 − b) = n_det − n_eff is negative for any non-trivial sample and so cannot give a normalisable Beta.' and Maths audit item 2: 'The exponent on (1 − P) as printed is \"1 − b\", which gives a negative exponent for any meaningful sample... The correct form for a Beta(a, b) density is P^{a−1}(1 − P)^{b−1}/B(a,b).'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Minor Issue 4: 'Eq. (2) typo. As printed, the second factor reads \"(1 − P)^{1−b}\" rather than the correct \"(1 − P)^{b−1}\" for a Beta density. With b = n_eff − n_det + 1, the printed exponent (1 − b) = n_det − n_eff is negative for any non-trivial sample and so cannot give a normalisable Beta.' and Maths audit item 2: 'The exponent on (1 − P) as printed is \"1 − b\", which gives a negative exponent for any meaningful sample... The correct form for a Beta(a, b) density is P^{a−1}(1 − P)^{b−1}/B(a,b).'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exponent '1-b' vs the correct 'b-1' in Eq. (2), directly matching the injected flip of the exponent from b-1 to 1-b in the beta-distribution PDF.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Eq. (2) typo.** As printed, the second factor reads \"(1 − P)^{1−b}\" rather than the correct \"(1 − P)^{b−1}\" for a Beta density. With b = n_eff − n_det + 1, the printed exponent (1 − b) = n_det − n_eff is negative for any non-trivial sample and so cannot give a normalisable Beta.\n\n**Eq. (2): the Beta posterior on the conditional rate, f(P;a,b) = (1/B(a,b)) P^{a−1} (1 − P)^{1−b}.**\n- _Verdict:_ FAIL (confidence: high, impact: minor — typographical, does not affect numerical results)\n- _Notes:_ The exponent on (1 − P) as printed is \"1 − b\"... The correct form for a Beta(a, b) density is P^{a−1}(1 − P)^{b−1}/B(a,b).",
+          "confidence": "high",
+          "reasoning": "The reviewer pinpoints the exact exponent reversal in Eq. (2) and gives the corrected form. This clearly corresponds to the injected mathematics error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "As printed, the second factor reads \"(1 − P)^{1−b}\" rather than the correct \"(1 − P)^{b−1}\" for a Beta density.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identified the error in Equation 2 where the exponent (1-b) was incorrect for a Beta distribution.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t1",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag any mismatch between a figure reference and the surrounding prose about metal-rich vs metal-poor conditional frequencies; the cross-reference swap from figfCJ_SNMixSE_metalrich to figfCJ_SNMixSE_metalpoor is not identified in the report.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review does not mention the wrong figure cross-reference to the metal-poor panel or any mismatch between the cited figure and the surrounding metal-rich excess claim. Comments about figure labels and counts are unrelated to this specific cross-reference injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer failed to mention the cross-reference error in Section 3.2 where the metal-poor figure was cited to support a claim of cold-Jupiter excess.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer did not flag the specific cross-reference mismatch where Figure 3 (metal-poor) was cited in Sec. 3.2 instead of Figure 2 (metal-rich). The reviewer flagged a decimal-point typo in the same paragraph (4.26% vs 42.6%) and various other issues, but never noted that the figure reference itself pointed to the wrong figure, nor that the cited figure contradicted the surrounding claim about metal-rich systems.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 69.479557,
+  "total_cost_usd": null,
+  "total_input_tokens": 47260,
+  "total_output_tokens": 7502,
+  "escalation_count": 1,
+  "notes": null
+}

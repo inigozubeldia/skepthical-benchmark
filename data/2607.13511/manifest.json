@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.13511",
+  "arxiv_url": "https://arxiv.org/abs/2607.13511",
+  "rotation_seed": 20260727,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S1",
+      "type": 1
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "But a single ternary plane carries at most 1.58 bits of information per weight, so \\emph{post-training} projection of a full-precision matrix onto one ternary plane loses too much: reasoning collapses \\cite{ptqtp}.",
+          "injected_text": "But a single ternary plane carries at most 1.58 bits of information per weight, so projection of a full-precision matrix onto one ternary plane loses too much: reasoning collapses \\cite{ptqtp}.",
+          "rationale": "Dropping the '\\emph{post-training}' qualifier overgeneralises the claim, incorrectly implying that any projection to a ternary plane (including QAT, which is known to work) causes reasoning to collapse.",
+          "ground_truth_description": "Removed the '\\emph{post-training}' condition from the claim about ternary projection causing model collapse.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "ptqtp",
+            "injected_cite_key": "ptqtp",
+            "claim_sentence_verbatim": "But a single ternary plane carries at most 1.58 bits of information per weight, so \\emph{post-training} projection of a full-precision matrix onto one ternary plane loses too much: reasoning collapses \\cite{ptqtp}.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "Under mask+sign packing (Eq.~\\ref{eq:bpw}), where zeros also cost a mask bit, the optimum is interior at $\\tau = 1.0$ ($\\sim$57\\% sparsity).",
+          "injected_text": "Under mask+sign packing (Eq.~\\ref{eq:bpw}), where zeros also cost a mask bit, the optimum is interior at $\\tau = 1.0$ ($\\sim$58\\% sparsity).",
+          "rationale": "Slightly perturbing the optimal sparsity for tau=1.0 from 57% to 58% introduces a repeated-constant discrepancy with the Introduction, reflecting a plausible failure to update all occurrences after a final experiment.",
+          "ground_truth_description": "Changed the reported sparsity percentage at tau=1.0 from 57% to 58% in the Results section, contradicting the 57% claimed in the Introduction.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "repeated_constant",
+            "value_before_raw": "57",
+            "value_after_raw": "58",
+            "value_before_float": 57.0,
+            "value_after_float": 58.0,
+            "location_cue": "Under mask+sign packing (Eq.~\\ref{eq:bpw}), where zeros also cost a mask bit, the optimum is interior at $\\tau = 1.0$ ($\\sim$57\\% sparsity).",
+            "paired_location": "Section 1",
+            "quantity_label": "sparsity percentage at tau=1.0",
+            "expected_bucket": "minor"
+          },
+          "proposer_agent": "injector.numerics.S1.t3.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "V \\leftarrow T_\\tau\\!\\Big(\\big[(U^\\top U + \\epsilon I)^{-1} U^\\top R\\big]^\\top\\Big), \\qquad\nU \\leftarrow T_\\tau\\!\\Big(R\\,V\\,(V^\\top V + \\epsilon I)^{-1}\\Big),",
+          "injected_text": "V \\leftarrow T_\\tau\\!\\Big(\\big[(U^\\top U - \\epsilon I)^{-1} U^\\top R\\big]^\\top\\Big), \\qquad\nU \\leftarrow T_\\tau\\!\\Big(R\\,V\\,(V^\\top V + \\epsilon I)^{-1}\\Big),",
+          "rationale": "The Tikhonov regularisation term in the standard ALS/ridge-regression update is changed from + \\epsilon I to - \\epsilon I, a canonical-form error that breaks positive-definiteness but typesets normally.",
+          "ground_truth_description": "Changed the Tikhonov regularisation sign in the ALS normal equations from plus to minus.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2.4",
+            "original_fragment_latex": "(U^\\top U + \\epsilon I)^{-1}",
+            "injected_fragment_latex": "(U^\\top U - \\epsilon I)^{-1}",
+            "full_equation_latex_before": "V \\leftarrow T_\\tau\\!\\Big(\\big[(U^\\top U + \\epsilon I)^{-1} U^\\top R\\big]^\\top\\Big), \\qquad\nU \\leftarrow T_\\tau\\!\\Big(R\\,V\\,(V^\\top V + \\epsilon I)^{-1}\\Big),",
+            "full_equation_latex_after": "V \\leftarrow T_\\tau\\!\\Big(\\big[(U^\\top U - \\epsilon I)^{-1} U^\\top R\\big]^\\top\\Big), \\qquad\nU \\leftarrow T_\\tau\\!\\Big(R\\,V\\,(V^\\top V + \\epsilon I)^{-1}\\Big),",
+            "term_role": "Tikhonov regularization sign in the normal equations",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t1.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "the inner-rank multiplier $\\mu$ (storage and compute both scale linearly with it, Sec.~\\ref{sec:cost})",
+          "injected_text": "the inner-rank multiplier $\\mu$ (storage and compute both scale linearly with it, Sec.~\\ref{sec:core})",
+          "rationale": "Since the paper lacks multiple labeled equations or any referenced figures/tables, substituting a section cross-reference (sec:core instead of sec:cost) via a plausible autocomplete error produces an equivalent structural mismatch.",
+          "ground_truth_description": "Changed a cross-reference about the cost model to point to the core method section instead.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "cross_reference_mismatch",
+            "expected_bucket": "minor",
+            "section_location": "Introduction",
+            "affected_span_verbatim": "Because $k$ is a real-valued rank rather than a bit-width, ExTernD's accuracy/cost trade-off is instead continuous: the inner-rank multiplier $\\mu$ (storage and compute both scale linearly with it, Sec.~\\ref{sec:cost}) and a sparsity threshold $\\tau$ (which sets the fraction of zeros in $B$ and $C$, e.g.\\ $\\tau{=}0.7 \\to {\\sim}41\\%$ zeros, $\\tau{=}1.0 \\to {\\sim}57\\%$, $\\tau{=}2.0 \\to {\\sim}87\\%$) can each be set per matrix to any real value, letting a target accuracy be hit exactly rather than rounded up to the next bit-width."
+          },
+          "proposer_agent": "injector.general.S2.t1.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "PTQTP \\cite{ptqtp} takes the important step of using \\emph{two} trit-planes, a superposition of two ternary matrices with row-wise scales, and shows this restores much of the lost expressiveness without retraining.",
+          "injected_text": "PTQTP \\cite{ptqtp} takes the important step of using \\emph{two} trit-planes, a superposition of two ternary matrices with scales, and shows this restores much of the lost expressiveness without retraining.",
+          "rationale": "Dropping the specific 'row-wise' qualifier weakens the methodological description of how scales are applied in PTQTP, making the claim sentence less faithful to the cited paper's stated method.",
+          "ground_truth_description": "Removed the methodological qualifier 'row-wise' from the description of the PTQTP scaling scheme.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "ptqtp",
+            "injected_cite_key": "ptqtp",
+            "claim_sentence_verbatim": "PTQTP \\cite{ptqtp} takes the important step of using \\emph{two} trit-planes, a superposition of two ternary matrices with row-wise scales, and shows this restores much of the lost expressiveness without retraining.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "reaches 10.10 wikitext-2 perplexity against 9.78 for bf16 ($+3.2\\%$), placing it near",
+          "injected_text": "reaches 10.10 wikitext-2 perplexity against 9.78 for bf16 ($+2.3\\%$), placing it near",
+          "rationale": "Swaps adjacent digits in the headline relative perplexity degradation in the abstract (+3.2% to +2.3%), creating an inconsistency with the corresponding exact value still reported correctly in Table 3.",
+          "ground_truth_description": "Digit swap in the abstract's wikitext-2 perplexity degradation percentage relative to bf16, creating a contradiction with Table 3.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "3.2",
+            "value_after_raw": "2.3",
+            "value_before_float": 3.2,
+            "value_after_float": 2.3,
+            "location_cue": "reaches 10.10 wikitext-2 perplexity against 9.78 for bf16 ($+3.2\\%$), placing it near",
+            "paired_location": "Table 3",
+            "quantity_label": "wikitext-2 perplexity degradation relative to bf16 (%)",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2} \\;\\le\\; \\|R_i\\|_F^2,",
+          "injected_text": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 \\;\\le\\; \\|R_i\\|_F^2,",
+          "rationale": "Deleting the subtracted projection-reduction term breaks the algebraic identity of the Frobenius norm expansion, rendering the equality mathematically false and refutable by Wolfram while maintaining valid LaTeX syntax.",
+          "ground_truth_description": "Deleted the subtracted reduction term -(u^T R_i v)^2 / (||u||^2 ||v||^2) from the residual norm proof equation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Appendix A first display",
+            "original_fragment_latex": " - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2}",
+            "injected_fragment_latex": "",
+            "full_equation_latex_before": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2} \\;\\le\\; \\|R_i\\|_F^2,",
+            "full_equation_latex_after": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 \\;\\le\\; \\|R_i\\|_F^2,",
+            "term_role": "squared projection reduction term",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "A simple greedy ALS already lands within $\\sim$17--20\\% of Q4\\_K's bit efficiency at matched accuracy, with identified, unstacked levers of comparable total size, while keeping inference multiplication-free.",
+          "injected_text": "A simple greedy ALS already strictly outperforms Q4\\_K's bit efficiency at matched accuracy, demonstrating that expanded rank provides superior compression, while keeping inference multiplication-free.",
+          "rationale": "The conclusion is rewritten to claim the method strictly outperforms Q4_K's bit efficiency, which directly contradicts Section 3.3 and Table 2 where the method trails Q4_K by 17-20%.",
+          "ground_truth_description": "The conclusion was altered to claim that ExTernD outperforms Q4_K's bit efficiency, directly contradicting the Results section which explicitly shows a 17-20% deficit.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "A",
+            "checklist_item_id": "A2",
+            "change_kind": "internal_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Conclusion",
+            "affected_span_verbatim": "A simple greedy ALS already lands within $\\sim$17--20\\% of Q4\\_K's bit efficiency at matched accuracy, with identified, unstacked levers of comparable total size, while keeping inference multiplication-free."
+          },
+          "proposer_agent": "injector.general.S3.t1.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "ternary weight networks \\cite{twn} and trained ternary quantization \\cite{ttq} established the format earlier for vision models.",
+          "injected_text": "ternary weight networks \\cite{twn} and trained ternary quantization \\cite{ttq} established the format earlier for spiking neural networks.",
+          "rationale": "Replaces the correct application domain (vision models) with spiking neural networks, a completely distinct subfield that neither TWN nor TTQ discusses, yielding an UNRELATED verdict.",
+          "ground_truth_description": "Misattributes the application domain of the cited TWN and TTQ papers from vision models to spiking neural networks.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "twn",
+            "injected_cite_key": "twn",
+            "claim_sentence_verbatim": "BitNet \\cite{bitnet,bitnet158} shows that 1-bit and 1.58-bit LLMs can be \\emph{trained from scratch}; ternary weight networks \\cite{twn} and trained ternary quantization \\cite{ttq} established the format earlier for vision models.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_topic_mis_attribution",
+            "detection_target_verdict": "UNRELATED"
+          },
+          "proposer_agent": "injector.citations.S3.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "96 MLP, 32 attention, 72 gated-DeltaNet",
+          "injected_text": "96 MLP, 55 attention, 72 gated-DeltaNet",
+          "rationale": "The paper contains no percentage breakdowns, so I injected a severe sum_eq_total error into a layer count breakdown (96+55+72 = 223 != 200) as the closest available realistic alternative.",
+          "ground_truth_description": "Changed the count of attention layers from 32 to 55, making the layer breakdown sum to 223 instead of the stated total of 200.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "sum_eq_total",
+            "value_before_raw": "32",
+            "value_after_raw": "55",
+            "value_before_float": 32.0,
+            "value_after_float": 55.0,
+            "location_cue": "All 200 language-model linear layers of Qwen3.5-4B (96 MLP, 55 attention, 72 gated-DeltaNet) were decomposed",
+            "paired_location": null,
+            "quantity_label": "attention layers",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2} \\;\\le\\; \\|R_i\\|_F^2,",
+          "injected_text": "\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 - 2\\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2} \\;\\le\\; \\|R_i\\|_F^2,",
+          "rationale": "Injecting a spurious factor of 2 in the expanded residual norm algebraically falsifies the optimal-scale projection identity, mimicking a classic derivation error where the author remembers the cross-term but forgets to add back the squared norm of the subtracted term.",
+          "ground_truth_description": "Added an erroneous factor of 2 to the residual energy decrease identity.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Appendix A first display",
+            "original_fragment_latex": "= \\|R_i\\|_F^2 - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2}",
+            "injected_fragment_latex": "= \\|R_i\\|_F^2 - 2\\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2}",
+            "full_equation_latex_before": "\n\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 - \\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2} \\;\\le\\; \\|R_i\\|_F^2,\n",
+            "full_equation_latex_after": "\n\\|R_{i+1}\\|_F^2 = \\|R_i - d_i u v^\\top\\|_F^2 = \\|R_i\\|_F^2 - 2\\frac{(u^\\top R_i v)^2}{\\|u\\|_2^2\\,\\|v\\|_2^2} \\;\\le\\; \\|R_i\\|_F^2,\n",
+            "term_role": "identity replacement",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "The multiplier $\\mu = k/\\min(m,n)$ becomes the accuracy dial.",
+          "injected_text": "The multiplier $\\mu = k/\\min(m,n)$ becomes the the accuracy dial.",
+          "rationale": "Accidental repetition of the word 'the', creating a typical cosmetic proofreading defect that does not affect meaning.",
+          "ground_truth_description": "Added a duplicated 'the' before 'accuracy dial' in Section 2.1.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D8",
+            "change_kind": "word_repetition",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 2.1",
+            "affected_span_verbatim": "The multiplier $\\mu = k/\\min(m,n)$ becomes the accuracy dial."
+          },
+          "proposer_agent": "injector.general.S1.t1.v3"
+        }
+      ]
+    }
+  ]
+}

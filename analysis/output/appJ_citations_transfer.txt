@@ -1,0 +1,83 @@
+==============================================================================
+1. COMPOSITION - citation errors per group (FIELD = field knowledge suffices,
+   CITED = the cited paper is needed, EITHER = could fall either way)
+   astro  FIELD   4/45  (   9%)   EITHER  10   CITED  31
+   ml     FIELD  14/45  (  31%)   EITHER  10   CITED  21
+
+==============================================================================
+2. DETECTION BY GROUP
+   corpus system                                        FIELD           EITHER            CITED
+   astro  Single LLM (free-form)                 25.0% (3/12)      3.6% (1/28)    12.9% (12/93)
+   astro  Single LLM (structured)                 8.3% (1/12)     20.0% (6/30)    16.7% (15/90)
+   astro  Single LLM (concise structured)        16.7% (2/12)     20.0% (6/30)    20.4% (19/93)
+   astro  Skepthical                              75.0% (3/4)     70.0% (7/10)    35.5% (11/31)
+   astro  Claude Code (structured)                 0.0% (0/4)     30.0% (3/10)     29.0% (9/31)
+   astro  Claude Code (concise structured)        25.0% (1/4)     30.0% (3/10)     16.1% (5/31)
+   astro  OpenReviewer-8B                          0.0% (0/4)      0.0% (0/10)      0.0% (0/31)
+   astro  PaperAudit-Bench Deep                    0.0% (0/4)      0.0% (0/10)      0.0% (0/31)
+   ml     Single LLM (free-form)                 16.7% (7/42)     20.0% (6/30)      9.5% (6/63)
+   ml     Single LLM (structured)               66.7% (28/42)    53.3% (16/30)    31.7% (20/63)
+   ml     Single LLM (concise structured)       40.5% (17/42)    43.3% (13/30)    19.4% (12/62)
+   ml     Skepthical                             57.1% (8/14)     80.0% (8/10)     38.1% (8/21)
+   ml     Claude Code (structured)              71.4% (10/14)     70.0% (7/10)    47.6% (10/21)
+   ml     Claude Code (concise structured)       57.1% (8/14)     30.0% (3/10)     33.3% (7/21)
+   ml     OpenReviewer-8B                         0.0% (0/14)      0.0% (0/10)      0.0% (0/21)
+   ml     PaperAudit-Bench Deep                   0.0% (0/14)      0.0% (0/10)      0.0% (0/21)
+
+==============================================================================
+3. RE-WEIGHTING - ML rates within each group, weighted by the astrophysics
+   group proportions
+   Single LLM (structured): astro  16.7%  ->  ML  47.4%   (ML re-weighted to astro mix:  39.6%)
+       composition  +7.8 pp | within-group +23.0 pp | composition share of the change 25.2%
+       FIELD   astro   8.3% -> ML  66.7%  (+58.3 pp; weighted contribution  +5.2 pp)
+       EITHER  astro  20.0% -> ML  53.3%  (+33.3 pp; weighted contribution  +7.4 pp)
+       CITED   astro  16.7% -> ML  31.7%  (+15.1 pp; weighted contribution +10.4 pp)
+   Skepthical: astro  46.7%  ->  ML  53.3%   (ML re-weighted to astro mix:  49.1%)
+       composition  +4.2 pp | within-group  +2.4 pp | composition share of the change 63.5%
+       FIELD   astro  75.0% -> ML  57.1%  (-17.9 pp; weighted contribution  -1.6 pp)
+       EITHER  astro  70.0% -> ML  80.0%  (+10.0 pp; weighted contribution  +2.2 pp)
+       CITED   astro  35.5% -> ML  38.1%  ( +2.6 pp; weighted contribution  +1.8 pp)
+
+==============================================================================
+4. MUTATION KIND - same mutation type in both corpora (does not use the groups)
+
+   --- Single LLM (structured) ---
+   mutation kind                                           astro             ml
+   claim_condition_dropped_or_over_generalised       9.5% (2/21)   23.8% (5/21)
+   claim_direction_reversal                         22.2% (4/18)  66.7% (12/18)
+   claim_method_category_swap                        3.7% (1/27)  58.3% (14/24)
+   claim_methodology_drift                           0.0% (0/21)   18.5% (5/27)
+   claim_qualifier_1to2_sigma                       37.5% (9/24)   38.9% (7/18)
+   claim_topic_mis_attribution                      28.6% (6/21)  77.8% (21/27)
+
+   --- Skepthical ---
+   mutation kind                                           astro             ml
+   claim_condition_dropped_or_over_generalised       28.6% (2/7)    14.3% (1/7)
+   claim_direction_reversal                          83.3% (5/6)   100.0% (6/6)
+   claim_method_category_swap                        55.6% (5/9)    75.0% (6/8)
+   claim_methodology_drift                           25.0% (2/8)    22.2% (2/9)
+   claim_qualifier_1to2_sigma                        50.0% (4/8)    66.7% (4/6)
+   claim_topic_mis_attribution                       42.9% (3/7)    55.6% (5/9)
+
+==============================================================================
+5. CITATION DETECTION RATE PER SYSTEM (Table 2 systems)
+   system                                              astro               ml
+   Claude Opus 4.7 (free-form)                   9.3% (4/43)     13.3% (6/45)
+   GPT-5.5 (free-form)                         22.2% (10/45)    28.9% (13/45)
+   Gemini 3.1 Pro (free-form)                    4.4% (2/45)      0.0% (0/45)
+   Claude Opus 4.7 (structured)                 20.9% (9/43)    57.8% (26/45)
+   GPT-5.5 (structured)                         18.2% (8/44)    57.8% (26/45)
+   Gemini 3.1 Pro (structured)                  11.1% (5/45)    26.7% (12/45)
+   Skepthical                                  46.7% (21/45)    53.3% (24/45)
+   Claude Code (structured)                    26.7% (12/45)    60.0% (27/45)
+   Claude Code (free-form)                       8.9% (4/45)     15.6% (7/45)
+   Stanford Agentic Reviewer                     8.9% (4/45)                -
+   OpenReviewer-8B                               0.0% (0/45)      0.0% (0/45)
+   PaperAudit-Bench Deep                         0.0% (0/45)      0.0% (0/45)
+
+   structured single LLMs, per provider:
+   Claude Opus 4.7                              20.9% (9/43)    57.8% (26/45)   higher on ML
+   GPT-5.5                                      18.2% (8/44)    57.8% (26/45)   higher on ML
+   Gemini 3.1 Pro                               11.1% (5/45)    26.7% (12/45)   higher on ML
+
+   astro, highest system other than Skepthical: 26.7% (Claude Code (structured))

@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "anthropic",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Also, the sum \"∑_{t, x₀, ε}\" is not defined (is it an expectation, a Monte Carlo estimator, batched sum?). Fix: write v_θ(x_t, t, c_image, c_voxel), define x_t explicitly (e.g., linear interpolation x_t = (1−t) x₀ + t ε for flow matching), and replace the ambiguous sum with an expectation over (t, x₀, ε).",
+          "confidence": "low",
+          "reasoning": "The reviewer flagged the RANSAC description only indirectly through the mathematical equation issue (summation vs expectation). There is no direct challenge to the 'deterministic robustness' characterization of RANSAC as a randomised algorithm. The RANSAC citation itself is not flagged as mis-describing the method's nature. No clear match to the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review discusses IP-Adapter and Fuse3D citations, but does not flag the RANSAC citation or challenge the claim that RANSAC is 'deterministic'. There is no specific citation-based objection matching this methodological drift.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions RANSAC as a component of the method but does not challenge the description of it as 'deterministic' or question the validity of the citation's support for that specific qualifier.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags the description of RANSAC as having 'deterministic robustness' instead of 'strong robustness', nor do they challenge the methodological characterization of RANSAC as deterministic versus randomised in Section 4.3. The reviewer mentions RANSAC only in summary/descriptive contexts without questioning this qualifier.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Ablation in Table 7 contradicts the Full-Model number in Table 1. Table 1 reports CD = 0.0035 and F-Score = 84.34 for HIVE-3D, while Table 7 reports the Full Model as CD = 0.035 and F-Score = 84.34 (IoU 0.7449 matches Table 1). Either the CD in Table 7 is off by a factor of 10, or one of the two tables is wrong.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Ablation in Table 7 contradicts the Full-Model number in Table 1. Table 1 reports CD = 0.0035 and F-Score = 84.34 for HIVE-3D, while Table 7 reports the Full Model as CD = 0.035 and F-Score = 84.34 (IoU 0.7449 matches Table 1). Either the CD in Table 7 is off by a factor of 10, or one of the two tables is wrong.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exact discrepancy between Table 1 (CD=0.0035) and Table 7 (CD=0.035), noting it is off by a factor of 10, which precisely matches the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "2. [general] Ablation in Table 7 contradicts the Full-Model number in Table 1. Table 1 reports CD = 0.0035 and F-Score = 84.34 for HIVE-3D, while Table 7 reports the Full Model as CD = 0.035 and F-Score = 84.34 (IoU 0.7449 matches Table 1). Either the CD in Table 7 is off by a factor of 10, or one of the two tables is wrong.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly names both conflicting values, 0.0035 and 0.035, and identifies the Table 1/Table 7 inconsistency for the Full Model Chamfer Distance. This directly matches the injected numeric change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Ablation in Table 7 contradicts the Full-Model number in Table 1. Table 1 reports CD = 0.0035 and F-Score = 84.34 for HIVE-3D, while Table 7 reports the Full Model as CD = 0.035 and F-Score = 84.34 (IoU 0.7449 matches Table 1). Either the CD in Table 7 is off by a factor of 10, or one of the two tables is wrong.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the 10x discrepancy (0.0035 vs 0.035) for the Chamfer Distance metric between the primary results table and the appendix ablation table.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "the equation is written as ‖v_θ(x, t) − (ε − x₀)‖² with x on the left and x₀, ε on the right, and t as timestep... Also, the sum \"∑_{t, x₀, ε}\" is not defined (is it an expectation, a Monte Carlo estimator, batched sum?). Fix: ... replace the ambiguous sum with an expectation over (t, x₀, ε).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "the equation is written as ‖v_θ(x, t) − (ε − x₀)‖² with x on the left and x₀, ε on the right, and t as timestep... Also, the sum \"∑_{t, x₀, ε}\" is not defined (is it an expectation, a Monte Carlo estimator, batched sum?). Fix: ... replace the ambiguous sum with an expectation over (t, x₀, ε).",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the summation operator over continuous variables (t, x₀, ε) as undefined/ambiguous and explicitly recommends replacing it with an expectation, which precisely corresponds to the injected swap of E to sum.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "6. [mathematical] The training objective (Eq. 2) is presented as the same as TRELLIS's conditional flow matching, but the equation is written as ‖v_θ(x, t) − (ε − x₀)‖² with x on the left and x₀, ε on the right, and t as timestep; the conditioning variables (image features, coarse voxel latent) are not present in v_θ's arguments even though the entire contribution is that v_θ is conditioned on both. Also, the sum \"∑_{t, x₀, ε}\" is not defined (is it an expectation, a Monte Carlo estimator, batched sum?). Fix: write v_θ(x_t, t, c_image, c_voxel), define x_t explicitly (e.g., linear interpolation x_t = (1−t) x₀ + t ε for flow matching), and replace the ambiguous sum with an expectation over (t, x₀, ε).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the use of a sum over t, x0, and epsilon and says it should be an expectation. This is a precise match to the injected replacement of the expectation operator with a summation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Also, the sum \"∑_{t, x₀, ε}\" is not defined (is it an expectation, a Monte Carlo estimator, batched sum?). Fix: ... replace the ambiguous sum with an expectation over (t, x₀, ε).",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flagged the use of a summation operator over continuous variables in the training objective and correctly identified that it should be an expectation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S2-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the inserted parenthetical claim about rendering fewer views causing degradation in Section 4.1. No review comment addresses this phantom sub-claim about view count ablation data.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review mentions ablations over recursion depth, voxel SR, scale estimation, and RANSAC, but nowhere flags the specific inserted claim that fewer rendered views substantially degrade quality without supporting evidence. No corresponding phantom-evidence sub-claim is identified.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention the injected claim regarding the effect of fewer views on generation quality or the lack of data supporting that specific methodological assertion.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the injected parenthetical claim about 'substantial degradation in generation quality when rendering fewer views' as an unsupported assertion. None of the reviewer's comments address this specific phantom sub-claim or the absence of ablation data supporting it.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 75.022383,
+  "total_cost_usd": null,
+  "total_input_tokens": 28179,
+  "total_output_tokens": 4597,
+  "escalation_count": 2,
+  "notes": null
+}

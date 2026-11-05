@@ -1,0 +1,252 @@
+{
+  "paper_id": "2607.14375",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-58d6daf2f444",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'Theorem 5'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "Theorem 5"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-6c39887049a4",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "The paper explicitly addresses which slots are perturbed: 'Zero hidden biases and the affine output bias are included as parameter slots. If a convention perturbs fewer slots, every robustness bound below only improves.' Appendix A.3 provides a detailed count table of parameter slots and states 'A parameter slot is counted even when its base value is zero.' The fan-in concern is also addressed since only explicitly present parameters are perturbed.",
+        "evidence": {
+          "claim": "The definition of the perturbation model and which coefficients are considered parameter slots is not stated with sufficient precision in the theorem, risking misinterpretation about which edges or biases are perturbed.",
+          "excerpt": "the perturbation model must be stated with complete precision, especially regarding which zero coefficients are considered parameter slots, ... If omitted zero edges from every input to every hidden unit were also treated as perturbable parameters, the fan-in and the sensitivity accounting would change substantially."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly addresses which slots are perturbed: 'Zero hidden biases and the affine output bias are included as parameter slots. If a convention perturbs fewer slots, every robustness bound below only improves.' Appendix A.3 provides a detailed count table of parameter slots and states 'A parameter slot is counted even when its base value is zero.' The fan-in concern is also addressed since only explicitly present parameters are perturbed.",
+            "cost_usd": 0.00536502
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The perturbation domain is stated explicitly: “For every explicitly present network weight or bias q, independently draw Zq …” and “Zero hidden biases and the affine output bias are included as parameter slots.” The appendix further fixes the zero-slot convention: “A parameter slot is counted even when its base value is zero.”",
+            "cost_usd": 0.0090785
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly clarifies the perturbation model on page 3, stating it applies to \"every explicitly present network weight or bias\" and noting that \"Zero hidden biases and the affine output bias are included as parameter slots,\" directly addressing the reviewer's concern about omitted zero edges.",
+            "cost_usd": 0.002288
+          }
+        ],
+        "cost_usd": 0.01673152
+      },
+      {
+        "flag_id": "fp-c6875de19513",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: While Section 5 clarifies that the verifier's expected running time includes \"internal randomness\" and that it is \"never allowed to be approximate or wrong\", the Theorem 1 statement on page 3 relies on the phrase \"exact algorithm\" and does not explicitly detail these properties within the theorem block itself as requested.",
+        "evidence": {
+          "claim": "The exact meaning of 'sound and complete', especially with respect to verifier internal randomness and correctness, should be explicitly clarified in the theorem statement.",
+          "excerpt": "The proof allows internal randomness of the verifier and applies Markov’s inequality to the running time. Thus the intended verifier seems to be Las Vegas/exact: the output is always correct, while the running time may be random. This should be stated explicitly."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Section 5: 'The verifier itself is never allowed to be approximate or wrong: approximation is used only by the outer randomized reduction to sample a distribution close to the exact rounded Gaussian law.' The theorem also says 'a sound and complete exact algorithm A' and the Markov argument applies to 'its expected running time... including any internal randomness,' which together clarify the Las Vegas nature.",
+            "cost_usd": 0.00536502
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper clarifies both exact correctness and internal randomness: Section 5 says the expected time bound is “including any internal randomness,” and immediately adds, “The verifier itself is never allowed to be approximate or wrong.” That resolves the intended Las-Vegas-style meaning of “sound and complete exact algorithm.”",
+            "cost_usd": 0.0090785
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While Section 5 clarifies that the verifier's expected running time includes \"internal randomness\" and that it is \"never allowed to be approximate or wrong\", the Theorem 1 statement on page 3 relies on the phrase \"exact algorithm\" and does not explicitly detail these properties within the theorem block itself as requested.",
+            "cost_usd": 0.002288
+          }
+        ],
+        "cost_usd": 0.01673152
+      },
+      {
+        "flag_id": "fp-c3d12f2cab50",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The quantifiers in the smoothed expected-time assumption should be written formally and explicitly as part of the theorem's statement, to clarify the assumptions for the Markov truncation and the dependence on the base instance.",
+          "excerpt": "the quantifiers should be written formally. ... There exists a fixed polynomial Q such that for every admissible base instance I, the expectation over the perturbation law and the verifier’s internal randomness of the running time of A on the perturbed instance is at most Q(s(I),B(I),1/σ⋆)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The theorem states 'a sound and complete exact algorithm A whose expected bit-running time on (1) is polynomial in s, B, and 1/σ⋆, for every adversarial base instance,' which captures the key quantifiers. However, the formal separation between 'there exists a fixed polynomial Q' and the universality over base instances is implicit rather than written out as a formal quantifier chain, which could cause ambiguity about whether Q may depend on the base instance.",
+            "cost_usd": 0.00536502
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The theorem already quantifies over base instances — “for every adversarial base instance satisfying 2^{-B} ≤ σ⋆” — and Appendix C.3 makes the fixed-polynomial quantifier explicit: “The smoothed polynomial bound for a fixed algorithm A means that some fixed polynomial Q upper-bounds its expectation.”",
+            "cost_usd": 0.0090785
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The theorem on page 3 states that the \"expected bit-running time on (1) is polynomial in s, B, and 1/\\sigma_\\star\", but lacks the formal explicit mathematical quantifiers (such as defining a fixed polynomial Q bounding the expectation) within the theorem statement that the reviewer requested.",
+            "cost_usd": 0.002288
+          }
+        ],
+        "cost_usd": 0.01673152
+      },
+      {
+        "flag_id": "fp-bb13b30e12dc",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: Although Section 2 mentions the \"inactive precision guard\" and provides the bounds \"20 \\le B = O(\\log(m+2))\", it does not explain which convention yields which bound or explicitly mention the coefficient size 2^{-20} to ensure admissibility, validating the reviewer's request to bring these clarifications forward from Section 5 and Appendix A.",
+        "evidence": {
+          "claim": "The precision guard mechanism and the bit-complexity convention should be motivated and clarified earlier in the main text to avoid confusion about admissibility assumptions and fixed lower bounds.",
+          "excerpt": "I suggest briefly mentioning in Section 2 that the reduction will add an inactive coefficient of size 2^{-20} to ensure admissibility at fixed σ⋆. Also, the bit-complexity convention should be clarified: under a convention including thresholds, B=O(log m); under a network-only convention, the guard ensures a fixed lower bound."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "Section 4.1 is titled 'The precision guard' and explicitly states its purpose: 'To make the fixed σ⋆ admissible under any natural convention for B, add one input x0 ∈ [0,1] and one hidden unit...Its coefficient 2^{-20} ensures B ≥ 20.' The bit-complexity convention is also clarified: 'under the broad convention that includes the threshold and box endpoints...Under a network-only convention, B is a fixed constant at least 20.' This appears in Section 5 as well.",
+            "cost_usd": 0.00536502
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The main text already flags the guard and the bit-convention issue before the appendix: Theorem 1 states, “The extra hidden ReLU is an inactive precision guard,” while Section 4.1 explains, “The smoothing model requires 2^{-B} ≤ σ. To make the fixed σ⋆ admissible under any natural convention for B, add one input …” Page 2 also notes, “Our construction also works under the narrower convention in which B is computed only from network coefficients.”",
+            "cost_usd": 0.0090785
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although Section 2 mentions the \"inactive precision guard\" and provides the bounds \"20 \\le B = O(\\log(m+2))\", it does not explain which convention yields which bound or explicitly mention the coefficient size 2^{-20} to ensure admissibility, validating the reviewer's request to bring these clarifications forward from Section 5 and Appendix A.",
+            "cost_usd": 0.002288
+          }
+        ],
+        "cost_usd": 0.01673152
+      },
+      {
+        "flag_id": "fp-392721973c59",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: The main proof in Section 4.3 states that a label change requires the displacement \"to reach at least \\Gamma\", but the detailed distinction regarding \"Strict unsafe and weak safe inequalities\" is indeed relegated to Appendix A.4, confirming the reviewer's claim.",
+        "evidence": {
+          "claim": "The distinction between strict and weak inequalities in label preservation should appear in the main proof, not only in the appendix, since it is central to the correctness of the argument.",
+          "excerpt": "the issue is central enough that a short version should be included in the main proof. ... The concentration bound should be phrased as bounding the event that the displacement is at least Γ, as the appendix does."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The main proof in Section 4.3 (Theorem 4) explicitly states 'A label change requires the uniform output displacement to reach at least Γ. This implies F − µC ≥ Λ, and (15) follows,' and the concentration bound is phrased as bounding the event that displacement reaches Γ. Appendix A.4 further clarifies the strict/weak distinction, and checklist item 9 in Appendix E states 'On the preservation event, the satisfiable witness remains strictly above the unchanged threshold.'",
+            "cost_usd": 0.00536502
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The strict/weak distinction is already present in the main text: “EXACT-RELU-VERIFY(N,X,τ)=1{g_N(x)≤τ for every x∈X}. An unsafe answer therefore needs a witness x with g_N(x)>τ; a safe answer establishes the universal weak inequality.” The transfer proof also uses the right thresholding event: “A label change requires the uniform output displacement to reach at least Γ.”",
+            "cost_usd": 0.0090785
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The main proof in Section 4.3 states that a label change requires the displacement \"to reach at least \\Gamma\", but the detailed distinction regarding \"Strict unsafe and weak safe inequalities\" is indeed relegated to Appendix A.4, confirming the reviewer's claim.",
+            "cost_usd": 0.002288
+          }
+        ],
+        "cost_usd": 0.01673152
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "general": 0.2
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "general": 0.0836576
+  },
+  "extractor_cost_usd": 0.014337999999999962,
+  "total_cost_usd": 0.09799559999999996
+}

@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13618",
+  "copy_id": "v3",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "the specific 91% rationale figure is not confidently verifiable here",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "the specific 91% rationale figure is not confidently verifiable here",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags the 91% rationale figure in the Key Statements section as weakly supported and not confidently verifiable, which corresponds to the injected 91% value (changed from 87%). Under the VALUE-OR-NUMERIC rule, the reviewer names the cited paper [5] and challenges the specific value (91%), so this counts as detection, though the confidence is medium because the reviewer did not explicitly state it contradicts the source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "✔ _WEAKLY_SUPPORTED_ **Prior bandit-task work reports a knowing-doing gap in which LLMs often produce correct rationales yet choose greedy rather than optimal actions.**\n- _Reference(s):_ [5]\n- _Justification:_ This is consistent with the cited title “LLMs are greedy agents,” but the specific 91% rationale figure is not confidently verifiable here.",
+          "confidence": "high",
+          "reasoning": "This directly names the cited source context and specifically questions the injected 91% value, which satisfies the value-or-numeric rule for citation mutations.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the specific 91% rationale figure is not confidently verifiable here.",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly quotes the injected 91% figure and identifies it as not being verifiable from the cited source.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Abstract says the models \"span skill scores from 0.63 to −0.23,\" but Table 2 reports the highest overall skill as GPT-5.4 at `0.62`. This is a small absolute discrepancy but concerns a headline result.",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Abstract says the models ",
+          "confidence": "low",
+          "reasoning": "The reviewer explicitly flags the 0.63 vs 0.62 discrepancy between the Abstract and Table 2 in both the Major Issues section and the Numerical Results Audit, directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The skill-score definition has a sign error and a central quantitative mismatch. In Sec. 4, Eq. (1) defines `skill = (Cbase − Cagent)/(Corc − Cbase)`, but the prose, worked example, and interpretation require denominator `Cbase − Corc`: with the printed equation, the seed-1 worked example gives approximately `−0.26`, not `0.26`. Sec. 5 and Table 2 also report positive scores consistent with the opposite denominator. In addition, the Abstract reports a maximum overall skill of `0.63`, whereas Table 2 reports GPT-5.4 at `0.62`.\n\n[✖] **The Abstract’s reported maximum overall skill matches Table 2.**\n- _Location:_ Abstract vs Table 2\n- _check_type:_ abstract_vs_body_match\n- _Reported:_ `0.63` vs `0.62` / _Computed:_ `0.62`\n- _Expected severity bucket:_ major",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the exact abstract-versus-table mismatch and the two conflicting values 0.63 and 0.62.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the Abstract reports a maximum overall skill of 0.63, whereas Table 2 reports GPT-5.4 at 0.62.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the exact numerical discrepancy between the abstract and the body of the paper.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Abstract says the models \"span skill scores from 0.63 to −0.23,\" but Table 2 reports the highest overall skill as GPT-5.4 at `0.62`. This is a small absolute discrepancy but concerns a headline result.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the 0.63 vs 0.62 discrepancy between the Abstract and Table 2, naming the exact values and the exact comparison location, which precisely matches the injected numerical perturbation.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. (1) prints `skill = (Cbase − Cagent)/(Corc − Cbase)`. Since lower cost is better and normally `Corc < Cbase`, this denominator is negative, so an agent between base and oracle receives a negative score. The worked example and all interpretation require denominator `Cbase − Corc`. The first incorrect step is the sign of the denominator in Eq. (1).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. (1) prints `skill = (Cbase − Cagent)/(Corc − Cbase)`. Since lower cost is better and normally `Corc < Cbase`, this denominator is negative, so an agent between base and oracle receives a negative score. The worked example and all interpretation require denominator `Cbase − Corc`. The first incorrect step is the sign of the denominator in Eq. (1).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inverted denominator in the skill-score equation, noting that Corc − Cbase should be Cbase − Corc, which precisely matches the injected sign error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The printed skill-score equation has the wrong sign relative to the worked example and results;\n\nThe skill-score definition has a sign error and a central quantitative mismatch. In Sec. 4, Eq. (1) defines `skill = (Cbase − Cagent)/(Corc − Cbase)`, but the prose, worked example, and interpretation require denominator `Cbase − Corc`:\n\n[✖] **The skill score is 0 at the base-stock floor and 1 at the oracle.**\n- _Location:_ Eq. (1), Sec. 4\n- _Verdict:_ FAIL (confidence: high, impact: critical)\n- _Notes:_ Eq. (1) prints `skill = (Cbase − Cagent)/(Corc − Cbase)`. Since lower cost is better and normally `Corc < Cbase`, this denominator is negative, so an agent between base and oracle receives a negative score. The worked example and all interpretation require denominator `Cbase − Corc`. The first incorrect step is the sign of the denominator in Eq. (1).",
+          "confidence": "high",
+          "reasoning": "This is a direct match to the injected denominator reversal in the skill-score equation, including the exact incorrect and corrected forms.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (1) defines skill = (Cbase − Cagent)/(Corc − Cbase), but the prose, worked example, and interpretation require denominator Cbase − Corc",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific sign error in the denominator of the skill-score equation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Sec. 2 contains an unresolved cross-reference: \"Table ??\" instead of the table number. Recommendation: Fix the LaTeX reference.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Sec. 2 contains an unresolved cross-reference: \"Table ??\" instead of the table number. Recommendation: Fix the LaTeX reference.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the broken cross-reference producing '??' in Sec. 2, directly matching the injected typo in the \\ref command.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Sec. 2 contains an unresolved cross-reference: “Table ??” instead of the table number.\n\n*Recommendation:* Fix the LaTeX reference.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the unresolved 'Table ??' cross-reference, which clearly corresponds to the broken \\ref injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 2 contains an unresolved cross-reference: ‘Table ??’ instead of the table number.",
+          "confidence": "high",
+          "reasoning": "The reviewer flags the specific LaTeX '??' artifact resulting from the broken reference injection in Section 2.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 37.084682,
+  "total_cost_usd": null,
+  "total_input_tokens": 30405,
+  "total_output_tokens": 4210,
+  "escalation_count": 1,
+  "notes": null
+}

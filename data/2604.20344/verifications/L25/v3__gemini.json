@@ -1,0 +1,180 @@
+{
+  "paper_id": "2604.20344",
+  "copy_id": "v3",
+  "reviewer_system": "L25",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not flag or challenge the description of SpheCow's integration strategy in Sec. 3.1. The citation-related comment in the review (Very minor issue 2) concerns sample sizes from Richings et al. 2011 and Dullo & Graham 2013, which is unrelated to the Baes2021b/SpheCow injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The report does not challenge the SpheCow/Baes2021b citation or the claim about the integration strategy in Section 3.1. The only citation-related comment concerns unrelated sample sizes from other papers.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer makes no mention of the numerical integration strategy or the citation to Baes2021b in Section 3.1; their comments on citations are restricted to sample sizes in Section 4.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section 4, Paragraph 1: The text states, \"For $\\gamma = 0$, we always find $\\alpha_{crit} = 2.1$\". However, in Appendix A, Table A.1, the row corresponding to $\\gamma = 0$ reports $\\alpha_{crit} = 2.00$ for all evaluated Sersic indices $m$. This matters because it introduces a numerical discrepancy regarding the exact threshold for flat-core profiles. Fix: Correct the text to read $2.00$, ensuring consistency with Table A.1.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section 4, Paragraph 1: The text states, \"For $\\gamma = 0$, we always find $\\alpha_{crit} = 2.1$\". However, in Appendix A, Table A.1, the row corresponding to $\\gamma = 0$ reports $\\alpha_{crit} = 2.00$ for all evaluated Sersic indices $m$. This matters because it introduces a numerical discrepancy regarding the exact threshold for flat-core profiles. Fix: Correct the text to read $2.00$, ensuring consistency with Table A.1.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly names the injected value 2.1, the paired location (Table A.1, γ=0 row), and identifies the numerical inconsistency between the two locations, which is precisely the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] Section 4, Paragraph 1: The text states, \"For $\\gamma = 0$, we always find $\\alpha_{crit} = 2.1$\". However, in Appendix A, Table A.1, the row corresponding to $\\gamma = 0$ reports $\\alpha_{crit} = 2.00$ for all evaluated Sersic indices $m$.",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies the changed value 2.1 and contrasts it with Table A.1's 2.00 for the same quantity, which is the exact injected inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text states, \"For \\u03b3 = 0, we always find \\u03b1_{crit} = 2.1\". However, in Appendix A, Table A.1, the row corresponding to \\u03b3 = 0 reports \\u03b1_{crit} = 2.00 for all evaluated Sersic indices m. This matters because it introduces a numerical discrepancy regarding the exact threshold for flat-core profiles.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the discrepancy between the prose value (2.1) and the table value (2.00) for the transition parameter at \\u03b3=0.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section 3.2, Equation 4: The mathematical identity provided for the logarithmic density slope is incorrect. The equation states $\\gamma(r) = - \\frac{d\\log \\nu(r)}{d\\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}$. The limit expression on the right-hand side evaluates to zero for any physical, finite-mass stellar density profile and does not represent a logarithmic derivative.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section 3.2, Equation 4: The mathematical identity provided for the logarithmic density slope is incorrect. The equation states $\\gamma(r) = - \\frac{d\\log \\nu(r)}{d\\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}$. The limit expression on the right-hand side evaluates to zero for any physical, finite-mass stellar density profile and does not represent a logarithmic derivative.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the injected false limit claim appended to the logarithmic slope definition and correctly explains why it is wrong, matching the injection precisely.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] Section 3.2, Equation 4: The mathematical identity provided for the logarithmic density slope is incorrect. The equation states $\\gamma(r) = - \\frac{d\\log \\nu(r)}{d\\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}$. The limit expression on the right-hand side evaluates to zero for any physical, finite-mass stellar density profile and does not represent a logarithmic derivative.",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the exact false appended limit expression and explains why the equivalence is mathematically wrong, directly matching the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 3.2, Equation 4: The mathematical identity provided for the logarithmic density slope is incorrect. The equation states \\u03b3(r) = - \\frac{d\\log \\nu(r)}{d\\log r} = \\lim_{r \\to \\infty} \\frac{\\nu(r)}{r}. The limit expression on the right-hand side evaluates to zero for any physical, finite-mass stellar density profile and does not represent a logarithmic derivative.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified that the appended limit term in Equation 4 is mathematically incorrect for a physical density profile.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Section 4, Paragraph 3: There is an unresolved LaTeX cross-reference in the text: \"Figure ?? also contains data from two representative observational studies.\" This matters as it disrupts the reading flow and fails to anchor the text to the correct visualization. Fix: Replace \"Figure ??\" with \"Figure 3\".",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Section 4, Paragraph 3: There is an unresolved LaTeX cross-reference in the text: \"Figure ?? also contains data from two representative observational studies.\" This matters as it disrupts the reading flow and fails to anchor the text to the correct visualization. Fix: Replace \"Figure ??\" with \"Figure 3\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the broken cross-reference rendering as '??' in the Discussion section, which corresponds exactly to the injected misspelling of the \\ref label.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] Section 4, Paragraph 3: There is an unresolved LaTeX cross-reference in the text: \"Figure ?? also contains data from two representative observational studies.\"",
+          "confidence": "high",
+          "reasoning": "This precisely flags the broken cross-reference rendering as 'Figure ??' in Section 4, which is the direct consequence of the injected bad label key.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 4, Paragraph 3: There is an unresolved LaTeX cross-reference in the text: \"Figure ?? also contains data from two representative observational studies.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the \"Figure ??\" artifact caused by the broken LaTeX cross-reference.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 25.515063,
+  "total_cost_usd": null,
+  "total_input_tokens": 11109,
+  "total_output_tokens": 2836,
+  "escalation_count": 0,
+  "notes": null
+}

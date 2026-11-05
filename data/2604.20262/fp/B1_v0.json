@@ -1,0 +1,320 @@
+{
+  "paper_id": "2604.20262",
+  "reviewer_system": "B1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-29104ff780a1",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Mechanical predicate passed: 2 occurrences; min sigfigs = 1; range = [0.002, 0.002]",
+        "evidence": {
+          "check_type": "repeated_constant",
+          "predicate": {
+            "verdict": "PASS",
+            "computed": 0.002,
+            "reported": 0.002,
+            "diff_abs": 0.0,
+            "diff_rel": 0.0,
+            "tolerance": {
+              "abs_tol": 0.0005,
+              "rel_tol": 0.5
+            },
+            "notes": "2 occurrences; min sigfigs = 1; range = [0.002, 0.002]"
+          },
+          "rereader": [
+            {
+              "label": "uncertainty_alpha",
+              "raw_observed": "0.002",
+              "value_observed": 0.002,
+              "notes": "Uncertainty for α found in Section 3.3, Fig. 9 and text."
+            },
+            {
+              "label": "uncertainty_beta",
+              "raw_observed": "0.002",
+              "value_observed": 0.002,
+              "notes": "Uncertainty for β found in Section 3.3, Fig. 9 and text."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.046304
+      },
+      {
+        "flag_id": "fp-4339638cb29d",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.046304
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-123b1fbb9ab3",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. The statement claims that Eq. (10) omits the baseline fringe term (the exponential phase factor involving (r_j - r_i)·n) and the time-integration/gain factor present in Eq. (5), which would create an ambiguity in the simulation forward model used for the N–S likelihood fit. This is a prose-level structural observation about two equations rather than an algebraic identity or canonical-form assertion. The transcription-fidelity check returned 'unverifiable/inconclusive', so the mechanical evidence trail provides no usable confirmation or refutation. The knowledge-audit channel is not applicable here (this is a claim about a difference between two paper-specific equations, not a canonical literature equation). Without reliable mechanical confirmation and with no applicable knowledge-audit channel, the claim cannot be assessed beyond noting that the structural difference described (absence of exp(-2πi/λ (r_j-r_i)·n) and the gain/time terms in Eq. (10)) is physically meaningful and would indeed constitute an approximation if not justified by assumptions such as a fringe-stopped or snapshot regime — but this cannot be verified from the evidence supplied.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "moderate",
+          "notes": "The statement claims that Eq. (10) omits the baseline fringe term (the exponential phase factor involving (r_j - r_i)·n) and the time-integration/gain factor present in Eq. (5), which would create an ambiguity in the simulation forward model used for the N–S likelihood fit. This is a prose-level structural observation about two equations rather than an algebraic identity or canonical-form assertion. The transcription-fidelity check returned 'unverifiable/inconclusive', so the mechanical evidence trail provides no usable confirmation or refutation. The knowledge-audit channel is not applicable here (this is a claim about a difference between two paper-specific equations, not a canonical literature equation). Without reliable mechanical confirmation and with no applicable knowledge-audit channel, the claim cannot be assessed beyond noting that the structural difference described (absence of exp(-2πi/λ (r_j-r_i)·n) and the gain/time terms in Eq. (10)) is physically meaningful and would indeed constitute an approximation if not justified by assumptions such as a fringe-stopped or snapshot regime — but this cannot be verified from the evidence supplied.",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → inconclusive (9.60s)"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.040450000000000014
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-c26273d29061",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper mentions applying normalization to eliminate solar activity effects and notes that 'solar radio bursts may induce fluctuations in received signal strength,' but provides no reference to absolute solar flux standards, contemporaneous solar flux monitors, or a robust procedure for identifying and excising solar burst periods. The methodology for handling solar flux variability is insufficiently specified.",
+        "evidence": {
+          "claim": "The handling of solar flux variability in estimating the E–W beam is insufficiently specified, lacking reference to absolute solar flux standards or robust excision/removal of solar bursts.",
+          "excerpt": "The handling of solar flux variability is insufficiently specified (no clear referencing to absolute flux standards or contemporaneous solar flux monitors, nor robust removal of solar bursts)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper mentions applying normalization to eliminate solar activity effects and notes that 'solar radio bursts may induce fluctuations in received signal strength,' but provides no reference to absolute solar flux standards, contemporaneous solar flux monitors, or a robust procedure for identifying and excising solar burst periods. The methodology for handling solar flux variability is insufficiently specified.",
+            "cost_usd": 0.027813750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only states in the abstract that it measures the E-W beam by \"applying normalization to eliminate the effects of solar activity,\" and in the methods merely notes that \"for our observation band at 700-800 MHz the steady emission from the quiet Sun is more common.\" It does not specify any absolute solar-flux reference, contemporaneous flux monitor, or explicit burst excision procedure.",
+            "cost_usd": 0.015707
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges solar variability but relies on the assumption that \"for our observation band at 700-800 MHz the steady emission from the quiet Sun is more common.\" It does not use contemporaneous solar monitors or actively excise bursts.",
+            "cost_usd": 0.0050019999999999995
+          }
+        ],
+        "cost_usd": 0.04852275
+      },
+      {
+        "flag_id": "fp-85ae3b277357",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper first presents a Gaussian N-S model (Eq. 2) and then in Eq. (11) introduces a reparameterization as '(A^simu_NS)^((1+α)/2)' using the simulation-derived shape, which is a different functional form. The paper states this is 'for computational convenience' but does not clearly explain how the two formulations are reconciled or quantify sensitivity to the EM prior.",
+        "evidence": {
+          "claim": "There is an inconsistency between the stated Gaussian N–S model and the use of a simulation-derived shape raised to a power; it is unclear how these are reconciled or how sensitive results are to the assumed EM prior.",
+          "excerpt": "Inconsistency between the stated Gaussian N–S model and the later use of a simulation-derived shape raised to a power."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper first presents a Gaussian N-S model (Eq. 2) and then in Eq. (11) introduces a reparameterization as '(A^simu_NS)^((1+α)/2)' using the simulation-derived shape, which is a different functional form. The paper states this is 'for computational convenience' but does not clearly explain how the two formulations are reconciled or quantify sensitivity to the EM prior.",
+            "cost_usd": 0.027813750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly presents Eq. (11) as a reparameterization, not a different model: \"For computational convenience here, we transform the form of ANS to ... (A^simu_NS)^{(1+α)/2}. Here, A^simu_NS is the ANS corresponding to the best-fit θNS obtained from electromagnetic simulations.\" Thus the later form is stated as a transformed version of the Gaussian N-S beam, not an unreconciled inconsistency.",
+            "cost_usd": 0.015707
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer misunderstood the equation; the paper explicitly defines $A_{NS}^{simu}$ as the Gaussian \"corresponding to the best-fit $\\theta_{NS}$ obtained from electromagnetic simulations.\" Raising this Gaussian to a power simply re-parameterizes the Gaussian width mathematically, so there is no inconsistency.",
+            "cost_usd": 0.0050019999999999995
+          }
+        ],
+        "cost_usd": 0.04852275
+      },
+      {
+        "flag_id": "fp-91fce6b096aa",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The pipeline includes 'subtraction of the night-time mean' as described in Section 2.1 and Fig. 2, and this step is used on the data feeding the N-S beam fit. The paper does not analyze or quantify the potential bias this step introduces to diffuse-sky signatures used in the N-S fitting procedure.",
+        "evidence": {
+          "claim": "Subtracting the nightly mean in the pipeline can bias diffuse-sky signatures used in the N–S fit; this source of bias is not analyzed or quantified.",
+          "excerpt": "The pipeline step “subtract the nightly mean” can bias diffuse-sky signatures used in the N–S fit; this is not quantified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The pipeline includes 'subtraction of the night-time mean' as described in Section 2.1 and Fig. 2, and this step is used on the data feeding the N-S beam fit. The paper does not analyze or quantify the potential bias this step introduces to diffuse-sky signatures used in the N-S fitting procedure.",
+            "cost_usd": 0.027813750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The pipeline in Sect. 2.1 explicitly includes \"Subtract the nightly mean\" (Fig. 2), while the N-S fit later relies on diffuse structure because \"The sources that have a constraining effect in our data are primarily Cyg A, Cas A, and the Galactic plane.\" The paper nowhere analyzes or quantifies how nightly-mean subtraction alters the diffuse-sky signal used in that fit.",
+            "cost_usd": 0.015707
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper applies \"subtraction of the night-time mean\" in its data reduction pipeline (Section 2.1) and uses a diffuse Galactic sky model for N-S fitting, but does not evaluate or quantify the potential bias this subtraction introduces to the diffuse-sky visibility.",
+            "cost_usd": 0.0050019999999999995
+          }
+        ],
+        "cost_usd": 0.04852275
+      },
+      {
+        "flag_id": "fp-bfee21b50784",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section 4 discusses error sources qualitatively, stating 'The relative error of the observed flux is within or around 5%, which we expect will not significantly affect our results,' but does not provide a full quantitative uncertainty budget combining sky-model variance, bright-source flux uncertainties, and instrumental systematics into a total error estimate for the N-S beam.",
+        "evidence": {
+          "claim": "A quantitative uncertainty budget for the N–S beam fit, including sky-model variance, bright-source flux uncertainties, and instrumental systematics, is missing.",
+          "excerpt": "a comparable, quantitative uncertainty budget for N–S (including sky-model variance, bright-source flux uncertainties, and instrumental systematics) is needed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 4 discusses error sources qualitatively, stating 'The relative error of the observed flux is within or around 5%, which we expect will not significantly affect our results,' but does not provide a full quantitative uncertainty budget combining sky-model variance, bright-source flux uncertainties, and instrumental systematics into a total error estimate for the N-S beam.",
+            "cost_usd": 0.027813750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides only qualitative discussion for N-S uncertainties: \"Here we assess the impact of the sky model... The relative error of the observed flux is within or around 5%, which we expect will not significantly affect our results,\" and says Galactic-plane uncertainty is another contributor. It does not present a quantitative propagated uncertainty budget for the N-S beam parameters from sky-model variance, source-flux errors, and instrumental systematics.",
+            "cost_usd": 0.015707
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper estimates a 5% error for flux models but only provides qualitative assurances for the N-S beam (\"we expect will not significantly affect our results\", \"can be suppressed to a negligible level\"), rather than presenting a quantitative uncertainty budget.",
+            "cost_usd": 0.0050019999999999995
+          }
+        ],
+        "cost_usd": 0.04852275
+      },
+      {
+        "flag_id": "fp-3478dc33d2ad",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "B1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper describes 'dual-polarization dipole feeds' but does not address polarization dependence in the beam characterization; the analysis treats the beam as a single power beam without discussing polarization-resolved beams or potential impacts of polarization leakage on the results.",
+        "evidence": {
+          "claim": "The analysis does not address polarization dependence or variation, potentially impacting beam characterization if beams are not polarization-independent.",
+          "excerpt": "Polarization dependence, per-feed beam variations, and mutual coupling are not addressed; results appear to be power-beam averages rather than polarization-resolved beams."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper describes 'dual-polarization dipole feeds' but does not address polarization dependence in the beam characterization; the analysis treats the beam as a single power beam without discussing polarization-resolved beams or potential impacts of polarization leakage on the results.",
+            "cost_usd": 0.027813750000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Although the instrument has \"96 dual polarization receivers,\" the analysis does not present polarization-resolved beams; instead it states, \"This averaged beamformed visibility is a measurement of the average primary beam, which is different with primary beam of each individual feed.\" No treatment of polarization dependence is given.",
+            "cost_usd": 0.015707
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions \"dual polarization receivers\" in the introduction but does not distinguish between polarizations in its methodology or results, indicating that polarization dependence in the beam is unaddressed.",
+            "cost_usd": 0.0050019999999999995
+          }
+        ],
+        "cost_usd": 0.04852275
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 1.0,
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 1,
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.092608,
+    "mathematics": 0.040450000000000014,
+    "general": 0.24261375000000002
+  },
+  "extractor_cost_usd": 0.015513999999999972,
+  "total_cost_usd": 0.39118575
+}

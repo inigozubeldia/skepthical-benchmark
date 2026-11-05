@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14287",
+  "copy_id": "v1",
+  "reviewer_system": "CL1",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "low",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the specific claim that 'joint multi-class training under extreme imbalance leads to improved generalization performance' as contradicting the cited work (tabassum_2024_adapting). The reviewer mentions class-imbalance handling and separate binary models but does not challenge the directionality of this particular citation claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Class-imbalance handling: separate binary models.** The authors train independent binary models for pores and inclusions, citing [18]. This is a reasonable practical choice but it partly sidesteps rather than solves the multi-class imbalance problem highlighted in the introduction.",
+          "confidence": "medium",
+          "reasoning": "The review explicitly challenges the introduction's cited claim about multi-class imbalance by pointing to ref. [18] and arguing the paper's characterization is misleading. Although it does not restate the exact 'improved vs reduced generalization' wording, it clearly contests the post-edit claim tied to that cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not mention the citation to Tabassum 2024 or the specific claim that imbalance improves performance; they only mentioned general issues with references being dated.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag or challenge the specific claim that 'joint multi-class training under extreme imbalance leads to improved generalization performance' attributed to [18]. The reviewer discusses the binary model choice and cites [18] in passing, but never challenges the directionality of that claim as contradicting the referenced source.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "**ViT-H size:** the text says \"~636 M parameters\" for the ViT-H image encoder in Sec. III-A but \"63 M parameters\" for the image encoder on page 2. Please reconcile (ViT-H is ≈636 M, so p. 2 appears to be a typo).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "**ViT-H size:** the text says \"~636 M parameters\" for the ViT-H image encoder in Sec. III-A but \"63 M parameters\" for the image encoder on page 2. Please reconcile (ViT-H is ≈636 M, so p. 2 appears to be a typo).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the contradiction between the 63M figure on page 2 and the 636M figure in Sec. III-A, matching exactly the injected numeric error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**ViT-H size:** the text says \"~636 M parameters\" for the ViT-H image encoder in Sec. III-A but \"63 M parameters\" for the image encoder on page 2. Please reconcile (ViT-H is ≈636 M, so p. 2 appears to be a typo).",
+          "confidence": "high",
+          "reasoning": "The reviewer names both conflicting values, identifies the affected quantity (ViT-H image encoder parameters), and states that 63M is a typo relative to 636M. This directly matches the injected numeric inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the text says \"~636 M parameters\" for the ViT-H image encoder in Sec. III-A but \"63 M parameters\" for the image encoder on page 2. Please reconcile (ViT-H is ≈636 M, so p. 2 appears to be a typo).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the contradiction between the 63M and 636M figures and noted the specific location of the error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "**Methodology, Sec. III-A:** The Conv-LoRA update equation uses a product `∏ g_i(x) E_i(W_E x)` inside the sum. As written, this reads as a product of expert outputs, but the surrounding text and Fig. 2(c) describe a mixture-of-experts (`∑ g_i · E_i`). Please double-check and correct.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "**Methodology, Sec. III-A:** The Conv-LoRA update equation uses a product `∏ g_i(x) E_i(W_E x)` inside the sum. As written, this reads as a product of expert outputs, but the surrounding text and Fig. 2(c) describe a mixture-of-experts (`∑ g_i · E_i`). Please double-check and correct.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the product operator in the Conv-LoRA equation as inconsistent with the mixture-of-experts summation described in the text, precisely matching the injected swap from ∑ to ∏.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Methodology, Sec. III-A:** The Conv-LoRA update equation uses a product `∏ g_i(x) E_i(W_E x)` inside the sum. As written, this reads as a product of expert outputs, but the surrounding text and Fig. 2(c) describe a mixture-of-experts (`∑ g_i · E_i`). Please double-check and correct.",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically flags the erroneous product operator in the Conv-LoRA equation and contrasts it with the expected summation form. This is an exact match to the injected operator swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Conv-LoRA update equation uses a product ∏ g_i(x) E_i(W_E x) inside the sum. As written, this reads as a product of expert outputs, but the surrounding text and Fig. 2(c) describe a mixture-of-experts (∑ g_i · E_i).",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified that the summation operator was replaced by a product operator in the specific equation in Section III-A.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "**Generality claim is overreached.** The abstract's statement that the framework \"generalizes universally to all non-destructive testing modalities and arbitrary material types\" is not supported by the experiments, which cover only AM XCT of two alloy families with a single intermediate dataset. Please tone this down to what is actually demonstrated.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "**Generality claim is overreached.** The abstract's statement that the framework \"generalizes universally to all non-destructive testing modalities and arbitrary material types\" is not supported by the experiments, which cover only AM XCT of two alloy families with a single intermediate dataset. Please tone this down to what is actually demonstrated.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies and challenges the injected sweeping generalization clause in the abstract, flagging it as unsupported by the paper's XCT-specific experiments.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Generality claim is overreached.** The abstract's statement that the framework \"generalizes universally to all non-destructive testing modalities and arbitrary material types\" is not supported by the experiments, which cover only AM XCT of two alloy families with a single intermediate dataset. Please tone this down to what is actually demonstrated.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly quotes and rejects the abstract's sweeping universal generalization claim. This precisely matches the injected overstated conclusion.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The abstract's statement that the framework \"generalizes universally to all non-destructive testing modalities and arbitrary material types\" is not supported by the experiments... Please tone this down to what is actually demonstrated.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the overreaching generality claim in the abstract, quoting the injected text verbatim.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 29.057595,
+  "total_cost_usd": null,
+  "total_input_tokens": 17207,
+  "total_output_tokens": 3327,
+  "escalation_count": 1,
+  "notes": null
+}

@@ -1,0 +1,180 @@
+{
+  "paper_id": "2604.20914",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly stated they found no confirmed citation errors, and nowhere in the report is there any challenge to the description of FIREFLY's importance sampling methodology or the Dong:2025igh citation. The dropped 'two-step' qualifier was not flagged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states they found no confirmed citation errors. They do not challenge the Dong:2025igh-supported claim about FIREFLY using importance sampling, so the methodology-drift citation injection was not flagged.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly stated that they found no citation errors and did not comment on the omission of the methodological qualifier in the description of importance sampling.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The caption states: \"Contours are drawn at the two-dimensional 1σ (39.3%), 1.5σ (67.5%), 2σ (56.5%) and 3σ (98.9%) credible levels.\" The listed 2σ value is inconsistent with the ordering: it is smaller than the listed 1.5σ value... Replace \"2σ (56.5%)\" with \"2σ (86.5%)\"",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The caption states: \"Contours are drawn at the two-dimensional 1σ (39.3%), 1.5σ (67.5%), 2σ (56.5%) and 3σ (98.9%) credible levels.\" The listed 2σ value is inconsistent with the ordering: it is smaller than the listed 1.5σ value... Replace \"2σ (56.5%)\" with \"2σ (86.5%)\"",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the incorrect 56.5% value for the 2σ credible level in the Fig. 1 caption, noted it violates ordering, and provided the correct value of 86.5%, directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The caption states: “Contours are drawn at the two-dimensional \\(1\\sigma\\) (39.3%), \\(1.5\\sigma\\) (67.5%), \\(2\\sigma\\) (56.5%) and \\(3\\sigma\\) (98.9%) credible levels.” The listed \\(2\\sigma\\) value is inconsistent with the ordering: it is smaller than the listed \\(1.5\\sigma\\) value. For a two-dimensional Gaussian, the usual enclosed probabilities are approximately 39.3%, 67.5%, 86.5%, and 98.9% for \\(1\\sigma\\), \\(1.5\\sigma\\), \\(2\\sigma\\), and \\(3\\sigma\\), respectively.\n\nConcrete fix: Replace “\\(2\\sigma\\) (56.5%)” with “\\(2\\sigma\\) (86.5%)”",
+          "confidence": "high",
+          "reasoning": "This directly identifies the altered Fig. 1 caption value and supplies the corrected 86.5%, specifically matching the injected numeric error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The caption states: “Contours are drawn at the two-dimensional 1\\sigma (39.3%), 1.5\\sigma (67.5%), 2\\sigma (56.5%) and 3\\sigma (98.9%) credible levels.” The listed 2\\sigma value is inconsistent with the ordering: it is smaller than the listed 1.5\\sigma value.",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the specific numerical error in the figure caption, noting the value 56.5% was out of order and incorrect for a 2-sigma level.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Eq. (A.12) writes y^{slr}_{ℓmn}(t)=∑_{j=0}^{2} g^{slr}_{ℓmn,j}(t) B^{ℓmn,j}. However, the linear parameters were defined only for j=1,2 in Eq. (A.5)... There is no B_{ℓmn,0} or g_{ℓmn,0} defined. Change the summation to ∑_{j=1}^{2}",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Eq. (A.12) writes y^{slr}_{ℓmn}(t)=∑_{j=0}^{2} g^{slr}_{ℓmn,j}(t) B^{ℓmn,j}. However, the linear parameters were defined only for j=1,2 in Eq. (A.5)... There is no B_{ℓmn,0} or g_{ℓmn,0} defined. Change the summation to ∑_{j=1}^{2}",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identified the sum starting from j=0 instead of j=1, noted that no j=0 term is defined, and recommended the correct fix of changing the lower bound to j=1, exactly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Eq. (A.12) writes\n\\[\ny^{slr}_{\\ell mn}(t)=\\sum_{j=0}^{2} g^{slr}_{\\ell mn,j}(t) B^{\\ell mn,j}.\n\\]\nHowever, the linear parameters were defined only for \\(j=1,2\\) in Eq. (A.5), and the basis functions in Eq. (A.11) are also only \\(g_{\\ell mn,1}\\) and \\(g_{\\ell mn,2}\\). There is no \\(B_{\\ell mn,0}\\) or \\(g_{\\ell mn,0}\\) defined.\n\nConcrete fix: Change the summation to\n\\[\ny^{slr}_{\\ell mn}(t)=\\sum_{j=1}^{2} g^{slr}_{\\ell mn,j}(t) B^{\\ell mn,j}.\n\\]",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the lower-bound shift from j=1 to j=0 in the single-link-response equation and proposes restoring the correct range.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Eq. (A.12) writes y^{slr}_{\\ell mn}(t)=\\sum_{j=0}^{2} g^{slr}_{\\ell mn,j}(t) B^{\\ell mn,j}. However, the linear parameters were defined only for j=1,2 in Eq. (A.5)... Change the summation to \\sum_{j=1}^{2}",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified that the summation lower bound in Equation A.12 had been shifted to j=0, which was inconsistent with the defined parameters.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The abstract states that 'the computational cost grows steeply with the number of modes, which is likely to restrict the approach to moderate mode counts in the space context.' However, the main text says that 'FIREFLY's computational cost increases only mildly with N, demonstrating its scalability for multimode ringdown analysis in space-borne detectors.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The abstract states that 'the computational cost grows steeply with the number of modes, which is likely to restrict the approach to moderate mode counts in the space context.' However, the main text says that 'FIREFLY's computational cost increases only mildly with N, demonstrating its scalability for multimode ringdown analysis in space-borne detectors.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the contradiction between the abstract's claim of steep cost growth and the main text's demonstration of mild scaling with N, directly corresponding to the injected rewriting of the abstract's scalability claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The abstract states that “the computational cost grows steeply with the number of modes, which is likely to restrict the approach to moderate mode counts in the space context.” However, the main text says that “FIREFLY’s computational cost increases only mildly with \\(N\\), demonstrating its scalability for multimode ringdown analysis in space-borne detectors.” The summary similarly presents FIREFLY as easing computational bottlenecks. These statements are not compatible as written.\n\nFig. 2 appears to support mild FIREFLY scaling over \\(N=1,\\ldots,6\\), while full-parameter sampling grows much more steeply.",
+          "confidence": "high",
+          "reasoning": "This is a direct flag of the abstract/body contradiction introduced by the edit, specifically contrasting the abstract's steep-growth claim with Fig. 2 and the main text's mild-scaling claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The abstract states that “the computational cost grows steeply with the number of modes, which is likely to restrict the approach to moderate mode counts in the space context.” However, the main text says that “FIREFLY’s computational cost increases only mildly with N”",
+          "confidence": "high",
+          "reasoning": "The reviewer flagged the contradiction between the abstract and the main text regarding the scaling of the computational cost, which was the specific general error injected.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 27.740564,
+  "total_cost_usd": null,
+  "total_input_tokens": 16900,
+  "total_output_tokens": 3467,
+  "escalation_count": 0,
+  "notes": null
+}

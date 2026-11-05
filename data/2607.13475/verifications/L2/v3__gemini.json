@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13475",
+  "copy_id": "v3",
+  "reviewer_system": "L2",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the claim about 'automated tracking of rigid laparoscopic instruments' (citation [6]) as misattributed or unrelated to the cited source. The reviewer's citation concerns are limited to [13] (Baraff and Witkin) and Laplacian relaxation, which is a different injection target entirely.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review flags a different citation issue about Laplacian relaxation and Baraff and Witkin [13], but does not mention reference [6] or challenge the claim about tracking rigid laparoscopic instruments against its cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies a citation mismatch for reference [13] but does not mention citation [6] or the claim regarding rigid laparoscopic instrument tracking.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer did not flag the claim about 'automated tracking of rigid laparoscopic instruments [6]' as misattributing the cited paper's topic. The reviewer's citation checks focused on references [9], [10], and [13], and never challenged reference [6] or noted that it actually concerns soft-tissue surface reconstruction rather than rigid instrument tracking.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Abstract vs. Body Numerical Mismatch: The Abstract claims the learned estimator 'achieves 98.2% of oracle performance'. In Sec. III.B, this same metric is reported as '98.1% oracle recovery'... [✖] Abstract oracle recovery percentage matches the body text. Location: Abstract vs Sec. III.B, check_type: abstract_vs_body_match, Reported: 98.2% / Computed: 98.1%",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Abstract vs. Body Numerical Mismatch: The Abstract claims the learned estimator 'achieves 98.2% of oracle performance'. In Sec. III.B, this same metric is reported as '98.1% oracle recovery'... [✖] Abstract oracle recovery percentage matches the body text. Location: Abstract vs Sec. III.B, check_type: abstract_vs_body_match, Reported: 98.2% / Computed: 98.1%",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the discrepancy between the abstract's 98.2% and the body's 98.1% oracle recovery percentage, which is exactly the injected numeric mismatch.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Abstract vs. Body Numerical Mismatch**\n- *Issue:* The Abstract claims the learned estimator \"achieves 98.2% of oracle performance\". In Sec. III.B, this same metric is reported as \"98.1% oracle recovery\".",
+          "confidence": "high",
+          "reasoning": "This explicitly identifies the abstract/body mismatch for the oracle recovery percentage and quotes both conflicting values, directly matching the injected numeric change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract claims the learned estimator \"achieves 98.2% of oracle performance\". In Sec. III.B, this same metric is reported as \"98.1% oracle recovery\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the discrepancy between the 98.2% value in the abstract and the 98.1% value in the body text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Invalid Loss Function Formulation: In Sec. II.B, Equation (1) is defined as L = L_recon - λ_s L_smooth + λ_e L_stretch. The smoothness penalty is being subtracted from the total loss... [✖] Total loss function incorporates reconstruction, smoothness, and stretch terms. Verdict: FAIL (confidence: high, impact: critical). Subtracting the positive-definite smoothness penalty means the optimizer will seek to minimize the overall loss by making the mesh as non-smooth and irregular as possible.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Invalid Loss Function Formulation: In Sec. II.B, Equation (1) is defined as L = L_recon - λ_s L_smooth + λ_e L_stretch. The smoothness penalty is being subtracted from the total loss... [✖] Total loss function incorporates reconstruction, smoothness, and stretch terms. Verdict: FAIL (confidence: high, impact: critical). Subtracting the positive-definite smoothness penalty means the optimizer will seek to minimize the overall loss by making the mesh as non-smooth and irregular as possible.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the negative sign on the smoothness regularization term as a critical error, matching exactly the injected sign flip in the composite loss function.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Invalid Loss Function Formulation**\n- *Issue:* In Sec. II.B, Equation (1) is defined as $\\mathcal{L} = \\mathcal{L}_{recon} - \\lambda_s \\mathcal{L}_{smooth} + \\lambda_e \\mathcal{L}_{stretch}$. The smoothness penalty is being *subtracted* from the total loss.\n- *Recommendation:* Correct the sign in Equation (1) to $+ \\lambda_s \\mathcal{L}_{smooth}$.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely flags the negative sign on the smoothness regularization term and states the needed correction, directly corresponding to the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "In Sec. II.B, Equation (1) is defined as $\\mathcal{L} = \\mathcal{L}_{recon} - \\lambda_s \\mathcal{L}_{smooth} + \\lambda_e \\mathcal{L}_{stretch}$. The smoothness penalty is being *subtracted* from the total loss.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the sign of the smoothness regularization term was flipped from positive to negative in the loss function.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Qualitative Contradiction between Abstract and Conclusion: The paper presents opposing takeaways regarding the success and viability of the method. The Abstract claims that the results 'demonstrate that learned... state estimation can support effective deformable manipulation under realistic perception constraints.' In direct contrast, the Conclusion states that the results 'suggest that... they cannot yet replace expensive physical simulation for deformable manipulation under realistic perception constraints.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Qualitative Contradiction between Abstract and Conclusion: The paper presents opposing takeaways regarding the success and viability of the method. The Abstract claims that the results 'demonstrate that learned... state estimation can support effective deformable manipulation under realistic perception constraints.' In direct contrast, the Conclusion states that the results 'suggest that... they cannot yet replace expensive physical simulation for deformable manipulation under realistic perception constraints.'",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the internal contradiction between the Abstract and the Conclusion regarding the method's viability, which corresponds exactly to the injected rewrite of the Conclusion to claim failure rather than success.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Qualitative Contradiction between Abstract and Conclusion**\n- *Issue:* The paper presents opposing takeaways regarding the success and viability of the method (G.2 rhetorical contradiction). The Abstract claims that the results \"demonstrate that learned... state estimation can support effective deformable manipulation under realistic perception constraints.\" In direct contrast, the Conclusion states that the results \"suggest that... they cannot yet replace expensive physical simulation for deformable manipulation under realistic perception constraints.\"",
+          "confidence": "high",
+          "reasoning": "The review explicitly identifies that the conclusion says the method cannot replace physical simulation, contradicting the positive interpretation elsewhere, which matches the injected conclusion rewrite.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract claims that the results \"demonstrate that learned... state estimation can support effective deformable manipulation under realistic perception constraints.\" In direct contrast, the Conclusion states that the results \"suggest that... they cannot yet replace expensive physical simulation for deformable manipulation under realistic perception constraints.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the qualitative contradiction where the conclusion expresses a lack of viability compared to the oracle, directly matching the injected error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 29.215973,
+  "total_cost_usd": null,
+  "total_input_tokens": 19217,
+  "total_output_tokens": 2736,
+  "escalation_count": 1,
+  "notes": null
+}

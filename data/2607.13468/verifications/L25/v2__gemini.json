@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13468",
+  "copy_id": "v2",
+  "reviewer_system": "L25",
+  "reviewer_tag": "gemini",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the characterization of DINOv2 as 'supervised' anywhere in the report. The citation-related minor issue (#4) concerns missing citations for FPFH and Kabsch, not the DINOv2 method category.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review mentions missing citations for FPFH and Kabsch, but does not flag the claim that DINOv2 is supervised or challenge the DINOv2 citation/source characterization. Therefore it does not specifically correspond to the injected citation claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not mention the training methodology of DINOv2 or the 'supervised' miscategorization.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the mischaracterization of DINOv2 as 'supervised' anywhere in the report. None of the reviewer's comments challenge the description of DINOv2's training methodology or cite the DINOv2 paper in connection with this claim.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 not-detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "The reviewer flags IoU values (0.7449 in major issue #2) and mentions the appendix ablation indirectly, but never specifically identifies a contradiction between the appendix Full Model IoU (0.7459) and the Table 1 value (0.7449). The reviewer's mention of 0.7449 is about a different issue (performance regression vs. TRELLIS), not the internal inconsistency between tables.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer discusses IoU 0.7449 in Table 1 versus a baseline and other runtime contradictions, but does not identify the appendix full-model IoU mismatch between 0.7449 and 0.7459. Under the numeric rule, there is no specific challenge to the repeated constant inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "medium",
+          "reasoning": "While the reviewer discusses the IoU value (0.7449) from Table 1, they do so to highlight degradation against a baseline, not to point out the contradiction with the 0.7459 value in the appendix.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "[mathematical] Imprecise mathematical formulation of the CFM loss. In Equation 2 (page 5), the Continuous Flow Matching loss is given as $L_{CFM}(\\theta) = \\mathbb{E}_{t,x_0,\\epsilon} \\| v_\\theta(x, t) - (x_0 - \\epsilon) \\|_2^2$.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "the target vector $(x_0 - \\epsilon)$ implies a specific linear interpolation path between data and noise that is never explicitly formulated in the text.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the term (x_0 - epsilon) in the CFM loss equation (Equation 2), which is precisely the injected negated target vector, and challenges its formulation, corresponding directly to the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] Imprecise mathematical formulation of the CFM loss. In Equation 2 (page 5), the Continuous Flow Matching loss is given as $L_{CFM}(\\theta) = \\mathbb{E}_{t,x_0,\\epsilon} \\| v_\\theta(x, t) - (x_0 - \\epsilon) \\|_2^2$.",
+          "confidence": "medium",
+          "reasoning": "The reviewer explicitly quotes the altered target term '(x_0 - \\epsilon)' in the CFM loss and flags the formulation as problematic. Although they do not explicitly state the sign is reversed relative to the canonical form, this is a specific match to the injected mathematical edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "In Equation 2 (page 5), the Continuous Flow Matching loss is given as $L_{CFM}(\theta) = \\mathbb{E}_{t,x_0,\\epsilon} \\| v_\\theta(x, t) - (x_0 - \\epsilon) \\|_2^2$. ... Additionally, the target vector $(x_0 - \\epsilon)$ implies a specific linear interpolation path between data and noise that is never explicitly formulated in the text.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the Continuous Flow Matching loss equation as imprecise and explicitly quotes the injected target vector (x0 - epsilon), which is the negation of the canonical form.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The abstract claims that the method 'does not yet surpass state-of-the-art methods in geometric fidelity.' Conversely, Table 1 explicitly shows HIVE-3D outperforming all baselines, including SOTA TRELLIS, on two out of three geometry metrics: CD (0.0035 vs 0.0038) and F-Score (84.34 vs 81.29). This implies the abstract was written for an older set of results or understates the paper's actual achievements.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The abstract claims that the method 'does not yet surpass state-of-the-art methods in geometric fidelity.' Conversely, Table 1 explicitly shows HIVE-3D outperforming all baselines, including SOTA TRELLIS, on two out of three geometry metrics: CD (0.0035 vs 0.0038) and F-Score (84.34 vs 81.29). This implies the abstract was written for an older set of results or understates the paper's actual achievements.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly identifies the contradiction between the abstract's claim of not surpassing state-of-the-art and the experimental results in Table 1, which is exactly the injected internal contradiction.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] Contradiction between the abstract and the experimental results. The abstract claims that the method \"does not yet surpass state-of-the-art methods in geometric fidelity.\" Conversely, Table 1 explicitly shows HIVE-3D outperforming all baselines, including SOTA TRELLIS, on two out of three geometry metrics: CD (0.0035 vs 0.0038) and F-Score (84.34 vs 81.29). This implies the abstract was written for an older set of results or understates the paper's actual achievements.",
+          "confidence": "high",
+          "reasoning": "This directly flags the injected abstract claim as contradicting the paper's reported results, which is exactly the internal contradiction introduced by the edit.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Contradiction between the abstract and the experimental results. The abstract claims that the method \"does not yet surpass state-of-the-art methods in geometric fidelity.\" Conversely, Table 1 explicitly shows HIVE-3D outperforming all baselines...",
+          "confidence": "high",
+          "reasoning": "The reviewer directly identifies the contradiction between the abstract's claim of comparable performance and the results showing SOTA performance.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 29.80484,
+  "total_cost_usd": null,
+  "total_input_tokens": 15682,
+  "total_output_tokens": 2936,
+  "escalation_count": 1,
+  "notes": null
+}

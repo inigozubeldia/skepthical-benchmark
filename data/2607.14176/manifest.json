@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.14176",
+  "arxiv_url": "https://arxiv.org/abs/2607.14176",
+  "rotation_seed": 20260734,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "them unsuitable for real-time decision-making in large-scale\nurban scenarios \\cite{Chen2024MILP}.",
+          "injected_text": "them unsuitable for real-time decision-making \\cite{Chen2024MILP}.",
+          "rationale": "The cited paper (Chen2024MILP) explicitly focuses on large-scale networked systems; dropping the condition over-generalises the claim to imply MILP is unsuitable even for small-scale scenarios.",
+          "ground_truth_description": "Dropped the 'in large-scale urban scenarios' condition, over-generalising the claim that MILP is unsuitable for real-time decision-making.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Chen2024MILP",
+            "injected_cite_key": "Chen2024MILP",
+            "claim_sentence_verbatim": "MILP formulations can compute globally optimal relay configurations, but their computational complexity increases superlinearly with network size and graph density, rendering them unsuitable for real-time decision-making in large-scale urban scenarios \\cite{Chen2024MILP}.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_condition_dropped_or_over_generalised",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S2.t2.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "GINE closely matches MILP decisions at the link level (accuracy 0.9589),",
+          "injected_text": "GINE closely matches MILP decisions at the link level (accuracy 0.9689),",
+          "rationale": "Perturbs the abstract's reported link-level accuracy by +0.01 to create an abstract_vs_body_match discrepancy against the true value reported in Section VI.B and Table I.",
+          "ground_truth_description": "Changes the link-level accuracy reported in the abstract from 0.9589 to 0.9689, introducing a mismatch with the body of the paper.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "0.9589",
+            "value_after_raw": "0.9689",
+            "value_before_float": 0.9589,
+            "value_after_float": 0.9689,
+            "location_cue": "GINE closely matches MILP decisions at the link level (accuracy 0.9589),",
+            "paired_location": "Section VI.B text and Table I",
+            "quantity_label": "link-level accuracy",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "\\sum_{j\\in\\mathcal{N}(i)}",
+          "injected_text": "\\sum_{j\\in\\mathcal{N}(i)\\cup\\{i\\}}",
+          "rationale": "Shifts the summation index set of the GIN message-passing update from the neighbourhood N(i) to N(i) union {i}, i.e. by exactly one element. Because the self term h_i^(l) is already added separately outside the sum, the self node is now aggregated twice, which contradicts the standard GIN update the surrounding text describes.",
+          "ground_truth_description": "GIN update: summation index set N(i) replaced by N(i) union {i}, double-counting the self node that is already added outside the sum.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "GIN message-passing update display",
+            "original_fragment_latex": "\\sum_{j\\in\\mathcal{N}(i)}",
+            "injected_fragment_latex": "\\sum_{j\\in\\mathcal{N}(i)\\cup\\{i\\}}",
+            "full_equation_latex_before": "\\mathbf{h}_i^{(\\ell+1)}=\\mathrm{MLP}^{(\\ell)}\\!\\Big(\\mathbf{h}_i^{(\\ell)}+\\!\\!\\sum_{j\\in\\mathcal{N}(i)}\\!\\mathrm{ReLU}(\\mathbf{h}_j^{(\\ell)}+\\tilde{\\mathbf{e}}_{ij}^{(\\ell)})\\Big),",
+            "full_equation_latex_after": "\\mathbf{h}_i^{(\\ell+1)}=\\mathrm{MLP}^{(\\ell)}\\!\\Big(\\mathbf{h}_i^{(\\ell)}+\\!\\!\\sum_{j\\in\\mathcal{N}(i)\\cup\\{i\\}}\\!\\mathrm{ReLU}(\\mathbf{h}_j^{(\\ell)}+\\tilde{\\mathbf{e}}_{ij}^{(\\ell)})\\Big),",
+            "term_role": "sum index set (neighbourhood)",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t3.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "main.tex",
+          "original_text": "reducing solver runtime by orders of magnitude, making MILP-grade optimisation\npractically compatible with stringent latency budgets.",
+          "injected_text": "reducing solver runtime by orders of magnitude, making MILP-grade optimisation\npractically compatible with stringent latency budgets and demonstrating its universal scalability to any arbitrary wireless network regardless of topology or node density.",
+          "rationale": "Adds a sweeping generalisation to the Conclusion claiming universal applicability to any wireless network, which is completely unsupported by the single dense-urban V2X dataset evaluated.",
+          "ground_truth_description": "Overstates the conclusion by claiming the approach universally scales to any arbitrary wireless network and topology, despite being tested only on a specific urban V2X dataset.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B7",
+            "change_kind": "overstated_conclusion",
+            "expected_bucket": "major",
+            "section_location": "Conclusions",
+            "affected_span_verbatim": "In addition, we evaluated the proposed hybrid \\emph{GP-MILP} strategy in which GINE predictions\nare used to prune the MILP solver's optimisation space. On the considered\ndataset, this pruning-based pipeline attains MILP-equivalent solutions while\nreducing solver runtime by orders of magnitude, making MILP-grade optimisation\npractically compatible with stringent latency budgets."
+          },
+          "proposer_agent": "injector.general.S3.t2.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "A class-weighted binary cross-entropy loss is employed to address the imbalance between active and iactive relay links \\cite{Ghosh2024}.",
+          "injected_text": "A binary cross-entropy loss is employed to address the imbalance between active and iactive relay links \\cite{Ghosh2024}.",
+          "rationale": "Dropping the precise methodological qualifier 'class-weighted' makes the claim assert that standard BCE is used to address class imbalance, which partially contradicts the cited paper's explicit focus on specialized techniques for imbalanced data.",
+          "ground_truth_description": "Removed the 'class-weighted' qualifier in the sentence describing the loss function used for class imbalance.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Ghosh2024",
+            "injected_cite_key": "Ghosh2024",
+            "claim_sentence_verbatim": "A class-weighted binary cross-entropy loss is employed to address the imbalance between active and iactive relay links \\cite{Ghosh2024}.",
+            "section_location": "Section VI.A",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "split into training ($80\\%$) and validation ($20\\%$) sets.",
+          "injected_text": "split into training ($80\\%$, i.e., $314{,}650$ snapshots) and validation ($20\\%$) sets.",
+          "rationale": "The paper lacked a fully explicit 'base * percent = result' triplet, so one was introduced by explicitly stating a result count for the 80% training split of the 449,500 total graphs; this count is intentionally incorrect by >10% (should be 359,600, not 314,650) to trigger a major percent_of failure.",
+          "ground_truth_description": "Added an explicit count for the 80% training split but incorrectly calculated it as 314,650 instead of the true value of 359,600.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_of",
+            "value_before_raw": "N/A",
+            "value_after_raw": "314,650",
+            "value_before_float": 359600.0,
+            "value_after_float": 314650.0,
+            "location_cue": "A total of 449,500 graph snapshots are generated and split into training (80%, i.e., 314,650 snapshots) and validation (20%) sets.",
+            "paired_location": null,
+            "quantity_label": "training set snapshots",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t2.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "\\sum_{j} f_{ij} - \\sum_{k} f_{ki} = d_i z_i,",
+          "injected_text": "\\sum_{j} f_{ij} = d_i z_i,",
+          "rationale": "Deleting the incoming flow term breaks the flow conservation constraint, effectively preventing multi-hop routing by forcing intermediate nodes to have zero outgoing relay flow.",
+          "ground_truth_description": "Removed the incoming flow term from the flow conservation constraint in the MILP formulation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Section 4.3 Constraints (Flow conservation)",
+            "original_fragment_latex": " - \\sum_{k} f_{ki}",
+            "injected_fragment_latex": "",
+            "full_equation_latex_before": "\\sum_{j} f_{ij} - \\sum_{k} f_{ki} = d_i z_i,\n\\quad \\forall i \\in \\mathrm{CAV}",
+            "full_equation_latex_after": "\\sum_{j} f_{ij} = d_i z_i,\n\\quad \\forall i \\in \\mathrm{CAV}",
+            "term_role": "incoming flow sum",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "main.tex",
+          "original_text": "\\item $v_{ij}\\!\\in\\!\\{0,1\\}$: activation of link $(i,j)$;",
+          "injected_text": "\\item $x_{ij}\\!\\in\\!\\{0,1\\}$: activation of link $(i,j)$;",
+          "rationale": "Renames the link activation variable from v_{ij} to x_{ij} in its declaration list, but leaves it as v_{ij} in all subsequent equations (e.g. constraints in Section IV.C), creating a local notation inconsistency.",
+          "ground_truth_description": "Changed the declared variable name for link activation from v_{ij} to x_{ij} in the Decision Variables list without updating its usage in the subsequent constraint equations.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D3",
+            "change_kind": "notation_drift",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. IV.A",
+            "affected_span_verbatim": "\\begin{itemize}[]\n\\item $v_{ij}\\!\\in\\!\\{0,1\\}$: activation of link $(i,j)$;\n\\item $f_{ij}\\!\\ge\\!0$: flow on link $(i,j)$;\n\\item $z_i\\!\\in\\!\\{0,1\\}$: CAV $i$ connected to at least one RSU;\n\\item $u_i\\!\\in\\!\\{0,\\dots,M\\!-\\!1\\}$: ordering variable for cycle elimination.\n\\end{itemize}"
+          },
+          "proposer_agent": "injector.general.S1.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "making them unsuitable for real-time NR-V2X operation \\cite{Chen2024MILP}.",
+          "injected_text": "making them highly suitable for real-time NR-V2X operation \\cite{Chen2024MILP}.",
+          "rationale": "Reverses the direction of the claim, asserting that MILP's complexity growth makes it suitable for real-time operation, directly contradicting the cited paper on the limitations of MILP.",
+          "ground_truth_description": "Changed 'unsuitable' to 'highly suitable' to reverse the cited paper's conclusion regarding the applicability of MILP to real-time operations.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Chen2024MILP",
+            "injected_cite_key": "Chen2024MILP",
+            "claim_sentence_verbatim": "While these methods can achieve optimal or near-optimal solutions, their computational complexity grows rapidly with network size and graph density, making them unsuitable for real-time NR-V2X operation \\cite{Chen2024MILP}.",
+            "section_location": "Sec. 2 (Related Work)",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "split into training ($80\\%$) and validation ($20\\%$) sets.",
+          "injected_text": "split into training ($95\\%$) and validation ($20\\%$) sets.",
+          "rationale": "Changing the training set split from 80% to 95% makes the dataset split sum to 115% instead of 100%, causing a blatant percent_to_100 failure.",
+          "ground_truth_description": "Altered the dataset split percentages so they no longer sum to 100%.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "percent_to_100",
+            "value_before_raw": "80\\%",
+            "value_after_raw": "95\\%",
+            "value_before_float": 80.0,
+            "value_after_float": 95.0,
+            "location_cue": "generated and split into training ($80\\%$) and validation ($20\\%$) sets",
+            "paired_location": null,
+            "quantity_label": "training set split percentage",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "+\\tilde{\\mathbf{e}}_{ij}^{(\\ell)})\\Big),",
+          "injected_text": "+\\tilde{\\mathbf{e}}_{ik}^{(\\ell)})\\Big),",
+          "rationale": "Replacing the bound index j with an unbound index k in the GNN message-passing equation creates an index-set mismatch, rendering the tensor conformability invalid.",
+          "ground_truth_description": "Replaced the bound index j with an unbound index k in the edge feature term of the GINE node update equation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. V.B",
+            "original_fragment_latex": "\\tilde{\\mathbf{e}}_{ij}^{(\\ell)}",
+            "injected_fragment_latex": "\\tilde{\\mathbf{e}}_{ik}^{(\\ell)}",
+            "full_equation_latex_before": "\\mathbf{h}_i^{(\\ell+1)}=\\mathrm{MLP}^{(\\ell)}\\!\\Big(\\mathbf{h}_i^{(\\ell)}+\\!\\!\\sum_{j\\in\\mathcal{N}(i)}\\!\\mathrm{ReLU}(\\mathbf{h}_j^{(\\ell)}+\\tilde{\\mathbf{e}}_{ij}^{(\\ell)})\\Big),",
+            "full_equation_latex_after": "\\mathbf{h}_i^{(\\ell+1)}=\\mathrm{MLP}^{(\\ell)}\\!\\Big(\\mathbf{h}_i^{(\\ell)}+\\!\\!\\sum_{j\\in\\mathcal{N}(i)}\\!\\mathrm{ReLU}(\\mathbf{h}_j^{(\\ell)}+\\tilde{\\mathbf{e}}_{ik}^{(\\ell)})\\Big),",
+            "term_role": "injected shape/index mismatch",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t1.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "main.tex",
+          "original_text": "a batch size of 64, and a dropout probability of 0.4.",
+          "injected_text": "a batch size of 64, and a dropout probability of 0.4 (as we observed severe overfitting at lower dropout rates).",
+          "rationale": "Inserts a phantom empirical justification for a hyperparameter choice that is not actually supported by any ablation or result in the paper.",
+          "ground_truth_description": "Added a parenthetical claim that lower dropout rates caused severe overfitting, despite no such ablation being reported in the text.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. VI.A",
+            "affected_span_verbatim": "The GIN encoder consists of $L=3$ layers with 256-dimensional embeddings and is trained for 200 epochs with Adam, a learning rate of $10^{-3}$, a batch size of 64, and a dropout probability of 0.4."
+          },
+          "proposer_agent": "injector.general.S2.t3.v3"
+        }
+      ]
+    }
+  ]
+}

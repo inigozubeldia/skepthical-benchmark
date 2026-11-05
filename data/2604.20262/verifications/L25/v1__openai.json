@@ -1,0 +1,189 @@
+{
+  "paper_id": "2604.20262",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer explicitly states they did not find a confirmed citation error and flagged no issue specifically about the CHIME beam measurement method being mislabeled as 'holographic.' No flag in the report corresponds to the claim_method_category_swap injection in Sec. 2.3.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states they did not find a confirmed citation error and does not challenge the CHIME citation or the claim that the cited source describes a holographic method. No specific flag corresponds to the method-category swap against cite key chimebeam.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly stated that they did not find any confirmed citation errors and would not flag them as errors based on the paper text alone.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly states 'I did not find a confirmed citation error from the paper text alone' and does not flag the use of 'holographic method' as a mischaracterization of the CHIME technique described in Collaboration et al. 2022. None of the reviewer's flagged issues correspond to this specific injection.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The baseline-length arithmetic for resolving the Sun is wrong… L < 0.4/0.01745 ≃ 22.9 m, not 45.8 m. The printed 45.8 m corresponds to θ=0.5°, not 1°.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The baseline-length arithmetic for resolving the Sun is wrong… L < 0.4/0.01745 ≃ 22.9 m, not 45.8 m. The printed 45.8 m corresponds to θ=0.5°, not 1°.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the injected value of 45.8 m as inconsistent with the λ/L = θ > 1° criterion, computing the correct value of 22.9 m and noting the factor-of-2 discrepancy.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] The baseline-length arithmetic for resolving the Sun is wrong.\n\n**Where:** Section 2.3.1: “The angular resolution of the baseline is \\(\\theta=\\lambda/L\\)… select baselines with \\(\\theta>1^\\circ\\)… \\(\\lambda=0.4\\) m, the baseline length \\(L\\) should ideally not exceed 45.8 m.”\n\n**What is wrong:** Using the printed formula and \\(\\theta=1^\\circ=0.01745\\) rad,\n\\[\nL < \\frac{0.4}{0.01745} \\simeq 22.9\\ {\\rm m},\n\\]\nnot 45.8 m. The printed 45.8 m corresponds to \\(\\theta=0.5^\\circ\\), not \\(1^\\circ\\).",
+          "confidence": "high",
+          "reasoning": "This directly identifies the incorrect value 45.8 m and recomputes the correct 22.9 m from the same printed formula and quantities, matching the injected arithmetic error exactly.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 2.3.1: “The angular resolution of the baseline is \\theta=\\lambda/L… select baselines with \\theta>1^\\circ… \\lambda=0.4 m, the baseline length L should ideally not exceed 45.8 m.” ... Using the printed formula and \\theta=1^\\circ=0.01745 rad, L < 0.4 / 0.01745 = 22.9 m, not 45.8 m.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the specific incorrect numerical value (45.8 m) and demonstrates through arithmetic that it should be 22.9 m, which is the exact error injected.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S1-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Gaussian N–S beam definition is inconsistent between Equations (2) and (11)… Equation (11) introduces a factor of 2 in the Gaussian denominator that is absent from Equation (2). These are different parameterizations of the width. The same symbol θ_NS therefore has two incompatible meanings.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Gaussian N–S beam definition is inconsistent between Equations (2) and (11)… Equation (11) introduces a factor of 2 in the Gaussian denominator that is absent from Equation (2). These are different parameterizations of the width. The same symbol θ_NS therefore has two incompatible meanings.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly identifies the cross-equation inconsistency between Eq. (2) and Eq. (11) regarding the factor of 2 in the exponent, which is precisely the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] The Gaussian N–S beam definition is inconsistent between Equations (2) and (11).\n\n**Where:** Section 2.2, Equation (2):\n\\[\nA_{\\rm NS}(\\theta)=\\exp\\left(-\\frac{\\theta^2}{\\theta_{\\rm NS}^2}\\right).\n\\]\nSection 2.4, Equation (11):\n\\[\nA_{\\rm NS}(\\theta)=e^{-\\theta^2/(2\\theta_{\\rm NS}^2)}\n=(A_{\\rm NS}^{\\rm simu})^{(1+\\alpha)/2}.\n\\]\n\n**What is wrong:** Equation (11) introduces a factor of 2 in the Gaussian denominator that is absent from Equation (2). These are different parameterizations of the width. The same symbol \\(\\theta_{\\rm NS}\\) therefore has two incompatible meanings.",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely flags the cross-equation inconsistency caused by the extra factor of 2 in Eq. (11), which is the exact injected mathematical change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 2.4, Equation (11): A_{\\rm NS}(\\theta)=e^{-\\theta^2/(2\\theta_{\\rm NS}^2)} ... Equation (11) introduces a factor of 2 in the Gaussian denominator that is absent from Equation (2).",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the cross-equation inconsistency between the original definition of the beam and its restatement in the methods section, specifically calling out the factor of 2.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t3",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The normalization parameter is inconsistently named γ and β. Section 2.4, Equation (10) uses γ. Immediately after Equation (10), the text says 'The parameter β appears in Eq. (10).' Equation (12) uses log L(α,β). Section 3.3 reports α=0.116±0.002, β=1.45±0.002.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The normalization parameter is inconsistently named γ and β. Section 2.4, Equation (10) uses γ. Immediately after Equation (10), the text says 'The parameter β appears in Eq. (10).' Equation (12) uses log L(α,β). Section 3.3 reports α=0.116±0.002, β=1.45±0.002.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the notation drift between γ in Eq. (10) and β in the surrounding text and results, which is exactly the injected symbol swap.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] The normalization parameter is inconsistently named \\(\\gamma\\) and \\(\\beta\\).\n\n**Where:** Section 2.4, Equation (10) uses \\(\\gamma\\). Immediately after Equation (10), the text says “The parameter \\(\\beta\\) appears in Eq. (10).” Equation (12) uses \\(\\log L(\\alpha,\\beta)\\). Section 3.3 reports \\(\\alpha=0.116\\pm0.002,\\ \\beta=1.45\\pm0.002\\).\n\n**What is wrong:** The same parameter appears to be called both \\(\\gamma\\) and \\(\\beta\\).",
+          "confidence": "high",
+          "reasoning": "This directly identifies the notation drift from β to γ in the simulated-visibility equation while surrounding text and results still use β, matching the injected general inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 2.4, Equation (10) uses \\gamma. Immediately after Equation (10), the text says “The parameter \\beta appears in Eq. (10).” ... The same parameter appears to be called both \\gamma and \\beta.",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the notation drift where the symbol beta was changed to gamma in the equation but remains beta in the following text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 45.994387,
+  "total_cost_usd": null,
+  "total_input_tokens": 31650,
+  "total_output_tokens": 3650,
+  "escalation_count": 1,
+  "notes": null
+}

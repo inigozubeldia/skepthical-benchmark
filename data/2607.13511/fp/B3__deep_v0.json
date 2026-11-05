@@ -1,0 +1,146 @@
+{
+  "paper_id": "2607.13511",
+  "reviewer_system": "B3",
+  "provider_tag": "deep",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-a56f069652ea",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "B3"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: Table 5 compares ExTernD and PTQTP at iso-BPW using imatrix-weighted energy, but the paper does not specify whether identical calibration data, imatrix statistics, or evaluation protocols were used for PTQTP's numbers—the paper only states 'When allowing ExTernD to expand its inner rank µ to precisely match this 6.68 BPW footprint' without clarifying that PTQTP results are produced under the same controlled conditions, leaving the comparison potentially uncontrolled.",
+        "evidence": {
+          "claim": "Claiming exact parity at iso-BPW in Table 5 without specifying identical calibration or identical evaluation settings distorts the comparison and lacks sufficient experimental controls.",
+          "excerpt": "Claiming exact parity at iso-BPW in Table 5 without specifying identical calibration or identical evaluation settings distorts the comparison and lacks sufficient experimental controls to support such a conclusion."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Table 5 compares ExTernD and PTQTP at iso-BPW using imatrix-weighted energy, but the paper does not specify whether identical calibration data, imatrix statistics, or evaluation protocols were used for PTQTP's numbers—the paper only states 'When allowing ExTernD to expand its inner rank µ to precisely match this 6.68 BPW footprint' without clarifying that PTQTP results are produced under the same controlled conditions, leaving the comparison potentially uncontrolled.",
+            "cost_usd": 0.0057112
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper does specify the comparison setting for Table 5: it is an \"Iso-BPW Comparison\" in \"imatrix-weighted energy preservation\" on named Qwen3.5-4B matrices, and states \"When we increase ExTernD’s inner rank µ to precisely match this 6.68 BPW footprint, ExTernD achieves virtually identical energy preservation ... (Table 5).\" The claim that identical evaluation settings are unspecified is therefore not supported by the text.",
+            "cost_usd": 0.020786666666666665
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly specifies the identical evaluation settings used for Table 5, noting that both methods are evaluated on the same Qwen3.5-4B matrices by \"minimizing the imatrix-weighted Frobenius error\" to achieve \"exact parity in imatrix-weighted energy preservation\".",
+            "cost_usd": 0.0032458
+          }
+        ],
+        "cost_usd": 0.029743666666666665
+      },
+      {
+        "flag_id": "fp-d31123fcafd8",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "B3"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "The paper explicitly addresses both element-matched and iso-BPW comparisons: 'Matching the number of ternary elements penalizes ExTernD by ignoring its massive sparsity advantage. A fairer comparison matches the effective bits-per-weight (BPW)' and Table 5 provides the iso-BPW comparison. The 'rigid stacked-discrete-value formulation' is also explicitly discussed as PTQTP's structural limitation, so the comparison framing is transparent rather than artificially biased.",
+        "evidence": {
+          "claim": "The comparison between ExTernD and PTQTP at K=4 is potentially biased because it is unclear if the comparison is under identical effective bits or if PTQTP is artificially capped, undermining fairness.",
+          "excerpt": "the text does not clarify if this is under identical effective bits or if PTQTP’s performance is artificially capped due to its rigid stacked-discrete-value formulation, potentially biasing the comparison."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly addresses both element-matched and iso-BPW comparisons: 'Matching the number of ternary elements penalizes ExTernD by ignoring its massive sparsity advantage. A fairer comparison matches the effective bits-per-weight (BPW)' and Table 5 provides the iso-BPW comparison. The 'rigid stacked-discrete-value formulation' is also explicitly discussed as PTQTP's structural limitation, so the comparison framing is transparent rather than artificially biased.",
+            "cost_usd": 0.0057112
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly clarifies both comparison modes: first, \"to match bit budgets precisely, we evaluate PTQTP at group size G = 128 and set the ExTernD component count to match the number of ternary elements,\" and then, \"A fairer comparison matches the effective bits-per-weight (BPW) ... ExTernD’s inner rank µ [is increased] to precisely match this 6.68 BPW footprint.\" So it is not unclear whether the K=4 comparison is element-matched or iso-BPW; both are described.",
+            "cost_usd": 0.020786666666666665
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly conducts a comparison under identical effective bits in the 'Iso-BPW Parity' paragraph, stating, \"When we increase ExTernD’s inner rank µ to precisely match this 6.68 BPW footprint [of PTQTP at K=4], ExTernD achieves virtually identical energy preservation\".",
+            "cost_usd": 0.0032458
+          }
+        ],
+        "cost_usd": 0.029743666666666665
+      },
+      {
+        "flag_id": "fp-ef6aa5943f00",
+        "paper_id": "2607.13511",
+        "reviewer_systems_attributed": [
+          "B3"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Table 2 explicitly compares ExTernD against Q4_K (not PTQTP), and the reviewer's claim that 'PTQTP was similarly matched' is a factual error—Table 2 is solely an ExTernD vs. Q4_K comparison at matched energy, with the paper stating 'Choosing µ per matrix to match it exactly' referring to Q4_K's 99.4–99.5% energy level. PTQTP is not mentioned in this table at all.",
+        "evidence": {
+          "claim": "Table 2 does not clarify if PTQTP was matched under identical conditions when comparing effective bits per weight, potentially biasing the results.",
+          "excerpt": "Table 2 reports ExTernD’s effective bits at matched Q4 K energy, but does not clarify if PTQTP was similarly matched under identical conditions, potentially biasing the comparison."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Table 2 explicitly compares ExTernD against Q4_K (not PTQTP), and the reviewer's claim that 'PTQTP was similarly matched' is a factual error—Table 2 is solely an ExTernD vs. Q4_K comparison at matched energy, with the paper stating 'Choosing µ per matrix to match it exactly' referring to Q4_K's 99.4–99.5% energy level. PTQTP is not mentioned in this table at all.",
+            "cost_usd": 0.0057112
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Table 2 is not a PTQTP comparison at all; it is explicitly about Q4 K: \"Q4 K achieves ... Choosing µ per matrix to match it exactly\" and the caption says \"Effective bits per original weight at Q4 K-matched energy.\" The flag’s concern about PTQTP conditions in Table 2 is factually misplaced.",
+            "cost_usd": 0.020786666666666665
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's factual claim is incorrect; Table 2 compares ExTernD against the Q4_K baseline, not PTQTP. PTQTP is not introduced or evaluated until Section 3.6 and Tables 4-5.",
+            "cost_usd": 0.0032458
+          }
+        ],
+        "cost_usd": 0.029743666666666665
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.6666666666666666
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.08923099999999999
+  },
+  "extractor_cost_usd": 0.006523999999999822,
+  "total_cost_usd": 0.09575499999999981
+}

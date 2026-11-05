@@ -1,0 +1,444 @@
+{
+  "paper_id": "2607.20554",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-1ed7afdc2b42",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 2 occurrences; min sigfigs = 3; range = [11.3, 120.8]",
+        "evidence": {
+          "check_type": "repeated_constant",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 120.8,
+            "reported": 11.3,
+            "diff_abs": 109.5,
+            "diff_rel": 0.9064569536423841,
+            "tolerance": {
+              "abs_tol": 0.05,
+              "rel_tol": 0.005
+            },
+            "notes": "2 occurrences; min sigfigs = 3; range = [11.3, 120.8]"
+          },
+          "rereader": [
+            {
+              "label": "connectivity_gain_body",
+              "raw_observed": "11.3%",
+              "value_observed": 11.3,
+              "notes": "Located in Section V.C: 'The proposed GINE-based L2O recovers most of this gain, achieving 11.3% on average with real-time latency.'"
+            },
+            {
+              "label": "connectivity_gain_suburban_mean",
+              "raw_observed": "120.8%",
+              "value_observed": 120.8,
+              "notes": "Located in Section G: 'In sparse conditions, L2O provides a median connectivity gain of 83.3% (mean 120.8%), demonstrating its ability to exploit scarce relay opportunities.'"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.024099333333333334
+      },
+      {
+        "flag_id": "fp-a065edc4e0d2",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.024099333333333334
+      },
+      {
+        "flag_id": "fp-a8a77413c561",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.024099333333333334
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-8754eaac8544",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The flow conservation equation states that total incoming flow equals total outgoing flow for every relay CAV (i.e., every CAV that is not an RSU). This is the standard form of a flow conservation constraint in network flow problems, and the transcription of the equation from the paper was confirmed as faithful. No mechanical check was applicable here, but the equation is mathematically well-formed and consistent with the stated claim. The implicit assumption that relay CAVs generate no net traffic themselves is noted but is standard for relay-node constraints.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "moderate",
+          "notes": "The flow conservation equation states that total incoming flow equals total outgoing flow for every relay CAV (i.e., every CAV that is not an RSU). This is the standard form of a flow conservation constraint in network flow problems, and the transcription of the equation from the paper was confirmed as faithful. No mechanical check was applicable here, but the equation is mathematically well-formed and consistent with the stated claim. The implicit assumption that relay CAVs generate no net traffic themselves is noted but is standard for relay-node constraints.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.013538250000000002
+      },
+      {
+        "flag_id": "fp-297df57f2cbf",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The connectivity constraint in Eq. (9) states that if CAV i is marked as connected (y_i = 1), then there must exist at least one RSU reachable from i via a directed path, which is correctly captured by the indicator-function sum on the right-hand side. The transcription was confirmed as faithful to the paper. No mechanical engine check was applicable to this logical/graph-theoretic inequality, but the formulation is logically sound: the inequality forces y_i ≤ (number of RSUs reachable from i), so y_i can equal 1 only when at least one path exists.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "moderate",
+          "notes": "The connectivity constraint in Eq. (9) states that if CAV i is marked as connected (y_i = 1), then there must exist at least one RSU reachable from i via a directed path, which is correctly captured by the indicator-function sum on the right-hand side. The transcription was confirmed as faithful to the paper. No mechanical engine check was applicable to this logical/graph-theoretic inequality, but the formulation is logically sound: the inequality forces y_i ≤ (number of RSUs reachable from i), so y_i can equal 1 only when at least one path exists.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.013538250000000002
+      },
+      {
+        "flag_id": "fp-ed60c1408a49",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. This statement is a structural constraint (acyclicity of the relay graph) rather than a mathematical equation, so no algebraic derivation needs verification. The transcription was confirmed faithful to the source. The claim is a standard and well-formed graph-theoretic condition: requiring that the active-edge subgraph G(V, E★) contains no cycles is a conventional loop-avoidance constraint in relay and routing protocols, and the formulation is consistent with standard definitions. No errors were identified.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "minor",
+          "notes": "This statement is a structural constraint (acyclicity of the relay graph) rather than a mathematical equation, so no algebraic derivation needs verification. The transcription was confirmed faithful to the source. The claim is a standard and well-formed graph-theoretic condition: requiring that the active-edge subgraph G(V, E★) contains no cycles is a conventional loop-avoidance constraint in relay and routing protocols, and the formulation is consistent with standard definitions. No errors were identified.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.013538250000000002
+      },
+      {
+        "flag_id": "fp-580b69403bdd",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Maths interpreter: PASS. The objective function in Eq. (5) sums the binary indicator variables y_i over all CAVs, where y_i = 1 if CAV i is connected to at least one RSU. Maximizing this sum is exactly equivalent to maximizing the number of successfully connected CAVs, so the claim is correct. The transcription was verified as faithful to the paper's original expression.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "high",
+          "impact": "minor",
+          "notes": "The objective function in Eq. (5) sums the binary indicator variables y_i over all CAVs, where y_i = 1 if CAV i is connected to at least one RSU. Maximizing this sum is exactly equivalent to maximizing the number of successfully connected CAVs, so the claim is correct. The transcription was verified as faithful to the paper's original expression.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.013538250000000002
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-a3a8baba5e35",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper describes the MILP oracle only at a high level: 'The optimisation problem defined in Section III is solved offline via Mixed-Integer Linear Programming (MILP)' with four listed constraint types, but omits solver choice, solver parameters, time limits, gap tolerance, linearization of acyclicity, and how flow variables are handled. These missing details make full reproducibility impossible.",
+        "evidence": {
+          "claim": "The MILP oracle that provides ground-truth labels for supervised learning is insufficiently described, lacking key details necessary for reproducibility and scientific assessment.",
+          "excerpt": "The MILP oracle must be described in much greater detail...This is essential for reproducibility and for assessing whether the GNN is truly approximating an optimal oracle."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper describes the MILP oracle only at a high level: 'The optimisation problem defined in Section III is solved offline via Mixed-Integer Linear Programming (MILP)' with four listed constraint types, but omits solver choice, solver parameters, time limits, gap tolerance, linearization of acyclicity, and how flow variables are handled. These missing details make full reproducibility impossible.",
+            "cost_usd": 0.0033223999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives only a high-level formulation and does not present a fully specified MILP oracle: e.g., it writes the connectivity constraint as \"yi ≤ Σj∈VRSU I{path exists from i to j}\" and loop avoidance as \"G(V,E⋆) is acyclic,\" then says only that \"The above problem can be formulated as a Mixed-Integer Linear Program (MILP).\" These statements do not provide the linearization/solver details needed to reproduce the oracle labels.",
+            "cost_usd": 0.006891416666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper provides conceptual constraints for the MILP formulation, such as 'G(V, E^*) is acyclic' (Eq. 10) and an indicator function for connectivity (Eq. 9), but fails to provide the actual linear equations and exact solver details used to implement the oracle.",
+            "cost_usd": 0.0021078333333333335
+          }
+        ],
+        "cost_usd": 0.01232165
+      },
+      {
+        "flag_id": "fp-57dc0a07c173",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The greedy SNR baseline is described only as 'Each CAV selects the feasible outgoing link with the highest SNR, subject to capacity and hop constraints,' with no tie-breaking rule, no specification of capacity/hop constraint enforcement, and no code or pseudocode. This is insufficient for an independent reimplementation.",
+        "evidence": {
+          "claim": "The greedy SNR baseline and other baselines are not sufficiently described, creating ambiguity and potentially undermining the validity of comparative claims.",
+          "excerpt": "Baselines are insufficiently described...A weak or improperly implemented greedy baseline may exaggerate the benefit of the proposed method."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The greedy SNR baseline is described only as 'Each CAV selects the feasible outgoing link with the highest SNR, subject to capacity and hop constraints,' with no tie-breaking rule, no specification of capacity/hop constraint enforcement, and no code or pseudocode. This is insufficient for an independent reimplementation.",
+            "cost_usd": 0.0033223999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The greedy baseline is described only briefly: \"Each CAV selects the feasible outgoing link with the highest SNR, subject to capacity and hop constraints.\" The paper does not specify key implementation details for this multi-hop baseline (e.g., ordering, tie handling, interaction with cycle/forest constraints), so the comparison setup remains ambiguous.",
+            "cost_usd": 0.006891416666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The greedy baseline is described simply as 'Each CAV selects the feasible outgoing link with the highest SNR, subject to capacity and hop constraints' (Section IV.D), which omits necessary algorithmic details like the ordering of CAVs and conflict resolution for capacity constraints.",
+            "cost_usd": 0.0021078333333333335
+          }
+        ],
+        "cost_usd": 0.01232165
+      },
+      {
+        "flag_id": "fp-1edab49fdc6b",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Implementation details are partially given ('3-layer GINE encoder with 256-dimensional hidden embeddings and sum aggregation,' '2-layer MLP,' 'weighted binary cross-entropy,' 'Adam with learning rate 10−3') but the paper omits feature normalization, exact node/edge feature vectors, the threshold used for edge activation, post-processing algorithm complexity, and whether all MILP constraints are guaranteed post-processing.",
+        "evidence": {
+          "claim": "The paper lacks critical detail regarding the GNN architecture, feature design, training procedure, and post-processing, impairing reproducibility.",
+          "excerpt": "The GNN architecture and training procedure need more detail...The authors should specify: exact node feature vector and normalization; exact edge feature vector and normalization; whether graph direction is preserved in message passing; ... positive-label definition for edge activation; threshold used to convert probabilities to selected edges; whether the threshold is fixed or tuned on validation data; post-processing algorithm; complexity of post-processing; whether post-processing can change many predicted links; whether final feasibility is guaranteed with respect to all MILP constraints or only structural constraints."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Implementation details are partially given ('3-layer GINE encoder with 256-dimensional hidden embeddings and sum aggregation,' '2-layer MLP,' 'weighted binary cross-entropy,' 'Adam with learning rate 10−3') but the paper omits feature normalization, exact node/edge feature vectors, the threshold used for edge activation, post-processing algorithm complexity, and whether all MILP constraints are guaranteed post-processing.",
+            "cost_usd": 0.0033223999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although some settings are given (\"3-layer GINE encoder with 256-dimensional hidden embeddings,\" \"weighted binary cross-entropy,\" \"Adam with learning rate 10−3\"), key reproducibility details are still missing: the paper says only that \"Edge probabilities are thresholded to identify candidate active links\" and that a \"lightweight feasibility refinement stage enforces structural constraints,\" without specifying the threshold, exact post-processing algorithm, or full feature encoding/normalization.",
+            "cost_usd": 0.006891416666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper lists features and mentions that 'Edge probabilities are thresholded to identify candidate active links' (Section IV.C), but omits crucial reproducibility details such as the specific threshold value, feature normalization methods, and the exact post-processing algorithm.",
+            "cost_usd": 0.0021078333333333335
+          }
+        ],
+        "cost_usd": 0.01232165
+      },
+      {
+        "flag_id": "fp-c6a255bfbb04",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states '286,602 snapshots balanced across three districts' but does not specify simulation duration, snapshot interval, per-snapshot vehicle count distribution, or RSU count and placement—details that are necessary for reproducibility and independent validation.",
+        "evidence": {
+          "claim": "The simulation dataset used for experiments is insufficiently described, missing critical details such as network and traffic parameters necessary for reproducibility.",
+          "excerpt": "Dataset description is incomplete...The paper states that the dataset contains 286,602 snapshots balanced across three Rome districts. However, several key details are missing: simulation duration; snapshot interval; number of vehicles per snapshot distribution; number and placement of RSUs..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states '286,602 snapshots balanced across three districts' but does not specify simulation duration, snapshot interval, per-snapshot vehicle count distribution, or RSU count and placement—details that are necessary for reproducibility and independent validation.",
+            "cost_usd": 0.0033223999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The dataset description is high-level but incomplete for reproduction: the paper states \"We consider three representative 500 × 500 m areas in Rome\" and that edges are built above \"a predefined SNR threshold,\" and reports \"[286,602] snapshots,\" but it does not specify basic simulation parameters such as snapshot interval/duration, RSU number/placement, the actual SNR threshold value, or traffic-demand generation details.",
+            "cost_usd": 0.006891416666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "While Section V.A describes the areas and total number of snapshots (286,602), it lacks specific details regarding the simulation duration, time interval between snapshots, and the exact number and deployment strategy of the RSUs.",
+            "cost_usd": 0.0021078333333333335
+          }
+        ],
+        "cost_usd": 0.01232165
+      },
+      {
+        "flag_id": "fp-45d6d1746e1d",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table II only shows results for Porta Pia as the single source domain (tested on EUR and Trastevere), with no rows for EUR or Trastevere as source domains, so the paper does not provide a full cross-area matrix and the reviewer's concern about limited evidence for a general robustness conclusion is valid.",
+        "evidence": {
+          "claim": "The cross-area generalization analysis is too limited and does not provide a full train/test district matrix, weakening claimed conclusions.",
+          "excerpt": "Cross-area robustness analysis is too limited...The current table does not support a general conclusion about cross-area robustness because only one source district is considered."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table II only shows results for Porta Pia as the single source domain (tested on EUR and Trastevere), with no rows for EUR or Trastevere as source domains, so the paper does not provide a full cross-area matrix and the reviewer's concern about limited evidence for a general robustness conclusion is valid.",
+            "cost_usd": 0.0033223999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims to study cross-area generalization by \"training on one district (source) and testing on the remaining two (targets),\" but Table II reports only one single-source case: \"Porta Pia → Porta Pia / EUR / Trastevere\" plus \"All Areas → All Areas.\" This is not a full train/test district matrix, so the robustness conclusion is based on limited evidence.",
+            "cost_usd": 0.006891416666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table II ('Cross-Area Connectivity Results') only reports results for models trained on a single source district ('Porta Pia') and the union of all districts, confirming the reviewer's claim that a full train/test district matrix is missing.",
+            "cost_usd": 0.0021078333333333335
+          }
+        ],
+        "cost_usd": 0.01232165
+      },
+      {
+        "flag_id": "fp-0cea7bd73317",
+        "paper_id": "2607.20554",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — openai=CONFIRMED_ISSUE: The manuscript makes strong deployment-oriented claims such as \"supporting scalable, real-time NR-V2X operation in smart city environments\" and that the framework \"can be integrated into future 5G-Advanced and beyond vehicular networking architectures,\" while also admitting that \"its current evaluation remains simulation-based and has not yet been validated through field-measured NR-V2X datasets or large-scale experimental testbeds.\" The deployment claims are therefore stronger than the presented evidence.",
+        "evidence": {
+          "claim": "The manuscript makes deployment claims that are too strong for the presented, simulation-based evidence and should be moderated.",
+          "excerpt": "Some claims are too strong relative to the evidence...While the results support potential feasibility, the evaluation is still simulation-based and does not include real NR-V2X traces, hardware-in-the-loop experiments, or field validation."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly acknowledges this limitation: 'its current evaluation remains simulation-based and has not yet been validated through field-measured NR-V2X datasets or large-scale experimental testbeds,' appropriately moderating deployment claims, so the reviewer's concern is already addressed in the text.",
+            "cost_usd": 0.0033223999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The manuscript makes strong deployment-oriented claims such as \"supporting scalable, real-time NR-V2X operation in smart city environments\" and that the framework \"can be integrated into future 5G-Advanced and beyond vehicular networking architectures,\" while also admitting that \"its current evaluation remains simulation-based and has not yet been validated through field-measured NR-V2X datasets or large-scale experimental testbeds.\" The deployment claims are therefore stronger than the presented evidence.",
+            "cost_usd": 0.006891416666666666
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's concern is already explicitly addressed in Section V.F, where the authors moderate their claims by stating 'its current evaluation remains simulation-based and has not yet been validated through field-measured NR-V2X datasets or large-scale experimental testbeds.'",
+            "cost_usd": 0.0021078333333333335
+          }
+        ],
+        "cost_usd": 0.01232165
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 2,
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.072298,
+    "mathematics": 0.05415300000000001,
+    "general": 0.07392989999999999
+  },
+  "extractor_cost_usd": 0.02507000000000001,
+  "total_cost_usd": 0.2254509
+}

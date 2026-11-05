@@ -1,0 +1,230 @@
+{
+  "paper_id": "2607.14004",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-462b7c0cb799",
+        "paper_id": "2607.14004",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges this in Section 6.6 ('We state this as an interpretation consistent with the evidence in this evaluation, not as a general claim about regression-aware optimization') and Section 7, but never experimentally isolates the regression-control mechanism from the other confounds (search space, workflow changes, completion gates, etc.). The methods differ on multiple dimensions simultaneously, so the causal claim about regression control is not experimentally isolated.",
+        "evidence": {
+          "claim": "The paper makes a core causal claim that regression control is what enables compounding, but this is not isolated experimentally due to confounding factors such as search space, candidate types, workflow, and implementation maturity.",
+          "excerpt": "The core causal claim that regression control is what enables compounding is not isolated experimentally. RELAI-VCL differs from GEPA and Meta Harness not only by in-loop no-regression filtering, but also by search space, candidate types, workflow changes, completion gates, task classifier, proposer behavior, and likely implementation maturity (Secs. 2.5, 4.2\u00134.4, 6.6, Conclusion). This makes the conclusion \u001cregression control must live inside the search loop\u001d stronger than the evidence supports."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges this in Section 6.6 ('We state this as an interpretation consistent with the evidence in this evaluation, not as a general claim about regression-aware optimization') and Section 7, but never experimentally isolates the regression-control mechanism from the other confounds (search space, workflow changes, completion gates, etc.). The methods differ on multiple dimensions simultaneously, so the causal claim about regression control is not experimentally isolated.",
+            "cost_usd": 0.00543552
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes the causal-sounding claim that 'optimization gains compounded only when regression control was built into the optimization loop' and even lists as a contribution 'Evidence that regression control must live inside the search loop.' But the compared methods also differ on multiple other dimensions: Table 2 says they 'differ in search space, proposer model, and whether regression control is enforced during search,' so the experiment does not isolate regression control alone.",
+            "cost_usd": 0.0086712
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims to provide \"Evidence that regression control must live inside the search loop\" (Section 1.4), but as Table 2 shows, the tested methods differ in their proposer models and search spaces (\"Prompts\" vs \"Harness code\" vs \"Prompt, tool, workflow...\"), failing to isolate regression control experimentally.",
+            "cost_usd": 0.0025770000000000003
+          }
+        ],
+        "cost_usd": 0.01668372
+      },
+      {
+        "flag_id": "fp-9ea35abce641",
+        "paper_id": "2607.14004",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper uses only 22 tasks with two trials per task (Section 3.3: 'Every task is evaluated twice per agent') and provides no confidence intervals, statistical tests, or sensitivity analysis. The paper itself acknowledges in Section 7 that the evaluation is limited, but does not provide any uncertainty quantification for the reported pass-rate differences.",
+        "evidence": {
+          "claim": "The evaluation is too small and under-sampled for the strength of the empirical claims, with only 22 tasks, two trials per task, and no uncertainty or statistical analysis.",
+          "excerpt": "The evaluation is too small and under-sampled for the strength of the empirical claims. The main comparison uses 22 tasks, with only two trials per task, no confidence intervals, no statistical tests, and no analysis of sensitivity to stochasticity or task sampling (Secs. 3.3, 5.1\u00135.3, 6.1\u00136.5)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses only 22 tasks with two trials per task (Section 3.3: 'Every task is evaluated twice per agent') and provides no confidence intervals, statistical tests, or sensitivity analysis. The paper itself acknowledges in Section 7 that the evaluation is limited, but does not provide any uncertainty quantification for the reported pass-rate differences.",
+            "cost_usd": 0.00543552
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The evaluation is indeed small and lightly replicated: Table 3 uses 'T1 (Phase 1) 12' tasks, 'T2 (Phase 2) 10' tasks, and Section 3.3 states 'Every task is evaluated twice per agent.' The results sections report only point estimates (e.g., 'Baseline 62.5% ... RELAI-VCL 79.2%') and do not provide quoted confidence intervals, statistical tests, or sensitivity analyses.",
+            "cost_usd": 0.0086712
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms the evaluation is small and lacks statistical analysis, relying on a set of \"12 Phase 1 tasks\" and \"10 additional tasks\" where \"Every task is evaluated twice per agent\" (Sections 3.3 and 5.1), with no confidence intervals or significance tests reported for the results.",
+            "cost_usd": 0.0025770000000000003
+          }
+        ],
+        "cost_usd": 0.01668372
+      },
+      {
+        "flag_id": "fp-89fe9e40edbc",
+        "paper_id": "2607.14004",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges in Table 2 and Sections 4.2-4.5 that GEPA searches only prompts, Meta Harness searches harness code, and RELAI-VCL searches 'Prompt, tool, workflow, memory, skill, code,' making the comparison of complete systems rather than an isolated test of the regression-control principle. The paper does not attempt to control for search space.",
+        "evidence": {
+          "claim": "The comparison is not methodologically balanced because the methods have different effective search spaces, so the results compare complete systems rather than just the optimization principle.",
+          "excerpt": "The comparison is not methodologically balanced because the methods are given different effective search spaces. GEPA is primarily prompt-only after GEPA-code fails, Meta Harness edits harness code, and RELAI-VCL searches over prompt, tool, workflow, memory, skill, and code changes (Secs. 4.2\u00134.5, Appendix B.2\u0013B.4). Therefore, the results compare complete systems rather than the specific optimization principle of regression-aware continual learning."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges in Table 2 and Sections 4.2-4.5 that GEPA searches only prompts, Meta Harness searches harness code, and RELAI-VCL searches 'Prompt, tool, workflow, memory, skill, code,' making the comparison of complete systems rather than an isolated test of the regression-control principle. The paper does not attempt to control for search space.",
+            "cost_usd": 0.00543552
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly compares methods with different search spaces: Table 2 lists GEPA as 'Prompts,' Meta Harness as 'Harness code,' and RELAI-VCL as 'Prompt, tool, workflow, memory, skill, code,' and Section 4.2 adds that 'only GEPA’s prompt-only variant is carried forward.' So this is a comparison of full systems under equal budgets, not a controlled test of only the regression-aware optimization principle.",
+            "cost_usd": 0.0086712
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 2 explicitly confirms that the methods possess different search spaces, with GEPA constrained to \"Prompts\", Meta Harness to \"Harness code\", and RELAI-VCL given access to \"Prompt, tool, workflow, memory, skill, code\", making it an unbalanced comparison between complete systems.",
+            "cost_usd": 0.0025770000000000003
+          }
+        ],
+        "cost_usd": 0.01668372
+      },
+      {
+        "flag_id": "fp-ca57495fdee7",
+        "paper_id": "2607.14004",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "There is a real internal tension: Section 4.3 says Meta Harness candidates are 'accepted or rejected based on evaluation feedback,' yet Section 6.3 says 'Every candidate generated during the second optimization round performed worse than the existing agent, and its score fell to 59.1%.' Appendix C reinforces this by stating 'Every candidate generated during Meta Harness’s second optimization round scored worse than its Phase-1-optimized agent' while also saying the Phase 2 file 'is the candidate that was ultimately kept.'",
+        "evidence": {
+          "claim": "There is an internal inconsistency in the description of Meta Harness Phase 2 regarding candidate acceptance and reported scores.",
+          "excerpt": "The Meta Harness Phase 2 description is internally inconsistent. Meta Harness is described as accepting or rejecting candidates based on evaluation feedback, yet the paper states that every Phase 2 candidate performed worse than the existing agent and that the score fell from 68.2% transfer to 59.1% final; Appendix C also says a worse Phase 2 candidate was \u001cultimately kept\u001d (Secs. 4.3, 6.3, Appendix C)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper is internally consistent: Meta Harness's Phase 2 candidate acceptance mechanism accepts/rejects based on evaluation feedback, but all Phase 2 candidates happened to perform worse. Appendix C clarifies 'The one Phase 2 harness file released here (output_noise_compaction.py) is the candidate that was ultimately kept' — meaning it was kept despite being worse because the optimizer had no better option. The score fell to 59.1% because this was the best available candidate, not a logical contradiction in the described mechanism.",
+            "cost_usd": 0.00543552
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "There is a real internal tension: Section 4.3 says Meta Harness candidates are 'accepted or rejected based on evaluation feedback,' yet Section 6.3 says 'Every candidate generated during the second optimization round performed worse than the existing agent, and its score fell to 59.1%.' Appendix C reinforces this by stating 'Every candidate generated during Meta Harness’s second optimization round scored worse than its Phase-1-optimized agent' while also saying the Phase 2 file 'is the candidate that was ultimately kept.'",
+            "cost_usd": 0.0086712
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper asserts Meta Harness candidates are \"accepted or rejected based on evaluation feedback\" (Section 4.3), but Appendix C contradicts this by stating that despite every Phase 2 candidate scoring \"worse than its Phase-1-optimized agent\", a worse candidate \"was ultimately kept\", dropping the score to 59.1%.",
+            "cost_usd": 0.0025770000000000003
+          }
+        ],
+        "cost_usd": 0.01668372
+      },
+      {
+        "flag_id": "fp-3452464eeb08",
+        "paper_id": "2607.14004",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table 1's caption states RELAI-VCL shows 'the only positive transfer to unseen tasks,' but Section 6.2 clearly states 'Meta Harness transfers much better, reaching 68.2% on the combined set' which is above both Meta Harness's own baseline (66.6% would be on T1 only) and the unoptimized baseline (56.8%). Meta Harness demonstrably also transfers positively, contradicting the caption's claim of RELAI-VCL being 'the only' positive transfer.",
+        "evidence": {
+          "claim": "The paper contains a central transfer-claim inconsistency in Table 1’s caption stating RELAI-VCL shows 'the only positive transfer' despite Meta Harness also transferring above baseline.",
+          "excerpt": "The paper contains a central transfer-claim inconsistency. Table 1\u0019s caption says RELAI-VCL shows \u001cthe only positive transfer to unseen tasks,\u001d but Meta Harness transfers from 66.6% on Phase 1 to 68.2% on the union and is repeatedly described as transferring well (Secs. 1.3, 6.2, Table 1)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1's caption states RELAI-VCL shows 'the only positive transfer to unseen tasks,' but Section 6.2 clearly states 'Meta Harness transfers much better, reaching 68.2% on the combined set' which is above both Meta Harness's own baseline (66.6% would be on T1 only) and the unoptimized baseline (56.8%). Meta Harness demonstrably also transfers positively, contradicting the caption's claim of RELAI-VCL being 'the only' positive transfer.",
+            "cost_usd": 0.00543552
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1's caption says RELAI-VCL has 'the only positive transfer to unseen tasks,' but Section 6.2 explicitly says 'Meta Harness transfers much better, reaching 68.2% on the combined set' and that its 'updates generalized well beyond the tasks used during optimization.' That makes the Table 1 wording inconsistent with the paper's own description of Meta Harness transfer.",
+            "cost_usd": 0.0086712
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table 1's caption claims RELAI-VCL showed \"the only positive transfer to unseen tasks,\" which directly contradicts both Table 1's data showing Meta Harness transferring from 66.6% to 68.2%, and Section 6.2's text stating \"Meta Harness transfers much better, reaching 68.2%\".",
+            "cost_usd": 0.0025770000000000003
+          }
+        ],
+        "cost_usd": 0.01668372
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0834186
+  },
+  "extractor_cost_usd": 0.019977999999999954,
+  "total_cost_usd": 0.10339659999999995
+}

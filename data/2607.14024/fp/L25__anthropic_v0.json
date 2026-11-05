@@ -1,0 +1,327 @@
+{
+  "paper_id": "2607.14024",
+  "reviewer_system": "L25",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-1ea6ad3f4c4a",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'Michalakes et al. [15] (WRF v3.9.1 citation)'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "Michalakes et al. [15] (WRF v3.9.1 citation)"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "numerics": [
+      {
+        "flag_id": "fp-07b91e9c0950",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: need labels {minuend, subtrahend, difference}",
+        "evidence": {
+          "check_type": "difference_eq",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "need labels {minuend, subtrahend, difference}"
+          },
+          "rereader": [
+            {
+              "label": "minuend",
+              "raw_observed": "218",
+              "value_observed": 218.0,
+              "notes": "Located after 'Due to overlaps, we identified 218 publications.' in Section 2.1; number is clearly specified."
+            },
+            {
+              "label": "subtrahend_1",
+              "raw_observed": "90",
+              "value_observed": 90.0,
+              "notes": "Stated in 'we discarded 90 results from 2014 and older'; clear numeric value."
+            },
+            {
+              "label": "subtrahend_2",
+              "raw_observed": "38",
+              "value_observed": 38.0,
+              "notes": "Stated in 'and further 38 results due to text unavailability or non-relatedness to WTPC modeling'; clear numeric value."
+            },
+            {
+              "label": "difference",
+              "raw_observed": "90",
+              "value_observed": 90.0,
+              "notes": "Appears in 'yielding a final body of 90 papers'; clear numeric result."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.04654900000000001
+      },
+      {
+        "flag_id": "fp-216efbe3c449",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.04654900000000001
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-f1f07fb36537",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=FP, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "The abstract and introduction overstate the review as comprising 218 publications when only 90 were actually analyzed; there is inconsistency about the WTPC review scope.",
+          "excerpt": "The abstract states the WTPC review comprises \"218 publications\", and the intro repeats ... However, Section 2.1 clarifies ... the final analysed body is 90 papers ... The headline numbers in the abstract and introduction therefore overstate the review's actual scope."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper is internally consistent: Section 2.1 explicitly states \"we identified 218 publications\" and then explains the filtering steps that \"yielding a final body of 90 papers.\" The abstract says the WTPC review \"comprising 218 publications\" refers to the initial identified set, not the final analyzed body, and Section 2.1 makes the distinction clear. The reviewer's claim of inconsistency misreads the paper's transparent description of the screening process.",
+            "cost_usd": 0.00513078
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "There is a real scope inconsistency: the introduction says the WTPC study is \"comprising 218 publications,\" but Section 2.1 says the search \"identified 218 publications\" and after exclusions yielded \"a final body of 90 papers.\" However, the abstract itself does not state the 218 figure, so that part of the flag is factually overstated.",
+            "cost_usd": 0.0102158
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the abstract does not mention the exact number, the Introduction explicitly claims the authors are 'analyzing 218 papers', which contradicts Section 2.1's statement that they discarded 128 of them 'yielding a final body of 90 papers'.",
+            "cost_usd": 0.00227484
+          }
+        ],
+        "cost_usd": 0.01762142
+      },
+      {
+        "flag_id": "fp-ea1137a502f0",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper's description of CSFS in Section 3.2 and Figure 2 omits the non-inferiority test statistic, threshold/α level, and how 'worst' cluster/feature is defined. The paper states \"The FS algorithm is enhanced by a non-inferiority test\" but provides no formula, parameter values, or sufficient detail to reproduce the method without inspecting the code.",
+        "evidence": {
+          "claim": "The algorithmic description of CSFS lacks critical details (test statistic, thresholds, clustering configuration), making reproduction and understanding difficult.",
+          "excerpt": "critical details are missing: (a) the non-inferiority test statistic and its threshold/α; (b) how \"worst\" is defined ... These directly affect both the runtime and accuracy results and the ability of readers/reviewers to reproduce them without inspecting the code."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's description of CSFS in Section 3.2 and Figure 2 omits the non-inferiority test statistic, threshold/α level, and how 'worst' cluster/feature is defined. The paper states \"The FS algorithm is enhanced by a non-inferiority test\" but provides no formula, parameter values, or sufficient detail to reproduce the method without inspecting the code.",
+            "cost_usd": 0.00513078
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.2 gives only a high-level description—e.g., \"the FS algorithm is enhanced by a non-inferiority test\" and \"Clustering can be performed based on feature correlations, RF FI as an initial best guess, or randomly\"—but the paper does not specify the test statistic/threshold, clustering configuration, or how the \"worst\" feature/cluster is determined.",
+            "cost_usd": 0.0102158
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.2 mentions that the algorithm is enhanced by 'a non-inferiority test' and discards clusters 'with a high certainty', but it omits the exact statistical test, alpha thresholds, and the mathematical definition of 'worst cluster or feature'.",
+            "cost_usd": 0.00227484
+          }
+        ],
+        "cost_usd": 0.01762142
+      },
+      {
+        "flag_id": "fp-6f5828cdec33",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section 5.2 reports per-scenario reductions of \"19.4%, 9.3%, 25.3%, and 39.8%\" whose arithmetic mean is ~23.5%, while Section 5.4 states \"on average by 20.8%\" and the abstract/conclusion claim \"21%\". The paper never explains how these aggregated figures are computed, making the discrepancy unresolved.",
+        "evidence": {
+          "claim": "The '21% on average' runtime reduction claim for CSFS versus SFS is not supported by the reported numbers, and the aggregation basis is unclear.",
+          "excerpt": "Section 5.2 reports SFS-vs-CSFS reductions of 19.4%, 9.3%, 25.3% and 39.8% ... their arithmetic mean is ... 23.45%, not 21%. Section 5.4 states \"on average by 20.8% across all experiments.\" Neither 20.8% nor 21% matches the simple mean ... and the aggregation basis is not defined."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 5.2 reports per-scenario reductions of \"19.4%, 9.3%, 25.3%, and 39.8%\" whose arithmetic mean is ~23.5%, while Section 5.4 states \"on average by 20.8%\" and the abstract/conclusion claim \"21%\". The paper never explains how these aggregated figures are computed, making the discrepancy unresolved.",
+            "cost_usd": 0.00513078
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports per-scenario reductions of \"19.4%, 9.3%, 25.3%, and 39.8%\" (Section 5.2), then states CSFS runs faster \"on average by 20.8% across all experiments\" (Section 5.4), while the abstract rounds this to \"21%.\" The aggregation basis connecting these figures is never defined, so the average-runtime claim is not transparently supported.",
+            "cost_usd": 0.0102158
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims an 'average reduction of 21%' in Section 3 and 'on average by 20.8%' in Section 5.4, but Section 5.2 lists '19.4%, 9.3%, 25.3%, and 39.8%', whose arithmetic mean is 23.45%. The paper does not explain how these values are aggregated.",
+            "cost_usd": 0.00227484
+          }
+        ],
+        "cost_usd": 0.01762142
+      },
+      {
+        "flag_id": "fp-e01653023f58",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — gemini=CONFIRMED_ISSUE: Section 5.1 acknowledges that for the S2 variants the differences are 'relatively small' and baselines 'perform surprisingly well', concluding wrapper methods provide an advantage 'primarily for the larger dataset variants'. However, the Abstract and Conclusion broadly assert that wrapper-based methods 'overall provide better-performing selections' without this vital qualification.",
+        "evidence": {
+          "claim": "The claim that wrapper-based methods overall provide better-performing selections is not consistently supported for WT-S2 and PV-S2; conclusion overstates results.",
+          "excerpt": "for WT-S2, the differences in RMSE are relatively small\" and ... \"PV-S2 ... only the CSFS method ... performs slightly better.\" Yet the abstract and conclusion assert broadly that \"wrapper-based methods overall provide better-performing selections of features.\""
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly qualifies its claim: Section 5.1 states \"for WT-S2, the differences in RMSE are relatively small\" and \"For PV-S2, the baseline methods...perform surprisingly well,\" while the abstract/conclusion use the word 'overall' to hedge the broad claim. The paper does not suppress these exceptions but rather discusses them openly, so the conclusion's qualified statement is consistent with the presented results.",
+            "cost_usd": 0.00513078
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper already qualifies the claim: after noting that for \"PV-S2, the baseline methods MI, F-value, and RF FI perform surprisingly well,\" it concludes, \"Overall, the results suggest that wrapper-based methods tend to provide an advantage primarily for the larger dataset variants.\" This supports an overall tendency rather than a universal claim for every dataset.",
+            "cost_usd": 0.0102158
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 5.1 acknowledges that for the S2 variants the differences are 'relatively small' and baselines 'perform surprisingly well', concluding wrapper methods provide an advantage 'primarily for the larger dataset variants'. However, the Abstract and Conclusion broadly assert that wrapper-based methods 'overall provide better-performing selections' without this vital qualification.",
+            "cost_usd": 0.00227484
+          }
+        ],
+        "cost_usd": 0.01762142
+      },
+      {
+        "flag_id": "fp-19bb90f78a8d",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: Section 5.1 introduces the modified SFS only briefly (\"we employ an enhanced SFS version that also uses the safe-remove shortcut\"), and Section 5.2 acknowledges \"the reported runtime improvements are conservative,\" but the paper never reports canonical SFS results for comparison, and the modification is not clearly signaled in earlier sections where SFS is described as the standard method, potentially misleading readers comparing to external SFS benchmarks.",
+        "evidence": {
+          "claim": "The 'safe-remove shortcut' added to the SFS baseline changes what 'SFS' means, causing misleading comparisons unless stated upfront and canonical SFS is reported.",
+          "excerpt": "the SFS baseline includes the same safe-remove shortcut at the feature level as used in CSFS ... This modification is introduced only in Section 5.2; earlier sections ... describe SFS as the standard method. Readers comparing to canonical SFS elsewhere ... will overestimate CSFS's advantage ..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 5.1 introduces the modified SFS only briefly (\"we employ an enhanced SFS version that also uses the safe-remove shortcut\"), and Section 5.2 acknowledges \"the reported runtime improvements are conservative,\" but the paper never reports canonical SFS results for comparison, and the modification is not clearly signaled in earlier sections where SFS is described as the standard method, potentially misleading readers comparing to external SFS benchmarks.",
+            "cost_usd": 0.00513078
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does state the modified baseline before presenting the comparative results: \"For a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut at the feature level whenever non-inferiority is provided.\" Therefore, the flag's claim that this is introduced only later and not stated upfront is incorrect.",
+            "cost_usd": 0.0102158
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer is factually incorrect on both counts: the modification is introduced early in Section 5.1 ('we employ an enhanced SFS version that also uses the safe-remove shortcut'), and the paper correctly notes in Section 5.2 that making SFS faster means the reported improvements are 'conservative', meaning readers would underestimate—not overestimate—CSFS's advantage over canonical SFS.",
+            "cost_usd": 0.00227484
+          }
+        ],
+        "cost_usd": 0.01762142
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "numerics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "numerics": 0.09309800000000001,
+    "general": 0.0881071
+  },
+  "extractor_cost_usd": 0.018632000000000093,
+  "total_cost_usd": 0.1998371000000001
+}

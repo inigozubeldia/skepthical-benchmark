@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14287",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S3-t2",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Sec. 3.1 says the authors adopt a multi-model formulation, but then states that prior work reported that 'joint multi-class training under extreme imbalance leads to improved generalization,' which appears to justify the opposite design choice. This affects the logic of the modeling decision.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Sec. 3.1 says the authors adopt a multi-model formulation, but then states that prior work reported that 'joint multi-class training under extreme imbalance leads to improved generalization,' which appears to justify the opposite design choice. This affects the logic of the modeling decision.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the word 'improved' in the cited claim as logically contradicting the design choice, directly corresponding to the direction-reversal injection that changed 'reduced' to 'improved' in the sentence attributed to tabassum_2024_adapting.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The rationale for training two independent binary models is internally unclear. Sec. 3.1 says the authors adopt a multi-model formulation, but then states that prior work reported that “joint multi-class training under extreme imbalance leads to improved generalization,” which appears to justify the opposite design choice.\n\n*Recommendation:* Clarify whether prior work found joint multiclass training harmful or beneficial, cite the exact result, and explain why binary models are preferred here.",
+          "confidence": "high",
+          "reasoning": "This directly challenges the altered post-edit claim about prior work reporting improved generalization, which under the broadened-claim rule counts as detection of the directional reversal against the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "prior work reported that “joint multi-class training under extreme imbalance leads to improved generalization,” which appears to justify the opposite design choice. ... Clarify whether prior work found joint multiclass training harmful or beneficial, cite the exact result",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the claim about 'improved generalization' and challenges its validity against the cited prior work, fulfilling the detection criteria for claim direction reversal.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Sec. 1 says the ViT-H image encoder 'alone comprises 63M parameters,' while Sec. 3.1 says the SAM ViT-H image encoder has '∼636M parameters.' The discrepancy is roughly an order of magnitude and exceeds any plausible rounding tolerance.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Sec. 1 says the ViT-H image encoder 'alone comprises 63M parameters,' while Sec. 3.1 says the SAM ViT-H image encoder has '∼636M parameters.' The discrepancy is roughly an order of magnitude and exceeds any plausible rounding tolerance.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 63M vs 636M inconsistency between the Introduction and Sec. 3.1, directly matching the injected parameter-count change from 636M to 63M.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The paper contains a major parameter-count inconsistency for SAM ViT-H. Sec. 1 states that the ViT-H image encoder “alone comprises 63M parameters,” while Sec. 3.1 states that the ViT-H image encoder has approximately 636M parameters, and Table 2 implies a full model size around 641M from 4.15M being 0.647%. This inconsistency affects the motivation for PEFT and the interpretation of parameter efficiency.\n\n[✖] The paper gives inconsistent ViT-H image-encoder parameter counts.\n- _Location:_ Sec. 1 vs Sec. 3.1\n- _Reported:_ 63M, ∼636M / _Computed:_ not equal",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly names the inconsistent quantity and quotes both values 63M and 636M, which specifically matches the injected dropped-digit numerical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. 1 states that the ViT-H image encoder “alone comprises 63M parameters,” while Sec. 3.1 states that the ViT-H image encoder has approximately 636M parameters",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the factor-of-10 discrepancy (63M vs 636M) and quotes both locations.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text writes the update as H = W_0x + W_D(∏_{i=1}^{N} g_i(x)E_i(W_E x)). A mixture-of-experts adapter normally forms a weighted sum of experts, and the figure itself depicts a summation over expert outputs. The product over vector-valued expert outputs is not clearly defined and is likely a transcription or formulation error in the core method.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text writes the update as H = W_0x + W_D(∏_{i=1}^{N} g_i(x)E_i(W_E x)). A mixture-of-experts adapter normally forms a weighted sum of experts, and the figure itself depicts a summation over expert outputs. The product over vector-valued expert outputs is not clearly defined and is likely a transcription or formulation error in the core method.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the product operator (∏) in the Conv-LoRA equation as inconsistent with the expected weighted sum formulation, directly matching the injection that swapped ∑ to ∏.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The Conv-LoRA mathematical description appears inconsistent with the mixture-of-experts formulation shown in the figure...\n\nThe Conv-LoRA mathematical formulation appears inconsistent with the described mixture-of-experts adaptation. In Sec. 3.1, the update is written with a product over experts, \\( \\prod_{i=1}^{N} g_i(x)E_i(W_E x) \\), whereas the figure and standard MoE/Conv-LoRA formulations use a weighted sum over experts.\n\n[✖] The Conv-LoRA adapter update combines expert outputs using a product over gated convolutional experts.\n- _Verdict:_ FAIL (confidence: high, impact: critical)\n- _Notes:_ The text writes the update as \\(H = W_0x + W_D(\\prod_{i=1}^{N} g_i(x)E_i(W_E x))\\). A mixture-of-experts adapter normally forms a weighted sum of experts, and the figure itself depicts a summation over expert outputs.",
+          "confidence": "high",
+          "reasoning": "The review explicitly identifies the product-over-experts operator and says it should be a weighted sum, directly matching the injected summation-to-product equation change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the update is written with a product over experts, \\( \\prod_{i=1}^{N} g_i(x)E_i(W_E x) \\), whereas the figure and standard MoE/Conv-LoRA formulations use a weighted sum over experts.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the product operator as a likely error and correctly notes that it should be a weighted sum in a mixture-of-experts context.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The Abstract overstates the demonstrated scope by claiming that the framework 'generalizes universally to all non-destructive testing modalities and arbitrary material types,' whereas the experiments cover GAN-generated XCT data and one real XCT dataset from CoCr laser powder bed fusion, with NIST evaluation only for pores. This is unsupported by the evidence in Sec. 4.1 and Sec. 4.5, and the Conclusions are more limited than the Abstract.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The Abstract overstates the demonstrated scope by claiming that the framework 'generalizes universally to all non-destructive testing modalities and arbitrary material types,' whereas the experiments cover GAN-generated XCT data and one real XCT dataset from CoCr laser powder bed fusion, with NIST evaluation only for pores. This is unsupported by the evidence in Sec. 4.1 and Sec. 4.5, and the Conclusions are more limited than the Abstract.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies and challenges the universal generalization claim added to the Abstract, quoting the exact injected language and noting it is unsupported by the paper's XCT-specific experiments.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The Abstract makes an unsupported universal generalization to all NDT modalities and arbitrary material types.\n\nThe Abstract overstates the demonstrated scope by claiming that the framework “generalizes universally to all non-destructive testing modalities and arbitrary material types,” whereas the experiments cover GAN-generated XCT data and one real XCT dataset from CoCr laser powder bed fusion, with NIST evaluation only for pores. This is unsupported by the evidence in Sec. 4.1 and Sec. 4.5...",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes and rejects the exact sweeping abstract claim about universal generalization across all NDT modalities and materials, which is the injected overstated conclusion.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The Abstract overstates the demonstrated scope by claiming that the framework “generalizes universally to all non-destructive testing modalities and arbitrary material types,”",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the exact overstated conclusion added to the abstract and flags it as unsupported by the paper's actual experimental evidence.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 33.890864,
+  "total_cost_usd": null,
+  "total_input_tokens": 22046,
+  "total_output_tokens": 5295,
+  "escalation_count": 0,
+  "notes": null
+}

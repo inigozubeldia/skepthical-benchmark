@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "\\cite{Greisen:1966jv,Zatsepin:1966jv} limit of $E\\sim 5\\times 10^{19}$ eV (or GZK cutoff) is the upper bound on the   energy for a   cosmic ray protons traveling from their production in very distant galaxies through the intergalactic medium to us.",
+    "injected_text": "\\cite{Greisen:1966jv,Zatsepin:1966jv} limit of $E\\sim 5\\times 10^{19}$ eV (or GZK cutoff) is the lower bound on the   energy for a   cosmic ray protons traveling from their production in very distant galaxies through the intergalactic medium to us.",
+    "rationale": "Direction reversal of cited conclusion. Greisen (1966) and Zatsepin & Kuzmin (1966) — the founding papers on the GZK cutoff (cite keys preserved byte-for-byte) — establish that the cutoff is the UPPER bound on the energy of cosmic ray protons that can survive intergalactic propagation. Reversing 'upper bound' → 'lower bound' contradicts the physics of the GZK process (proton energy degradation by CMB photons via pion production) and contradicts the cited papers' stated result.",
+    "ground_truth_description": "Polarity flip of the GZK-cutoff direction claim: 'upper bound' → 'lower bound'. Greisen 1966 + Zatsepin-Kuzmin 1966 establish the GZK as an UPPER bound on cosmic-ray-proton energies above ~5×10^19 eV; the injected sentence reverses the direction.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Greisen:1966jv",
+      "injected_cite_key": "Greisen:1966jv",
+      "claim_sentence_verbatim": "\\cite{Greisen:1966jv,Zatsepin:1966jv} limit of $E\\sim 5\\times 10^{19}$ eV (or GZK cutoff) is the upper bound on the   energy for a   cosmic ray protons traveling from their production in very distant galaxies through the intergalactic medium to us.",
+      "section_location": "Sec. 1 (Introduction), GZK-cutoff discussion preceding the Amaterasu-from-void argument",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "their relative fraction  above 10$^{20}$ eV can be found from full sky observations.",
+    "injected_text": "their relative fraction  above 10$^{19}$ eV can be found from full sky observations.",
+    "rationale": "Abstract↔body major numerical mismatch. The abstract's 'above 10^20 eV' is the headline energy threshold for the magnetic-monopole UHECR claim — anchored throughout the body (Sec. 1 line 49 'free magnetic monopoles can naturally have energies above 10^20 eV', 'central value of its measured energy was 2.46×10^20 eV', etc.). Replacing the abstract '10^20' with '10^19' produces a 10× discrepancy with every body anchor; abstract_vs_body_match fires at MAJOR.",
+    "ground_truth_description": "Replaced the abstract's headline energy threshold '10^20 eV' with '10^19 eV', a 10× factor mismatch. The body keeps the correct 10^20 eV anchor (multiple occurrences: Frampton-context magnetic-monopole energy claim; Amaterasu's 2.46×10^20 eV measured energy).",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "10^{20}",
+      "value_after_raw": "10^{19}",
+      "value_before_float": 1e+20,
+      "value_after_float": 1e+19,
+      "location_cue": "their relative fraction above 10^{19} eV can be found from full sky observations",
+      "paired_location": "Sec. 1 Introduction body retains 10^{20} eV as the canonical magnetic-monopole UHECR energy threshold ('free magnetic monopoles can naturally have energies above $10^{20}$ eV', and 'central value of its measured energy was 2.46x10^{20} eV'); also Sec. 4 (line 217+) repeats 10^{20} eV as the trans-GZK threshold",
+      "quantity_label": "energy threshold for UHECR magnetic monopole fraction (eV) — abstract anchored to body Sec. 1 + Sec. 4",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "g=e/2\\alpha=3.3\\times10^{-8} \\;\\rm{esu}",
+    "injected_text": "g=2e\\alpha=3.3\\times10^{-8} \\;\\rm{esu}",
+    "rationale": "Wrong-but-plausible formula. The Dirac monopole charge in Gaussian units is g₀ = e/(2α) where α is the fine-structure constant (so g/e = 1/(2α) ≈ 68.5, giving g ≈ 3.3×10^-8 esu). Replacing with g = 2eα flips the relationship: the injected formula gives g ≈ 7×10^-12 esu (4 orders of magnitude smaller than the stated value 3.3×10^-8). Wolfram refutes by symbolic comparison against the canonical Dirac quantization e·g = ℏc/2 (Gaussian) → g = ℏc/(2e) = e/(2α).",
+    "ground_truth_description": "Replaced the canonical Dirac monopole charge formula 'g = e/(2α)' with the structurally similar but algebraically wrong 'g = 2eα'. The numerical value '3.3×10^-8 esu' (correct for the original formula) is preserved, creating an internal inconsistency between formula and value.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "charge",
+      "equation_location": "Sec. 2 (MM acceleration / Hillas), Eq. (charge)",
+      "original_fragment_latex": "e/2\\alpha",
+      "injected_fragment_latex": "2e\\alpha",
+      "full_equation_latex_before": "g=e/2\\alpha=3.3\\times10^{-8}",
+      "full_equation_latex_after": "g=2e\\alpha=3.3\\times10^{-8}",
+      "term_role": "Dirac monopole charge expression",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t2.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "UHECRsFromTheLocalVoid22Feb2026.tex",
+    "original_text": "We can then generate a graph for the ratio of void- to non-void rays shown as the blue line in Figure 5.",
+    "injected_text": "We can then generate a graph for the ratio of void- to non-void rays shown as the blue line in Figure 4.",
+    "rationale": "Cross-reference mis-target. The sentence describes the void-to-non-void ratio plot, which is actually Figure 5 (the section's figure showing the blue line for the ratio + orange line for MM fraction). After the swap, the prose still describes the ratio plot but points to Figure 4, which is the energy breakdown of void rays — different content. Both Figure 4 and Figure 5 exist in the paper.",
+    "ground_truth_description": "Swapped the figure cross-reference target from Figure 5 (the void-to-non-void ratio plot) to Figure 4 (the void-rays energy breakdown). Reader inspecting Figure 4 sees an energy histogram, not the ratio curve the prose describes.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "cross_reference_mismatch",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 4 Estimate of the Magnetic Monopole Fraction of UHECR Flux (line 219) — sentence describing the void-vs-non-void ratio plot. The injected reference 'Figure 4' is the trans-GZK skymap; the actually-described content (ratio of void- to non-void rays as the blue line) is Figure 5 (VoidRatio_MonopoleFraction.png)",
+      "affected_span_verbatim": "We can then generate a graph for the ratio of void- to non-void rays shown as the blue line in Figure 5."
+    },
+    "proposer_agent": "injector.general.S2.t1.v3"
+  }
+]

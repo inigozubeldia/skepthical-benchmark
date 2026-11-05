@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "FastCentNN was evaluated against the original CentNN on six widely used synthetic clustering benchmark datasets: A1, A2, S1, S2, R15, and Aggregation \\cite{ClusteringDatasets}.",
+    "injected_text": "FastCentNN was evaluated against the original CentNN on six widely used synthetic clustering benchmark datasets originally designed for evaluating graph neural networks: A1, A2, S1, S2, R15, and Aggregation \\cite{ClusteringDatasets}.",
+    "rationale": "The claim is modified to state the datasets were designed for evaluating graph neural networks, a topic entirely absent from the cited paper on K-means properties, resulting in an UNRELATED verdict while looking like a plausible author copy-paste error.",
+    "ground_truth_description": "Modified the claim sentence to falsely state that the cited datasets were designed for evaluating graph neural networks, causing a topic misattribution.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "ClusteringDatasets",
+      "injected_cite_key": "ClusteringDatasets",
+      "claim_sentence_verbatim": "FastCentNN was evaluated against the original CentNN on six widely used synthetic clustering benchmark datasets: A1, A2, S1, S2, R15, and Aggregation \\cite{ClusteringDatasets}.",
+      "section_location": "Sec. 3.2",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "(5.41\\% speed-up)",
+    "injected_text": "(15.41\\% speed-up)",
+    "rationale": "The paper states the Fashion-MNIST runtime drops from 8.220 s to 7.775 s and labels this a 5.41% speed-up, which is arithmetically correct (0.445/8.220 = 5.41%). Changing the label to 15.41% makes the stated ratio blatantly inconsistent with the two runtimes printed in the same sentence — a self-contained, checkable violation using only the paper's own numbers.",
+    "ground_truth_description": "Fashion-MNIST speed-up mis-stated as 15.41% while the runtimes 8.220 s -> 7.775 s in the same sentence imply 5.41%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "5.41%",
+      "value_after_raw": "15.41%",
+      "value_before_float": 5.41,
+      "value_after_float": 15.41,
+      "location_cue": "Fashion-MNIST, FastCentNN reduces the runtime from 8.220\\,s to 7.775\\,s (5.41\\% speed-up)",
+      "paired_location": "same sentence — runtimes 8.220 s and 7.775 s imply 5.41%",
+      "quantity_label": "runtime speed-up on Fashion-MNIST (%)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "M_t=\\sum_{j=1}^{k_t}\\|w_j^{(t)}-w_j^{(t-1)}\\|_2,",
+    "injected_text": "M_t=\\sum_{j=1}^{k_t}\\|w_i^{(t)}-w_j^{(t-1)}\\|_2,",
+    "rationale": "The index i is not bound by the summation over j, introducing an index mismatch where the movement is calculated against an unquantified centroid.",
+    "ground_truth_description": "An index in the centroid movement sum was changed to an unbound variable, breaking the index conformability of the equation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2.4",
+      "original_fragment_latex": "w_j^{(t)}",
+      "injected_fragment_latex": "w_i^{(t)}",
+      "full_equation_latex_before": "M_t=\\sum_{j=1}^{k_t}\\|w_j^{(t)}-w_j^{(t-1)}\\|_2,",
+      "full_equation_latex_after": "M_t=\\sum_{j=1}^{k_t}\\|w_i^{(t)}-w_j^{(t-1)}\\|_2,",
+      "term_role": "injected shape/index mismatch",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "Since the primary objective is to improve computational efficiency while preserving clustering quality, the relative difference in mean squared error (MSE) is reported as:",
+    "injected_text": "Since the primary objective is to improve computational efficiency while preserving clustering quality, the relative difference in mean absolute error (MAE) is reported as:",
+    "rationale": "The experimental setup claims the evaluation metric is mean absolute error (MAE), but the equation immediately following and the results tables report mean squared error (MSE), creating an internal contradiction between the stated setup and the results.",
+    "ground_truth_description": "Substituted mean squared error with mean absolute error in the text of the experimental setup, conflicting with the MSE metric actually reported in the results.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B4",
+      "change_kind": "methods_results_inconsistency",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 3.1",
+      "affected_span_verbatim": "Since the primary objective is to improve computational efficiency while preserving clustering quality, the relative difference in mean squared error (MSE) is reported as:"
+    },
+    "proposer_agent": "injector.general.S2.t2.v2"
+  }
+]

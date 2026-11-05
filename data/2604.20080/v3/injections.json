@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": " 12+log(O/H)$_{\\rm SDSS}$ & 7.53$\\pm$0.08 & \\tablefootmark{(f)} & (5) \\\\",
+    "injected_text": " 12+log(O/H)$_{\\rm SDSS}$ & 7.65$\\pm$0.08 & \\tablefootmark{(f)} & (5) \\\\",
+    "rationale": "Table 1 attributes 12+log(O/H)_SDSS = 7.53 ± 0.08 for Mrk 996 to Arellano-Cordova2024 (CLASSY IX) via tablebib reference (5). Arellano-Cordova2024 reports this SDSS-based metallicity as 7.53 ± 0.08; shifting the central value to 7.65 (Δ = 0.12 = 1.5σ) places the citing claim outside the 1σ band [7.45, 7.61] but within 2σ [7.37, 7.69]. The stated ±0.08 uncertainty, the reference number, and the cite key in the tablebib are all left untouched—only the central value moves—so a careful reader who opens Arellano-Cordova2024 and compares specific digits flags the discrepancy, while a casual reader does not.",
+    "ground_truth_description": "Changed the SDSS-based oxygen abundance for Mrk 996 in Table 1 from 7.53±0.08 to 7.65±0.08, a 1.5σ shift in the central value while keeping the citation to Arellano-Cordova2024 (via tablebib reference (5)) intact.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Arellano-Cordova2024",
+      "injected_cite_key": "Arellano-Cordova2024",
+      "claim_sentence_verbatim": " 12+log(O/H)$_{\\rm SDSS}$ & 7.53$\\pm$0.08 & \\tablefootmark{(f)} & (5) \\\\",
+      "section_location": "Sec. 2.1, Table 1 (Basic properties for Mrk 996)",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "The global CO(2--1)/CO(1--0) ratio is low ($R_{21}\\!\\approx\\!0.29$--0.34), consistent with %low-density gas under \nsubthermal excitation.",
+    "injected_text": "The global CO(2--1)/CO(1--0) ratio is low ($R_{21}\\!\\approx\\!0.29$--0.35), consistent with %low-density gas under \nsubthermal excitation.",
+    "rationale": "Perturbs the abstract's headline R21 upper-bound by +1 in the second decimal (0.34 -> 0.35) while the body of the paper (Sect. 3.5 and Table 5) still reports R_{21}=0.34, producing an abstract-vs-body second-decimal drift detectable by abstract_vs_body_match.",
+    "ground_truth_description": "Changed the upper bound of the CO(2-1)/CO(1-0) line ratio quoted in the abstract from 0.34 to 0.35; the body and table still report 0.34.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "0.34",
+      "value_after_raw": "0.35",
+      "value_before_float": 0.34,
+      "value_after_float": 0.35,
+      "location_cue": "The global CO(2--1)/CO(1--0) ratio is low ($R_{21}\\!\\approx\\!0.29$--0.34)",
+      "paired_location": "Section 3.5 (subsect-r21): 'we obtained ... resulting in $R_{21}=0.34\\pm0.22$'; also Table 5 (table-co_compare) row 'Ratio R_{21} ... ALMA 0.34'.",
+      "quantity_label": "Global CO(2-1)/CO(1-0) line luminosity ratio R_{21} (uncorrected, ALMA)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "\\log\\alpha_{\\rm CO}=0.7-1.5\\left[(12+\\log{\\rm O/H})-8.7\\right]",
+    "injected_text": "\\log\\alpha_{\\rm CO}=0.7-1.5\\left[(12+\\log{\\rm O/H})\\right]",
+    "rationale": "Deletes the -8.7 metallicity-zero-point term from the Amorin+2016 metallicity-dependent log alpha_CO calibration, leaving valid LaTeX but a mathematically incorrect formula whose evaluation no longer yields the stated alpha_CO approx 69 at 12+log(O/H)=7.94.",
+    "ground_truth_description": "Removed the '-8.7' subtracted offset inside the bracket of the Amorin+2016 log alpha_CO formula in Appendix B, so the right-hand side no longer matches the original calibration nor produces the claimed alpha_CO~69 result.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Appendix B (alpha_CO prescription 1, Amorin+2016 displayed formula)",
+      "original_fragment_latex": "-8.7",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\log\\alpha_{\\rm CO}=0.7-1.5\\left[(12+\\log{\\rm O/H})-8.7\\right]",
+      "full_equation_latex_after": "\\log\\alpha_{\\rm CO}=0.7-1.5\\left[(12+\\log{\\rm O/H})\\right]",
+      "term_role": "metallicity zero-point offset (solar-anchor constant of the linear fit)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "submitted_arxiv.tex",
+    "original_text": "To complement the ALMA observations, we used optical and ultraviolet data tracing the ionized gas and young stellar populations.",
+    "injected_text": "To compliment the ALMA observations, we used optical and ultraviolet data tracing the ionized gas and young stellar populations.",
+    "rationale": "Classic homophone swap 'complement' -> 'compliment' that spell-checkers do not catch; a realistic cosmetic typo a tired author would miss, leaving meaning unaffected and triggering a very_minor presentation flag.",
+    "ground_truth_description": "Replaced the verb 'complement' with the homophone 'compliment' in the opening sentence of Section 2.2 (Ancillary data).",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D8",
+      "change_kind": "homophone_swap",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 2.2 (Ancillary data)",
+      "affected_span_verbatim": "To complement the ALMA observations, we used optical and ultraviolet data tracing the ionized gas and young stellar populations."
+    },
+    "proposer_agent": "injector.general.S1.t1.v3"
+  }
+]

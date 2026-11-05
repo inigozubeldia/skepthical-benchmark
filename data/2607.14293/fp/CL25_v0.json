@@ -1,0 +1,279 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "CL25",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-9f5f2e119508",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'Ref. [18] Krizhevsky et al.'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "Ref. [18] Krizhevsky et al."
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-a2f3f14704ae",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The transcription of the equation was confirmed faithful. The units check encountered a technical error and could not run, so dimensional consistency was assessed by reasoning: phase φ is dimensionless, ε(n_g) is an energy (joules), t_idle is time (seconds), and ℏ has units of joule·seconds, giving [J·s / (J·s)] = dimensionless — fully consistent. The form φ = 2πεt/ℏ is the standard expression for a dynamical phase accrued over a time t due to an energy splitting ε, so the equation is physically correct.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "moderate",
+          "notes": "The transcription of the equation was confirmed faithful. The units check encountered a technical error and could not run, so dimensional consistency was assessed by reasoning: phase φ is dimensionless, ε(n_g) is an energy (joules), t_idle is time (seconds), and ℏ has units of joule·seconds, giving [J·s / (J·s)] = dimensionless — fully consistent. The form φ = 2πεt/ℏ is the standard expression for a dynamical phase accrued over a time t due to an energy splitting ε, so the equation is physically correct.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.01825219999999983
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-46a78e4e89bf",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Figure 1 shows 'Input (128, 2)' and internal tensor shapes of (128, 8) and (128, 16), while Section II B states 'Each scan consists of N = 80 samples' and training is described on 80-sample scans. No explanation is provided anywhere in the paper for the discrepancy between the 128-length input dimension in the architecture diagram and the 80-sample scans used for training and evaluation.",
+        "evidence": {
+          "claim": "The input tensor length used in the model (128) is inconsistent with the scan length (80) described elsewhere, without justification, which affects reproducibility and interpretation of network architecture.",
+          "excerpt": "Figure 1 shows every architecture with `Input (128, 2)` and internal shapes `(128, 8)` / `(128, 16)`, but Sec. II B states \"each scan consists of N = 80 samples\", and Sec. II B/C describe training on 80-sample scans with an 80-sample first-difference channel. Nowhere is the discrepancy between 80 and 128 explained"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 shows 'Input (128, 2)' and internal tensor shapes of (128, 8) and (128, 16), while Section II B states 'Each scan consists of N = 80 samples' and training is described on 80-sample scans. No explanation is provided anywhere in the paper for the discrepancy between the 128-length input dimension in the architecture diagram and the 80-sample scans used for training and evaluation.",
+            "cost_usd": 0.00481032
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 labels the model input as \"Input (128, 2)\" with internal shapes \"(128, 8)\" and \"(128, 16),\" but Sec. II B states that \"Each scan consists of N = 80 samples.\" I found no passage explaining how 80-sample scans become 128-length inputs, so the inconsistency remains unresolved.",
+            "cost_usd": 0.0060293
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 1 illustrates the networks taking an `Input (128, 2)`, while Section II B explicitly states that \"Each scan consists of N = 80 samples.\" The paper fails to provide any explanation for how or why the 80-sample scan is converted to a 128-length tensor.",
+            "cost_usd": 0.0019255600000000002
+          }
+        ],
+        "cost_usd": 0.01276518
+      },
+      {
+        "flag_id": "fp-e6c0910e5abc",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "On page 4, the paragraph beginning 'Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ (with Δx₀ = 0). The first-difference channel exposes local sample-to-sample variation, which is the primary signature of a discontinuous phase shift.' appears verbatim twice back to back, which is a clear copy-paste duplication error.",
+        "evidence": {
+          "claim": "Section II B contains a duplicated paragraph describing scan conversion to two-channel input, likely an editing error affecting clarity and flow.",
+          "excerpt": "The paragraph beginning \"Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ (with Δx₀ = 0). The first-difference channel exposes local sample-to-sample variation, which is the primary signature of a discontinuous phase shift.\" appears verbatim twice back to back."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "On page 4, the paragraph beginning 'Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δxᵢ = xᵢ − xᵢ₋₁ (with Δx₀ = 0). The first-difference channel exposes local sample-to-sample variation, which is the primary signature of a discontinuous phase shift.' appears verbatim twice back to back, which is a clear copy-paste duplication error.",
+            "cost_usd": 0.00481032
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section II B/C repeats verbatim the paragraph \"Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel Δx_i = x_i − x_{i−1} (with Δx_0 = 0)...\" twice in succession. This is a clear duplication/editing error in the paper text.",
+            "cost_usd": 0.0060293
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The exact paragraph starting with \"Each scan is converted to a two-channel input...\" is indeed duplicated verbatim right before Section II C (Training procedure) on page 4.",
+            "cost_usd": 0.0019255600000000002
+          }
+        ],
+        "cost_usd": 0.01276518
+      },
+      {
+        "flag_id": "fp-b112cf734d7c",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The sub-caption for Fig. 2(b) reads 'Scan containing a charge jump (dashed line) of ΔV = +0.227 V', while the main figure caption states 'an injected charge jump (dashed line) of Δq = +0.417 e at gate voltage −0.184 V' and the in-panel legend shows 'jump @ −0.184 V (Δq = +0.417 e)'. The value 'ΔV = +0.227 V' is inconsistent with all other descriptions of the same panel and is unexplained.",
+        "evidence": {
+          "claim": "Figure 2(b) sub-caption contains inconsistent values for the injected jump relative to both the main figure caption and in-panel legend, which may mislead readers about data values.",
+          "excerpt": "The (b) sub-caption reads \"Scan containing a charge jump (dashed line) of ΔV = +0.227 V\", while the FIG. 2 caption for the same panel says \"an injected charge jump (dashed line) of Δq = +0.417 e at gate voltage −0.184 V\", and the in-panel legend shows \"jump @ −0.184 V (Δq = +0.417 e)\". The value \"ΔV = +0.227 V\" appears nowhere else and matches neither the jump position nor its magnitude."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The sub-caption for Fig. 2(b) reads 'Scan containing a charge jump (dashed line) of ΔV = +0.227 V', while the main figure caption states 'an injected charge jump (dashed line) of Δq = +0.417 e at gate voltage −0.184 V' and the in-panel legend shows 'jump @ −0.184 V (Δq = +0.417 e)'. The value 'ΔV = +0.227 V' is inconsistent with all other descriptions of the same panel and is unexplained.",
+            "cost_usd": 0.00481032
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The sub-caption says \"(b) Scan containing a charge jump (dashed line) of ΔV = +0.227 V,\" but the main figure caption says \"an injected charge jump (dashed line) of Δq = +0.417 e at gate voltage −0.184 V,\" and the panel legend matches the latter. These values are inconsistent within the same figure.",
+            "cost_usd": 0.0060293
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 2(b) sub-caption states \"ΔV = +0.227 V\", which conflicts with both the main caption (\"Δq = +0.417 e at gate voltage −0.184 V\") and the in-panel legend of the plot.",
+            "cost_usd": 0.0019255600000000002
+          }
+        ],
+        "cost_usd": 0.01276518
+      },
+      {
+        "flag_id": "fp-2d3546fe24b9",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=FP, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "Stray text about I-Q state discrimination is mixed into the description of charge-jump detection, making it ambiguous and potentially misleading regarding the input modality of the network.",
+          "excerpt": "the paragraph that begins \"We adapt this approach for charge jump detection: rather than classifying single I-Q points for state discrimination, our CNN operates on a sliding window of Ramsey charge tomography data…\" is immediately followed by: \"In that application, the network classifies individual readout samples in the in-phase/quadrature (I-Q) plane, where the qubit's |0⟩ and |1⟩ states produce distinguishable points in the complex demodulated signal [37].\""
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The passage is actually coherent contextual writing: 'We adapt this approach for charge jump detection: rather than classifying single I-Q points for state discrimination, our CNN operates on a sliding window of Ramsey charge tomography data' explicitly contrasts the current work from prior I-Q discrimination work, and the following sentence 'In that application, the network classifies individual readout samples in the in-phase/quadrature (I-Q) plane...' describes the prior application being contrasted against. This is not stray text but intentional comparison to distinguish the two use cases.",
+            "cost_usd": 0.00481032
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The placement is awkward: after describing the present work, the text adds \"In that application, the network classifies individual readout samples in the in-phase/quadrature (I-Q) plane...\" However, the current model’s input is also stated explicitly elsewhere: \"Each scan is converted to a two-channel input by concatenating the raw amplitude trace with its first-difference channel,\" so whether this sentence truly creates ambiguity is unclear.",
+            "cost_usd": 0.0060293
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "In Section IV A, the paper states our CNN operates on a sliding window... followed immediately by \"In that application, the network classifies individual readout samples in the in-phase/quadrature (I-Q) plane...\", which refers confusingly to the prior state-discrimination work and breaks the logical flow regarding the proposed model.",
+            "cost_usd": 0.0019255600000000002
+          }
+        ],
+        "cost_usd": 0.01276518
+      },
+      {
+        "flag_id": "fp-2302150810c7",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section III A claims 'The DCCNN outperforms the TCN on every metric in both regimes', but Table IV shows that after quantization the TCN and DCCNN tie on Jump precision (both 0.90) and No-Jump recall (both 0.96), contradicting the claim of outperformance on 'every metric'.",
+        "evidence": {
+          "claim": "The claim that the DCCNN outperforms the TCN on every metric in both regimes is not supported by Table IV; in the quantised regime, the metrics tie for Jump precision and No-Jump recall.",
+          "excerpt": "Sec. III A claims the DCCNN wins on every metric in both the float and quantised regimes. In Table IV, however, the quantised TCN and DCCNN tie on Jump precision (both 0.90) and on No-Jump recall (both 0.96)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III A claims 'The DCCNN outperforms the TCN on every metric in both regimes', but Table IV shows that after quantization the TCN and DCCNN tie on Jump precision (both 0.90) and No-Jump recall (both 0.96), contradicting the claim of outperformance on 'every metric'.",
+            "cost_usd": 0.00481032
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. III A states, \"The DCCNN outperforms the TCN on every metric in both regimes,\" but Table IV shows ties in the quantized case: for No Jump recall both are \"0.96,\" and for Jump precision both are \"0.90.\" Thus the textual claim is stronger than what the table supports.",
+            "cost_usd": 0.0060293
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section III A claims that \"The DCCNN outperforms the TCN on every metric in both regimes\", but Table IV shows that for the quantized models, the TCN and DCCNN tie on Jump precision (both 0.90) and No-Jump recall (both 0.96).",
+            "cost_usd": 0.0019255600000000002
+          }
+        ],
+        "cost_usd": 0.01276518
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "mathematics": 0.01825219999999983,
+    "general": 0.06382589999999999
+  },
+  "extractor_cost_usd": 0.01831000000000016,
+  "total_cost_usd": 0.10038809999999998
+}

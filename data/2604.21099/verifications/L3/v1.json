@@ -1,0 +1,198 @@
+{
+  "paper_id": "2604.21099",
+  "copy_id": "v1",
+  "reviewer_system": "L3",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not specifically challenge the characterization of Sommers' method as 'Monte Carlo exposure estimates' versus the correct 'analytical/relative exposure' derivation. The closest flag is in Minor Issue 5 about prior work citations being unclear, but this is too vague and does not specifically address the method-category swap for Sommers:2000relative.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review does criticize unclear discussion of prior work and asks authors to clarify what methods are adopted from the literature, but it does not specifically challenge the claim that Sommers (2000) provides Monte Carlo exposure estimates or otherwise contradict that citation-method characterization.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer mentions general concerns about missing details for exposure corrections and inconsistent citations, but never specifically identifies the mischaracterization of Sommers (2000) as a Monte Carlo method or challenges the claim against that specific source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the characterization of Sommers [20] as providing 'Monte Carlo exposure estimates' versus the actual analytical/geometric relative-exposure method. No part of the review challenges this specific methodological mis-categorization of the Sommers citation.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The text variously refers to 720, 72, and 36 events (in Appendix A) without clear explanation.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The text variously refers to 720, 72, and 36 events (in Appendix A) without clear explanation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the inconsistency between the numbers 720 and 72 (and 36) events in the paper, which directly corresponds to the injected discrepancy between the figure caption (72) and body text (720).",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The text variously refers to 720, 72, and 36 events (in Appendix A) without clear explanation.",
+          "confidence": "high",
+          "reasoning": "This directly flags the exact inconsistency introduced by changing the Figure 3 caption from 720 to 72 while other text still says 720 and Appendix A mentions 36.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The text variously refers to 720, 72, and 36 events (in Appendix A) without clear explanation.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the inconsistency between the numeric counts of events (720 vs 72) cited in different parts of the paper and figures.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The implementation is also flawed: it ignores the uncertainty on the baseline ratio $R_0$",
+      "reasoning": "majority-2/3: 3-judge majority (2/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The mathematical audit item 'mm_error_propagation' (item 6) actually marks the truncated equation as PASS, noting 'standard error propagation for I_MM = I_v - R_0·I_nv with independent errors and constant R_0 yields σ²_{I_MM} = σ²_{I_v} + R_0² σ²_{I_nv}, exactly as stated' — this confirms the injected (incomplete) equation rather than detecting the missing term. The Major Issue 3 mentions that the implementation 'ignores the uncertainty on the baseline ratio R_0' but this is framed as a conceptual/methodological critique of treating R_0 as constant, not as a detection of a missing term in the displayed equation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The implementation is also flawed: it ignores the uncertainty on the baseline ratio $R_0$",
+          "confidence": "high",
+          "reasoning": "The injected error deletes the $I_{nv}^2\\sigma_{R_0}^2$ term from the propagated variance, and the reviewer specifically identifies omission of uncertainty in $R_0$, which corresponds to that missing term.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The implementation is also flawed: it ignores the uncertainty on the baseline ratio $R_0$",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the uncertainty of the baseline ratio (sigma_{R_0}) is missing from the statistical implementation, which corresponds directly to the deleted term in the variance formula.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not flag the case mismatch between F_{MM}(E) in the defining equation and f_{MM} used everywhere else. The mathematical audit item 5 actually uses F_{MM} notation without flagging the inconsistency with f_{MM} in the surrounding text.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review mentions inconsistent terminology, capitalization, and some notation issues in physics formulae, but it does not specifically identify the local drift between $F_{\\rm MM}(E)$ in one defining equation and $f_{\\rm MM}$ elsewhere.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer notes general capitalization inconsistencies (e.g., 'Local Void' vs 'local void') but fails to mention the specific notation drift between the lowercase f_{MM} and uppercase F_{MM} in the definition equation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer does not flag the notation inconsistency between capital F_{MM} in the defining equation and lowercase f_{MM} used everywhere else. The reviewer's Major Issue 3 discusses the conceptual flaws of the estimator and uses f_{MM} notation, but never points out the case mismatch between the equation and surrounding text/table.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 42.935382,
+  "total_cost_usd": null,
+  "total_input_tokens": 51524,
+  "total_output_tokens": 3277,
+  "escalation_count": 2,
+  "notes": null
+}

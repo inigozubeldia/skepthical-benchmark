@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "updated online through winner-loser dynamics",
+    "injected_text": "updated online through winner-take-all dynamics",
+    "rationale": "Drifts the methodological qualifier on the CentNN citation from 'winner-loser dynamics' to 'winner-take-all dynamics'. CentNN updates both the winning and the losing centroid — this paper's own method section states 'The loser update is applied only when $N_p>1$' — whereas winner-take-all updates only the winner. The drift therefore mis-describes the cited algorithm AND contradicts the citing paper's own description. Cite key untouched; one existing phrase perturbed.\n",
+    "ground_truth_description": "CentNN citation: update rule described as 'winner-take-all' instead of the cited method's 'winner-loser dynamics'.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "park2000centroid",
+      "injected_cite_key": "park2000centroid",
+      "claim_sentence_verbatim": "Among modern clustering approaches, centroid neural network (CentNN) \\cite{park2000centroid} is a prototype-based algorithm that follows a competitive-learning paradigm, where centroid vectors are updated online through winner-loser dynamics.",
+      "section_location": "Sec. 1 (Introduction / Related background)",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "On MNIST, the runtime is improved from 8.344\\,s to 7.924\\,s, corresponding to a speed-up of 5.03\\%, while the number of training epochs is decreased from 141 to 132.",
+    "injected_text": "On MNIST, the runtime is improved from 8.344\\,s to 7.924\\,s, corresponding to a speed-up of 6.25\\%, while the number of training epochs is decreased from 141 to 132.",
+    "rationale": "Since the paper lacks dataset subpopulation splits, the edit targets a runtime speed-up calculation acting as a base-percent-result triple, shifting the stated percentage from 5.03% to 6.25% (a ~24% relative error) to realistically trigger a percent_of arithmetic failure.",
+    "ground_truth_description": "Changes the reported MNIST speed-up percentage from 5.03% to 6.25%, breaking the arithmetic relationship with the provided before and after runtimes.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "5.03",
+      "value_after_raw": "6.25",
+      "value_before_float": 5.03,
+      "value_after_float": 6.25,
+      "location_cue": "On MNIST, the runtime is improved from 8.344\\,s to 7.924\\,s, corresponding to a speed-up of 5.03\\%",
+      "paired_location": null,
+      "quantity_label": "runtime speed-up %",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "w_1=\\bar{x}+\\epsilon,\\quad w_2=\\bar{x}-\\epsilon,\\quad\n\\bar{x}=\\frac{1}{n}\\sum_{i=1}^n x_i,",
+    "injected_text": "w_1=\\bar{x}+\\epsilon,\\quad w_2=\\bar{x}-\\epsilon,\\quad\n\\bar{x}=\\sum_{i=1}^n x_i,",
+    "rationale": "The 1/n normalisation prefactor is dropped from the canonical empirical mean formula, breaking the fundamental definition of the sample mean and allowing the symbolic engine to refute the identity.",
+    "ground_truth_description": "Dropped the 1/n normalisation prefactor from the global mean formula for initializing centroids.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Section II.C first display",
+      "original_fragment_latex": "\\frac{1}{n}",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "w_1=\\bar{x}+\\epsilon,\\quad w_2=\\bar{x}-\\epsilon,\\quad\n\\bar{x}=\\frac{1}{n}\\sum_{i=1}^n x_i,",
+      "full_equation_latex_after": "w_1=\\bar{x}+\\epsilon,\\quad w_2=\\bar{x}-\\epsilon,\\quad\n\\bar{x}=\\sum_{i=1}^n x_i,",
+      "term_role": "normalisation prefactor",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "placing CentNN within the broader family of competitive",
+    "injected_text": "placing CentNN within the broader family of of competitive",
+    "rationale": "Accidental repetition of the preposition 'of' simulates a common, purely cosmetic typing error.",
+    "ground_truth_description": "Added an accidental word repetition ('of of') in the Introduction.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D8",
+      "change_kind": "word_repetition",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 1 (Introduction)",
+      "affected_span_verbatim": "This design is well suited to incremental data processing, memory-constrained environments, and adaptive model growth, placing CentNN within the broader family of competitive and self-organizing neural models \\cite{kohonen1990self,martinetz1993neural}."
+    },
+    "proposer_agent": "injector.general.S1.t1.v1"
+  }
+]

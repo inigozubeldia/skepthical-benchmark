@@ -1,0 +1,62 @@
+{
+  "paper_id": "2607.13468",
+  "reviewer_system": "B3",
+  "provider_tag": "deep",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-0bb692734508",
+        "paper_id": "2607.13468",
+        "reviewer_systems_attributed": [
+          "B3"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Section 4.1 explicitly details the attention-based alignment: 'image tokens are injected into cross-attention layers as keys and values, while the active voxels serve as queries. This produces a cross-attention map that is normalized along the image token axis using a softmax function... we aggregate the attention scores of image tokens covered by the instance mask region M_k^d. By applying a threshold to these aggregated scores, we select a set of voxel indices denoted as V_k^d.' Additional implementation specifics (specific attention heads used: 'head 0, 4, and 12') are provided in Appendix A.1.",
+        "evidence": {
+          "claim": "The description of the hierarchical scene tree construction does not provide sufficient details on how 2D image parts are aligned with 3D voxel components using attention-based retrieval, leaving the implementation ambiguous.",
+          "excerpt": "the description of the hierarchical scene tree construction in Section 4.1 does not provide sufficient details on how the 2D image parts are specifically aligned with the 3D voxel components using attention-based retrieval, making the implementation of this step ambiguous."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Section 4.1 explicitly details the attention-based alignment: 'image tokens are injected into cross-attention layers as keys and values, while the active voxels serve as queries. This produces a cross-attention map that is normalized along the image token axis using a softmax function... we aggregate the attention scores of image tokens covered by the instance mask region M_k^d. By applying a threshold to these aggregated scores, we select a set of voxel indices denoted as V_k^d.' Additional implementation specifics (specific attention heads used: 'head 0, 4, and 12') are provided in Appendix A.1.",
+            "cost_usd": 0.019729200000000002
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does describe the 2D-to-3D alignment mechanism: Section 4.1 states that \"image tokens are injected into cross-attention layers as keys and values, while the active voxels serve as queries,\" then \"we aggregate the attention scores of image tokens covered by the instance mask region... [and] select a set of voxel indices.\" The appendix adds implementation detail: \"We obtain the final attention map by averaging the voxel-to-token attention maps from... head 0, 4, and 12... [and] select the set of voxels whose aggregated scores exceed a predefined threshold.\"",
+            "cost_usd": 0.0253275
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Section 4.1 and Appendix A.1 explicitly detail the alignment process, stating that \"image tokens are injected into cross-attention layers as keys and values, while the active voxels serve as queries\" and that they \"aggregate the attention scores of image tokens covered by the instance mask region\" to select corresponding voxel indices.",
+            "cost_usd": 0.0062888
+          }
+        ],
+        "cost_usd": 0.0513455
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 1.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0513455
+  },
+  "extractor_cost_usd": 0.004270000000000038,
+  "total_cost_usd": 0.05561550000000004
+}

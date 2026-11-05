@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "paper.tex",
+    "original_text": "Bayesian nonparametric cloth models for real-time state estimation [8]",
+    "injected_text": "Bayesian cloth models for real-time state estimation [8]",
+    "rationale": "Dropping the specific 'nonparametric' qualifier creates a subtle methodological drift, making the citing claim slightly too general and only partially consistent with the cited paper's explicit methodology.",
+    "ground_truth_description": "The specific methodological qualifier 'nonparametric' is removed from the description of the cited Bayesian cloth models.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "8",
+      "injected_cite_key": "8",
+      "claim_sentence_verbatim": "More generally, deformable state estimation and cloth modeling have been studied using approaches such as point registration with dynamic simulation [7] and Bayesian nonparametric cloth models for real-time state estimation [8].",
+      "section_location": "INTRODUCTION",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "paper.tex",
+    "original_text": "On the remaining 89 improvable episodes, the oracle succeeds in 100\\% of cases (89/89).",
+    "injected_text": "On the remaining 89 improvable episodes, the oracle succeeds in 85\\% of cases (89/89).",
+    "rationale": "Modifying the success percentage from 100% to 85% while leaving the raw fraction (89/89) intact breaks the percent_of arithmetic relationship by 15%, triggering a major severity failure.",
+    "ground_truth_description": "Altered the stated percentage of oracle success from 100% to 85% without changing the accompanying fraction (89/89), creating an arithmetic inconsistency.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "100",
+      "value_after_raw": "85",
+      "value_before_float": 100.0,
+      "value_after_float": 85.0,
+      "location_cue": "On the remaining 89 improvable episodes, the oracle succeeds in 85\\% of cases (89/89).",
+      "paired_location": null,
+      "quantity_label": "success percentage",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "paper.tex",
+    "original_text": "\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2",
+    "injected_text": "\\|\\hat{X}_{i,j} - X_{i,k}\\|_2^2",
+    "rationale": "Introduces an unbound free index 'k' in the reconstruction loss summand, causing a shape/index mismatch that breaks the summation.",
+    "ground_truth_description": "Changed the ground truth mesh indices from X_{i,j} to X_{i,k}, leaving k as an unbound index in a sum over i and j.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. II.B second display",
+      "original_fragment_latex": "\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2",
+      "injected_fragment_latex": "\\|\\hat{X}_{i,j} - X_{i,k}\\|_2^2",
+      "full_equation_latex_before": "\\mathcal{L}_{\\text{recon}} \n= \\frac{1}{HW} \\sum_{i,j} \n\\|\\hat{X}_{i,j} - X_{i,j}\\|_2^2.",
+      "full_equation_latex_after": "\\mathcal{L}_{\\text{recon}} \n= \\frac{1}{HW} \\sum_{i,j} \n\\|\\hat{X}_{i,j} - X_{i,k}\\|_2^2.",
+      "term_role": "injected shape/index mismatch",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "paper.tex",
+    "original_text": "Regularization weights are fixed to $\\lambda_s = \\lambda_e = 0.1$ throughout.",
+    "injected_text": "Regularization weights are fixed to $\\lambda_s = \\lambda_e = 0.1$ throughout (we observed substantial degradation in reconstruction accuracy at higher weights).",
+    "rationale": "Inserts an unsupported parenthetical claim about an ablation finding (degradation at higher weights) that is never presented in the Results section.",
+    "ground_truth_description": "Added a phantom methodological justification claiming performance degradation at higher regularization weights, which is not supported by any evidence in the paper.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 2.2",
+      "affected_span_verbatim": "Regularization weights are fixed to $\\lambda_s = \\lambda_e = 0.1$ throughout."
+    },
+    "proposer_agent": "injector.general.S2.t3.v1"
+  }
+]

@@ -1,0 +1,198 @@
+{
+  "paper_id": "2607.13749",
+  "copy_id": "v2",
+  "reviewer_system": "CL25",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t2",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer mentions Power et al. in the context of 'Same recipe used in the grokking literature [10, 11]' but does not challenge the claim about grokking being observed universally across networks vs. specifically on small algorithmic datasets. No flag corresponds to the dropped qualifying condition.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] **\"Same recipe used in the grokking literature [10, 11]\" is stated without support.** Section 4.3 says the ReLU baseline uses \"hidden width 256, cross-entropy loss, AdamW with weight decay 1.0, and 8000 training steps—the same recipe used in the grokking literature [10, 11]\". The paper does not report the recipes actually used in Nanda et al. or Power et al., so the reader has to take the equivalence on faith. I was unable to verify this without going to the cited papers, and the citations vary in setup (Power et al. used AdamW variants with different WD; Nanda et al. modular-addition experiments used cross-entropy and WD around 1).",
+          "confidence": "low",
+          "reasoning": "The reviewer does discuss Power et al. and challenges a claim against cited grokking literature, but this is about hyperparameter recipe support in Section 4.3, not the Related Work sentence overgeneralising Power et al.'s small-algorithmic-datasets result. This does not specifically target the injected claim sentence.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer mentions Power et al. [11] only in the context of verifying hyperparameter recipes in Section 4.3 (Minor Issue 6), and does not challenge the claim summary in the Related Work section or mention any over-generalisation regarding algorithmic datasets.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never challenges the characterization of Power et al. 2022's findings or notes that the qualifying condition 'trained on small algorithmic datasets' was dropped. The reviewer's comment 6 about the ReLU baseline recipe touches on Power et al.'s hyperparameters but does not flag the over-generalized claim about what Power et al. observed.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t3",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Abstract quotes 99.9% agreement, body quotes 99.8%. The abstract states \"the algebraic prediction matches the observed outcome with 99.9% accuracy\". Section 1 (p. 2) says \"with 99.8% accuracy\", and Section 4.2 (p. 8) says \"Of the 585 runs, 584 match the algebraic prediction, giving a 99.8% agreement rate\". With 584/585 = 99.829%, the correct rounded value is 99.8%, so the abstract number is wrong.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Abstract quotes 99.9% agreement, body quotes 99.8%. The abstract states \"the algebraic prediction matches the observed outcome with 99.9% accuracy\". Section 1 (p. 2) says \"with 99.8% accuracy\", and Section 4.2 (p. 8) says \"Of the 585 runs, 584 match the algebraic prediction, giving a 99.8% agreement rate\". With 584/585 = 99.829%, the correct rounded value is 99.8%, so the abstract number is wrong.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 99.9% vs 99.8% inconsistency between the abstract and Section 4.2, matching exactly the injected numeric change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] **Abstract quotes 99.9% agreement, body quotes 99.8%.** The abstract states \"the algebraic prediction matches the observed outcome with 99.9% accuracy\". Section 1 (p. 2) says \"with 99.8% accuracy\", and Section 4.2 (p. 8) says \"Of the 585 runs, 584 match the algebraic prediction, giving a 99.8% agreement rate\". With 584/585 = 99.829%, the correct rounded value is 99.8%, so the abstract number is wrong. *Fix:* change the abstract to 99.8%.",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the abstract's 99.9% value as inconsistent with the repeated 99.8% figure in the body and Section 4.2, matching the injected repeated-constant drift.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "[numerical] Abstract quotes 99.9% agreement, body quotes 99.8%. The abstract states \"the algebraic prediction matches the observed outcome with 99.9% accuracy\".",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inconsistency between the 99.9% accuracy in the abstract and the 99.8% value found in Section 4.2.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t2",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Lemma 1 (eq. (4)) is missing a factor of 1/(k−l)! in the coefficient formula. The paper writes c_l(W,v) = (k!/l!) Σ_j v_j W_{1j}^l W_{2j}^{k−l}. The binomial expansion of (W_{1j}x_1 + W_{2j}x_2)^k gives coefficient (k choose l) = k!/(l!(k−l)!) on x_1^l x_2^{k−l}, so the correct expression is c_l = (k choose l) Σ_j v_j W_{1j}^l W_{2j}^{k−l}. Fix: replace k!/l! by k!/(l!(k−l)!) (or by (k choose l)) in (4).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Lemma 1 (eq. (4)) is missing a factor of 1/(k−l)! in the coefficient formula. The paper writes c_l(W,v) = (k!/l!) Σ_j v_j W_{1j}^l W_{2j}^{k−l}. The binomial expansion of (W_{1j}x_1 + W_{2j}x_2)^k gives coefficient (k choose l) = k!/(l!(k−l)!) on x_1^l x_2^{k−l}, so the correct expression is c_l = (k choose l) Σ_j v_j W_{1j}^l W_{2j}^{k−l}. Fix: replace k!/l! by k!/(l!(k−l)!) (or by (k choose l)) in (4).",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies that the binomial coefficient was replaced with k!/l! (missing the (k-l)! denominator) and provides the correct form, directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] **Lemma 1 (eq. (4)) is missing a factor of 1/(k−l)! in the coefficient formula.** The paper writes c_l(W,v) = (k!/l!) Σ_j v_j W_{1j}^l W_{2j}^{k−l}. The binomial expansion of (W_{1j}x_1 + W_{2j}x_2)^k gives coefficient (k choose l) = k!/(l!(k−l)!) on x_1^l x_2^{k−l}, so the correct expression is c_l = (k choose l) Σ_j v_j W_{1j}^l W_{2j}^{k−l}. The paper's own Lemma 3 proof is consistent with the *correct* coefficient — it writes \"since the binomial coefficients (k choose l) are nonzero, it suffices to show that the rescaled coefficients c̃_l = c_l/(k choose l) = Σ_j v_j W_{1j}^l W_{2j}^{k−l} can be chosen freely\" — so the mistake is only in Lemma 1's statement, and downstream results are unaffected. *Fix:* replace k!/l! by k!/(l!(k−l)!) (or by (k choose l)) in (4).",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely flags eq. (4)'s coefficient as missing the (k−l)! denominator and states the correct binomial coefficient, directly matching the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "[mathematical] Lemma 1 (eq. (4)) is missing a factor of 1/(k−l)! in the coefficient formula. The paper writes c_l(W,v) = (k!/l!) Σ_j v_j W_{1j}^l W_{2j}^{k−l}.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the binomial coefficient in equation 4 is missing the (k-l)! denominator, which is exactly the injected error.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t3",
+      "module": "general",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer does not mention any inconsistency with the hidden width symbol being M instead of H in Section 4.1; no flag in the report corresponds to this notation drift injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The review mentions several general/notational issues, but none flags the hidden-width symbol changing from H to M in Section 4.1. No specific notation-drift detection corresponding to this injection appears.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "While the reviewer flags several other notational and consistency issues (such as the delta symbol usage), they do not mention the hidden width variable changing from H to M in Section 4.1.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's report does not mention the notation change from H to M for hidden width in Section 4.1. None of the listed issues address this notation inconsistency.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 39.367944,
+  "total_cost_usd": null,
+  "total_input_tokens": 22761,
+  "total_output_tokens": 4027,
+  "escalation_count": 2,
+  "notes": null
+}

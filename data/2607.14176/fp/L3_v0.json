@@ -1,0 +1,230 @@
+{
+  "paper_id": "2607.14176",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-8254dbd56346",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only states 'MILP runtimes correspond to the end-to-end solver time per instance using Google OR-Tools, executed in multi-thread mode with a per-instance time limit of 11 s' but provides no statistics on the fraction of instances solved to proven optimality, optimality gaps for incomplete runs, or how sub-optimal/infeasible instances were handled in the training dataset.",
+        "evidence": {
+          "claim": "The MILP 'oracle' used to label training data is time-limited but the paper omits statistics on its solution quality, optimality fraction, and handling of sub-optimal/infeasible runs, making all downstream evaluation results ambiguous.",
+          "excerpt": "The MILP solver was time-limited to $11\\,{\rm s}$, but the paper does not report the fraction of instances solved to proven optimality, the distribution of optimality gaps for incomplete runs, or how sub-optimal/infeasible instances were handled in the dataset. This ambiguity makes it difficult to interpret all downstream results, from edge-level accuracy to claims of 'MILP-equivalence' for the GP-MILP model."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only states 'MILP runtimes correspond to the end-to-end solver time per instance using Google OR-Tools, executed in multi-thread mode with a per-instance time limit of 11 s' but provides no statistics on the fraction of instances solved to proven optimality, optimality gaps for incomplete runs, or how sub-optimal/infeasible instances were handled in the training dataset.",
+            "cost_usd": 0.0037457999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that \"MILP runtimes correspond to the end-to-end solver time per instance using Google OR-Tools, executed in multi-thread mode with a per-instance time limit of 11 s\" and that \"Each snapshot is labelled offline using the MILP model... [which] determines the optimal multi-hop relay scheme,\" but nowhere reports the fraction solved to proven optimality, any optimality gaps, or how time-limited/infeasible runs were handled.",
+            "cost_usd": 0.0130108
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that the MILP oracle was executed with a 'per-instance time limit of 11 s' (Section VI.A), but it never reports the fraction of instances solved to proven optimality or the optimality gaps for incomplete runs.",
+            "cost_usd": 0.0023316000000000005
+          }
+        ],
+        "cost_usd": 0.0190882
+      },
+      {
+        "flag_id": "fp-300cb97b9c75",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper evaluates GINE primarily via edge-level classification metrics (accuracy 0.9589, F1 0.9544) and connectivity gains vs. a 1-hop baseline, but explicitly acknowledges 'the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time' without providing any analysis of feasibility rates or objective-level quality of raw GINE outputs.",
+        "evidence": {
+          "claim": "The GINE model is evaluated only on edge-level metrics despite the problem being system-level, and the feasibility or objective quality of predicted solutions is not assessed; a few critical errors could lead to entirely infeasible or suboptimal solutions.",
+          "excerpt": "The GINE model is evaluated primarily on edge-level classification metrics (accuracy, F1), but the MILP's objective is to maximize system-level connectivity under hard constraints (flow, capacity, loop-freeness). The GINE model does not enforce these constraints, yet there is no analysis of the feasibility or objective-level quality of its raw outputs."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates GINE primarily via edge-level classification metrics (accuracy 0.9589, F1 0.9544) and connectivity gains vs. a 1-hop baseline, but explicitly acknowledges 'the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time' without providing any analysis of feasibility rates or objective-level quality of raw GINE outputs.",
+            "cost_usd": 0.0037457999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The reviewer is overstating one part: the paper says it evaluates \"(i) link-level agreement with the MILP oracle, (ii) end-to-end connectivity gains\" and explicitly defines \"end-to-end CAV connectivity.\" However, it also admits that \"the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time,\" and it does not provide an explicit feasibility audit for raw GINE outputs under the MILP constraints.",
+            "cost_usd": 0.0130108
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although the paper claims the GINE model 'closely approximates the MILP-optimal solutions in terms of connectivity', it admits it 'does not explicitly enforce routing or flow-conservation constraints at inference time' (Section I) and provides no quantitative analysis of the feasibility of its raw outputs.",
+            "cost_usd": 0.0023316000000000005
+          }
+        ],
+        "cost_usd": 0.0190882
+      },
+      {
+        "flag_id": "fp-b8280ea14759",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper compares connectivity gains only 'compared to the 1-hop MILP baseline' and provides no direct comparison between GINE/GP-MILP and the full multi-hop MILP oracle at the system-level connectivity metric, nor comparisons to other learning-based methods.",
+        "evidence": {
+          "claim": "Connectivity gains are only benchmarked against a 1-hop MILP baseline rather than the proper multi-hop MILP oracle or other relevant baselines, so the performance of the learned models is not appropriately contextualized.",
+          "excerpt": "The paper lacks a direct comparison of connectivity between the GINE/GP-MILP models and the multi-hop MILP oracle, which is the proper benchmark for an approximation method. Furthermore, the paper lacks comparisons to other relevant baselines."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares connectivity gains only 'compared to the 1-hop MILP baseline' and provides no direct comparison between GINE/GP-MILP and the full multi-hop MILP oracle at the system-level connectivity metric, nor comparisons to other learning-based methods.",
+            "cost_usd": 0.0037457999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "For connectivity, the paper says \"As a reference baseline, we consider a 1-hop MILP formulation\" and then reports results \"Compared to the 1-hop MILP baseline.\" Although link-level agreement is compared to the MILP oracle, no quantitative connectivity comparison of GINE/GP-MILP against the full multi-hop MILP oracle or other baselines is provided.",
+            "cost_usd": 0.0130108
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's claim that the paper lacks a direct comparison to the multi-hop MILP oracle is false. Section VI.D explicitly compares GP-MILP to the oracle, stating it preserves 'MILP-equivalent solutions on the evaluated dataset, i.e., yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs'.",
+            "cost_usd": 0.0023316000000000005
+          }
+        ],
+        "cost_usd": 0.0190882
+      },
+      {
+        "flag_id": "fp-c0e79fd970b1",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'A total of 449,500 graph snapshots are generated and split into training (80%) and validation (20%) sets' from 'a 1 km² dense urban area of Rome (Porta Pia)' with no mention of temporal or spatial separation in the split, nor any cross-city or cross-scenario generalization experiments.",
+        "evidence": {
+          "claim": "The entire dataset is generated from a single 1 km^2 area of Rome and split randomly, creating risk of spatio-temporal leakage and inflated metrics; no evidence is given for generalization to other settings.",
+          "excerpt": "The entire dataset is generated from a single $1\\,{\\rm km}^2$ urban area (Porta Pia, Rome) and partitioned with a simple random $80/20$ split. This setup creates a high risk of spatio-temporal correlation between training and validation sets, potentially leading to inflated performance metrics that do not reflect true generalization to new scenarios, traffic patterns, or city layouts."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'A total of 449,500 graph snapshots are generated and split into training (80%) and validation (20%) sets' from 'a 1 km² dense urban area of Rome (Porta Pia)' with no mention of temporal or spatial separation in the split, nor any cross-city or cross-scenario generalization experiments.",
+            "cost_usd": 0.0037457999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The dataset is indeed narrow: \"Vehicular mobility is modelled in SUMO over a 1 km2 dense urban area of Rome (Porta Pia)\" and \"A total of 449,500 graph snapshots are generated and split into training (80%) and validation (20%) sets.\" The paper gives no cross-city, cross-area, or temporally separated evaluation to address possible leakage or broader generalization.",
+            "cost_usd": 0.0130108
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that the dataset is generated over a '1 km^2 dense urban area of Rome (Porta Pia)' and simply 'split into training (80%) and validation (20%) sets' (Section VI.A), without demonstrating or discussing generalization to other unseen geographic areas or temporal distributions.",
+            "cost_usd": 0.0023316000000000005
+          }
+        ],
+        "cost_usd": 0.0190882
+      },
+      {
+        "flag_id": "fp-5ce4d39e1d98",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper claims 'GP-MILP preserves MILP-equivalent solutions (same objective value)' and 'yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs,' but provides no data on the fraction of instances where this holds or the distribution of objective gaps when it does not.",
+        "evidence": {
+          "claim": "Claims that GP-MILP finds 'MILP-equivalent solutions (same objective value)' are asserted but not supported by data; the fraction of instances matching the full MILP and objective quality gap are not reported.",
+          "excerpt": "The paper provides no data on the actual solution quality of the GP-MILP. It is not clear what fraction of instances achieve the same objective as the full MILP, nor what the objective gap is when they differ. Aggressive pruning could potentially remove edges from the optimal solution, leading to suboptimal outcomes."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims 'GP-MILP preserves MILP-equivalent solutions (same objective value)' and 'yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs,' but provides no data on the fraction of instances where this holds or the distribution of objective gaps when it does not.",
+            "cost_usd": 0.0037457999999999997
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper does make the claimed objective-quality statement: \"Experimental results demonstrate that GP-MILP... [preserves] MILP-equivalent solutions on the evaluated dataset, i.e., yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs,\" and the abstract similarly says \"GP-MILP preserves MILP-equivalent solutions (same objective value).\" So the reviewer’s claim that no match/gap information is reported is factually too strong, even though the reporting is terse.",
+            "cost_usd": 0.0130108
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper broadly asserts that GP-MILP preserves 'MILP-equivalent solutions on the evaluated dataset' (Section VI.D). However, since pruning operates at 99% recall (meaning some optimal edges are lost), GP-MILP cannot perfectly match the oracle 100% of the time, and the authors do not report the actual fraction of matched instances or the average objective gap.",
+            "cost_usd": 0.0023316000000000005
+          }
+        ],
+        "cost_usd": 0.0190882
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.095441
+  },
+  "extractor_cost_usd": 0.02867799999999998,
+  "total_cost_usd": 0.12411899999999998
+}

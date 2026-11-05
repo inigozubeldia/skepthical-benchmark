@@ -1,0 +1,369 @@
+{
+  "paper_id": "2604.20262",
+  "arxiv_url": "https://arxiv.org/abs/2604.20262",
+  "rotation_seed": 796196933,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S1",
+      "type": 3
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S2",
+      "type": 3
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "2026-0218.tex",
+          "original_text": "We adopt the method described in \\cite{chimebeam} to measure the primary beam in the E-W direction.",
+          "injected_text": "We adopt the holographic method described in \\cite{chimebeam} to measure the primary beam in the E-W direction.",
+          "rationale": "The cited CHIME paper presents a Sun-tracking beamforming technique to measure the primary beam, not a holographic technique (which uses a reference antenna). Inserting 'holographic' mis-categorizes the method while keeping the cite key intact, so a verifier reading chimebeam would return CONTRADICTED.",
+          "ground_truth_description": "Inserted 'holographic' before 'method' in the sentence adopting the CHIME beam-measurement technique, mis-categorizing CHIME's beamforming/Sun-tracking method as a holographic one.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "chimebeam",
+            "injected_cite_key": "chimebeam",
+            "claim_sentence_verbatim": "We adopt the method described in \\cite{chimebeam} to measure the primary beam in the E-W direction.",
+            "section_location": "Sec. 2.3 (East-West Beam Measurement)",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "2026-0218.tex",
+          "original_text": "The center frequency of the TCPA is 750 MHz, corresponding to a wavelength $\\lambda$ of 0.4 m, the baseline length $L$ should ideally not exceed 22.9 m to satisfy this requirement.",
+          "injected_text": "The center frequency of the TCPA is 750 MHz, corresponding to a wavelength $\\lambda$ of 0.4 m, the baseline length $L$ should ideally not exceed 45.8 m to satisfy this requirement.",
+          "rationale": "All three operands of the angular-resolution ratio (lambda=0.4 m, L_max, theta=1 deg) are stated explicitly in adjacent prose; doubling L_max to 45.8 m makes lambda/L = 0.5 deg, contradicting the theta>1 deg cut by a factor of two -- a blatant ratio_eq failure (~50% relative error) that upgrades to MAJOR.",
+          "ground_truth_description": "Replaced the maximum baseline length consistent with theta > 1 deg from 22.9 m to 45.8 m, breaking the explicit lambda/L = theta arithmetic by a factor of 2.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "ratio_eq",
+            "value_before_raw": "22.9 m",
+            "value_after_raw": "45.8 m",
+            "value_before_float": 22.9,
+            "value_after_float": 45.8,
+            "location_cue": "wavelength $\\lambda$ of 0.4 m, the baseline length $L$ should ideally not exceed 45.8 m to satisfy this requirement",
+            "paired_location": null,
+            "quantity_label": "Maximum baseline length L for angular resolution theta = lambda/L > 1 deg at lambda = 0.4 m",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t3.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "2026-0218.tex",
+          "original_text": "    A_{\\rm NS}(\\theta) = e^{-\\frac{\\theta^2}{\\theta_{\\rm NS}^2}} = (A_{\\rm NS}^{\\rm simu})^{\\frac{1+\\alpha}{2}}",
+          "injected_text": "    A_{\\rm NS}(\\theta) = e^{-\\frac{\\theta^2}{2\\theta_{\\rm NS}^2}} = (A_{\\rm NS}^{\\rm simu})^{\\frac{1+\\alpha}{2}}",
+          "rationale": "A_NS is defined as exp(-theta^2/theta_NS^2) in Eq. (eq2:beamNS) and re-stated in Eq. (eq2:beamalpha); inserting an extra factor of 2 in the denominator of the exponent in the latter occurrence makes the two displayed definitions disagree, realising a within-paper cross-equation consistency break (M.S1.t2).",
+          "ground_truth_description": "Changed the exponent in the re-statement of A_NS(theta) in Eq. (eq2:beamalpha) from -theta^2/theta_NS^2 to -theta^2/(2 theta_NS^2), so it no longer matches the original definition in Eq. (eq2:beamNS).",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq2:beamalpha",
+            "equation_location": "Eq. (eq2:beamalpha) in Sect. 2.4 (North-South Beam Measurement); anchor: Eq. (eq2:beamNS) in Sect. 2.2",
+            "original_fragment_latex": "e^{-\\frac{\\theta^2}{\\theta_{\\rm NS}^2}}",
+            "injected_fragment_latex": "e^{-\\frac{\\theta^2}{2\\theta_{\\rm NS}^2}}",
+            "full_equation_latex_before": "A_{\\rm NS}(\\theta) = e^{-\\frac{\\theta^2}{\\theta_{\\rm NS}^2}} = (A_{\\rm NS}^{\\rm simu})^{\\frac{1+\\alpha}{2}}",
+            "full_equation_latex_after": "A_{\\rm NS}(\\theta) = e^{-\\frac{\\theta^2}{2\\theta_{\\rm NS}^2}} = (A_{\\rm NS}^{\\rm simu})^{\\frac{1+\\alpha}{2}}",
+            "term_role": "cross-equation inconsistency: Gaussian form of A_NS(theta) in Eq. (eq2:beamNS) vs. its re-statement in Eq. (eq2:beamalpha)",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t2.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "2026-0218.tex",
+          "original_text": "    V_{ij}^{\\rm simu} = \\beta\\int \\dif^2 \\vec{n}\\ \\ A^2_{NS}(\\vec{n})A^{2}_{EW}(\\vec{n}) I_{\\rm sky}(\\vec{n})",
+          "injected_text": "    V_{ij}^{\\rm simu} = \\gamma\\int \\dif^2 \\vec{n}\\ \\ A^2_{NS}(\\vec{n})A^{2}_{EW}(\\vec{n}) I_{\\rm sky}(\\vec{n})",
+          "rationale": "Renames the sky-model normalization parameter from beta to gamma in Eq. (eq2:simulation); the surrounding paragraph immediately afterwards still discusses 'the parameter $\\beta$' and the likelihood $\\log L(\\alpha,\\beta)$, and the Results section quotes the best-fit '$\\beta = 1.45 \\pm 0.002$', so the local symbol swap creates a visible notation drift (D3) without altering numerics.",
+          "ground_truth_description": "In the simulated-visibility equation in Methods, the prefactor symbol $\\beta$ was changed to $\\gamma$, while the explanatory text and the Results best-fit value still use $\\beta$ for the same quantity.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D3",
+            "change_kind": "notation_drift",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 2 (Methods), North-South Beam Measurement, Eq. (eq2:simulation)",
+            "affected_span_verbatim": "    V_{ij}^{\\rm simu} = \\beta\\int \\dif^2 \\vec{n}\\ \\ A^2_{NS}(\\vec{n})A^{2}_{EW}(\\vec{n}) I_{\\rm sky}(\\vec{n})"
+          },
+          "proposer_agent": "injector.general.S1.t3.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "2026-0218.tex",
+          "original_text": "This model approximates the results obtained from the electromagnetic (EM) field simulation by \\cite{Sun_2022}, as thoroughly validated in the work of \\cite{Yusimu}.",
+          "injected_text": "This model approximates the results obtained from the simulation by \\cite{Sun_2022}, as thoroughly validated in the work of \\cite{Yusimu}.",
+          "rationale": "Drops the precise methodological qualifier 'electromagnetic (EM) field' from a citation to Sun_2022, whose central contribution (per its title 'The Electromagnetic Characteristics of the Tianlai Cylindrical Pathfinder Array') is specifically electromagnetic field simulation; the citing claim becomes generic 'simulation', which is less faithful to the cited paper's stated method.",
+          "ground_truth_description": "Removed the methodological qualifier 'electromagnetic (EM) field' from the description of Sun_2022's simulation, leaving the cite key intact but weakening the methodological characterization.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "Sun_2022",
+            "injected_cite_key": "Sun_2022",
+            "claim_sentence_verbatim": "This model approximates the results obtained from the electromagnetic (EM) field simulation by \\cite{Sun_2022}, as thoroughly validated in the work of \\cite{Yusimu}.",
+            "section_location": "Sec. 2.2 (Methods, Primary Beam Model)",
+            "mutation_kind": "claim_methodology_drift",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t3.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "2026-0218.tex",
+          "original_text": "we show the visibility for a short north-south baseline at 750 MHz.",
+          "injected_text": "we show the visibility for a short north-south baseline at 570 MHz.",
+          "rationale": "The abstract of this paper contains no numerical claim at all, so a strict 'abstract headline number' digit-swap is not realisable; the closest analog is the most prominent quoted result-figure caption sentence in the body. I swap the adjacent digits 7<->5 in '750 MHz' (the center frequency repeatedly stated as the TCPA's operating center, e.g. Sec. 2.3.1 'The center frequency of the TCPA is 750 MHz' and the Fig. 2 caption '(750 MHz)'). After the edit the same headline value is quoted both as 570 MHz (Sec. 3.3, describing the best-fit data_fit figure) and as 750 MHz (Sec. 2.3.1 and Fig. 2 caption), creating a same-paper internal inconsistency for the predicate, and crossing the band boundary (700-800 MHz) which makes it factually obviously wrong on a single read.",
+          "ground_truth_description": "Adjacent-digit swap of the headline frequency at which the data-fit example is shown, changing '750 MHz' to '570 MHz' in Sec. 3.3 while the same value remains correctly quoted as '750 MHz' in Sec. 2.3.1 and the Fig. 2 caption.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "750",
+            "value_after_raw": "570",
+            "value_before_float": 750.0,
+            "value_after_float": 570.0,
+            "location_cue": "we show the visibility for a short north-south baseline at 570 MHz",
+            "paired_location": "Sec. 2.3.1 (Baseline Selection): 'The center frequency of the TCPA is 750 MHz, corresponding to a wavelength lambda of 0.4 m'; also Fig. 2 caption '(750 MHz)'.",
+            "quantity_label": "TCPA observing center frequency (MHz) at which the data-fit example in Fig. fig:data_fit is shown",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "2026-0218.tex",
+          "original_text": "    V_{ij} = \\frac{g_ig_j^*}{\\tau}\\int \\dif^2 \\vec{n} \\dif t\\ \\ |A(\\vec{n})|^2 e^{-\\frac{2\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}I(\\vec{n}) + <\\eta_i \\eta_j^*>",
+          "injected_text": "    V_{ij} = \\frac{g_ig_j^*}{\\tau}\\int \\dif^2 \\vec{n} \\dif t\\ \\ |A(\\vec{n})|^2 e^{-\\frac{\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}I(\\vec{n}) + <\\eta_i \\eta_j^*>",
+          "rationale": "The displayed visibility equation is a load-bearing instance of the van Cittert--Zernike relation; replacing the canonical Fourier-kernel coefficient 2\\pi/\\lambda by \\pi/\\lambda produces a structurally similar but algebraically incorrect formula (factor-of-2 perturbation of a well-known physics-law coefficient), exactly the mechanism specified for mathematics S3 type 2.",
+          "ground_truth_description": "In the calibrated visibility equation (eq2:calvis), the standard interferometric phase factor exp(-2\\pi i (r_j-r_i)\\cdot n / \\lambda) was replaced by exp(-\\pi i (r_j-r_i)\\cdot n / \\lambda), halving the canonical coefficient.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": "eq2:calvis",
+            "equation_location": "Eq. (5), Sect. 2.3.2 (Phase Calibration)",
+            "original_fragment_latex": "e^{-\\frac{2\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}",
+            "injected_fragment_latex": "e^{-\\frac{\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}",
+            "full_equation_latex_before": "V_{ij} = \\frac{g_ig_j^*}{\\tau}\\int \\dif^2 \\vec{n} \\dif t\\ \\ |A(\\vec{n})|^2 e^{-\\frac{2\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}I(\\vec{n}) + <\\eta_i \\eta_j^*>",
+            "full_equation_latex_after": "V_{ij} = \\frac{g_ig_j^*}{\\tau}\\int \\dif^2 \\vec{n} \\dif t\\ \\ |A(\\vec{n})|^2 e^{-\\frac{\\pi i}{\\lambda} (\\vec{r}_j - \\vec{r}_i)\\cdot \\vec{n}}I(\\vec{n}) + <\\eta_i \\eta_j^*>",
+            "term_role": "Fourier-kernel phase coefficient (canonical 2\\pi/\\lambda in van Cittert--Zernike visibility relation)",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t2.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "2026-0218.tex",
+          "original_text": "The length of these baselines are all 3.2m.",
+          "injected_text": "The length of these baselines are all 3.2m. The visibilities from all 12 baselines are then jointly combined into a single stacked likelihood, which suppresses per-baseline systematics and ensures that the recovered N-S beam parameters are consistent across the full set of selected baselines.",
+          "rationale": "The inserted sentence asserts that all 12 selected N-S baselines are jointly combined in a stacked likelihood for the beam fit, but the Results section ('Measurement of the North-South Primary Beam') explicitly states that the fit uses visibilities from only three baselines (A1-A9, A2-A10, A4-A12), so a reviewer cross-checking Methods against Results sees a clear protocol inconsistency.",
+          "ground_truth_description": "Added a sentence to the Methods (N-S beam) claiming a joint stacked-likelihood fit over all 12 selected baselines, contradicting the Results section which fits using only 3 baselines.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methodology_setup_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Sec. 2.4 (Methods, North-South Beam Measurement)",
+            "affected_span_verbatim": "We adopt a multivariate Gaussian likelihood function of the form\n\\begin{equation}\n    \\label{eq2:likelihood}\n    \\log(L(\\alpha, \\beta)) \\sim (V_{ij} - V_{ij}^{\\rm simu}) (V_{ij} - V_{ij}^{\\rm simu})^* / \\sigma^2\n\\end{equation}\nHere, we assume that $\\alpha$ and $\\beta$ satisfy a uniform distribution, and $\\sigma$ is the standard deviation of the thermal noise, which is determined by observing an `empty' sky region devoid of bright radio source."
+          },
+          "proposer_agent": "injector.general.S3.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "2026-0218.tex",
+          "original_text": "Recently, the CHIME team \\citep{chimebeam} demonstrated a novel technique using the Sun as a calibration source for primary beam measurement.",
+          "injected_text": "Recently, the CHIME team \\citep{chimebeam} reported the discovery of a luminous fast radio burst originating from a Galactic magnetar, providing strong evidence that magnetar flares are a progenitor of at least some FRBs.",
+          "rationale": "Topic mis-attribution with cite key intact: chimebeam is the CHIME Sun-based primary-beam paper, but the rewritten claim attributes a Galactic-magnetar FRB discovery to it — a substantive result entirely absent from that paper, on a different subject within the same collaboration's broader output (the kind of confusion a tired author could plausibly make).",
+          "ground_truth_description": "Replaced the claim attached to \\citep{chimebeam} so that instead of describing a Sun-based primary-beam measurement technique (the actual subject of that paper), the sentence credits the cited paper with reporting a Galactic-magnetar FRB discovery, which it does not discuss.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "chimebeam",
+            "injected_cite_key": "chimebeam",
+            "claim_sentence_verbatim": "Recently, the CHIME team \\citep{chimebeam} reported the discovery of a luminous fast radio burst originating from a Galactic magnetar, providing strong evidence that magnetar flares are a progenitor of at least some FRBs.",
+            "section_location": "Introduction",
+            "mutation_kind": "claim_topic_mis_attribution",
+            "detection_target_verdict": "UNRELATED"
+          },
+          "proposer_agent": "injector.citations.S3.t3.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "2026-0218.tex",
+          "original_text": "We have selected 12 similar short baselines located on the A cylindrical surface.",
+          "injected_text": "We have selected 11 similar short baselines located on the A cylindrical surface.",
+          "rationale": "The abstract of this paper contains no numerical values, so a literal abstract-vs-body second-decimal drift is not feasible; the closest realistic anchor is the headline count '12 similar short baselines' which appears once in the Methods (§ NS Beam Measurement: 'we selected the following baselines A1-A9, A2-A10, ... A12-A20', explicitly enumerating 12) and again in the Results section. Perturbing the Results occurrence from 12 to 11 creates a cross-section inconsistency on the same quantity that abstract_vs_body_match-style logic detects.",
+          "ground_truth_description": "Changed the Results-section baseline count from '12 similar short baselines' to '11 similar short baselines', contradicting the Methods statement (and the explicit A1-A9 through A12-A20 enumeration) that describes 12 baselines.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "12",
+            "value_after_raw": "11",
+            "value_before_float": 12.0,
+            "value_after_float": 11.0,
+            "location_cue": "We have selected 12 similar short baselines located on the A cylindrical surface",
+            "paired_location": "Methods § NS Beam Measurement: 'Finally, We have selected 12 similar short baselines located on the same cylinder.' (followed by enumerated list A1-A9, A2-A10, A3-A11, A4-A12, A5-A13, A6-A14, A7-A15, A8-A16, A9-A17, A10-A18, A11-A19, A12-A20 — 12 baselines)",
+            "quantity_label": "Number of short north-south baselines selected on cylinder A for the N-S primary beam fit",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "2026-0218.tex",
+          "original_text": "S = \\frac{1}{N}\\sum_{(i,j) \\in \\mathcal{S}} V_{i,j}^{\\rm cal} ~ e^{\\frac{2\\pi i}{\\lambda}\\vec{n}\\cdot(\\vec{r}_j - \\vec{r}_i)}",
+          "injected_text": "S = \\frac{1}{N}\\prod_{(i,j) \\in \\mathcal{S}} V_{i,j}^{\\rm cal} ~ e^{\\frac{2\\pi i}{\\lambda}\\vec{n}\\cdot(\\vec{r}_j - \\vec{r}_i)}",
+          "rationale": "Operator swap (sum -> product) on the beamforming definition: the equation still typesets, but a product of phased visibilities is not a coherent beamformed signal, so Wolfram refutes it against the standard beamforming identity.",
+          "ground_truth_description": "In the beamforming equation, the outer summation operator over selected baselines was replaced by a product operator, while the operand and prefactor 1/N were left unchanged.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 2.3.3 (Beamforming), unlabeled displayed equation defining S",
+            "original_fragment_latex": "\\sum_{(i,j) \\in \\mathcal{S}}",
+            "injected_fragment_latex": "\\prod_{(i,j) \\in \\mathcal{S}}",
+            "full_equation_latex_before": "S = \\frac{1}{N}\\sum_{(i,j) \\in \\mathcal{S}} V_{i,j}^{\\rm cal} ~ e^{\\frac{2\\pi i}{\\lambda}\\vec{n}\\cdot(\\vec{r}_j - \\vec{r}_i)}",
+            "full_equation_latex_after": "S = \\frac{1}{N}\\prod_{(i,j) \\in \\mathcal{S}} V_{i,j}^{\\rm cal} ~ e^{\\frac{2\\pi i}{\\lambda}\\vec{n}\\cdot(\\vec{r}_j - \\vec{r}_i)}",
+            "term_role": "outer operator swap (coherent sum over baselines becomes a product)",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t2.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v3",
+          "file_path": "2026-0218.tex",
+          "original_text": "To prevent cross-coupling between feeds, we selected those with $L > 1.8\\text{m}$.",
+          "injected_text": "To prevent cross-coupling between feeds, we selected those with $L > 1.8\\text{m}$ (shorter baselines showed visibly degraded phase stability in our preliminary checks).",
+          "rationale": "Inserts a parenthetical justifying the L>1.8 m baseline-selection threshold by appealing to a 'preliminary check' of phase stability that the Results, Discussion, and figures of the paper never actually report, creating an unsupported sub-claim that a reviewer cross-referencing Methods against evidence would flag.",
+          "ground_truth_description": "Added a parenthetical phantom-evidence justification ('shorter baselines showed visibly degraded phase stability in our preliminary checks') to the Methods sentence motivating the L>1.8 m baseline cut, asserting an empirical observation that is not actually presented anywhere in the paper.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "C",
+            "checklist_item_id": "C4",
+            "change_kind": "phantom_evidence_subclaim",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 2.3.1 (Baseline Selection)",
+            "affected_span_verbatim": "To prevent cross-coupling between feeds, we selected those with $L > 1.8\\text{m}$."
+          },
+          "proposer_agent": "injector.general.S2.t3.v3"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "morion2026.tex",
+    "original_text": "The well-known Borde-Guth-Vilenkin Theorem shows that inflationary spacetimes are generically geodesically past-incomplete, necessitating the existence of a pre-inflationary boundary of some sort, possibly singular.",
+    "injected_text": "The well-known Borde-Guth-Vilenkin Theorem shows that all expanding spacetimes are generically geodesically past-incomplete, necessitating the existence of a pre-inflationary boundary of some sort, possibly singular.",
+    "rationale": "The cited Borde-Guth-Vilenkin paper explicitly conditions its past-incompleteness conclusion on inflationary spacetimes (those with positive average expansion rate H_av along a past-directed geodesic); replacing 'inflationary' with the broader 'all expanding' drops that scope qualifier and over-generalises to spacetimes such as loitering / asymptotically-Minkowski models which are expanding but past-complete, while leaving the cite key, the directional claim, and the methodological language (BGV theorem, past-incompleteness) untouched.",
+    "ground_truth_description": "In the abstract, the scope qualifier 'inflationary' attached to the BGV-theorem statement was replaced with 'all expanding', over-generalising the cited claim to spacetimes for which Borde-Guth-Vilenkin do not establish past-incompleteness.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Borde:2001nh",
+      "injected_cite_key": "Borde:2001nh",
+      "claim_sentence_verbatim": "The well-known Borde-Guth-Vilenkin Theorem shows that inflationary spacetimes are generically geodesically past-incomplete, necessitating the existence of a pre-inflationary boundary of some sort, possibly singular.",
+      "section_location": "Abstract",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "morion2026.tex",
+    "original_text": "        F\\left(\\gamma\\right) = \\frac{3}{2} \\ln\\left(\\frac{\\gamma + 1}{\\gamma - 1}\\right),",
+    "injected_text": "        F\\left(\\gamma\\right) = \\frac{2}{3} \\ln\\left(\\frac{\\gamma + 1}{\\gamma - 1}\\right),",
+    "rationale": "The abstract of this paper contains no numerical content, so the strict cell target (adjacent-digit swap on an abstract headline number with a body anchor) has no eligible site. The best available realisation is a body-vs-body numerical mismatch: the timelike F(gamma) coefficient 3/2 is stated in eq:FTimelike and then quoted again in the Theorem's proof block; swapping numerator and denominator in the proof's restatement (3/2 -> 2/3) creates an internal numerical inconsistency between two locations stating the same closed-form result, which abstract_vs_body_match can flag as a cross-location quantitative contradiction.",
+    "ground_truth_description": "In the Theorem's proof block, the prefactor of ln((gamma+1)/(gamma-1)) in the timelike F(gamma) was changed from 3/2 to 2/3, contradicting eq:FTimelike where the same quantity is correctly given as 3/2.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "3/2",
+      "value_after_raw": "2/3",
+      "value_before_float": 1.5,
+      "value_after_float": 0.6666666666666666,
+      "location_cue": "F\\left(\\gamma\\right) = \\frac{2}{3} \\ln\\left(\\frac{\\gamma + 1}{\\gamma - 1}\\right), if $\\mathcal{C}$ is timelike",
+      "paired_location": "eq:FTimelike (Section: BGV Theorem: General Case), where the same coefficient is correctly given as 3/2 in the line '= \\frac{3}{2} \\ln\\left(\\frac{\\gamma + 1}{\\gamma - 1}\\right).'",
+      "quantity_label": "Prefactor of ln((gamma+1)/(gamma-1)) in the timelike F(gamma) appearing in the generalized BGV theorem",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "morion2026.tex",
+    "original_text": "    \\gamma^2 = \\frac{1}{1 - v^2},",
+    "injected_text": "    \\gamma^2 = \\frac{1}{1 + v^2},",
+    "rationale": "Subtle sign perturbation on the canonical special-relativistic Lorentz factor gamma^2 = 1/(1 - v^2) — a textbook field-canonical identity imported into the paper to define the boost in the geodesic-completeness derivation; flipping the minus sign to a plus still typesets and reads naturally but is unmistakably wrong against the canonical form a domain reader would recall, which is exactly the Stage-1b knowledge-audit pathway this cell calibrates.",
+    "ground_truth_description": "In the displayed equation defining the Lorentz boost factor, the denominator was changed from (1 - v^2) to (1 + v^2), inverting the sign relative to the canonical Lorentz factor.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 1 (Geodesic Completeness in FRW spacetime), displayed equation defining gamma^2 as the Lorentz boost factor",
+      "original_fragment_latex": "\\gamma^2 = \\frac{1}{1 - v^2}",
+      "injected_fragment_latex": "\\gamma^2 = \\frac{1}{1 + v^2}",
+      "full_equation_latex_before": "\\gamma^2 = \\frac{1}{1 - v^2},",
+      "full_equation_latex_after": "\\gamma^2 = \\frac{1}{1 + v^2},",
+      "term_role": "denominator sign in the canonical special-relativistic Lorentz factor (textbook field-canonical form)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "morion2026.tex",
+    "original_text": "where $\\tau$ is the duration of the expanding phase.",
+    "injected_text": "where $\\tau$ is the duration of the contracting phase.",
+    "rationale": "The setup paragraph in Sec. 2 now defines $\\tau$ as the duration of the contracting phase, but the subsequent simplified-example calculation $N_+ = \\int_0^\\tau H_+(t)\\,dt \\simeq H_+\\tau$ continues to treat $[0,\\tau]$ as the expanding phase (as does the entropy condition where the upper limit of the $H_+$ integral is $\\tau$ and the lower limit of the $H_-$ integral is $\\tau$), creating an internal Methods/Results inconsistency about which segment of the cycle $\\tau$ labels.",
+    "ground_truth_description": "Changed the definition of the cycle-segment duration $\\tau$ from 'expanding phase' to 'contracting phase' in the IS cyclic-model setup, while leaving the downstream calculations (which integrate the expansion rate $H_+$ from 0 to $\\tau$ to get the e-folds of expansion) untouched.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methods_results_inconsistency",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 2 (The Ijjas-Steinhardt Cyclic Model is Geodesically Incomplete)",
+      "affected_span_verbatim": "where $\\tau$ is the duration of the expanding phase."
+    },
+    "proposer_agent": "injector.general.S2.t2.v3"
+  }
+]

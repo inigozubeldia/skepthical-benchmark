@@ -1,0 +1,146 @@
+{
+  "paper_id": "2604.20914",
+  "reviewer_system": "B2",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-567c3d9e602c",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=CONFIRMED_ISSUE, gemini=FP",
+        "evidence": {
+          "claim": "The paper does not provide a detailed comparison with other existing methods for extracting QNM parameters from gravitational wave observations.",
+          "excerpt": "The paper does not provide a detailed comparison with other existing methods for extracting QNM parameters from gravitational wave observations. It would be helpful to see how FIREFLY compares to other approaches in terms of accuracy and speed."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper compares FIREFLY against 'conventional full-parameter sampling' and demonstrates speedup, but does not compare against other specialized QNM extraction methods. However, the paper's scope is explicitly about implementing FIREFLY for space-borne detectors, and it references [11] (the original FIREFLY paper) for prior validation. The flag is reasonable as a suggestion but is essentially a request for additional analysis not present in the paper.",
+            "cost_usd": 0.0066370000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s explicit benchmarking is only against a single baseline: “In Fig. 1, we show the posterior distributions from the conventional full-parameter sampling and the FIREFLY” and “Figure 2 further shows the time scaling of the two methods.” It does not provide a broader comparison to other existing QNM-extraction approaches beyond conventional full-parameter sampling.",
+            "cost_usd": 0.008211999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does extensively compare FIREFLY to the existing standard approach in terms of both speed and accuracy, stating 'In simulations including six QNMs, FIREFLY—with high fidelity—yields a ~200 times speedup over the conventional approach' and providing detailed time scaling (Fig. 2) and accuracy assessments via Wasserstein distances (Appendix D).",
+            "cost_usd": 0.002474866666666667
+          }
+        ],
+        "cost_usd": 0.017323866666666667
+      },
+      {
+        "flag_id": "fp-c467ec6fa1d4",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The study is framed around simulations — “We adopt the GWSpace [12] package to simulate TDI signals in the space-borne detector” — and it only briefly notes one limitation: “the evidences given by FIREFLY and the full-parameter sampling have slight differences… A detailed comparison and explanation about the evidence is left for future work.” There is no detailed discussion of limitations, failure modes, or challenges for real-data application.",
+        "evidence": {
+          "claim": "The paper does not provide a detailed discussion of the limitations of the FIREFLY algorithm or the potential challenges in applying it to real data.",
+          "excerpt": "The paper does not provide a detailed discussion of the limitations of the FIREFLY algorithm or the potential challenges in applying it to real data. It would be helpful to see a more thorough error analysis and discussion of potential failure modes."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper acknowledges some limitations, e.g., 'in this study we conservatively apply the FIREFLY for only calculating the posteriors' and notes evidence calculation differences 'at the level of 10^-3,' but does not provide a thorough discussion of failure modes or challenges with real (non-simulated) data. This is a legitimate concern but partially addressed by the paper's explicit acknowledgment of future work.",
+            "cost_usd": 0.0066370000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The study is framed around simulations — “We adopt the GWSpace [12] package to simulate TDI signals in the space-borne detector” — and it only briefly notes one limitation: “the evidences given by FIREFLY and the full-parameter sampling have slight differences… A detailed comparison and explanation about the evidence is left for future work.” There is no detailed discussion of limitations, failure modes, or challenges for real-data application.",
+            "cost_usd": 0.008211999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper validates the method on simulated stationary Gaussian noise but does not provide a thorough error analysis of potential failure modes or discuss the specific challenges of applying it to real observational data (e.g., glitches, data gaps).",
+            "cost_usd": 0.002474866666666667
+          }
+        ],
+        "cost_usd": 0.017323866666666667
+      },
+      {
+        "flag_id": "fp-c7c86eac4ab5",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "B2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper uses a fixed noise model (Gaussian noise, TianQin A and E channels) and states 'we utilize 64 CPU cores for computation' with a specific setup, but provides no discussion of how different noise models or non-Gaussian noise would affect FIREFLY's performance. The paper does not address this concern at all.",
+        "evidence": {
+          "claim": "The paper does not provide a detailed discussion of the impact of different noise models on the performance of FIREFLY.",
+          "excerpt": "The paper does not provide a detailed discussion of the impact of different noise models on the performance of FIREFLY. It would be helpful to see how the algorithm performs under different noise conditions and how it might need to be modified for different detectors."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses a fixed noise model (Gaussian noise, TianQin A and E channels) and states 'we utilize 64 CPU cores for computation' with a specific setup, but provides no discussion of how different noise models or non-Gaussian noise would affect FIREFLY's performance. The paper does not address this concern at all.",
+            "cost_usd": 0.0066370000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The likelihood model is introduced under a single assumption: “We start from the standard likelihood in the GW data analysis assuming Gaussian noise with zero mean.” The paper does not study or discuss how FIREFLY’s performance changes under different noise models or non-Gaussian/nonstationary detector noise conditions.",
+            "cost_usd": 0.008211999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper assumes standard 'Gaussian noise with zero mean' (Eq. B.2) and does not test or discuss the algorithm's performance under different noise conditions or models.",
+            "cost_usd": 0.002474866666666667
+          }
+        ],
+        "cost_usd": 0.017323866666666667
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0519716
+  },
+  "extractor_cost_usd": 0.004870000000000048,
+  "total_cost_usd": 0.05684160000000005
+}

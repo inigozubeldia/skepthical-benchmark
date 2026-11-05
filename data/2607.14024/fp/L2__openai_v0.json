@@ -1,0 +1,195 @@
+{
+  "paper_id": "2607.14024",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "citations": [
+      {
+        "flag_id": "fp-61038883a9a5",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "citations",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Could not retrieve cited paper PDF for 'WRF citation [23]'.",
+        "evidence": {
+          "arxiv_id": null,
+          "canonical_entity": "WRF citation [23]"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.0
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-d1e9c93b6513",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "mathematics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Maths interpreter: FAIL. The definition states that the intersection of all clusters must be empty (∩ᵢcᵢ = ∅), but this condition is weaker than the standard partition requirement. A proper partition requires pairwise disjointness (cᵢ ∩ cⱼ = ∅ for all i ≠ j), not merely that the global intersection of all clusters simultaneously is empty. For example, three sets {a,b}, {b,c}, {a,c} have an empty three-way intersection yet are not pairwise disjoint and would not constitute a valid partition of features. The intended meaning — that clusters do not overlap — requires pairwise disjointness, which is a strictly stronger condition than what is written. The transcription was confirmed faithful to the paper, so the issue lies in the definition itself, not in copying.",
+        "evidence": {
+          "maths_verdict": "FAIL",
+          "confidence": "medium",
+          "impact": "moderate",
+          "notes": "The definition states that the intersection of all clusters must be empty (∩ᵢcᵢ = ∅), but this condition is weaker than the standard partition requirement. A proper partition requires pairwise disjointness (cᵢ ∩ cⱼ = ∅ for all i ≠ j), not merely that the global intersection of all clusters simultaneously is empty. For example, three sets {a,b}, {b,c}, {a,c} have an empty three-way intersection yet are not pairwise disjoint and would not constitute a valid partition of features. The intended meaning — that clusters do not overlap — requires pairwise disjointness, which is a strictly stronger condition than what is written. The transcription was confirmed faithful to the paper, so the issue lies in the definition itself, not in copying.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.020077200000000017
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-0d72c950cf8d",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Section 3.2 describes CSFS only at a high level, listing bullet points such as 'a non-inferiority test that allows for safe and early discarding of feature clusters if the removal does not negatively impact the predictive performance with a high certainty' and 'a conditional force-remove of the worst feature or cluster is triggered,' but never defines the statistical test, threshold, confidence level, bootstrap procedure, tie-breaking rules, or exact fallback logic. The paper points to an open-source implementation on GitHub but does not provide algorithmic detail sufficient for reproduction from the paper alone.",
+        "evidence": {
+          "claim": "The CSFS algorithm is not specified in enough detail to reproduce or assess the main methodological contribution: several crucial components are undefined, including the non-inferiority test, clustering construction, and fallback logic.",
+          "excerpt": "The CSFS algorithm is not specified in enough detail to reproduce or assess the main methodological contribution. Sec. 3.2 states that CSFS uses clustering, “safe-removal,” non-inferiority testing, and conditional force-removal, but it does not define the statistical non-inferiority test, threshold/margin, confidence level, bootstrap or validation procedure, tie-breaking rules, cluster-size policy, or exact fallback logic."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.2 describes CSFS only at a high level, listing bullet points such as 'a non-inferiority test that allows for safe and early discarding of feature clusters if the removal does not negatively impact the predictive performance with a high certainty' and 'a conditional force-remove of the worst feature or cluster is triggered,' but never defines the statistical test, threshold, confidence level, bootstrap procedure, tie-breaking rules, or exact fallback logic. The paper points to an open-source implementation on GitHub but does not provide algorithmic detail sufficient for reproduction from the paper alone.",
+            "cost_usd": 0.007563299999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 3.2 gives only a high-level description: “Clustering can be performed based on feature correlations, RF FI as an initial best guess, or randomly,” and “The FS algorithm is enhanced by a non-inferiority test that allows for safe and early discarding of feature clusters.” The paper never specifies the non-inferiority test itself, its margin/confidence settings, or the exact feature/cluster fallback decision rule beyond “conditional force-remove of the worst feature or cluster is triggered.”",
+            "cost_usd": 0.009887166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces a \"non-inferiority test\" and \"conditional force-remove\" (Section 3.2), but does not mathematically define the test, confidence levels, margins, or the exact conditional fallback logic in the text.",
+            "cost_usd": 0.003680133333333333
+          }
+        ],
+        "cost_usd": 0.0211306
+      },
+      {
+        "flag_id": "fp-b45985cb6df1",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges this in Section 5.4: 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station,' yet the Abstract and Conclusion make broad claims like 'CSFS achieves a predictive performance comparable to SFS while reducing computational cost by an average of 21%' without qualifying these as single-station results, constituting a mismatch between the generality of the framing and the narrowness of the evidence.",
+        "evidence": {
+          "claim": "The experimental evidence is much narrower than the wind-and-solar framing; only one turbine and one PV station are evaluated, but general domain-level claims are made.",
+          "excerpt": "The experimental evidence is much narrower than the paper’s wind-and-solar framing. Sec. 4.2 evaluates only turbine T11 from the EDP dataset, and Sec. 4.3 evaluates only PV station 01 from PVOD, while the Abstract, Introduction, and Conclusion frame the method as improving wind and solar prediction pipelines more generally."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this in Section 5.4: 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station,' yet the Abstract and Conclusion make broad claims like 'CSFS achieves a predictive performance comparable to SFS while reducing computational cost by an average of 21%' without qualifying these as single-station results, constituting a mismatch between the generality of the framing and the narrowness of the evidence.",
+            "cost_usd": 0.007563299999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experiments are indeed limited to one asset per domain: “For our study, we select wind turbine T11” and “For our study, we select station 01.” Yet the paper makes broader domain-level claims (e.g., the title “Improving Wind and Solar Power Prediction” and “the proposed methodology is applicable to a wide range of FS problems”), while also admitting as a threat to validity “particularly the use of only a single WT and PV station.”",
+            "cost_usd": 0.009887166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states \"we select wind turbine T11\" (Sec 4.2) and \"we select station 01\" (Sec 4.3), confirming the evaluation is limited to a single turbine and a single PV station despite broader domain-level framing.",
+            "cost_usd": 0.003680133333333333
+          }
+        ],
+        "cost_usd": 0.0211306
+      },
+      {
+        "flag_id": "fp-7548ce55615a",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section 5.2 reports runtime reductions and notes that 'the SFS baseline includes the same safe-remove shortcut at the feature level as used in CSFS,' and Section 5.1 states hyperparameters are optimized 'once at the beginning of each SFS or CSFS iteration,' but the number of model fits per iteration, HPO budget (number of trials/time limit for CFO), number of repeated runs contributing to runtime estimates, and whether safe-removal paths use identical HPO settings are not reported, making it impossible to fully attribute the runtime reduction to the claimed algorithmic efficiency gain.",
+        "evidence": {
+          "claim": "The runtime comparison does not fully isolate the claimed algorithmic efficiency gain because model-fit counts, HPO budgets, number of repetitions, and aggregation methods are insufficiently reported.",
+          "excerpt": "The runtime comparison does not fully isolate the claimed algorithmic efficiency gain. Sec. 5.1 states that hyperparameters are optimized during each SFS/CSFS iteration, while Sec. 5.2 reports runtime reductions; however, the number of model fits, HPO budgets, repeated runs, and whether failed/safe-removal paths use identical HPO settings are not fully reported."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section 5.2 reports runtime reductions and notes that 'the SFS baseline includes the same safe-remove shortcut at the feature level as used in CSFS,' and Section 5.1 states hyperparameters are optimized 'once at the beginning of each SFS or CSFS iteration,' but the number of model fits per iteration, HPO budget (number of trials/time limit for CFO), number of repeated runs contributing to runtime estimates, and whether safe-removal paths use identical HPO settings are not reported, making it impossible to fully attribute the runtime reduction to the claimed algorithmic efficiency gain.",
+            "cost_usd": 0.007563299999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The runtime methodology is only partially specified: Sec. 5.1 says “We optimize the hyperparameters once at the beginning of each SFS or CSFS iteration,” and Fig. 5 reports runtimes “aggregated over all used models for the target set feature size |F'| = 2.” The paper does not state the HPO budget, number of model fits/repetitions behind the runtime totals, or whether identical tuning settings were used across all CSFS/SFS branches, so the efficiency gain is not fully isolated.",
+            "cost_usd": 0.009887166666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states it uses \"Cost-Frugal Optimization (CFO)\" for hyperparameter tuning at each iteration (Sec 5.1), but does not report the specific HPO budgets, total model fits, or isolation of these costs in the runtime analysis (Sec 5.2).",
+            "cost_usd": 0.003680133333333333
+          }
+        ],
+        "cost_usd": 0.0211306
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "citations": 0.0,
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "citations": 1,
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "citations": 0.0,
+    "mathematics": 0.020077200000000017,
+    "general": 0.0633918
+  },
+  "extractor_cost_usd": 0.019835999999999965,
+  "total_cost_usd": 0.10330499999999998
+}

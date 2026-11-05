@@ -1,0 +1,272 @@
+{
+  "paper_id": "2607.14293",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-8d96c71aa82d",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states in the Conclusions: 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.' All performance comparisons in Table VII are on synthetic scans, confirming the claim about real-domain validation is unresolved.",
+        "evidence": {
+          "claim": "The manuscript's parity claim with χ² is only demonstrated on synthetic scans, with no quantitative validation on real or held-out NEXUS data, leaving the main claim insufficiently substantiated in the real domain.",
+          "excerpt": "the manuscript's central claim — parity with the χ² algorithm at fixed FPR and a viable path to in-loop deployment — is at present a claim about synthetic data. ... Without either, the conclusion that the DCCNN \"matches\" χ² is not fully substantiated on the domain where χ² was originally benchmarked."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in the Conclusions: 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans.' All performance comparisons in Table VII are on synthetic scans, confirming the claim about real-domain validation is unresolved.",
+            "cost_usd": 0.0038546
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says the network is trained/evaluated on synthetic data — \"trained on synthetic Ramsey tomography scans generated from qubit templates measured at the Northwestern Experimental Underground Site (NEXUS)\" — and the conclusion notes that \"Future work will focus on ... validating the simulation-trained model on measured scans.\" So the χ² parity claim is not quantitatively validated on real NEXUS scans in this manuscript.",
+            "cost_usd": 0.009901499999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that the model is only tested on synthetic data, stating in the conclusions that 'Future work will focus on deploying the DCCNN on real-time data acquisition with operating qubit hardware, validating the simulation-trained model on measured scans'.",
+            "cost_usd": 0.0018675333333333334
+          }
+        ],
+        "cost_usd": 0.015623633333333333
+      },
+      {
+        "flag_id": "fp-0db47fb73881",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'the ablation of residual connections was successful, as they do not provide a statistically significant improvement in detection performance for this task,' but no p-value, test statistic, or multi-seed analysis is provided—only per-qubit efficiency values with standard deviation across five qubits, which is insufficient to support a statistical significance claim.",
+        "evidence": {
+          "claim": "The claim that TCN residual connections do not provide a statistically significant improvement is unsupported due to lack of multiple seed runs or appropriate statistical analysis.",
+          "excerpt": "the reported per-qubit efficiencies ... are quoted with a single standard-deviation error across only five qubit templates, and no test statistic, p-value, or seed-variance analysis is provided. ... either (i) repeat training over multiple random seeds ... or (ii) rephrase the claim more cautiously"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'the ablation of residual connections was successful, as they do not provide a statistically significant improvement in detection performance for this task,' but no p-value, test statistic, or multi-seed analysis is provided—only per-qubit efficiency values with standard deviation across five qubits, which is insufficient to support a statistical significance claim.",
+            "cost_usd": 0.0038546
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The authors state, \"These findings indicate that the ablation of residual connections was successful, as they do not provide a statistically significant improvement in detection performance for this task,\" but only single efficiency summaries such as \"Overall 0.7797 ± 0.0621 0.8331 ± 0.0790\" are given across five qubits. No multiple-seed training study or formal statistical test is reported to support the phrase \"statistically significant.\"",
+            "cost_usd": 0.009901499999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that the residual connections 'do not provide a statistically significant improvement in detection performance' but only provides the standard deviation across five qubit templates (e.g., 0.8331 ± 0.0790) as error bars, lacking a formal statistical test or multiple-seed analysis to support the claim.",
+            "cost_usd": 0.0018675333333333334
+          }
+        ],
+        "cost_usd": 0.015623633333333333
+      },
+      {
+        "flag_id": "fp-f3d89499fd36",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=AMBIGUOUS: The paper states the chi2 FPR constraint of 5% was 'chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively),' implicitly reporting DCCNN FPR values, but these are not presented in a dedicated table row or clearly labeled as FPR, making the reporting incomplete though not entirely absent.",
+        "evidence": {
+          "claim": "The DCCNN false-positive rate (FPR) is not directly reported or clearly matched between DCCNN and χ² methods, undermining core quantitative claims.",
+          "excerpt": "The DCCNN FPR itself is not explicitly reported in the tables; only per-class metrics on the 15,000-scan test set (Tables III–IV) are given. Please state the DCCNN FPR directly ... Since the entire \"matching\" argument hinges on this number, it deserves its own row in Table VII (or a dedicated table)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states the chi2 FPR constraint of 5% was 'chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively),' implicitly reporting DCCNN FPR values, but these are not presented in a dedicated table row or clearly labeled as FPR, making the reporting incomplete though not entirely absent.",
+            "cost_usd": 0.0038546
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Section III.C explicitly reports the DCCNN false-positive rates: \"This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively).\" So the factual claim that the DCCNN FPR is not directly reported is incorrect, even though it is not broken out in a table.",
+            "cost_usd": 0.009901499999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer claims the DCCNN FPR is not explicitly reported, but the paper directly states it in Section III.C: 'This FPR was chosen to match the rates observed for the DCCNN before and after quantization (6% and 4%, respectively).'",
+            "cost_usd": 0.0018675333333333334
+          }
+        ],
+        "cost_usd": 0.015623633333333333
+      },
+      {
+        "flag_id": "fp-4756cea3b839",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper acknowledges the training jump rate is 1.1 mHz while noting real underground rates as low as 0.19 mHz were achieved, but does not evaluate model performance at the lower real-world prior or discuss threshold adjustment for the operational regime—the concern is not addressed quantitatively.",
+        "evidence": {
+          "claim": "Model evaluation and threshold setting do not account for the real-world low prior probability of jumps, risking non-optimal performance in deployment.",
+          "excerpt": "the operational prior at NEXUS is much lower (0.19 mHz corresponds to a jump-in-scan probability far below 33%). It would strengthen the paper to either (i) evaluate at a jump prior representative of the underground data-taking regime ... since a fixed 0.5 cut trained on a 1:2 imbalance will not be optimal at the real prior."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges the training jump rate is 1.1 mHz while noting real underground rates as low as 0.19 mHz were achieved, but does not evaluate model performance at the lower real-world prior or discuss threshold adjustment for the operational regime—the concern is not addressed quantitatively.",
+            "cost_usd": 0.0038546
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper evaluates on datasets where \"∼33,000 contain a charge jump\" and later compares methods on scans \"with a jump rate of 1.1 mHz,\" not the lowest-rate regime noted elsewhere (\"charge jump rates as low as 0.19 mHz were achieved\"). But the manuscript frames its main benchmark around efficiency at matched FPR rather than deployment precision under a rare-event prior, so it is unclear whether this omission undermines the stated claims or is simply out of scope.",
+            "cost_usd": 0.009901499999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper trains and reports its classification metrics on a dataset with a ~33% jump prior (Sections II.C and III.A) and evaluates overall detection efficiency on a set with a 1.1 mHz jump rate, but does not adjust the decision threshold or report false-positive impacts under the realistic low-prior distribution.",
+            "cost_usd": 0.0018675333333333334
+          }
+        ],
+        "cost_usd": 0.015623633333333333
+      },
+      {
+        "flag_id": "fp-e0cc66b2234d",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The quantitative comparisons are restricted to larger jumps, e.g. the abstract and Tables V–VII report efficiency on \"|∆q| ∈ [0.1, 0.5] e.\" Although Sec. III.C says the simulations were \"binned in 15 jump-size intervals spanning |∆q| ∈ [0.1, 0.5] e,\" no efficiency-vs-magnitude results are actually shown, especially not below 0.1 e.",
+        "evidence": {
+          "claim": "Detection efficiency is only reported for large jumps, not as a function of jump magnitude, potentially missing regime where ML and χ² performance differ most.",
+          "excerpt": "Ref. [17] and physical interest extend to smaller jumps where TLS reconfiguration and lower-energy events matter. ... plotting this vs. Δq for both DCCNN and χ² would be very valuable and directly show whether ML gains or loses at the sensitive low-magnitude end."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "Section III C states that efficiency is evaluated with 'each set binned in 15 jump-size intervals spanning |∆q| ∈ [0.1, 0.5] e,' indicating the binned efficiency-vs-magnitude analysis exists in the methodology, though the per-bin curves are not plotted in a figure; however, the paper's Table VII does summarize integrated results over this range and the binned methodology is described, partially addressing the concern.",
+            "cost_usd": 0.0038546
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The quantitative comparisons are restricted to larger jumps, e.g. the abstract and Tables V–VII report efficiency on \"|∆q| ∈ [0.1, 0.5] e.\" Although Sec. III.C says the simulations were \"binned in 15 jump-size intervals spanning |∆q| ∈ [0.1, 0.5] e,\" no efficiency-vs-magnitude results are actually shown, especially not below 0.1 e.",
+            "cost_usd": 0.009901499999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper notes that simulated scans were 'binned in 15 jump-size intervals spanning |Δq| ∈ [0.1, 0.5] e' (Section III.C) but only reports the aggregate mean per-qubit efficiency in Table VII, failing to report or plot performance as a function of jump magnitude.",
+            "cost_usd": 0.0018675333333333334
+          }
+        ],
+        "cost_usd": 0.015623633333333333
+      },
+      {
+        "flag_id": "fp-489bddf0b30c",
+        "paper_id": "2607.14293",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only reports 'a per-inference latency of 1,860 cycles (6.19 µs)' from HLS C-synthesis and notes the tProc 'can continuously poll this register,' but provides no end-to-end latency estimate including data acquisition, AXI transfer, polling overhead, or recalibration trigger time.",
+        "evidence": {
+          "claim": "Only inference (IP block) latency is reported, not the end-to-end control loop timing, leaving unclear whether the demonstrated speed is sufficient for operational requirements.",
+          "excerpt": "The stated 6.19 μs is the per-inference latency of the DCCNN IP block from HLS C-synthesis. In an operational loop, the relevant quantity is end-to-end ... Without this context, the reader cannot judge whether the achieved latency is \"fast enough.\""
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only reports 'a per-inference latency of 1,860 cycles (6.19 µs)' from HLS C-synthesis and notes the tProc 'can continuously poll this register,' but provides no end-to-end latency estimate including data acquisition, AXI transfer, polling overhead, or recalibration trigger time.",
+            "cost_usd": 0.0038546
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The hardware section reports only IP-level timing — \"a per-inference latency of 1,860 cycles (6.19 µs)\" and \"per-inference latency of 6.19 µs on the Zynq UltraScale+ RFSoC ZCU216\" — with no quantified end-to-end control-loop timing including acquisition, transfer, tProc polling/branching, or recalibration. Thus the paper does not show whether the full operational loop is fast enough.",
+            "cost_usd": 0.009901499999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only reports the IP block latency from C-synthesis ('estimates a per-inference latency of 1,860 cycles (6.19 μs)') and explicitly leaves end-to-end integration for later, noting that 'Future work will focus on... demonstrating in-loop integration with the QICK control firmware.'",
+            "cost_usd": 0.0018675333333333334
+          }
+        ],
+        "cost_usd": 0.015623633333333333
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0937418
+  },
+  "extractor_cost_usd": 0.013769999999999935,
+  "total_cost_usd": 0.10751179999999994
+}

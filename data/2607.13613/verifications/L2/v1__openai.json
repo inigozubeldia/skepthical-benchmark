@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13613",
+  "copy_id": "v1",
+  "reviewer_system": "L2",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "CentNN updates centroids online using winner-take-all competitive dynamics and grows the model through centroid splitting. [SUPPORTED]",
+          "confidence": "medium",
+          "reasoning": "The reviewer's Key Statements section explicitly endorses the injected 'winner-take-all' description as SUPPORTED rather than flagging it as a methodological drift from the cited paper. The reviewer did not challenge the post-edit claim against park2000centroid.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review repeatedly describes CentNN as using 'winner-loser' dynamics elsewhere, but it does not explicitly challenge the specific cited introduction sentence or mark the park2000centroid-backed claim as contradicted/unsupported. In fact, the key-statements section labels a closely related claim as SUPPORTED with 'winner-take-all competitive dynamics,' which works against counting this as a detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly marked the sentence containing the methodology drift as 'SUPPORTED' by the cited reference, thus failing to identify the error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's 'Key statements and references' section actually SUPPORTS the post-injection claim, marking as SUPPORTED: 'CentNN updates centroids online using winner-take-all competitive dynamics and grows the model through centroid splitting.' The reviewer did not flag the contradiction between 'winner-take-all' in the introduction and 'winner-loser' described throughout the method section; instead, the reviewer validated the injected (incorrect) terminology.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Sec. 3.3 says MNIST has a `6.25%` speed-up, while Table 2 reports `5.03%`. The two values refer to the same runtime comparison and do not match. ... The MNIST speed-up stated in the prose matches the MNIST speed-up in Table 2. [FAIL] Reported: `6.25%` / Computed: `5.03%`",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Sec. 3.3 says MNIST has a `6.25%` speed-up, while Table 2 reports `5.03%`. The two values refer to the same runtime comparison and do not match. ... The MNIST speed-up stated in the prose matches the MNIST speed-up in Table 2. [FAIL] Reported: `6.25%` / Computed: `5.03%`",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the inconsistency between the 6.25% value in Sec. 3.3 and the 5.03% in Table 2, and further verifies that the printed runtimes (8.344s to 7.924s) support 5.03%, directly flagging the injected erroneous value.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "Several speed-up claims are numerically inconsistent with the printed tables, including the Abstract’s “up to 16%” versus the Table 1 maximum of 16.72%, and the MNIST text reporting 6.25% while Table 2 reports 5.03% (Abstract, Sec. 3.3, Tables 1–2).",
+          "confidence": "high",
+          "reasoning": "This explicitly names the MNIST claim and the inconsistent values 6.25% versus 5.03%, which directly matches the injected numerical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the MNIST text reporting 6.25% while Table 2 reports 5.03%",
+          "confidence": "high",
+          "reasoning": "The reviewer identified the specific numerical inconsistency between the injected prose value (6.25%) and the table/calculated values.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The global mean used for initialization is defined as the sum of all samples. [FAIL] ... The prose says `\\bar{x}` is the global mean, but the displayed equation gives `\\bar{x} = \\sum_{i=1}^{n} x_i` without division by `n`. The standard sample mean is `(1/n)\\sum_{i=1}^{n}x_i`; using the unnormalized sum would drastically change initialization.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The global mean used for initialization is defined as the sum of all samples. [FAIL] ... The prose says `\\bar{x}` is the global mean, but the displayed equation gives `\\bar{x} = \\sum_{i=1}^{n} x_i` without division by `n`. The standard sample mean is `(1/n)\\sum_{i=1}^{n}x_i`; using the unnormalized sum would drastically change initialization.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the missing 1/n normalisation prefactor in Eq. (4) and flags it as a critical mathematical failure, directly corresponding to the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The global mean is mathematically misdefined: Eq. (4) states `\\bar{x} = \\sum_{i=1}^{n} x_i` while the prose says centroids are initialized near the global mean; the correct mean should be `\\bar{x} = (1/n)\\sum_{i=1}^{n} x_i` (Sec. 2.3).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the missing 1/n normalization in Eq. (4), exactly corresponding to the dropped prefactor injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The global mean is mathematically misdefined: Eq. (4) states \\bar{x} = \\sum_{i=1}^{n} x_i while the prose says centroids are initialized near the global mean; the correct mean should be \\bar{x} = (1/n)\\sum_{i=1}^{n} x_i",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the missing normalization factor in the global mean equation in Section 2.3.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "There is a duplicated word: \"the broader family of of competitive and self-organizing neural models\" (Introduction).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "There is a duplicated word: \"the broader family of of competitive and self-organizing neural models\" (Introduction).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly quotes the duplicated 'of of' word repetition in the Introduction, matching the injected text exactly.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "There is a duplicated word: “the broader family of of competitive and self-organizing neural models” (Introduction).",
+          "confidence": "high",
+          "reasoning": "This directly quotes the duplicated 'of of' typo introduced in the Introduction, so it is a clear detection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "There is a duplicated word: 'the broader family of of competitive and self-organizing neural models' (Introduction).",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identified the accidental word repetition 'of of' in the Introduction.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 48.668195,
+  "total_cost_usd": null,
+  "total_input_tokens": 27468,
+  "total_output_tokens": 6048,
+  "escalation_count": 1,
+  "notes": null
+}

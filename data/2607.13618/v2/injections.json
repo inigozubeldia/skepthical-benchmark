@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "paper.tex",
+    "original_text": "recite causal facts from text rather than infer them",
+    "injected_text": "infer causal facts from text rather than recite them",
+    "rationale": "Swapping the positions of 'recite' and 'infer' reverses the direction of the cited paper's central conclusion, ensuring a CONTRADICTED verdict.",
+    "ground_truth_description": "Reversed the claim attributed to zecevic2023parrots so that it says models infer causal facts rather than recite them, opposite to the cited finding.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "zecevic2023parrots",
+      "injected_cite_key": "zecevic2023parrots",
+      "claim_sentence_verbatim": "Causal-reasoning benchmarks test whether a model can recover causal structure or answer interventional and counterfactual queries \\citep{cladder2023}, and there is evidence that models recite causal facts from text rather than infer them \\citep{zecevic2023parrots}.",
+      "section_location": "Section 2",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "paper.tex",
+    "original_text": "Claude Sonnet 5, GPT-5.4, DeepSeek-V4-Pro, and Grok 4.5 detect 84--88\\%\nof hidden failures",
+    "injected_text": "Claude Sonnet 5, GPT-5.4, DeepSeek-V4-Pro, and Grok 4.5 detect 48--88\\%\nof hidden failures",
+    "rationale": "Swapping the digits of the headline lower-bound detection rate in the abstract (84 -> 48) contradicts the correct value that still appears in Section 5 ('84--88\\%'), firing the abstract_vs_body_match predicate.",
+    "ground_truth_description": "Digit swap in the abstract's headline detection rate from 84% to 48%, creating an inconsistency with the body text.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "84",
+      "value_after_raw": "48",
+      "value_before_float": 84.0,
+      "value_after_float": 48.0,
+      "location_cue": "Claude Sonnet 5, GPT-5.4, DeepSeek-V4-Pro, and Grok 4.5 detect 84--88\\%\nof hidden failures",
+      "paired_location": "Section 5",
+      "quantity_label": "percentage of hidden failures detected",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "paper.tex",
+    "original_text": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+    "injected_text": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}, i}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+    "rationale": "Introduces an unbound free index 'i' on the agent cost term, making the right-hand side an indexed object while the left-hand side is a scalar, creating a shape mismatch.",
+    "ground_truth_description": "Added an unquantified index 'i' to the agent cost in the skill score equation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Eq. (1) in Section 4",
+      "original_fragment_latex": "C_{\\mathrm{agent}}",
+      "injected_fragment_latex": "C_{\\mathrm{agent}, i}",
+      "full_equation_latex_before": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+      "full_equation_latex_after": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}, i}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+      "term_role": "injected shape/index mismatch",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "paper.tex",
+    "original_text": "mean on that tape, so skill is undefined there, and the seed is excluded\nfrom every skill mean (leaving $n = 49$). Its runs still count in a\ndenominator-free companion statistic, the number of seeds on which the\nagent's raw cost beats the floor's.",
+    "injected_text": "mean on that tape, so skill is undefined there, and the seed is excluded\nfrom every skill mean (leaving $n = 49$). We additionally drop any episode where an agent beats the oracle, strictly capping maximum skill at one. Its runs still count in a\ndenominator-free companion statistic, the number of seeds on which the\nagent's raw cost beats the floor's.",
+    "rationale": "Inserting a methodology claim that episodes beating the oracle are dropped to cap skill at one creates a stark contradiction with the Results section, which explicitly states that individual scores above 1 occur and are legitimate.",
+    "ground_truth_description": "Added a sentence to the metrics description claiming that runs beating the oracle are excluded to cap skill scores at 1, contradicting the Results section which reports 33 runs scoring above 1.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Section 4",
+      "affected_span_verbatim": "One of the fifty seeds has negative headroom ($C_{\\mathrm{base}} < C_{\\mathrm{orc}}$): the floor already beats the oracle\nmean on that tape, so skill is undefined there, and the seed is excluded\nfrom every skill mean (leaving $n = 49$). Its runs still count in a\ndenominator-free companion statistic, the number of seeds on which the\nagent's raw cost beats the floor's."
+    },
+    "proposer_agent": "injector.general.S3.t3.v2"
+  }
+]

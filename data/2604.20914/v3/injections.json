@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "firefly_space_merge.tex",
+    "original_text": "in the high-precision regime, to avoid",
+    "injected_text": "to avoid",
+    "rationale": "Drops the explicit scope qualifier 'in the high-precision regime' from a claim attached to \\cite{Shi:2024ttu, Capuano:2025kkl}; both cited works bound the systematic-bias-from-omitted-modes result to the high-SNR / high-precision regime, where in low-SNR regimes the bias is sub-dominant to statistical error, so the over-generalised citing sentence is no longer faithful to the cited papers.",
+    "ground_truth_description": "Removed the conditional qualifier 'in the high-precision regime,' from the introduction sentence about needing to include indirectly-detectable modes to avoid systematic biases, over-generalising a regime-bounded result while leaving the cite keys intact.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Shi:2024ttu, Capuano:2025kkl",
+      "injected_cite_key": "Shi:2024ttu, Capuano:2025kkl",
+      "claim_sentence_verbatim": "Moreover, in the high-precision regime, to avoid systematic biases it is necessary to include modes that are not directly detectable~\\cite{Shi:2024ttu, Capuano:2025kkl}, which further complicates the situation.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_condition_dropped_or_over_generalised",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S2.t2.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "firefly_space_merge.tex",
+    "original_text": "from about 13 hours to 4 minutes",
+    "injected_text": "from about 13 hours to 6 minutes",
+    "rationale": "The paper has no canonical 'X% of N = M' triple, so I target the closest available base × percent = result statement: the 200-fold speedup linking 13 hours and 4 minutes (13 h × 1/200 ≈ 3.9 min). Changing the result to '6 minutes' breaks the percent_of arithmetic with ~54% relative deviation; rationale flags weak-target tension per cell guidance.",
+    "ground_truth_description": "Changed the FIREFLY runtime from '4 minutes' to '6 minutes' so that the stated 200-times speedup of a 13-hour baseline is no longer arithmetically consistent.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "4 minutes",
+      "value_after_raw": "6 minutes",
+      "value_before_float": 4.0,
+      "value_after_float": 6.0,
+      "location_cue": "approximately 200 times speedup, reducing the computation from about 13 hours to 6 minutes",
+      "paired_location": "Same sentence: '200 times speedup' (percent ratio) and '13 hours' (base) in the main text",
+      "quantity_label": "FIREFLY ringdown-analysis runtime (result of base 13 h × percent 1/200)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "firefly_space_merge.tex",
+    "original_text": "        H^{\\rm l}\n        \\bigl(\n        t - L_{\\rm l}/c - \\hat{\\bm{k}}\\cdot\\bm{r}_{\\rm s}/c\n        \\bigr)",
+    "injected_text": "        H^{\\rm l}\n        \\bigl(\n        t - L_{\\rm l} - \\hat{\\bm{k}}\\cdot\\bm{r}_{\\rm s}/c\n        \\bigr)",
+    "rationale": "Dropping the /c on L_l in the retarded-time argument of H^l makes a length appear inside a time argument, so the term subtracted from t carries units of length while the remaining terms are times — pint trivially refutes the dimensional consistency of the load-bearing single-link response equation.",
+    "ground_truth_description": "Removed the speed-of-light division on the arm-length delay (L_l/c -> L_l) inside the first H^l(...) argument of the single-link response equation, producing a length-minus-time dimensional mismatch.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:single link response",
+      "equation_location": "Supplementary Materials, Sec. A.2 (Single link response), eq:single link response",
+      "original_fragment_latex": "t - L_{\\rm l}/c - \\hat{\\bm{k}}\\cdot\\bm{r}_{\\rm s}/c",
+      "injected_fragment_latex": "t - L_{\\rm l} - \\hat{\\bm{k}}\\cdot\\bm{r}_{\\rm s}/c",
+      "full_equation_latex_before": "y^{\\rm slr}(t) = \\frac{1}{2\\bigl(1 - \\hat{\\bm{k}}\\cdot\\hat{\\bm{n}}_{\\rm l}\\bigr)} \\Bigl[ H^{\\rm l}\\bigl(t - L_{\\rm l}/c - \\hat{\\bm{k}}\\cdot\\bm{r}_{\\rm s}/c\\bigr) - H^{\\rm l}\\bigl(t - \\hat{\\bm{k}}\\cdot\\bm{r}_{\\rm r}/c\\bigr) \\Bigr]",
+      "full_equation_latex_after": "y^{\\rm slr}(t) = \\frac{1}{2\\bigl(1 - \\hat{\\bm{k}}\\cdot\\hat{\\bm{n}}_{\\rm l}\\bigr)} \\Bigl[ H^{\\rm l}\\bigl(t - L_{\\rm l} - \\hat{\\bm{k}}\\cdot\\bm{r}_{\\rm s}/c\\bigr) - H^{\\rm l}\\bigl(t - \\hat{\\bm{k}}\\cdot\\bm{r}_{\\rm r}/c\\bigr) \\Bigr]",
+      "term_role": "injected unit mismatch",
+      "expected_engine": "pint",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": true
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "firefly_space_merge.tex",
+    "original_text": "Figure~\\ref{fig2} further shows the time scaling of the two methods with the\nnumber of  QNMs included",
+    "injected_text": "Figure~\\ref{fig:2} further shows the time scaling of the two methods with the\nnumber of  QNMs included",
+    "rationale": "Mis-typed \\ref target ('fig:2' instead of the actual label 'fig2') leaves the cross-reference unresolved, so the rendered PDF shows 'Figure ??' even though the document still compiles — a realistic typo from a tired author who inconsistently used 'fig:' and 'fig' label prefixes.",
+    "ground_truth_description": "Changed \\ref{fig2} to \\ref{fig:2} in the sentence introducing Fig. 2, producing an unresolved cross-reference that renders as 'Figure ??' in the PDF.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D7",
+      "change_kind": "latex_artefact",
+      "expected_bucket": "very_minor",
+      "section_location": "Main text, paragraph introducing Fig. 2 (time-scaling discussion)",
+      "affected_span_verbatim": "Figure~\\ref{fig2} further shows the time scaling of the two methods with the\nnumber of  QNMs included"
+    },
+    "proposer_agent": "injector.general.S1.t2.v3"
+  }
+]

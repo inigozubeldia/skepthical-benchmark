@@ -1,0 +1,241 @@
+{
+  "paper_id": "2607.13475",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-4059444f80b6",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: 0.1055 * 15.5% = 0.0163525; claimed 0.0941",
+        "evidence": {
+          "check_type": "percent_of",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 0.0163525,
+            "reported": 0.0941,
+            "diff_abs": 0.0777475,
+            "diff_rel": 0.826222104144527,
+            "tolerance": {
+              "abs_tol": 5e-05,
+              "rel_tol": 0.005
+            },
+            "notes": "0.1055 * 15.5% = 0.0163525; claimed 0.0941"
+          },
+          "rereader": [
+            {
+              "label": "base",
+              "raw_observed": "0.1055",
+              "value_observed": 0.1055,
+              "notes": "Exact printed mean exposure improvement for learned estimator in single-step retraction"
+            },
+            {
+              "label": "percent",
+              "raw_observed": "7.3%",
+              "value_observed": 7.3,
+              "notes": "Relative improvement percent for oracle in multi-step planning"
+            },
+            {
+              "label": "result",
+              "raw_observed": "0.0941",
+              "value_observed": 0.0941,
+              "notes": "Printed mean exposure improvement for learned estimator in multi-step retraction"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.035811999999999955
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-ba44f419adb1",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges the limitation only in the conclusion as future work: 'we plan to validate on real tissue data and investigate robustness under varying observation density and noise levels.' All experiments use a 'randomized 2D deformable sheet model' with Laplacian relaxation, synthetic observations, and no anatomical geometry, tissue material variation, or real endoscopic perception, while the main framing is about 'surgical tissue retraction' under 'realistic perception constraints.'",
+        "evidence": {
+          "claim": "The claims about “surgical tissue retraction” and “realistic perception constraints” are broader than the experimental evidence, which is limited to a simplified 2D cloth simulation.",
+          "excerpt": "The claims about “surgical tissue retraction” and “realistic perception constraints” are broader than the demonstrated setting supports. The method is tested only on a randomized 2D cloth-like sheet with synthetic random vertex observations and Laplacian/diffusion relaxation, not on anatomical geometry, real or simulated endoscopic perception, contact/friction, tissue material variation, tool constraints, or real tissue data (Abstract; Sec. 1; Sec. 2; Sec. 3; Conclusion). This matters because the main contribution is framed as supporting autonomous surgical manipulation, but the evidence demonstrates a much narrower synthetic deformable-sheet task."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges the limitation only in the conclusion as future work: 'we plan to validate on real tissue data and investigate robustness under varying observation density and noise levels.' All experiments use a 'randomized 2D deformable sheet model' with Laplacian relaxation, synthetic observations, and no anatomical geometry, tissue material variation, or real endoscopic perception, while the main framing is about 'surgical tissue retraction' under 'realistic perception constraints.'",
+            "cost_usd": 0.003924975
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s evidence is explicitly limited to simulation: 'We evaluate the approach in a 2D deformable sheet simulation' and 'All experiments are conducted in simulation using a randomized 2D deformable sheet model.' Yet the claims are broader, e.g. 'These results demonstrate that learned, geometry-regularized state estimation can support effective deformable manipulation under realistic perception constraints,' while 'future work' is to 'validate on real tissue data.'",
+            "cost_usd": 0.008256625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states that \"All experiments are conducted in simulation using a randomized 2D deformable sheet model\" and notes that testing on real tissue data is \"ongoing and future work,\" confirming the reviewer's claim that the experiments are limited to a simplified simulation.",
+            "cost_usd": 0.0029605
+          }
+        ],
+        "cost_usd": 0.0151421
+      },
+      {
+        "flag_id": "fp-236aa5b5fe31",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The method section omits MLP hidden sizes, activations, optimizer, learning rate, batch size, training duration, normalization, exact index encoding, mesh-state generation process, target-region geometry, action-space bounds, and exposure computation. The paper states only 'A three-layer multilayer perceptron maps the noisy, partial observations to the latent space' and 'Regularization weights are fixed to λs = λe = 0.1,' with no further architectural or training details sufficient for reproducibility.",
+        "evidence": {
+          "claim": "The method description omits load-bearing experimental details necessary for reproducibility, including key hyperparameters, model architecture, and dataset generation procedures.",
+          "excerpt": "The method description is insufficient for reproducibility in several load-bearing components. The paper does not specify the MLP hidden sizes, activations, optimizer, learning rate, batch size, number of updates, train/validation split, PCA preprocessing, normalization, exact encoding of observed vertex indices, random mesh-state generation process, target-region geometry, action-space bounds, grasp-patch size, pull-displacement distribution, or exact exposure computation (Sec. 2; Sec. 2.1; Sec. 2.2; Sec. 2.3; Sec. 3). These omissions make it difficult to reproduce the reported 98.1% oracle recovery or determine whether the estimator architecture or data-generation choices drive performance."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The method section omits MLP hidden sizes, activations, optimizer, learning rate, batch size, training duration, normalization, exact index encoding, mesh-state generation process, target-region geometry, action-space bounds, and exposure computation. The paper states only 'A three-layer multilayer perceptron maps the noisy, partial observations to the latent space' and 'Regularization weights are fixed to λs = λe = 0.1,' with no further architectural or training details sufficient for reproducibility.",
+            "cost_usd": 0.003924975
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Key implementation details are only described at a high level—for example, 'A three-layer multilayer perceptron maps the noisy, partial observations to the latent space,' 'Training data is generated during training (not pre-recorded) by sampling random mesh configurations,' and 'Actions correspond to patch-based pulling operations parameterized by a grasp point on the sheet and a pull displacement.' The PDF does not provide many load-bearing specifics such as hidden sizes/activations, optimizer and training schedule, exact index encoding, or precise action/data-generation details.",
+            "cost_usd": 0.008256625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper lacks key experimental details such as learning rate, optimizer, batch size, and MLP hidden layer dimensions, only stating that \"A three-layer multilayer perceptron maps the noisy, partial observations to the latent space\" and \"The estimator is trained using a composite loss.\"",
+            "cost_usd": 0.0029605
+          }
+        ],
+        "cost_usd": 0.0151421
+      },
+      {
+        "flag_id": "fp-fd7ec49942df",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The experiments report only planning-level outcomes (exposure improvement, success rate) with no direct state-estimation error metrics, no ablations removing geometry regularization terms, no ablation on PCA dimensionality or observation density, and no analysis of which component drives performance. The paper states 'Metrics include exposure improvement, success rate...and statistical significance measured using paired and independent t-tests,' with no reconstruction error or component ablation reported.",
+        "evidence": {
+          "claim": "The experimental evidence does not isolate the claimed contribution of the learned geometry-regularized estimator; key estimator-quality metrics and ablation studies are missing.",
+          "excerpt": "The experimental evidence does not isolate the claimed contribution of the learned, geometry-regularized estimator. The paper reports planning outcomes but does not report direct state-estimation errors, observed/unobserved vertex reconstruction errors, latent-space error, uncertainty behavior, or ablations removing PCA, removing smoothness/stretch terms, changing the latent dimension, changing observation density, or changing noise level (Sec. 2.1; Sec. 2.2; Sec. 3). This matters because the central claim is that geometry-regularized learned state estimation enables planning, but the experiments do not show which part of the estimator is necessary or whether it reconstructs physically meaningful states."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experiments report only planning-level outcomes (exposure improvement, success rate) with no direct state-estimation error metrics, no ablations removing geometry regularization terms, no ablation on PCA dimensionality or observation density, and no analysis of which component drives performance. The paper states 'Metrics include exposure improvement, success rate...and statistical significance measured using paired and independent t-tests,' with no reconstruction error or component ablation reported.",
+            "cost_usd": 0.003924975
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The method’s claimed contribution is the 'geometry-regularized' estimator, but the reported evaluation focuses on planning only: 'Metrics include exposure improvement, success rate ...' and 'We compare the learned estimator against an oracle ... and a naive baseline.' No direct reconstruction-error metrics or ablations of PCA, smoothness/stretch regularization, latent dimension, observation density, or noise level are reported in the paper.",
+            "cost_usd": 0.008256625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper evaluates the estimator strictly via downstream planning metrics (\"exposure improvement, success rate\") and does not report direct state estimation errors (e.g., mesh reconstruction MSE) or ablation studies on the regularization terms, which are \"fixed to \\lambda_s = \\lambda_e = 0.1 throughout.\"",
+            "cost_usd": 0.0029605
+          }
+        ],
+        "cost_usd": 0.0151421
+      },
+      {
+        "flag_id": "fp-0d1f2b5c15b8",
+        "paper_id": "2607.13475",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper claims multi-step performance is 'statistically equivalent to a full-state oracle' in the Conclusion and references 'significant gains' but reports only one p-value (p=0.835 for the oracle sampling-budget comparison). No p-values, confidence intervals, or effect sizes are provided for the learned vs. oracle, learned vs. naive, or single-step vs. multi-step comparisons that underpin the central claims.",
+        "evidence": {
+          "claim": "Statistical claims and tests are underreported—key comparisons lack p-values, effect sizes, confidence intervals, and full methodological detail.",
+          "excerpt": "Statistical claims are underreported. The paper states that statistical significance is measured using paired and independent t-tests, and the Conclusion says multi-step performance is statistically equivalent to oracle performance, but the only visible p-value is for the oracle sampling-budget comparison; p-values or confidence intervals for learned vs. oracle, learned vs. naive, and single-step vs. multi-step comparisons are not reported (Sec. 3; Sec. 3.2; Sec. 3.3; Conclusion). This weakens the evidential basis for “statistically equivalent” and “significant gains.”"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims multi-step performance is 'statistically equivalent to a full-state oracle' in the Conclusion and references 'significant gains' but reports only one p-value (p=0.835 for the oracle sampling-budget comparison). No p-values, confidence intervals, or effect sizes are provided for the learned vs. oracle, learned vs. naive, or single-step vs. multi-step comparisons that underpin the central claims.",
+            "cost_usd": 0.003924975
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper says 'Metrics include exposure improvement, success rate, and statistical significance measured using paired and independent t-tests' and concludes the estimator is 'statistically equivalent to a full-state oracle,' but the only explicit p-value reported is 'An independent t-test between nsamples = 200 and 2000 yields p = 0.835.' The learned-vs-oracle and single-step-vs-multi-step comparisons are presented without p-values, confidence intervals, or effect sizes.",
+            "cost_usd": 0.008256625
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Although Section III mentions that \"Metrics include... statistical significance measured using paired and independent t-tests,\" Sections III.A and III.B only report mean improvements and success rates, completely omitting the p-values for the main comparisons between the learned estimator, oracle, and baseline.",
+            "cost_usd": 0.0029605
+          }
+        ],
+        "cost_usd": 0.0151421
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.035811999999999955,
+    "general": 0.0605684
+  },
+  "extractor_cost_usd": 0.020426000000000027,
+  "total_cost_usd": 0.11680639999999998
+}

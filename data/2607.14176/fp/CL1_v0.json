@@ -1,0 +1,356 @@
+{
+  "paper_id": "2607.14176",
+  "reviewer_system": "CL1",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-523d6b4d5188",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'to the best of our knowledge, this is among the first works that combine MILP-level optimality with edge-aware GNN learning' but provides no table or precise architectural comparison against [12]–[19], only a brief qualitative paragraph in Related Work. The reviewer's request for a precise comparative analysis against prior methods is not satisfied.",
+        "evidence": {
+          "claim": "The technical novelty over prior GNN and edge-level approaches is inadequately specified and not sufficiently contrasted with previous work; the claim of novelty is too soft and lacks a precise comparative analysis.",
+          "excerpt": "The claim \"to the best of our knowledge, this is among the first works that combine MILP-level optimality with edge-aware GNN learning\" is too soft. Please contrast the architecture, features, and loss against [12]–[19] in a table."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'to the best of our knowledge, this is among the first works that combine MILP-level optimality with edge-aware GNN learning' but provides no table or precise architectural comparison against [12]–[19], only a brief qualitative paragraph in Related Work. The reviewer's request for a precise comparative analysis against prior methods is not satisfied.",
+            "cost_usd": 0.003047625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s novelty claim is indeed soft: it says, \"To the best of our knowledge, this is among the first works that combine MILP-level optimality with edge-aware GNN learning,\" and the prior-work contrast remains high level (e.g., \"Existing GNN-based solutions... do not explicitly account for global constraints\" and \"More recent studies have explored edge-centric graph representations...\"). It does not provide the precise comparative analysis of architecture/features/loss against [12]–[19] that the reviewer asks for.",
+            "cost_usd": 0.0056051875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper lacks a structured comparative analysis or table contrasting the proposed architecture, features, and loss against the cited prior works [12]-[19], confirming the reviewer's concern.",
+            "cost_usd": 0.001836125
+          }
+        ],
+        "cost_usd": 0.0104889375
+      },
+      {
+        "flag_id": "fp-c925ee7deecd",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper acknowledges 'the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time' but never reports the fraction of GINE outputs that violate routing constraints, nor explains how connectivity is measured when the raw output is infeasible. No post-processing or repair mechanism is described.",
+        "evidence": {
+          "claim": "The GINE's predicted link activations are not guaranteed to form a feasible routing structure due to lack of constraint enforcement, yet only unconstrained metrics are reported, making the results hard to interpret.",
+          "excerpt": "How often does the raw GINE output *actually* yield a feasible routing structure? The paper should report the fraction of instances in which the GINE decisions violate each constraint class, and how end-to-end connectivity in Section VI-C is measured when the raw output is infeasible (is post-processing applied? shortest path? greedy repair?)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges 'the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time' but never reports the fraction of GINE outputs that violate routing constraints, nor explains how connectivity is measured when the raw output is infeasible. No post-processing or repair mechanism is described.",
+            "cost_usd": 0.003047625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly admits that the model \"does not explicitly enforce routing or flow-conservation constraints at inference time,\" yet Section VI reports only link-level metrics and connectivity gains, not feasibility rates by constraint class or any repair procedure. Connectivity is defined only as \"the fraction of vehicles that can reach at least one RSU through the activated directed links,\" without explaining what is done when the raw GINE output is infeasible.",
+            "cost_usd": 0.0056051875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that 'the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time', but fails to quantify the constraint violation rates or clarify post-processing for infeasible instances in Section VI-C.",
+            "cost_usd": 0.001836125
+          }
+        ],
+        "cost_usd": 0.0104889375
+      },
+      {
+        "flag_id": "fp-091cdf53de94",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper compares GINE only against a '1-hop MILP formulation obtained by restricting the optimisation to direct CAV→RSU links only,' which is a degraded MILP variant. No heuristic multi-hop baseline, standard GNN without edge features, or MLP baseline is included, making it impossible to isolate the contribution of the learned edge-aware component.",
+        "evidence": {
+          "claim": "The experimental comparison lacks non-trivial multi-hop, non-edge-aware, and message-passing-free baselines, so the contribution of GINE cannot be disentangled from other factors.",
+          "excerpt": "The only baseline is a 1-hop MILP oracle, i.e., a degraded version of the same MILP. This does not isolate the contribution of the *learned* component. Please add at least: (a) a heuristic multi-hop baseline... (b) a standard GNN without edge features... (c) an edge-classification MLP on hand-crafted per-link features..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares GINE only against a '1-hop MILP formulation obtained by restricting the optimisation to direct CAV→RSU links only,' which is a degraded MILP variant. No heuristic multi-hop baseline, standard GNN without edge features, or MLP baseline is included, making it impossible to isolate the contribution of the learned edge-aware component.",
+            "cost_usd": 0.003047625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that \"Results are compared against the MILP oracle and a 1-hop MILP baseline,\" and no heuristic multi-hop baseline, non-edge-aware GNN, or message-passing-free classifier is reported. Thus the contribution of the learned GINE component is not isolated by the baseline suite described in the paper.",
+            "cost_usd": 0.0056051875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experimental section states 'Results are compared against the MILP oracle and a 1-hop MILP baseline', confirming the absence of standard non-trivial GNN, heuristic, or MLP baselines to properly isolate the GINE's contribution.",
+            "cost_usd": 0.001836125
+          }
+        ],
+        "cost_usd": 0.0104889375
+      },
+      {
+        "flag_id": "fp-0dc80eca2d0f",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states 'GINE inference is executed on the GPU' while 'MILP runtimes correspond to the end-to-end solver time per instance using Google OR-Tools, executed in multi-thread mode' on an Intel i9 CPU, with no CPU-only GINE latency reported and no acknowledgment that the hardware asymmetry affects the latency comparison.",
+        "evidence": {
+          "claim": "The reported GINE and MILP latencies are not directly comparable due to GPU vs CPU execution, making the inference speed claims potentially misleading unless deployment context and CPU runtime are reported or the asymmetry is acknowledged.",
+          "excerpt": "GINE runs on an NVIDIA RTX 5000 GPU, while MILP runs on an Intel i9 CPU... Please clarify the intended deployment target (RSU/MEC edge server?) and, ideally, provide a CPU-only GINE latency measurement, or at minimum acknowledge this hardware asymmetry..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'GINE inference is executed on the GPU' while 'MILP runtimes correspond to the end-to-end solver time per instance using Google OR-Tools, executed in multi-thread mode' on an Intel i9 CPU, with no CPU-only GINE latency reported and no acknowledgment that the hardware asymmetry affects the latency comparison.",
+            "cost_usd": 0.003047625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The runtime section says, \"Execution times are measured on a single server equipped with an Intel i9 CPU and an NVIDIA RTX 5000 GPU. GINE inference is executed on the GPU... MILP runtimes correspond to the end-to-end solver time...\" The paper does not provide CPU-only GINE timing or explicitly discuss this hardware asymmetry when making latency comparisons.",
+            "cost_usd": 0.0056051875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'GINE inference is executed on the GPU' while 'MILP runtimes correspond to the end-to-end solver time... using Google OR-Tools' on an Intel i9 CPU, confirming the unacknowledged hardware asymmetry.",
+            "cost_usd": 0.001836125
+          }
+        ],
+        "cost_usd": 0.0104889375
+      },
+      {
+        "flag_id": "fp-c434d1dea940",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper defines 'MILP-equivalent solutions' only as 'yielding the same objective value and connectivity outcome' with no discussion of fairness or capacity utilisation differences, and the ~1.86% tail behavior (instances exceeding 30 ms) is not analyzed — it is only noted that 'MILP runtimes above 9 s are clipped in the plot.'",
+        "evidence": {
+          "claim": "The definition of 'MILP-equivalent' solutions and the behavior of GP-MILP in rare or tail cases are insufficiently explained, particularly regarding possible infeasibility or objective degradation when links are pruned.",
+          "excerpt": "Two clarifications are needed: - \"MILP-equivalent\" is defined only as \"same objective value.\" Two configurations with identical objective but different routing may have very different fairness / capacity utilisation implications.... The reported \"98.14% under 30 ms\" implies ~1.86% take longer — what is the tail behaviour, and does it include failures?"
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper defines 'MILP-equivalent solutions' only as 'yielding the same objective value and connectivity outcome' with no discussion of fairness or capacity utilisation differences, and the ~1.86% tail behavior (instances exceeding 30 ms) is not analyzed — it is only noted that 'MILP runtimes above 9 s are clipped in the plot.'",
+            "cost_usd": 0.003047625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper defines GP-MILP success only as \"yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs,\" which does not discuss alternative routings or other implications. It also reports only aggregate thresholds (\"GP-MILP 98.14%\" under 30 ms) without explaining the remaining tail cases, failures, or any objective degradation when pruning is harmful.",
+            "cost_usd": 0.0056051875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper defines MILP-equivalent merely as 'yielding the same objective value and connectivity outcome' (Section VI.D) and fails to explain the tail behavior or potential failures for the 1.86% of instances that exceed 30 ms in Table II.",
+            "cost_usd": 0.001836125
+          }
+        ],
+        "cost_usd": 0.0104889375
+      },
+      {
+        "flag_id": "fp-6e3c84f1f8e5",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Table I and Table II report single-run point estimates with no confidence intervals or standard deviations, and there is no per-scenario breakdown (2 vs. 3 vs. 4 RSUs) or multi-seed evaluation reported anywhere in the paper.",
+        "evidence": {
+          "claim": "Model results are reported as single-run point estimates, with no confidence intervals or analysis of variability due to random initialisation or hyperparameters, undermining the statistical reliability of the findings.",
+          "excerpt": "Table I reports single-run point estimates with no confidence intervals; Table II reports single-run percentages. ... Please report mean ± std over at least 3–5 training seeds and per-scenario breakdowns (2 vs. 3 vs. 4 active RSUs)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table I and Table II report single-run point estimates with no confidence intervals or standard deviations, and there is no per-scenario breakdown (2 vs. 3 vs. 4 RSUs) or multi-seed evaluation reported anywhere in the paper.",
+            "cost_usd": 0.003047625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The experimental section reports single values such as \"the model achieves an accuracy of 0.9589, precision of 0.9508, recall of 0.9581, and F1-score of 0.9544 on the validation set,\" and Table II gives single percentages, but there is no mention of multiple training seeds, confidence intervals, or mean±std. The training setup likewise states only that the model \"is trained for 200 epochs with Adam\" without any variability analysis.",
+            "cost_usd": 0.0056051875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports single point estimates in Tables I and II, and the training setup mentions training 'for 200 epochs with Adam' without reporting standard deviations, confidence intervals, or evaluating across multiple random seeds.",
+            "cost_usd": 0.001836125
+          }
+        ],
+        "cost_usd": 0.0104889375
+      },
+      {
+        "flag_id": "fp-565b6e523d09",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'a class-weighted binary cross-entropy loss is adopted' with justification limited to handling class imbalance, but no ablation comparing this to structured or connectivity-aware loss alternatives is provided, and the paper acknowledges the model 'does not explicitly enforce routing or flow-conservation constraints at inference time.'",
+        "evidence": {
+          "claim": "The choice of class-weighted BCE loss is not justified against structured or connectivity-aware alternatives, and there is no ablation to test if better alignment with the true connectivity objective might improve results.",
+          "excerpt": "Given that connectivity — not per-edge accuracy — is the true objective, some ablation is warranted. A structured / connectivity-aware loss might improve feasibility (see comment 2)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'a class-weighted binary cross-entropy loss is adopted' with justification limited to handling class imbalance, but no ablation comparing this to structured or connectivity-aware loss alternatives is provided, and the paper acknowledges the model 'does not explicitly enforce routing or flow-conservation constraints at inference time.'",
+            "cost_usd": 0.003047625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The loss choice is only justified by imbalance: \"Due to the strong imbalance between active and inactive edges, a class-weighted binary cross-entropy loss is adopted,\" and \"α is chosen to penalise false negatives more strongly.\" The paper provides no ablation against structured or connectivity-aware objectives, despite connectivity being the stated end goal.",
+            "cost_usd": 0.0056051875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that 'A class-weighted binary cross-entropy loss is adopted' but does not present any ablation study or comparison with structured/connectivity-aware loss alternatives to justify this choice.",
+            "cost_usd": 0.001836125
+          }
+        ],
+        "cost_usd": 0.0104889375
+      },
+      {
+        "flag_id": "fp-3996ccef16e2",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "CL1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states experiments are conducted on 'a 1 km² dense urban area of Rome (Porta Pia)' and claims 'stable generalisation across heterogeneous graph instances' based only on held-out snapshots from the same map, with no cross-map or cross-city evaluation to substantiate the broader generalisation claim.",
+        "evidence": {
+          "claim": "Generalisation is only demonstrated within the same Rome Porta Pia area; claims of 'stable generalisation' are overstated without evaluation on different maps, RSU placements, or traffic densities.",
+          "excerpt": "The claim of \"stable generalisation\" (Section VI-B) is only over held-out snapshots from the same map with the same RSU placement policy. Cross-map generalisation (a different city, different RSU count/density, different traffic densities) would greatly strengthen the paper, or, at minimum, the current claim should be softened."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states experiments are conducted on 'a 1 km² dense urban area of Rome (Porta Pia)' and claims 'stable generalisation across heterogeneous graph instances' based only on held-out snapshots from the same map, with no cross-map or cross-city evaluation to substantiate the broader generalisation claim.",
+            "cost_usd": 0.003047625
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The dataset is confined to \"a 1 km2 dense urban area of Rome (Porta Pia)\" and split into \"training (80%) and validation (20%) sets,\" yet the paper claims that \"Comparable performance is observed on the full dataset, confirming stable generalisation across heterogeneous graph instances.\" This supports within-dataset generalisation only, not cross-map/placement/traffic generalisation.",
+            "cost_usd": 0.0056051875
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's dataset is restricted to 'a 1 km2 dense urban area of Rome (Porta Pia)' (Section VI.A), making the claim of 'stable generalisation' limited to a single map, confirming the reviewer's critique.",
+            "cost_usd": 0.001836125
+          }
+        ],
+        "cost_usd": 0.0104889375
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0839115
+  },
+  "extractor_cost_usd": 0.01708799999999991,
+  "total_cost_usd": 0.10099949999999991
+}

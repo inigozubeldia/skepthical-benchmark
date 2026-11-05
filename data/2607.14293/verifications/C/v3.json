@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.14293",
+  "copy_id": "v3",
+  "reviewer_system": "C",
+  "reviewer_tag": null,
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-3/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer notes that the paper's TCN description covers '(1) causal padding and (2) dilated convolutions' and even flags the ablation of residual connections as a strength, but never specifically challenges the post-edit claim against Bai et al. (2018) as omitting residual connections from the defining characteristics. The reviewer's summary statement about TCNs in the Key statements section marks it WEAKLY_SUPPORTED but does not flag it as contradicted or mischaracterising the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The review discusses residual skip connections as an ablation result, but it does not challenge the specific TCN-defining-characteristics claim against Bai et al. [26] as overgeneralised or partially supported. In fact, the key-statement audit repeats the post-edit two-feature description as weakly supported rather than flagging the omission of residual connections.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer notes the absence of residual connections but frames it as an 'ablation' and a 'strength' of the paper rather than a mischaracterization or contradiction of the cited Bai et al. source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer's discussion of TCN characteristics notes that the DCCNN is the TCN 'minus the residual connections' and treats this as a deliberate design choice (an ablation), not as a mischaracterization of Bai et al. [26]. The reviewer's key-statements section marks the TCN claim as WEAKLY_SUPPORTED without flagging that residual connections are a defining characteristic omitted from the description. No reviewer flag challenges the post-edit claim about TCN distinguishing characteristics against Bai et al. [26].",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S3-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Train/validation/test sizes do not sum to the stated dataset. Sec. II C states '100,000 scans' total but then declares splits of 70,000 / 15,000 / 150,000, which sum to 235,000. This is a load-bearing numerical inconsistency (the test set alone is 1.5× the claimed corpus).",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Train/validation/test sizes do not sum to the stated dataset. Sec. II C states '100,000 scans' total but then declares splits of 70,000 / 15,000 / 150,000, which sum to 235,000. This is a load-bearing numerical inconsistency (the test set alone is 1.5× the claimed corpus).",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the 150,000 test-set figure and the resulting sum of 235,000 vs. the stated 100,000 total, which precisely matches the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "the train/val/test split (70k/15k/150k) does not sum to the stated 100k dataset\n\n**Train/validation/test sizes do not sum to the stated dataset.** Sec. II C states \"100,000 scans\" total but then declares splits of 70,000 / 15,000 / 150,000, which sum to 235,000.\n\n*Recommendation:* Correct the split sizes so they sum to the stated total (test set is presumably 15,000, not 150,000)",
+          "confidence": "high",
+          "reasoning": "This explicitly names the altered value 150,000, the cited total of 100,000, and infers the intended correction to 15,000. It directly matches the injected test-split numeric error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "the train/val/test split (70k/15k/150k) does not sum to the stated 100k dataset",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the summation error created by the changed test set size and correctly identifies the specific values.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S3-t1",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Sec. I C, χ² formula uses summation index i but the summand is x_j. The dummy index in the sum should be i (i.e. `(x_i − x̂(θ))²`), otherwise the sum is over a constant. Recommendation: Change `x_j` to `x_i` inside the sum.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Sec. I C, χ² formula uses summation index i but the summand is x_j. The dummy index in the sum should be i (i.e. `(x_i − x̂(θ))²`), otherwise the sum is over a constant. Recommendation: Change `x_j` to `x_i` inside the sum.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the mismatched index (x_j in a sum over i) in the chi-squared formula, directly corresponding to the injected x_i → x_j change.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "**Sec. I C, χ² formula uses summation index i but the summand is x_j.** The dummy index in the sum should be i (i.e. `(x_i − x̂(θ))²`), otherwise the sum is over a constant.\n\n**Rolling χ² statistic: χ²_n(θ) = (1/n) Σ_{i=1}^n (x_j − x̂(θ))² / σ̂²(θ).**\n    - _Verdict:_ FAIL (confidence: high, impact: minor)\n    - _Notes:_ The equation contains a transcription bug: the sum runs over i but the summand references x_j (a free index, not the summation index)",
+          "confidence": "high",
+          "reasoning": "The reviewer precisely identifies the free-index error x_j versus summation index i in the χ² formula. This is a direct detection of the injected mathematical inconsistency.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Sec. I C, χ² formula uses summation index i but the summand is x_j. The dummy index in the sum should be i (i.e. (x_i − x̂(θ))²)",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies the unbound index j in the summation formula in Section I.C.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Broken cross-reference 'Table ??' in Sec. II A ('Table ?? compares the two models…'). The reader can infer from context that this points at Table I, but the compilation error should be fixed.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Broken cross-reference 'Table ??' in Sec. II A ('Table ?? compares the two models…'). The reader can infer from context that this points at Table I, but the compilation error should be fixed.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the broken 'Table ??' reference in Sec. II A, which is exactly the LaTeX artefact produced by the injected undefined label.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "the paper contains a broken `Table ??` reference\n\n**Broken cross-reference \"Table ??\" in Sec. II A** (\"Table ?? compares the two models…\"). The reader can infer from context that this points at Table I, but the compilation error should be fixed.\n\n*Recommendation:* Repair the `\\ref` and rebuild.",
+          "confidence": "high",
+          "reasoning": "The review explicitly flags the broken 'Table ??' cross-reference, which is exactly the LaTeX artefact caused by the changed label. This is a specific match to the injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Broken cross-reference \"Table ??\" in Sec. II A (\"Table ?? compares the two models…\")",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies the LaTeX rendering artifact '??' caused by the broken cross-reference and quotes the surrounding text.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 37.227198,
+  "total_cost_usd": null,
+  "total_input_tokens": 46058,
+  "total_output_tokens": 3140,
+  "escalation_count": 1,
+  "notes": null
+}

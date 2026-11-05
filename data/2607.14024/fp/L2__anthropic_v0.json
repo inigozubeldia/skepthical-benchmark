@@ -1,0 +1,277 @@
+{
+  "paper_id": "2607.14024",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-a97119e9bf0f",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "numerics",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Mechanical predicate passed: 2 occurrences; min sigfigs = 3; range = [0.971, 0.971]",
+        "evidence": {
+          "check_type": "abstract_vs_body_match",
+          "predicate": {
+            "verdict": "PASS",
+            "computed": 0.971,
+            "reported": 0.971,
+            "diff_abs": 0.0,
+            "diff_rel": 0.0,
+            "tolerance": {
+              "abs_tol": 0.0005,
+              "rel_tol": 0.005
+            },
+            "notes": "2 occurrences; min sigfigs = 3; range = [0.971, 0.971]"
+          },
+          "rereader": [
+            {
+              "label": "abstract_value",
+              "raw_observed": "32.49",
+              "value_observed": 32.49,
+              "notes": "Located in Abstract and Section 5.3 as 'RMSE values of (32.49±0.30) kW for a 2 MW Wind Turbine (WT) and (0.971±0.047) MW for a 20 MW PV power station, respectively.'"
+            },
+            {
+              "label": "body_tab1_value",
+              "raw_observed": "32.49",
+              "value_observed": 32.49,
+              "notes": "Value explicitly given as (32.49 ± 0.30) kW for WT-S1 in Table 1, Section 5.3."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.09117599999999992
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-9202c0151f26",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper describes CSFS only through a high-level flow diagram (Fig. 2) and prose bullet points stating things like 'The FS algorithm is enhanced by a non-inferiority test that allows for safe and early discarding of feature clusters' without specifying the statistical test, thresholds, cluster size parameters, or force-remove trigger conditions. The paper points to a GitHub repository for implementation but the algorithm itself is underspecified in the paper.",
+        "evidence": {
+          "claim": "The CSFS algorithm is underspecified in its core components (non-inferiority test, clustering procedure, cluster size, force-remove trigger, hyperparameter schedule), impeding reproducibility.",
+          "excerpt": "the CSFS algorithm is described only through a high-level figure and prose — key components such as the non-inferiority test, clustering procedure, cluster size, and force-remove trigger are underspecified; (ii) the evaluation is limited to a single wind turbine and a single PV station, undercutting generalization claims; (iii) statistical treatment of the runtime and RMSE comparisons is informal; (iv) the \"literature review\" contributions and CSFS contribution are somewhat loosely connected — the review's insights do not directly motivate specific algorithmic choices in CSFS; (v) several abstract/body numerical claims exhibit minor inconsistencies."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper describes CSFS only through a high-level flow diagram (Fig. 2) and prose bullet points stating things like 'The FS algorithm is enhanced by a non-inferiority test that allows for safe and early discarding of feature clusters' without specifying the statistical test, thresholds, cluster size parameters, or force-remove trigger conditions. The paper points to a GitHub repository for implementation but the algorithm itself is underspecified in the paper.",
+            "cost_usd": 0.005287979999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section 3.2 gives only high-level statements such as “Clustering can be performed based on feature correlations, RF FI as an initial best guess, or randomly,” “The FS algorithm is enhanced by a non-inferiority test,” and “a conditional force-remove of the worst feature or cluster is triggered,” but the PDF does not define the non-inferiority criterion/threshold, cluster construction parameters, or the exact force-remove rule.",
+            "cost_usd": 0.0105658
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper introduces components like the \"non-inferiority test\" and \"conditional force-remove\" in Section 3.2 without providing the mathematical definitions, thresholds, or specific clustering configurations used, making the algorithm underspecified.",
+            "cost_usd": 0.00212104
+          }
+        ],
+        "cost_usd": 0.01797482
+      },
+      {
+        "flag_id": "fp-de7ee5113665",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper's abstract and conclusion state '21%' computational cost reduction as a general claim, but Section 4.2 and 4.3 confirm that only 'turbine T11' and 'station 01' were used. Section 5.4 briefly acknowledges this: 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station,' but does not qualify the headline claims accordingly.",
+        "evidence": {
+          "claim": "Core conclusions about efficiency and performance are over-generalized from experiments on only one wind turbine and one PV station, undermining the validity of broad claims.",
+          "excerpt": "Sec. 4.2 selects turbine T11 and Sec. 4.3 selects station 01 based on data availability, yet abstract- and conclusion-level claims (e.g., \"reducing computational cost by an average of 21%\") are stated without qualification. Sec. 5.4 acknowledges this only briefly. This substantially weakens the empirical support for the paper's central efficiency and performance claims."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper's abstract and conclusion state '21%' computational cost reduction as a general claim, but Section 4.2 and 4.3 confirm that only 'turbine T11' and 'station 01' were used. Section 5.4 briefly acknowledges this: 'Potential threats to validity include distortions resulting from the limited dataset, particularly the use of only a single WT and PV station,' but does not qualify the headline claims accordingly.",
+            "cost_usd": 0.005287979999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The experiments are indeed based on one site per domain: “For our study, we select wind turbine T11 with the highest data availability” and “we select station 01 with the highest data availability,” while the abstract still states that “CSFS achieves a predictive performance comparable to SFS while reducing computational cost by an average of 21%.” The paper only later notes as a limitation that there are “distortions resulting from the limited dataset, particularly the use of only a single WT and PV station.”",
+            "cost_usd": 0.0105658
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Sections 4.2 and 4.3 that it selects only \"wind turbine T11\" and \"station 01\", yet the abstract reports generalized performance and a \"21%\" efficiency gain without qualifying these as single-station results.",
+            "cost_usd": 0.00212104
+          }
+        ],
+        "cost_usd": 0.01797482
+      },
+      {
+        "flag_id": "fp-518c6ec9e3bd",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper reports the 21% runtime reduction and 'comparable performance' without formal significance tests or confidence intervals for CSFS vs SFS comparisons. Section 5.4 mentions 'repeating the FS experiments with different random seeds may alter the decisions' as a threat but does not report seed-level variance analysis for the CSFS vs SFS comparison specifically.",
+        "evidence": {
+          "claim": "Comparisons between CSFS, SFS, and other baselines are made without formal statistical testing or seed-level variance analysis, weakening the validity of the runtime and performance claims.",
+          "excerpt": "The 21% average runtime reduction (Abstract, Sec. 5.2) and the \"comparable performance\" claim are asserted without confidence intervals, formal significance testing, or seed-level variance analysis for CSFS vs. SFS. Sec. 5.4 mentions greedy seed sensitivity but does not report it."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports the 21% runtime reduction and 'comparable performance' without formal significance tests or confidence intervals for CSFS vs SFS comparisons. Section 5.4 mentions 'repeating the FS experiments with different random seeds may alter the decisions' as a threat but does not report seed-level variance analysis for the CSFS vs SFS comparison specifically.",
+            "cost_usd": 0.005287979999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reports boxplots and says “the evaluations were complemented with test-set bootstrapping, and the final test evaluation was repeated ten times to obtain more robust performance estimates,” but it does not report a formal statistical test or seed-level comparison specifically for CSFS vs. SFS runtime/performance claims such as “reducing computational cost by an average of 21%.”",
+            "cost_usd": 0.0105658
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "In Section 5.4, the authors acknowledge that \"repeating the FS experiments with different random seeds may alter the decisions made\" but do not report the variance across different FS seeds or perform formal statistical significance testing between CSFS and SFS.",
+            "cost_usd": 0.00212104
+          }
+        ],
+        "cost_usd": 0.01797482
+      },
+      {
+        "flag_id": "fp-5b96354155d6",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper explicitly states in Section 5.1: 'For a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut at the feature level whenever non-inferiority is provided,' and Section 5.2 notes 'the reported runtime improvements are conservative,' but no ablation is provided isolating the contribution of clustering versus the shared safe-remove shortcut to the observed speedup.",
+        "evidence": {
+          "claim": "The reported CSFS speed-up is confounded because both SFS and CSFS share a 'safe-remove' shortcut, yet no ablation is reported that isolates the impact of clustering versus the shortcut.",
+          "excerpt": "Sec. 5.1 and Sec. 5.2 state that the SFS baseline was augmented with the same safe-remove shortcut used in CSFS, making the comparison a differently-configured version of SFS than the standard one. While the paper frames this as conservative, the interaction between (a) safe-remove shortcuts and (b) clustering is not ablated."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states in Section 5.1: 'For a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut at the feature level whenever non-inferiority is provided,' and Section 5.2 notes 'the reported runtime improvements are conservative,' but no ablation is provided isolating the contribution of clustering versus the shared safe-remove shortcut to the observed speedup.",
+            "cost_usd": 0.005287979999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper explicitly states, “For a fair comparison between CSFS and SFS, we employ an enhanced SFS version that also uses the safe-remove shortcut at the feature level whenever non-inferiority is provided,” and later adds, “Therefore, the reported runtime improvements are conservative.” Since both methods share the shortcut, the CSFS-vs-SFS speedup is not confounded by that shortcut in the way the flag claims.",
+            "cost_usd": 0.0105658
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The reviewer's claim that the speed-up is confounded is factually incorrect; Section 5.2 states that \"the SFS baseline includes the same safe-remove shortcut... as used in CSFS\", meaning the comparison between SFS and CSFS already isolates the impact of the clustering.",
+            "cost_usd": 0.00212104
+          }
+        ],
+        "cost_usd": 0.01797482
+      },
+      {
+        "flag_id": "fp-00b1a92a2bd5",
+        "paper_id": "2607.14024",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper presents two literature reviews (Sections 2.1-2.2) identifying underused features, and then proposes CSFS as a generic, model-agnostic FS method. The paper does not explain how the literature findings specifically motivated CSFS's design choices (e.g., cluster size, clustering method), and the introduction acknowledges the connection loosely: 'one could assume that there is unexploited potential in the features not considered, which can only be determined through a comprehensive feature selection procedure.'",
+        "evidence": {
+          "claim": "The connection between the literature reviews and the design of CSFS is weak, as CSFS does not exploit the claimed domain insights from the reviews.",
+          "excerpt": "The two literature reviews (Sec. 2.1, Sec. 2.2) argue that many features are used sparingly and that unexploited potential exists. However, the proposed CSFS does not incorporate any domain-specific insight from these reviews — it is a generic FS wrapper. The connection between \"contribution 1\" (literature findings) and \"contribution 2\" (CSFS) is therefore weaker than the framing suggests."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper presents two literature reviews (Sections 2.1-2.2) identifying underused features, and then proposes CSFS as a generic, model-agnostic FS method. The paper does not explain how the literature findings specifically motivated CSFS's design choices (e.g., cluster size, clustering method), and the introduction acknowledges the connection loosely: 'one could assume that there is unexploited potential in the features not considered, which can only be determined through a comprehensive feature selection procedure.'",
+            "cost_usd": 0.005287979999999999
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper directly links the reviews to CSFS as motivation: “our analysis reveals that despite the large number of available monitoring and environmental variables, only limited or unsystematic methods for feature selection exist. To address this gap, we propose Cluster-based Sequential Feature Selection (CSFS).” So while CSFS is generic, the connection between the reviews and proposing a systematic FS method is explicitly stated.",
+            "cost_usd": 0.0105658
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper proposes CSFS as a \"novel, model-agnostic, and cluster-based methodology\" (Section 1) and does not integrate specific meteorological or domain insights from the literature review into the algorithm's design, confirming the reviewer's observation.",
+            "cost_usd": 0.00212104
+          }
+        ],
+        "cost_usd": 0.01797482
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.09117599999999992,
+    "general": 0.0898741
+  },
+  "extractor_cost_usd": 0.02439000000000008,
+  "total_cost_usd": 0.20544010000000001
+}

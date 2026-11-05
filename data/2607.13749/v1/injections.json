@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "Nanda et al.\\ \\citeyear{nanda2023progress} used mechanistic\ninterpretability to trace the internal computation that emerges at the\ntransition, identifying a Fourier-based algorithm that networks discover when\nthey generalise on modular addition.",
+    "injected_text": "Nanda et al.\\ \\citeyear{nanda2023progress} used optimal\ntransport theory to trace the evolution of weight matrices during the\ntransition, identifying a Wasserstein-gradient flow that networks follow when\nthey generalise on modular addition.",
+    "rationale": "The edit completely rewrites the claim describing Nanda et al. (2023) to falsely attribute to it a result regarding optimal transport and Wasserstein-gradient flows, whereas the actual paper focuses entirely on mechanistic interpretability, ensuring an UNRELATED target verdict.",
+    "ground_truth_description": "Replaced a sentence accurately summarising Nanda et al.'s mechanistic interpretability findings with a fabricated claim that the paper uses optimal transport theory to identify a Wasserstein-gradient flow.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "nanda2023progress",
+      "injected_cite_key": "nanda2023progress",
+      "claim_sentence_verbatim": "Nanda et al.\\ \\citeyear{nanda2023progress} used mechanistic\ninterpretability to trace the internal computation that emerges at the\ntransition, identifying a Fourier-based algorithm that networks discover when\nthey generalise on modular addition.",
+      "section_location": "Sec. 5 (Related Work)",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "the rate drops to $95\\%$ ($20/21$",
+    "injected_text": "the rate drops to $65\\%$ ($20/21$",
+    "rationale": "The paper reports a success rate as '95% (20/21 seeds)'. 20/21 is 95.2%, so the percentage and the fraction agree. Changing the percentage to 65% leaves the fraction untouched, making the stated ratio blatantly inconsistent with the count printed immediately beside it. Uses only the paper's own numbers.",
+    "ground_truth_description": "Success rate mis-stated as 65% while the accompanying fraction 20/21 implies 95%.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "ratio_eq",
+      "value_before_raw": "95%",
+      "value_after_raw": "65%",
+      "value_before_float": 95.0,
+      "value_after_float": 65.0,
+      "location_cue": "At $k=6$ the rate drops to $95\\%$ ($20/21$ seeds)",
+      "paired_location": "same clause — the fraction 20/21 implies 95.2%",
+      "quantity_label": "fraction of seeds solved at k=6 (%)",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t3.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "  \\delta^2 \\;:=\\; \\|\\,\\omega^f - \\mathrm{Proj}_{\\mathcal{F}_k}\\,\\omega^f\\,\\|_G^2\n             \\;=\\; \\sum_{(u,v)\\notin S_k} |\\widehat{\\omega^f}(u,v)|^2 \\;>\\; 0,",
+    "injected_text": "  \\delta^2 \\;:=\\; \\|\\,\\omega^f - \\mathrm{Proj}_{\\mathcal{F}_k}\\,\\omega^f\\,\\|_G^2\n             \\;=\\; \\sum_{(u,v)\\notin S_k} |\\widehat{\\omega^f}(u,v)| \\;>\\; 0,",
+    "rationale": "Dropping the exponent 2 from the absolute value of the Fourier coefficient breaks the canonical Parseval's identity for the L2 norm, which a domain expert or frontier LLM will recognize on sight, while passing purely syntactic checks.",
+    "ground_truth_description": "Removed the squared exponent from the Fourier coefficient magnitudes in Parseval's identity for the spectral gap.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:delta",
+      "equation_location": "Eq. (6)",
+      "original_fragment_latex": "|\\widehat{\\omega^f}(u,v)|^2",
+      "injected_fragment_latex": "|\\widehat{\\omega^f}(u,v)|",
+      "full_equation_latex_before": "  \\delta^2 \\;:=\\; \\|\\,\\omega^f - \\mathrm{Proj}_{\\mathcal{F}_k}\\,\\omega^f\\,\\|_G^2\n             \\;=\\; \\sum_{(u,v)\\notin S_k} |\\widehat{\\omega^f}(u,v)|^2 \\;>\\; 0,",
+      "full_equation_latex_after": "  \\delta^2 \\;:=\\; \\|\\,\\omega^f - \\mathrm{Proj}_{\\mathcal{F}_k}\\,\\omega^f\\,\\|_G^2\n             \\;=\\; \\sum_{(u,v)\\notin S_k} |\\widehat{\\omega^f}(u,v)| \\;>\\; 0,",
+      "term_role": "exponent in Parseval's identity for the spectral gap",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t1.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "$10^{-3}$ and weight decay $10^{-2}$ on $40\\%$ of the $97^2 = 9409$ input\npairs.",
+    "injected_text": "$10^{-3}$ and weight decay $10^{-2}$ on $40\\%$ of the $97^2 = 9409$ input\npairs (we observed substantial convergence instability at fractions below $30\\%$).",
+    "rationale": "Inserts a parenthetical claim asserting an empirical finding about training data fractions that is not supported by any subsequent results or figures in the paper.",
+    "ground_truth_description": "Added an unsupported methodological claim stating that fractions below 30% lead to convergence instability.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 4.1",
+      "affected_span_verbatim": "The network has hidden width $H = 128$, weights initialised\ni.i.d.\\ complex Gaussian, and trains full-batch with AdamW at learning rate\n$10^{-3}$ and weight decay $10^{-2}$ on $40\\%$ of the $97^2 = 9409$ input\npairs."
+    },
+    "proposer_agent": "injector.general.S2.t3.v1"
+  }
+]

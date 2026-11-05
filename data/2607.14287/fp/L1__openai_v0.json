@@ -1,0 +1,398 @@
+{
+  "paper_id": "2607.14287",
+  "reviewer_system": "L1",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-2ce60ff43d87",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper compares XCT-SAM (two-stage) against Conv-LoRA-SAM (one-stage, directly on XCT data) but does not include a control that starts from the alloy-adapted weights and skips Stage-II, or a control using random initialization with two stages. The ablation in Table II only studies rank configurations, not the contribution of the intermediate domain step itself, so the causal attribution of gains to sequential adaptation is not fully isolated.",
+        "evidence": {
+          "claim": "The contribution of the intermediate alloy-domain adaptation is not isolated sufficiently, and important experimental controls are missing, casting doubt on the attribution of observed gains to sequential adaptation.",
+          "excerpt": "If any of these differ, then the observed performance gain cannot be attributed solely to sequential adaptation. A cleaner ablation would include at least: ... The current results suggest that the intermediate stage helps, but the causal claim would be stronger with this controlled comparison."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares XCT-SAM (two-stage) against Conv-LoRA-SAM (one-stage, directly on XCT data) but does not include a control that starts from the alloy-adapted weights and skips Stage-II, or a control using random initialization with two stages. The ablation in Table II only studies rank configurations, not the contribution of the intermediate domain step itself, so the causal attribution of gains to sequential adaptation is not fully isolated.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper does isolate the sequential-adaptation contribution with a direct baseline: \"we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage used in XCT-SAM\" and \"For fair comparison, all trainable baselines are optimized using the same XCT training data, preprocessing pipeline, and post-processing procedures where applicable.\"",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly isolates the contribution of sequential adaptation by including a control baseline, Conv-LoRA-SAM, which is fine-tuned \"without the intermediate alloy-microstructure adaptation stage used in XCT-SAM\" and ensures that \"all trainable baselines are optimized using the same XCT training data, preprocessing pipeline, and post-processing procedures\".",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      },
+      {
+        "flag_id": "fp-2bf67c8920a5",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'For Stage-I adaptation, we use an alloy-microstructure dataset [34] as an intermediate domain' and 'a learning rate of 2×10^−4, a batch size of 8, and trained for up to 15 epochs,' but does not describe the segmentation task used in Stage-I (e.g., what classes are segmented, what annotations are used from the alloy dataset), making reproduction difficult.",
+        "evidence": {
+          "claim": "The details of the Stage-I alloy-microstructure adaptation are insufficiently described, omitting crucial methodological information necessary to reproduce and interpret the results.",
+          "excerpt": "The paper states that the alloy-microstructure dataset is used as an intermediate domain, but the actual adaptation task is not described in enough detail. Important missing details include: ... Since Stage-I is central to the paper, this part needs substantially more methodological detail."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'For Stage-I adaptation, we use an alloy-microstructure dataset [34] as an intermediate domain' and 'a learning rate of 2×10^−4, a batch size of 8, and trained for up to 15 epochs,' but does not describe the segmentation task used in Stage-I (e.g., what classes are segmented, what annotations are used from the alloy dataset), making reproduction difficult.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Stage-I is described only at a high level: \"For Stage-I adaptation, we use an alloy-microstructure dataset [34] as an intermediate domain\" and \"In Stage 1, we perform intermediate domain adaptation on the alloy dataset [34] using a learning rate of 2 × 10−4, a batch size of 8, and trained for up to 15 epochs.\" The paper does not specify the Stage-I supervision/task or labels, which is central for reproducing and interpreting that stage.",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions that \"In Stage 1, we perform intermediate domain adaptation on the alloy dataset\" and lists hyperparameters like learning rate and epochs, but completely omits what the actual adaptation task or supervision signal (e.g., segmentation labels, unsupervised objectives) was on this dataset.",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      },
+      {
+        "flag_id": "fp-a7a630a2cecc",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper only states 'all prompt-based methods use an identical prompt protocol across experiments' without describing what type of prompts (points, boxes, masks), how many, or how they are generated. This is insufficient for reproducibility of a prompt-dependent method.",
+        "evidence": {
+          "claim": "The prompting protocol for SAM-based methods is unclear and insufficiently described, causing major reproducibility concerns and preventing a fair comparison among methods.",
+          "excerpt": "This is a major reproducibility issue. For a SAM-based segmentation paper, the prompting protocol is essential."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper only states 'all prompt-based methods use an identical prompt protocol across experiments' without describing what type of prompts (points, boxes, masks), how many, or how they are generated. This is insufficient for reproducibility of a prompt-dependent method.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The only prompting description is: \"SAM is evaluated in a zero-shot setting, while all prompt-based methods use an identical prompt protocol across experiments.\" The actual prompt type/construction is never stated, so the SAM-based comparisons are not reproducible from the paper alone.",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states that \"all prompt-based methods use an identical prompt protocol across experiments,\" but it never actually defines what that prompt protocol is (e.g., bounding boxes, point coordinates, grids), making it impossible to reproduce.",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      },
+      {
+        "flag_id": "fp-b38bbb41a707",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper states 'we generate threshold-derived binary reference masks following the image-processing pipeline of [33]' and labels the NIST figure row as 'Ground Truth,' but does not explicitly discuss the limitation that these pseudo-labels are not expert-annotated and may introduce evaluation noise, beyond a brief mention in the caption.",
+        "evidence": {
+          "claim": "NIST dataset masks are threshold-derived and not expert-annotated, so referring to them as ground truth is misleading and affects the interpretation of results.",
+          "excerpt": "These masks are not true ground truth; they are algorithmic pseudo-labels. ... the paper should discuss this limitation more explicitly and avoid language suggesting that the NIST masks are definitive ground truth."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'we generate threshold-derived binary reference masks following the image-processing pipeline of [33]' and labels the NIST figure row as 'Ground Truth,' but does not explicitly discuss the limitation that these pseudo-labels are not expert-annotated and may introduce evaluation noise, beyond a brief mention in the caption.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly clarifies that NIST masks are not manual ground truth: \"Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks\" and Fig. 7 states, \"The row marked Ground Truth denotes threshold-derived reference masks.\"",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper is very transparent about this limitation, explicitly stating in Section IV.A that \"we generate threshold-derived binary reference masks\" and explicitly defining the figure labels in the caption of Figure 7: \"The row marked Ground Truth denotes threshold-derived reference masks.\"",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      },
+      {
+        "flag_id": "fp-c6c21d47d002",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=AMBIGUOUS: The paper's claims of 'best overall IoU and Dice scores' are supported by Table I, where XCT-SAM leads on IoU and Dice across all three settings. However, on some individual metrics (e.g., F1 for NIST pores, where SAM-Med2D scores 0.9116 vs XCT-SAM's 0.9051) XCT-SAM is not always best, so 'consistently outperforms' is partially overstated, making this genuinely ambiguous.",
+        "evidence": {
+          "claim": "Some performance claims in the text are overstated or misleading given that XCT-SAM is not always best on all metrics and sometimes achieves only marginal improvements over baselines.",
+          "excerpt": "broader statements such as “consistently outperforms” or “best overall” should be phrased more carefully. ... The paper should distinguish between large gains and marginal gains."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "low",
+            "reason": "The paper's claims of 'best overall IoU and Dice scores' are supported by Table I, where XCT-SAM leads on IoU and Dice across all three settings. However, on some individual metrics (e.g., F1 for NIST pores, where SAM-Med2D scores 0.9116 vs XCT-SAM's 0.9051) XCT-SAM is not always best, so 'consistently outperforms' is partially overstated, making this genuinely ambiguous.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper’s stronger claims are metric-qualified rather than blanket claims of winning everything; e.g., for NIST it says \"XCT-SAM achieves the best IoU and Dice scores among all baselines,\" which matches Table I and does not claim best F1 there. The abstract likewise limits the headline claim to \"the best overall IoU and Dice scores.\"",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The performance claims are not overstated. The paper specifically claims in the Abstract that XCT-SAM achieves \"the best overall IoU and Dice scores,\" which is factually supported by Table I where it secures the highest IoU and Dice in every column; it does not claim to be the best on the F1 metric everywhere.",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      },
+      {
+        "flag_id": "fp-75a3ecb541a2",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=AMBIGUOUS: Table III shows Focal Tversky achieves higher pore IoU (0.3390 vs 0.3245) and pore F1 (0.5686 vs 0.5567) on GAN data, while Dice-Focal leads on inclusion and NIST metrics. The paper claims Dice-Focal provides 'the most balanced performance,' which is a reasonable characterization, but the text does not fully acknowledge cases where Focal Tversky outperforms it.",
+        "evidence": {
+          "claim": "The interpretation of the objective-function ablation is not consistent with the actual results in Table III, leading to potential misrepresentation of which loss is best.",
+          "excerpt": "the statement that Dice-Focal gives the most balanced performance is reasonable, but ... It should not imply that Dice-Focal is best across all metrics and datasets. A useful addition would be an average rank or aggregate score."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "Table III shows Focal Tversky achieves higher pore IoU (0.3390 vs 0.3245) and pore F1 (0.5686 vs 0.5567) on GAN data, while Dice-Focal leads on inclusion and NIST metrics. The paper claims Dice-Focal provides 'the most balanced performance,' which is a reasonable characterization, but the text does not fully acknowledge cases where Focal Tversky outperforms it.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The ablation text does not claim Dice-Focal is best on every metric; it says \"Dice-Focal provides the most balanced performance across evaluation benchmarks and metrics\" and then specifically notes \"it achieves the best inclusion segmentation results\" and on NIST \"the highest pore-segmentation performance with 0.5849 IoU and 0.7288 Dice.\" That is consistent with Table III.",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The text accurately reflects Table III without claiming Dice-Focal is best everywhere. It correctly specifies that it provides balanced performance and \"achieves the best inclusion segmentation results\" on GAN data and \"the highest pore-segmentation performance\" on NIST data, directly matching the table.",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      },
+      {
+        "flag_id": "fp-df081dae5cb6",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Table I reports only mean values without standard deviations or confidence intervals. While Figure 5 shows error bars (±1 std) for per-test-set bar charts, the main summary Table I lacks any variability measures, and no statistical significance testing is reported anywhere in the paper.",
+        "evidence": {
+          "claim": "The paper fails to provide statistical significance testing or report variability (e.g., standard deviation, confidence intervals) for main results, making it unclear whether improvements are meaningful.",
+          "excerpt": "It is unclear whether the improvements are statistically significant, especially when the margins are small ... The authors should report standard deviations or confidence intervals in the tables, or perform significance testing where appropriate."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Table I reports only mean values without standard deviations or confidence intervals. While Figure 5 shows error bars (±1 std) for per-test-set bar charts, the main summary Table I lacks any variability measures, and no statistical significance testing is reported anywhere in the paper.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The main result tables report only means (e.g., \"Quantitative comparison of mean segmentation performance\" and \"Reported values represent mean segmentation performance averaged across all test sets\"), and no statistical significance test is provided. Although Fig. 5 says \"the error bars indicate ±1 std,\" that does not resolve significance or uncertainty for the main summary results.",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The reviewer's claim that the paper fails to report variability for the main results is factually incorrect, as Figure 5 clearly plots the variability of the main segmentation baselines, with the caption explicitly noting \"the error bars indicate ±1 std.\"",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      },
+      {
+        "flag_id": "fp-eeed6ec9d478",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper mentions using 'CycleGAN-generated synthetic XCT data' and 'real NIST XCT data' and references '~1K images' for fine-tuning, but provides no dataset summary table with per-split image counts, defect instance counts, or resolution information, limiting reproducibility.",
+        "evidence": {
+          "claim": "The dataset split and size information is incomplete, lacking a clear breakdown of images per split and a dataset summary table, hampering reproducibility.",
+          "excerpt": "The paper should provide a dataset table containing: ... This would greatly improve reproducibility."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper mentions using 'CycleGAN-generated synthetic XCT data' and 'real NIST XCT data' and references '~1K images' for fine-tuning, but provides no dataset summary table with per-split image counts, defect instance counts, or resolution information, limiting reproducibility.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives only coarse split information such as \"Since fine-tuning is performed on a relatively small dataset (∼1K images)\" and \"we use Test-3 as the validation set,\" but it provides no explicit per-split image counts or dataset summary table. That leaves the dataset breakdown incomplete for reproducibility.",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper mentions \"(~1K images)\" for the training set and lists test sets by name (e.g., Test-1, Test-2), but completely lacks a quantitative breakdown of the number of images/volumes within each specific split.",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      },
+      {
+        "flag_id": "fp-c3982bb4faa6",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L1"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "FP majority blocked by non-FP dissent — anthropic=CONFIRMED_ISSUE: The paper acknowledges 'we train two independent binary segmentation models, dedicated to pore and inclusion detection, respectively,' and lists 'unified multiclass defect segmentation' only as future work, but the abstract and introduction use language like 'segmenting diverse defect types' without adequately foregrounding that the implementation is two separate binary models.",
+        "evidence": {
+          "claim": "The use of two independent binary segmentation models for pores and inclusions limits the practical usability of the method and is not discussed adequately.",
+          "excerpt": "The current wording sometimes suggests “diverse defect segmentation,” but the actual implementation is two separate binary segmentation models."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper acknowledges 'we train two independent binary segmentation models, dedicated to pore and inclusion detection, respectively,' and lists 'unified multiclass defect segmentation' only as future work, but the abstract and introduction use language like 'segmenting diverse defect types' without adequately foregrounding that the implementation is two separate binary models.",
+            "cost_usd": 0.0032757333333333334
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "This limitation is explicitly discussed: \"we train two independent binary segmentation models, dedicated to pore and inclusion detection, respectively\" and \"Current limitations include ... reliance on 2D slice-wise binary models. Future work will explore ... unified multiclass defect segmentation.\"",
+            "cost_usd": 0.007833277777777778
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "This is adequately discussed and explicitly disclosed. Section III.A justifies it by citing prior work that \"joint multi-class training under extreme imbalance leads to reduced generalization performance,\" and Section V explicitly lists \"reliance on 2D slice-wise binary models\" as a current limitation.",
+            "cost_usd": 0.0016540888888888889
+          }
+        ],
+        "cost_usd": 0.0127631
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.1148679
+  },
+  "extractor_cost_usd": 0.015647999999999995,
+  "total_cost_usd": 0.1305159
+}

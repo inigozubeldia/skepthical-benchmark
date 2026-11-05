@@ -1,0 +1,257 @@
+{
+  "paper_id": "2607.14176",
+  "reviewer_system": "L25",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "mathematics": [
+      {
+        "flag_id": "fp-2cc5145c59a8",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "mathematics",
+        "verdict": "FP",
+        "confidence": "medium",
+        "reason": "Maths interpreter: PASS. The two capacity constraints in Eq. (3) were checked for mathematical and logical correctness. The first constraint (f_{ij} ≤ C_{ij}v_{ij}) correctly enforces that flow on a link cannot exceed its capacity when active (v_{ij}=1) and is zero when the link is inactive (v_{ij}=0), which is a standard big-M / binary-activation formulation. The second constraint (∑_i f_{ij} ≤ M_{RSU_j}) correctly bounds the total incoming traffic at each RSU by its maximum available capacity. Both inequalities are standard and well-formed for a network flow optimisation with binary link indicators; no errors were found.",
+        "evidence": {
+          "maths_verdict": "PASS",
+          "confidence": "medium",
+          "impact": "moderate",
+          "notes": "The two capacity constraints in Eq. (3) were checked for mathematical and logical correctness. The first constraint (f_{ij} ≤ C_{ij}v_{ij}) correctly enforces that flow on a link cannot exceed its capacity when active (v_{ij}=1) and is zero when the link is inactive (v_{ij}=0), which is a standard big-M / binary-activation formulation. The second constraint (∑_i f_{ij} ≤ M_{RSU_j}) correctly bounds the total incoming traffic at each RSU by its maximum available capacity. Both inequalities are standard and well-formed for a network flow optimisation with binary link indicators; no errors were found.",
+          "tools_used": [
+            "Transcription from the paper (LLM): faithful"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.017961799999999917
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-b3214db12368",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'MILP runtimes correspond to the end-to-end solver time per instance using Google OR-Tools, executed in multi-thread mode with a per-instance time limit of 11 s' but never reports solver status, optimality gaps, or how many instances hit the time limit. It repeatedly calls the solutions 'optimal' (e.g., 'Solving the MILP yields an optimal binary relay-activation matrix') without verifying proven optimality for all training instances.",
+        "evidence": {
+          "claim": "The paper repeatedly claims the MILP labels are 'optimal' without establishing solver-proven optimality for all labelled instances, potentially overstating supervised learning and MILP-equivalency results.",
+          "excerpt": "The paper states that the MILP oracle generates optimal relay configurations, but later says MILP runtimes are measured with a per-instance time limit of 11 s. A time-limited MILP solve does not necessarily return a proven optimum. The paper does not report solver status, optimality gaps, number of timeouts, or whether suboptimal incumbent solutions were discarded."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'MILP runtimes correspond to the end-to-end solver time per instance using Google OR-Tools, executed in multi-thread mode with a per-instance time limit of 11 s' but never reports solver status, optimality gaps, or how many instances hit the time limit. It repeatedly calls the solutions 'optimal' (e.g., 'Solving the MILP yields an optimal binary relay-activation matrix') without verifying proven optimality for all training instances.",
+            "cost_usd": 0.0038742
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper calls the labels optimal — e.g. \"Each snapshot is labelled offline using the MILP model in Section IV, which determines the optimal multi-hop relay scheme\" — but the only solver-runtime detail given is that MILP runs use \"a per-instance time limit of 11 s.\" The paper does not report solver status, optimality gaps, or how many instances were proven optimal.",
+            "cost_usd": 0.012138800000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper notes that MILP runtimes use a \"per-instance time limit of 11 s,\" but fails to report optimality gaps, timeouts, or whether suboptimal incumbent solutions were retained as ground-truth labels.",
+            "cost_usd": 0.00215728
+          }
+        ],
+        "cost_usd": 0.01817028
+      },
+      {
+        "flag_id": "fp-6db4dd808f5b",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges this: 'While the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time,' but provides no quantitative evaluation of constraint violations (cycles, capacity violations, multiple outgoing links per CAV) in the predicted outputs. Only link-level accuracy/F1 metrics are reported.",
+        "evidence": {
+          "claim": "The feasibility of relay selections predicted directly by the GINE model is not evaluated, so the extent to which predicted graphs violate important constraints is unknown.",
+          "excerpt": "The results do not quantify how often the predicted relay graph violates the MILP constraints. In particular, the model may activate multiple outgoing links for a CAV, create cycles, exceed link/RSU capacities, or produce disconnected relay chains."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this: 'While the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time,' but provides no quantitative evaluation of constraint violations (cycles, capacity violations, multiple outgoing links per CAV) in the predicted outputs. Only link-level accuracy/F1 metrics are reported.",
+            "cost_usd": 0.0038742
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly says the learned method \"does not explicitly enforce routing or flow-conservation constraints at inference time,\" yet the reported results focus on link-level metrics and connectivity, not violation rates for constraints like cycles, multiple outgoing links, or capacity excess. It even lists \"constraint-aware post-processing to further enhance feasibility\" as future work.",
+            "cost_usd": 0.012138800000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that \"the proposed model does not explicitly enforce routing or flow-conservation constraints at inference time,\" but the experimental section does not quantify the frequency or severity of constraint violations (such as cycles or multiple outgoing links) in the raw GINE outputs.",
+            "cost_usd": 0.00215728
+          }
+        ],
+        "cost_usd": 0.01817028
+      },
+      {
+        "flag_id": "fp-cbeafdb9a78b",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states GP-MILP 'preserv[es] MILP-equivalent solutions on the evaluated dataset, i.e., yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs,' but provides no table of objective gaps, no count of instances with identical objectives, and no analysis of cases where pruning at 99% link-level recall may have removed a necessary optimal edge.",
+        "evidence": {
+          "claim": "The claim that GP-MILP preserves MILP-equivalent solutions is not supported by the reported results, as no objective gaps or loss of optimality statistics are presented.",
+          "excerpt": "No table or figure reports objective values, objective gaps, connectivity equality, number of instances with identical objective, or cases where pruning removed a necessary edge. The paper says pruning is done at threshold 0.15 with recall approximately 99%, but a 99% link-level recall does not guarantee that all optimal edges are retained in every graph instance."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states GP-MILP 'preserv[es] MILP-equivalent solutions on the evaluated dataset, i.e., yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs,' but provides no table of objective gaps, no count of instances with identical objectives, and no analysis of cases where pruning at 99% link-level recall may have removed a necessary optimal edge.",
+            "cost_usd": 0.0038742
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only asserts that GP-MILP preserves equality — \"yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs\" — but the reported table gives only latency percentages (\"TABLE II: Percentage of graph instances meeting given latency thresholds\"). No quantitative objective-gap or equality statistics are actually presented.",
+            "cost_usd": 0.012138800000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes an absolute claim that GP-MILP is \"yielding the same objective value and connectivity outcome as the MILP solved on the complete graphs,\" but provides no tables, statistics, or objective gap distributions to support this, which is questionable given the reported 99% edge recall.",
+            "cost_usd": 0.00215728
+          }
+        ],
+        "cost_usd": 0.01817028
+      },
+      {
+        "flag_id": "fp-2a0a90e9e888",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Section VI-C states 'the proposed framework achieves an average connectivity gain of 9.2%' without clearly specifying whether this refers to GINE, MILP oracle, or GP-MILP predictions. The phrase 'enabling coordinated multi-hop relaying' and 'proposed framework' remain ambiguous throughout the connectivity gain discussion.",
+        "evidence": {
+          "claim": "Reported connectivity gains are not clearly attributed to a specific method (MILP oracle, GINE, or GP-MILP), making it impossible to credit the improvement to the GINE model.",
+          "excerpt": "Section VI-C does not clearly state whether the reported 9.2% and 12% gains are obtained by the full MILP oracle, the thresholded GINE predictions, GP-MILP, or some post-processed GINE output. The text says 'enabling coordinated multi-hop relaying' and 'the proposed framework,' which is ambiguous."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Section VI-C states 'the proposed framework achieves an average connectivity gain of 9.2%' without clearly specifying whether this refers to GINE, MILP oracle, or GP-MILP predictions. The phrase 'enabling coordinated multi-hop relaying' and 'proposed framework' remain ambiguous throughout the connectivity gain discussion.",
+            "cost_usd": 0.0038742
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper does attribute the gains to GINE: the abstract says \"Experiments ... show that GINE closely matches MILP decisions at the link level ... and yields consistent end-to-end connectivity gains over a 1-hop MILP baseline.\" Section VI also states it evaluates \"the proposed GINE-based Learning-to-Optimise (L2O) framework\" for \"end-to-end connectivity gains.\"",
+            "cost_usd": 0.012138800000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Section VI-C states that \"the proposed framework achieves an average connectivity gain of 9.2%\" without clarifying whether this performance applies to the raw GINE outputs, the GP-MILP pipeline, or the full MILP oracle.",
+            "cost_usd": 0.00215728
+          }
+        ],
+        "cost_usd": 0.01817028
+      },
+      {
+        "flag_id": "fp-00a080a3a5c4",
+        "paper_id": "2607.14176",
+        "reviewer_systems_attributed": [
+          "L25"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=FP, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "Claims of 'tightly bounded' inference latency and 'no observable dependence on graph size' are misleading, as only empirical measurements are provided and the algorithm is only edge-linear, not formally bounded.",
+          "excerpt": "This supports an empirical latency observation, not a formal bound. In addition, the statement “no observable dependence on graph size or edge density” is stronger than the stated complexity O(|E|); a flat measured curve over the evaluated range may be dominated by fixed overheads, but the algorithm is still edge-linear."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states 'inference latency remains tightly bounded, with all evaluated instances completing within 5 ms' and notes complexity is O(|E|), which is a valid empirical observation over the evaluated range. The reviewer's concern that 'tightly bounded' is misleading vs. a formal bound is a matter of interpretation — the paper does not claim a formal worst-case bound but empirically demonstrates consistent sub-5ms latency across all tested instances.",
+            "cost_usd": 0.0038742
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "medium",
+            "reason": "The paper presents these as empirical observations, not a formal theorem: \"Inference latency remains tightly bounded, with all evaluated instances completing within 5 ms\" and \"no observable dependence on graph size or edge density within the evaluated range.\" It separately states the actual asymptotic claim as \"the computational complexity scales linearly with the number of edges, i.e., O(|E|).\"",
+            "cost_usd": 0.012138800000000002
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims that observing \"no observable dependence on graph size or edge density within the evaluated range\" is \"consistent with the linear computational complexity of message passing,\" which conflates a flat empirical curve (likely dominated by fixed GPU overheads) with theoretical linear scaling.",
+            "cost_usd": 0.00215728
+          }
+        ],
+        "cost_usd": 0.01817028
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "mathematics": 1.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "mathematics": 0,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "mathematics": 0.017961799999999917,
+    "general": 0.0908514
+  },
+  "extractor_cost_usd": 0.018614000000000047,
+  "total_cost_usd": 0.12742719999999996
+}

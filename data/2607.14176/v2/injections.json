@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "A class-weighted binary cross-entropy loss is employed to address the imbalance between active and iactive relay links \\cite{Ghosh2024}.",
+    "injected_text": "A binary cross-entropy loss is employed to address the imbalance between active and iactive relay links \\cite{Ghosh2024}.",
+    "rationale": "Dropping the precise methodological qualifier 'class-weighted' makes the claim assert that standard BCE is used to address class imbalance, which partially contradicts the cited paper's explicit focus on specialized techniques for imbalanced data.",
+    "ground_truth_description": "Removed the 'class-weighted' qualifier in the sentence describing the loss function used for class imbalance.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "Ghosh2024",
+      "injected_cite_key": "Ghosh2024",
+      "claim_sentence_verbatim": "A class-weighted binary cross-entropy loss is employed to address the imbalance between active and iactive relay links \\cite{Ghosh2024}.",
+      "section_location": "Section VI.A",
+      "mutation_kind": "claim_methodology_drift",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "split into training ($80\\%$) and validation ($20\\%$) sets.",
+    "injected_text": "split into training ($80\\%$, i.e., $314{,}650$ snapshots) and validation ($20\\%$) sets.",
+    "rationale": "The paper lacked a fully explicit 'base * percent = result' triplet, so one was introduced by explicitly stating a result count for the 80% training split of the 449,500 total graphs; this count is intentionally incorrect by >10% (should be 359,600, not 314,650) to trigger a major percent_of failure.",
+    "ground_truth_description": "Added an explicit count for the 80% training split but incorrectly calculated it as 314,650 instead of the true value of 359,600.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "percent_of",
+      "value_before_raw": "N/A",
+      "value_after_raw": "314,650",
+      "value_before_float": 359600.0,
+      "value_after_float": 314650.0,
+      "location_cue": "A total of 449,500 graph snapshots are generated and split into training (80%, i.e., 314,650 snapshots) and validation (20%) sets.",
+      "paired_location": null,
+      "quantity_label": "training set snapshots",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t2.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "\\sum_{j} f_{ij} - \\sum_{k} f_{ki} = d_i z_i,",
+    "injected_text": "\\sum_{j} f_{ij} = d_i z_i,",
+    "rationale": "Deleting the incoming flow term breaks the flow conservation constraint, effectively preventing multi-hop routing by forcing intermediate nodes to have zero outgoing relay flow.",
+    "ground_truth_description": "Removed the incoming flow term from the flow conservation constraint in the MILP formulation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Section 4.3 Constraints (Flow conservation)",
+      "original_fragment_latex": " - \\sum_{k} f_{ki}",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\sum_{j} f_{ij} - \\sum_{k} f_{ki} = d_i z_i,\n\\quad \\forall i \\in \\mathrm{CAV}",
+      "full_equation_latex_after": "\\sum_{j} f_{ij} = d_i z_i,\n\\quad \\forall i \\in \\mathrm{CAV}",
+      "term_role": "incoming flow sum",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t1.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "\\item $v_{ij}\\!\\in\\!\\{0,1\\}$: activation of link $(i,j)$;",
+    "injected_text": "\\item $x_{ij}\\!\\in\\!\\{0,1\\}$: activation of link $(i,j)$;",
+    "rationale": "Renames the link activation variable from v_{ij} to x_{ij} in its declaration list, but leaves it as v_{ij} in all subsequent equations (e.g. constraints in Section IV.C), creating a local notation inconsistency.",
+    "ground_truth_description": "Changed the declared variable name for link activation from v_{ij} to x_{ij} in the Decision Variables list without updating its usage in the subsequent constraint equations.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D3",
+      "change_kind": "notation_drift",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. IV.A",
+      "affected_span_verbatim": "\\begin{itemize}[]\n\\item $v_{ij}\\!\\in\\!\\{0,1\\}$: activation of link $(i,j)$;\n\\item $f_{ij}\\!\\ge\\!0$: flow on link $(i,j)$;\n\\item $z_i\\!\\in\\!\\{0,1\\}$: CAV $i$ connected to at least one RSU;\n\\item $u_i\\!\\in\\!\\{0,\\dots,M\\!-\\!1\\}$: ordering variable for cycle elimination.\n\\end{itemize}"
+    },
+    "proposer_agent": "injector.general.S1.t3.v2"
+  }
+]

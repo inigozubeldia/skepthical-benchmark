@@ -1,0 +1,189 @@
+{
+  "paper_id": "2607.13613",
+  "copy_id": "v1",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S1-t3",
+      "module": "citations",
+      "detected": false,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "",
+      "reasoning": "majority-2/3: ambiguity-escalation with PDF attached",
+      "escalated_with_pdf": true,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "low",
+          "reasoning": "The reviewer did not flag the 'winner-take-all' vs 'winner-loser' description of CentNN in the Introduction. The citation-related flags in the report concern reference [2]'s relevance and reference [9]'s incomplete bibliographic information, neither of which corresponds to the methodology drift injection.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "The paper proposes FastCentNN, a variant of Centroid Neural Network that triggers centroid splitting earlier when total centroid movement remains below a threshold for a patience window. The aim is to avoid low-movement epochs before splitting while preserving the original winner-loser update rule.",
+          "confidence": "medium",
+          "reasoning": "The review summary explicitly characterizes CentNN/FastCentNN as preserving the original 'winner-loser update rule', which directly conflicts with the injected claim that the cited CentNN uses 'winner-take-all dynamics'. Although not listed as a citation issue item, it clearly challenges the post-edit methodological description.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer uses the correct terminology 'winner-loser' in their summary, but they do not flag the error in the text where 'winner-take-all' was injected, nor do they challenge the claim against the cited source.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": false,
+          "matching_evidence": "",
+          "confidence": "high",
+          "reasoning": "The reviewer never flags the 'winner-take-all dynamics' phrase in the Introduction as contradicting CentNN's winner-loser update mechanism. While the reviewer discusses winner-loser dynamics in the summary, they do not challenge the specific claim sentence against the cited source [3] (park2000centroid). The reviewer's citation flag (item 7) addresses reference [2]'s relevance, not this methodological drift.",
+          "escalated_with_pdf": true
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S2-t2",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Table 2 reports MNIST runtime as `8.344 / 7.924` seconds and speed-up as `5.03%`. Section 3.3 states that this corresponds to a speed-up of `6.25%`. Using the printed runtimes: (8.344 - 7.924)/8.344 × 100 = 0.420/8.344 × 100 ≈ 5.03%. Replace `6.25%` in Section 3.3 with `5.03%`",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Table 2 reports MNIST runtime as `8.344 / 7.924` seconds and speed-up as `5.03%`. Section 3.3 states that this corresponds to a speed-up of `6.25%`. Using the printed runtimes: (8.344 - 7.924)/8.344 × 100 = 0.420/8.344 × 100 ≈ 5.03%. Replace `6.25%` in Section 3.3 with `5.03%`",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the arithmetic inconsistency between the 6.25% figure in Section 3.3 and the 5.03% correctly computed from the printed runtimes (8.344 s and 7.924 s), directly matching the injected error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] The MNIST speed-up is inconsistent between Table 2 and Section 3.3.\n\nWhat is wrong: Table 2 reports MNIST runtime as `8.344 / 7.924` seconds and speed-up as `5.03%`. Section 3.3 states that this corresponds to a speed-up of `6.25%`.\n\nUsing the printed runtimes:\n\\[\n\\frac{8.344 - 7.924}{8.344}\\times 100\n=\n\\frac{0.420}{8.344}\\times 100\n\\approx 5.03\\%.\n\\]\n\nConcrete fix: Replace `6.25%` in Section 3.3 with `5.03%`, or explain a different speed-up definition if one was intended.",
+          "confidence": "high",
+          "reasoning": "The reviewer names the exact section, runtimes, incorrect percentage, and corrected value, directly matching the injected arithmetic error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "Section 3.3 states that this corresponds to a speed-up of 6.25%. ... Replace 6.25% in Section 3.3 with 5.03%",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the injected value (6.25%) as an arithmetic inconsistency and provides the correct calculation.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The definition of the global mean in Equation (4) is missing division by n. Equation (4) defines x̄ = Σ x_i rather than x̄ = (1/n)Σ x_i. Correct Equation (4) to include the factor 1/n.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The definition of the global mean in Equation (4) is missing division by n. Equation (4) defines x̄ = Σ x_i rather than x̄ = (1/n)Σ x_i. Correct Equation (4) to include the factor 1/n.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identified the missing 1/n normalisation prefactor in the global mean formula, precisely matching the injected mathematical error.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] The definition of the global mean in Equation (4) is missing division by \\(n\\).\n\nWhat is wrong: The text says CentNN starts from two centroids near the global mean, but Equation (4) defines\n\\[\n\\bar{x} = \\sum_{i=1}^{n} x_i,\n\\]\nrather than\n\\[\n\\bar{x} = \\frac{1}{n}\\sum_{i=1}^{n}x_i.\n\\]\n\nConcrete fix: Correct Equation (4) to include the factor \\(1/n\\).",
+          "confidence": "high",
+          "reasoning": "This exactly identifies the dropped normalization prefactor in the global mean formula.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The definition of the global mean in Equation (4) is missing division by n. ... Equation (4) defines \\bar{x} = \\sum_{i=1}^{n} x_i, rather than \\bar{x} = \\frac{1}{n}\\sum_{i=1}^{n}x_i.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the normalization factor 1/n was missing from the equation for the global mean.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S1-t1",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The duplicate phrase 'family of of competitive' should be corrected. The phrase contains a duplicated 'of.'",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The duplicate phrase 'family of of competitive' should be corrected. The phrase contains a duplicated 'of.'",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flagged the word repetition 'of of' in the Introduction, directly matching the injected typo.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] The duplicate phrase “family of of competitive” should be corrected.\n\nWhat is wrong: The phrase contains a duplicated “of.”\n\nConcrete fix: Change to “family of competitive and self-organizing neural models.”",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags the duplicated word 'of of' in the Introduction, which is the injected cosmetic typo.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "The duplicate phrase \"family of of competitive\" should be corrected. ... The phrase contains a duplicated \"of.\"",
+          "confidence": "high",
+          "reasoning": "The reviewer identifies and quotes the exact word repetition injected into the introduction.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 31.204007,
+  "total_cost_usd": null,
+  "total_input_tokens": 22594,
+  "total_output_tokens": 3667,
+  "escalation_count": 1,
+  "notes": null
+}

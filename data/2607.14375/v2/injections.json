@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "Convex relaxations provide scalable bounds but face intrinsic tightness barriers without branching or additional structure \\citep{salman2019convex}.",
+    "injected_text": "Convex relaxations provide scalable bounds and overcome intrinsic tightness barriers without branching or additional structure \\citep{salman2019convex}.",
+    "rationale": "Reverses the claim that convex relaxations suffer from tightness barriers (which the cited paper proves) to claiming they overcome them, directly contradicting the cited conclusion.",
+    "ground_truth_description": "Changes the statement from saying convex relaxations face tightness barriers to saying they overcome them, contradicting the cited reference.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "salman2019convex",
+      "injected_cite_key": "salman2019convex",
+      "claim_sentence_verbatim": "Convex relaxations provide scalable bounds but face intrinsic tightness barriers without branching or additional structure \\citep{salman2019convex}.",
+      "section_location": "Related work",
+      "mutation_kind": "claim_direction_reversal",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S3.t2.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "\\frac{99}{4}+\\frac{148}{9}=\\frac{1483}{36}.",
+    "injected_text": "\\frac{99}{4}+\\frac{145}{9}=\\frac{1483}{36}.",
+    "rationale": "Changing the summand's numerator from 148 to 145 breaks the explicit sum equality (the left side evaluates to 1471/36 instead of 1483/36) while staying within a 10% relative error, producing a minor arithmetic mismatch.",
+    "ground_truth_description": "Perturbed a numerator in a reported sum of fractions so that the explicit arithmetic equality no longer holds.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "sum_eq_total",
+      "value_before_raw": "148",
+      "value_after_raw": "145",
+      "value_before_float": 148.0,
+      "value_after_float": 145.0,
+      "location_cue": "Thus the semantic per-clause totals are\n\\[\n\\frac{27}{2}+\\frac{26}{3}=\\frac{133}{6},\n\\qquad\n\\frac{99}{4}+\\frac{148}{9}=\\frac{1483}{36}.\n\\]",
+      "paired_location": null,
+      "quantity_label": "numerator in overflow unit squared influence",
+      "expected_bucket": "minor"
+    },
+    "proposer_agent": "injector.numerics.S1.t2.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "\\mu=\\EE|Z|=\\sqrt{2/\\pi}.",
+    "injected_text": "\\mu=\\EE|Z|=\\sqrt{1/\\pi}.",
+    "rationale": "The expected value of a folded standard normal distribution is a canonical identity; altering the factor of 2 in the square root creates a mathematical error that Wolfram will refute by exact symbolic integration.",
+    "ground_truth_description": "Changed the expectation of the absolute standard normal distribution from \\sqrt{2/\\pi} to \\sqrt{1/\\pi}.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:CD",
+      "equation_location": "Eq. (12)",
+      "original_fragment_latex": "\\sqrt{2/\\pi}",
+      "injected_fragment_latex": "\\sqrt{1/\\pi}",
+      "full_equation_latex_before": "C=\\sum_qc_q,\n\\qquad\nD^2=\\sum_qc_q^2,\n\\qquad\n\\mu=\\EE|Z|=\\sqrt{2/\\pi}.",
+      "full_equation_latex_after": "C=\\sum_qc_q,\n\\qquad\nD^2=\\sum_qc_q^2,\n\\qquad\n\\mu=\\EE|Z|=\\sqrt{1/\\pi}.",
+      "term_role": "normalisation prefactor",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$.",
+    "injected_text": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$, although we exclude the highest noise level $\\sigma=0.063$ from the bootstrap products due to excessive variance.",
+    "rationale": "Inserting a methodology claim that the highest noise level was excluded from the bootstrap products directly contradicts the subsequent text and Figure 1 caption, which explicitly discuss the bootstrap product results at sigma=0.063.",
+    "ground_truth_description": "Added a false claim in the experiments section stating that the highest noise level was excluded from bootstrap products, contradicting the figure captions and results.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Sec. 6.1",
+      "affected_span_verbatim": "We generated 300 globally optimized blocks of each family at each of ten noise levels from $0.0015$ through $0.063$, with $B=16$."
+    },
+    "proposer_agent": "injector.general.S3.t3.v2"
+  }
+]

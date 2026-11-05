@@ -1,0 +1,369 @@
+{
+  "paper_id": "2607.13618",
+  "arxiv_url": "https://arxiv.org/abs/2607.13618",
+  "rotation_seed": 20260729,
+  "schedule": [
+    {
+      "copy_id": "v1",
+      "module": "citations",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "numerics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v1",
+      "module": "mathematics",
+      "severity": "S2",
+      "type": 3
+    },
+    {
+      "copy_id": "v1",
+      "module": "general",
+      "severity": "S2",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "citations",
+      "severity": "S3",
+      "type": 2
+    },
+    {
+      "copy_id": "v2",
+      "module": "numerics",
+      "severity": "S2",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "mathematics",
+      "severity": "S3",
+      "type": 1
+    },
+    {
+      "copy_id": "v2",
+      "module": "general",
+      "severity": "S3",
+      "type": 3
+    },
+    {
+      "copy_id": "v3",
+      "module": "citations",
+      "severity": "S1",
+      "type": 2
+    },
+    {
+      "copy_id": "v3",
+      "module": "numerics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "mathematics",
+      "severity": "S1",
+      "type": 1
+    },
+    {
+      "copy_id": "v3",
+      "module": "general",
+      "severity": "S1",
+      "type": 2
+    }
+  ],
+  "copies": [
+    {
+      "copy_id": "v1",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "paper.tex",
+          "original_text": "heuristic and reinforcement-learning baselines",
+          "injected_text": "supervised and imitation-learning baselines",
+          "rationale": "Mis-categorizes the methodology used for the baselines in the cited paper (swapping RL/heuristics for supervised/imitation learning), triggering a CONTRADICTED verdict.",
+          "ground_truth_description": "Changes the description of the baselines in the InvAgent citation from 'heuristic and reinforcement-learning' to 'supervised and imitation-learning'.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "invagent2024",
+            "injected_cite_key": "invagent2024",
+            "claim_sentence_verbatim": "In inventory management specifically, AIM-Bench \\citep{aimbench2025} finds human-like ordering biases (demand anchoring, bullwhip amplification) across five environments, and InvAgent \\citep{invagent2024} reports outcome gaps against heuristic and reinforcement-learning baselines in a fully observed twelve-period setting.",
+            "section_location": "Section 2",
+            "mutation_kind": "claim_method_category_swap",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S2.t3.v1"
+        },
+        {
+          "module": "numerics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v1",
+          "file_path": "paper.tex",
+          "original_text": "  \\item \\textsc{persistent} (15 seeds), a multi-week stretch of port",
+          "injected_text": "  \\item \\textsc{persistent} (24 seeds), a multi-week stretch of port",
+          "rationale": "The paper genuinely lacks any percentage breakdowns to perturb for the 'percent_to_100' cell, so to preserve realism I fell back to the nearest equivalent (sum_eq_total) by changing a profile's seed count so the breakdown no longer sums to the stated 50 seeds.",
+          "ground_truth_description": "Perturbed the number of persistent seeds from 15 to 24 so the profile counts (12+24+23=59) no longer sum to the stated 50-seed total.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "sum_eq_total",
+            "value_before_raw": "15",
+            "value_after_raw": "24",
+            "value_before_float": 15.0,
+            "value_after_float": 24.0,
+            "location_cue": "\\item \\textsc{persistent} (24 seeds), a multi-week stretch of port",
+            "paired_location": "fifty seeds chosen this way from a 200-seed pool",
+            "quantity_label": "number of persistent seeds",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S3.t1.v1"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S2",
+          "type": 3,
+          "copy_id": "v1",
+          "file_path": "paper.tex",
+          "original_text": "\\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+          "injected_text": "C_{\\mathrm{base}} - C_{\\mathrm{agent}}",
+          "rationale": "The paper lacks canonical physical/statistical PDFs, so the normalisation denominator is dropped from the benchmark's defined skill score; Wolfram refutes this against the prose property that the score equals 1 at the oracle mean.",
+          "ground_truth_description": "Removed the normalisation denominator from the skill score equation, turning it into an absolute cost difference.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Section 4",
+            "original_fragment_latex": "\\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+            "injected_fragment_latex": "C_{\\mathrm{base}} - C_{\\mathrm{agent}}",
+            "full_equation_latex_before": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+            "full_equation_latex_after": "\\mathrm{skill} \\;=\\; C_{\\mathrm{base}} - C_{\\mathrm{agent}}",
+            "term_role": "normalisation denominator",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S2.t3.v1"
+        },
+        {
+          "module": "general",
+          "severity": "S2",
+          "type": 2,
+          "copy_id": "v1",
+          "file_path": "paper.tex",
+          "original_text": "\\texttt{buy\\_briefing}\n(\\$30) and \\texttt{buy\\_audit} (\\$25) reveal the true state of the canal\nand of the spot supplier, respectively.",
+          "injected_text": "\\texttt{buy\\_briefing}\n(\\$30) and \\texttt{buy\\_audit} (\\$25) emit noisy readings of the canal\nand of the spot supplier, respectively.",
+          "rationale": "Methods now claims the audit and briefing tools return noisy readings, but the Discussion still states they return near-deterministic ground truth by design.",
+          "ground_truth_description": "Changed the description of the audit and briefing tools in Methods to say they return noisy readings, contradicting the Discussion.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methods_results_inconsistency",
+            "expected_bucket": "minor",
+            "section_location": "Sec. 3.1",
+            "affected_span_verbatim": "Each week the agent reads a dashboard of on-hand inventory, orders in\ntransit, realized demand, freight quotes, berth waiting times, canal\ntransit counts, supplier scorecards, and quality reports. It may then take\nany of five within-week actions, none of which advances time.\n\\texttt{lock\\_freight} fixes the current freight multiplier for a chosen\nnumber of weeks; the lock itself is free, but a locked rate forgoes any\ndrop in the spot index. \\texttt{expedite\\_air} flies up to 20 units in at\n\\$15 per unit; they land the following week and bypass the port entirely.\n\\texttt{inspect\\_batch} (\\$40) sorts an arriving batch so that most\ndefective units are recovered before they stock. \\texttt{buy\\_briefing}\n(\\$30) and \\texttt{buy\\_audit} (\\$25) reveal the true state of the canal\nand of the spot supplier, respectively."
+          },
+          "proposer_agent": "injector.general.S2.t2.v1"
+        }
+      ]
+    },
+    {
+      "copy_id": "v2",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S3",
+          "type": 2,
+          "copy_id": "v2",
+          "file_path": "paper.tex",
+          "original_text": "recite causal facts from text rather than infer them",
+          "injected_text": "infer causal facts from text rather than recite them",
+          "rationale": "Swapping the positions of 'recite' and 'infer' reverses the direction of the cited paper's central conclusion, ensuring a CONTRADICTED verdict.",
+          "ground_truth_description": "Reversed the claim attributed to zecevic2023parrots so that it says models infer causal facts rather than recite them, opposite to the cited finding.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "zecevic2023parrots",
+            "injected_cite_key": "zecevic2023parrots",
+            "claim_sentence_verbatim": "Causal-reasoning benchmarks test whether a model can recover causal structure or answer interventional and counterfactual queries \\citep{cladder2023}, and there is evidence that models recite causal facts from text rather than infer them \\citep{zecevic2023parrots}.",
+            "section_location": "Section 2",
+            "mutation_kind": "claim_direction_reversal",
+            "detection_target_verdict": "CONTRADICTED"
+          },
+          "proposer_agent": "injector.citations.S3.t2.v2"
+        },
+        {
+          "module": "numerics",
+          "severity": "S2",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "paper.tex",
+          "original_text": "Claude Sonnet 5, GPT-5.4, DeepSeek-V4-Pro, and Grok 4.5 detect 84--88\\%\nof hidden failures",
+          "injected_text": "Claude Sonnet 5, GPT-5.4, DeepSeek-V4-Pro, and Grok 4.5 detect 48--88\\%\nof hidden failures",
+          "rationale": "Swapping the digits of the headline lower-bound detection rate in the abstract (84 -> 48) contradicts the correct value that still appears in Section 5 ('84--88\\%'), firing the abstract_vs_body_match predicate.",
+          "ground_truth_description": "Digit swap in the abstract's headline detection rate from 84% to 48%, creating an inconsistency with the body text.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "84",
+            "value_after_raw": "48",
+            "value_before_float": 84.0,
+            "value_after_float": 48.0,
+            "location_cue": "Claude Sonnet 5, GPT-5.4, DeepSeek-V4-Pro, and Grok 4.5 detect 84--88\\%\nof hidden failures",
+            "paired_location": "Section 5",
+            "quantity_label": "percentage of hidden failures detected",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S2.t1.v2"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S3",
+          "type": 1,
+          "copy_id": "v2",
+          "file_path": "paper.tex",
+          "original_text": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+          "injected_text": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}, i}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+          "rationale": "Introduces an unbound free index 'i' on the agent cost term, making the right-hand side an indexed object while the left-hand side is a scalar, creating a shape mismatch.",
+          "ground_truth_description": "Added an unquantified index 'i' to the agent cost in the skill score equation.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Eq. (1) in Section 4",
+            "original_fragment_latex": "C_{\\mathrm{agent}}",
+            "injected_fragment_latex": "C_{\\mathrm{agent}, i}",
+            "full_equation_latex_before": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+            "full_equation_latex_after": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}, i}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+            "term_role": "injected shape/index mismatch",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "refuted",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S3.t1.v2"
+        },
+        {
+          "module": "general",
+          "severity": "S3",
+          "type": 3,
+          "copy_id": "v2",
+          "file_path": "paper.tex",
+          "original_text": "mean on that tape, so skill is undefined there, and the seed is excluded\nfrom every skill mean (leaving $n = 49$). Its runs still count in a\ndenominator-free companion statistic, the number of seeds on which the\nagent's raw cost beats the floor's.",
+          "injected_text": "mean on that tape, so skill is undefined there, and the seed is excluded\nfrom every skill mean (leaving $n = 49$). We additionally drop any episode where an agent beats the oracle, strictly capping maximum skill at one. Its runs still count in a\ndenominator-free companion statistic, the number of seeds on which the\nagent's raw cost beats the floor's.",
+          "rationale": "Inserting a methodology claim that episodes beating the oracle are dropped to cap skill at one creates a stark contradiction with the Results section, which explicitly states that individual scores above 1 occur and are legitimate.",
+          "ground_truth_description": "Added a sentence to the metrics description claiming that runs beating the oracle are excluded to cap skill scores at 1, contradicting the Results section which reports 33 runs scoring above 1.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "B",
+            "checklist_item_id": "B3",
+            "change_kind": "methodology_setup_contradiction",
+            "expected_bucket": "major",
+            "section_location": "Section 4",
+            "affected_span_verbatim": "One of the fifty seeds has negative headroom ($C_{\\mathrm{base}} < C_{\\mathrm{orc}}$): the floor already beats the oracle\nmean on that tape, so skill is undefined there, and the seed is excluded\nfrom every skill mean (leaving $n = 49$). Its runs still count in a\ndenominator-free companion statistic, the number of seeds on which the\nagent's raw cost beats the floor's."
+          },
+          "proposer_agent": "injector.general.S3.t3.v2"
+        }
+      ]
+    },
+    {
+      "copy_id": "v3",
+      "injections": [
+        {
+          "module": "citations",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "paper.tex",
+          "original_text": "produce a correct rationale for 87\\% of decisions",
+          "injected_text": "produce a correct rationale for 91\\% of decisions",
+          "rationale": "Since the source paper lacks explicitly bounded \\pm \\sigma cited values, the 87\\% accuracy claim was shifted by 4 points to 91\\%, serving as a plausible 1-2\\sigma perturbation for a behavioral ML trial without introducing unnatural formatting.",
+          "ground_truth_description": "Changed the reported rationale correctness rate for Schmied et al. (2025) from 87\\% to 91\\%.",
+          "truth": {
+            "kind": "citations",
+            "original_cite_key": "schmied2025greedy",
+            "injected_cite_key": "schmied2025greedy",
+            "claim_sentence_verbatim": "In bandit tasks, models produce a correct rationale for 87\\% of decisions and still take the greedy action over the optimal action they just derived \\citep{schmied2025greedy}.",
+            "section_location": "Sec. 2",
+            "mutation_kind": "claim_qualifier_1to2_sigma",
+            "detection_target_verdict": "PARTIALLY_SUPPORTED"
+          },
+          "proposer_agent": "injector.citations.S1.t2.v3"
+        },
+        {
+          "module": "numerics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "paper.tex",
+          "original_text": "scores from $0.62$ to $-0.23$:",
+          "injected_text": "scores from $0.63$ to $-0.23$:",
+          "rationale": "Perturbs the upper bound of the skill score range in the abstract by +0.01, creating a minor mismatch with the true value in Table 2.",
+          "ground_truth_description": "Abstract's upper skill score bound drifted from 0.62 to 0.63, contradicting the body's Table 2.",
+          "truth": {
+            "kind": "numerics",
+            "predicate": "abstract_vs_body_match",
+            "value_before_raw": "0.62",
+            "value_after_raw": "0.63",
+            "value_before_float": 0.62,
+            "value_after_float": 0.63,
+            "location_cue": "scores from $0.62$ to $-0.23$: two of the four end below",
+            "paired_location": "Table 2",
+            "quantity_label": "maximum agent skill score",
+            "expected_bucket": "major"
+          },
+          "proposer_agent": "injector.numerics.S1.t1.v3"
+        },
+        {
+          "module": "mathematics",
+          "severity": "S1",
+          "type": 1,
+          "copy_id": "v3",
+          "file_path": "paper.tex",
+          "original_text": "\\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+          "injected_text": "\\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{orc}} - C_{\\mathrm{base}}}",
+          "rationale": "The canonical skill score normalises as (baseline - model) / (baseline - reference); the injected form reverses the denominator to (reference - baseline), which negates the score. It directly contradicts the sentence immediately following the display, which states the quantity is 0 at the symptom-blind floor and 1 at the oracle mean — under the injected form it would be -1 at the oracle mean.",
+          "ground_truth_description": "Skill-score definition: denominator (C_base - C_orc) replaced by (C_orc - C_base), inverting the sign of the normalised score.",
+          "truth": {
+            "kind": "mathematics",
+            "equation_label": null,
+            "equation_location": "Sec. 4, skill-score definition display",
+            "original_fragment_latex": "{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+            "injected_fragment_latex": "{C_{\\mathrm{orc}} - C_{\\mathrm{base}}}",
+            "full_equation_latex_before": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{base}} - C_{\\mathrm{orc}}}",
+            "full_equation_latex_after": "\\mathrm{skill} \\;=\\; \\frac{C_{\\mathrm{base}} - C_{\\mathrm{agent}}}{C_{\\mathrm{orc}} - C_{\\mathrm{base}}}",
+            "term_role": "skill-score normalisation denominator",
+            "expected_engine": "wolfram",
+            "expected_verifier_outcome": "inconclusive",
+            "units_critical": false
+          },
+          "proposer_agent": "injector.mathematics.S1.t1.v3"
+        },
+        {
+          "module": "general",
+          "severity": "S1",
+          "type": 2,
+          "copy_id": "v3",
+          "file_path": "paper.tex",
+          "original_text": "Table~\\ref{tab:related} summarizes the benchmarks closest to ours.",
+          "injected_text": "Table~\\ref{tab:relatd} summarizes the benchmarks closest to ours.",
+          "rationale": "A broken \\ref target introduces a '??' into the rendered PDF, acting as a minor presentation defect.",
+          "ground_truth_description": "Introduced a typo in a \\ref command to generate a '??' rendering artefact.",
+          "truth": {
+            "kind": "general",
+            "checklist_category": "D",
+            "checklist_item_id": "D7",
+            "change_kind": "latex_artefact",
+            "expected_bucket": "very_minor",
+            "section_location": "Sec. 2",
+            "affected_span_verbatim": "Table~\\ref{tab:related} summarizes the benchmarks closest to ours."
+          },
+          "proposer_agent": "injector.general.S1.t2.v3"
+        }
+      ]
+    }
+  ]
+}

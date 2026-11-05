@@ -1,0 +1,188 @@
+{
+  "paper_id": "2604.20914",
+  "reviewer_system": "L2",
+  "provider_tag": "openai",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-c339edc5f9c6",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper explicitly states 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations' and Appendix C confirms a single non-spinning MBHB injection with fixed geometric parameters, one mass/redshift pair, and TianQin A/E channels only, while the abstract claims 'a viable and scalable route for multi-mode ringdown analysis in the space context' without broader empirical validation.",
+        "evidence": {
+          "claim": "The empirical validation is too narrow for the broad claims made about space-borne detectors and multi-mode ringdown analysis generally; results are based on a single injection and setup, but claims are made for much broader applicability.",
+          "excerpt": "The empirical validation is too narrow for the broad claims made about “space-borne detectors” and “multi-mode ringdown analysis” generally. The results use one non-spinning MBHB injection, one redshift and mass pair, TianQin A/E channels only, fixed geometric parameters, one start time, and one six-mode ordering, while the abstract and concluding paragraph present the method as a generally viable route for space-borne multi-mode analyses and other in-band sources (Abstract; Sec. 1; Appendix C)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper explicitly states 'This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations' and Appendix C confirms a single non-spinning MBHB injection with fixed geometric parameters, one mass/redshift pair, and TianQin A/E channels only, while the abstract claims 'a viable and scalable route for multi-mode ringdown analysis in the space context' without broader empirical validation.",
+            "cost_usd": 0.0057765
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper’s experiments are indeed narrow: it says \"As an example, we consider a non-spinning MBHB... The data are recorded from t = 10Mf after the merger in the TDI A and E channels of TianQin\" and Appendix C fixes one injection/setup. Yet it still generalizes broadly, e.g. \"This choice is for illustration, but the analysis readily generalizes to other start times t and detector (network) configurations,\" without broader empirical validation.",
+            "cost_usd": 0.008872125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states that 'As an example, we consider a non-spinning MBHB with source-frame masses... recorded from t = 10Mf... in the TDI A and E channels of TianQin' and presents this single configuration as an illustration, without empirically validating other setups, leaving the broad claims unverified.",
+            "cost_usd": 0.002445
+          }
+        ],
+        "cost_usd": 0.017093625
+      },
+      {
+        "flag_id": "fp-b1fab36989bd",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The timing claim is reported only as \"reducing the computation from about 13 hours to 4 minutes\" and Fig. 2 gives \"Sampling time for full-parameter sampling and FIREFLY,\" but the paper never states exactly what is included in that timing. Appendix C separately lists FIREFLY post-processing settings — \"nw = 50000,\" \"n⊗ = 20000,\" and \"nB = 5000\" — without clarifying whether these steps are counted in the reported runtime.",
+        "evidence": {
+          "claim": "The timing/speedup claim is central but under-specified; it is not clear whether the reported 'sampling time' includes all FIREFLY steps, so the speedup may be mischaracterized.",
+          "excerpt": "The timing/speedup claim is central but under-specified. The paper states that FIREFLY reduces the six-mode analysis from about 13 hours to 4 minutes and gives a ∼200-fold speedup, but it is not fully clear whether the reported “sampling time” includes all FIREFLY steps: auxiliary sampling, construction of basis functions, matrix operations, the first Monte Carlo integration with `nw = 50000`, the `n⊗ = 20000` reweighted samples, and the `nB = 5000` conditional draws for every reweighted sample (Sec. 1; Appendix C)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper reports 'the average time over 5 independent runs' and describes all FIREFLY steps in Appendix C (auxiliary sampling, MC integration with nw=50000, n⊗=20000 reweighted samples, nB=5000 conditional draws), but does not explicitly state whether all these post-processing steps are included in the reported 4-minute timing versus just the auxiliary sampling step.",
+            "cost_usd": 0.0057765
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The timing claim is reported only as \"reducing the computation from about 13 hours to 4 minutes\" and Fig. 2 gives \"Sampling time for full-parameter sampling and FIREFLY,\" but the paper never states exactly what is included in that timing. Appendix C separately lists FIREFLY post-processing settings — \"nw = 50000,\" \"n⊗ = 20000,\" and \"nB = 5000\" — without clarifying whether these steps are counted in the reported runtime.",
+            "cost_usd": 0.008872125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper simply reports that 'FIREFLY achieves an approximately 200 times speedup, reducing the computation from about 13 hours to 4 minutes' and shows overall 'Sampling time' in Figure 2, but fails to provide a breakdown clarifying whether this duration encompasses all necessary procedural steps like the MC integration and conditional parameter draws detailed in Appendix C.",
+            "cost_usd": 0.002445
+          }
+        ],
+        "cost_usd": 0.017093625
+      },
+      {
+        "flag_id": "fp-6c1609f4599d",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'The framework developed in this work has the potential to extend to other GW sources...such as double white dwarfs and extreme mass-ratio inspirals, where similar Gaussian structures exist in the likelihood,' but provides no experiment or derivation for those waveform families, making this an acknowledged but undemonstrated claim per R1.",
+        "evidence": {
+          "claim": "The paper overstates demonstrated extensibility to other GW sources; no experiment or derivation is provided for those waveform families, yet the conclusion and abstract claim such potential.",
+          "excerpt": "The conclusion and abstract overstate demonstrated extensibility. The paper says the framework “has the potential to extend to other GW sources” such as double white dwarfs and EMRIs and that FIREFLY can “unlock” the full potential of future space-borne GW observations, but no experiment or derivation is provided for those waveform families, their parameter degeneracies, source-duration differences, or nontrivial nuisance parameters (Abstract; Sec. 1)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states 'The framework developed in this work has the potential to extend to other GW sources...such as double white dwarfs and extreme mass-ratio inspirals, where similar Gaussian structures exist in the likelihood,' but provides no experiment or derivation for those waveform families, making this an acknowledged but undemonstrated claim per R1.",
+            "cost_usd": 0.0057765
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper does not present experiments or source-specific derivations for other waveform families, yet the abstract states the method \"is extensible to other GW sources in band.\" In the conclusion this is softened to \"has the potential to extend to other GW sources... such as double white dwarfs and extreme mass-ratio inspirals,\" which still remains an unvalidated extrapolation in this paper.",
+            "cost_usd": 0.008872125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper claims the framework 'has the potential to extend to other GW sources in space-borne detectors’ frequency band, such as double white dwarfs and extreme mass-ratio inspirals' based on 'similar Gaussian structures', but provides no specific mathematical derivation or empirical demonstration for these alternative waveform families.",
+            "cost_usd": 0.002445
+          }
+        ],
+        "cost_usd": 0.017093625
+      },
+      {
+        "flag_id": "fp-1dd612e652f4",
+        "paper_id": "2604.20914",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "Appendix C states 'Other geometric parameters such as the sky location are fixed to their injected values, but we can also include them in θ and sample in the inference. In addition, changing the injected geometric parameters does not affect the speedup substantially,' but no quantitative assessment of fidelity or speedup with free geometric parameters is provided, leaving the concern unaddressed per R1.",
+        "evidence": {
+          "claim": "The inference setup fixes geometric parameters and uses flat amplitude/phase priors, but does not fully assess how these choices affect fidelity and speedup; fixing these parameters removes key correlations likely important in realistic analyses.",
+          "excerpt": "The inference setup fixes geometric parameters and uses flat amplitude/phase priors, but the paper does not fully assess how these choices affect the claimed fidelity and speedup. Since TDI responses depend strongly on sky location, polarization, inclination, and time-dependent detector geometry, fixing these parameters removes correlations that may be important in realistic space-borne analyses (Sec. 1; Appendix C)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "Appendix C states 'Other geometric parameters such as the sky location are fixed to their injected values, but we can also include them in θ and sample in the inference. In addition, changing the injected geometric parameters does not affect the speedup substantially,' but no quantitative assessment of fidelity or speedup with free geometric parameters is provided, leaving the concern unaddressed per R1.",
+            "cost_usd": 0.0057765
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The setup does fix geometric parameters: Appendix C states \"Other geometric parameters such as the sky location are fixed to their injected values,\" and although it adds \"we can also include them in θ and sample in the inference,\" no quantitative test of that more realistic case is shown. Likewise, the paper specifies flat target priors — \"we choose flat priors: ϕℓmn ∼ U(0, 2π) and Aℓmn ∼ U(0, Amax)\" — but does not assess how these prior/modeling choices change fidelity or speedup beyond the illustrated case.",
+            "cost_usd": 0.008872125
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges that 'Other geometric parameters such as the sky location are fixed to their injected values' and asserts that changing them 'does not affect the speedup substantially', but it does not actually assess or quantify the impact on fidelity and efficiency when these parameters are jointly sampled rather than fixed.",
+            "cost_usd": 0.002445
+          }
+        ],
+        "cost_usd": 0.017093625
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0683745
+  },
+  "extractor_cost_usd": 0.021054000000000017,
+  "total_cost_usd": 0.08942850000000002
+}

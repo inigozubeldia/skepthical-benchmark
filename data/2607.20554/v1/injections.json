@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S1",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "Recent research on intelligent network optimisation for 5G and beyond has extensively explored machine learning techniques for service prioritisation, outage management, network slicing, and resource allocation~\\cite{10736694,10215916,naumann2019v2x}.",
+    "injected_text": "Recent research on intelligent network optimisation for 6G and beyond has extensively explored machine learning techniques for service prioritisation, outage management, network slicing, and resource allocation~\\cite{10736694,10215916,naumann2019v2x}.",
+    "rationale": "Since the source paper contains no explicit ±σ quantitative claims attached to citations, I shifted the generation number (5G to 6G) in a cited claim as a surrogate for a minor quantitative misquote, introducing a tension with the cited papers which focus on 5G.",
+    "ground_truth_description": "Altered the numerical generation qualifier from 5G to 6G in a claim supported by citations that explicitly focus on 5G and V2X.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "10736694,10215916,naumann2019v2x",
+      "injected_cite_key": "10736694,10215916,naumann2019v2x",
+      "claim_sentence_verbatim": "Recent research on intelligent network optimisation for 5G and beyond has extensively explored machine learning techniques for service prioritisation, outage management, network slicing, and resource allocation~\\cite{10736694,10215916,naumann2019v2x}.",
+      "section_location": "Related Work and Motivation",
+      "mutation_kind": "claim_qualifier_1to2_sigma",
+      "detection_target_verdict": "PARTIALLY_SUPPORTED"
+    },
+    "proposer_agent": "injector.citations.S1.t2.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "we analyze 286,602 graph snapshots generated within a 500$\\times$500\\,m area",
+    "injected_text": "we analyze 28,660 graph snapshots generated within a 500$\\times$500\\,m area",
+    "rationale": "Introduces an order-of-magnitude error by changing the number of graph snapshots in Section V.G to 28,660, which massively contradicts the 286,602 snapshots originally stated in Section V.A.",
+    "ground_truth_description": "Changes the number of graph snapshots analyzed from 286,602 to 28,660 in Section V.G, introducing a 10x contradiction with the dataset details in Section V.A.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "286,602",
+      "value_after_raw": "28,660",
+      "value_before_float": 286602.0,
+      "value_after_float": 28660.0,
+      "location_cue": "we analyze 286,602 graph snapshots generated within a 500$\\times$500\\,m area",
+      "paired_location": "Section V.A Implementation details",
+      "quantity_label": "number of graph snapshots analyzed",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S3.t2.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "\\sum_{j \\in V_{\\mathrm{RSU}}} \\mathbb{I}",
+    "injected_text": "\\sum_{j \\in V} \\mathbb{I}",
+    "rationale": "Widens the summation index set of the connectivity constraint from the RSU node set V_RSU to the full node set V. This is the set-valued analogue of a summation bound shift: the constraint now counts paths to ANY node rather than strictly to a roadside unit, so a CAV with no path to any RSU can still satisfy it — contradicting the sentence above the display, which requires a directed path to at least one RSU.",
+    "ground_truth_description": "Connectivity constraint: summation index set widened from V_{RSU} to V, so paths to non-RSU nodes wrongly satisfy the RSU-reachability requirement.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Problem formulation — RSU connectivity constraint",
+      "original_fragment_latex": "\\sum_{j \\in V_{\\mathrm{RSU}}}",
+      "injected_fragment_latex": "\\sum_{j \\in V}",
+      "full_equation_latex_before": "y_i \\leq \\sum_{j \\in V_{\\mathrm{RSU}}} \\mathbb{I}\\{ \\text{path exists from } i \\text{ to } j \\}, \\quad \\forall i \\in V_{\\mathrm{CAV}},",
+      "full_equation_latex_after": "y_i \\leq \\sum_{j \\in V} \\mathbb{I}\\{ \\text{path exists from } i \\text{ to } j \\}, \\quad \\forall i \\in V_{\\mathrm{CAV}},",
+      "term_role": "summation index set (RSU reachability)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "inconclusive",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S1.t3.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "main.tex",
+    "original_text": "The dataset comprises \\textit{[286,602]} snapshots balanced across\nthe three districts (\\textit{Porta-Pia, Eur, Trastevere} each).",
+    "injected_text": "The dataset comprises \\textit{[286,602]} snapshots balanced across\nthe three districts (\\textit{Porta-Pia, Eur, Trastevere} each), with snapshots containing fewer than 100 candidate edges explicitly filtered out.",
+    "rationale": "The inserted claim in the Experimental Setup states that sparse networks with fewer than 100 edges were filtered out, which is visibly contradicted by Section V.G and Table I where the 'Suburban regime' (<100 edges) is explicitly evaluated.",
+    "ground_truth_description": "Added a methodology claim stating that networks with <100 edges were filtered out, directly contradicting the results section which evaluates these sparse networks.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B3",
+      "change_kind": "methodology_setup_contradiction",
+      "expected_bucket": "major",
+      "section_location": "Section V.A",
+      "affected_span_verbatim": "Data are split into 70\\%/20\\%/10\\% train/validation/test\n(seed=42). The dataset comprises \\textit{[286,602]} snapshots balanced across\nthe three districts (\\textit{Porta-Pia, Eur, Trastevere} each)."
+    },
+    "proposer_agent": "injector.general.S3.t3.v1"
+  }
+]

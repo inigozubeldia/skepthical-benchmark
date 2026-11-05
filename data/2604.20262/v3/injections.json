@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "2026-0218.tex",
+    "original_text": "Recently, the CHIME team \\citep{chimebeam} demonstrated a novel technique using the Sun as a calibration source for primary beam measurement.",
+    "injected_text": "Recently, the CHIME team \\citep{chimebeam} reported the discovery of a luminous fast radio burst originating from a Galactic magnetar, providing strong evidence that magnetar flares are a progenitor of at least some FRBs.",
+    "rationale": "Topic mis-attribution with cite key intact: chimebeam is the CHIME Sun-based primary-beam paper, but the rewritten claim attributes a Galactic-magnetar FRB discovery to it — a substantive result entirely absent from that paper, on a different subject within the same collaboration's broader output (the kind of confusion a tired author could plausibly make).",
+    "ground_truth_description": "Replaced the claim attached to \\citep{chimebeam} so that instead of describing a Sun-based primary-beam measurement technique (the actual subject of that paper), the sentence credits the cited paper with reporting a Galactic-magnetar FRB discovery, which it does not discuss.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "chimebeam",
+      "injected_cite_key": "chimebeam",
+      "claim_sentence_verbatim": "Recently, the CHIME team \\citep{chimebeam} reported the discovery of a luminous fast radio burst originating from a Galactic magnetar, providing strong evidence that magnetar flares are a progenitor of at least some FRBs.",
+      "section_location": "Introduction",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v3"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v3",
+    "file_path": "2026-0218.tex",
+    "original_text": "We have selected 12 similar short baselines located on the A cylindrical surface.",
+    "injected_text": "We have selected 11 similar short baselines located on the A cylindrical surface.",
+    "rationale": "The abstract of this paper contains no numerical values, so a literal abstract-vs-body second-decimal drift is not feasible; the closest realistic anchor is the headline count '12 similar short baselines' which appears once in the Methods (§ NS Beam Measurement: 'we selected the following baselines A1-A9, A2-A10, ... A12-A20', explicitly enumerating 12) and again in the Results section. Perturbing the Results occurrence from 12 to 11 creates a cross-section inconsistency on the same quantity that abstract_vs_body_match-style logic detects.",
+    "ground_truth_description": "Changed the Results-section baseline count from '12 similar short baselines' to '11 similar short baselines', contradicting the Methods statement (and the explicit A1-A9 through A12-A20 enumeration) that describes 12 baselines.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "12",
+      "value_after_raw": "11",
+      "value_before_float": 12.0,
+      "value_after_float": 11.0,
+      "location_cue": "We have selected 12 similar short baselines located on the A cylindrical surface",
+      "paired_location": "Methods § NS Beam Measurement: 'Finally, We have selected 12 similar short baselines located on the same cylinder.' (followed by enumerated list A1-A9, A2-A10, A3-A11, A4-A12, A5-A13, A6-A14, A7-A15, A8-A16, A9-A17, A10-A18, A11-A19, A12-A20 — 12 baselines)",
+      "quantity_label": "Number of short north-south baselines selected on cylinder A for the N-S primary beam fit",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v3"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 2,
+    "copy_id": "v3",
+    "file_path": "2026-0218.tex",
+    "original_text": "S = \\frac{1}{N}\\sum_{(i,j) \\in \\mathcal{S}} V_{i,j}^{\\rm cal} ~ e^{\\frac{2\\pi i}{\\lambda}\\vec{n}\\cdot(\\vec{r}_j - \\vec{r}_i)}",
+    "injected_text": "S = \\frac{1}{N}\\prod_{(i,j) \\in \\mathcal{S}} V_{i,j}^{\\rm cal} ~ e^{\\frac{2\\pi i}{\\lambda}\\vec{n}\\cdot(\\vec{r}_j - \\vec{r}_i)}",
+    "rationale": "Operator swap (sum -> product) on the beamforming definition: the equation still typesets, but a product of phased visibilities is not a coherent beamformed signal, so Wolfram refutes it against the standard beamforming identity.",
+    "ground_truth_description": "In the beamforming equation, the outer summation operator over selected baselines was replaced by a product operator, while the operand and prefactor 1/N were left unchanged.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 2.3.3 (Beamforming), unlabeled displayed equation defining S",
+      "original_fragment_latex": "\\sum_{(i,j) \\in \\mathcal{S}}",
+      "injected_fragment_latex": "\\prod_{(i,j) \\in \\mathcal{S}}",
+      "full_equation_latex_before": "S = \\frac{1}{N}\\sum_{(i,j) \\in \\mathcal{S}} V_{i,j}^{\\rm cal} ~ e^{\\frac{2\\pi i}{\\lambda}\\vec{n}\\cdot(\\vec{r}_j - \\vec{r}_i)}",
+      "full_equation_latex_after": "S = \\frac{1}{N}\\prod_{(i,j) \\in \\mathcal{S}} V_{i,j}^{\\rm cal} ~ e^{\\frac{2\\pi i}{\\lambda}\\vec{n}\\cdot(\\vec{r}_j - \\vec{r}_i)}",
+      "term_role": "outer operator swap (coherent sum over baselines becomes a product)",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t2.v3"
+  },
+  {
+    "module": "general",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v3",
+    "file_path": "2026-0218.tex",
+    "original_text": "To prevent cross-coupling between feeds, we selected those with $L > 1.8\\text{m}$.",
+    "injected_text": "To prevent cross-coupling between feeds, we selected those with $L > 1.8\\text{m}$ (shorter baselines showed visibly degraded phase stability in our preliminary checks).",
+    "rationale": "Inserts a parenthetical justifying the L>1.8 m baseline-selection threshold by appealing to a 'preliminary check' of phase stability that the Results, Discussion, and figures of the paper never actually report, creating an unsupported sub-claim that a reviewer cross-referencing Methods against evidence would flag.",
+    "ground_truth_description": "Added a parenthetical phantom-evidence justification ('shorter baselines showed visibly degraded phase stability in our preliminary checks') to the Methods sentence motivating the L>1.8 m baseline cut, asserting an empirical observation that is not actually presented anywhere in the paper.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "C",
+      "checklist_item_id": "C4",
+      "change_kind": "phantom_evidence_subclaim",
+      "expected_bucket": "minor",
+      "section_location": "Sec. 2.3.1 (Baseline Selection)",
+      "affected_span_verbatim": "To prevent cross-coupling between feeds, we selected those with $L > 1.8\\text{m}$."
+    },
+    "proposer_agent": "injector.general.S2.t3.v3"
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "enabling Quantization-Aware Training\n(QAT) \\cite{jacob2017quantization}, which helps maintain model performance on FPGA by\nsimulating low-precision arithmetic during the training\nphase \\cite{Chen2020Statistical,Chen2021ActNN}. QAT allows",
+    "injected_text": "enabling Post-Training Quantization\n(PTQ) \\cite{jacob2017quantization}, which helps maintain model performance on FPGA by\ncalibrating low-precision arithmetic after the training\nphase \\cite{Chen2020Statistical,Chen2021ActNN}. PTQ allows",
+    "rationale": "Swaps the method category from Quantization-Aware Training (QAT) to Post-Training Quantization (PTQ), mis-attributing the fundamental methodology of the cited papers which focus exclusively on training-time optimization and simulation.",
+    "ground_truth_description": "Changes the description of the quantization methodology in the claim from Quantization-Aware Training to Post-Training Quantization, directly contradicting the cited references.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "jacob2017quantization",
+      "injected_cite_key": "jacob2017quantization",
+      "claim_sentence_verbatim": "QKeras is a quantization extension that provides drop-in functional equivalents for standard Keras layers, enabling Post-Training Quantization (PTQ) \\cite{jacob2017quantization}, which helps maintain model performance on FPGA by calibrating low-precision arithmetic after the training phase \\cite{Chen2020Statistical,Chen2021ActNN}.",
+      "section_location": "Sec. 2.1 Proposed architecture",
+      "mutation_kind": "claim_method_category_swap",
+      "detection_target_verdict": "CONTRADICTED"
+    },
+    "proposer_agent": "injector.citations.S2.t3.v2"
+  },
+  {
+    "module": "numerics",
+    "severity": "S1",
+    "type": 1,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "reaching a per-inference latency of $6.19\\,\\mu$s on the Zynq UltraScale+ RFSoC ZCU216.",
+    "injected_text": "reaching a per-inference latency of $6.18\\,\\mu$s on the Zynq UltraScale+ RFSoC ZCU216.",
+    "rationale": "Perturbs the abstract's quoted latency by 0.01 microseconds, creating a second-decimal abstract vs body mismatch while leaving Section 4.3 untouched.",
+    "ground_truth_description": "Changed the per-inference latency in the abstract from 6.19 to 6.18 microseconds, introducing a mismatch with the body of the paper.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "abstract_vs_body_match",
+      "value_before_raw": "6.19",
+      "value_after_raw": "6.18",
+      "value_before_float": 6.19,
+      "value_after_float": 6.18,
+      "location_cue": "reaching a per-inference latency of $6.18\\,\\mu$s on the Zynq UltraScale+ RFSoC ZCU216.",
+      "paired_location": "Section 4.3 and Table V",
+      "quantity_label": "per-inference latency in microseconds",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S1.t1.v2"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S2",
+    "type": 3,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "\\chi^2_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^{n}",
+    "injected_text": "\\chi^2_n(\\theta) = \\sum_{i=1}^{n}",
+    "rationale": "Dropped the 1/n normalisation prefactor from the definition of the reduced chi-squared, rendering it standard chi-squared and contradicting the prose.",
+    "ground_truth_description": "Removed the 1/n normalisation prefactor from the reduced chi-squared equation.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": null,
+      "equation_location": "Sec. 1.3",
+      "original_fragment_latex": "\\frac{1}{n}",
+      "injected_fragment_latex": "",
+      "full_equation_latex_before": "\\chi^2_n(\\theta) = \\frac{1}{n} \\sum_{i=1}^{n}\n  \\frac{(x_i - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)} \\,.",
+      "full_equation_latex_after": "\\chi^2_n(\\theta) = \\sum_{i=1}^{n}\n  \\frac{(x_i - \\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)} \\,.",
+      "term_role": "normalisation prefactor",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S2.t3.v2"
+  },
+  {
+    "module": "general",
+    "severity": "S3",
+    "type": 2,
+    "copy_id": "v2",
+    "file_path": "main.tex",
+    "original_text": "supports streaming deployment in the qubit control loop. Future work will focus on\ndeploying the DCCNN on real-time data acquisition with operating qubit hardware, validating",
+    "injected_text": "supports streaming deployment in the qubit control loop, establishing a universal detection framework that generalizes natively to all forms of environmental noise across arbitrary solid-state quantum architectures. Future work will focus on\ndeploying the DCCNN on real-time data acquisition with operating qubit hardware, validating",
+    "rationale": "Adds a sweeping, unverified generalization to the Conclusion claiming the method works for all noise forms on arbitrary architectures, though only charge jumps on specific superconducting qubits were tested.",
+    "ground_truth_description": "Added an unsupported, sweeping claim in the Conclusion stating the method generalizes to all forms of environmental noise across arbitrary quantum architectures.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "B",
+      "checklist_item_id": "B7",
+      "change_kind": "overstated_conclusion",
+      "expected_bucket": "major",
+      "section_location": "Conclusions",
+      "affected_span_verbatim": "These results demonstrate that ML-based charge-jump detection is viable at the resource\nand latency constraints of on-chip quantum firmware. The approach is supervision-free at\ninference time, requires no hyperparameter tuning when applied to a new qubit, and\nsupports streaming deployment in the qubit control loop. Future work will focus on\ndeploying the DCCNN on real-time data acquisition with operating qubit hardware, validating\nthe simulation-trained model on measured scans and demonstrating in-loop integration with\nthe QICK control firmware."
+    },
+    "proposer_agent": "injector.general.S3.t2.v2"
+  }
+]

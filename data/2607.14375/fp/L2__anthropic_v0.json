@@ -1,0 +1,146 @@
+{
+  "paper_id": "2607.14375",
+  "reviewer_system": "L2",
+  "provider_tag": "anthropic",
+  "per_module_verdicts": {
+    "general": [
+      {
+        "flag_id": "fp-6735ba4bb80c",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "The paper provides the full algebraic derivation in the proof of Theorem 2: it explicitly states 'The reward deficits of clauses satisfied by a are nonnegative' and shows 'm/3 − g_Φ(x) ≥ V/3 + u/3 − (1/3)Σ_{C∈F(a)} D_C ≥ u/3, where the final inequality holds because false-clause occurrences are a subset of all literal occurrences, so Σ_{C∈F(a)} D_C ≤ V.' The derivation from Eq. (8) via min{L_C, 1/3} is also shown explicitly using 'LC − ReLU(LC − 1/3) = min{LC, 1/3}'.",
+        "evidence": {
+          "claim": "Proof of Theorem 2 compresses a key algebraic step: The gap inequality for m/3 − g_Φ(x) as a function of clause types is ambiguously or incompletely justified, with critical sign and minimum/deficit direction left unstated; possible to mislead the reader regarding the algebraic structure.",
+          "excerpt": "Missing verification of one algebraic step in the proof of Theorem 2 (Sec. 3). The claim m/3 − g_Φ(x) ≥ V/3 + u/3 − (1/3)Σ_{C∈F(a)} D_C is stated but the derivation from Eq. (8) is compressed. Specifically, the reader must verify that (i) for satisfied clauses under a, min{L_C, 1/3} ≥ 1/3 ..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper provides the full algebraic derivation in the proof of Theorem 2: it explicitly states 'The reward deficits of clauses satisfied by a are nonnegative' and shows 'm/3 − g_Φ(x) ≥ V/3 + u/3 − (1/3)Σ_{C∈F(a)} D_C ≥ u/3, where the final inequality holds because false-clause occurrences are a subset of all literal occurrences, so Σ_{C∈F(a)} D_C ≤ V.' The derivation from Eq. (8) via min{L_C, 1/3} is also shown explicitly using 'LC − ReLU(LC − 1/3) = min{LC, 1/3}'.",
+            "cost_usd": 0.0082567
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The proof gives the sign/direction needed for the clause-deficit argument: after Eq. (8) it states, “The reward deficits of clauses satisfied by a are nonnegative. Therefore m/3 − gΦ(x) ≥ V/3 + u/3 − (1/3)∑_{C∈F(a)} D_C ≥ u/3,” and explains the last step by “false-clause occurrences are a subset of all literal occurrences, so ∑_{C∈F(a)} D_C ≤ V.”",
+            "cost_usd": 0.009926666666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly justifies the algebraic step for satisfied clauses by noting that their contribution to the gap is non-negative, stating: \"The reward deficits of clauses satisfied by a are nonnegative.\"",
+            "cost_usd": 0.0026154
+          }
+        ],
+        "cost_usd": 0.020798766666666666
+      },
+      {
+        "flag_id": "fp-0985797bb0c2",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "Appendix B.1 explicitly states the counting: 'An overflow unit has at most three incoming weights, one hidden bias, and one output weight. It contributes at most 4·2 + 2/3 = 26/3 to C, and 4·2² + (2/3)² = 148/9 to D².' The '4' accounts for three incoming weights plus one hidden bias (4 parameters each with influence 2), and the output weight contributes 2/3, matching the table in Sec. 4.2. The assumptions are stated clearly.",
+        "evidence": {
+          "claim": "Discrepancy in coefficient count for overflow unit and its sensitivity contribution: the matching between Sec. 4.2 and Appendix B.1's table does not state the counting and worst-case fan-in assumptions, risking misinterpretation.",
+          "excerpt": "Coefficient-count discrepancy for the overflow unit and the sensitivity table (Sec. 4.2 vs Appendix B.1). Sec. 4.2 assigns overflow-unit *output weight* influence 2/3, and Appendix B.1 uses \"one output weight\" contributing 2/3 to C and (2/3)² = 4/9 to D², but then reports the overflow total 26/3 to C and 148/9 to D² using \"4·2 + 2/3\" ..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "Appendix B.1 explicitly states the counting: 'An overflow unit has at most three incoming weights, one hidden bias, and one output weight. It contributes at most 4·2 + 2/3 = 26/3 to C, and 4·2² + (2/3)² = 148/9 to D².' The '4' accounts for three incoming weights plus one hidden bias (4 parameters each with influence 2), and the output weight contributes 2/3, matching the table in Sec. 4.2. The assumptions are stated clearly.",
+            "cost_usd": 0.0082567
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The counting assumption is stated explicitly: the paper says “Every hidden fan-in is at most three,” and Appendix B.1 spells out that “An overflow unit has at most three incoming weights, one hidden bias, and one output weight. It contributes at most 4·2 + 2/3 = 26/3 to C, and 4·2^2 + (2/3)^2 = 148/9 to D^2.” This matches Sec. 4.2’s influence table.",
+            "cost_usd": 0.009926666666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly lists the counting and fan-in assumptions right before the calculation in Appendix B.1: \"An overflow unit has at most three incoming weights, one hidden bias, and one output weight.\"",
+            "cost_usd": 0.0026154
+          }
+        ],
+        "cost_usd": 0.020798766666666666
+      },
+      {
+        "flag_id": "fp-8a7d200515eb",
+        "paper_id": "2607.14375",
+        "reviewer_systems_attributed": [
+          "L2"
+        ],
+        "module": "general",
+        "verdict": "FP",
+        "confidence": "high",
+        "reason": "The paper explicitly acknowledges the deliberate looseness in both Section 4.4 ('Using the coarser but convenient inequality h/(2σ⋆) ≤ 1/2, µ < 5/6') and Appendix B.3 ('The exact Gaussian mean would give the stronger per-clause tail separation 4.2819... and exponent 0.2132...m; the paper uses the rational lower bounds 52m/15 and m/8'). The slack is intentional and clearly stated as a deliberate conservative choice for clean rational arithmetic.",
+        "evidence": {
+          "claim": "The rational bound µ < 5/6 used for the mean of the normal absolute value is only loosely justified, with a very coarse bound h/(2σ⋆) ≤ 1/2 instead of the much tighter and numerically accurate value. The slack is substantial and not clearly acknowledged.",
+          "excerpt": "The rational bound \"µ < 5/6\" is used but only informally justified (Sec. 4.4). ... However, using h/(2σ⋆) ≤ 1/2 is *very loose* — with h ≤ 2⁻²⁰ and σ⋆ = 2⁻¹¹, actually h/(2σ⋆) ≤ 2⁻¹⁰ ≈ 0.00098, not 0.5. This looseness is intentional (per Appendix B.3, the exact constants would give a stronger exponent), but the paper should be clearer that the 500x slack in this factor is deliberate."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges the deliberate looseness in both Section 4.4 ('Using the coarser but convenient inequality h/(2σ⋆) ≤ 1/2, µ < 5/6') and Appendix B.3 ('The exact Gaussian mean would give the stronger per-clause tail separation 4.2819... and exponent 0.2132...m; the paper uses the rational lower bounds 52m/15 and m/8'). The slack is intentional and clearly stated as a deliberate conservative choice for clean rational arithmetic.",
+            "cost_usd": 0.0082567
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly marks the bound as intentionally loose: Sec. 4.4 says it uses the “coarser but convenient inequality h/(2σ⋆) ≤ 1/2, µ < 5/6,” and Appendix B.3 adds, “The exact Gaussian mean would give the stronger per-clause tail separation 4.2819... and exponent 0.2132... m; the paper uses the rational lower bounds 52m/15 and m/8.”",
+            "cost_usd": 0.009926666666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper clearly acknowledges this looseness, explicitly calling it a \"coarser but convenient inequality\" in Section 4.4, and goes further in Appendix B.3 to explicitly quantify the slack by stating what \"the exact Gaussian mean would give\" compared to the used rational lower bounds.",
+            "cost_usd": 0.0026154
+          }
+        ],
+        "cost_usd": 0.020798766666666666
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "general": 1.0
+  },
+  "per_module_unadjudicated_count": {
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "general": 0.0623963
+  },
+  "extractor_cost_usd": 0.029343999999999995,
+  "total_cost_usd": 0.0917403
+}

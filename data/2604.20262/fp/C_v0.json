@@ -1,0 +1,262 @@
+{
+  "paper_id": "2604.20262",
+  "reviewer_system": "C",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-ce0e3767b284",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "numerics",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Mechanical predicate failed: sum = 50.0; target = 100.0; additive half-ULP tolerance = 10.0",
+        "evidence": {
+          "check_type": "percent_to_100",
+          "predicate": {
+            "verdict": "FAIL",
+            "computed": 50.0,
+            "reported": 100.0,
+            "diff_abs": -50.0,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": 10.0,
+              "rel_tol": null
+            },
+            "notes": "sum = 50.0; target = 100.0; additive half-ULP tolerance = 10.0"
+          },
+          "rereader": [
+            {
+              "label": "relative_difference_max",
+              "raw_observed": "30%",
+              "value_observed": 30.0,
+              "notes": "Fig. 12 caption and visual shows yellow saturation at the 0.30 (30%) level over portions of the map."
+            },
+            {
+              "label": "relative_difference_typical",
+              "raw_observed": "20%",
+              "value_observed": 20.0,
+              "notes": "Fig. 13 caption and map show the beam's relative error within 10% over most areas, but context from the query and the visual in Fig. 12 (not 13—mislabel 'Fig. 13' should reference the Fig. 12 relative difference map) shows ~0.20 (20%) is typical off-axis."
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.09276600000000013
+      }
+    ],
+    "mathematics": [
+      {
+        "flag_id": "fp-1feff784b567",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "mathematics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Maths interpreter: UNCERTAIN. The transcription-fidelity check confirms the equation was faithfully copied from the paper. However, no mechanical engine checks (Wolfram, Pint) were run, and no knowledge-audit (cross-family LLM) was performed on this asserted equation. The formula itself represents a specific model choice — that the simulated visibility equals beta times the integral of sky intensity weighted by the product of squared N-S and E-W primary beam patterns — which is a plausible but non-canonical simplification of the standard radio interferometry visibility equation (Van Cittert-Zernike theorem), where typically the full beam pattern A(n) appears squared rather than decomposed into A_NS^2 * A_EW^2. Without a knowledge audit confirming or refuting whether this decomposed beam product is consistent with Eq. (2) of the paper and the stated instrument model, a definitive verdict cannot be reached. The beta scaling factor as an empirical flux calibration parameter is a reasonable modeling assumption but also lacks independent verification here.",
+        "evidence": {
+          "maths_verdict": "UNCERTAIN",
+          "confidence": "low",
+          "impact": "moderate",
+          "notes": "The transcription-fidelity check confirms the equation was faithfully copied from the paper. However, no mechanical engine checks (Wolfram, Pint) were run, and no knowledge-audit (cross-family LLM) was performed on this asserted equation. The formula itself represents a specific model choice — that the simulated visibility equals beta times the integral of sky intensity weighted by the product of squared N-S and E-W primary beam patterns — which is a plausible but non-canonical simplification of the standard radio interferometry visibility equation (Van Cittert-Zernike theorem), where typically the full beam pattern A(n) appears squared rather than decomposed into A_NS^2 * A_EW^2. Without a knowledge audit confirming or refuting whether this decomposed beam product is consistent with Eq. (2) of the paper and the stated instrument model, a definitive verdict cannot be reached. The beta scaling factor as an empirical flux calibration parameter is a reasonable modeling assumption but also lacks independent verification here.",
+          "tools_used": [
+            "llm: transcription-fidelity check (cross-family LLM) → confirmed (11.20s)"
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.023119199999999784
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-e196378ad0fc",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "In Eq. (8), α is explicitly the spectral index of Cas A, while in Eq. (11) α is the N-S beam reparameterization exponent. Sec. 3.3 then quotes 'α = 0.116 ± 0.002' with no disambiguation to clarify which α is meant, creating genuine ambiguity that is never resolved in the text.",
+        "evidence": {
+          "claim": "The symbol α is used for both the Cas A spectral index and the N-S beam exponent within a small section, and Sec. 3.3 quotes 'α = 0.116 ± 0.002' with no disambiguation, risking code and prose confusion and ambiguous results.",
+          "excerpt": "The symbol α is used with two distinct meanings without disambiguation. In Eq. (8) it is the spectral index of Cas A; in Eq. (11) it is the N-S beam reparameterisation exponent. Sec. 3.3 then quotes 'α = 0.116 ± 0.002' with no indication of which α is meant..."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "In Eq. (8), α is explicitly the spectral index of Cas A, while in Eq. (11) α is the N-S beam reparameterization exponent. Sec. 3.3 then quotes 'α = 0.116 ± 0.002' with no disambiguation to clarify which α is meant, creating genuine ambiguity that is never resolved in the text.",
+            "cost_usd": 0.005668875
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper reuses the same symbol for different quantities: Eq. (8) defines Cas A with “\\((\\nu/\\nu_0)^\\alpha\\)”, while Eq. (11) redefines the beam model as “\\((A^{simu}_{NS})^{\\frac{1+\\alpha}{2}}\\)”, and Sec. 3.3 then reports “the best-fit parameters \\(\\alpha = 0.116\\pm0.002, \\beta = 1.45\\pm0.002\\)” without explicitly restating which \\(\\alpha\\) is meant.",
+            "cost_usd": 0.011921999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper uses the symbol α for the spectral index of Cas A in Eq. (8) and for the N-S beam exponent in Eq. (11), and later quotes 'α = 0.116 ± 0.002' without explicit disambiguation.",
+            "cost_usd": 0.0025696
+          }
+        ],
+        "cost_usd": 0.020160474999999997
+      },
+      {
+        "flag_id": "fp-0ebca365ce05",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "Sec. 3.3 reports 'α = 0.116 ± 0.002, β = 1.45 ± 0.002' as MCMC uncertainties, and while Sec. 4 acknowledges 'the relative error of the observed flux is within or around 5%' for sky model errors, it never propagates these systematic uncertainties onto the quoted α or β values, leaving the formal error bars misleadingly tight.",
+        "evidence": {
+          "claim": "The reported MCMC uncertainties on α, β are implausibly tight for an absolute beam-shape fit: systematic errors from the sky model and calibration are not propagated into the quoted error bars or the discussion, leading to misleadingly precise results.",
+          "excerpt": "The reported MCMC uncertainties α = 0.116 ± 0.002 and β = 1.45 ± 0.002 (Sec. 3.3) imply ~2% and ~0.1% precision respectively, which is not credible for an absolute beam-shape measurement built on a diffuse-sky model whose flux scale is itself only known to ~5–10%. The discussion (Sec. 4) acknowledges sky-model and instrument errors qualitatively but never propagates them onto α or β."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 3.3 reports 'α = 0.116 ± 0.002, β = 1.45 ± 0.002' as MCMC uncertainties, and while Sec. 4 acknowledges 'the relative error of the observed flux is within or around 5%' for sky model errors, it never propagates these systematic uncertainties onto the quoted α or β values, leaving the formal error bars misleadingly tight.",
+            "cost_usd": 0.005668875
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Sec. 3.3 gives very tight formal errors — “the best-fit parameters \\(\\alpha = 0.116\\pm0.002, \\beta = 1.45\\pm0.002\\)” — but Sec. 4 only acknowledges systematics qualitatively: “The errors in our methodology may arise from... Modeling error of the sky” and “The relative error of the observed flux is within or around 5%, which we expect will not significantly affect our results,” without propagating those uncertainties into \\(\\alpha\\) or \\(\\beta\\).",
+            "cost_usd": 0.011921999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper acknowledges systematic errors such as 'the error due to the flux model of the Cyg A and Cas A' but expects it 'will not significantly affect our results', failing to quantitatively propagate these into the reported MCMC uncertainties for α and β.",
+            "cost_usd": 0.0025696
+          }
+        ],
+        "cost_usd": 0.020160474999999997
+      },
+      {
+        "flag_id": "fp-afaeb679a5c9",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "AMBIGUOUS",
+        "confidence": "low",
+        "reason": "Three-panel split: anthropic=AMBIGUOUS, openai=AMBIGUOUS, gemini=CONFIRMED_ISSUE",
+        "evidence": {
+          "claim": "Residual histograms in Fig. 9 are not centred at zero and show strong non-Gaussian tails, indicating model-data bias and an underestimate of errors; this is not quantified or acknowledged in the text.",
+          "excerpt": "The residual histograms in Fig. 9 (bottom row) are visibly not centred at zero — both real and imaginary residuals/σ peak around +2 to +3, with substantial tails extending past ±10σ. This is direct evidence that the best-fit model is biased and that σ underestimates the true scatter, which in turn explains how the formal errors in Sec. 3.3 are so small."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "AMBIGUOUS",
+            "confidence": "medium",
+            "reason": "The paper states 'We see the fit is pretty good' regarding Fig. 9, but does not quantitatively address the apparent non-zero centering or non-Gaussian tails visible in the residual histograms. The reviewer's claim about residuals peaking at +2 to +3σ is plausible from the figure description, but without clear numeric characterization in the paper the issue is not definitively confirmed or denied.",
+            "cost_usd": 0.005668875
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "AMBIGUOUS",
+            "confidence": "low",
+            "reason": "The paper provides only the qualitative statement “We see the fit is pretty good” and the Fig. 9 caption “Bottom: Distribution of residuals,” with no quantitative normality/zero-mean test. From the PDF alone, the reviewer’s specific visual claim that the histograms peak at “+2 to +3” and prove bias/error-underestimation cannot be established unambiguously.",
+            "cost_usd": 0.011921999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Figure 9 shows residual histograms that are visibly off-center (peaking around 2-3σ) with large tails, yet the text only claims 'the fit is pretty good' without acknowledging or quantifying this bias.",
+            "cost_usd": 0.0025696
+          }
+        ],
+        "cost_usd": 0.020160474999999997
+      },
+      {
+        "flag_id": "fp-21a63d5e337d",
+        "paper_id": "2604.20262",
+        "reviewer_systems_attributed": [
+          "C"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper states 'this convolution effect is negligible compared to our measurement precision' without providing supporting numbers, and the Cyg A flux model parameters are never specified (Eq. 8 only covers Cas A). The averaging procedure in Sec. 2.3.3 also lacks specification of which days were averaged and what weights were used, confirming missing methodological details.",
+        "evidence": {
+          "claim": "Several methodological claims (e.g., 'negligible convolution effect,' Cyg A flux model, baseline averaging, noise suppression) are stated without supporting numbers, models, or data, undermining the reproducibility and credibility of the methodology.",
+          "excerpt": "The phantom-evidence audit flags several Methods statements asserted without supporting artifact: 'this convolution effect is negligible compared to our measurement precision' (Sec. 3.2 — no number); 'manually added a number of point sources, such as Cyg A and Cas A' (Sec. 2.4 — Eq. 8 only specifies Cas A; the Cyg A flux model and parameters are never given); 'averaged the data of selected baselines and adjacent days' (Sec. 2.3.3 — which days, what averaging weights); 'by averaging over multiple baselines, this noise can be suppressed to a negligible level' (Sec. 4 — no demonstration)."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper states 'this convolution effect is negligible compared to our measurement precision' without providing supporting numbers, and the Cyg A flux model parameters are never specified (Eq. 8 only covers Cas A). The averaging procedure in Sec. 2.3.3 also lacks specification of which days were averaged and what weights were used, confirming missing methodological details.",
+            "cost_usd": 0.005668875
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Several key methodological points are asserted but not specified quantitatively, e.g. “Our analysis shows that this convolution effect is negligible compared to our measurement precision,” “we manually added a number of point sources, such as Cyg A and Cas A,” “We averaged the data of selected baselines and adjacent days,” and “by averaging over multiple baselines, this noise can be suppressed to a negligible level.” The paper does not give the supporting numbers/procedure details the flag asks for.",
+            "cost_usd": 0.011921999999999999
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper makes multiple methodological claims without quantitative support, such as 'this convolution effect is negligible' (Sec. 3.2), 'manually added... Cyg A' without providing its flux model (Sec. 2.4), and claiming noise 'can be suppressed to a negligible level' (Sec. 4).",
+            "cost_usd": 0.0025696
+          }
+        ],
+        "cost_usd": 0.020160474999999997
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "mathematics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 0,
+    "mathematics": 1,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.09276600000000013,
+    "mathematics": 0.023119199999999784,
+    "general": 0.08064189999999999
+  },
+  "extractor_cost_usd": 0.02792,
+  "total_cost_usd": 0.2244470999999999
+}

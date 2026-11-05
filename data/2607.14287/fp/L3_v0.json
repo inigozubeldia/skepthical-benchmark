@@ -1,0 +1,359 @@
+{
+  "paper_id": "2607.14287",
+  "reviewer_system": "L3",
+  "provider_tag": null,
+  "per_module_verdicts": {
+    "numerics": [
+      {
+        "flag_id": "fp-6f2337d7ea27",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Flag-structurer could not map to a specific numeric in the paper.",
+        "evidence": {
+          "structurer_status": "skipped"
+        },
+        "judge_panel": [],
+        "cost_usd": 0.05782599999999993
+      },
+      {
+        "flag_id": "fp-a3f5400c2af0",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "numerics",
+        "verdict": "UNADJUDICATABLE",
+        "confidence": "low",
+        "reason": "Predicate uncertain: non-integer input for integer_equal: 0.3245",
+        "evidence": {
+          "check_type": "integer_equal",
+          "predicate": {
+            "verdict": "UNCERTAIN",
+            "computed": null,
+            "reported": null,
+            "diff_abs": null,
+            "diff_rel": null,
+            "tolerance": {
+              "abs_tol": null,
+              "rel_tol": null
+            },
+            "notes": "non-integer input for integer_equal: 0.3245"
+          },
+          "rereader": [
+            {
+              "label": "Table I: Pores(GAN)/IoU",
+              "raw_observed": "0.3245",
+              "value_observed": 0.3245,
+              "notes": "Matched Table I row: XCT-SAM (ours); column: Pores(GAN), IoU"
+            },
+            {
+              "label": "Table III (Dice-Focal): Pores(GAN)/IoU",
+              "raw_observed": "0.3245",
+              "value_observed": 0.3245,
+              "notes": "Matched Table III row: Dice-Focal (ours); column: Pores (GAN), IoU"
+            },
+            {
+              "label": "Table I: Inclusions(GAN)/IoU",
+              "raw_observed": "0.3639",
+              "value_observed": 0.3639,
+              "notes": "Matched Table I row: XCT-SAM (ours); column: Inclusions (GAN), IoU"
+            },
+            {
+              "label": "Table III (Dice-Focal): Inclusions(GAN)/IoU",
+              "raw_observed": "0.3639",
+              "value_observed": 0.3639,
+              "notes": "Matched Table III row: Dice-Focal (ours); column: Inclusions (GAN), IoU"
+            },
+            {
+              "label": "Table I: Pores(NIST)/IoU",
+              "raw_observed": "0.5849",
+              "value_observed": 0.5849,
+              "notes": "Matched Table I row: XCT-SAM (ours); column: Pores (NIST), IoU"
+            },
+            {
+              "label": "Table III (Dice-Focal): Pores(NIST)/IoU",
+              "raw_observed": "0.5849",
+              "value_observed": 0.5849,
+              "notes": "Matched Table III row: Dice-Focal (ours); column: Pores (NIST), IoU"
+            }
+          ]
+        },
+        "judge_panel": [],
+        "cost_usd": 0.05782599999999993
+      }
+    ],
+    "general": [
+      {
+        "flag_id": "fp-6cd8feda4e03",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "medium",
+        "reason": "The paper does not include an ablation that controls for the additional training steps or data volume introduced by Stage-1; the only ablation compares ranks and loss functions. The text claims the sequential strategy helps but never isolates the curriculum effect from the confound of more total optimization, stating only that 'the warm start reduces the effective domain gap' without a controlled experiment.",
+        "evidence": {
+          "claim": "The central contribution is not cleanly isolated: the sequential (two-stage) adaptation may be confounded by increased training data and optimization steps compared to direct adaptation, so observed improvements may not be due to the curriculum design.",
+          "excerpt": "The central claim regarding the benefit of the intermediate adaptation stage is not yet fully disentangled from confounding factors like increased training data and compute. Furthermore, crucial details about the experimental protocol, particularly the Stage-1 task and the prompting strategy, are under-specified."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "medium",
+            "reason": "The paper does not include an ablation that controls for the additional training steps or data volume introduced by Stage-1; the only ablation compares ranks and loss functions. The text claims the sequential strategy helps but never isolates the curriculum effect from the confound of more total optimization, stating only that 'the warm start reduces the effective domain gap' without a controlled experiment.",
+            "cost_usd": 0.0037756000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper compares against direct adaptation, but the two-stage method uses extra data and optimization without a control isolating curriculum effects: \"we fine-tune this baseline on GAN-generated XCT images without the intermediate alloy-microstructure [34] adaptation stage used in XCT-SAM\" and \"In Stage 1... trained for up to 15 epochs. In Stage 2, we further adapt the model... for an additional 20 epochs.\"",
+            "cost_usd": 0.007049916666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper does not disentangle the benefits of the sequential curriculum from the additional data/compute, merely stating for baselines that they were optimized on 'the same XCT training data' without matching the alloy-microstructure adaptation step's compute or data volume.",
+            "cost_usd": 0.0017530333333333334
+          }
+        ],
+        "cost_usd": 0.01257855
+      },
+      {
+        "flag_id": "fp-30547eea92b3",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper only states 'we perform intermediate domain adaptation on the alloy dataset [34] using a learning rate of 2×10−4, a batch size of 8, and trained for up to 15 epochs' but never specifies what is being segmented in Stage-1 (task definition, label types), the train/val/test splits, or the total number of images used, making Stage-1 insufficiently described for reproducibility.",
+        "evidence": {
+          "claim": "The Stage-1 adaptation on the alloy-microstructure dataset, critical to the method, lacks key experimental details, making reproducibility and interpretation impossible.",
+          "excerpt": "The Stage-1 adaptation on the alloy-microstructure dataset, which is critical to the paper's core idea, is insufficiently specified for reproducibility or interpretation. Key details are missing, including: the precise segmentation task in Stage 1 (e.g., what is being segmented?), the nature of the labels (binary, multiclass), the prompt generation protocol for this stage, the train/validation/test splits, and the total number of images used."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper only states 'we perform intermediate domain adaptation on the alloy dataset [34] using a learning rate of 2×10−4, a batch size of 8, and trained for up to 15 epochs' but never specifies what is being segmented in Stage-1 (task definition, label types), the train/val/test splits, or the total number of images used, making Stage-1 insufficiently described for reproducibility.",
+            "cost_usd": 0.0037756000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Stage 1 is only described at a high level — \"For Stage-I adaptation, we use an alloy-microstructure dataset [34] as an intermediate domain\" and \"In Stage 1, we perform intermediate domain adaptation on the alloy dataset [34] using a learning rate of 2 × 10−4, a batch size of 8, and trained for up to 15 epochs\" — but the paper does not specify the Stage-1 segmentation target/labels, prompt protocol, splits, or image counts.",
+            "cost_usd": 0.007049916666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states, 'In Stage 1, we perform intermediate domain adaptation on the alloy dataset [34] using a learning rate of 2e-4...', but completely omits the segmentation task details, label types, split sizes, and prompt generation protocol used for this critical stage.",
+            "cost_usd": 0.0017530333333333334
+          }
+        ],
+        "cost_usd": 0.01257855
+      },
+      {
+        "flag_id": "fp-0fdeaedd0483",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper explicitly states 'Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33],' and never addresses the risk that models may be rewarded for replicating the thresholding heuristic rather than true segmentation quality.",
+        "evidence": {
+          "claim": "Evaluation on the real NIST benchmark uses intensity-thresholding-derived reference masks instead of manual annotations, risking that evaluation only tests replication of a heuristic rather than true segmentation, thus weakening claims of generalization.",
+          "excerpt": "The evaluation on the real NIST benchmark relies on reference masks generated via an intensity-thresholding pipeline from prior work [33], not manual annotations. This creates a significant risk that the evaluation measures a model's ability to replicate a thresholding heuristic rather than its true segmentation quality. This potential bias weakens the claims of real-world generalization."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states 'Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33],' and never addresses the risk that models may be rewarded for replicating the thresholding heuristic rather than true segmentation quality.",
+            "cost_usd": 0.0037756000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly states that the real-data evaluation does not use manual annotations: \"Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33].\" It also reiterates in Fig. 7 that the \"Ground Truth denotes threshold-derived reference masks,\" so the concern about evaluating against a heuristic-derived target is not resolved.",
+            "cost_usd": 0.007049916666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper explicitly confirms this limitation: 'Since manually annotated ground-truth defect masks are not publicly available, we generate threshold-derived binary reference masks following the image-processing pipeline of [33].' This evaluates the model against a heuristic rather than human annotations.",
+            "cost_usd": 0.0017530333333333334
+          }
+        ],
+        "cost_usd": 0.01257855
+      },
+      {
+        "flag_id": "fp-a5cf60447ada",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper confirms that real-world inclusion evaluation is absent: \"As the NIST dataset contains only pore defects, inclusion segmentation evaluation is not applicable and is therefore omitted from the NIST benchmark results.\" Thus, real-world evidence supports pores only, while inclusion results are synthetic only.",
+        "evidence": {
+          "claim": "Paper claims generalization for both pores and inclusions, but real-world evidence for inclusion segmentation is missing: all inclusion results are on synthetic data only.",
+          "excerpt": "The paper's claims cover both pores and inclusions, but the real-world evidence for inclusion segmentation is entirely missing. The NIST dataset evaluation is performed only for pores. All inclusion results are reported exclusively on synthetic, GAN-generated data."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "FP",
+            "confidence": "high",
+            "reason": "The paper explicitly acknowledges this limitation: 'As the NIST dataset contains only pore defects, inclusion segmentation evaluation is not applicable and is therefore omitted from the NIST benchmark results.' The paper does not claim real-world generalization for inclusions; inclusion results are correctly scoped to the GAN-generated dataset.",
+            "cost_usd": 0.0037756000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms that real-world inclusion evaluation is absent: \"As the NIST dataset contains only pore defects, inclusion segmentation evaluation is not applicable and is therefore omitted from the NIST benchmark results.\" Thus, real-world evidence supports pores only, while inclusion results are synthetic only.",
+            "cost_usd": 0.007049916666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper confirms that real-world inclusions are not evaluated: 'As the NIST dataset contains only pore defects, inclusion segmentation evaluation is not applicable and is therefore omitted from the NIST benchmark results.'",
+            "cost_usd": 0.0017530333333333334
+          }
+        ],
+        "cost_usd": 0.01257855
+      },
+      {
+        "flag_id": "fp-fb8cec025b63",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The paper states only that 'all prompt-based methods use an identical prompt protocol across experiments' without describing the prompt type, generation method, or density, making comparisons between SAM variants irreproducible and potentially unfair.",
+        "evidence": {
+          "claim": "The prompt generation protocol for all SAM-based methods is critically under-specified, making comparisons unfair and irreproducible.",
+          "excerpt": "The prompting protocol for all SAM-based methods is critically under-specified. The paper states an 'identical prompt protocol' was used but fails to describe it. SAM's performance is highly dependent on the prompt type (points, boxes), generation method (e.g., derived from ground truth), and density. This ambiguity makes the comparisons between SAM variants unfair and irreproducible."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper states only that 'all prompt-based methods use an identical prompt protocol across experiments' without describing the prompt type, generation method, or density, making comparisons between SAM variants irreproducible and potentially unfair.",
+            "cost_usd": 0.0037756000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "Prompting is not actually described beyond the statement that \"all prompt-based methods use an identical prompt protocol across experiments.\" The paper does not specify prompt type, generation method, or density, so the SAM-based comparisons are under-specified and hard to reproduce.",
+            "cost_usd": 0.007049916666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper simply states 'all prompt-based methods use an identical prompt protocol across experiments' but fails to define what that protocol actually is (e.g., points, boxes, generation method), making it impossible to reproduce.",
+            "cost_usd": 0.0017530333333333334
+          }
+        ],
+        "cost_usd": 0.01257855
+      },
+      {
+        "flag_id": "fp-1c29f4f271f5",
+        "paper_id": "2607.14287",
+        "reviewer_systems_attributed": [
+          "L3"
+        ],
+        "module": "general",
+        "verdict": "CONFIRMED_ISSUE",
+        "confidence": "high",
+        "reason": "The implementation details section omits exact split sizes, input image resolution, preprocessing normalization, data augmentation, number of runs/seeds, and model selection criteria; the paper only mentions learning rates, batch sizes, and epoch counts, leaving many reproducibility-critical details absent.",
+        "evidence": {
+          "claim": "Paper omits crucial experimental details required for reproducibility, such as exact split sizes, input resolutions, preprocessing, augmentation, random seeds/runs, and model selection criteria.",
+          "excerpt": "The paper is missing numerous experimental details required for reproducibility. Key omissions include: exact numbers of images in each training/validation/test split, input image resolution and preprocessing steps (e.g., normalization, patching, 2D slice extraction), data augmentation techniques, the number of random seeds/runs for experiments, and the model selection/stopping criteria."
+        },
+        "judge_panel": [
+          {
+            "judge_provider": "anthropic",
+            "judge_model": "claude-sonnet-4-6",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The implementation details section omits exact split sizes, input image resolution, preprocessing normalization, data augmentation, number of runs/seeds, and model selection criteria; the paper only mentions learning rates, batch sizes, and epoch counts, leaving many reproducibility-critical details absent.",
+            "cost_usd": 0.0037756000000000005
+          },
+          {
+            "judge_provider": "openai",
+            "judge_model": "gpt-5.4",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper gives only partial setup details — e.g., \"we use Test-3 as the validation set\" and \"In Stage 1... batch size of 8... In Stage 2...\" — but it does not report exact split sizes, input resolution/preprocessing, augmentation, random seeds/runs, or explicit model-selection/stopping criteria. It even refers to \"the same XCT training data, preprocessing pipeline\" without describing that pipeline.",
+            "cost_usd": 0.007049916666666667
+          },
+          {
+            "judge_provider": "gemini",
+            "judge_model": "gemini-3.1-pro-preview",
+            "verdict": "CONFIRMED_ISSUE",
+            "confidence": "high",
+            "reason": "The paper lacks exact split sizes, image resolutions, augmentation techniques, and random seeds, only broadly noting that they use 'the same XCT training data, preprocessing pipeline, and post-processing procedures where applicable' without defining them.",
+            "cost_usd": 0.0017530333333333334
+          }
+        ],
+        "cost_usd": 0.01257855
+      }
+    ]
+  },
+  "per_module_fp_rate": {
+    "numerics": 0.0,
+    "general": 0.0
+  },
+  "per_module_unadjudicated_count": {
+    "numerics": 2,
+    "general": 0
+  },
+  "per_module_cost_usd": {
+    "numerics": 0.11565199999999987,
+    "general": 0.0754713
+  },
+  "extractor_cost_usd": 0.028204000000000118,
+  "total_cost_usd": 0.2193273
+}

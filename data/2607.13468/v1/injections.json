@@ -1,0 +1,93 @@
+[
+  {
+    "module": "citations",
+    "severity": "S3",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "sec/3_method.tex",
+    "original_text": "Specifically, we employ RANSAC~\\cite{RANSAC}, which is resilient to spurious correspondences, instead of methods such as ICP~\\cite{ICP} that rely on accurate nearest-neighbor matching.",
+    "injected_text": "Specifically, we employ RANSAC~\\cite{RANSAC}, which formulates the alignment as a differentiable optimal transport problem, instead of methods such as ICP~\\cite{ICP} that rely on accurate nearest-neighbor matching.",
+    "rationale": "The edit keeps the cite key intact but completely rewrites the claim to attribute a differentiable optimal transport mechanism to RANSAC, which is a fundamentally different subfield/problem from the random sampling and consensus approach actually presented in the cited paper.",
+    "ground_truth_description": "The claim describing the mechanism of RANSAC was replaced with a claim about formulating alignment as a differentiable optimal transport problem, an entirely unrelated algorithmic topic.",
+    "truth": {
+      "kind": "citations",
+      "original_cite_key": "RANSAC",
+      "injected_cite_key": "RANSAC",
+      "claim_sentence_verbatim": "Specifically, we employ RANSAC~\\cite{RANSAC}, which is resilient to spurious correspondences, instead of methods such as ICP~\\cite{ICP} that rely on accurate nearest-neighbor matching.",
+      "section_location": "Sec. 3.3",
+      "mutation_kind": "claim_topic_mis_attribution",
+      "detection_target_verdict": "UNRELATED"
+    },
+    "proposer_agent": "injector.citations.S3.t3.v1"
+  },
+  {
+    "module": "numerics",
+    "severity": "S2",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "sec/4_experiment.tex",
+    "original_text": "Ours\\textsuperscript & \\textbf{0.0035} & \\textbf{84.34} & 0.7449  & 36.5s\\\\",
+    "injected_text": "Ours\\textsuperscript & \\textbf{0.0035} & \\textbf{48.34} & 0.7449  & 36.5s\\\\",
+    "rationale": "The abstract contains no numerical results, so I targeted the headline F-Score in Table 1 (repeated in Table 5) by swapping adjacent digits, changing the predicate to repeated_constant while preserving the spirit of a headline-number mismatch.",
+    "ground_truth_description": "Swapped the digits of the F-Score of the proposed method in Table 1 from 84.34 to 48.34, creating a mismatch with the same value reported in the ablation study table.",
+    "truth": {
+      "kind": "numerics",
+      "predicate": "repeated_constant",
+      "value_before_raw": "84.34",
+      "value_after_raw": "48.34",
+      "value_before_float": 84.34,
+      "value_after_float": 48.34,
+      "location_cue": "Ours\\textsuperscript & \\textbf{0.0035} & \\textbf{84.34} & 0.7449  & 36.5s\\\\",
+      "paired_location": "Table tab:ablation_sm_3",
+      "quantity_label": "F-Score",
+      "expected_bucket": "major"
+    },
+    "proposer_agent": "injector.numerics.S2.t1.v1"
+  },
+  {
+    "module": "mathematics",
+    "severity": "S3",
+    "type": 1,
+    "copy_id": "v1",
+    "file_path": "sec/3_method.tex",
+    "original_text": "\\boldsymbol{p}_i\\in\\{0,1,\\ldots,N-1\\}^3",
+    "injected_text": "\\boldsymbol{p}_i\\in\\{0,1,\\ldots,N-1\\}^2",
+    "rationale": "The positional index of an active voxel is redefined from a 3-tuple to a 2-tuple while the grid it indexes remains three-dimensional, so the index set is no longer conformable with the voxel grid — and it directly contradicts the following sentence, which calls p_i the positional index of an active voxel in the 3D grid.",
+    "ground_truth_description": "Structured-latent definition: the positional index set {0,...,N-1}^3 was changed to {0,...,N-1}^2, making the index non-conformable with the 3D voxel grid.",
+    "truth": {
+      "kind": "mathematics",
+      "equation_label": "eq:energy",
+      "equation_location": "Sec. 3 (Method), structured-latent definition",
+      "original_fragment_latex": "\\boldsymbol{p}_i\\in\\{0,1,\\ldots,N-1\\}^3",
+      "injected_fragment_latex": "\\boldsymbol{p}_i\\in\\{0,1,\\ldots,N-1\\}^2",
+      "full_equation_latex_before": "\\boldsymbol{z}=\\{(\\boldsymbol{z}_i,\\boldsymbol{p}_i)\\!\\}_{i=1}^L,\\:\\boldsymbol{z}_i\\in\\mathbb{R}^C,\\boldsymbol{p}_i\\in\\{0,1,\\ldots,N-1\\}^3,",
+      "full_equation_latex_after": "\\boldsymbol{z}=\\{(\\boldsymbol{z}_i,\\boldsymbol{p}_i)\\!\\}_{i=1}^L,\\:\\boldsymbol{z}_i\\in\\mathbb{R}^C,\\boldsymbol{p}_i\\in\\{0,1,\\ldots,N-1\\}^2,",
+      "term_role": "positional index set of an active voxel",
+      "expected_engine": "wolfram",
+      "expected_verifier_outcome": "refuted",
+      "units_critical": false
+    },
+    "proposer_agent": "injector.mathematics.S3.t1.v1"
+  },
+  {
+    "module": "general",
+    "severity": "S1",
+    "type": 3,
+    "copy_id": "v1",
+    "file_path": "sec/3_method.tex",
+    "original_text": "representation of the object instance, denoted as $\\mathcal{O}_k$, using the \\base structure latents decoder $\\mathcal{D}_{\\mathrm{GS}}$.",
+    "injected_text": "representation of the object instance, denoted as $\\mathcal{Q}_k$, using the \\base structure latents decoder $\\mathcal{D}_{\\mathrm{GS}}$.",
+    "rationale": "The variable representing the regenerated object instance is changed to \\mathcal{Q}_k locally in the Methods section, creating a notation inconsistency with the Appendix which still refers to it as \\mathcal{O}_k.",
+    "ground_truth_description": "Changes the notation for the object instance from \\mathcal{O}_k to \\mathcal{Q}_k in the method section, causing a notation drift against its usage in the appendix.",
+    "truth": {
+      "kind": "general",
+      "checklist_category": "D",
+      "checklist_item_id": "D3",
+      "change_kind": "notation_drift",
+      "expected_bucket": "very_minor",
+      "section_location": "Sec. 3.1",
+      "affected_span_verbatim": "The structure latents corresponding to each instance  can be further independently decoded into a 3D Gaussian Splatting (3DGS) representation of the object instance, denoted as $\\mathcal{O}_k$, using the \\base structure latents decoder $\\mathcal{D}_{\\mathrm{GS}}$."
+    },
+    "proposer_agent": "injector.general.S1.t3.v1"
+  }
+]

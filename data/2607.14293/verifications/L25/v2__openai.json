@@ -1,0 +1,180 @@
+{
+  "paper_id": "2607.14293",
+  "copy_id": "v2",
+  "reviewer_system": "L25",
+  "reviewer_tag": "openai",
+  "verdicts": [
+    {
+      "injection_ref": "citations-S2-t3",
+      "module": "citations",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "medium",
+      "matching_evidence": "[general] The quantization methodology is internally inconsistent: the text describes PTQ, QAT, and “quantization-aware retraining” as if they were the same procedure. ... Sec. II A says the models were quantized using QKeras and describes “Post-Training Quantization (PTQ)”",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Sec. II A says the models were quantized using QKeras and describes \"Post-Training Quantization (PTQ),\" including the statement that PTQ \"allows the model to learn how to operate under precision constraints.\" Sec. II C then describes a \"quantization-aware retraining stage\" with a different learning rate, and Table IV is labeled \"after quantization-aware training.\" PTQ does not involve learning under quantization constraints in the same way as QAT/retraining.",
+          "confidence": "high",
+          "reasoning": "The reviewer directly flags the claim that QKeras enables PTQ as internally inconsistent with QAT/retraining language elsewhere, which corresponds precisely to the injected swap from QAT to PTQ in Sec. 2.1. The reviewer challenged the post-edit claim (PTQ description) as contradicted by the methodology actually used.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] **The quantization methodology is internally inconsistent: the text describes PTQ, QAT, and “quantization-aware retraining” as if they were the same procedure.**\n\n- **Where:** Sec. II A and Sec. II C; Tables II and IV.\n- **What is wrong:** Sec. II A says the models were quantized using QKeras and describes “Post-Training Quantization (PTQ),” including the statement that PTQ “allows the model to learn how to operate under precision constraints.” Sec. II C then describes a “quantization-aware retraining stage” with a different learning rate, and Table IV is labeled “after quantization-aware training.” PTQ does not involve learning under quantization constraints in the same way as QAT/retraining.",
+          "confidence": "high",
+          "reasoning": "This directly challenges the post-edit PTQ claim in the same section and contrasts it with QAT/retraining, matching the injected QAT→PTQ methodology swap. Under the broadened-claim rule, this is a specific contradiction of the cited-method claim.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "[general] The quantization methodology is internally inconsistent: the text describes PTQ, QAT, and “quantization-aware retraining” as if they were the same procedure. ... Sec. II A says the models were quantized using QKeras and describes “Post-Training Quantization (PTQ)”",
+          "confidence": "medium",
+          "reasoning": "The reviewer identifies the specific methodology swap (from QAT to PTQ) in Section II A, noting that the description of PTQ involving learning is inconsistent with standard definitions. While the reviewer does not explicitly mention the citation by name, they specifically challenge the post-edit claim in the injected sentence.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": "not_extracted"
+    },
+    {
+      "injection_ref": "numerics-S1-t1",
+      "module": "numerics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Abstract: 6.18 μs; Sec. IV C and Table IX: 1,860 cycles, 6.19 μs. Using the printed target clock of 3.33 ns, 1,860×3.33 ns is approximately 6.19 μs. The abstract's 6.18 μs is a small inconsistency.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Abstract: 6.18 μs; Sec. IV C and Table IX: 1,860 cycles, 6.19 μs. Using the printed target clock of 3.33 ns, 1,860×3.33 ns is approximately 6.19 μs. The abstract's 6.18 μs is a small inconsistency.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly names both values (6.18 μs in the abstract vs 6.19 μs in Section IV C and Table IX) and identifies the mismatch, directly corresponding to the injected change of 6.19→6.18 in the abstract.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[numerical] **The reported inference latency is given as both \\(6.18\\,\\mu{\\rm s}\\) and \\(6.19\\,\\mu{\\rm s}\\).**\n\n- **Where:** Abstract: \\(6.18\\,\\mu{\\rm s}\\); Sec. IV C and Table IX: \\(1{,}860\\) cycles, \\(6.19\\,\\mu{\\rm s}\\).\n- **What is wrong:** Using the printed target clock of \\(3.33\\) ns, \\(1{,}860\\times3.33\\) ns is approximately \\(6.19\\,\\mu{\\rm s}\\). The abstract’s \\(6.18\\,\\mu{\\rm s}\\) is a small inconsistency.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly names the mismatched values 6.18 and 6.19 microseconds and locates the abstract versus body/table inconsistency. That exactly matches the injected numeric perturbation.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "[numerical] The reported inference latency is given as both 6.18 µs and 6.19 µs. ... Abstract: 6.18 µs; Sec. IV C and Table IX: 1,860 cycles, 6.19 µs.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly identifies the numerical discrepancy between the abstract (6.18) and the body/Table IX (6.19) introduced by the injection.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "mathematics-S2-t3",
+      "module": "mathematics",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "The χ² expression omits the sample index dependence and calls the statistic \"reduced χ²\" without showing a degrees-of-freedom normalization... the text calls this a \"reduced χ²,\" but the displayed expression has no division by the number of degrees of freedom.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "The χ² expression omits the sample index dependence and calls the statistic \"reduced χ²\" without showing a degrees-of-freedom normalization... the text calls this a \"reduced χ²,\" but the displayed expression has no division by the number of degrees of freedom.",
+          "confidence": "high",
+          "reasoning": "The reviewer explicitly flags that the equation labeled reduced chi-squared lacks the normalization divisor (1/n), which is exactly the injected removal of the 1/n prefactor from the reduced chi-squared definition.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[mathematical] **The χ² expression omits the sample index dependence and calls the statistic “reduced χ²” without showing a degrees-of-freedom normalization.**\n\n- **Where:** Sec. I C:\n  \\[\n  \\chi^2_n(\\theta)=\\sum_{i=1}^n \\frac{(x_i-\\hat{x}(\\theta))^2}{\\hat{\\sigma}^2(\\theta)} .\n  \\]\n- **What is wrong:** Since the data are a scan over gate voltage/sample index, the template and noise envelope should apparently depend on both sample index and phase, e.g. \\(\\hat{x}_i(\\theta)\\) and \\(\\hat{\\sigma}_i(\\theta)\\). As written, each \\(x_i\\) is compared to the same scalar \\(\\hat{x}(\\theta)\\). Also, the text calls this a “reduced χ²,” but the displayed expression has no division by the number of degrees of freedom.\n- **Concrete fix:** Rewrite the statistic with explicit index dependence and, if it is truly reduced χ², include the normalization. For example:\n  \\[\n  \\chi^2_{n,\\rm red}(\\theta)=\\frac{1}{\\nu}\\sum_{i=1}^n\n  \\frac{(x_i-\\hat{x}_i(\\theta))^2}{\\hat{\\sigma}_i^2(\\theta)} ,\n  \\]",
+          "confidence": "high",
+          "reasoning": "The reviewer specifically notes that the equation called 'reduced χ²' lacks the normalization/division factor. This directly corresponds to the injected removal of the 1/n prefactor.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "[mathematical] The χ² expression omits the sample index dependence and calls the statistic “reduced χ²” without showing a degrees-of-freedom normalization. ... the text calls this a “reduced χ²,” but the displayed expression has no division by the number of degrees of freedom.",
+          "confidence": "high",
+          "reasoning": "The reviewer correctly identifies that the equation for the reduced chi-squared statistic is missing the normalization factor (the 1/n prefactor that was removed).",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    },
+    {
+      "injection_ref": "general-S3-t2",
+      "module": "general",
+      "detected": true,
+      "ambiguous": false,
+      "confidence": "high",
+      "matching_evidence": "Conclusions: \"requires no hyperparameter tuning when applied to a new qubit\" and \"establishing a universal detection framework that generalizes natively to all forms of environmental noise across arbitrary solid-state quantum architectures.\" ... The paper trains and evaluates on synthetic scans generated from five NEXUS qubit/template configurations. It does not show a held-out-qubit test, transfer to a genuinely new qubit, measured-data validation, other forms of environmental noise, or other solid-state quantum architectures.",
+      "reasoning": "majority-3/3: 3-judge majority (3/3 detected)",
+      "escalated_with_pdf": false,
+      "judge_panel": [
+        {
+          "judge_provider": "anthropic",
+          "judge_model": "claude-sonnet-4-6",
+          "detected": true,
+          "matching_evidence": "Conclusions: \"requires no hyperparameter tuning when applied to a new qubit\" and \"establishing a universal detection framework that generalizes natively to all forms of environmental noise across arbitrary solid-state quantum architectures.\" ... The paper trains and evaluates on synthetic scans generated from five NEXUS qubit/template configurations. It does not show a held-out-qubit test, transfer to a genuinely new qubit, measured-data validation, other forms of environmental noise, or other solid-state quantum architectures.",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the injected sweeping generalization verbatim and explicitly identifies it as unsupported by the evidence, directly matching the injected overstated conclusion in the Conclusions section.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "openai",
+          "judge_model": "gpt-5.4",
+          "detected": true,
+          "matching_evidence": "[general] **The conclusion overstates generalization beyond the evidence shown.**\n\n- **Where:** Conclusions: “requires no hyperparameter tuning when applied to a new qubit” and “establishing a universal detection framework that generalizes natively to all forms of environmental noise across arbitrary solid-state quantum architectures.”\n- **What is wrong:** The paper trains and evaluates on synthetic scans generated from five NEXUS qubit/template configurations. It does not show a held-out-qubit test, transfer to a genuinely new qubit, measured-data validation, other forms of environmental noise, or other solid-state quantum architectures.",
+          "confidence": "high",
+          "reasoning": "This quote reproduces and challenges the exact sweeping conclusion about all forms of environmental noise across arbitrary architectures. It is a direct detection of the injected overstated conclusion.",
+          "escalated_with_pdf": false
+        },
+        {
+          "judge_provider": "gemini",
+          "judge_model": "gemini-3-flash-preview",
+          "detected": true,
+          "matching_evidence": "[general] The conclusion overstates generalization beyond the evidence shown. ... “establishing a universal detection framework that generalizes natively to all forms of environmental noise across arbitrary solid-state quantum architectures.”",
+          "confidence": "high",
+          "reasoning": "The reviewer quotes the injected sentence verbatim from the Conclusions section and correctly identifies it as an unsupported overstatement.",
+          "escalated_with_pdf": false
+        }
+      ],
+      "extraction_source": null
+    }
+  ],
+  "per_module_n_judges": {
+    "citations": 3,
+    "numerics": 3,
+    "mathematics": 3,
+    "general": 3
+  },
+  "wall_seconds": 43.189933,
+  "total_cost_usd": null,
+  "total_input_tokens": 22379,
+  "total_output_tokens": 6182,
+  "escalation_count": 0,
+  "notes": null
+}
